@@ -11936,3 +11936,458 @@ def get_job_subtitles_vtt(job_id: str, request: Request):
         vtt_path.write_text(_build_srt(cached, vtt=True), encoding="utf-8")
     return FileResponse(vtt_path, media_type="text/vtt",
                         filename="lesson.vtt")
+
+
+# ============================================================================
+# v3.20 — Student-facing UI screens + missing API endpoints
+#
+# Implements:
+#   • Page routes for the core study loop (lesson generator, video player,
+#     flashcards, quiz, chat, profile, teacher home, parent portal)
+#   • GET+PUT /api/me/profile   — user preferences (language/level/mode)
+#   • GET     /api/flashcards/due + /api/flashcards/decks
+#   • POST    /api/flashcards/{card_id}/review   — SM-2 grade submission
+#   • GET     /api/quiz/{lesson_id}              — GET alias for quiz data
+#   • POST    /auth/forgot-password + /auth/reset-password
+#   • POST    /auth/change-password
+#   • GET     /api/doubts/queue
+# ============================================================================
+
+
+# ---- Page routes -----------------------------------------------------------
+# NOTE: /lessons/new MUST be registered before /lessons/{job_id} so FastAPI
+# matches the literal path first.
+
+@app.get("/lessons/new", response_class=HTMLResponse)
+def lesson_new_page() -> HTMLResponse:
+    """Lesson generator screen — upload → options → generate → watch."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_lesson_new_html())
+
+
+@app.get("/lessons/{job_id}", response_class=HTMLResponse)
+def lesson_player_page(job_id: str) -> HTMLResponse:
+    """Video player screen with tabs: quiz, chat, flashcards, notes, recap."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_lesson_player_html())
+
+
+@app.get("/flashcards", response_class=HTMLResponse)
+def flashcards_page() -> HTMLResponse:
+    """SM-2 flashcard study screen — due queue, flip, rate."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_flashcards_html())
+
+
+@app.get("/quiz", response_class=HTMLResponse)
+def quiz_page() -> HTMLResponse:
+    """Standalone quiz screen — reads ?lesson= from query string."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_quiz_html())
+
+
+@app.get("/chat", response_class=HTMLResponse)
+def chat_page() -> HTMLResponse:
+    """AI Tutor chat screen — reads ?lesson= from query string."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_chat_html())
+
+
+@app.get("/profile", response_class=HTMLResponse)
+def profile_page() -> HTMLResponse:
+    """User preferences and account settings."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_profile_html())
+
+
+@app.get("/teacher", response_class=HTMLResponse)
+def teacher_page() -> HTMLResponse:
+    """Teacher home — classes, assignments, doubt queue."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_teacher_html())
+
+
+@app.get("/parent", response_class=HTMLResponse)
+def parent_page() -> HTMLResponse:
+    """Parent portal — child progress, fee payment."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_parent_html())
+
+
+# ---- User profile ---------------------------------------------------------
+# Preference columns added idempotently on first use (ALTER TABLE IF NOT EXISTS).
+
+_PROFILE_COLS_SQL = [
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS display_name TEXT",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_language TEXT NOT NULL DEFAULT 'en'",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_level TEXT NOT NULL DEFAULT 'middle'",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_mode TEXT NOT NULL DEFAULT 'teaching'",
+]
+
+_profile_migrated = False
+
+
+def _ensure_profile_cols() -> None:
+    global _profile_migrated
+    if _profile_migrated:
+        return
+    try:
+        db_url = get_db_url()
+        if not db_url:
+            return
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            for stmt in _PROFILE_COLS_SQL:
+                conn.execute(stmt)
+        _profile_migrated = True
+    except Exception as exc:
+        print(f"[profile_cols] non-fatal: {exc}")
+
+
+@app.get("/api/me/profile")
+def get_my_profile(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return authenticated user's email, tier, and study preferences."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    _ensure_profile_cols()
+    row = None
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url) as conn:
+                row = conn.execute(
+                    "SELECT display_name, preferred_language, "
+                    "       preferred_level, preferred_mode "
+                    "FROM users WHERE id = %s",
+                    (user.id,),
+                ).fetchone()
+    except Exception as exc:
+        print(f"[get_profile] db error (non-fatal): {exc}")
+    return JSONResponse({
+        "id": user.id,
+        "email": user.email,
+        "subscription_tier": user.subscription_tier,
+        "subscription_level": user.subscription_level,
+        "display_name": row[0] if row else None,
+        "preferred_language": (row[1] if row and row[1] else "en"),
+        "preferred_level": (row[2] if row and row[2] else "middle"),
+        "preferred_mode": (row[3] if row and row[3] else "teaching"),
+    })
+
+
+@app.put("/api/me/profile")
+async def update_my_profile(
+    request: Request,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Update user study preferences (language, level, mode, display_name)."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    try:
+        body = await request.json()
+    except Exception:
+        raise HTTPException(400, "request body must be JSON")
+    _ensure_profile_cols()
+    allowed = {"display_name", "preferred_language", "preferred_level", "preferred_mode"}
+    updates: dict[str, str] = {
+        k: str(v) for k, v in body.items()
+        if k in allowed and v is not None
+    }
+    if not updates:
+        raise HTTPException(400, "no valid fields provided")
+    if "preferred_language" in updates and updates["preferred_language"] not in SUPPORTED_LANGUAGES:
+        raise HTTPException(400, f"preferred_language must be one of {sorted(SUPPORTED_LANGUAGES)}")
+    if "preferred_level" in updates and updates["preferred_level"] not in LEVEL_GUIDANCE:
+        raise HTTPException(400, f"preferred_level must be one of {sorted(LEVEL_GUIDANCE)}")
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            set_clause = ", ".join(f"{col} = %s" for col in updates)
+            vals = list(updates.values()) + [user.id]
+            with psycopg.connect(db_url, autocommit=True) as conn:
+                conn.execute(
+                    f"UPDATE users SET {set_clause} WHERE id = %s", vals,
+                )
+    except Exception as exc:
+        raise HTTPException(500, f"update failed: {exc}")
+    return JSONResponse({"ok": True, "updated": list(updates.keys())})
+
+
+# ---- Flashcard due queue + SM-2 review ------------------------------------
+
+@app.get("/api/flashcards/due")
+def flashcards_due_queue(
+    deck_id: str | None = None,
+    limit: int = 20,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return cards due for SM-2 review today, optionally filtered by deck."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    _sr.migrate()
+    cards = _sr.due_queue(
+        user_id=user.id,
+        deck_id=deck_id or None,
+        limit=min(max(1, limit), 100),
+    )
+    return JSONResponse({
+        "cards": [
+            {
+                "id": c.id,
+                "deck_id": c.deck_id,
+                "front": c.front,
+                "back": c.back,
+                "hint": c.hint,
+                "source_ref": c.source_ref,
+            }
+            for c in cards
+        ],
+        "count": len(cards),
+    })
+
+
+@app.post("/api/flashcards/{card_id}/review")
+def review_flashcard(
+    card_id: str,
+    grade: int = Form(..., ge=0, le=5, description="SM-2 grade 0=Again 2=Hard 4=Good 5=Easy"),
+    time_seconds: int | None = Form(None),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Submit a SM-2 review grade for a card. Updates interval and next due date."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    try:
+        outcome = _sr.review_card(
+            card_id=card_id,
+            user_id=user.id,
+            grade=grade,
+            time_seconds=time_seconds,
+        )
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    return JSONResponse({
+        "ok": True,
+        "card_id": card_id,
+        "new_interval_days": round(outcome.new_interval, 2),
+        "new_ease": round(outcome.new_ease, 3),
+        "new_due_at": outcome.new_due_at,
+        "repetitions": outcome.repetitions,
+        "lapses": outcome.lapses,
+    })
+
+
+@app.get("/api/flashcards/decks")
+def list_flashcard_decks(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """List the authenticated user's flashcard decks."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    _sr.migrate()
+    decks = _sr.list_my_decks(user.id)
+    return JSONResponse({
+        "decks": [
+            {
+                "id": d.id,
+                "title": d.title,
+                "description": d.description,
+                "card_count": d.card_count,
+                "language": d.language,
+                "visibility": d.visibility,
+            }
+            for d in decks
+        ],
+        "count": len(decks),
+    })
+
+
+# ---- Quiz data (GET alias) ------------------------------------------------
+
+@app.get("/api/quiz/{lesson_id}")
+def get_quiz_data(
+    lesson_id: str,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return the quiz questions for a cached lesson (GET version)."""
+    cached_lesson = cache.get_lesson_by_key(lesson_id)
+    if cached_lesson is None:
+        raise HTTPException(404, "lesson not found; POST /lessons first")
+    return JSONResponse({
+        "lesson_id": lesson_id,
+        "title": cached_lesson.title,
+        "language_code": cached_lesson.language_code,
+        "language_name": cached_lesson.language_name,
+        "level": cached_lesson.level,
+        "questions": cached_lesson.quiz or [],
+    })
+
+
+# ---- Password management -------------------------------------------------
+
+_RESET_TOKEN_DDL = """
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    token      TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    used_at    TIMESTAMPTZ,
+    expires_at TIMESTAMPTZ NOT NULL
+        DEFAULT (NOW() + INTERVAL '1 hour')
+);
+"""
+
+_reset_table_created = False
+
+
+def _ensure_reset_table() -> None:
+    global _reset_table_created
+    if _reset_table_created:
+        return
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url, autocommit=True) as conn:
+                conn.execute(_RESET_TOKEN_DDL)
+        _reset_table_created = True
+    except Exception as exc:
+        print(f"[reset_table] non-fatal: {exc}")
+
+
+@app.post("/auth/forgot-password")
+def forgot_password(email: str = Form(...)) -> JSONResponse:
+    """Send a password-reset link. Always returns 200 to prevent email enumeration."""
+    _ok = {"ok": True, "message": "If that email is registered, you'll receive a reset link."}
+    if _get_user_repo() is None:
+        return JSONResponse(_ok)
+    result = _get_user_repo().find_by_email(email)
+    if result is None:
+        return JSONResponse(_ok)
+    user, _ = result
+    import secrets
+    token = secrets.token_urlsafe(32)
+    _ensure_reset_table()
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url, autocommit=True) as conn:
+                conn.execute(
+                    "INSERT INTO password_reset_tokens (token, user_id) "
+                    "VALUES (%s, %s)",
+                    (token, user.id),
+                )
+    except Exception as exc:
+        print(f"[forgot_password] db error: {exc}")
+    # Production: send email here. Dev: log the token.
+    reset_url = f"/auth/reset-password?token={token}"
+    print(f"[DEV] Reset link for {email}: {reset_url}")
+    return JSONResponse(_ok)
+
+
+@app.post("/auth/reset-password")
+def reset_password(
+    token: str = Form(...),
+    new_password: str = Form(..., min_length=8),
+) -> JSONResponse:
+    """Consume a reset token and set a new password."""
+    db_url = get_db_url()
+    if not db_url:
+        raise HTTPException(503, "auth not configured")
+    _ensure_reset_table()
+    try:
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            row = conn.execute(
+                "SELECT user_id FROM password_reset_tokens "
+                "WHERE token = %s AND used_at IS NULL AND expires_at > NOW()",
+                (token,),
+            ).fetchone()
+            if not row:
+                raise HTTPException(400, "invalid or expired reset link — please request a new one")
+            conn.execute(
+                "UPDATE users SET password_hash = %s WHERE id = %s",
+                (hash_password(new_password), row[0]),
+            )
+            conn.execute(
+                "UPDATE password_reset_tokens SET used_at = NOW() WHERE token = %s",
+                (token,),
+            )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"reset failed: {exc}")
+    return JSONResponse({"ok": True, "message": "Password updated — please sign in."})
+
+
+@app.post("/auth/change-password")
+def change_password(
+    old_password: str = Form(...),
+    new_password: str = Form(..., min_length=8),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Change password for an authenticated user."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    if _get_user_repo() is None:
+        raise HTTPException(503, "auth not configured")
+    result = _get_user_repo().find_by_email(user.email)
+    if not result:
+        raise HTTPException(404, "user not found")
+    _, current_hash = result
+    if not current_hash or not verify_password(old_password, current_hash):
+        raise HTTPException(400, "current password is incorrect")
+    db_url = get_db_url()
+    if not db_url:
+        raise HTTPException(503, "auth not configured")
+    try:
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            conn.execute(
+                "UPDATE users SET password_hash = %s WHERE id = %s",
+                (hash_password(new_password), user.id),
+            )
+    except Exception as exc:
+        raise HTTPException(500, f"update failed: {exc}")
+    return JSONResponse({"ok": True, "message": "Password changed — please sign in again."})
+
+
+# ---- Doubt queue for teacher portal --------------------------------------
+
+@app.get("/api/doubts/queue")
+def get_doubt_queue(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return pending doubts for the teacher/org to claim and respond to."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    try:
+        from . import doubt_clearing as _dc
+        _dc.migrate()
+        with _dc._conn() as conn:
+            rows = conn.execute(
+                "SELECT id, user_id, question_text, status, created_at "
+                "FROM doubt_requests WHERE status = 'pending' "
+                "ORDER BY created_at ASC LIMIT 50",
+            ).fetchall()
+        return JSONResponse({
+            "doubts": [
+                {
+                    "id": r[0],
+                    "user_id": r[1],
+                    "question": r[2],
+                    "status": r[3],
+                    "created_at": r[4],
+                }
+                for r in rows
+            ],
+            "count": len(rows),
+        })
+    except Exception as exc:
+        return JSONResponse({"doubts": [], "count": 0, "note": str(exc)})

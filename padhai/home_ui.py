@@ -1,4 +1,4 @@
-"""v3.19 — Goal-led home UI, UX fixes.
+"""v3.20 — Goal-led home UI wired to student screens.
 
 v3.18 painted the §26 mockup but had three real UX bugs the user
 caught immediately:
@@ -203,6 +203,20 @@ HOME_HTML = """<!doctype html>
         font-size:11px;padding:4px 8px;border-radius:999px}
   .pill.admin{background:var(--violet-soft);color:var(--violet)}
 
+  /* nav link chips in sidebar for quick-launch */
+  .nav-chip{display:flex;align-items:center;gap:8px;
+            background:#1a2c47;border:1px solid rgba(255,255,255,.1);
+            border-radius:7px;padding:9px 10px;color:#d7e0f4;
+            font-size:12px;font-weight:700;cursor:pointer;
+            text-decoration:none;width:100%;margin-bottom:4px}
+  .nav-chip:hover{background:#243a57;color:#fff}
+  .nav-chip .icon{font-size:15px;flex-shrink:0}
+  .quickbar{margin-top:10px;padding-top:10px;
+            border-top:1px solid rgba(255,255,255,.1)}
+  .streak-badge{display:inline-flex;align-items:center;gap:5px;
+                background:#ff6b35;color:#fff;border-radius:999px;
+                padding:4px 10px;font-size:11px;font-weight:850;
+                margin-bottom:8px}
   .mobile-bottom-nav{display:none}
   @media(max-width:1180px){
     .app{grid-template-columns:200px 1fr}
@@ -261,6 +275,24 @@ HOME_HTML = """<!doctype html>
         Loading sections…
       </div>
     </div>
+    <!-- Quick-launch: always-visible links to core screens -->
+    <div class="quickbar">
+      <a class="nav-chip" href="/lessons/new">
+        <span class="icon">🎬</span>New lesson
+      </a>
+      <a class="nav-chip" href="/flashcards">
+        <span class="icon">🃏</span>Flashcards
+        <span id="dueCount" style="margin-left:auto;background:#ff6b35;
+              color:#fff;border-radius:999px;padding:2px 7px;
+              font-size:10px;display:none"></span>
+      </a>
+      <a class="nav-chip" href="/chat">
+        <span class="icon">🤖</span>AI Tutor
+      </a>
+      <a class="nav-chip" href="/profile">
+        <span class="icon">⚙</span>Settings
+      </a>
+    </div>
     <div class="sidenav-spacer"></div>
     <div class="signin-card" id="signinCard" style="display:none">
       Not signed in. <a href="/landing">Sign in →</a>
@@ -272,7 +304,13 @@ HOME_HTML = """<!doctype html>
       <div class="search">
         Search NCERT, UPSC polity, SSC reasoning, JEE physics, college notes…
       </div>
-      <div class="user-pill" id="userPill">Low-data mode aware</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="user-pill" id="userPill">…</div>
+        <a href="/lessons/new" class="btn primary"
+           style="text-decoration:none;white-space:nowrap;padding:9px 14px">
+          + New Lesson
+        </a>
+      </div>
     </div>
 
     <section class="hero" id="hero">
@@ -724,7 +762,73 @@ HOME_HTML = """<!doctype html>
         + 'your questions.';
   }
 
+  // -------- User identity in topbar --------
+  async function loadUser(){
+    const u = await getJSON('/auth/me');
+    const pill = $('userPill');
+    if(u && u.email){
+      pill.textContent = u.email.split('@')[0] + ' · ' + (u.subscription_tier || 'M1');
+      $('signinCard').style.display = 'none';
+    } else {
+      pill.textContent = 'Not signed in';
+      $('signinCard').style.display = '';
+    }
+  }
+
+  // -------- Due flashcards badge --------
+  async function loadDueBadge(){
+    const data = await getJSON('/api/flashcards/due?limit=1');
+    if(data && data.count > 0){
+      const badge = $('dueCount');
+      if(badge){
+        badge.textContent = data.count;
+        badge.style.display = '';
+      }
+    }
+  }
+
+  // -------- Hero CTA: navigate to real screens --------
+  const _CTA_ROUTES = {
+    'Continue today\\'s plan': '/lessons/new',
+    'Open Study Studio': '/lessons/new',
+    'Take 20-min mock': '/quiz',
+    'Ask AI tutor': '/chat',
+    'New lesson': '/lessons/new',
+    'Study flashcards': '/flashcards',
+  };
+
+  function _patchHeroActions(){
+    document.querySelectorAll('#heroActions button[data-i]').forEach(b => {
+      const idx = parseInt(b.dataset.i, 10);
+      const title = b.textContent.trim();
+      const route = _CTA_ROUTES[title];
+      if(route){
+        // Replace click handler to navigate instead of scroll/drawer
+        b.replaceWith(b.cloneNode(true));  // strip old listeners
+        const nb = document.querySelector('#heroActions button[data-i="' + idx + '"]');
+        if(nb) nb.addEventListener('click', () => { location.href = route; });
+      }
+    });
+  }
+
+  // -------- Plan blocks: make clickable --------
+  function _patchPlanBlocks(){
+    document.querySelectorAll('.study-step').forEach(el => {
+      const kind = el.querySelector('.step-meta');
+      if(!kind) return;
+      const kindText = kind.textContent;
+      if(kindText.includes('practice') || kindText.includes('read'))
+        el.style.cursor = 'pointer';
+      el.addEventListener('click', () => {
+        if(kindText.includes('mock')) location.href = '/quiz';
+        else location.href = '/lessons/new';
+      });
+    });
+  }
+
   async function boot(){
+    loadUser();
+    loadDueBadge();
     manifest = await getJSON('/api/navigation/manifest');
     renderSidebar(manifest);
     renderSectionGroups(manifest);
@@ -734,6 +838,8 @@ HOME_HTML = """<!doctype html>
     renderPlan(dash);
     renderNext(dash);
     renderRightbar(dash);
+    _patchHeroActions();
+    _patchPlanBlocks();
   }
   boot();
 })();
@@ -843,7 +949,13 @@ LANDING_HTML = """<!doctype html>
   <div class="alt">
     <a href="/home">Open Exam Hub</a>
     &nbsp;·&nbsp;
-    <a href="/ui-legacy">Legacy dashboard</a>
+    <a href="#" id="forgotLink">Forgot password?</a>
+  </div>
+  <div id="forgotForm" style="display:none;margin-top:14px">
+    <label for="resetEmail">Email</label>
+    <input id="resetEmail" type="email" placeholder="your@email.com">
+    <button class="cta" id="resetBtn" style="margin-top:10px">Send reset link</button>
+    <div class="err" id="resetMsg"></div>
   </div>
 </div>
 <script>
@@ -910,6 +1022,28 @@ LANDING_HTML = """<!doctype html>
       }
     },
   );
+  // Forgot password toggle + submit
+  document.getElementById('forgotLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    const ff = document.getElementById('forgotForm');
+    ff.style.display = ff.style.display === 'none' ? '' : 'none';
+  });
+  document.getElementById('resetBtn').addEventListener('click', async () => {
+    const email = document.getElementById('resetEmail').value.trim();
+    const msg = document.getElementById('resetMsg');
+    if(!email){ msg.textContent = 'Enter your email.'; msg.classList.add('show'); return; }
+    const btn = document.getElementById('resetBtn');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    const fd = new FormData(); fd.append('email', email);
+    try{
+      const r = await fetch('/auth/forgot-password', {method:'POST', body:fd});
+      const j = await r.json();
+      msg.textContent = j.message || 'Check your inbox.';
+      msg.classList.add('show');
+      msg.style.color = '#7ee8a2';
+    } catch(e){ msg.textContent = 'Network error.'; msg.classList.add('show'); }
+    finally{ btn.disabled = false; btn.textContent = 'Send reset link'; }
+  });
 })();
 </script>
 </body>
