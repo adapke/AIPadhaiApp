@@ -1,0 +1,95 @@
+name: smoke
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install the core requirements + the deps the smoke tests
+          # actually exercise. Optional deps (rq, locust, python3-saml,
+          # mermaid-cli) stay out — those tests handle the
+          # not-installed path gracefully.
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install fastapi 'pydantic>=2' python-multipart
+
+      - name: Run v1.x → v2.0 smoke suite
+        env:
+          PADHAI_DB_PATH: /tmp/padhai_ci.db
+        run: |
+          set -e
+          # Each release smoke is self-contained — they clean their own
+          # tmp DB at startup. Run in version order so any regression
+          # surfaces at the right release.
+          for script in scripts/test_v1.py \
+                        scripts/test_v1_1.py \
+                        scripts/test_v1_2.py \
+                        scripts/test_v1_3.py \
+                        scripts/test_v1_5.py \
+                        scripts/test_v1_6.py \
+                        scripts/test_v1_7.py \
+                        scripts/test_v1_8.py \
+                        scripts/test_v1_9.py \
+                        scripts/test_v2_0.py \
+                        scripts/test_v2_0_1.py \
+                        scripts/test_v2_0_2.py \
+                        scripts/test_v2_0_3.py \
+                        scripts/test_v2_0_4.py \
+                        scripts/test_v2_1.py \
+                        scripts/test_v2_2.py \
+                        scripts/test_v2_3.py \
+                        scripts/test_v2_4.py \
+                        scripts/test_v2_5.py \
+                        scripts/test_v2_6.py \
+                        scripts/test_v2_7.py \
+                        scripts/test_v2_8.py \
+                        scripts/test_v2_9.py \
+                        scripts/test_v3_0.py \
+                        scripts/test_v3_1.py \
+                        scripts/test_v3_2.py \
+                        scripts/test_v3_3.py \
+                        scripts/test_v3_4.py \
+                        scripts/test_v3_5.py \
+                        scripts/test_v3_6.py \
+                        scripts/test_v3_7.py \
+                        scripts/test_v3_8.py \
+                        scripts/test_v3_9.py \
+                        scripts/test_v3_10.py \
+                        scripts/test_v3_11.py \
+                        scripts/test_v3_12.py \
+                        scripts/test_v3_13.py \
+                        scripts/test_v3_14.py \
+                        scripts/test_v3_15.py \
+                        scripts/test_v3_16.py \
+                        scripts/test_v3_17.py \
+                        scripts/test_v3_18.py \
+                        scripts/test_v3_19.py; do
+            echo "===== $script ====="
+            PYTHONPATH=. python "$script"
+          done
+
+      - name: Route count sanity check
+        run: |
+          PYTHONPATH=. python -c "
+          from padhai.web import app
+          n = len(app.routes)
+          assert n > 100, f'route count regressed: {n} (expected > 100)'
+          print(f'routes: {n}')
+          "

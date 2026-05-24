@@ -35,7 +35,7 @@ def main() -> int:
     changelog = Path("CHANGELOG.md")
     check("CHANGELOG.md exists", changelog.exists())
     if changelog.exists():
-        body = changelog.read_text()
+        body = changelog.read_text(encoding="utf-8")
         check(
             "CHANGELOG covers v0.10 + v1.0 + v2.0",
             "v0.10" in body and "v1.0.0" in body and "v2.0.0" in body,
@@ -48,7 +48,7 @@ def main() -> int:
     readme = Path("README.md")
     check("README.md exists", readme.exists())
     if readme.exists():
-        body = readme.read_text()
+        body = readme.read_text(encoding="utf-8")
         check(
             "README reflects platform state (not v0.x CLI prototype framing)",
             "AI Pathshala" in body and "School ERP" in body

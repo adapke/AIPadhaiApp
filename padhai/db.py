@@ -461,4 +461,5 @@ def get_db_url() -> str | None:
 
 
 def use_postgres() -> bool:
-    return get_db_url() is not None
+    url = (get_db_url() or "").strip()
+    return url.startswith(("postgres://", "postgresql://"))

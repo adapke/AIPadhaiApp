@@ -29,15 +29,18 @@ import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-# Load .env from the project root before any os.environ reads
-try:
-    from dotenv import load_dotenv as _load_dotenv
-    _load_dotenv(
-        Path(__file__).resolve().parent.parent / ".env",
-        override=False,
-    ) or _load_dotenv(override=False)  # fallback: auto-discover from CWD
-except ImportError:
-    pass
+# Load .env from the project root before any os.environ reads. Tests can
+# disable this so a local developer DATABASE_URL does not leak into
+# SQLite-only smoke runs.
+if os.environ.get("PADHAI_SKIP_DOTENV", "0") not in ("1", "true", "yes"):
+    try:
+        from dotenv import load_dotenv as _load_dotenv
+        _load_dotenv(
+            Path(__file__).resolve().parent.parent / ".env",
+            override=False,
+        ) or _load_dotenv(override=False)  # fallback: auto-discover from CWD
+    except ImportError:
+        pass
 
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response

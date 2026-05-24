@@ -375,9 +375,21 @@ HOME_HTML = """<!doctype html>
   const $ = id => document.getElementById(id);
   let manifest = null;
 
+  function authHeaders(base){
+    const headers = Object.assign({}, base || {});
+    try {
+      const token = localStorage.getItem('pathshala_token');
+      if(token) headers.Authorization = 'Bearer ' + token;
+    } catch(_) {}
+    return headers;
+  }
+
   async function getJSON(url){
     try{
-      const r = await fetch(url, {credentials:'include'});
+      const r = await fetch(url, {
+        credentials:'include',
+        headers: authHeaders(),
+      });
       if(!r.ok) return null;
       return await r.json();
     } catch(_){ return null; }
@@ -516,8 +528,8 @@ HOME_HTML = """<!doctype html>
         : null;
       res = await fetch(url, {
         method, credentials: 'include',
-        headers: method !== 'GET' ?
-          {'Content-Type':'application/x-www-form-urlencoded'} : {},
+        headers: authHeaders(method !== 'GET' ?
+          {'Content-Type':'application/x-www-form-urlencoded'} : {}),
         body: bodyStr || undefined,
       });
     } catch(e) {
