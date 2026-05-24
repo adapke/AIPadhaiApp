@@ -882,6 +882,12 @@ LANDING_HTML = """<!doctype html>
           method: 'POST', body: fd, credentials: 'include',
         });
         if (r.ok) {
+          try {
+            const data = await r.json();
+            if (data && data.token) {
+              localStorage.setItem('padhai_token', data.token);
+            }
+          } catch(_) {}
           location.href = '/home';
           return;
         }
