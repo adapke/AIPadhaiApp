@@ -54,9 +54,6 @@ class Section:
     features: tuple[Feature, ...] = field(default_factory=tuple)
 
 
-# Note: `keep` badge mirrors review §26: "existing functionality
-# stays". `new` flags modules shipped in v3.x.
-
 NAVIGATION: tuple[Section, ...] = (
     Section(
         title="Exam Hub",
@@ -109,10 +106,12 @@ NAVIGATION: tuple[Section, ...] = (
         features=(
             Feature("Upload library",
                     "/api/uploads",
+                    http_method="POST",
                     description="Documents + manuscripts.",
                     badge="keep"),
             Feature("Generate lessons",
-                    "/api/lessons",
+                    "/lessons",
+                    http_method="POST",
                     description="AI video + notes from sources.",
                     badge="keep"),
             Feature("Doubt chat",
@@ -170,7 +169,7 @@ NAVIGATION: tuple[Section, ...] = (
                     description="History + analysis per submission.",
                     badge="keep"),
             Feature("Question bank",
-                    "/api/question-bank",
+                    "/api/question-bank/search",
                     description="Verified questions tagged + filterable.",
                     badge="keep"),
         ),
@@ -227,11 +226,11 @@ NAVIGATION: tuple[Section, ...] = (
         ),
         features=(
             Feature("Forums",
-                    "/api/forums",
+                    "/api/forums/threads",
                     description="Discussion threads.",
                     badge="keep"),
             Feature("Study buddies",
-                    "/api/study-buddies",
+                    "/api/buddies/me",
                     description="Peer-match by exam + schedule.",
                     badge="keep"),
             Feature("Mentor program",
@@ -361,9 +360,9 @@ NAVIGATION: tuple[Section, ...] = (
                     description="DMCA-style takedowns.",
                     badge="new", visible_to_role="admin"),
             Feature("DPDP / SOC2 audit",
-                    "/api/admin/audit",
+                    "/api/orgs/{org_id}/audit",
                     description=(
-                        "Compliance event audit trail."
+                        "Compliance event audit trail (org-scoped)."
                     ),
                     badge="keep", visible_to_role="admin"),
         ),
@@ -412,14 +411,10 @@ def _section_to_dict(s: Section) -> dict:
 
 
 def get_manifest(*, role: str | None = None) -> dict:
-    """Return the navigation manifest. If `role` is supplied, we
-    filter features by `visible_to_role` — UI can hand the
-    student / teacher / parent / admin enum and get back only
-    what's relevant."""
+    """Return the navigation manifest, optionally filtered by role."""
     sections = []
     for s in NAVIGATION:
         if role is None:
-            # No filter — show everything
             visible = list(s.features)
         else:
             visible = [
@@ -427,7 +422,6 @@ def get_manifest(*, role: str | None = None) -> dict:
                 if f.visible_to_role is None
                 or f.visible_to_role == role
             ]
-        # Drop entire section if it has zero visible features
         if not visible:
             continue
         sections.append({

@@ -239,6 +239,10 @@ class PostgresJobStore:
         )
 
     def get(self, job_id: str) -> Job | None:
+        try:
+            uuid.UUID(job_id)
+        except (TypeError, ValueError):
+            return None
         with self.pool.connection() as conn, conn.cursor() as cur:
             cur.execute(
                 "SELECT id, status, created_at, updated_at, payload, "
