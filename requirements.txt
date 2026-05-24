@@ -1,0 +1,17 @@
+anthropic>=0.50
+gtts>=2.5
+pillow>=10
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+python-dotenv>=1.0
+piper-tts>=1.4
+# Production-tier (1M-user scale) — only loaded when DATABASE_URL /
+# S3_BUCKET are configured; the dev path keeps working without them.
+psycopg[binary,pool]>=3.2
+boto3>=1.35
+bcrypt>=4.2
+pyjwt>=2.9
+redis>=5.0
+rq>=2.0
+PyMuPDF>=1.24    # PDF ingest (renders pages to PNG without poppler)

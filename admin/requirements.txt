@@ -1,0 +1,8 @@
+# Admin Console dependencies — kept minimal and independent of the
+# student app's requirements.txt. When admin moves to its own repo
+# this file moves with it; nothing else needs to change.
+fastapi>=0.110
+uvicorn[standard]>=0.27
+bcrypt>=4.0
+pyjwt>=2.7
+cryptography>=41

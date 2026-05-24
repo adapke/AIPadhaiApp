@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PadhaiApp Final Review Report</title>
+  <style>
+    :root{--bg:#f5f7fb;--panel:#ffffff;--ink:#172033;--muted:#667085;--line:#dbe3ef;--brand:#2563eb;--brand-soft:#eaf1ff;--green:#0f8f64;--shadow:0 10px 24px rgba(20,31,52,.06)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55;padding-top:64px}
+    a{color:inherit;text-decoration:none}
+    .menubar{position:fixed;left:0;right:0;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 18px;box-shadow:0 4px 16px rgba(20,31,52,.05)}
+    .brand{display:flex;align-items:center;gap:10px;min-width:190px}.logo{width:34px;height:34px;border-radius:8px;background:#172033;color:#fff;display:grid;place-items:center;font-weight:850}.brand b{display:block;font-size:14px}.brand span{display:block;color:var(--muted);font-size:11px;margin-top:1px}
+    .menu-links{display:flex;align-items:center;gap:8px;overflow:auto}.menu-links a{white-space:nowrap;border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-size:13px;font-weight:750;color:#344054}.menu-links a.primary{background:var(--brand);border-color:var(--brand);color:#fff}.menu-links a:hover{background:var(--brand-soft);color:var(--brand)}.menu-links a.primary:hover{background:var(--brand);color:#fff}
+    main{max-width:980px;margin:0 auto;padding:26px 18px 60px}.notice{background:#fff;border:1px solid #bad4ff;border-left:4px solid var(--brand);border-radius:8px;padding:14px 16px;margin-bottom:14px;color:#344054}.notice b{color:var(--brand)}
+    section{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px;margin:14px 0;box-shadow:var(--shadow);scroll-margin-top:84px}
+    h1{font-size:30px;line-height:1.15;margin:0 0 8px}h2{font-size:18px;margin:0 0 10px}p{margin:8px 0;color:#475467}.muted{color:var(--muted)}.score{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{border:1px solid var(--line);border-radius:8px;padding:12px;background:#fbfcff}.card b{display:block;font-size:22px;margin-bottom:3px}.tag{display:inline-block;background:var(--brand-soft);color:var(--brand);border-radius:999px;padding:5px 8px;font-size:12px;font-weight:800;margin:3px 4px 3px 0}ul{padding-left:22px}li{margin:5px 0}.footer-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.footer-actions a{border:1px solid var(--line);border-radius:7px;padding:9px 11px;font-size:13px;font-weight:800;background:#fff}.footer-actions a.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    @media(max-width:760px){body{padding-top:116px}.menubar{display:block;padding:10px 12px}.brand{margin-bottom:8px}.menu-links{gap:6px}.menu-links a{font-size:12px;padding:7px 9px}.score{grid-template-columns:1fr}h1{font-size:24px}main{padding:18px 12px 60px}}
+  </style>
+</head>
+<body>
+  <nav class="menubar">
+    <a class="brand" href="#top"><div class="logo">P</div><div><b>PadhaiApp Review</b><span>Report + mockup links</span></div></a>
+    <div class="menu-links">
+      <a href="#verdict">Verdict</a>
+      <a href="#ratings">Ratings</a>
+      <a href="#features">Keep Features</a><a href="#coverage">Coverage</a>
+      <a href="#mobile">Mobile</a>
+      <a href="#trust">Trust</a>
+      <a class="primary" href="PADHAIAPP_RECOMMENDED_PRODUCT_MOCKUP.html">Open Mockup</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <div class="notice"><b>You are viewing the report page.</b> To see the UI mockup with the sidebar/menu, click <b>Open Mockup</b> in the top menu.</div>
+    <h1>PadhaiApp Final Review Report</h1>
+    <p class="muted">Final frontend, mobile, accuracy, and functionality review - 21 May 2026.</p>
+
+    <section id="verdict"><h2>Executive Verdict</h2><p>The previous mockup was useful as a concept, but too complicated as a product screen. Many controls looked clickable but had no real behavior, so the user experience felt broken. The final direction is a simpler app shell that keeps existing PadhaiApp modules and makes the first screen focused on one goal and four actions.</p></section>
+
+    <section id="ratings"><h2>Ratings</h2><div class="score"><div class="card"><b>6/10</b><span>Old mockup as concept</span></div><div class="card"><b>3/10</b><span>Old mockup as functional prototype</span></div><div class="card"><b>7/10</b><span>Existing product foundation</span></div><div class="card"><b>9.5</b><span>Possible with execution</span></div></div></section>
+
+    <section id="core"><h2>Core Fix</h2><p>Do not show every module on the homepage. Show a calm student home with active goal, today's next action, progress, and four actions:</p><p><span class="tag">Continue Learning</span><span class="tag">Create / Upload</span><span class="tag">Practice / Test</span><span class="tag">Ask Doubt</span></p></section>
+
+    <section id="features"><h2>Keep Existing Features</h2><p>Keep Video Studio, Explainer, Doubt Chat, Library, Quiz Maker, Flashcards, Match Game, Audio Recap, Notes, Live Lecture, Voice Tutor, Learning Path, Curriculum Map, Teacher Studio, Parent View, School / Coaching, attendance, exams, timetable, fees, and admin modules. Group them under More Tools instead of crowding the first screen.</p></section>
+
+
+    <section id="coverage"><h2>India Exam And School Board Coverage</h2><p>Yes, the final product direction covers all major Indian exam and school-board paths, but it should be handled through a configurable coverage registry instead of a crowded homepage.</p><p><span class="tag">CBSE</span><span class="tag">ICSE / ISC</span><span class="tag">NIOS</span><span class="tag">All State / UT Boards</span><span class="tag">SCERT + NCERT</span><span class="tag">JEE</span><span class="tag">NEET</span><span class="tag">CUET</span><span class="tag">UPSC</span><span class="tag">SSC</span><span class="tag">Banking</span><span class="tag">Railways</span><span class="tag">Defence</span><span class="tag">State PSC</span><span class="tag">Teaching</span><span class="tag">Law</span><span class="tag">GATE / NET</span><span class="tag">Private Jobs</span><span class="tag">PhD / Research</span></p><p>Each board or exam pack should store syllabus year, language medium, source files, topic map, paper pattern, marking scheme, PYQ/sample-paper mapping, verified-answer status, and readiness score.</p></section>
+    <section id="mobile"><h2>Mobile Rule</h2><p>Mobile should use five tabs only: Home, Create, Test, Tutor, More. Role-specific screens should handle Teacher, Parent, School Admin, and Mentor views.</p></section>
+
+    <section id="trust"><h2>Trust Layer</h2><ul><li>Source-grounded answers from uploaded or verified content.</li><li>Citations for notes, answers, and explanations.</li><li>Teacher or expert verification status.</li><li>Official syllabus and PYQ mapping.</li><li>Correction workflow and audit logs.</li></ul></section>
+
+    <section id="final"><h2>Final Recommendation</h2><p>Keep the power, remove the noise. PadhaiApp should feel like a daily learning command center, not a list of all possible features. The product can reach 8+ quickly with simplification, and up to 9.5 if accuracy, community, Indian exam depth, mobile performance, and institutional trust are executed well.</p><div class="footer-actions"><a class="primary" href="PADHAIAPP_RECOMMENDED_PRODUCT_MOCKUP.html">Open Final Mockup</a><a href="PADHAIAPP_FINAL_FRONTEND_MOBILE_DESIGN_REVIEW.md">Open Markdown Report</a></div></section>
+  </main>
+</body>
+</html>

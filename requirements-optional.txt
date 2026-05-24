@@ -1,0 +1,38 @@
+# Optional dependencies — install per-deployment based on which
+# features the env vars activate. Each module gracefully degrades
+# when its lib isn't importable, so this file is genuinely optional.
+#
+# Install all: `pip install -r requirements-optional.txt`
+# Install selectively per feature below.
+
+# --- G2: Redis + RQ distributed job queue
+# Required when: REDIS_URL is set
+# Module: padhai/queue_backend.py, padhai/worker_entrypoint.py
+rq>=1.16
+redis>=5.0
+
+# --- H1: SAML 2.0 SSO
+# Required when: any org has a SAML config row
+# Module: padhai/saml.py
+python3-saml>=1.16
+
+# --- G6: Load testing (dev / staging, NOT prod)
+# Required when: running scripts/loadtest_locustfile.py
+locust>=2.27
+
+# --- J1: KaTeX server-side math rendering
+# Required when: KATEX_BIN env var is set
+# Not a pip dep — install via npm separately:
+#   npm install -g katex
+#   export KATEX_BIN=/usr/local/bin/katex-cli
+
+# --- J2: Mermaid diagrams
+# Required when: MERMAID_BIN env var is set
+# Not a pip dep — install via npm:
+#   npm install -g @mermaid-js/mermaid-cli
+#   export MERMAID_BIN=$(which mmdc)
+
+# --- J4: Sarvam.ai voice (Hindi v2)
+# Required when: SARVAM_API_KEY is set
+# Uses `requests` which is already pulled by anthropic, but document:
+# requests>=2.32

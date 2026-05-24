@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# generated artifacts
+*.mp4
+*.mp3
+demo_page.png
+sample_slide.png
+test_*.png
+demo_script.json
+
+# IDE — keep shared run configs, drop per-user state
+.idea/*
+!.idea/runConfigurations/
+!.idea/runConfigurations/*.xml
+.vscode/
+*.swp
+*.swo
+
+# secrets — env files are never committed; share .env.example only
+.env
+.env.local
+.env.*.local

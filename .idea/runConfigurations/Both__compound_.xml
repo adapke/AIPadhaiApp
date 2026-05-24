@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <!--
+    Compound run config — starts BOTH processes (student on 8000 and
+    admin on 8001) in one click. Useful when you want to verify admin
+    runs cleanly standalone while still having the mounted version
+    available at localhost:8000/admin.
+  -->
+  <configuration default="false" name="Both (student + standalone admin)" type="CompoundRunConfigurationType">
+    <toRun name="AI Pathshala (student + admin)" type="PythonConfigurationType" />
+    <toRun name="Admin (standalone — split-out preview)" type="PythonConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>

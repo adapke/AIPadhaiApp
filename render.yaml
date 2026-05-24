@@ -1,0 +1,99 @@
+# Render blueprint — one-click deploy for PadhAI.
+#
+# Apply via the Render dashboard ("Blueprint" → point at this repo) or
+# the render CLI: `render blueprint apply`.
+#
+# Production tier (target 1M users):
+#   - Postgres database (provisioned below) replaces SQLite for jobs + caches
+#   - Cloudflare R2 (set via env vars) replaces local disk for video storage
+#   - The persistent disk drops from 20GB to 5GB (just for Piper voice +
+#     transient render workspace)
+
+databases:
+  - name: padhai-db
+    plan: starter            # 1GB Postgres; bump to standard at ~100k users
+    databaseName: padhai
+    user: padhai
+
+services:
+  - type: web
+    name: padhai
+    runtime: docker
+    plan: starter            # bump to standard once you need >512MB RAM for ffmpeg
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: false            # paused during v0.7 gap-close work; flip back when ready to ship
+    preDeployCommand: python -m scripts.migrate
+    disk:
+      name: padhai-cache
+      mountPath: /var/padhai/cache
+      sizeGB: 5             # only transient render workspace + Piper voice now
+
+    envVars:
+      # Wired to the Postgres above — Render injects the connection string.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: padhai-db
+          property: connectionString
+
+      # Cloudflare R2 for video storage. Set in dashboard:
+      #   account: <your account id>
+      #   bucket:  padhai-videos
+      #   keys:    R/W token from R2 → API tokens
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_ENDPOINT_URL
+        sync: false           # https://<account_id>.r2.cloudflarestorage.com
+      - key: S3_REGION
+        value: auto
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_PUBLIC_URL_BASE
+        sync: false           # optional; e.g. https://videos.padhai.ai (R2 custom domain)
+
+
+      # Required — set in the Render dashboard (sync: false keeps these secret)
+      - key: ANTHROPIC_API_KEY
+        sync: false
+
+      # Tier-specific TTS provider keys (set whichever tier you serve).
+      - key: BHASHINI_USER_ID
+        sync: false
+      - key: BHASHINI_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: ELEVENLABS_VOICE_ID
+        sync: false
+
+      # Tier-specific talking-head provider keys.
+      - key: PADHAI_TALKING_HEAD_PROVIDER
+        sync: false   # explicit selector — synthesia | heygen | tavus | deepbrain | d-id | wav2lip | cartoon
+      - key: HEYGEN_API_KEY
+        sync: false
+      - key: SYNTHESIA_API_KEY
+        sync: false
+      - key: TAVUS_API_KEY
+        sync: false
+      - key: TAVUS_REPLICA_ID
+        sync: false
+      - key: DEEPBRAIN_API_KEY
+        sync: false
+      - key: DEEPBRAIN_MODEL_ID
+        sync: false
+      - key: DID_API_KEY
+        sync: false
+      - key: DID_SOURCE_PHOTO_URL
+        sync: false
+
+      # ── Admin Console (mounted at /admin/* inside the main app) ─────
+      # Single deploy in v0.8.1 — the admin app is mounted on the main
+      # FastAPI at /admin. When admin scale demands a separate service,
+      # add a `padhai-admin` block here pointing at ./admin/Dockerfile
+      # and drop the mount line in padhai/web.py. The admin app code
+      # already runs standalone — see admin/Dockerfile.
+      - key: ADMIN_JWT_SECRET
+        sync: false   # Separate from PADHAI_JWT_SECRET so admin keys
+                      # can be rotated independently of student-app keys.

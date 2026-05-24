@@ -1,0 +1,41 @@
+<component name="ProjectRunConfigurationManager">
+  <!--
+    OPTIONAL — runs the admin app as a standalone process on port 8001,
+    matching the future "split admin to its own repo / Render service"
+    architecture.
+
+    You normally do NOT need this. The main "AI Pathshala (student +
+    admin)" run config already serves admin at /admin/* on port 8000.
+
+    Use this config when:
+      - testing that admin still works with zero padhai imports
+      - validating the future split-out before doing the actual git mv
+      - running admin against a different Postgres / cache directory
+  -->
+  <configuration default="false" name="Admin (standalone — split-out preview)" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="false">
+    <module name="Paymentoneclick" />
+    <option name="ENV_FILES" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONUNBUFFERED" value="1" />
+      <env name="PYTHONPATH" value="$PROJECT_DIR$" />
+      <env name="ADMIN_JWT_SECRET" value="dev-admin-secret-change-me-locally-please" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="SDK_NAME" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="IS_MODULE_SDK" value="true" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="uvicorn" />
+    <option name="PARAMETERS" value="admin.app:app --host 127.0.0.1 --port 8001 --reload" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="true" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <option name="INPUT_FILE" value="" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,242 @@
+"""User authentication, session tokens, and tier enforcement.
+
+Two integration shapes ship today:
+
+  1. LocalAuth — bcrypt-hashed passwords stored in the `users` table,
+     short-lived JWTs (HS256) issued + verified locally. Right default
+     for a self-hosted prototype.
+
+  2. ClerkAuth — external IDP; we just verify the JWTs Clerk issues
+     against their JWKS endpoint. Right default for production once
+     you don't want to own password resets, MFA, social login.
+
+The web tier consumes them through `current_user`, a FastAPI dependency
+that returns an `AuthUser` (None when anonymous in the dev path; raises
+401 otherwise once `PADHAI_REQUIRE_AUTH=1`).
+
+Tier enforcement
+----------------
+`AuthUser.subscription_tier` ('M1' / 'M2' / 'M3' / 'M4a' / 'M4b' / 'M4c'
+/ 'M4d' / 'M4e') maps deterministically to the talking-head provider
+the renderer should use for that user. `resolve_provider_for_tier()`
+is the single source of truth; POST /lessons calls it after auth so
+clients can't request a tier above what they're paying for. See LEARN.md
+§7.1 for the subscription matrix this encodes."""
+
+from __future__ import annotations
+
+import os
+import time
+from dataclasses import dataclass
+from typing import Protocol
+
+# bcrypt / pyjwt are imported lazily so the module still loads when
+# auth is disabled in dev and the deps haven't been installed.
+
+
+# ---- JWT settings ---------------------------------------------------------
+
+JWT_ALG = "HS256"
+JWT_TTL_SECONDS = 7 * 24 * 60 * 60  # 7 days
+
+
+def _jwt_secret() -> str:
+    secret = os.environ.get("PADHAI_JWT_SECRET")
+    if not secret:
+        raise RuntimeError(
+            "PADHAI_JWT_SECRET not set. Generate one with "
+            "`python -c 'import secrets; print(secrets.token_urlsafe(48))'` "
+            "and set it on every web/worker process."
+        )
+    return secret
+
+
+# ---- Domain types ---------------------------------------------------------
+
+
+@dataclass
+class AuthUser:
+    id: str
+    email: str
+    subscription_tier: str    # "M1" .. "M4e"
+    subscription_level: str   # "L1" .. "L5"
+
+
+# ---- Password hashing -----------------------------------------------------
+
+
+def hash_password(plain: str) -> str:
+    import bcrypt
+    return bcrypt.hashpw(plain.encode(), bcrypt.gensalt(rounds=12)).decode()
+
+
+def verify_password(plain: str, hashed: str) -> bool:
+    import bcrypt
+    return bcrypt.checkpw(plain.encode(), hashed.encode())
+
+
+# ---- JWT issue / verify ---------------------------------------------------
+
+
+def issue_token(user_id: str) -> str:
+    import jwt as pyjwt
+    payload = {
+        "sub": user_id,
+        "iat": int(time.time()),
+        "exp": int(time.time()) + JWT_TTL_SECONDS,
+    }
+    return pyjwt.encode(payload, _jwt_secret(), algorithm=JWT_ALG)
+
+
+def decode_token(token: str) -> str | None:
+    """Return the user_id if the token is valid + unexpired, else None."""
+    import jwt as pyjwt
+    try:
+        payload = pyjwt.decode(token, _jwt_secret(), algorithms=[JWT_ALG])
+    except pyjwt.PyJWTError:
+        return None
+    return payload.get("sub")
+
+
+# ---- User repository ------------------------------------------------------
+
+
+class UserRepository(Protocol):
+    def create(
+        self, email: str, password_hash: str,
+        tier: str = "M1", level: str = "L3",
+    ) -> AuthUser: ...
+
+    def find_by_email(self, email: str) -> tuple[AuthUser, str] | None:
+        """Returns (user, password_hash) or None. The hash is returned
+        separately so callers can verify_password against it."""
+        ...
+
+    def find_by_id(self, user_id: str) -> AuthUser | None: ...
+
+
+class PostgresUserRepository:
+    """Backs LocalAuth onto the `users` table from padhai/db.py."""
+
+    def __init__(self, pool):
+        self.pool = pool
+
+    def create(
+        self, email: str, password_hash: str,
+        tier: str = "M1", level: str = "L3",
+    ) -> AuthUser:
+        with self.pool.connection() as conn, conn.cursor() as cur:
+            cur.execute(
+                "INSERT INTO users (email, password_hash, subscription_tier, "
+                "subscription_level) VALUES (%s, %s, %s, %s) RETURNING id",
+                (email.lower(), password_hash, tier, level),
+            )
+            row = cur.fetchone()
+        return AuthUser(
+            id=str(row[0]), email=email.lower(),
+            subscription_tier=tier, subscription_level=level,
+        )
+
+    def find_by_email(self, email: str) -> tuple[AuthUser, str] | None:
+        with self.pool.connection() as conn, conn.cursor() as cur:
+            cur.execute(
+                "SELECT id, email, password_hash, subscription_tier, "
+                "subscription_level FROM users WHERE email = %s",
+                (email.lower(),),
+            )
+            row = cur.fetchone()
+        if not row:
+            return None
+        return (
+            AuthUser(
+                id=str(row[0]), email=row[1],
+                subscription_tier=row[3], subscription_level=row[4],
+            ),
+            row[2],
+        )
+
+    def find_by_id(self, user_id: str) -> AuthUser | None:
+        with self.pool.connection() as conn, conn.cursor() as cur:
+            cur.execute(
+                "SELECT id, email, subscription_tier, subscription_level "
+                "FROM users WHERE id = %s", (user_id,),
+            )
+            row = cur.fetchone()
+        if not row:
+            return None
+        return AuthUser(
+            id=str(row[0]), email=row[1],
+            subscription_tier=row[2], subscription_level=row[3],
+        )
+
+
+# ---- Tier → provider mapping ---------------------------------------------
+
+# The single source of truth for the LEARN.md §7.1 subscription matrix.
+# Server-side enforcement: client can't request HeyGen if they paid for
+# M2 — they get cartoon + Bhashini regardless of what their form submits.
+TIER_TO_PROVIDER: dict[str, str] = {
+    "M1":  "cartoon",
+    "M2":  "cartoon",       # cartoon avatar, premium voice via TTSProvider
+    "M3":  "wav2lip",
+    "M4a": "d-id",
+    "M4b": "heygen",
+    "M4c": "tavus",
+    "M4d": "synthesia",
+    "M4e": "deepbrain",
+}
+
+
+def resolve_provider_for_tier(user: AuthUser | None) -> str:
+    """Map a user's subscription tier to the talking-head provider they
+    are entitled to. Anonymous users get M1 (cartoon)."""
+    if user is None:
+        return "cartoon"
+    return TIER_TO_PROVIDER.get(user.subscription_tier, "cartoon")
+
+
+# ---- FastAPI dependency ---------------------------------------------------
+
+
+def _require_auth() -> bool:
+    return os.environ.get("PADHAI_REQUIRE_AUTH", "0") in ("1", "true", "yes")
+
+
+def make_current_user_dependency(repo_or_getter):
+    """Return a FastAPI dependency that resolves the bearer token to an
+    AuthUser. Returns None for anonymous when PADHAI_REQUIRE_AUTH=0;
+    raises 401 otherwise. Repo None means auth is disabled — always
+    returns None.
+
+    repo_or_getter may be a UserRepository, None, or a zero-arg callable
+    that returns one of the above. The callable form lets callers defer
+    the repo lookup to request time so the dependency works even when the
+    repo is initialised after module import (e.g. in the lifespan)."""
+    from fastapi import Header, HTTPException
+
+    require_auth = _require_auth()
+
+    async def current_user(
+        authorization: str | None = Header(default=None),
+    ) -> AuthUser | None:
+        repo = repo_or_getter() if callable(repo_or_getter) else repo_or_getter
+        if repo is None:
+            if require_auth:
+                raise HTTPException(503, "auth required but not configured")
+            return None
+
+        if authorization and authorization.lower().startswith("bearer "):
+            token = authorization[len("bearer "):].strip()
+            user_id = decode_token(token)
+            if user_id is None:
+                raise HTTPException(401, "invalid or expired token")
+            user = repo.find_by_id(user_id)
+            if user is None:
+                raise HTTPException(401, "user not found")
+            return user
+
+        if require_auth:
+            raise HTTPException(401, "missing bearer token")
+        return None
+
+    return current_user

@@ -1,0 +1,48 @@
+{
+  "appId": "in.aipathshala.app",
+  "appName": "AI Pathshala",
+  "webDir": "../padhai/static",
+  "server": {
+    "url": "https://app.aipathshala.in",
+    "cleartext": false,
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 800,
+      "launchAutoHide": true,
+      "backgroundColor": "#5E60CE",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": false
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    },
+    "App": {
+      "deepLinks": ["aipathshala://", "https://app.aipathshala.in"]
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#5E60CE"
+    },
+    "Share": {},
+    "Filesystem": {},
+    "Browser": {},
+    "Device": {}
+  },
+  "android": {
+    "minSdkVersion": 24,
+    "targetSdkVersion": 34,
+    "allowMixedContent": false,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "ios": {
+    "scheme": "AIPathshala",
+    "limitsNavigationsToAppBoundDomains": true,
+    "contentInset": "always",
+    "preferredContentMode": "mobile"
+  },
+  "_comment": "Source of truth for native Capacitor builds. Both iOS (I1) and Android (I2) read this. See MOBILE_BUILD.md for build instructions."
+}

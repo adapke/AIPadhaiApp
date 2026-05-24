@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>PadhaiApp — Feature Explorer v2</title>
+  <style>
+    :root{
+      --bg:#f4f6fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e0e6ef;
+      --brand:#2563eb;--brand-soft:#eff6ff;
+      --keep:#0f8f64;--keep-soft:#e7f7ef;
+      --new:#2563eb;--new-soft:#eff6ff;
+      --soon:#b45309;--soon-soft:#fff4df;
+      --shadow:0 8px 24px rgba(20,31,52,.07);
+      --radius:10px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:Inter,'Plus Jakarta Sans',system-ui,sans-serif;line-height:1.55;padding-bottom:60px}
+
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 20px;gap:12px}
+    .logo{display:flex;align-items:center;gap:9px}
+    .logo-mark{width:32px;height:32px;border-radius:8px;background:#172033;color:#fff;display:grid;place-items:center;font-weight:800;font-size:15px;flex-shrink:0}
+    .logo b{font-size:14px;font-weight:800}.logo span{font-size:11px;color:var(--muted)}
+    .nav-links{display:flex;align-items:center;gap:6px;overflow:auto}
+    .nav-link{white-space:nowrap;border:1px solid var(--line);border-radius:7px;padding:7px 10px;font-size:12px;font-weight:700;color:#344054;background:none;cursor:pointer;font-family:inherit;transition:all .12s}
+    .nav-link:hover{background:var(--brand-soft);color:var(--brand);border-color:var(--brand)}
+    .nav-link.cta{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .nav-link.cta:hover{background:#1d4ed8}
+
+    .page{max-width:1000px;margin:0 auto;padding:24px 20px 40px}
+    .page-header{margin-bottom:20px}
+    .page-header h1{font-size:22px;font-weight:800;margin-bottom:4px}
+    .page-header p{font-size:14px;color:var(--muted)}
+
+    .section-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
+    .section-header{margin-bottom:14px}
+    .section-header h2{font-size:15px;font-weight:800;margin-bottom:3px}
+    .section-header p{font-size:12.5px;color:var(--muted)}
+    .btn-row{display:flex;flex-wrap:wrap;gap:8px}
+
+    /* Feature buttons */
+    .feat-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1.5px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;min-width:130px;justify-content:space-between}
+    .feat-btn:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-soft);transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,.12)}
+    .feat-btn:active{transform:translateY(0)}
+    .feat-btn .status{font-size:10px;font-weight:800;border-radius:999px;padding:3px 7px;letter-spacing:.03em;white-space:nowrap}
+    .feat-btn .status.keep{background:var(--keep-soft);color:var(--keep)}
+    .feat-btn .status.new{background:var(--new-soft);color:var(--new)}
+    .feat-btn .status.soon{background:var(--soon-soft);color:var(--soon);cursor:default}
+
+    /* Soon tooltip card */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,41,.4);z-index:50;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:14px;padding:24px 26px;width:100%;max-width:420px;box-shadow:0 24px 64px rgba(15,23,41,.18);position:relative;animation:mIn .17s ease}
+    @keyframes mIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .modal-close{position:absolute;top:14px;right:16px;background:none;border:0;font-size:20px;cursor:pointer;color:var(--muted);padding:2px 6px;border-radius:6px;line-height:1}
+    .modal-close:hover{background:#f3f4f6}
+    .soon-badge{display:inline-block;background:var(--soon-soft);color:var(--soon);border-radius:999px;padding:4px 10px;font-size:11px;font-weight:800;margin-bottom:10px}
+    .modal h3{font-size:19px;font-weight:800;margin-bottom:6px}
+    .modal .modal-desc{font-size:13.5px;color:var(--muted);line-height:1.5;margin-bottom:20px}
+    .soon-box{background:var(--soon-soft);border:1.5px solid #fde68a;border-radius:8px;padding:13px 15px;display:flex;gap:10px;margin-bottom:16px}
+    .soon-box .icon{font-size:22px;line-height:1;flex-shrink:0}
+    .soon-box h4{font-size:13px;font-weight:800;margin-bottom:3px}
+    .soon-box p{font-size:12px;color:var(--soon);line-height:1.45}
+    .modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn-primary{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+    .btn-primary:hover{opacity:.87}
+    .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+    .btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+
+    @media(max-width:600px){
+      .btn-row{flex-direction:column}.feat-btn{width:100%}
+      .modal{padding:18px 16px}.topbar{flex-wrap:wrap;gap:8px}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="logo">
+    <div class="logo-mark">पा</div>
+    <div><b>PadhaiApp Features</b><span>Click any feature to open it</span></div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="goTo('s-create')">Create</button>
+    <button class="nav-link" onclick="goTo('s-study')">Study</button>
+    <button class="nav-link" onclick="goTo('s-mock')">Tests</button>
+    <button class="nav-link" onclick="goTo('s-tutor')">Tutor</button>
+    <button class="nav-link" onclick="goTo('s-community')">Community</button>
+    <button class="nav-link" onclick="goTo('s-school')">School</button>
+    <button class="nav-link cta" onclick="openMod('home')">🚀 Open App</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <h1>PadhaiApp — Feature Explorer</h1>
+    <p>Every green (keep) and blue (new) button opens the live module in the app. Orange (soon) buttons show what's coming next.</p>
+  </div>
+
+  <!-- HOME / EXAM HUB -->
+  <div class="section-card" id="s-home">
+    <div class="section-header">
+      <h2>🏠 Student Home &amp; Exam Hub</h2>
+      <p>Goal-first home — one exam, today's action, readiness score, four clear paths.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('home')">Student Home <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('path')">Study Plan <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('home')">Choose Exam Goal <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('home')">My Stats &amp; Streak <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('home')">Role Switcher <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+  <!-- CREATE & UPLOAD -->
+  <div class="section-card" id="s-create">
+    <div class="section-header">
+      <h2>✨ Create &amp; Upload</h2>
+      <p>Generate AI video lessons, explainers, and audio recaps from any topic, PDF, or photo.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('studio')">Video Studio <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('explainer')">Explainer <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('library')">My Library <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('recap')">Audio Recap <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('studio')">Upload Studio <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+  <!-- STUDY TOOLS -->
+  <div class="section-card" id="s-study">
+    <div class="section-header">
+      <h2>📚 Study Tools</h2>
+      <p>Spaced-repetition flashcards, match game, notes editor, and curriculum map.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('flashcards')">Flashcards (SRS) <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('match')">Match Game <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('notes')">Notes Editor <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('curriculum')">Curriculum Map <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('library')">Recent Lessons <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+  <!-- MOCK TESTS / PYQ -->
+  <div class="section-card" id="s-mock">
+    <div class="section-header">
+      <h2>🧪 Mock Tests / PYQ</h2>
+      <p>Exam-pattern mocks with section timing, negative marking, percentile.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('quizmaker')">Browse Mocks <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('quizmaker')">My Attempts <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('quizmaker')">Question Bank <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('quizmaker')">Quiz Maker <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('quizmaker')">QB Stats <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="soon('Full Mock Engine','Section-timed mock with answer palette, mark-for-review, timer, and rank percentile.','quizmaker')">Full Mock Engine <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('PYQ Database','Previous Year Questions mapped to each exam syllabus with verified solutions.','quizmaker')">PYQ Database <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Weak Area Report','Topics with lowest accuracy auto-detected from all quiz attempts.','quizmaker')">Weak Areas <span class="status soon">soon</span></button>
+    </div>
+  </div>
+
+  <!-- AI TUTOR -->
+  <div class="section-card" id="s-tutor">
+    <div class="section-header">
+      <h2>💬 AI Tutor</h2>
+      <p>Citation-grounded chat with source, official, and general modes + voice and live lecture.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('chat')">Start Tutor Session <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('voice')">Voice Tutor <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('live')">Live Lecture <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('chat')">Set Subject <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="soon('Socratic Exchanges','Hint-first AI tutor that prompts you to think before giving the answer.','chat')">Socratic Exchanges <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('My Citations','History of source citations across all tutor sessions for revision.','chat')">My Citations <span class="status soon">soon</span></button>
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <div class="section-card" id="s-community">
+    <div class="section-header">
+      <h2>👥 Community</h2>
+      <p>Exam / state / language rooms with moderation and reactions.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="soon('Forums','Discussion boards by exam, board, state, and language with moderation.','chat')">Forums <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Study Buddies','Peer matching by exam, state, and study schedule.','home')">Study Buddies <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Mentor Program','Senior students and experts for AMAs and doubt reviews.','chat')">Mentor Program <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Reactions','Emoji reactions on lessons, notes, and discussions.','home')">Reactions <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Exam Rooms','Live study rooms per exam — current affairs updated daily.','home')">Exam Rooms <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Leaderboard','Rank by exam cohort, state, or study streak.','home')">Leaderboard <span class="status soon">soon</span></button>
+    </div>
+  </div>
+
+  <!-- SCHOOL / TEACHER / PARENT -->
+  <div class="section-card" id="s-school">
+    <div class="section-header">
+      <h2>🏫 School / Teacher / Parent</h2>
+      <p>Roster, classes, attendance, fees, parent dashboard, teacher studio.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('school')">School Portal <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('teacher')">Teacher Studio <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('parent')">Parent Dashboard <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Attendance <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Fees &amp; Invoices <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Timetable <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Assignments <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">School Exams <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Members &amp; Roster <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+  <!-- PLANNING -->
+  <div class="section-card" id="s-plan">
+    <div class="section-header">
+      <h2>🗺️ Planning &amp; Readiness</h2>
+      <p>Week-by-week learning path, curriculum mapper, and exam readiness tracking.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('path')">Learning Path <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('curriculum')">Curriculum Map <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('home')">Readiness Score <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="soon('Revision Planner','Spaced revision schedule based on mastery and exam date.','flashcards')">Revision Planner <span class="status soon">soon</span></button>
+    </div>
+  </div>
+
+  <!-- MARKETPLACE -->
+  <div class="section-card" id="s-market">
+    <div class="section-header">
+      <h2>🛒 Marketplace</h2>
+      <p>Browse and publish question packs, notes, and content with revenue share.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="soon('Browse Packs','Question and note packs by exam, board, and subject — curated by creators.','library')">Browse Packs <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="soon('Publish Content','Upload your notes or questions and earn from views and downloads.','teacher')">Publish Content <span class="status soon">soon</span></button>
+      <button class="feat-btn" onclick="openMod('home')">Vouchers <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('home')">Affiliates <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+  <!-- ADMIN & TRUST -->
+  <div class="section-card" id="s-admin">
+    <div class="section-header">
+      <h2>⚙️ Admin &amp; Trust</h2>
+      <p>Org management, DPDP compliance, source verification, audit logs.</p>
+    </div>
+    <div class="btn-row">
+      <button class="feat-btn" onclick="openMod('school')">Org Management <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('school')">Audit Log <span class="status keep">keep</span></button>
+      <button class="feat-btn" onclick="openMod('chat')">Accuracy Layer <span class="status new">new</span></button>
+      <button class="feat-btn" onclick="openMod('teacher')">Expert Review Queue <span class="status new">new</span></button>
+      <button class="feat-btn" onclick="openMod('home')">DPDP / Privacy <span class="status keep">keep</span></button>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- Coming-soon modal (only used for "soon" features) -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeIfBack(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <span class="soon-badge">Coming soon</span>
+    <h3 id="modal-title"></h3>
+    <p class="modal-desc" id="modal-desc"></p>
+    <div class="soon-box">
+      <span class="icon">🚧</span>
+      <div>
+        <h4>In development</h4>
+        <p>This feature is being built and will be available in a future release. You can use the nearest available module now.</p>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="modal-open-btn" onclick="">Open nearest module →</button>
+      <button class="btn-ghost" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const APP_BASE = window.location.protocol === 'file:'
+  ? 'http://localhost:8000'
+  : window.location.origin;
+
+function openMod(mod) {
+  window.open(APP_BASE + '/?m=' + mod, '_blank');
+}
+
+function goTo(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function soon(title, desc, nearestMod) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-desc').textContent = desc;
+  const btn = document.getElementById('modal-open-btn');
+  btn.onclick = function() { openMod(nearestMod); closeModal(); };
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeIfBack(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

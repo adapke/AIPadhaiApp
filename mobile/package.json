@@ -1,0 +1,35 @@
+{
+  "name": "aipathshala-mobile",
+  "version": "1.4.0",
+  "description": "Capacitor shell wrapping the AI Pathshala PWA for iOS + Android.",
+  "scripts": {
+    "build": "cap sync",
+    "ios": "cap open ios",
+    "android": "cap open android",
+    "ios:run": "cap run ios",
+    "android:run": "cap run android",
+    "android:build": "cd android && ./gradlew assembleRelease",
+    "ios:archive": "cd ios && xcodebuild -workspace App.xcworkspace -scheme App archive",
+    "publish:android": "cd android && ./gradlew bundleRelease && echo 'Upload android/app/build/outputs/bundle/release/app-release.aab to Play Console'",
+    "publish:ios": "echo 'Run: npx cap open ios → Xcode → Product → Archive → Distribute App → App Store Connect'"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/browser": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/device": "^6.0.0",
+    "@capacitor/filesystem": "^6.0.0",
+    "@capacitor/ios": "^6.0.0",
+    "@capacitor/push-notifications": "^6.0.0",
+    "@capacitor/share": "^6.0.0",
+    "@capacitor/splash-screen": "^6.0.0",
+    "@capacitor/status-bar": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

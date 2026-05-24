@@ -1,0 +1,1011 @@
+"""Page image → structured teaching script via Claude vision."""
+
+from __future__ import annotations
+
+import base64
+import json
+import mimetypes
+from dataclasses import dataclass
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+import anthropic
+
+if TYPE_CHECKING:
+    from .cache import Cache
+
+MODEL = "claude-opus-4-7"
+
+# Language code → human-readable name passed to the model and to gTTS.
+SUPPORTED_LANGUAGES = {
+    "en": "English",
+    "hi": "Hindi",
+    "ta": "Tamil",
+    "te": "Telugu",
+    "kn": "Kannada",
+    "mr": "Marathi",
+    "bn": "Bengali",
+    "gu": "Gujarati",
+    "pa": "Punjabi",
+    "ml": "Malayalam",
+}
+
+LEVEL_GUIDANCE = {
+    "kg": (
+        "Pitch this at a kindergarten student (age 3-6). Treat the lesson as a "
+        "'learn-and-fun' moment, not a textbook chapter. RULES: produce only "
+        "3-4 scenes total (not 5-8). Each scene's narration is 2-4 sentences, "
+        "and each sentence is 5-10 words. Use everyday comparisons the child "
+        "knows — animals, food, toys, family. Repeat key words. Be cheerful: "
+        "narration may include phrases like 'wow!', 'see?', 'so cool!'. "
+        "Bullets should be ultra-short (3-6 words). Quiz: 2 questions only, "
+        "pictures-not-words simple."
+    ),
+    "eli5": "Explain like the student is 5 years old. Tiny words, lots of analogies, no jargon.",
+    "primary": "Pitch this at a primary-school student (grades 3-5). Simple vocabulary, concrete examples.",
+    "middle": "Pitch this at a middle-school student (grades 6-8). Introduce technical terms with definitions.",
+    "secondary": "Pitch this at a secondary-school / board-exam student (grades 9-12). Full technical depth, exam-relevant framing.",
+    "neet_jee": "Pitch this at a NEET/JEE aspirant. Maximum rigour, derivations, common exam traps.",
+}
+
+
+@dataclass
+class Scene:
+    """A single teaching beat — one slide in the storyboard.
+
+    Required: title + narration + bullets. The rest are PRD §11
+    Lesson-Blueprint v2 fields, all optional so v1 Lessons keep
+    deserializing cleanly. New generators (v0.7+) populate them; the
+    renderer reads them when present and falls back to the old layout
+    when they're missing."""
+    title: str
+    narration: str
+    bullets: list[str]
+    diagram: str | None = None              # animated-template name (photosynthesis, atom, …)
+    # — v0.7 storyboard v2 fields (all optional, backward-compatible) —
+    scene_goal: str | None = None           # one-line intent ("hook the learner")
+    character_action: str | None = None     # what the teacher avatar does ("point to leaf")
+    animation_type: str | None = None       # template hint ("character_intro", "diagram_walk")
+    assets: list[str] | None = None         # named asset references ("student", "plant", "sun")
+    on_screen_text: str | None = None       # large text overlay (separate from bullets)
+    subtitle: str | None = None             # caption track text, may differ from narration in length
+    # — v0.14 C7: page-level provenance for source citations —
+    source_pages: list[int] | None = None   # page numbers in the upload this scene draws from
+
+
+@dataclass
+class Lesson:
+    title: str
+    language_code: str
+    language_name: str
+    level: str
+    scenes: list[Scene]
+    quiz: list[dict]
+
+
+SYSTEM_PROMPT = """You are PadhAI, an AI teacher that turns a single textbook page into a short, engaging video lesson script for Indian students.
+
+You will receive an image of a textbook page plus a target language and difficulty level. Output a JSON lesson plan that the video pipeline can render directly.
+
+Rules:
+- Read the page carefully. Identify the chapter title, the key concepts, any equations, diagrams, and worked examples.
+- Produce 5-8 scenes. Each scene is a single teaching beat (~30-60 seconds of narration).
+- Narration must be in the requested language, spoken naturally — short sentences, no markdown, no LaTeX.
+- For each scene also provide 2-4 short bullet points (in the same language) that will appear on screen alongside the narration.
+- End with a 3-question quiz (multiple choice, options A/B/C/D, correct answer marked).
+- Do NOT copy long verbatim text from the page — explain in your own words. Diagrams and equations may be described.
+- Calibrate depth to the chosen level."""
+
+
+def _image_to_block(path: Path) -> dict:
+    media_type, _ = mimetypes.guess_type(path.name)
+    if media_type is None:
+        media_type = "image/jpeg"
+    data = base64.standard_b64encode(path.read_bytes()).decode("utf-8")
+    return {
+        "type": "image",
+        "source": {"type": "base64", "media_type": media_type, "data": data},
+    }
+
+
+def build_user_text(
+    language_code: str,
+    level: str,
+    target_duration_seconds: int | None = None,
+    profile_addendum: str | None = None,
+) -> str:
+    """The user-turn prompt that pairs with the image in the request body.
+
+    `target_duration_seconds` is honoured as a soft constraint — at
+    typical narration pace of ~140 words/minute, that's a target word
+    budget the model can fit into. `profile_addendum` is the
+    PersonalizationProfile.prompt_addendum that carries video_mode,
+    user_type, tone, scene_beats, disclaimers, etc."""
+    language_name = SUPPORTED_LANGUAGES[language_code]
+    parts = [
+        f"Target language: {language_name} ({language_code}).",
+        f"Difficulty level: {level}. {LEVEL_GUIDANCE[level]}",
+    ]
+    if target_duration_seconds:
+        word_budget = int(target_duration_seconds * 2.3)  # ~140 wpm
+        parts.append(
+            f"TARGET DURATION: ~{target_duration_seconds} seconds total. "
+            f"Aim for around {word_budget} words of narration across all "
+            f"scenes combined. Do NOT exceed this materially."
+        )
+    if profile_addendum:
+        parts.append(profile_addendum)
+    parts.append("Generate the lesson plan for the attached page.")
+    return "\n\n".join(parts)
+
+
+def build_schema(level: str) -> dict:
+    """The JSON-schema for output_config.format. KG levels get a shorter
+    catalogue than middle-school+ to match LEVEL_GUIDANCE['kg']."""
+    if level == "kg":
+        scene_min, scene_max = 3, 4
+        quiz_min, quiz_max = 2, 2
+    else:
+        scene_min, scene_max = 5, 8
+        quiz_min, quiz_max = 3, 3
+    return {
+        "type": "object",
+        "properties": {
+            "title": {"type": "string"},
+            "scenes": {
+                "type": "array",
+                "minItems": scene_min,
+                "maxItems": scene_max,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "title": {"type": "string"},
+                        "narration": {"type": "string"},
+                        "bullets": {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 4,
+                            "items": {"type": "string"},
+                        },
+                        "diagram": {
+                            "type": ["string", "null"],
+                            "enum": [
+                                None,
+                                "solar_system",
+                                "photosynthesis",
+                                "water_cycle",
+                                "atom",
+                                "addition_dots",
+                            ],
+                            "description": (
+                                "Optional diagram template name. Use only when "
+                                "the scene's content matches one of the supported "
+                                "templates; otherwise null."
+                            ),
+                        },
+                    },
+                    "required": ["title", "narration", "bullets", "diagram"],
+                    "additionalProperties": False,
+                },
+            },
+            "quiz": {
+                "type": "array",
+                "minItems": quiz_min,
+                "maxItems": quiz_max,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "question": {"type": "string"},
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "A": {"type": "string"},
+                                "B": {"type": "string"},
+                                "C": {"type": "string"},
+                                "D": {"type": "string"},
+                            },
+                            "required": ["A", "B", "C", "D"],
+                            "additionalProperties": False,
+                        },
+                        "answer": {"type": "string", "enum": ["A", "B", "C", "D"]},
+                    },
+                    "required": ["question", "options", "answer"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": ["title", "scenes", "quiz"],
+        "additionalProperties": False,
+    }
+
+
+def parse_lesson_json(
+    data: dict, language_code: str, level: str,
+) -> Lesson:
+    """Turn the JSON the model returns into a Lesson dataclass. Used by
+    both the synchronous and batch paths.
+
+    v0.12: modes like 'explainer', 'parent', 'reel' omit the `quiz`
+    field entirely in their schema — `quiz` defaults to an empty list
+    when the model didn't return one."""
+    return Lesson(
+        title=data["title"],
+        language_code=language_code,
+        language_name=SUPPORTED_LANGUAGES[language_code],
+        level=level,
+        scenes=[Scene(**s) for s in data["scenes"]],
+        quiz=data.get("quiz", []),
+    )
+
+
+def image_to_block(image_path: Path) -> dict:
+    """Re-export of the (formerly private) image-block builder so the
+    batch path can use it."""
+    return _image_to_block(image_path)
+
+
+RECAP_MODEL = "claude-haiku-4-5"  # cheap remix from Lesson JSON, ~₹0.20/call
+RECAP_SYSTEM = """You write a podcast-style audio recap of a finished lesson.
+
+Rules:
+- Open with a warm greeting like a friendly tutor recapping at the end of class.
+- 120-160 words total. Read time ~60-80 seconds at gentle pace.
+- One paragraph. No bullet points, no markdown, no headings.
+- Cover the 3-5 most important takeaways in plain spoken language.
+- Use the EXACT language of the lesson (match language_code / language_name).
+- End with one encouraging follow-up question the student can think about.
+- Never invent facts that aren't in the lesson scenes. If a concept wasn't taught, skip it."""
+
+
+EXPLAINER_MODEL = "claude-haiku-4-5"  # topic-to-explanation, ~₹0.30/call
+EXPLAINER_SYSTEM = """You generate a short, focused explainer for a single concept.
+
+Output JSON shape (keys exactly as named, all required):
+{
+  "topic":          short canonical name of the concept (echo back, polished),
+  "one_liner":      one sentence (~15-25 words) capturing the heart of it,
+  "explanation":    2-3 short paragraphs in plain language, no jargon walls,
+  "key_points":     ["3-5 short bullet phrases"],
+  "worked_example": one concrete example with the steps shown,
+  "common_mistakes":["2-3 short pitfalls students fall into"],
+  "analogy":        a single one-sentence everyday-life analogy
+}
+
+Rules:
+- Write EVERYTHING in the requested language (echo language_code).
+- Calibrate vocabulary and depth to the level (kg / eli5 / primary / middle / secondary / neet_jee).
+- No markdown formatting in field values. No bullet characters — just plain strings.
+- For maths topics, write equations in plain text (e.g. "x^2 + 2x + 1") not LaTeX.
+- Stay strictly on-topic. If the topic isn't academic, give a one-line refusal in 'explanation' and empty arrays.
+- Be concrete: students need a worked example, not philosophy."""
+
+
+LIVE_TUTOR_SYSTEM = """You are a kind, patient AI tutor speaking aloud with a student in a live conversation.
+
+Rules:
+- Reply in the SAME language as the student's message. Detect it from the transcript.
+- Keep the answer SHORT — 2-4 sentences, ~30-60 spoken words. The student is listening, not reading.
+- Speak naturally: contractions, simple words, no markdown, no LaTeX, no bullet points.
+- If the question is vague, ask one short clarifying question instead of guessing.
+- For numerical problems, walk through ONE clean step at a time, not a wall of math.
+- Never start with 'As an AI...'. Just answer like a warm teacher would.
+- If the student asks a non-academic question, gently redirect to studies in one sentence."""
+
+
+FLASHCARD_MODEL = "claude-haiku-4-5"  # cheap remix — Lesson JSON already has the work
+FLASHCARD_SYSTEM = """You convert a structured lesson into spaced-repetition flashcards.
+
+Rules:
+- Each card has a concise question or concept name on the front (5-15 words)
+  and a clear answer/explanation on the back (1-3 sentences).
+- Cover the MOST important concepts from the lesson — quality over quantity.
+- Match the lesson's language for both front and back exactly.
+- Cards should be self-contained — readable without seeing the lesson.
+- Add 1-3 short tags per card (subject area, sub-topic).
+- An optional `hint` field can give a memory aid for hard concepts.
+- Never repeat the same concept across multiple cards.
+- Cards for kindergarten/primary: simpler language, fewer cards.
+- Cards for secondary/exam: more rigorous, can reference equations/dates."""
+
+
+CURRICULUM_MATCH_SYSTEM = """You match a generated lesson against a curriculum catalogue.
+
+You will be given:
+  - The student's lesson title + scene summary.
+  - A list of candidate curriculum entries, each with id, board, class,
+    subject, chapter title, summary, and topic tags.
+
+Return the top 3 entries that BEST match the lesson, ranked by relevance.
+For each match include:
+  - id: the candidate's id
+  - confidence: 0.0 to 1.0
+  - reason: one-sentence why it matches (mention specific topic overlap)
+
+If nothing matches well, return an empty list with empty `matches`. Don't
+force matches that aren't there — students upload material from many
+sources, not all of which align to Indian school syllabi."""
+
+
+def match_curriculum(
+    lesson: Lesson,
+    catalogue: list[dict],
+    client: anthropic.Anthropic | None = None,
+) -> list[dict]:
+    """Return ranked curriculum matches for a lesson.
+
+    Catalogue rows come from padhai/curriculum.py CURRICULUM. We attach
+    a stable `id` (board+class+subject+chapter_no) to each so the model
+    can reference them by id rather than re-emitting the metadata.
+
+    Uses Haiku 4.5 — single short prompt, ~₹0.20/call. Cached in the
+    lesson_curriculum tier; second call returns instantly."""
+    import dataclasses
+
+    client = client or anthropic.Anthropic()
+    # Filter catalogue to plausible candidates by level alignment +
+    # subject keywords from the lesson title. Cuts the prompt size by
+    # ~80%, drops cost commensurately.
+    title_lower = lesson.title.lower()
+    candidates = []
+    for c in catalogue:
+        cid = f"{c['board']}-c{c['class']}-{c['subject']}-{c['chapter_no']}"
+        score = 0
+        if c["level"] == lesson.level:
+            score += 2
+        if c["subject"].lower() in title_lower:
+            score += 1
+        for t in c.get("topics", []):
+            if t.lower() in title_lower:
+                score += 2
+        candidates.append((score, {**c, "id": cid}))
+    # Top 30 by score so Haiku doesn't have to read the entire catalogue
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    short = [c for _, c in candidates[:30]]
+
+    schema = {
+        "type": "object",
+        "properties": {
+            "matches": {
+                "type": "array",
+                "maxItems": 3,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string"},
+                        "confidence": {"type": "number"},
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["id", "confidence", "reason"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": ["matches"],
+        "additionalProperties": False,
+    }
+
+    lesson_summary = (
+        f"Title: {lesson.title}\n"
+        f"Level: {lesson.level}\n"
+        f"Scenes: {', '.join(s.title for s in lesson.scenes)}\n"
+        f"Bullets: {' | '.join(b for s in lesson.scenes for b in s.bullets)}"
+    )
+    catalogue_text = json.dumps(short, ensure_ascii=False)
+
+    response = client.messages.create(
+        model="claude-haiku-4-5",
+        max_tokens=1500,
+        system=CURRICULUM_MATCH_SYSTEM,
+        output_config={
+            "format": {"type": "json_schema", "schema": schema},
+            "effort": "low",
+        },
+        messages=[{
+            "role": "user",
+            "content": (
+                f"LESSON:\n{lesson_summary}\n\nCATALOGUE (top candidates):\n"
+                f"{catalogue_text}\n\nRank the top 3 matches by relevance."
+            ),
+        }],
+    )
+    text = next(b.text for b in response.content if b.type == "text")
+    matches = json.loads(text)["matches"]
+
+    # Hydrate matches with the full catalogue row so the UI doesn't have
+    # to round-trip back to look them up.
+    by_id = {c["id"]: c for c in short}
+    return [
+        {**m, **{k: v for k, v in by_id.get(m["id"], {}).items() if k != "id"}}
+        for m in matches
+    ]
+
+
+LEARNING_PATH_SYSTEM = """You generate a personalised study plan for an Indian student.
+
+You will be given:
+  - Target class (Class 6-12 or college-prep)
+  - Subjects the student wants to study
+  - Daily time budget (typically 20-60 minutes)
+  - Number of weeks available before the target date
+  - Optional weak topics the student flagged
+  - The curriculum catalogue entries for the chosen class/subjects
+  - The student's existing library (already-generated lessons they can re-watch)
+
+Generate a structured study plan:
+  - One theme per week (the headline concept that ties the week together)
+  - 5-6 daily tasks per week, NOT 7 — leave one day as buffer/rest
+  - Task types: watch (a video lesson), quiz (test recall), study (read a chapter),
+    practice (work problems), revision (review earlier material)
+  - Mix new content with revision — by week 2+, ~25% of tasks should revisit
+    earlier weeks
+  - Reference chapters by their `id` from the catalogue when relevant; null
+    when the task is general (e.g. "watch your uploaded photosynthesis lesson")
+  - Each task: realistic time estimate (default 15 min for watch, 10 for quiz,
+    20 for study, 25 for practice, 10 for revision)
+  - Total per week must roughly fit the daily budget × 5 days
+  - If weak topics are provided, weight Week 1-2 more heavily toward them
+
+Don't fabricate chapter ids. Only use ids from the catalogue you're given.
+Don't over-plan — 4 weeks is the sweet spot for most students; longer plans
+get ignored. Cap at 8 weeks."""
+
+
+def generate_learning_path(
+    student_class: int,
+    subjects: list[str],
+    weeks: int,
+    daily_minutes: int = 30,
+    focus_topics: list[str] | None = None,
+    library_lessons: list[dict] | None = None,
+    catalogue: list[dict] | None = None,
+    client: anthropic.Anthropic | None = None,
+) -> dict:
+    """Build a structured multi-week study plan via Claude Opus 4.7
+    (this is a real planning task — Haiku gets it wrong).
+
+    Library lessons + catalogue entries are given to the model so it
+    can reference real content. ~₹4-6/call; cached aggressively in
+    the learning_paths/ tier so the same inputs return instantly."""
+    client = client or anthropic.Anthropic()
+
+    weeks = max(2, min(8, weeks))
+    catalogue = catalogue or []
+    library_lessons = library_lessons or []
+    focus_topics = focus_topics or []
+
+    # Filter catalogue to chosen class + neighbouring classes (one above
+    # and below for prerequisite/extension topics)
+    cls_range = {student_class - 1, student_class, student_class + 1}
+    short_cat = [
+        {
+            "id": f"{c['board']}-c{c['class']}-{c['subject']}-{c['chapter_no']}",
+            "class": c["class"], "subject": c["subject"],
+            "chapter_title": c["chapter_title"],
+            "topics": c.get("topics", []),
+        }
+        for c in catalogue
+        if c["class"] in cls_range and c["subject"] in subjects
+    ]
+
+    schema = {
+        "type": "object",
+        "properties": {
+            "title": {"type": "string"},
+            "summary": {"type": "string"},
+            "total_weeks": {"type": "integer"},
+            "weeks": {
+                "type": "array",
+                "minItems": weeks,
+                "maxItems": weeks,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "week_number": {"type": "integer"},
+                        "theme": {"type": "string"},
+                        "daily_tasks": {
+                            "type": "array",
+                            "minItems": 4,
+                            "maxItems": 6,
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "day": {
+                                        "type": "string",
+                                        "enum": ["Mon","Tue","Wed","Thu","Fri","Sat"],
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": ["watch","quiz","study","practice","revision"],
+                                    },
+                                    "topic": {"type": "string"},
+                                    "estimated_minutes": {"type": "integer"},
+                                    "chapter_ref": {"type": ["string","null"]},
+                                    "lesson_id": {"type": ["string","null"]},
+                                },
+                                "required": ["day","type","topic","estimated_minutes",
+                                             "chapter_ref","lesson_id"],
+                                "additionalProperties": False,
+                            },
+                        },
+                    },
+                    "required": ["week_number","theme","daily_tasks"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": ["title","summary","total_weeks","weeks"],
+        "additionalProperties": False,
+    }
+
+    user_msg = (
+        f"Student: Class {student_class}, studying {', '.join(subjects)}.\n"
+        f"Time budget: {daily_minutes} minutes/day.\n"
+        f"Plan length: {weeks} weeks.\n"
+        f"Weak topics to focus on: {', '.join(focus_topics) if focus_topics else 'none specified'}\n\n"
+        f"Curriculum catalogue ({len(short_cat)} chapters available for this class):\n"
+        f"{json.dumps(short_cat, ensure_ascii=False)}\n\n"
+        f"Student's library ({len(library_lessons)} lessons they've generated):\n"
+        f"{json.dumps(library_lessons, ensure_ascii=False)}\n\n"
+        f"Build the {weeks}-week study plan now."
+    )
+
+    response = client.messages.create(
+        model=MODEL,  # Opus 4.7 — this is real planning
+        max_tokens=8000,
+        system=LEARNING_PATH_SYSTEM,
+        thinking={"type": "adaptive"},
+        output_config={
+            "format": {"type": "json_schema", "schema": schema},
+            "effort": "medium",
+        },
+        messages=[{"role": "user", "content": user_msg}],
+    )
+    text = next(b.text for b in response.content if b.type == "text")
+    return json.loads(text)
+
+
+def generate_flashcards(
+    lesson: Lesson,
+    count: int = 8,
+    client: anthropic.Anthropic | None = None,
+) -> list[dict]:
+    """Convert a Lesson into spaced-repetition flashcards.
+
+    Returns a list of dicts: [{"front", "back", "hint"?, "tags"}].
+
+    Uses Claude Haiku 4.5 because the structured Lesson JSON is already
+    in hand — this is a cheap remix task, not heavy reasoning. Typical
+    cost per call: ~₹0.30."""
+    import dataclasses
+
+    client = client or anthropic.Anthropic()
+
+    # Adjust card count for younger learners
+    if lesson.level in ("kg", "primary"):
+        count = min(count, 5)
+    elif lesson.level in ("neet_jee",):
+        count = min(count + 4, 14)
+
+    schema = {
+        "type": "object",
+        "properties": {
+            "cards": {
+                "type": "array",
+                "minItems": max(3, count - 2),
+                "maxItems": count + 2,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "front": {
+                            "type": "string",
+                            "description": "concise question or concept name (5-15 words)",
+                        },
+                        "back": {
+                            "type": "string",
+                            "description": "answer or explanation (1-3 sentences)",
+                        },
+                        "hint": {
+                            "type": ["string", "null"],
+                            "description": "optional memory aid; null when not needed",
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "minItems": 1,
+                            "maxItems": 3,
+                        },
+                    },
+                    "required": ["front", "back", "hint", "tags"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": ["cards"],
+        "additionalProperties": False,
+    }
+
+    scenes_json = json.dumps(
+        [dataclasses.asdict(s) for s in lesson.scenes], ensure_ascii=False,
+    )
+    response = client.messages.create(
+        model=FLASHCARD_MODEL,
+        max_tokens=4000,
+        system=FLASHCARD_SYSTEM,
+        output_config={
+            "format": {"type": "json_schema", "schema": schema},
+            "effort": "low",
+        },
+        messages=[{
+            "role": "user",
+            "content": (
+                f"Lesson title: {lesson.title}\n"
+                f"Language: {lesson.language_name} ({lesson.language_code})\n"
+                f"Difficulty level: {lesson.level}\n\n"
+                f"Lesson scenes:\n{scenes_json}\n\n"
+                f"Generate {count} high-quality flashcards covering the key "
+                "concepts from this lesson."
+            ),
+        }],
+    )
+    text = next(b.text for b in response.content if b.type == "text")
+    return json.loads(text)["cards"]
+
+
+def generate_recap(
+    lesson: Lesson,
+    client: anthropic.Anthropic | None = None,
+) -> str:
+    """One-paragraph spoken recap of a Lesson, ready to feed to TTS.
+
+    Returns plain text in the lesson's language. Costs ~₹0.20 (Haiku 4.5
+    on the Lesson JSON we already paid for). Cached by lesson_id in
+    Cache.put_recap_text so the second listener is free."""
+    import dataclasses
+
+    client = client or anthropic.Anthropic()
+
+    scenes_json = json.dumps(
+        [dataclasses.asdict(s) for s in lesson.scenes], ensure_ascii=False,
+    )
+    response = client.messages.create(
+        model=RECAP_MODEL,
+        max_tokens=600,
+        system=RECAP_SYSTEM,
+        output_config={"effort": "low"},
+        messages=[{
+            "role": "user",
+            "content": (
+                f"Lesson title: {lesson.title}\n"
+                f"Language: {lesson.language_name} ({lesson.language_code})\n"
+                f"Level: {lesson.level}\n\n"
+                f"Scenes:\n{scenes_json}\n\n"
+                "Write the recap now."
+            ),
+        }],
+    )
+    return next(b.text for b in response.content if b.type == "text").strip()
+
+
+def generate_explainer(
+    topic: str,
+    language_code: str = "en",
+    level: str = "middle",
+    client: anthropic.Anthropic | None = None,
+) -> dict:
+    """Topic-to-explanation: type a concept name, get a structured mini-lesson.
+
+    Free-form input, structured JSON output. Costs ~₹0.30 (Haiku 4.5).
+    Caching is by (topic, language, level) — the same 'photosynthesis'
+    request from 1000 students hits the cache 999 times."""
+    if language_code not in SUPPORTED_LANGUAGES:
+        raise ValueError(f"language {language_code!r} not supported")
+    if level not in LEVEL_GUIDANCE:
+        raise ValueError(f"level {level!r} not supported")
+
+    client = client or anthropic.Anthropic()
+    schema = {
+        "type": "object",
+        "properties": {
+            "topic": {"type": "string"},
+            "one_liner": {"type": "string"},
+            "explanation": {"type": "string"},
+            "key_points": {
+                "type": "array", "minItems": 3, "maxItems": 6,
+                "items": {"type": "string"},
+            },
+            "worked_example": {"type": "string"},
+            "common_mistakes": {
+                "type": "array", "minItems": 0, "maxItems": 4,
+                "items": {"type": "string"},
+            },
+            "analogy": {"type": "string"},
+        },
+        "required": [
+            "topic", "one_liner", "explanation", "key_points",
+            "worked_example", "common_mistakes", "analogy",
+        ],
+        "additionalProperties": False,
+    }
+    response = client.messages.create(
+        model=EXPLAINER_MODEL,
+        max_tokens=2000,
+        system=EXPLAINER_SYSTEM,
+        output_config={
+            "format": {"type": "json_schema", "schema": schema},
+            "effort": "low",
+        },
+        messages=[{
+            "role": "user",
+            "content": (
+                f"Topic: {topic}\n"
+                f"Language: {SUPPORTED_LANGUAGES[language_code]} ({language_code})\n"
+                f"Level: {level} — {LEVEL_GUIDANCE[level]}\n\n"
+                "Generate the explainer JSON now."
+            ),
+        }],
+    )
+    text = next(b.text for b in response.content if b.type == "text")
+    return json.loads(text)
+
+
+def live_tutor_reply(
+    transcript: str,
+    history: list[dict] | None = None,
+    client: anthropic.Anthropic | None = None,
+) -> str:
+    """Short conversational reply for the Live Lecture loop.
+
+    `transcript` is what the student just said (via browser SpeechRecognition).
+    `history` is the running conversation: list of {role, content} dicts.
+    Returns 2-4 sentences in the student's detected language."""
+    client = client or anthropic.Anthropic()
+    messages = list(history or [])
+    messages.append({"role": "user", "content": transcript})
+    response = client.messages.create(
+        model=FLASHCARD_MODEL,  # Haiku 4.5 — fast, cheap, conversational
+        max_tokens=400,
+        system=LIVE_TUTOR_SYSTEM,
+        messages=messages,
+    )
+    return next(b.text for b in response.content if b.type == "text").strip()
+
+
+# Topic → animated-diagram template. Matched against the lowercased topic
+# string before falling back to text-only whiteboard slides. Order matters:
+# more specific keywords come first so "solar system" wins over "solar".
+DIAGRAM_KEYWORDS: list[tuple[tuple[str, ...], str]] = [
+    (("photosynth", "chloroplast", "chlorophyll"), "photosynthesis"),
+    (("solar system", "planet", "orbit"), "solar_system"),
+    (("water cycle", "evaporation", "precipitation", "condensation"),
+     "water_cycle"),
+    (("atom", "electron", "proton", "neutron", "nucleus"), "atom"),
+    (("addition", "plus", "sum", "add ", "adding"), "addition_dots"),
+]
+
+
+def pick_diagram(topic: str) -> str | None:
+    """Return the diagram-template name that best matches the topic, or
+    None when none of our drawable concepts apply. Pure string-match —
+    no LLM call needed for the common cases."""
+    t = topic.lower()
+    for keywords, name in DIAGRAM_KEYWORDS:
+        if any(k in t for k in keywords):
+            return name
+    return None
+
+
+# Localized scene-title templates. Used by explainer_to_lesson() to keep
+# the headings in the same language as the narration. Falls back to
+# English for languages we haven't translated yet.
+EXPLAINER_SCENE_TITLES: dict[str, dict[str, str]] = {
+    "en": {
+        "intro":   "What is {topic}?",
+        "explain": "Let me explain",
+        "example": "Worked example",
+        "analogy": "Think of it like…",
+        "mistakes": "Common mistakes",
+        "mistakes_intro": "Before we close, here are mistakes many students make. ",
+    },
+    "hi": {
+        "intro":   "{topic} क्या है?",
+        "explain": "आइए समझते हैं",
+        "example": "उदाहरण के साथ",
+        "analogy": "इसे ऐसे समझें…",
+        "mistakes": "आम गलतियाँ",
+        "mistakes_intro": "अंत में, कुछ गलतियाँ जो छात्र अक्सर करते हैं — ",
+    },
+    "mr": {
+        "intro":   "{topic} म्हणजे काय?",
+        "explain": "मला समजावून सांगा",
+        "example": "उदाहरणासह",
+        "analogy": "असे विचार करा…",
+        "mistakes": "सामान्य चुका",
+        "mistakes_intro": "शेवटी, विद्यार्थी अनेकदा करत असलेल्या काही चुका — ",
+    },
+    "ta": {
+        "intro":   "{topic} என்றால் என்ன?",
+        "explain": "விளக்கம்",
+        "example": "உதாரணத்துடன்",
+        "analogy": "இதை இப்படி நினைத்துப் பாருங்கள்…",
+        "mistakes": "பொதுவான தவறுகள்",
+        "mistakes_intro": "முடிவில், மாணவர்கள் அடிக்கடி செய்யும் சில தவறுகள் — ",
+    },
+}
+
+
+def explainer_to_lesson(
+    explainer: dict, language_code: str, level: str,
+) -> Lesson:
+    """Convert an Explainer JSON (topic + structured fields) into a Lesson
+    dataclass that the existing render pipeline can turn into a cartoon
+    video. No Claude vision call needed — pure shape conversion.
+
+    When the topic matches one of the known animated diagrams (solar
+    system, photosynthesis, water cycle, atom, addition), the worked-
+    example and 'let me explain' scenes get that diagram attached so the
+    render produces an illustrated concept board (Khan Academy style)
+    instead of a plain bulleted whiteboard."""
+    topic = explainer.get("topic") or "Explainer"
+    one_liner = explainer.get("one_liner", "")
+    explanation = explainer.get("explanation", "")
+    key_points = explainer.get("key_points", []) or []
+    worked_example = explainer.get("worked_example", "")
+    analogy = explainer.get("analogy", "")
+    common_mistakes = explainer.get("common_mistakes", []) or []
+    diagram_name = pick_diagram(topic)
+    titles = EXPLAINER_SCENE_TITLES.get(
+        language_code, EXPLAINER_SCENE_TITLES["en"],
+    )
+
+    def short_bullets(items: list[str], limit: int = 4) -> list[str]:
+        cleaned = [str(b).strip() for b in items if str(b).strip()]
+        return cleaned[:limit]
+
+    def truncate_bullet(b: str, n: int = 80) -> str:
+        b = str(b).strip()
+        return (b[: n - 1] + "…") if len(b) > n else b
+
+    scenes: list[Scene] = []
+
+    intro_bullets = [truncate_bullet(b) for b in short_bullets(key_points, 3)]
+    if not intro_bullets:
+        intro_bullets = [topic]
+    scenes.append(Scene(
+        title=titles["intro"].format(topic=topic),
+        narration=one_liner or f"{topic}",
+        bullets=intro_bullets,
+        diagram=diagram_name,
+    ))
+
+    if explanation:
+        explain_bullets = [truncate_bullet(b) for b in short_bullets(key_points, 4)]
+        if not explain_bullets:
+            explain_bullets = [topic]
+        scenes.append(Scene(
+            title=titles["explain"],
+            narration=explanation,
+            bullets=explain_bullets,
+            diagram=diagram_name,
+        ))
+
+    if worked_example:
+        ex_lines = [ln.strip() for ln in worked_example.splitlines() if ln.strip()]
+        ex_bullets = [truncate_bullet(ln) for ln in ex_lines[:4]] or [topic]
+        scenes.append(Scene(
+            title=titles["example"],
+            narration=worked_example,
+            bullets=ex_bullets,
+            diagram=diagram_name,
+        ))
+
+    if analogy:
+        scenes.append(Scene(
+            title=titles["analogy"],
+            narration=analogy,
+            bullets=[truncate_bullet(analogy, 90)],
+        ))
+
+    if common_mistakes:
+        mistake_bullets = [truncate_bullet(m) for m in short_bullets(common_mistakes, 3)]
+        scenes.append(Scene(
+            title=titles["mistakes"],
+            narration=(
+                titles["mistakes_intro"] +
+                " ".join(common_mistakes)
+            ),
+            bullets=mistake_bullets,
+        ))
+
+    return Lesson(
+        title=topic,
+        language_code=language_code,
+        language_name=SUPPORTED_LANGUAGES.get(language_code, language_code),
+        level=level,
+        scenes=scenes,
+        quiz=[],
+    )
+
+
+def generate_lesson(
+    image_path: Path,
+    language_code: str,
+    level: str,
+    client: anthropic.Anthropic | None = None,
+    cache: "Cache | None" = None,
+    target_duration_seconds: int | None = None,
+    profile_addendum: str | None = None,
+    video_mode: str = "teaching",
+) -> Lesson:
+    """Generate a video lesson from a textbook-page image.
+
+    v0.12 (C1): the `video_mode` arg now dispatches to a mode-specific
+    SYSTEM prompt + JSON schema. So `mode='reel'` returns a 3-scene
+    punchy short, `mode='parent'` returns a 3-scene "what your child
+    must understand" walk, etc. — not just the teaching-default
+    5-scene structure with a different prompt addendum.
+    """
+    from . import mode_prompts as _mp
+
+    if language_code not in SUPPORTED_LANGUAGES:
+        raise ValueError(
+            f"language {language_code!r} not supported. choose from: {sorted(SUPPORTED_LANGUAGES)}"
+        )
+    if level not in LEVEL_GUIDANCE:
+        raise ValueError(
+            f"level {level!r} not supported. choose from: {sorted(LEVEL_GUIDANCE)}"
+        )
+
+    image_bytes = image_path.read_bytes()
+
+    # Cache key needs to include both video_mode AND the profile
+    # signature, otherwise two different modes over the same page
+    # collide. v0.11 added profile_addendum to the key; v0.12 adds
+    # video_mode explicitly for clarity.
+    profile_sig = (profile_addendum or "") + f"|mode={video_mode}"
+    if cache is not None and not profile_addendum and video_mode == "teaching":
+        # Old path — pure-teaching, no profile — falls back to legacy
+        # cache key so existing cached lessons stay reusable.
+        hit = cache.get_lesson(image_bytes, language_code, level, MODEL)
+        if hit is not None:
+            return hit
+
+    client = client or anthropic.Anthropic()
+
+    user_text = build_user_text(
+        language_code, level,
+        target_duration_seconds=target_duration_seconds,
+        profile_addendum=profile_addendum,
+    )
+    # v0.12 C1: per-mode prompts + schemas
+    system_prompt = _mp.mode_system_prompt(video_mode)
+    schema = _mp.mode_schema(video_mode, level)
+
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=8000,
+        system=system_prompt,
+        thinking={"type": "adaptive"},
+        output_config={
+            "effort": "high",
+            "format": {"type": "json_schema", "schema": schema},
+        },
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    _image_to_block(image_path),
+                    {"type": "text", "text": user_text},
+                ],
+            }
+        ],
+    )
+
+    text = next(b.text for b in response.content if b.type == "text")
+    data = json.loads(text)
+
+    lesson = parse_lesson_json(data, language_code, level)
+
+    if cache is not None:
+        cache.put_lesson(image_bytes, language_code, level, MODEL, lesson)
+
+    return lesson

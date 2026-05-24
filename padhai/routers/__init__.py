@@ -1,0 +1,44 @@
+"""Router package — extracted from `padhai/web.py` to keep that file
+under control.
+
+Each router is a self-contained FastAPI `APIRouter` covering one
+subsystem. `web.py` imports + includes them at app bootstrap.
+
+Convention:
+- Module-level `router = APIRouter()` named exactly that
+- Cross-module deps (rate_limit, math_render, etc.) imported inside
+  endpoint functions (lazy) so a router can be imported standalone
+  for unit testing without bootstrapping the whole app
+- Auth-needed endpoints stay in web.py until v2.0.3 when we wire a
+  shared `api_deps.py` for the user/org dependencies
+
+To add a new router: write `padhai/routers/<name>.py` exposing
+`router`, then add `"name"` to the `all_routers` list below.
+"""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+
+# Single source of truth for which routers are wired. Order doesn't
+# matter for correctness (FastAPI dedupes) but matters for readability
+# in the auto-generated /docs page.
+_ROUTER_NAMES = (
+    "public_preview",
+    "catalog",
+    "coaching",
+    "question_bank",
+    "me",            # v2.0.3 — /api/me/*, /api/users/me/*, /api/coaching/practice/*
+    "orgs_admin",    # v2.0.3 — /api/orgs/{org_id}/* admin-gated
+    "v3",            # v2.1.0 — L1 tutor + L6 LLM obs + Q1 flags
+)
+
+
+def all_routers():
+    """Lazy-import each module and yield its `router`. Avoids importing
+    every router at package import time; lets web.py's lifecycle stay
+    in control."""
+    for name in _ROUTER_NAMES:
+        mod = __import__(f"padhai.routers.{name}", fromlist=["router"])
+        yield mod.router

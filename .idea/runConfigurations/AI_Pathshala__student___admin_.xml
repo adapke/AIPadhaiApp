@@ -1,0 +1,48 @@
+<component name="ProjectRunConfigurationManager">
+  <!--
+    Runs the student app on http://localhost:8000.
+    The admin console is mounted at /admin/* in the same process —
+    no second run config needed for normal development.
+
+    First-time setup:
+      1. Install deps:           pip install -r requirements.txt
+      2. (Optional) Hindi/Tamil/Kannada neural voices:
+         download Piper models and set PIPER_MODEL_HI / _TA / _KN to
+         the .onnx paths. Without them the espeak fallback runs.
+      3. Set a real ANTHROPIC_API_KEY in the Environment variables
+         field below (or in a .env loaded by your IDE).
+
+    Reload:
+      --reload watches python files; static SPA HTML lives in
+      padhai/web.py so editing it triggers reload too.
+  -->
+  <configuration default="false" name="AI Pathshala (student + admin)" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="false">
+    <module name="Paymentoneclick" />
+    <option name="ENV_FILES" value="" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONUNBUFFERED" value="1" />
+      <env name="PYTHONPATH" value="$PROJECT_DIR$" />
+      <env name="PADHAI_JWT_SECRET" value="dev-padhai-secret-change-me-locally-please" />
+      <env name="ADMIN_JWT_SECRET" value="dev-admin-secret-change-me-locally-please" />
+      <env name="PADHAI_TTS_PROVIDER" value="espeak" />
+      <env name="PADHAI_TALKING_HEAD_PROVIDER" value="cartoon" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="SDK_NAME" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="IS_MODULE_SDK" value="true" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <option name="SCRIPT_NAME" value="uvicorn" />
+    <option name="PARAMETERS" value="padhai.web:app --host 127.0.0.1 --port 8000 --reload" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="MODULE_MODE" value="true" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <option name="INPUT_FILE" value="" />
+    <method v="2" />
+  </configuration>
+</component>
