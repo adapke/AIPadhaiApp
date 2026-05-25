@@ -7965,6 +7965,19 @@ def landing_page() -> HTMLResponse:
     return HTMLResponse(_home_ui.get_landing_html())
 
 
+@app.get("/auth/login")
+def login_page_redirect() -> RedirectResponse:
+    """Redirect GET /auth/login → /landing so bookmarks and direct
+    navigation work; the actual login form and POST handler live there."""
+    return RedirectResponse("/landing", status_code=302)
+
+
+@app.get("/login")
+def login_shortcut_redirect() -> RedirectResponse:
+    """Convenience alias — /login → /landing."""
+    return RedirectResponse("/landing", status_code=302)
+
+
 @app.get("/ui-legacy", response_class=HTMLResponse)
 def ui_legacy() -> HTMLResponse:
     """The pre-v3.18 dashboard. Kept so existing bookmarks /
