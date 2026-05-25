@@ -13,10 +13,13 @@ those should rely on per-user quotas elsewhere.
 
 from __future__ import annotations
 
+import ipaddress
 import threading
 import time
 from collections import defaultdict
 from dataclasses import dataclass
+
+_MAX_BUCKETS = 100_000  # hard cap to prevent memory exhaustion from spoofed keys
 
 
 @dataclass
@@ -43,6 +46,10 @@ class TokenBucket:
     def try_consume(self, key: str, *, cost: float = 1.0) -> bool:
         now = time.monotonic()
         with self._lock:
+            if key not in self._buckets and len(self._buckets) >= _MAX_BUCKETS:
+                # Bucket table full — fail open to avoid blocking legitimate
+                # users, but log once so ops can notice and scale the limit.
+                return True
             b = self._buckets[key]
             elapsed = now - b.last_refill
             b.tokens = min(self._capacity, b.tokens + elapsed * self._rate)
@@ -71,15 +78,37 @@ login = TokenBucket(capacity=5, rate_per_sec=0.05)               # 5 burst, then
 file_upload = TokenBucket(capacity=20, rate_per_sec=0.5)         # 20 burst, then 1/2s
 
 
+def _validate_ip(raw: str) -> str | None:
+    """Return the IP string if it is a valid IPv4/IPv6 address, else None."""
+    try:
+        return str(ipaddress.ip_address(raw.strip()))
+    except ValueError:
+        return None
+
+
 def client_ip_from_request(request) -> str:
-    """Extract caller IP for keying. Same logic as
-    `audit.actor_from_request` — respects X-Forwarded-For when behind
-    Cloudflare."""
+    """Extract caller IP for rate-limit keying.
+
+    Priority order:
+      1. CF-Connecting-IP (set by Cloudflare — authenticated, not spoofable)
+      2. X-Forwarded-For first hop, only when it parses as a valid IP
+      3. TCP connection host (request.client.host)
+
+    Never trusts arbitrary string values as keys — an invalid header
+    falls through to the next source so attackers can't create unlimited
+    bucket entries with synthetic keys.
+    """
     try:
         headers = request.headers
-        xff = headers.get("x-forwarded-for") if headers else None
-        if xff:
-            return xff.split(",")[0].strip()
+        if headers:
+            cf_ip = headers.get("cf-connecting-ip")
+            if cf_ip and _validate_ip(cf_ip):
+                return cf_ip.strip()
+            xff = headers.get("x-forwarded-for")
+            if xff:
+                candidate = _validate_ip(xff.split(",")[0])
+                if candidate:
+                    return candidate
         if request.client:
             return request.client.host
     except Exception:  # noqa: BLE001

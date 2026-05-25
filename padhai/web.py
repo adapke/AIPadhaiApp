@@ -25,6 +25,7 @@ import json
 import os
 import re
 import tempfile
+import threading
 import time
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -210,28 +211,35 @@ object_storage = get_storage()
 # None and POST /lessons treats every request as anonymous (M1 tier).
 _pg_store = store if isinstance(store, PostgresJobStore) else None
 _user_repo = None
+_repo_lock = threading.Lock()
 
 
 def _get_user_repo():
     """Lazy getter for the user repo. Falls back to on-demand init so
     that DATABASE_URL set after module import (e.g. via .env or the
-    lifespan) is still picked up on first request."""
+    lifespan) is still picked up on first request.
+
+    Protected by _repo_lock to prevent concurrent requests from each
+    creating their own PostgresJobStore and leaking connection pools."""
     global _user_repo, _pg_store
     if _user_repo is not None:
         return _user_repo
-    db_url = os.environ.get("DATABASE_URL")
-    _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
-    if not db_url:
-        return None
-    try:
-        if _pg_store is None:
-            _pg_store = PostgresJobStore(db_url)
-        _user_repo = PostgresUserRepository(_pg_store.pool)
-        _log.info("_get_user_repo: initialised ok")
-    except Exception as e:
-        _log.error("_get_user_repo: FAILED: %s", e)
-        return None
-    return _user_repo
+    with _repo_lock:
+        if _user_repo is not None:  # re-check inside lock
+            return _user_repo
+        db_url = os.environ.get("DATABASE_URL")
+        _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
+        if not db_url:
+            return None
+        try:
+            if _pg_store is None:
+                _pg_store = PostgresJobStore(db_url)
+            _user_repo = PostgresUserRepository(_pg_store.pool)
+            _log.info("_get_user_repo: initialised ok")
+        except Exception as e:
+            _log.error("_get_user_repo: FAILED: %s", e)
+            return None
+        return _user_repo
 
 
 current_user = make_current_user_dependency(_get_user_repo)
@@ -868,6 +876,9 @@ class _CSPMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         response = await call_next(request)
         ct = response.headers.get("content-type", "")
+        # nosniff on every response — prevents IE/Edge content-type sniffing
+        # on JSON endpoints that echo user input.
+        response.headers["X-Content-Type-Options"] = "nosniff"
         if "text/html" in ct:
             response.headers["Content-Security-Policy"] = (
                 "default-src 'self'; "
@@ -880,9 +891,9 @@ class _CSPMiddleware(BaseHTTPMiddleware):
                 "frame-ancestors 'none';"
             )
             response.headers["X-Frame-Options"] = "DENY"
-            response.headers["X-Content-Type-Options"] = "nosniff"
         return response
 app.add_middleware(_CSPMiddleware)
+app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 
 @app.get("/metrics")
@@ -8271,12 +8282,12 @@ def _escape_html(s: str) -> str:
 
 
 _PASSWORD_RE = _re.compile(
-    r"^(?=.*[A-Za-z])(?=.*\d).{8,}$"
+    r"^(?=.*[A-Za-z])(?=.*\d)\S{8,}$"
 )
 
 def _validate_password_complexity(password: str) -> None:
-    """Require ≥8 chars with at least one letter and one digit."""
-    if not _PASSWORD_RE.match(password):
+    """Require ≥8 non-whitespace chars with at least one letter and one digit."""
+    if not _PASSWORD_RE.fullmatch(password):
         raise HTTPException(
             400,
             "password must be at least 8 characters and contain at least "
@@ -8313,6 +8324,14 @@ def login(
             note="bad password", **actor,
         )
         raise HTTPException(401, "invalid credentials")
+    if user.account_locked:
+        _audit.record(
+            action="auth.login.blocked",
+            actor_user_id=user.id,
+            target_type="user", target_id=user.id,
+            note="account locked", **actor,
+        )
+        raise HTTPException(403, "account suspended — contact support")
     _audit.record(
         action="auth.login.success",
         actor_user_id=user.id,
@@ -8486,13 +8505,17 @@ def create_lesson(
     # Persist the upload. For PDFs / PPTX / DOCX, fan out to one page
     # image per page; the rest of the pipeline only knows about images.
     suffix = Path(image.filename or "page.jpg").suffix.lower() or ".jpg"
-    raw_bytes = image.file.read()
-    if len(raw_bytes) > 25 * 1024 * 1024:
-        raise HTTPException(413, "file too large (limit 25 MB)")
+    _SIZE_LIMIT = 25 * 1024 * 1024
     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
-        f.write(raw_bytes)
         upload_path = Path(f.name)
-    del raw_bytes  # release memory before heavy processing
+        total = 0
+        for chunk in iter(lambda: image.file.read(65536), b""):
+            total += len(chunk)
+            if total > _SIZE_LIMIT:
+                f.close()
+                upload_path.unlink(missing_ok=True)
+                raise HTTPException(413, "file too large (limit 25 MB)")
+            f.write(chunk)
     try:
         page_images = ingest_source(upload_path)
     except ValueError as e:
@@ -8564,16 +8587,23 @@ def create_lesson(
     job = runner.enqueue(job_payload)
 
     # Multi-page upload: fan out one job per remaining page.
-    # Clean up any extra page temp files that fail to enqueue so they
-    # don't leak on disk if the queue is full or the runner throws.
+    # Enqueue extra pages. On any failure, unlink ALL remaining temp files
+    # (both the failing page and any pages not yet enqueued) to avoid leaks.
+    # Already-enqueued extra jobs are allowed to proceed — the first-page job
+    # is also already running, so a partial multi-page render is better than
+    # dropping everything and leaving no output for the user.
     extra_jobs = []
+    remaining = list(extra_pages)
     for extra in extra_pages:
+        remaining.remove(extra)
         try:
             extra_payload = dict(job_payload)
             extra_payload["image_path"] = str(extra)
             extra_jobs.append(runner.enqueue(extra_payload))
         except Exception:
             Path(extra).unlink(missing_ok=True)
+            for leftover in remaining:
+                Path(leftover).unlink(missing_ok=True)
             raise
 
     response = {
@@ -9929,7 +9959,7 @@ def list_org_classes_route(
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    classes = _orgs.list_classes(org_id)[:limit]
+    classes = _orgs.list_classes(org_id, limit=limit)
     return {
         "classes": [
             {
@@ -9974,7 +10004,7 @@ def list_org_assignments_route(
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    items = _orgs.list_assignments(org_id, class_id=class_id)[:limit]
+    items = _orgs.list_assignments(org_id, class_id=class_id, limit=limit)
     return {
         "assignments": [
             {
@@ -10242,7 +10272,7 @@ def list_org_notifications(
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher"})
-    items = _notifs.list_for_admin(org_id=org_id)[:limit]
+    items = _notifs.list_for_admin(org_id=org_id, limit=limit)
     return {
         "notifications": [
             {
@@ -10748,7 +10778,7 @@ def list_exam_attempts(
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher"})
-    attempts = _orgs.list_attempts(eid)[:limit]
+    attempts = _orgs.list_attempts(eid, limit=limit)
     return {"attempts": [_attempt_to_dict(a) for a in attempts]}
 
 
@@ -10865,7 +10895,7 @@ def list_org_fee_structures(
     _require_org_role(org_id, user.id, {"admin", "teacher"})
     return {
         "structures": [_fee_struct_to_dict(s)
-                       for s in _orgs.list_fee_structures(org_id)[:limit]],
+                       for s in _orgs.list_fee_structures(org_id, limit=limit)],
     }
 
 
@@ -10903,8 +10933,8 @@ def list_org_fee_invoices(
         raise HTTPException(403, "not a member of this org")
     # Students get auto-filtered to their own user_id
     user_filter = user.id if my_role == "student" else None
-    invoices = _orgs.list_invoices(org_id, status=status, user_id=user_filter)
-    return {"invoices": [_invoice_to_dict(i) for i in invoices[:limit]]}
+    invoices = _orgs.list_invoices(org_id, status=status, user_id=user_filter, limit=limit)
+    return {"invoices": [_invoice_to_dict(i) for i in invoices]}
 
 
 @app.get("/api/orgs/{org_id}/fees/summary")
@@ -12326,7 +12356,7 @@ def list_flashcard_decks(
         raise HTTPException(401, "authentication required")
     from . import spaced_repetition as _sr
     _sr.migrate()
-    decks = _sr.list_my_decks(user.id)[:limit]
+    decks = _sr.list_my_decks(user.id, limit=limit)
     return JSONResponse({
         "decks": [
             {

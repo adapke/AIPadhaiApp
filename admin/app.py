@@ -24,6 +24,7 @@ Routes (all under /admin/* once mounted):
 
 from __future__ import annotations
 
+import secrets as _secrets
 from datetime import datetime, timezone
 from typing import Annotated
 
@@ -92,8 +93,15 @@ def signup(
             detail="ADMIN_BOOTSTRAP_TOKEN is not set — bootstrap signup disabled. "
                    "Set it in your environment to create the first admin account.",
         )
-    if bootstrap_token != required_token:
+    if not _secrets.compare_digest(bootstrap_token, required_token):
         raise HTTPException(status_code=403, detail="invalid bootstrap token")
+    import re as _re
+    if not _re.fullmatch(r"^(?=.*[A-Za-z])(?=.*\d)\S{8,}$", password):
+        raise HTTPException(
+            status_code=400,
+            detail="password must be at least 8 characters and contain at least "
+                   "one letter and one digit",
+        )
     if auth.count_users() > 0:
         # Surface as the login page with a clear error.
         html = render_login(

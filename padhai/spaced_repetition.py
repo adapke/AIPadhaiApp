@@ -296,12 +296,12 @@ def _row_to_deck(r) -> Deck:
     )
 
 
-def list_my_decks(user_id: str) -> list[Deck]:
+def list_my_decks(user_id: str, *, limit: int = 200) -> list[Deck]:
     with _conn() as conn:
         rows = conn.execute(
             _DECK_SEL + " WHERE owner_user_id = ? "
-            "ORDER BY updated_at DESC",
-            (user_id,),
+            "ORDER BY updated_at DESC LIMIT ?",
+            (user_id, limit),
         ).fetchall()
     return [_row_to_deck(r) for r in rows]
 

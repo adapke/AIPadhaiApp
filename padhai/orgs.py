@@ -590,13 +590,13 @@ def list_members(org_id: str,
     ]
 
 
-def list_classes(org_id: str) -> list[OrgClass]:
+def list_classes(org_id: str, *, limit: int = 200) -> list[OrgClass]:
     with _conn(read_only=True) as conn:
         rows = conn.execute(
             "SELECT id, org_id, name, grade_level, section, created_at "
             "FROM org_classes WHERE org_id = ? "
-            "ORDER BY name ASC",
-            (org_id,),
+            "ORDER BY name ASC LIMIT ?",
+            (org_id, limit),
         ).fetchall()
     return [
         OrgClass(id=r[0], org_id=r[1], name=r[2], grade_level=r[3],
@@ -605,18 +605,19 @@ def list_classes(org_id: str) -> list[OrgClass]:
     ]
 
 
-def list_assignments(org_id: str, class_id: str | None = None) -> list[Assignment]:
+def list_assignments(org_id: str, class_id: str | None = None, *, limit: int = 200) -> list[Assignment]:
     where = ["org_id = ?"]
     params: list = [org_id]
     if class_id:
         where.append("class_id = ?")
         params.append(class_id)
+    params.append(limit)
     with _conn(read_only=True) as conn:
         rows = conn.execute(
             "SELECT id, org_id, class_id, title, topic, language, level, "
             "due_date, notes, created_by, created_at FROM org_assignments "
             "WHERE " + " AND ".join(where) +
-            " ORDER BY created_at DESC LIMIT 200",
+            " ORDER BY created_at DESC LIMIT ?",
             params,
         ).fetchall()
     return [
@@ -1480,12 +1481,12 @@ def _attempt_by_id(aid: str) -> ExamAttempt:
     )
 
 
-def list_attempts(exam_id: str) -> list[ExamAttempt]:
+def list_attempts(exam_id: str, *, limit: int = 200) -> list[ExamAttempt]:
     with _conn(read_only=True) as conn:
         rows = conn.execute(
             "SELECT id FROM org_exam_attempts WHERE exam_id = ? "
-            "ORDER BY submitted_at DESC NULLS LAST",
-            (exam_id,),
+            "ORDER BY submitted_at DESC NULLS LAST LIMIT ?",
+            (exam_id, limit),
         ).fetchall()
     return [_attempt_by_id(r[0]) for r in rows]
 
@@ -1579,14 +1580,14 @@ def create_fee_structure(
     )
 
 
-def list_fee_structures(org_id: str) -> list[FeeStructure]:
+def list_fee_structures(org_id: str, *, limit: int = 200) -> list[FeeStructure]:
     with _conn(read_only=True) as conn:
         rows = conn.execute(
             "SELECT id, org_id, name, amount_paise, currency, applies_to, "
             "       due_date, notes, created_by, created_at "
             "FROM org_fee_structures WHERE org_id = ? "
-            "ORDER BY created_at DESC",
-            (org_id,),
+            "ORDER BY created_at DESC LIMIT ?",
+            (org_id, limit),
         ).fetchall()
     return [FeeStructure(*r) for r in rows]
 
