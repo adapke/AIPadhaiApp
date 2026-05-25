@@ -12110,19 +12110,25 @@ async def update_my_profile(
         raise HTTPException(400, f"preferred_language must be one of {sorted(SUPPORTED_LANGUAGES)}")
     if "preferred_level" in updates and updates["preferred_level"] not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"preferred_level must be one of {sorted(LEVEL_GUIDANCE)}")
+    db_url = get_db_url()
+    if not db_url:
+        return JSONResponse({
+            "ok": True,
+            "updated": list(updates.keys()),
+            "persisted": False,
+            "note": "DATABASE_URL not set — preferences applied for this session only",
+        })
     try:
-        db_url = get_db_url()
-        if db_url:
-            import psycopg
-            set_clause = ", ".join(f"{col} = %s" for col in updates)
-            vals = list(updates.values()) + [user.id]
-            with psycopg.connect(db_url, autocommit=True) as conn:
-                conn.execute(
-                    f"UPDATE users SET {set_clause} WHERE id = %s", vals,
-                )
+        import psycopg
+        set_clause = ", ".join(f"{col} = %s" for col in updates)
+        vals = list(updates.values()) + [user.id]
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            conn.execute(
+                f"UPDATE users SET {set_clause} WHERE id = %s", vals,
+            )
     except Exception as exc:
         raise HTTPException(500, f"update failed: {exc}")
-    return JSONResponse({"ok": True, "updated": list(updates.keys())})
+    return JSONResponse({"ok": True, "updated": list(updates.keys()), "persisted": True})
 
 
 # ---- Flashcard due queue + SM-2 review ------------------------------------
@@ -12162,7 +12168,7 @@ def flashcards_due_queue(
 @app.post("/api/flashcards/{card_id}/review")
 def review_flashcard(
     card_id: str,
-    grade: int = Form(..., ge=0, le=5, description="SM-2 grade 0=Again 2=Hard 4=Good 5=Easy"),
+    grade: int = Form(..., ge=0, le=5, description="SM-2 grade 0=Again 3=Hard 4=Good 5=Easy"),
     time_seconds: int | None = Form(None),
     user: AuthUser | None = Depends(current_user),
 ) -> JSONResponse:
@@ -12382,7 +12388,7 @@ def change_password(
     if user is None:
         raise HTTPException(401, "authentication required")
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured")
+        raise HTTPException(503, "auth not configured — set DATABASE_URL")
     result = _get_user_repo().find_by_email(user.email)
     if not result:
         raise HTTPException(404, "user not found")
@@ -12390,8 +12396,6 @@ def change_password(
     if not current_hash or not verify_password(old_password, current_hash):
         raise HTTPException(400, "current password is incorrect")
     db_url = get_db_url()
-    if not db_url:
-        raise HTTPException(503, "auth not configured")
     try:
         import psycopg
         with psycopg.connect(db_url, autocommit=True) as conn:
@@ -12410,9 +12414,21 @@ def change_password(
 def get_doubt_queue(
     user: AuthUser | None = Depends(current_user),
 ) -> JSONResponse:
-    """Return pending doubts for the teacher/org to claim and respond to."""
+    """Return pending doubts for the teacher/org to claim and respond to.
+    Requires teacher or admin role in at least one org."""
     if user is None:
         raise HTTPException(401, "authentication required")
+    # Role gate: only teachers and admins may see the doubt queue.
+    try:
+        user_orgs = _orgs.find_orgs_for_user(user.id)
+        is_educator = any(
+            _orgs.user_role_in_org(org_id=o.id, user_id=user.id) in ("teacher", "admin")
+            for o in user_orgs
+        )
+    except Exception:
+        is_educator = False
+    if not is_educator:
+        raise HTTPException(403, "teacher or admin role required to view the doubt queue")
     try:
         from . import doubt_clearing as _dc
         _dc.migrate()
