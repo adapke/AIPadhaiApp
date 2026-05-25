@@ -130,12 +130,54 @@ def _db_path() -> Path:
     return Path.home() / ".padhai" / "jobs.db"
 
 
-def _conn() -> sqlite3.Connection:
-    path = _db_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(path), timeout=10.0)
-    conn.executescript(SCHEMA)
-    return conn
+def _use_postgres() -> bool:
+    return os.environ.get("DATABASE_URL", "").startswith("postgres")
+
+
+_schema_applied = False
+
+
+class _DB:
+    """Thin wrapper around sqlite3 / psycopg that normalises ? → %s for
+    Postgres and handles schema bootstrap once per process."""
+
+    def __init__(self) -> None:
+        global _schema_applied
+        self._pg = _use_postgres()
+        if self._pg:
+            import psycopg  # type: ignore[import]
+            self._conn = psycopg.connect(os.environ["DATABASE_URL"])
+            if not _schema_applied:
+                for stmt in [s.strip() for s in SCHEMA.split(";") if s.strip()]:
+                    self._conn.execute(stmt)
+                self._conn.commit()
+                _schema_applied = True
+        else:
+            path = _db_path()
+            path.parent.mkdir(parents=True, exist_ok=True)
+            self._conn = sqlite3.connect(str(path), timeout=10.0)
+            if not _schema_applied:
+                self._conn.executescript(SCHEMA)
+                _schema_applied = True
+
+    def execute(self, sql: str, params=()):
+        if self._pg:
+            sql = sql.replace("?", "%s")
+        return self._conn.execute(sql, params)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            self._conn.commit()
+        else:
+            self._conn.rollback()
+        self._conn.close()
+
+
+def _conn() -> _DB:
+    return _DB()
 
 
 def migrate() -> None:

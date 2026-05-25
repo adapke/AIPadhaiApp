@@ -199,7 +199,7 @@ def resolve_provider_for_tier(user: AuthUser | None) -> str:
 
 
 def _require_auth() -> bool:
-    return os.environ.get("PADHAI_REQUIRE_AUTH", "0") in ("1", "true", "yes")
+    return os.environ.get("PADHAI_REQUIRE_AUTH", "1") in ("1", "true", "yes")
 
 
 def make_current_user_dependency(repo_or_getter):

@@ -8377,6 +8377,7 @@ def tiers() -> JSONResponse:
 
 @app.post("/lessons", status_code=202)
 def create_lesson(
+    request: Request,
     image: UploadFile = File(..., description="textbook page image (JPG/PNG)"),
     language: str = Form("en"),
     level: str = Form("middle"),
@@ -8390,6 +8391,9 @@ def create_lesson(
         raise HTTPException(400, f"language must be one of {sorted(SUPPORTED_LANGUAGES)}")
     if level not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
+    _rate_key = user.id if user else _rl.client_ip_from_request(request)
+    if not _rl.ai_generation.try_consume(_rate_key):
+        raise HTTPException(429, "Too many lesson generations — please wait a moment before trying again.")
 
     # Persist the upload. For PDFs / PPTX / DOCX, fan out to one page
     # image per page; the rest of the pipeline only knows about images.
@@ -8824,6 +8828,7 @@ def make_flashcards(
 
 @app.post("/chat/{lesson_id}")
 def chat_about_lesson(
+    request: Request,
     lesson_id: str,
     question: str = Form(..., min_length=2),
     user: AuthUser | None = Depends(current_user),
@@ -8834,6 +8839,9 @@ def chat_about_lesson(
     once the render completes (look for `result.lesson_id`).
     The endpoint loads the cached Lesson JSON and answers with Claude
     grounded in that material — no general-knowledge hallucination."""
+    _rate_key = user.id if user else _rl.client_ip_from_request(request)
+    if not _rl.ai_generation.try_consume(_rate_key):
+        raise HTTPException(429, "Too many requests — please wait before asking again.")
     import dataclasses
     import json
     from .pedagogy import MODEL
@@ -12260,6 +12268,45 @@ def _ensure_reset_table() -> None:
         print(f"[reset_table] non-fatal: {exc}")
 
 
+def _send_reset_email(*, to_email: str, reset_url: str) -> None:
+    """Send a password-reset email. Uses SMTP when SMTP_HOST is set;
+    falls back to console log in dev so the flow is testable without
+    a mail server."""
+    smtp_host = os.environ.get("SMTP_HOST")
+    base_url = os.environ.get("APP_BASE_URL", "http://localhost:8000")
+    full_url = f"{base_url}{reset_url}"
+    if not smtp_host:
+        print(
+            f"[DEV no-email] Password reset for {to_email}.\n"
+            f"  Reset link: {full_url}\n"
+            f"  Set SMTP_HOST (and optionally SMTP_PORT/SMTP_USER/SMTP_PASSWORD/SMTP_FROM)\n"
+            f"  in .env to send real emails."
+        )
+        return
+    import smtplib
+    from email.message import EmailMessage
+    msg = EmailMessage()
+    msg["Subject"] = "Reset your AI Pathashala password"
+    msg["From"] = os.environ.get("SMTP_FROM", "noreply@aipadhaiapp.com")
+    msg["To"] = to_email
+    msg.set_content(
+        f"Click the link below to reset your AI Pathashala password:\n\n"
+        f"{full_url}\n\n"
+        f"This link expires in 1 hour. If you didn't request a reset, ignore this email."
+    )
+    smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port) as smtp:
+            smtp.starttls()
+            smtp_user = os.environ.get("SMTP_USER", "")
+            smtp_pass = os.environ.get("SMTP_PASSWORD", "")
+            if smtp_user:
+                smtp.login(smtp_user, smtp_pass)
+            smtp.send_message(msg)
+    except Exception as exc:
+        print(f"[send_reset_email] failed to send to {to_email}: {exc}")
+
+
 @app.post("/auth/forgot-password")
 def forgot_password(email: str = Form(...)) -> JSONResponse:
     """Send a password-reset link. Always returns 200 to prevent email enumeration."""
@@ -12285,9 +12332,8 @@ def forgot_password(email: str = Form(...)) -> JSONResponse:
                 )
     except Exception as exc:
         print(f"[forgot_password] db error: {exc}")
-    # Production: send email here. Dev: log the token.
     reset_url = f"/auth/reset-password?token={token}"
-    print(f"[DEV] Reset link for {email}: {reset_url}")
+    _send_reset_email(to_email=email, reset_url=reset_url)
     return JSONResponse(_ok)
 
 
