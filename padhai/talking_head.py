@@ -480,9 +480,18 @@ class DIDProvider:
         # public URL (S3 / GCS / D-ID's own files endpoint), then POST that
         # URL as audio_url. The shape is documented at:
         # https://docs.d-id.com/reference/talks-create
-        raise NotImplementedError(
-            "D-ID integration is sketched; complete it once you have a "
-            "source-photo URL + a writable signed-URL endpoint for audio."
+        # Full D-ID integration requires a signed-URL endpoint for audio
+        # and a source-photo URL. Until that's wired, fall back to the
+        # cartoon provider so M4 jobs don't crash.
+        import logging
+        logging.getLogger(__name__).warning(
+            "DIDProvider.render_clip called but D-ID integration is not "
+            "complete; falling back to CartoonAvatarProvider. Set "
+            "DID_SOURCE_PHOTO_URL and wire a signed-audio-URL endpoint "
+            "to enable full D-ID output."
+        )
+        CartoonAvatarProvider().render_clip(
+            narration_audio, script_text, language_code, out_path
         )
 
 

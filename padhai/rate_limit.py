@@ -63,6 +63,13 @@ preview_math = TokenBucket(capacity=30, rate_per_sec=1.0)        # 30 burst, the
 preview_diagram = TokenBucket(capacity=20, rate_per_sec=0.5)     # 20 burst, then 1/2s
 preview_scorer = TokenBucket(capacity=15, rate_per_sec=0.25)     # 15 burst, then 1/4s
 
+# AI generation endpoints (lesson render, chat, explain). Keyed by
+# user_id for authenticated users; client IP for anonymous. Generous
+# burst for normal use; prevents runaway loops and accidental DDoS.
+ai_generation = TokenBucket(capacity=10, rate_per_sec=0.1)       # 10 burst, then 1/10s
+login = TokenBucket(capacity=5, rate_per_sec=0.05)               # 5 burst, then 1/20s — brute-force guard
+file_upload = TokenBucket(capacity=20, rate_per_sec=0.5)         # 20 burst, then 1/2s
+
 
 def client_ip_from_request(request) -> str:
     """Extract caller IP for keying. Same logic as

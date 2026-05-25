@@ -42,8 +42,14 @@ if os.environ.get("PADHAI_SKIP_DOTENV", "0") not in ("1", "true", "yes"):
     except ImportError:
         pass
 
-from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
+import logging
+import re as _re
+
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
+
+_log = logging.getLogger("padhai.web")
 
 from .auth import (
     AuthUser,
@@ -214,16 +220,16 @@ def _get_user_repo():
     if _user_repo is not None:
         return _user_repo
     db_url = os.environ.get("DATABASE_URL")
-    print(f"[_get_user_repo] DATABASE_URL={'SET' if db_url else 'MISSING'}")
+    _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
     if not db_url:
         return None
     try:
         if _pg_store is None:
             _pg_store = PostgresJobStore(db_url)
         _user_repo = PostgresUserRepository(_pg_store.pool)
-        print(f"[_get_user_repo] initialised ok")
+        _log.info("_get_user_repo: initialised ok")
     except Exception as e:
-        print(f"[_get_user_repo] FAILED: {e}")
+        _log.error("_get_user_repo: FAILED: %s", e)
         return None
     return _user_repo
 
@@ -489,11 +495,21 @@ async def _lifespan(app: FastAPI):
             if _pg_store is None:
                 _pg_store = PostgresJobStore(_db_url)
             _user_repo = PostgresUserRepository(_pg_store.pool)
-            print(f"[startup] postgres connected: {_db_url.split('@')[-1]}")
+            _log.info("postgres connected: %s", _db_url.split("@")[-1])
         except Exception as e:  # noqa: BLE001
-            print(f"[startup] postgres FAILED — auth will be unavailable: {e}")
+            _log.error("postgres FAILED — auth will be unavailable: %s", e)
     else:
-        print("[startup] DATABASE_URL not set — running in SQLite/anonymous mode")
+        _log.warning("DATABASE_URL not set — running in SQLite/anonymous mode")
+
+    # Warn if APP_BASE_URL is unset or still localhost in a production-like env
+    _base_url = os.environ.get("APP_BASE_URL", "")
+    if not _base_url:
+        _log.warning(
+            "APP_BASE_URL is not set — password-reset emails will contain "
+            "http://localhost:8000 links. Set APP_BASE_URL to your public URL."
+        )
+    elif "localhost" in _base_url and _db_url:
+        _log.warning("APP_BASE_URL=%s looks like dev but DATABASE_URL is set", _base_url)
 
     # Apply additive schema migrations that don't belong to JobStore
     # (DPDP consent columns + notifications tables). Idempotent — safe
@@ -515,308 +531,309 @@ async def _lifespan(app: FastAPI):
                     timeout=120,
                 )
                 if _r.returncode == 0:
-                    print("[startup] liquibase: changesets applied")
+                    _log.info("[startup] liquibase: changesets applied")
                     _liquibase_ran = True
                 else:
-                    print(f"[startup] liquibase failed (rc={_r.returncode}): "
-                          f"{_r.stderr[:300]}")
+                    _log.error("[startup] liquibase failed (rc=%d): %s",
+                               _r.returncode, _r.stderr[:300])
             except FileNotFoundError:
-                print("[startup] liquibase not in PATH — falling back to init_schema()")
+                _log.warning("[startup] liquibase not in PATH — falling back to init_schema()")
             except Exception as e:  # noqa: BLE001
-                print(f"[startup] liquibase error (non-fatal): {e}")
+                _log.warning("[startup] liquibase error (non-fatal): %s", e)
         if not _liquibase_ran:
             try:
                 _pg_store.init_schema()
-                print("[startup] postgres base schema applied (Python fallback)")
+                _log.info("[startup] postgres base schema applied (Python fallback)")
             except Exception as e:  # noqa: BLE001
-                print(f"[startup] init_schema failed (non-fatal): {e}")
+                _log.warning("[startup] init_schema failed (non-fatal): %s", e)
     try:
         _dpdp.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] dpdp.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] dpdp.migrate failed (non-fatal): %s", e)
     try:
         _sso.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] sso.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] sso.migrate failed (non-fatal): %s", e)
     try:
         _schema_v2.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] schema_v2.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] schema_v2.migrate failed (non-fatal): %s", e)
     try:
         _branding.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] branding.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] branding.migrate failed (non-fatal): %s", e)
     try:
         _audit.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] audit.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] audit.migrate failed (non-fatal): %s", e)
     try:
         _push.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] push.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] push.migrate failed (non-fatal): %s", e)
     try:
         _saml.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] saml.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] saml.migrate failed (non-fatal): %s", e)
     try:
         _scim.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] scim.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] scim.migrate failed (non-fatal): %s", e)
     try:
         _residency.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] residency.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] residency.migrate failed (non-fatal): %s", e)
     try:
         _streaks.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] streaks.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] streaks.migrate failed (non-fatal): %s", e)
     try:
         _customdom.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] custom_domains.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] custom_domains.migrate failed (non-fatal): %s", e)
     try:
         _qbank.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] question_bank.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] question_bank.migrate failed (non-fatal): %s", e)
     try:
         _scorer.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] curriculum_scorer.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] curriculum_scorer.migrate failed (non-fatal): %s", e)
     try:
         _countries.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] countries.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] countries.migrate failed (non-fatal): %s", e)
     try:
         _coaching.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] coaching.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] coaching.migrate failed (non-fatal): %s", e)
     try:
         _mastery.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] mastery.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] mastery.migrate failed (non-fatal): %s", e)
     try:
         _preschool.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] preschool.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] preschool.migrate failed (non-fatal): %s", e)
     try:
         _flags.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] feature_flags.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] feature_flags.migrate failed (non-fatal): %s", e)
     try:
         _llm_obs.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] llm_obs.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] llm_obs.migrate failed (non-fatal): %s", e)
     try:
         _tutor.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] tutor.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] tutor.migrate failed (non-fatal): %s", e)
     try:
         _essay.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] essay_grader.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] essay_grader.migrate failed (non-fatal): %s", e)
     try:
         _practice.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] practice_test.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] practice_test.migrate failed (non-fatal): %s", e)
     try:
         _live.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] live_classes.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] live_classes.migrate failed (non-fatal): %s", e)
     try:
         _doubt.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] doubt_clearing.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] doubt_clearing.migrate failed (non-fatal): %s", e)
     try:
         _analytics.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] analytics.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] analytics.migrate failed (non-fatal): %s", e)
     try:
         _math_vision.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] math_vision.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] math_vision.migrate failed (non-fatal): %s", e)
     try:
         _mock_iv.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] mock_interview.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] mock_interview.migrate failed (non-fatal): %s", e)
     try:
         _mock_te.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] mock_test_events.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] mock_test_events.migrate failed (non-fatal): %s", e)
     try:
         _forums.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] forums.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] forums.migrate failed (non-fatal): %s", e)
     try:
         _family.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] family_plans.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] family_plans.migrate failed (non-fatal): %s", e)
     try:
         _buddies.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] study_buddies.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] study_buddies.migrate failed (non-fatal): %s", e)
     try:
         _pub.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] teacher_publishing.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] teacher_publishing.migrate failed (non-fatal): %s", e)
     try:
         _cmkt.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] content_market.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] content_market.migrate failed (non-fatal): %s", e)
     try:
         _mentor.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] mentorship.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] mentorship.migrate failed (non-fatal): %s", e)
     try:
         _nep.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] nep_alignment.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] nep_alignment.migrate failed (non-fatal): %s", e)
     try:
         _diksha.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] diksha.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] diksha.migrate failed (non-fatal): %s", e)
     try:
         _cs.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] customer_success.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] customer_success.migrate failed (non-fatal): %s", e)
     try:
         _states.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] state_partnerships.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] state_partnerships.migrate failed (non-fatal): %s", e)
     try:
         _corp.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] corporate.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] corporate.migrate failed (non-fatal): %s", e)
     try:
         _sales.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] sales_pipeline.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] sales_pipeline.migrate failed (non-fatal): %s", e)
     try:
         _tmkt.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] tutor_marketplace.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] tutor_marketplace.migrate failed (non-fatal): %s", e)
     try:
         _qpmkt.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] question_pack_market.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] question_pack_market.migrate failed (non-fatal): %s", e)
     try:
         _vouchers.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] vouchers.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] vouchers.migrate failed (non-fatal): %s", e)
     try:
         _univ.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] university_partners.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] university_partners.migrate failed (non-fatal): %s", e)
     try:
         _affiliates.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] affiliates.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] affiliates.migrate failed (non-fatal): %s", e)
     try:
         _digilocker.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] digilocker.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] digilocker.migrate failed (non-fatal): %s", e)
     try:
         _citations.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] citations.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] citations.migrate failed (non-fatal): %s", e)
     try:
         _exam_tax.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] exam_taxonomy.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] exam_taxonomy.migrate failed (non-fatal): %s", e)
     try:
         _accbench.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] accuracy_bench.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] accuracy_bench.migrate failed (non-fatal): %s", e)
     try:
         _mock_eng.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] mock_engine.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] mock_engine.migrate failed (non-fatal): %s", e)
     try:
         _readiness.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] readiness.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] readiness.migrate failed (non-fatal): %s", e)
     try:
         _tutor_grd.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] tutor_grounding.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] tutor_grounding.migrate failed (non-fatal): %s", e)
     try:
         _retrieval.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] retrieval.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] retrieval.migrate failed (non-fatal): %s", e)
     try:
         _daily_plan.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] daily_plan.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] daily_plan.migrate failed (non-fatal): %s", e)
     try:
         _modq.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] moderation_queue.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] moderation_queue.migrate failed (non-fatal): %s", e)
     try:
         _dashboards.migrate()    # no-op, kept for symmetry
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] dashboards.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] dashboards.migrate failed (non-fatal): %s", e)
     try:
         _expert_review.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] expert_review.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] expert_review.migrate failed (non-fatal): %s", e)
     try:
         _srs.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] spaced_repetition.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] spaced_repetition.migrate failed (non-fatal): %s", e)
     try:
         _socratic.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] socratic_tutor.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] socratic_tutor.migrate failed (non-fatal): %s", e)
     try:
         _research.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] research_tools.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] research_tools.migrate failed (non-fatal): %s", e)
     try:
         _mq.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] marketplace_quality.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] marketplace_quality.migrate failed (non-fatal): %s", e)
     try:
         _offline.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] offline_packs.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] offline_packs.migrate failed (non-fatal): %s", e)
     try:
         _messaging.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] messaging.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] messaging.migrate failed (non-fatal): %s", e)
     try:
         _audio_recap.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] audio_recap.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] audio_recap.migrate failed (non-fatal): %s", e)
     try:
         _adaptive.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] adaptive_packs.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] adaptive_packs.migrate failed (non-fatal): %s", e)
     try:
         _step_math.migrate()
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] step_math.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] step_math.migrate failed (non-fatal): %s", e)
     try:
         _navigation.migrate()    # no-op
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] navigation.migrate failed (non-fatal): {e}")
+        _log.warning("[startup] navigation.migrate failed (non-fatal): %s", e)
     try:
         _student_home.migrate()    # no-op
     except Exception as e:  # noqa: BLE001
-        print(f"[startup] student_home.migrate failed (non-fatal): {e}")
-    print(f"[startup] live video: {_live.active_provider()}")
-    print(f"[startup] tutor: {'available' if _tutor.is_available() else 'not configured'}")
+        _log.warning("[startup] student_home.migrate failed (non-fatal): %s", e)
+    _log.info("[startup] live video: %s", _live.active_provider())
+    _log.info("[startup] tutor: %s", "available" if _tutor.is_available() else "not configured")
     _llm_cache_desc = _llm_cache.describe()
-    print(
-        f"[startup] llm cache: caching={_llm_cache_desc['caching_enabled']} "
-        f"batch={_llm_cache_desc['batch_enabled']}"
+    _log.info(
+        "[startup] llm cache: caching=%s batch=%s",
+        _llm_cache_desc['caching_enabled'],
+        _llm_cache_desc['batch_enabled'],
     )
-    print(f"[startup] region: {_region.description()}")
-    print(f"[startup] db backend: {_db_backend.description()}")
-    print(f"[startup] queue backend: {_queue_backend.description()}")
+    _log.info("[startup] region: %s", _region.description())
+    _log.info("[startup] db backend: %s", _db_backend.description())
+    _log.info("[startup] queue backend: %s", _queue_backend.description())
     if _cdn.is_configured():
-        print("[startup] cdn: signed-url delivery enabled")
+        _log.info("[startup] cdn: signed-url delivery enabled")
     resumed = runner.resume_pending()
     if resumed:
-        print(f"[startup] resumed {resumed} pending jobs from {_DB_PATH}")
+        _log.info("[startup] resumed %d pending jobs from %s", resumed, _DB_PATH)
     yield
     runner.shutdown(wait=False)
     if _pg_store is not None:
@@ -841,6 +858,31 @@ for _r in _routers.all_routers():
 # PostHog (latter two no-op when env vars unset). Install BEFORE other
 # middlewares so it sees the un-modified request shape.
 _obs.install(app)
+
+# Content-Security-Policy — blocks inline XSS from untrusted content
+# rendered in teacher/student UIs (quiz answers, doubt text, etc.).
+# 'unsafe-inline' is kept for now because the SPA uses inline scripts;
+# migrate to nonces in a future refactor to tighten this further.
+from starlette.middleware.base import BaseHTTPMiddleware  # noqa: E402
+class _CSPMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        ct = response.headers.get("content-type", "")
+        if "text/html" in ct:
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self'; "
+                "script-src 'self' 'unsafe-inline'; "
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+                "font-src 'self' https://fonts.gstatic.com; "
+                "img-src 'self' data: blob: https:; "
+                "media-src 'self' blob: https:; "
+                "connect-src 'self'; "
+                "frame-ancestors 'none';"
+            )
+            response.headers["X-Frame-Options"] = "DENY"
+            response.headers["X-Content-Type-Options"] = "nosniff"
+        return response
+app.add_middleware(_CSPMiddleware)
 
 
 @app.get("/metrics")
@@ -7965,6 +8007,19 @@ def landing_page() -> HTMLResponse:
     return HTMLResponse(_home_ui.get_landing_html())
 
 
+@app.get("/auth/login")
+def login_page_redirect() -> RedirectResponse:
+    """Redirect GET /auth/login → /landing so bookmarks and direct
+    navigation work; the actual login form and POST handler live there."""
+    return RedirectResponse("/landing", status_code=302)
+
+
+@app.get("/login")
+def login_shortcut_redirect() -> RedirectResponse:
+    """Convenience alias — /login → /landing."""
+    return RedirectResponse("/landing", status_code=302)
+
+
 @app.get("/ui-legacy", response_class=HTMLResponse)
 def ui_legacy() -> HTMLResponse:
     """The pre-v3.18 dashboard. Kept so existing bookmarks /
@@ -7983,7 +8038,22 @@ def features() -> HTMLResponse:
 
 @app.get("/health")
 def health() -> JSONResponse:
-    return JSONResponse({"status": "ok"})
+    """Liveness + readiness probe. Returns 200 only when the DB pool
+    is reachable; 503 otherwise. Load balancers use this to drain
+    instances before cycling them."""
+    checks: dict = {"status": "ok"}
+    if _pg_store is not None:
+        try:
+            with _pg_store.pool.connection() as conn, conn.cursor() as cur:
+                cur.execute("SELECT 1")
+            checks["db"] = "ok"
+        except Exception as exc:
+            checks["db"] = f"error: {exc}"
+            checks["status"] = "degraded"
+            return JSONResponse(checks, status_code=503)
+    else:
+        checks["db"] = "sqlite (no DATABASE_URL)"
+    return JSONResponse(checks)
 
 
 # ---- auth -----------------------------------------------------------------
@@ -8065,6 +8135,7 @@ def signup(
         raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
     if "@" not in email:
         raise HTTPException(400, "invalid email")
+    _validate_password_complexity(password)
     if _get_user_repo().find_by_email(email) is not None:
         raise HTTPException(409, "email already registered")
 
@@ -8199,12 +8270,29 @@ def _escape_html(s: str) -> str:
     return html.escape(s)
 
 
+_PASSWORD_RE = _re.compile(
+    r"^(?=.*[A-Za-z])(?=.*\d).{8,}$"
+)
+
+def _validate_password_complexity(password: str) -> None:
+    """Require ≥8 chars with at least one letter and one digit."""
+    if not _PASSWORD_RE.match(password):
+        raise HTTPException(
+            400,
+            "password must be at least 8 characters and contain at least "
+            "one letter and one digit",
+        )
+
+
 @app.post("/auth/login")
 def login(
     request: Request,
     email: str = Form(...),
     password: str = Form(...),
 ) -> JSONResponse:
+    _rate_key = _rl.client_ip_from_request(request)
+    if not _rl.login.try_consume(_rate_key):
+        raise HTTPException(429, "Too many login attempts — please wait before trying again.")
     if _get_user_repo() is None:
         raise HTTPException(503, "auth not configured")
     actor = _audit.actor_from_request(request)
@@ -8377,6 +8465,7 @@ def tiers() -> JSONResponse:
 
 @app.post("/lessons", status_code=202)
 def create_lesson(
+    request: Request,
     image: UploadFile = File(..., description="textbook page image (JPG/PNG)"),
     language: str = Form("en"),
     level: str = Form("middle"),
@@ -8390,13 +8479,20 @@ def create_lesson(
         raise HTTPException(400, f"language must be one of {sorted(SUPPORTED_LANGUAGES)}")
     if level not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
+    _rate_key = user.id if user else _rl.client_ip_from_request(request)
+    if not _rl.ai_generation.try_consume(_rate_key):
+        raise HTTPException(429, "Too many lesson generations — please wait a moment before trying again.")
 
     # Persist the upload. For PDFs / PPTX / DOCX, fan out to one page
     # image per page; the rest of the pipeline only knows about images.
     suffix = Path(image.filename or "page.jpg").suffix.lower() or ".jpg"
+    raw_bytes = image.file.read()
+    if len(raw_bytes) > 25 * 1024 * 1024:
+        raise HTTPException(413, "file too large (limit 25 MB)")
     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
-        f.write(image.file.read())
+        f.write(raw_bytes)
         upload_path = Path(f.name)
+    del raw_bytes  # release memory before heavy processing
     try:
         page_images = ingest_source(upload_path)
     except ValueError as e:
@@ -8405,8 +8501,6 @@ def create_lesson(
     image_path = page_images[0]
     extra_pages = page_images[1:]
     if upload_path != image_path:
-        # we converted (e.g. PDF → PNGs); the original upload is no
-        # longer needed but the page images live elsewhere
         upload_path.unlink(missing_ok=True)
 
     # Synchronous cache short-circuit. Two layers checked in order:
@@ -8470,11 +8564,17 @@ def create_lesson(
     job = runner.enqueue(job_payload)
 
     # Multi-page upload: fan out one job per remaining page.
+    # Clean up any extra page temp files that fail to enqueue so they
+    # don't leak on disk if the queue is full or the runner throws.
     extra_jobs = []
     for extra in extra_pages:
-        extra_payload = dict(job_payload)
-        extra_payload["image_path"] = str(extra)
-        extra_jobs.append(runner.enqueue(extra_payload))
+        try:
+            extra_payload = dict(job_payload)
+            extra_payload["image_path"] = str(extra)
+            extra_jobs.append(runner.enqueue(extra_payload))
+        except Exception:
+            Path(extra).unlink(missing_ok=True)
+            raise
 
     response = {
         "job_id": job.id,
@@ -8824,6 +8924,7 @@ def make_flashcards(
 
 @app.post("/chat/{lesson_id}")
 def chat_about_lesson(
+    request: Request,
     lesson_id: str,
     question: str = Form(..., min_length=2),
     user: AuthUser | None = Depends(current_user),
@@ -8834,6 +8935,9 @@ def chat_about_lesson(
     once the render completes (look for `result.lesson_id`).
     The endpoint loads the cached Lesson JSON and answers with Claude
     grounded in that material — no general-knowledge hallucination."""
+    _rate_key = user.id if user else _rl.client_ip_from_request(request)
+    if not _rl.ai_generation.try_consume(_rate_key):
+        raise HTTPException(429, "Too many requests — please wait before asking again.")
     import dataclasses
     import json
     from .pedagogy import MODEL
@@ -9381,6 +9485,7 @@ _UPLOAD_DIR = Path(os.environ.get(
 
 @app.post("/api/uploads", status_code=201)
 def create_upload(
+    request: Request,
     file: UploadFile = File(...),
     is_whiteboard: bool = Form(False,
         description="True for handwritten content (whiteboard / notebook / "
@@ -9397,8 +9502,14 @@ def create_upload(
     "Uploaded 12 pages of textbook.pdf" before the user decides what to
     generate from it.
     """
+    _rate_key = _rl.client_ip_from_request(request)
+    if not _rl.file_upload.try_consume(_rate_key):
+        raise HTTPException(429, "too many uploads — slow down")
     _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     suffix = Path(file.filename or "page.jpg").suffix.lower() or ".jpg"
+    if suffix not in (".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf",
+                      ".pptx", ".docx", ".heic", ".heif"):
+        raise HTTPException(400, "unsupported file type")
     raw_path = _UPLOAD_DIR / f"{uuid.uuid4().hex}{suffix}"
     body = file.file.read()
     if len(body) > 25 * 1024 * 1024:
@@ -9730,12 +9841,13 @@ def get_org_detail(
 def list_org_members(
     org_id: str,
     role: str | None = None,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher"})
-    members = _orgs.list_members(org_id, role=role)
+    members = _orgs.list_members(org_id, role=role, limit=limit)
     return {
         "members": [
             {
@@ -9786,6 +9898,7 @@ def add_org_member(
 @app.post("/api/orgs/{org_id}/roster", status_code=201)
 def upload_org_roster(
     org_id: str,
+    request: Request,
     csv: UploadFile = File(...),
     user: AuthUser | None = Depends(current_user),
 ):
@@ -9793,8 +9906,14 @@ def upload_org_roster(
     role, class. New classes referenced by name are auto-created.
     Returns counts so the UI can show "imported N, skipped M"."""
     user = _require_user(user)
+    _rate_key = _rl.client_ip_from_request(request)
+    if not _rl.file_upload.try_consume(_rate_key):
+        raise HTTPException(429, "too many uploads — slow down")
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin"})
+    suffix = Path(csv.filename or "roster.csv").suffix.lower()
+    if suffix not in (".csv", ".tsv", ".txt"):
+        raise HTTPException(400, "roster must be a CSV/TSV file")
     body = csv.file.read()
     if len(body) > 2 * 1024 * 1024:
         raise HTTPException(413, "CSV too large (limit 2 MB)")
@@ -9804,12 +9923,13 @@ def upload_org_roster(
 @app.get("/api/orgs/{org_id}/classes")
 def list_org_classes_route(
     org_id: str,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    classes = _orgs.list_classes(org_id)
+    classes = _orgs.list_classes(org_id)[:limit]
     return {
         "classes": [
             {
@@ -9848,12 +9968,13 @@ def create_org_class_route(
 def list_org_assignments_route(
     org_id: str,
     class_id: str | None = None,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    items = _orgs.list_assignments(org_id, class_id=class_id)
+    items = _orgs.list_assignments(org_id, class_id=class_id)[:limit]
     return {
         "assignments": [
             {
@@ -10076,7 +10197,7 @@ def create_org_notification(
             push_summary["failed"] += r.failed
     except Exception as e:  # noqa: BLE001
         # Never let push failures block notification creation.
-        print(f"[push] fan_out failed for notification {n.id}: {e}")
+        _log.warning("[push] fan_out failed for notification %s: %s", n.id, e)
     return {
         "id": n.id, "title": n.title, "audience": n.audience,
         "kind": n.kind, "send_at": n.send_at, "push": push_summary,
@@ -10114,13 +10235,14 @@ def _resolve_audience(org_id: str, audience: str) -> list[str]:
 @app.get("/api/orgs/{org_id}/notifications")
 def list_org_notifications(
     org_id: str,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     """Admin view — all notifications in this org (sent + scheduled)."""
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher"})
-    items = _notifs.list_for_admin(org_id=org_id)
+    items = _notifs.list_for_admin(org_id=org_id)[:limit]
     return {
         "notifications": [
             {
@@ -10619,13 +10741,14 @@ def submit_exam(
 @app.get("/api/orgs/{org_id}/exams/{eid}/attempts")
 def list_exam_attempts(
     org_id: str, eid: str,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     """All attempts on this exam — teacher review surface."""
     user = _require_user(user)
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin", "teacher"})
-    attempts = _orgs.list_attempts(eid)
+    attempts = _orgs.list_attempts(eid)[:limit]
     return {"attempts": [_attempt_to_dict(a) for a in attempts]}
 
 
@@ -10734,6 +10857,7 @@ def create_org_fee_structure(
 @app.get("/api/orgs/{org_id}/fees/structures")
 def list_org_fee_structures(
     org_id: str,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     user = _require_user(user)
@@ -10741,7 +10865,7 @@ def list_org_fee_structures(
     _require_org_role(org_id, user.id, {"admin", "teacher"})
     return {
         "structures": [_fee_struct_to_dict(s)
-                       for s in _orgs.list_fee_structures(org_id)],
+                       for s in _orgs.list_fee_structures(org_id)[:limit]],
     }
 
 
@@ -10767,6 +10891,7 @@ def generate_fee_invoices(
 def list_org_fee_invoices(
     org_id: str,
     status: str | None = None,
+    limit: int = Query(default=200, ge=1, le=500),
     user: AuthUser | None = Depends(current_user),
 ):
     """Admin/teacher see all invoices in the org. Students see only
@@ -10779,7 +10904,7 @@ def list_org_fee_invoices(
     # Students get auto-filtered to their own user_id
     user_filter = user.id if my_role == "student" else None
     invoices = _orgs.list_invoices(org_id, status=status, user_id=user_filter)
-    return {"invoices": [_invoice_to_dict(i) for i in invoices]}
+    return {"invoices": [_invoice_to_dict(i) for i in invoices[:limit]]}
 
 
 @app.get("/api/orgs/{org_id}/fees/summary")
@@ -10994,6 +11119,9 @@ def upload_org_logo(
 
     Size cap: 2 MB. Type: PNG / JPG / SVG / WebP only."""
     user = _require_user(user)
+    _rate_key = _rl.client_ip_from_request(request)
+    if not _rl.file_upload.try_consume(_rate_key):
+        raise HTTPException(429, "too many uploads — slow down")
     _org_or_404(org_id)
     _require_org_role(org_id, user.id, {"admin"})
 
@@ -11936,3 +12064,514 @@ def get_job_subtitles_vtt(job_id: str, request: Request):
         vtt_path.write_text(_build_srt(cached, vtt=True), encoding="utf-8")
     return FileResponse(vtt_path, media_type="text/vtt",
                         filename="lesson.vtt")
+
+
+# ============================================================================
+# v3.20 — Student-facing UI screens + missing API endpoints
+#
+# Implements:
+#   • Page routes for the core study loop (lesson generator, video player,
+#     flashcards, quiz, chat, profile, teacher home, parent portal)
+#   • GET+PUT /api/me/profile   — user preferences (language/level/mode)
+#   • GET     /api/flashcards/due + /api/flashcards/decks
+#   • POST    /api/flashcards/{card_id}/review   — SM-2 grade submission
+#   • GET     /api/quiz/{lesson_id}              — GET alias for quiz data
+#   • POST    /auth/forgot-password + /auth/reset-password
+#   • POST    /auth/change-password
+#   • GET     /api/doubts/queue
+# ============================================================================
+
+
+# ---- Page routes -----------------------------------------------------------
+# NOTE: /lessons/new MUST be registered before /lessons/{job_id} so FastAPI
+# matches the literal path first.
+
+@app.get("/lessons/new", response_class=HTMLResponse)
+def lesson_new_page() -> HTMLResponse:
+    """Lesson generator screen — upload → options → generate → watch."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_lesson_new_html())
+
+
+@app.get("/lessons/{job_id}", response_class=HTMLResponse)
+def lesson_player_page(job_id: str) -> HTMLResponse:
+    """Video player screen with tabs: quiz, chat, flashcards, notes, recap."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_lesson_player_html())
+
+
+@app.get("/flashcards", response_class=HTMLResponse)
+def flashcards_page() -> HTMLResponse:
+    """SM-2 flashcard study screen — due queue, flip, rate."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_flashcards_html())
+
+
+@app.get("/quiz", response_class=HTMLResponse)
+def quiz_page() -> HTMLResponse:
+    """Standalone quiz screen — reads ?lesson= from query string."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_quiz_html())
+
+
+@app.get("/chat", response_class=HTMLResponse)
+def chat_page() -> HTMLResponse:
+    """AI Tutor chat screen — reads ?lesson= from query string."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_chat_html())
+
+
+@app.get("/profile", response_class=HTMLResponse)
+def profile_page() -> HTMLResponse:
+    """User preferences and account settings."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_profile_html())
+
+
+@app.get("/teacher", response_class=HTMLResponse)
+def teacher_page() -> HTMLResponse:
+    """Teacher home — classes, assignments, doubt queue."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_teacher_html())
+
+
+@app.get("/parent", response_class=HTMLResponse)
+def parent_page() -> HTMLResponse:
+    """Parent portal — child progress, fee payment."""
+    from . import ui_pages as _ui
+    return HTMLResponse(_ui.get_parent_html())
+
+
+# ---- User profile ---------------------------------------------------------
+# Preference columns added idempotently on first use (ALTER TABLE IF NOT EXISTS).
+
+_PROFILE_COLS_SQL = [
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS display_name TEXT",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_language TEXT NOT NULL DEFAULT 'en'",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_level TEXT NOT NULL DEFAULT 'middle'",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_mode TEXT NOT NULL DEFAULT 'teaching'",
+]
+
+_profile_migrated = False
+
+
+def _ensure_profile_cols() -> None:
+    global _profile_migrated
+    if _profile_migrated:
+        return
+    try:
+        db_url = get_db_url()
+        if not db_url:
+            return
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            for stmt in _PROFILE_COLS_SQL:
+                conn.execute(stmt)
+        _profile_migrated = True
+    except Exception as exc:
+        _log.warning("[profile_cols] non-fatal: %s", exc)
+
+
+@app.get("/api/me/profile")
+def get_my_profile(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return authenticated user's email, tier, and study preferences."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    _ensure_profile_cols()
+    row = None
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url) as conn:
+                row = conn.execute(
+                    "SELECT display_name, preferred_language, "
+                    "       preferred_level, preferred_mode "
+                    "FROM users WHERE id = %s",
+                    (user.id,),
+                ).fetchone()
+    except Exception as exc:
+        _log.warning("[get_profile] db error (non-fatal): %s", exc)
+    return JSONResponse({
+        "id": user.id,
+        "email": user.email,
+        "subscription_tier": user.subscription_tier,
+        "subscription_level": user.subscription_level,
+        "display_name": row[0] if row else None,
+        "preferred_language": (row[1] if row and row[1] else "en"),
+        "preferred_level": (row[2] if row and row[2] else "middle"),
+        "preferred_mode": (row[3] if row and row[3] else "teaching"),
+    })
+
+
+@app.put("/api/me/profile")
+async def update_my_profile(
+    request: Request,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Update user study preferences (language, level, mode, display_name)."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    try:
+        body = await request.json()
+    except Exception:
+        raise HTTPException(400, "request body must be JSON")
+    _ensure_profile_cols()
+    allowed = {"display_name", "preferred_language", "preferred_level", "preferred_mode"}
+    updates: dict[str, str] = {
+        k: str(v) for k, v in body.items()
+        if k in allowed and v is not None
+    }
+    if not updates:
+        raise HTTPException(400, "no valid fields provided")
+    if "preferred_language" in updates and updates["preferred_language"] not in SUPPORTED_LANGUAGES:
+        raise HTTPException(400, f"preferred_language must be one of {sorted(SUPPORTED_LANGUAGES)}")
+    if "preferred_level" in updates and updates["preferred_level"] not in LEVEL_GUIDANCE:
+        raise HTTPException(400, f"preferred_level must be one of {sorted(LEVEL_GUIDANCE)}")
+    db_url = get_db_url()
+    if not db_url:
+        return JSONResponse({
+            "ok": True,
+            "updated": list(updates.keys()),
+            "persisted": False,
+            "note": "DATABASE_URL not set — preferences applied for this session only",
+        })
+    try:
+        import psycopg
+        set_clause = ", ".join(f"{col} = %s" for col in updates)
+        vals = list(updates.values()) + [user.id]
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            conn.execute(
+                f"UPDATE users SET {set_clause} WHERE id = %s", vals,
+            )
+    except Exception as exc:
+        raise HTTPException(500, f"update failed: {exc}")
+    return JSONResponse({"ok": True, "updated": list(updates.keys()), "persisted": True})
+
+
+# ---- Flashcard due queue + SM-2 review ------------------------------------
+
+@app.get("/api/flashcards/due")
+def flashcards_due_queue(
+    deck_id: str | None = None,
+    limit: int = 20,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return cards due for SM-2 review today, optionally filtered by deck."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    _sr.migrate()
+    cards = _sr.due_queue(
+        user_id=user.id,
+        deck_id=deck_id or None,
+        limit=min(max(1, limit), 100),
+    )
+    return JSONResponse({
+        "cards": [
+            {
+                "id": c.id,
+                "deck_id": c.deck_id,
+                "front": c.front,
+                "back": c.back,
+                "hint": c.hint,
+                "source_ref": c.source_ref,
+            }
+            for c in cards
+        ],
+        "count": len(cards),
+    })
+
+
+@app.post("/api/flashcards/{card_id}/review")
+def review_flashcard(
+    card_id: str,
+    grade: int = Form(..., ge=0, le=5, description="SM-2 grade 0=Again 3=Hard 4=Good 5=Easy"),
+    time_seconds: int | None = Form(None),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Submit a SM-2 review grade for a card. Updates interval and next due date."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    try:
+        outcome = _sr.review_card(
+            card_id=card_id,
+            user_id=user.id,
+            grade=grade,
+            time_seconds=time_seconds,
+        )
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    return JSONResponse({
+        "ok": True,
+        "card_id": card_id,
+        "new_interval_days": round(outcome.new_interval, 2),
+        "new_ease": round(outcome.new_ease, 3),
+        "new_due_at": outcome.new_due_at,
+        "repetitions": outcome.repetitions,
+        "lapses": outcome.lapses,
+    })
+
+
+@app.get("/api/flashcards/decks")
+def list_flashcard_decks(
+    limit: int = Query(default=200, ge=1, le=500),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """List the authenticated user's flashcard decks."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    _sr.migrate()
+    decks = _sr.list_my_decks(user.id)[:limit]
+    return JSONResponse({
+        "decks": [
+            {
+                "id": d.id,
+                "title": d.title,
+                "description": d.description,
+                "card_count": d.card_count,
+                "language": d.language,
+                "visibility": d.visibility,
+            }
+            for d in decks
+        ],
+        "count": len(decks),
+    })
+
+
+# ---- Quiz data (GET alias) ------------------------------------------------
+
+@app.get("/api/quiz/{lesson_id}")
+def get_quiz_data(
+    lesson_id: str,
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return the quiz questions for a cached lesson (GET version)."""
+    cached_lesson = cache.get_lesson_by_key(lesson_id)
+    if cached_lesson is None:
+        raise HTTPException(404, "lesson not found; POST /lessons first")
+    return JSONResponse({
+        "lesson_id": lesson_id,
+        "title": cached_lesson.title,
+        "language_code": cached_lesson.language_code,
+        "language_name": cached_lesson.language_name,
+        "level": cached_lesson.level,
+        "questions": cached_lesson.quiz or [],
+    })
+
+
+# ---- Password management -------------------------------------------------
+
+_RESET_TOKEN_DDL = """
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    token      TEXT PRIMARY KEY,
+    user_id    TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    used_at    TIMESTAMPTZ,
+    expires_at TIMESTAMPTZ NOT NULL
+        DEFAULT (NOW() + INTERVAL '1 hour')
+);
+"""
+
+_reset_table_created = False
+
+
+def _ensure_reset_table() -> None:
+    global _reset_table_created
+    if _reset_table_created:
+        return
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url, autocommit=True) as conn:
+                conn.execute(_RESET_TOKEN_DDL)
+        _reset_table_created = True
+    except Exception as exc:
+        _log.warning("[reset_table] non-fatal: %s", exc)
+
+
+def _send_reset_email(*, to_email: str, reset_url: str) -> None:
+    """Send a password-reset email. Uses SMTP when SMTP_HOST is set;
+    falls back to console log in dev so the flow is testable without
+    a mail server."""
+    smtp_host = os.environ.get("SMTP_HOST")
+    base_url = os.environ.get("APP_BASE_URL", "http://localhost:8000")
+    full_url = f"{base_url}{reset_url}"
+    if not smtp_host:
+        _log.info(
+            "[DEV no-email] Password reset for %s. Reset link: %s "
+            "(set SMTP_HOST in .env to send real emails)",
+            to_email, full_url,
+        )
+        return
+    import smtplib
+    from email.message import EmailMessage
+    msg = EmailMessage()
+    msg["Subject"] = "Reset your AI Pathashala password"
+    msg["From"] = os.environ.get("SMTP_FROM", "noreply@aipadhaiapp.com")
+    msg["To"] = to_email
+    msg.set_content(
+        f"Click the link below to reset your AI Pathashala password:\n\n"
+        f"{full_url}\n\n"
+        f"This link expires in 1 hour. If you didn't request a reset, ignore this email."
+    )
+    smtp_port = int(os.environ.get("SMTP_PORT", "587"))
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port) as smtp:
+            smtp.starttls()
+            smtp_user = os.environ.get("SMTP_USER", "")
+            smtp_pass = os.environ.get("SMTP_PASSWORD", "")
+            if smtp_user:
+                smtp.login(smtp_user, smtp_pass)
+            smtp.send_message(msg)
+    except Exception as exc:
+        _log.error("[send_reset_email] failed to send to %s: %s", to_email, exc)
+
+
+@app.post("/auth/forgot-password")
+def forgot_password(email: str = Form(...)) -> JSONResponse:
+    """Send a password-reset link. Always returns 200 to prevent email enumeration."""
+    _ok = {"ok": True, "message": "If that email is registered, you'll receive a reset link."}
+    if _get_user_repo() is None:
+        return JSONResponse(_ok)
+    result = _get_user_repo().find_by_email(email)
+    if result is None:
+        return JSONResponse(_ok)
+    user, _ = result
+    import secrets
+    token = secrets.token_urlsafe(32)
+    _ensure_reset_table()
+    try:
+        db_url = get_db_url()
+        if db_url:
+            import psycopg
+            with psycopg.connect(db_url, autocommit=True) as conn:
+                conn.execute(
+                    "INSERT INTO password_reset_tokens (token, user_id) "
+                    "VALUES (%s, %s)",
+                    (token, user.id),
+                )
+    except Exception as exc:
+        _log.error("[forgot_password] db error: %s", exc)
+    reset_url = f"/auth/reset-password?token={token}"
+    _send_reset_email(to_email=email, reset_url=reset_url)
+    return JSONResponse(_ok)
+
+
+@app.post("/auth/reset-password")
+def reset_password(
+    token: str = Form(...),
+    new_password: str = Form(..., min_length=8),
+) -> JSONResponse:
+    """Consume a reset token and set a new password."""
+    _validate_password_complexity(new_password)
+    db_url = get_db_url()
+    if not db_url:
+        raise HTTPException(503, "auth not configured")
+    _ensure_reset_table()
+    try:
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            row = conn.execute(
+                "SELECT user_id FROM password_reset_tokens "
+                "WHERE token = %s AND used_at IS NULL AND expires_at > NOW()",
+                (token,),
+            ).fetchone()
+            if not row:
+                raise HTTPException(400, "invalid or expired reset link — please request a new one")
+            conn.execute(
+                "UPDATE users SET password_hash = %s WHERE id = %s",
+                (hash_password(new_password), row[0]),
+            )
+            conn.execute(
+                "UPDATE password_reset_tokens SET used_at = NOW() WHERE token = %s",
+                (token,),
+            )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"reset failed: {exc}")
+    return JSONResponse({"ok": True, "message": "Password updated — please sign in."})
+
+
+@app.post("/auth/change-password")
+def change_password(
+    old_password: str = Form(...),
+    new_password: str = Form(..., min_length=8),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Change password for an authenticated user."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    _validate_password_complexity(new_password)
+    if _get_user_repo() is None:
+        raise HTTPException(503, "auth not configured — set DATABASE_URL")
+    result = _get_user_repo().find_by_email(user.email)
+    if not result:
+        raise HTTPException(404, "user not found")
+    _, current_hash = result
+    if not current_hash or not verify_password(old_password, current_hash):
+        raise HTTPException(400, "current password is incorrect")
+    db_url = get_db_url()
+    try:
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            conn.execute(
+                "UPDATE users SET password_hash = %s WHERE id = %s",
+                (hash_password(new_password), user.id),
+            )
+    except Exception as exc:
+        raise HTTPException(500, f"update failed: {exc}")
+    return JSONResponse({"ok": True, "message": "Password changed — please sign in again."})
+
+
+# ---- Doubt queue for teacher portal --------------------------------------
+
+@app.get("/api/doubts/queue")
+def get_doubt_queue(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Return pending doubts for the teacher/org to claim and respond to.
+    Requires teacher or admin role in at least one org."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    # Role gate: only teachers and admins may see the doubt queue.
+    try:
+        user_orgs = _orgs.find_orgs_for_user(user.id)
+        is_educator = any(
+            _orgs.user_role_in_org(org_id=o.id, user_id=user.id) in ("teacher", "admin")
+            for o in user_orgs
+        )
+    except Exception:
+        is_educator = False
+    if not is_educator:
+        raise HTTPException(403, "teacher or admin role required to view the doubt queue")
+    try:
+        from . import doubt_clearing as _dc
+        _dc.migrate()
+        with _dc._conn() as conn:
+            rows = conn.execute(
+                "SELECT id, user_id, question_text, status, created_at "
+                "FROM doubt_requests WHERE status = 'pending' "
+                "ORDER BY created_at ASC LIMIT 50",
+            ).fetchall()
+        return JSONResponse({
+            "doubts": [
+                {
+                    "id": r[0],
+                    "user_id": r[1],
+                    "question": r[2],
+                    "status": r[3],
+                    "created_at": r[4],
+                }
+                for r in rows
+            ],
+            "count": len(rows),
+        })
+    except Exception as exc:
+        return JSONResponse({"doubts": [], "count": 0, "note": str(exc)})

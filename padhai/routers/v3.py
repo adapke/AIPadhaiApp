@@ -225,7 +225,8 @@ def upsert_flag_endpoint(
 
 
 @router.delete("/api/admin/flags/{flag_key}")
-def delete_flag_endpoint(flag_key: str):
+def delete_flag_endpoint(flag_key: str, user=Depends(current_user)):
+    user = require_user(user)
     from .. import feature_flags
     ok = feature_flags.delete(flag_key)
     if not ok:

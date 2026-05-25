@@ -81,15 +81,23 @@ def _pptx_to_images(pptx_path: Path, work_dir: Path) -> list[Path]:
     (`soffice --headless --convert-to pdf`) then pdf_to_images. Requires
     LibreOffice on the host."""
     if shutil.which("soffice") is None:
-        raise RuntimeError(
-            "PPTX ingest needs LibreOffice on the host (apt install libreoffice)"
+        raise ValueError(
+            "PPTX upload requires LibreOffice on the server "
+            "(apt install libreoffice). "
+            "Convert your file to PDF or PNG first, then upload."
         )
     work_dir.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        ["soffice", "--headless", "--convert-to", "pdf",
-         "--outdir", str(work_dir), str(pptx_path)],
-        check=True, capture_output=True,
-    )
+    try:
+        subprocess.run(
+            ["soffice", "--headless", "--convert-to", "pdf",
+             "--outdir", str(work_dir), str(pptx_path)],
+            check=True, capture_output=True,
+        )
+    except subprocess.CalledProcessError as e:
+        raise ValueError(
+            f"Could not convert PPTX to PDF: {e.stderr.decode()[:200] if e.stderr else 'unknown error'}. "
+            "Try saving as PDF before uploading."
+        ) from e
     pdf_path = work_dir / f"{pptx_path.stem}.pdf"
     return pdf_to_images(pdf_path, work_dir)
 
@@ -97,14 +105,22 @@ def _pptx_to_images(pptx_path: Path, work_dir: Path) -> list[Path]:
 def _docx_to_images(docx_path: Path, work_dir: Path) -> list[Path]:
     """Same shape — DOCX → PDF (LibreOffice) → images."""
     if shutil.which("soffice") is None:
-        raise RuntimeError(
-            "DOCX ingest needs LibreOffice on the host"
+        raise ValueError(
+            "DOCX upload requires LibreOffice on the server "
+            "(apt install libreoffice). "
+            "Convert your file to PDF or PNG first, then upload."
         )
     work_dir.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        ["soffice", "--headless", "--convert-to", "pdf",
-         "--outdir", str(work_dir), str(docx_path)],
-        check=True, capture_output=True,
-    )
+    try:
+        subprocess.run(
+            ["soffice", "--headless", "--convert-to", "pdf",
+             "--outdir", str(work_dir), str(docx_path)],
+            check=True, capture_output=True,
+        )
+    except subprocess.CalledProcessError as e:
+        raise ValueError(
+            f"Could not convert DOCX to PDF: {e.stderr.decode()[:200] if e.stderr else 'unknown error'}. "
+            "Try saving as PDF before uploading."
+        ) from e
     pdf_path = work_dir / f"{docx_path.stem}.pdf"
     return pdf_to_images(pdf_path, work_dir)
