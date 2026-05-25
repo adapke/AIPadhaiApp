@@ -60,6 +60,7 @@ class AuthUser:
     email: str
     subscription_tier: str    # "M1" .. "M4e"
     subscription_level: str   # "L1" .. "L5"
+    account_locked: bool = False
 
 
 # ---- Password hashing -----------------------------------------------------
@@ -141,7 +142,7 @@ class PostgresUserRepository:
         with self.pool.connection() as conn, conn.cursor() as cur:
             cur.execute(
                 "SELECT id, email, password_hash, subscription_tier, "
-                "subscription_level FROM users WHERE email = %s",
+                "subscription_level, account_locked FROM users WHERE email = %s",
                 (email.lower(),),
             )
             row = cur.fetchone()
@@ -151,6 +152,7 @@ class PostgresUserRepository:
             AuthUser(
                 id=str(row[0]), email=row[1],
                 subscription_tier=row[3], subscription_level=row[4],
+                account_locked=bool(row[5]),
             ),
             row[2],
         )
@@ -158,8 +160,8 @@ class PostgresUserRepository:
     def find_by_id(self, user_id: str) -> AuthUser | None:
         with self.pool.connection() as conn, conn.cursor() as cur:
             cur.execute(
-                "SELECT id, email, subscription_tier, subscription_level "
-                "FROM users WHERE id = %s", (user_id,),
+                "SELECT id, email, subscription_tier, subscription_level, "
+                "account_locked FROM users WHERE id = %s", (user_id,),
             )
             row = cur.fetchone()
         if not row:
@@ -167,6 +169,7 @@ class PostgresUserRepository:
         return AuthUser(
             id=str(row[0]), email=row[1],
             subscription_tier=row[2], subscription_level=row[3],
+            account_locked=bool(row[4]),
         )
 
 
@@ -233,6 +236,8 @@ def make_current_user_dependency(repo_or_getter):
             user = repo.find_by_id(user_id)
             if user is None:
                 raise HTTPException(401, "user not found")
+            if user.account_locked:
+                raise HTTPException(403, "account suspended — contact support")
             return user
 
         if require_auth:

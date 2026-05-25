@@ -310,8 +310,11 @@ def _gather_signals(
             d = out.setdefault(code, {})
             d["mastery"] = r.mastery
             d["attempts"] = r.attempts
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as _e:  # noqa: BLE001
+        import logging
+        logging.getLogger(__name__).warning(
+            "adaptive signal collection failed (non-fatal)", exc_info=_e
+        )
     # Recent mock performance — last 5 mocks, per-topic accuracy
     try:
         from . import mock_engine as _me
@@ -333,8 +336,11 @@ def _gather_signals(
                 prev = d.get("recent_mock_pct")
                 if prev is None or accuracy < prev:
                     d["recent_mock_pct"] = accuracy
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as _e:  # noqa: BLE001
+        import logging
+        logging.getLogger(__name__).warning(
+            "adaptive signal collection failed (non-fatal)", exc_info=_e
+        )
     # Skipped plans — count topics that appeared in skipped plans
     try:
         from . import daily_plan as _dp
@@ -348,8 +354,11 @@ def _gather_signals(
                 if b.topic_code:
                     d = out.setdefault(b.topic_code, {})
                     d["skipped_count"] = d.get("skipped_count", 0) + 1
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as _e:  # noqa: BLE001
+        import logging
+        logging.getLogger(__name__).warning(
+            "adaptive signal collection failed (non-fatal)", exc_info=_e
+        )
     return out
 
 

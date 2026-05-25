@@ -58,14 +58,17 @@ def healthz():
 
 def _set_token_cookie(response, token: str) -> None:
     """SameSite=Lax + HttpOnly so JavaScript on the page can't read it
-    (defence-in-depth against XSS). Secure flag set automatically if
-    Render terminates TLS, which it does."""
+    (defence-in-depth against XSS). Secure=True in production (any env
+    where HTTPS is used); False only in local dev without TLS."""
+    import os as _os
+    is_secure = _os.environ.get("APP_BASE_URL", "http://").startswith("https://")
     response.set_cookie(
         key=auth.COOKIE_NAME,
         value=token,
         max_age=auth.TOKEN_TTL_SECONDS,
         httponly=True,
         samesite="lax",
+        secure=is_secure,
         path="/admin",
     )
 
@@ -75,12 +78,22 @@ def signup(
     email: str = Form(...),
     password: str = Form(..., min_length=8),
     display_name: str = Form(""),
+    bootstrap_token: str = Form(""),
 ):
-    """Bootstrap signup — only allowed when zero admin users exist.
-    First signup wins. After that, signups MUST come through an invite
-    flow (v0.9). This pattern means a fresh deployment can be claimed
-    by whoever loads /admin first; in production point the route to a
-    one-time setup URL behind a VPN."""
+    """Bootstrap signup — only allowed when zero admin users exist AND
+    the caller supplies the correct ADMIN_BOOTSTRAP_TOKEN env var.
+    Set this to a strong random secret before first deployment and
+    delete it after the first admin account is created."""
+    import os as _os
+    required_token = _os.environ.get("ADMIN_BOOTSTRAP_TOKEN", "")
+    if not required_token:
+        raise HTTPException(
+            status_code=403,
+            detail="ADMIN_BOOTSTRAP_TOKEN is not set — bootstrap signup disabled. "
+                   "Set it in your environment to create the first admin account.",
+        )
+    if bootstrap_token != required_token:
+        raise HTTPException(status_code=403, detail="invalid bootstrap token")
     if auth.count_users() > 0:
         # Surface as the login page with a clear error.
         html = render_login(
