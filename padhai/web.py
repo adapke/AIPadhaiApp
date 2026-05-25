@@ -853,7 +853,7 @@ async def _lifespan(app: FastAPI):
     # Give in-flight jobs up to 30 s to finish before hard-killing the pool.
     # wait=True prevents Render's SIGTERM from stranding half-rendered videos.
     _log.info("[shutdown] waiting up to 30 s for in-flight jobs to complete...")
-    runner.shutdown(wait=True, cancel_futures=False)
+    runner.shutdown(wait=True)
     if _pg_store is not None:
         _pg_store.close()
 
@@ -907,18 +907,21 @@ app.add_middleware(GZipMiddleware, minimum_size=1024)
 
 # CORS — allow the configured frontend origin(s) plus localhost for dev.
 # Set CORS_ORIGINS in env as a comma-separated list of allowed origins.
-# Default allows all origins in dev (no DATABASE_URL set); in production
-# only the explicit list is allowed.
+# Default allows all origins in dev; in production set to the exact SPA origin.
+# IMPORTANT: allow_credentials=True is incompatible with allow_origins=["*"]
+# per the CORS spec — browsers reject that combination. We only send
+# Allow-Credentials when explicit origins are configured.
 _cors_raw = os.environ.get("CORS_ORIGINS", "")
 _cors_origins: list[str] = (
     [o.strip() for o in _cors_raw.split(",") if o.strip()]
     if _cors_raw
     else ["*"]
 )
+_cors_credentials = _cors_origins != ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
-    allow_credentials=True,
+    allow_credentials=_cors_credentials,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["Authorization", "Content-Type", "X-Requested-With"],
 )
@@ -5349,9 +5352,7 @@ $('pd-link-form')?.addEventListener('submit', async (e) => {
       throw new Error(j.detail || ('HTTP ' + r.status));
     }
     const j = await r.json();
-    status.innerHTML = `Invite sent! In dev, the verify URL is:
-      <a href="${j.verify_url_dev_only}" target="_blank">${j.verify_url_dev_only}</a>
-      <br>In production, your child gets an email + an in-app notification.`;
+    status.innerHTML = `Invite sent! Your child will receive a verification email and in-app notification.`;
     status.className = 'status ok';
     e.target.reset();
     await pdLoadChildren();
@@ -8381,8 +8382,6 @@ def signup(
     request: Request,
     email: str = Form(...),
     password: str = Form(..., min_length=8),
-    subscription_tier: str = Form("M1"),
-    subscription_level: str = Form("L3"),
     # DPDP §9: DOB collected at signup. When the user is under 13 we
     # also require parent_email and lock the account until consent
     # comes back via /auth/parent-consent.
@@ -8414,8 +8413,8 @@ def signup(
     user = _get_user_repo().create(
         email=email,
         password_hash=hash_password(password),
-        tier=subscription_tier,
-        level=subscription_level,
+        tier="M1",
+        level="L3",
     )
 
     if dob:
@@ -8447,7 +8446,9 @@ def signup(
         )
         response_body["consent_required"] = True
         response_body["parent_email"] = parent_email
-        response_body["verify_url_dev_only"] = verify_url  # remove in prod
+        # Log the consent URL server-side only — never expose in the response
+        # body so the minor cannot self-approve by extracting the token.
+        _log.info("[signup] parental consent URL for user %s: %s", user.id, verify_url)
     return JSONResponse(response_body)
 
 
@@ -8567,14 +8568,9 @@ def login(
         )
         raise HTTPException(401, "invalid credentials")
     user, password_hash = found
-    if not password_hash or not verify_password(password, password_hash):
-        _audit.record(
-            action="auth.login.fail",
-            actor_user_id=user.id,
-            target_type="email", target_id=email,
-            note="bad password", **actor,
-        )
-        raise HTTPException(401, "invalid credentials")
+    # Check account_locked BEFORE verify_password to avoid a status-code
+    # oracle: if we checked after, a correct password on a locked account
+    # returns 403 while a wrong password returns 401, leaking the password.
     if user.account_locked:
         _audit.record(
             action="auth.login.blocked",
@@ -8583,6 +8579,14 @@ def login(
             note="account locked", **actor,
         )
         raise HTTPException(403, "account suspended — contact support")
+    if not password_hash or not verify_password(password, password_hash):
+        _audit.record(
+            action="auth.login.fail",
+            actor_user_id=user.id,
+            target_type="email", target_id=email,
+            note="bad password", **actor,
+        )
+        raise HTTPException(401, "invalid credentials")
     _audit.record(
         action="auth.login.success",
         actor_user_id=user.id,
@@ -10765,9 +10769,10 @@ def create_parent_link(
         pass
 
     verify_url = str(request.url_for("parent_link_verify")) + f"?t={token}"
+    # Log server-side only; never expose the token in the response body.
+    _log.info("[parent_link] verify URL for link %s: %s", link.id, verify_url)
     return {
         **_link_to_dict(link),
-        "verify_url_dev_only": verify_url,  # remove from response in prod
         "audience": "child" if initiated_by == "parent" else "parent",
     }
 
@@ -11312,15 +11317,25 @@ async def razorpay_webhook(request: Request):
                 try:
                     import psycopg as _pg
                     with _pg.connect(db_url, autocommit=True) as conn:
+                        # Validate sub_user_id refers to a real user before
+                        # trusting the client-supplied notes.user_id value.
+                        exists = conn.execute(
+                            "SELECT 1 FROM users WHERE id = %s", (sub_user_id,)
+                        ).fetchone()
+                        if not exists:
+                            _log.warning(
+                                "[razorpay_webhook] notes.user_id %s not found in DB "
+                                "(plan %s) — ignoring", sub_user_id, plan_id,
+                            )
+                            return {"ignored": f"user {sub_user_id} not found"}
                         conn.execute(
                             "UPDATE users SET subscription_tier = %s WHERE id = %s",
                             (new_tier, sub_user_id),
                         )
                     _audit.record(
                         action="subscription.upgraded",
-                        user_id=sub_user_id,
-                        detail={"tier": new_tier, "plan_id": plan_id,
-                                "event": event_type},
+                        actor_user_id=sub_user_id,
+                        note=f"tier={new_tier} plan_id={plan_id} event={event_type}",
                     )
                     _log.info(
                         "[razorpay_webhook] upgraded user %s to tier %s "
@@ -11353,8 +11368,8 @@ async def razorpay_webhook(request: Request):
                         )
                     _audit.record(
                         action="subscription.downgraded",
-                        user_id=sub_user_id,
-                        detail={"tier": "M1", "event": event_type},
+                        actor_user_id=sub_user_id,
+                        note=f"tier=M1 event={event_type}",
                     )
                     _log.info(
                         "[razorpay_webhook] downgraded user %s to M1 on cancellation",
@@ -11366,6 +11381,9 @@ async def razorpay_webhook(request: Request):
                         "[razorpay_webhook] tier downgrade failed for user %s: %s",
                         sub_user_id, exc,
                     )
+                    # Re-raise so Razorpay gets a 500 and retries delivery —
+                    # a silent 200 would leave the cancelled user on paid tier.
+                    raise HTTPException(500, "tier downgrade failed — will retry")
         return {"ignored": f"{event_type}: no user_id in notes"}
 
     if event_type not in ("payment.captured", "order.paid"):
@@ -12619,17 +12637,21 @@ async def update_my_profile(
 
 @app.get("/api/me/data/export")
 def export_my_data(
+    request: Request,
     user: AuthUser | None = Depends(current_user),
 ) -> JSONResponse:
     """DPDP Act 2023 §11 — right to access. Returns all personal data we
-    hold for the authenticated user as a single JSON document. Call at
-    most once per 24 h; the response includes a `generated_at` timestamp
-    so the user can track it."""
+    hold for the authenticated user as a single JSON document."""
     if user is None:
         raise HTTPException(401, "authentication required")
+    # Rate-limit: use the file_upload bucket (20 burst) as a proxy for
+    # expensive read operations — prevents DB exhaustion via tight loops.
+    _rate_key = _rl.client_ip_from_request(request)
+    if not _rl.file_upload.try_consume(_rate_key, cost=5):
+        raise HTTPException(429, "rate limit exceeded — please wait before exporting again")
 
     export: dict = {
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "schema_version": 1,
         "profile": {
             "id": user.id,
@@ -12648,29 +12670,42 @@ def export_my_data(
     if db_url:
         try:
             import psycopg as _pg
-            with _pg.connect(db_url) as conn:
+            with _pg.connect(db_url, autocommit=True) as conn:
                 row = conn.execute(
                     "SELECT display_name, preferred_language, "
                     "       preferred_level, preferred_mode, created_at "
                     "FROM users WHERE id = %s",
                     (user.id,),
                 ).fetchone()
-            if row:
-                export["profile"]["display_name"] = row[0]
-                export["profile"]["created_at"] = (
-                    row[4].isoformat() if hasattr(row[4], "isoformat") else str(row[4])
-                ) if row[4] else None
-                export["preferences"] = {
-                    "language": row[1],
-                    "level": row[2],
-                    "mode": row[3],
-                }
+                if row:
+                    export["profile"]["display_name"] = row[0]
+                    export["profile"]["created_at"] = (
+                        row[4].isoformat() if hasattr(row[4], "isoformat") else str(row[4])
+                    ) if row[4] else None
+                    export["preferences"] = {
+                        "language": row[1],
+                        "level": row[2],
+                        "mode": row[3],
+                    }
+                # Audit events: last 100 actions for this user
+                audit_rows = conn.execute(
+                    "SELECT action, note, created_at FROM audit_log "
+                    "WHERE actor_user_id = %s ORDER BY created_at DESC LIMIT 100",
+                    (user.id,),
+                ).fetchall()
+                export["audit_events"] = [
+                    {
+                        "action": r[0],
+                        "note": r[1],
+                        "timestamp": r[2].isoformat() if hasattr(r[2], "isoformat") else str(r[2]),
+                    }
+                    for r in audit_rows
+                ]
         except Exception as exc:
-            _log.warning("[data_export] profile query failed (non-fatal): %s", exc)
+            _log.warning("[data_export] profile/audit query failed (non-fatal): %s", exc)
 
-    # Job history
+    # Job history — use the module-level store, not _get_store() which doesn't exist
     try:
-        store = _get_store()
         jobs = store.recent_jobs(limit=200, filter_user_id=user.id)
         export["jobs"] = [
             {
@@ -12696,7 +12731,7 @@ def export_my_data(
     except Exception as exc:
         _log.warning("[data_export] flashcard query failed (non-fatal): %s", exc)
 
-    _audit.record(action="dpdp.data_export", user_id=user.id)
+    _audit.record(action="dpdp.data_export", actor_user_id=user.id)
     return JSONResponse(export)
 
 
@@ -12718,7 +12753,12 @@ def delete_my_account(
         raise HTTPException(503, "database not configured — cannot delete account")
 
     anon_email = f"deleted-{user.id}@deleted.invalid"
-    deletion_requested_at = datetime.utcnow().isoformat() + "Z"
+    deletion_requested_at = datetime.now(timezone.utc).isoformat()
+
+    # Ensure profile columns exist before we try to NULL them out —
+    # without this, a user who never visited /api/me/profile would hit
+    # ProgrammingError: column 'preferred_language' does not exist.
+    _ensure_profile_cols()
 
     try:
         import psycopg as _pg
@@ -12737,8 +12777,8 @@ def delete_my_account(
 
     _audit.record(
         action="dpdp.account_deletion_requested",
-        user_id=user.id,
-        detail={"deletion_requested_at": deletion_requested_at},
+        actor_user_id=user.id,
+        note=f"deletion_requested_at={deletion_requested_at}",
     )
     _log.info(
         "[delete_account] user %s requested erasure; email anonymised, "

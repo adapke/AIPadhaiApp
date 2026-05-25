@@ -14,7 +14,7 @@ _25MB = 25 * 1024 * 1024
 class TestUpload:
     def test_upload_requires_auth(self, client: TestClient):
         r = client.post(
-            "/api/upload",
+            "/api/uploads",
             files={"image": ("test.jpg", io.BytesIO(b"fake"), "image/jpeg")},
         )
         assert r.status_code == 401
@@ -24,7 +24,7 @@ class TestUpload:
         # 26 MB of zeros
         big = io.BytesIO(b"\x00" * (_25MB + 1024))
         r = client.post(
-            "/api/upload",
+            "/api/uploads",
             files={"image": ("big.jpg", big, "image/jpeg")},
             headers=auth_headers(token),
         )
@@ -33,7 +33,7 @@ class TestUpload:
     def test_upload_rejects_bad_content_type(self, client: TestClient):
         _, token = signup(client)
         r = client.post(
-            "/api/upload",
+            "/api/uploads",
             files={"image": ("evil.exe", io.BytesIO(b"MZ\x90\x00"), "application/octet-stream")},
             headers=auth_headers(token),
         )
@@ -50,7 +50,7 @@ class TestUpload:
             b"\xd8N\x00\x00\x00\x00IEND\xaeB`\x82"
         )
         r = client.post(
-            "/api/upload",
+            "/api/uploads",
             files={"image": ("photo.png", io.BytesIO(png_1x1), "image/png")},
             headers=auth_headers(token),
         )

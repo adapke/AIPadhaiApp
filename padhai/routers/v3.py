@@ -205,11 +205,12 @@ def upsert_flag_endpoint(
     description: str | None = Form(None, max_length=500),
     enabled_default: bool = Form(False),
     rollout_pct: int = Form(0, ge=0, le=100),
+    user=Depends(current_user),
 ):
-    """Admin upsert. v2.1 keeps this open (no auth) since the admin
-    SPA at /admin lives behind a separate cookie gate; v2.1.x moves
-    it under the same require_admin gate as the other /admin/api
-    endpoints."""
+    """Admin upsert — requires is_admin (same gate as DELETE)."""
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
     from .. import feature_flags
     try:
         f = feature_flags.upsert(

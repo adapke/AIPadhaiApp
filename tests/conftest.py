@@ -49,13 +49,20 @@ def random_email() -> str:
 
 def signup(client: TestClient, *, email: str | None = None,
            password: str = "Test1234!") -> tuple[str, str]:
-    """Sign up a fresh user. Returns (email, token)."""
+    """Sign up a fresh user. Returns (email, token).
+
+    Skips the calling test automatically when DATABASE_URL is not set
+    (auth requires Postgres; SQLite fallback is not available for the
+    user repository).
+    """
     email = email or random_email()
     r = client.post("/auth/signup", data={
         "email": email,
         "password": password,
         "terms_accepted": "true",
     })
+    if r.status_code == 503:
+        pytest.skip("DATABASE_URL not set — auth endpoints require a database")
     assert r.status_code == 200, r.text
     token = r.json()["token"]
     return email, token
