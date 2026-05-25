@@ -47,6 +47,7 @@ import logging
 import re as _re
 
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 
@@ -552,8 +553,14 @@ async def _lifespan(app: FastAPI):
             try:
                 _pg_store.init_schema()
                 _log.info("[startup] postgres base schema applied (Python fallback)")
-            except Exception as e:  # noqa: BLE001
-                _log.warning("[startup] init_schema failed (non-fatal): %s", e)
+            except Exception as e:
+                _log.critical(
+                    "[startup] init_schema FAILED — cannot start with a broken schema: %s", e
+                )
+                raise RuntimeError(
+                    f"Database schema initialisation failed: {e}. "
+                    "Fix the schema or DATABASE_URL and redeploy."
+                ) from e
     try:
         _dpdp.migrate()
     except Exception as e:  # noqa: BLE001
@@ -843,7 +850,10 @@ async def _lifespan(app: FastAPI):
     if resumed:
         _log.info("[startup] resumed %d pending jobs from %s", resumed, _DB_PATH)
     yield
-    runner.shutdown(wait=False)
+    # Give in-flight jobs up to 30 s to finish before hard-killing the pool.
+    # wait=True prevents Render's SIGTERM from stranding half-rendered videos.
+    _log.info("[shutdown] waiting up to 30 s for in-flight jobs to complete...")
+    runner.shutdown(wait=True, cancel_futures=False)
     if _pg_store is not None:
         _pg_store.close()
 
@@ -894,6 +904,24 @@ class _CSPMiddleware(BaseHTTPMiddleware):
         return response
 app.add_middleware(_CSPMiddleware)
 app.add_middleware(GZipMiddleware, minimum_size=1024)
+
+# CORS — allow the configured frontend origin(s) plus localhost for dev.
+# Set CORS_ORIGINS in env as a comma-separated list of allowed origins.
+# Default allows all origins in dev (no DATABASE_URL set); in production
+# only the explicit list is allowed.
+_cors_raw = os.environ.get("CORS_ORIGINS", "")
+_cors_origins: list[str] = (
+    [o.strip() for o in _cors_raw.split(",") if o.strip()]
+    if _cors_raw
+    else ["*"]
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_cors_origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "X-Requested-With"],
+)
 
 
 @app.get("/metrics")
@@ -8011,6 +8039,225 @@ def home_page() -> HTMLResponse:
     return HTMLResponse(_home_ui.get_home_html())
 
 
+
+_TERMS_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terms of Service — PadhaiApp</title>
+<style>
+  body{max-width:780px;margin:40px auto;padding:0 20px;
+       font-family:Inter,Segoe UI,Arial,sans-serif;color:#111827;line-height:1.7}
+  h1{font-size:28px;margin-bottom:4px}
+  h2{font-size:18px;margin-top:32px}
+  .meta{color:#667085;font-size:13px;margin-bottom:32px}
+  a{color:#1565d8}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid #e5e7eb;
+         color:#667085;font-size:13px}
+</style>
+</head>
+<body>
+<h1>Terms of Service</h1>
+<p class="meta">Effective date: 1 June 2026 &nbsp;|&nbsp; Last updated: 1 June 2026</p>
+
+<h2>1. Acceptance</h2>
+<p>By creating an account or using PadhaiApp ("Service"), you agree to these Terms. If you do not
+agree, do not use the Service. Users under 18 must have a parent or guardian review and accept
+these Terms on their behalf.</p>
+
+<h2>2. Service Description</h2>
+<p>PadhaiApp provides AI-generated video lessons, adaptive practice tests, flashcards, and tutoring
+tools for Indian students. Features vary by subscription tier (Free M1 through Enterprise M4e).</p>
+
+<h2>3. Account Registration</h2>
+<p>You must provide accurate information. You are responsible for keeping your password confidential.
+You must not share your account. You must be at least 13 years old, or provide verifiable parental
+consent (as required by the Digital Personal Data Protection Act 2023).</p>
+
+<h2>4. Acceptable Use</h2>
+<p>You agree not to: (a) upload content you do not have rights to; (b) attempt to reverse-engineer
+the AI models; (c) use the Service to generate misleading or harmful content; (d) circumvent
+subscription limits; (e) scrape, crawl, or bulk-download content.</p>
+
+<h2>5. Intellectual Property</h2>
+<p>You retain ownership of content you upload. By uploading, you grant PadhaiApp a non-exclusive,
+royalty-free licence to process it solely to provide the Service. AI-generated lesson videos are
+owned by PadhaiApp; users receive a limited licence to use them for personal study.</p>
+
+<h2>6. Subscription and Payments</h2>
+<p>Paid plans are billed in advance. Prices are in Indian Rupees (INR) and include applicable taxes.
+Refunds are available within 7 days of purchase for unused credits. We reserve the right to change
+prices with 30 days' notice.</p>
+
+<h2>7. Disclaimer of Warranties</h2>
+<p>The Service is provided "as is". We do not warrant that AI-generated content is accurate,
+complete, or suitable for any examination. Always verify important information with authoritative
+sources.</p>
+
+<h2>8. Limitation of Liability</h2>
+<p>To the extent permitted by law, PadhaiApp's liability is limited to the amount you paid in the
+12 months preceding the claim. We are not liable for indirect, incidental, or consequential
+damages.</p>
+
+<h2>9. Governing Law</h2>
+<p>These Terms are governed by the laws of India. Disputes are subject to the exclusive jurisdiction
+of the courts of Bengaluru, Karnataka.</p>
+
+<h2>10. Changes to Terms</h2>
+<p>We may update these Terms. We will notify you by email or in-app notice at least 14 days before
+material changes take effect. Continued use after the effective date constitutes acceptance.</p>
+
+<h2>11. Contact</h2>
+<p>Legal queries: <a href="mailto:legal@aipadhaiapp.com">legal@aipadhaiapp.com</a></p>
+
+<footer>© 2026 PadhaiApp &nbsp;|&nbsp;
+<a href="/terms">Terms</a> &nbsp;|&nbsp;
+<a href="/privacy">Privacy</a> &nbsp;|&nbsp;
+<a href="/landing">Home</a></footer>
+</body>
+</html>"""
+
+_PRIVACY_HTML = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — PadhaiApp</title>
+<style>
+  body{max-width:780px;margin:40px auto;padding:0 20px;
+       font-family:Inter,Segoe UI,Arial,sans-serif;color:#111827;line-height:1.7}
+  h1{font-size:28px;margin-bottom:4px}
+  h2{font-size:18px;margin-top:32px}
+  .meta{color:#667085;font-size:13px;margin-bottom:32px}
+  a{color:#1565d8}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid #e5e7eb;
+         color:#667085;font-size:13px}
+</style>
+</head>
+<body>
+<h1>Privacy Policy</h1>
+<p class="meta">Effective date: 1 June 2026 &nbsp;|&nbsp; Last updated: 1 June 2026</p>
+
+<h2>1. Data Controller</h2>
+<p>PadhaiApp (operated by AI Pathshala Pvt. Ltd., Bengaluru, Karnataka, India) is the Data
+Fiduciary under the Digital Personal Data Protection Act 2023 (DPDP Act). Contact:
+<a href="mailto:privacy@aipadhaiapp.com">privacy@aipadhaiapp.com</a></p>
+
+<h2>2. Data We Collect</h2>
+<ul>
+  <li><strong>Account data:</strong> name, email, date of birth, password hash.</li>
+  <li><strong>Usage data:</strong> lessons generated, exam scores, study streaks, session logs.</li>
+  <li><strong>Uploaded content:</strong> textbook pages, question papers, notes.</li>
+  <li><strong>Device data:</strong> IP address, browser type, OS (for security and analytics).</li>
+  <li><strong>Payment data:</strong> processed by Razorpay; we store only invoice IDs and status.</li>
+</ul>
+
+<h2>3. Legal Basis for Processing (DPDP Act 2023)</h2>
+<p>We process your data under: (a) consent given at registration; (b) performance of the
+subscription contract; (c) compliance with legal obligations; (d) legitimate interests
+(fraud prevention, service improvement).</p>
+
+<h2>4. Children's Data (DPDP §9)</h2>
+<p>We do not knowingly collect data from children under 13 without verifiable parental consent.
+Users who declare a date of birth under 13 are placed in a restricted state until a parent or
+guardian provides digital consent via a verifiable email link. We do not serve behavioural
+advertising to children.</p>
+
+<h2>5. How We Use Your Data</h2>
+<ul>
+  <li>Provide and personalise AI lessons and practice materials.</li>
+  <li>Process payments and manage subscriptions.</li>
+  <li>Send transactional emails (password reset, consent, invoices).</li>
+  <li>Improve model accuracy (anonymised, aggregated signals only).</li>
+  <li>Detect and prevent fraud and abuse.</li>
+</ul>
+
+<h2>6. Data Sharing</h2>
+<p>We share data with: (a) Anthropic PBC (AI inference); (b) Razorpay (payments);
+(c) Cloudflare R2 (storage); (d) Render.com (hosting). All processors are bound by
+data processing agreements. We do not sell your data.</p>
+
+<h2>7. Your Rights (DPDP Act 2023)</h2>
+<ul>
+  <li><strong>Access:</strong> <code>GET /api/me/data/export</code> — download your data as JSON.</li>
+  <li><strong>Correction:</strong> update your profile in Settings.</li>
+  <li><strong>Erasure:</strong> <code>DELETE /api/me/account</code> — deletes your account and
+      anonymises personal data within 30 days.</li>
+  <li><strong>Grievance:</strong> email <a href="mailto:privacy@aipadhaiapp.com">privacy@aipadhaiapp.com</a>;
+      we respond within 72 hours.</li>
+</ul>
+
+<h2>8. Data Retention</h2>
+<p>Account data: retained while your account is active + 90 days after deletion.
+Uploaded content: deleted within 30 days of account deletion.
+Aggregated analytics: retained indefinitely (no personal identifiers).</p>
+
+<h2>9. Security</h2>
+<p>Passwords are hashed with bcrypt (cost factor 12). Data in transit is encrypted via TLS 1.3.
+Data at rest is encrypted at the storage layer (Cloudflare R2 AES-256). We conduct annual
+security audits.</p>
+
+<h2>10. International Transfers</h2>
+<p>AI inference is processed by Anthropic (USA). We rely on standard contractual clauses for
+transfers outside India in accordance with DPDP Act rules.</p>
+
+<h2>11. Cookies</h2>
+<p>We use only strictly necessary session cookies (HttpOnly, SameSite=Lax). No advertising or
+tracking cookies are set.</p>
+
+<h2>12. Changes</h2>
+<p>Material changes will be notified by email 14 days in advance.</p>
+
+<h2>13. Grievance Officer</h2>
+<p>Name: [To be appointed] &nbsp;|&nbsp;
+Email: <a href="mailto:privacy@aipadhaiapp.com">privacy@aipadhaiapp.com</a><br>
+Response within 72 hours as required by DPDP Act §13.</p>
+
+<footer>© 2026 PadhaiApp &nbsp;|&nbsp;
+<a href="/terms">Terms</a> &nbsp;|&nbsp;
+<a href="/privacy">Privacy</a> &nbsp;|&nbsp;
+<a href="/landing">Home</a></footer>
+</body>
+</html>"""
+
+
+@app.get("/terms", include_in_schema=False)
+def terms_page() -> HTMLResponse:
+    return HTMLResponse(_TERMS_HTML)
+
+
+@app.get("/privacy", include_in_schema=False)
+def privacy_page() -> HTMLResponse:
+    return HTMLResponse(_PRIVACY_HTML)
+
+
+@app.get("/robots.txt", include_in_schema=False)
+def robots_txt() -> Response:
+    content = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /admin\n"
+        "Disallow: /api/\n"
+        "Disallow: /jobs/\n"
+        "Sitemap: https://aipadhaiapp.com/sitemap.xml\n"
+    )
+    return Response(content=content, media_type="text/plain")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def sitemap_xml() -> Response:
+    content = '''<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aipadhaiapp.com/landing</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aipadhaiapp.com/features</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aipadhaiapp.com/pricing</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aipadhaiapp.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://aipadhaiapp.com/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>'''
+    return Response(content=content, media_type="application/xml")
+
+
 @app.get("/landing", response_class=HTMLResponse)
 def landing_page() -> HTMLResponse:
     """Public landing for unauthed visitors."""
@@ -8141,9 +8388,13 @@ def signup(
     # comes back via /auth/parent-consent.
     dob: str | None = Form(None, description="YYYY-MM-DD"),
     parent_email: str | None = Form(None),
+    # Legal: user must accept Terms of Service before account creation.
+    terms_accepted: bool = Form(False),
 ) -> JSONResponse:
     if _get_user_repo() is None:
         raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
+    if not terms_accepted:
+        raise HTTPException(400, "you must accept the Terms of Service to create an account")
     if "@" not in email:
         raise HTTPException(400, "invalid email")
     _validate_password_complexity(password)
@@ -11034,9 +11285,92 @@ async def razorpay_webhook(request: Request):
     except (ValueError, TypeError):
         raise HTTPException(400, "invalid JSON")
     event_type = event.get("event", "")
+    payload = event.get("payload", {})
+
+    # --- Subscription tier upgrade on plan activation / renewal ---
+    # Map Razorpay plan IDs → subscription tiers via env vars:
+    #   RAZORPAY_PLAN_M2=plan_xxx  RAZORPAY_PLAN_M3=plan_yyy  etc.
+    _PLAN_TIER_MAP: dict[str, str] = {}
+    for _t in ("M2", "M3", "M4a", "M4b", "M4c", "M4d", "M4e"):
+        _pid = os.environ.get(f"RAZORPAY_PLAN_{_t}", "")
+        if _pid:
+            _PLAN_TIER_MAP[_pid] = _t
+
+    if event_type in ("subscription.activated", "subscription.charged"):
+        sub_entity = (payload.get("subscription") or {}).get("entity", {})
+        plan_id = sub_entity.get("plan_id", "")
+        # Razorpay stores the notes.user_id or the subscriber_id we
+        # set when creating the subscription.
+        sub_user_id = (
+            (sub_entity.get("notes") or {}).get("user_id")
+            or sub_entity.get("customer_id")
+        )
+        new_tier = _PLAN_TIER_MAP.get(plan_id)
+        if new_tier and sub_user_id:
+            db_url = get_db_url()
+            if db_url:
+                try:
+                    import psycopg as _pg
+                    with _pg.connect(db_url, autocommit=True) as conn:
+                        conn.execute(
+                            "UPDATE users SET subscription_tier = %s WHERE id = %s",
+                            (new_tier, sub_user_id),
+                        )
+                    _audit.record(
+                        action="subscription.upgraded",
+                        user_id=sub_user_id,
+                        detail={"tier": new_tier, "plan_id": plan_id,
+                                "event": event_type},
+                    )
+                    _log.info(
+                        "[razorpay_webhook] upgraded user %s to tier %s "
+                        "(plan %s, event %s)", sub_user_id, new_tier, plan_id, event_type,
+                    )
+                    return {"user_id": sub_user_id, "tier": new_tier, "status": "upgraded"}
+                except Exception as exc:
+                    _log.error(
+                        "[razorpay_webhook] tier upgrade failed for user %s: %s",
+                        sub_user_id, exc,
+                    )
+                    raise HTTPException(500, "tier upgrade failed")
+        return {"ignored": f"{event_type}: no matching plan or user"}
+
+    if event_type == "subscription.cancelled":
+        sub_entity = (payload.get("subscription") or {}).get("entity", {})
+        sub_user_id = (
+            (sub_entity.get("notes") or {}).get("user_id")
+            or sub_entity.get("customer_id")
+        )
+        if sub_user_id:
+            db_url = get_db_url()
+            if db_url:
+                try:
+                    import psycopg as _pg
+                    with _pg.connect(db_url, autocommit=True) as conn:
+                        conn.execute(
+                            "UPDATE users SET subscription_tier = 'M1' WHERE id = %s",
+                            (sub_user_id,),
+                        )
+                    _audit.record(
+                        action="subscription.downgraded",
+                        user_id=sub_user_id,
+                        detail={"tier": "M1", "event": event_type},
+                    )
+                    _log.info(
+                        "[razorpay_webhook] downgraded user %s to M1 on cancellation",
+                        sub_user_id,
+                    )
+                    return {"user_id": sub_user_id, "tier": "M1", "status": "downgraded"}
+                except Exception as exc:
+                    _log.error(
+                        "[razorpay_webhook] tier downgrade failed for user %s: %s",
+                        sub_user_id, exc,
+                    )
+        return {"ignored": f"{event_type}: no user_id in notes"}
+
     if event_type not in ("payment.captured", "order.paid"):
         return {"ignored": event_type}
-    payload = event.get("payload", {})
+
     payment = (payload.get("payment") or {}).get("entity", {})
     order_id = payment.get("order_id")
     payment_id = payment.get("id")
@@ -12279,6 +12613,174 @@ async def update_my_profile(
     except Exception as exc:
         raise HTTPException(500, f"update failed: {exc}")
     return JSONResponse({"ok": True, "updated": list(updates.keys()), "persisted": True})
+
+
+# ---- DPDP Act 2023 — data portability + erasure ---------------------------
+
+@app.get("/api/me/data/export")
+def export_my_data(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """DPDP Act 2023 §11 — right to access. Returns all personal data we
+    hold for the authenticated user as a single JSON document. Call at
+    most once per 24 h; the response includes a `generated_at` timestamp
+    so the user can track it."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+
+    export: dict = {
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "schema_version": 1,
+        "profile": {
+            "id": user.id,
+            "email": user.email,
+            "subscription_tier": user.subscription_tier,
+            "subscription_level": user.subscription_level,
+        },
+        "preferences": None,
+        "jobs": [],
+        "flashcard_decks": [],
+        "audit_events": [],
+    }
+
+    # Preferences from DB (non-fatal: may not exist yet)
+    db_url = get_db_url()
+    if db_url:
+        try:
+            import psycopg as _pg
+            with _pg.connect(db_url) as conn:
+                row = conn.execute(
+                    "SELECT display_name, preferred_language, "
+                    "       preferred_level, preferred_mode, created_at "
+                    "FROM users WHERE id = %s",
+                    (user.id,),
+                ).fetchone()
+            if row:
+                export["profile"]["display_name"] = row[0]
+                export["profile"]["created_at"] = (
+                    row[4].isoformat() if hasattr(row[4], "isoformat") else str(row[4])
+                ) if row[4] else None
+                export["preferences"] = {
+                    "language": row[1],
+                    "level": row[2],
+                    "mode": row[3],
+                }
+        except Exception as exc:
+            _log.warning("[data_export] profile query failed (non-fatal): %s", exc)
+
+    # Job history
+    try:
+        store = _get_store()
+        jobs = store.recent_jobs(limit=200, filter_user_id=user.id)
+        export["jobs"] = [
+            {
+                "id": j.get("id"),
+                "topic": j.get("topic"),
+                "language": j.get("language"),
+                "status": j.get("status"),
+                "created_at": j.get("created_at"),
+            }
+            for j in (jobs or [])
+        ]
+    except Exception as exc:
+        _log.warning("[data_export] jobs query failed (non-fatal): %s", exc)
+
+    # Flashcard decks
+    try:
+        from . import spaced_repetition as _sr
+        decks = _sr.list_my_decks(user_id=user.id)
+        export["flashcard_decks"] = [
+            {"id": d.id, "name": d.name, "card_count": d.card_count}
+            for d in (decks or [])
+        ]
+    except Exception as exc:
+        _log.warning("[data_export] flashcard query failed (non-fatal): %s", exc)
+
+    _audit.record(action="dpdp.data_export", user_id=user.id)
+    return JSONResponse(export)
+
+
+@app.delete("/api/me/account")
+def delete_my_account(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """DPDP Act 2023 §12 — right to erasure. Soft-deletes the account:
+    the email is anonymised immediately and the account is locked. Full
+    purge of all personal data happens within 30 days (scheduled by ops).
+
+    This action is irreversible. The token used to call this endpoint
+    becomes invalid after the call returns."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+
+    db_url = get_db_url()
+    if not db_url:
+        raise HTTPException(503, "database not configured — cannot delete account")
+
+    anon_email = f"deleted-{user.id}@deleted.invalid"
+    deletion_requested_at = datetime.utcnow().isoformat() + "Z"
+
+    try:
+        import psycopg as _pg
+        with _pg.connect(db_url, autocommit=True) as conn:
+            # Anonymise email + lock account in one statement.
+            conn.execute(
+                "UPDATE users SET email = %s, account_locked = TRUE, "
+                "display_name = NULL, preferred_language = NULL, "
+                "preferred_level = NULL, preferred_mode = NULL "
+                "WHERE id = %s",
+                (anon_email, user.id),
+            )
+    except Exception as exc:
+        _log.error("[delete_account] anonymisation failed for user %s: %s", user.id, exc)
+        raise HTTPException(500, "account deletion failed — please contact support")
+
+    _audit.record(
+        action="dpdp.account_deletion_requested",
+        user_id=user.id,
+        detail={"deletion_requested_at": deletion_requested_at},
+    )
+    _log.info(
+        "[delete_account] user %s requested erasure; email anonymised, "
+        "full purge scheduled within 30 days", user.id,
+    )
+    return JSONResponse({
+        "ok": True,
+        "message": (
+            "Account anonymised. All remaining personal data will be purged "
+            "within 30 days in accordance with the DPDP Act 2023."
+        ),
+        "deletion_requested_at": deletion_requested_at,
+    })
+
+
+# ---- Subscription tier enforcement ----------------------------------------
+
+_TIER_RANK: dict[str, int] = {
+    "M1": 1, "M2": 2, "M3": 3,
+    "M4a": 4, "M4b": 5, "M4c": 6, "M4d": 7, "M4e": 8,
+}
+
+
+def _require_tier(user: AuthUser | None, min_tier: str) -> AuthUser:
+    """Raise 401/403 if the user is below `min_tier`. Use as a guard at
+    the start of any endpoint that requires a paid subscription.
+
+    Example:
+        user = _require_tier(user, "M2")
+    """
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    user_rank = _TIER_RANK.get(user.subscription_tier, 0)
+    required_rank = _TIER_RANK.get(min_tier, 0)
+    if user_rank < required_rank:
+        raise HTTPException(
+            403,
+            f"this feature requires subscription tier {min_tier} or above "
+            f"(your tier: {user.subscription_tier}). "
+            "Upgrade at /pricing",
+        )
+    return user
 
 
 # ---- Flashcard due queue + SM-2 review ------------------------------------

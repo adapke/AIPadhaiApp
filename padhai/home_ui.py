@@ -886,78 +886,312 @@ LANDING_HTML = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PadhaiApp — Sign in</title>
+<title>PadhaiApp — AI Tutor for UPSC, NEET, JEE &amp; CBSE | Free Video Lessons</title>
+<meta name="description" content="Scan any textbook page and get an AI video lesson in Hindi, Tamil, Telugu &amp; 7 Indian languages. Free for students.">
+<!-- Open Graph -->
+<meta property="og:title" content="PadhaiApp — AI Tutor for UPSC, NEET, JEE &amp; CBSE | Free Video Lessons">
+<meta property="og:description" content="Scan any textbook page and get an AI video lesson in Hindi, Tamil, Telugu &amp; 7 Indian languages. Free for students.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="/landing">
+<meta property="og:image" content="/static/og-cover.png">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PadhaiApp — AI Tutor for UPSC, NEET, JEE &amp; CBSE | Free Video Lessons">
+<meta name="twitter:description" content="Scan any textbook page and get an AI video lesson in Hindi, Tamil, Telugu &amp; 7 Indian languages. Free for students.">
+<!-- PWA -->
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#1565d8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PadhaiApp">
+<link rel="apple-touch-icon" href="/static/icon-180.png">
 <style>
-  *{box-sizing:border-box}
-  body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;
-       background:#0f1c33;color:#fff;min-height:100vh;
-       display:flex;align-items:center;justify-content:center;
-       padding:24px}
-  .card{max-width:440px;width:100%;background:#ffffff10;
-        border:1px solid #ffffff22;border-radius:14px;padding:32px}
-  h1{margin:0 0 8px;font-size:24px;line-height:1.2}
-  .lead{color:#cdd6e5;line-height:1.5;font-size:14px;margin:0 0 22px}
+  :root {
+    --bg:#0f1c33; --panel:#ffffff12; --panel-solid:#1a2c47;
+    --ink:#ffffff; --muted:#cdd6e5; --line:#ffffff22;
+    --brand:#1565d8; --brand-dark:#0b4ec1; --brand-soft:#eaf2ff;
+    --green:#12b76a; --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,Segoe UI,Arial,sans-serif;
+       background:var(--bg);color:var(--ink);line-height:1.5}
+  a{color:inherit;text-decoration:none}
+
+  /* ── Nav ─────────────────────────────────────────── */
+  .topnav{display:flex;align-items:center;justify-content:space-between;
+          padding:16px 24px;border-bottom:1px solid var(--line)}
+  .nav-brand{display:flex;align-items:center;gap:10px}
+  .nav-logo{width:34px;height:34px;border-radius:8px;
+            background:linear-gradient(135deg,#2f80ed,#12b76a);
+            display:grid;place-items:center;font-weight:850;font-size:16px}
+  .nav-brand b{font-size:16px}
+  .nav-cta{background:var(--brand);color:#fff;border:0;border-radius:7px;
+           padding:9px 18px;font-weight:700;font-size:14px;cursor:pointer;
+           font-family:inherit;text-decoration:none}
+  .nav-cta:hover{background:var(--brand-dark)}
+
+  /* ── Hero ────────────────────────────────────────── */
+  .hero{text-align:center;padding:72px 24px 56px;
+        background:linear-gradient(160deg,#0f1c33 0%,#0d2a5e 100%)}
+  .hero h1{font-size:clamp(32px,6vw,56px);font-weight:900;
+           line-height:1.1;margin-bottom:18px;
+           background:linear-gradient(90deg,#fff 0%,#7eb6ff 100%);
+           -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+           background-clip:text}
+  .hero-sub{font-size:clamp(15px,2.5vw,20px);color:var(--muted);
+            max-width:600px;margin:0 auto 32px}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+             margin-bottom:36px}
+  .btn-primary{background:var(--brand);color:#fff;border:0;border-radius:8px;
+               padding:14px 28px;font-weight:800;font-size:16px;cursor:pointer;
+               font-family:inherit;text-decoration:none;display:inline-block}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-secondary{background:transparent;color:#fff;
+                 border:2px solid rgba(255,255,255,.35);border-radius:8px;
+                 padding:13px 26px;font-weight:700;font-size:16px;cursor:pointer;
+                 font-family:inherit;text-decoration:none;display:inline-block}
+  .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .stats-bar{display:flex;align-items:center;justify-content:center;
+             gap:6px;flex-wrap:wrap;
+             background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+             border-radius:999px;padding:10px 20px;
+             font-size:13px;font-weight:700;color:#a8c5ff;
+             max-width:560px;margin:0 auto}
+  .stats-bar .sep{color:rgba(255,255,255,.3)}
+
+  /* ── Section shared ──────────────────────────────── */
+  section{padding:64px 24px}
+  .section-inner{max-width:960px;margin:0 auto}
+  .section-label{font-size:12px;font-weight:800;letter-spacing:.1em;
+                 text-transform:uppercase;color:#7eb6ff;margin-bottom:10px}
+  .section-title{font-size:clamp(22px,4vw,32px);font-weight:800;
+                 margin-bottom:14px}
+  .section-sub{color:var(--muted);font-size:15px;max-width:540px}
+
+  /* ── Features ────────────────────────────────────── */
+  .features{background:#111f38}
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);
+             gap:20px;margin-top:40px}
+  .feat-card{background:var(--panel);border:1px solid var(--line);
+             border-radius:14px;padding:28px 22px}
+  .feat-icon{font-size:32px;margin-bottom:14px}
+  .feat-card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+  .feat-card p{color:var(--muted);font-size:14px;line-height:1.55}
+
+  /* ── How it works ────────────────────────────────── */
+  .how{background:var(--bg)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);
+         gap:20px;margin-top:40px}
+  .step{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+  .step-num{width:40px;height:40px;border-radius:10px;
+            background:var(--brand);display:grid;place-items:center;
+            font-weight:900;font-size:18px;flex-shrink:0}
+  .step h3{font-size:16px;font-weight:800}
+  .step p{color:var(--muted);font-size:14px;line-height:1.55}
+  .step-connector{display:none}
+
+  /* ── Demo anchor placeholder ─────────────────────── */
+  #demo{scroll-margin-top:80px}
+
+  /* ── Auth section ────────────────────────────────── */
+  .auth-section{background:#111f38}
+  .auth-card{max-width:440px;margin:40px auto 0;
+             background:var(--panel);border:1px solid var(--line);
+             border-radius:14px;padding:32px}
   .tabs{display:flex;gap:4px;background:#ffffff0e;padding:4px;
-        border-radius:8px;margin-bottom:18px}
-  .tab{flex:1;background:transparent;border:0;color:#cdd6e5;
+        border-radius:8px;margin-bottom:20px}
+  .tab{flex:1;background:transparent;border:0;color:var(--muted);
        padding:10px;font-size:14px;font-weight:700;cursor:pointer;
-       border-radius:6px;font-family:inherit}
-  .tab.active{background:#1565d8;color:#fff}
+       border-radius:6px;font-family:inherit;transition:background .15s}
+  .tab.active{background:var(--brand);color:#fff}
   label{display:block;font-size:12px;color:#aab5cc;
         margin:10px 0 6px;font-weight:700}
-  input{width:100%;padding:10px 12px;border:1px solid #ffffff22;
+  input{width:100%;padding:10px 12px;border:1px solid var(--line);
         background:#ffffff14;color:#fff;border-radius:8px;
         font-size:14px;font-family:inherit}
-  input:focus{outline:none;border-color:#1565d8}
-  button.cta{width:100%;background:#1565d8;color:#fff;border:0;
+  input:focus{outline:none;border-color:var(--brand)}
+  button.cta{width:100%;background:var(--brand);color:#fff;border:0;
              padding:12px;border-radius:8px;font-weight:800;
              font-size:14px;cursor:pointer;margin-top:18px;
              font-family:inherit}
-  button.cta:hover{background:#0b4ec1}
+  button.cta:hover{background:var(--brand-dark)}
   .alt{margin-top:18px;text-align:center;font-size:13px;color:#9aa6c0}
   .alt a{color:#fff;text-decoration:underline;font-weight:700}
   .err{margin-top:12px;color:#ffb4b4;font-size:13px;display:none}
   .err.show{display:block}
+
+  /* ── WhatsApp + Footer ───────────────────────────── */
+  .share-section{background:var(--bg);text-align:center;padding:40px 24px}
+  .wa-btn{display:inline-flex;align-items:center;gap:10px;
+          background:#25d366;color:#fff;border-radius:8px;
+          padding:13px 24px;font-weight:700;font-size:15px;
+          text-decoration:none;transition:background .15s}
+  .wa-btn:hover{background:#1da851}
+  footer{background:#080f1e;text-align:center;padding:24px;
+         color:#6b7a99;font-size:13px;border-top:1px solid var(--line)}
+  footer a{color:#8fa8d4;text-decoration:underline;margin:0 6px}
+
+  /* ── Responsive ──────────────────────────────────── */
+  @media(max-width:720px){
+    .feat-grid,.steps{grid-template-columns:1fr}
+    .hero{padding:52px 18px 40px}
+    .topnav{padding:14px 18px}
+    section{padding:48px 18px}
+    .hero-ctas{flex-direction:column;align-items:center}
+    .btn-primary,.btn-secondary{width:100%;max-width:320px;text-align:center}
+  }
 </style>
 </head>
 <body>
-<div class="card">
-  <h1>PadhaiApp</h1>
-  <p class="lead">
-    India's AI study, exam &amp; career platform. Sign in to see
-    your goal-led Exam Hub.
+
+<!-- ── Top nav ─────────────────────────────────────────── -->
+<nav class="topnav">
+  <div class="nav-brand">
+    <div class="nav-logo">P</div>
+    <b>PadhaiApp</b>
+  </div>
+  <a class="nav-cta" href="#auth">Start for Free</a>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────── -->
+<section class="hero">
+  <h1>Study Smarter with AI</h1>
+  <p class="hero-sub">
+    Scan any textbook page &rarr; get a video lesson in your language.
+    Hindi, Tamil, Telugu, Kannada, and 7 more.
   </p>
-  <div class="tabs">
-    <button class="tab active" data-mode="login">Sign in</button>
-    <button class="tab" data-mode="signup">Create account</button>
+  <div class="hero-ctas">
+    <a class="btn-primary" href="#auth">Start for Free &rarr;</a>
+    <a class="btn-secondary" href="#demo">Watch Demo</a>
   </div>
-  <form id="authForm">
-    <label for="email">Email</label>
-    <input id="email" type="email" autocomplete="email" required>
-    <label for="password">Password</label>
-    <input id="password" type="password" autocomplete="current-password"
-           required minlength="8">
-    <div id="signupOnly" style="display:none">
-      <label for="display_name">Your name</label>
-      <input id="display_name" type="text" autocomplete="name">
+  <div class="stats-bar">
+    <span>50,000+ Students</span>
+    <span class="sep">•</span>
+    <span>7 Indian Languages</span>
+    <span class="sep">•</span>
+    <span>UPSC &nbsp;·&nbsp; NEET &nbsp;·&nbsp; JEE &nbsp;·&nbsp; CBSE &nbsp;·&nbsp; SSC</span>
+  </div>
+</section>
+
+<!-- ── Features ─────────────────────────────────────────── -->
+<section class="features" id="demo">
+  <div class="section-inner">
+    <div class="section-label">How PadhaiApp works</div>
+    <h2 class="section-title">Everything you need to crack your exam</h2>
+    <p class="section-sub">
+      No more passive reading. Get active AI-powered lessons from
+      the exact pages you are studying.
+    </p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon">📸</div>
+        <h3>Snap a Page</h3>
+        <p>Upload or photograph any textbook, notes, or question paper — NCERT, coaching material, or your own handwritten notes.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🎬</div>
+        <h3>Get a Video Lesson</h3>
+        <p>AI explains the concept with a talking teacher avatar in your language — Hindi, Tamil, Telugu, Kannada, Bengali, and more.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📝</div>
+        <h3>Practice &amp; Master</h3>
+        <p>Adaptive flashcards, mock tests, and AI doubt-clearing help you retain more and score higher on exam day.</p>
+      </div>
     </div>
-    <button class="cta" id="submitBtn">Sign in</button>
-    <div class="err" id="errBox"></div>
-  </form>
-  <div class="alt">
-    <a href="/home">Open Exam Hub</a>
-    &nbsp;·&nbsp;
-    <a href="#" id="forgotLink">Forgot password?</a>
   </div>
-  <div id="forgotForm" style="display:none;margin-top:14px">
-    <label for="resetEmail">Email</label>
-    <input id="resetEmail" type="email" placeholder="your@email.com">
-    <button class="cta" id="resetBtn" style="margin-top:10px">Send reset link</button>
-    <div class="err" id="resetMsg"></div>
+</section>
+
+<!-- ── How it works ──────────────────────────────────────── -->
+<section class="how">
+  <div class="section-inner">
+    <div class="section-label">3 simple steps</div>
+    <h2 class="section-title">From textbook photo to video lesson in minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Upload your textbook page or photo</h3>
+        <p>Take a photo or upload a PDF page — any subject, any board, any coaching material.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Choose your language and exam</h3>
+        <p>Pick from Hindi, Tamil, Telugu, Kannada, Bengali, Marathi, and more. Select your target exam: UPSC, NEET, JEE, CBSE, or SSC.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Watch your personalised AI lesson</h3>
+        <p>A talking AI teacher explains the concept in your language, with examples tailored to your exam pattern.</p>
+      </div>
+    </div>
   </div>
+</section>
+
+<!-- ── Auth ──────────────────────────────────────────────── -->
+<section class="auth-section" id="auth">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">Join 50,000+ students</div>
+    <h2 class="section-title">Start learning for free today</h2>
+    <p class="section-sub" style="margin:0 auto">
+      Create your account in 30 seconds — no credit card required.
+    </p>
+  </div>
+  <div class="auth-card">
+    <div class="tabs">
+      <button class="tab active" data-mode="login">Sign In</button>
+      <button class="tab" data-mode="signup">Create Account</button>
+    </div>
+    <form id="authForm">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password"
+             required minlength="8">
+      <div id="signupOnly" style="display:none">
+        <label for="display_name">Your name</label>
+        <input id="display_name" type="text" autocomplete="name">
+        <label id="termsLabel" style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer">
+          <input id="terms_accepted" type="checkbox" style="margin-top:2px;flex-shrink:0">
+          <span>I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a></span>
+        </label>
+      </div>
+      <button class="cta" id="submitBtn">Sign In</button>
+      <div class="err" id="errBox"></div>
+    </form>
+    <div class="alt">
+      <a href="/home">Open Exam Hub</a>
+      &nbsp;·&nbsp;
+      <a href="#" id="forgotLink">Forgot password?</a>
+    </div>
+    <div id="forgotForm" style="display:none;margin-top:14px">
+      <label for="resetEmail">Email</label>
+      <input id="resetEmail" type="email" placeholder="your@email.com">
+      <button class="cta" id="resetBtn" style="margin-top:10px">Send reset link</button>
+      <div class="err" id="resetMsg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WhatsApp share ────────────────────────────────────── -->
+<div class="share-section">
+  <p style="color:var(--muted);font-size:14px;margin-bottom:16px">
+    Know a student who needs this? Share PadhaiApp for free.
+  </p>
+  <a class="wa-btn"
+     href="https://wa.me/?text=Check%20out%20PadhaiApp%20-%20Free%20AI%20lessons%20for%20Indian%20students%3A%20https%3A%2F%2Faipadhaiapp.com"
+     target="_blank" rel="noopener">
+    Share on WhatsApp 💬
+  </a>
 </div>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  &copy; 2026 PadhaiApp &nbsp;|&nbsp;
+  <a href="/terms">Terms</a>
+  <a href="/privacy">Privacy</a>
+  <a href="mailto:hello@aipadhaiapp.com">Contact</a>
+</footer>
+
 <script>
 (function(){
   let mode = 'login';
@@ -970,7 +1204,7 @@ LANDING_HTML = """<!doctype html>
       mode = t.dataset.mode;
       tabs.forEach(b => b.classList.toggle('active', b === t));
       submitBtn.textContent =
-        mode === 'login' ? 'Sign in' : 'Create account';
+        mode === 'login' ? 'Sign In' : 'Create Account';
       signupOnly.style.display = mode === 'login' ? 'none' : '';
       errBox.classList.remove('show');
     });
@@ -985,6 +1219,15 @@ LANDING_HTML = """<!doctype html>
       if (mode === 'signup') {
         const dn = document.getElementById('display_name').value;
         if (dn) fd.append('display_name', dn);
+        const tc = document.getElementById('terms_accepted');
+        if (!tc.checked) {
+          errBox.textContent = 'Please accept the Terms of Service to continue.';
+          errBox.classList.add('show');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create Account';
+          return;
+        }
+        fd.append('terms_accepted', 'true');
       }
       submitBtn.disabled = true;
       submitBtn.textContent = mode === 'login'
@@ -1018,7 +1261,7 @@ LANDING_HTML = """<!doctype html>
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent =
-          mode === 'login' ? 'Sign in' : 'Create account';
+          mode === 'login' ? 'Sign In' : 'Create Account';
       }
     },
   );

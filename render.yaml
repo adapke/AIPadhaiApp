@@ -23,7 +23,7 @@ services:
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
     autoDeploy: false            # paused during v0.7 gap-close work; flip back when ready to ship
-    preDeployCommand: python -m scripts.migrate
+    preDeployCommand: python -m scripts.migrate && echo "migrations OK"
     disk:
       name: padhai-cache
       mountPath: /var/padhai/cache

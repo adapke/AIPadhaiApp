@@ -3,6 +3,7 @@ gtts>=2.5
 pillow>=10
 fastapi>=0.115
 uvicorn[standard]>=0.30
+gunicorn>=22.0
 python-multipart>=0.0.9
 python-dotenv>=1.0
 piper-tts>=1.4

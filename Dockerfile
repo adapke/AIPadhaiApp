@@ -94,4 +94,11 @@ COPY padhai ./padhai
 EXPOSE 8000
 
 # Render / Fly / Cloud Run all inject $PORT; default to 8000 for local docker run.
-CMD ["sh", "-c", "uvicorn padhai.web:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "exec gunicorn padhai.web:app \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --workers ${WEB_CONCURRENCY:-2} \
+    --timeout 120 \
+    --bind 0.0.0.0:${PORT:-8000} \
+    --preload \
+    --access-logfile - \
+    --error-logfile -"]
