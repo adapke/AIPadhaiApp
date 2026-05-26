@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+node_modules/
 
 # generated artifacts
 *.mp4
@@ -18,6 +19,11 @@ demo_script.json
 .vscode/
 *.swp
 *.swo
+
+# SQLite dev databases (created at runtime by SQLiteUserRepository)
+*.db
+*.db-shm
+*.db-wal
 
 # secrets — env files are never committed; share .env.example only
 .env

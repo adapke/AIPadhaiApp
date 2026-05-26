@@ -26,8 +26,10 @@ def tutor_start(user=Depends(current_user)):
     user's long memory + last 2 ended sessions."""
     from .. import feature_flags, tutor
     user = require_user(user)
-    # Gate behind the tutor.enabled feature flag (Q1)
-    if not feature_flags.is_enabled("tutor.enabled", user_id=user.id):
+    # Gate behind the tutor.enabled feature flag only when the flag exists.
+    # If the flag doesn't exist in DB (fresh deploy) we allow all users through.
+    flag = feature_flags.get("tutor.enabled")
+    if flag is not None and not feature_flags.is_enabled("tutor.enabled", user_id=user.id):
         raise HTTPException(403, "AI tutor not yet rolled out to your account")
     s = tutor.start_session(user_id=user.id)
     return {

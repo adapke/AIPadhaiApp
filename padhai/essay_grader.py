@@ -553,3 +553,237 @@ def _persist_grade(
             (result.score, json.dumps(feedback), ai_call_id,
              time.time(), submission_id),
         )
+
+
+# ---------- default rubric seeding ----------
+
+_DEFAULT_RUBRICS: list[dict] = [
+    # UPSC Mains GS Papers
+    {
+        "exam": "upsc_mains", "paper": "GS1",
+        "topic": "History, Society, Geography",
+        "max_marks": 250,
+        "criteria": [
+            {"name": "Relevance & Coverage", "weight": 30,
+             "description": "Answer addresses all dimensions of the question"},
+            {"name": "Content Depth", "weight": 30,
+             "description": "Factual accuracy, data, examples, case studies"},
+            {"name": "Structure & Coherence", "weight": 20,
+             "description": "Introduction, body paragraphs, conclusion; logical flow"},
+            {"name": "Analytical Ability", "weight": 10,
+             "description": "Critical reasoning, multi-perspective analysis"},
+            {"name": "Language & Presentation", "weight": 10,
+             "description": "Grammar, clarity, diagrams/maps where relevant"},
+        ],
+        "model_answer": (
+            "A model GS1 answer covers historical context, societal impact, "
+            "geographical dimensions, and links to current events with 2-3 "
+            "relevant examples or data points per sub-part."
+        ),
+    },
+    {
+        "exam": "upsc_mains", "paper": "GS2",
+        "topic": "Governance, Constitution, Polity, IR",
+        "max_marks": 250,
+        "criteria": [
+            {"name": "Constitutional Accuracy", "weight": 30,
+             "description": "Correct articles, schedules, landmark judgements cited"},
+            {"name": "Policy Analysis", "weight": 25,
+             "description": "Government schemes, committee recommendations referenced"},
+            {"name": "IR & Security Linkage", "weight": 20,
+             "description": "International organisations, bilateral ties, treaties"},
+            {"name": "Structure", "weight": 15,
+             "description": "Intro–Body–Conclusion, use of headings/bullets"},
+            {"name": "Language", "weight": 10,
+             "description": "Clarity, grammar, concise sentences"},
+        ],
+    },
+    {
+        "exam": "upsc_mains", "paper": "GS3",
+        "topic": "Economy, Environment, Technology, Security",
+        "max_marks": 250,
+        "criteria": [
+            {"name": "Economic Concepts", "weight": 30,
+             "description": "Correct terminology, budget/policy data, RBI/SEBI references"},
+            {"name": "Environmental Science", "weight": 25,
+             "description": "Biodiversity, climate, conventions, Supreme Court orders"},
+            {"name": "Technology & Innovation", "weight": 20,
+             "description": "Current initiatives (Digital India, space, defence R&D)"},
+            {"name": "Internal Security", "weight": 15,
+             "description": "LWE, border management, cyber security frameworks"},
+            {"name": "Presentation", "weight": 10,
+             "description": "Legibility, diagram labels, conciseness"},
+        ],
+    },
+    {
+        "exam": "upsc_mains", "paper": "GS4",
+        "topic": "Ethics, Integrity, Aptitude",
+        "max_marks": 250,
+        "criteria": [
+            {"name": "Ethical Framework", "weight": 30,
+             "description": "Thinker citations (Gandhi, Aristotle, Kant), value articulation"},
+            {"name": "Case Study Analysis", "weight": 30,
+             "description": "Stakeholder identification, dilemma resolution, pros/cons"},
+            {"name": "Practical Suggestions", "weight": 20,
+             "description": "Actionable, constitutionally sound recommendations"},
+            {"name": "Emotional Intelligence", "weight": 10,
+             "description": "Empathy, compassion, self-awareness demonstrated"},
+            {"name": "Clarity", "weight": 10,
+             "description": "Logical structure, no jargon, readable"},
+        ],
+    },
+    {
+        "exam": "upsc_essay", "paper": "Essay",
+        "topic": "General Essay",
+        "max_marks": 250,
+        "criteria": [
+            {"name": "Originality & Insight", "weight": 30,
+             "description": "Fresh perspective, nuanced thesis, avoids clichés"},
+            {"name": "Breadth of Ideas", "weight": 25,
+             "description": "Multi-disciplinary examples: history, science, arts, policy"},
+            {"name": "Coherence & Flow", "weight": 20,
+             "description": "Smooth transitions, unified argument throughout"},
+            {"name": "Introduction & Conclusion", "weight": 15,
+             "description": "Memorable opening hook; satisfying conclusion with call to action"},
+            {"name": "Language", "weight": 10,
+             "description": "Vocabulary range, grammar, sentence variety"},
+        ],
+    },
+    # JEE Advanced descriptive
+    {
+        "exam": "jee_adv_descriptive", "paper": "Physics",
+        "topic": "Mechanics & Electromagnetism",
+        "max_marks": 60,
+        "criteria": [
+            {"name": "Conceptual Accuracy", "weight": 40,
+             "description": "Correct laws, principles, formulae applied"},
+            {"name": "Mathematical Derivation", "weight": 30,
+             "description": "Step-by-step algebra, correct substitutions, units"},
+            {"name": "Diagram / Free-Body", "weight": 20,
+             "description": "Labelled diagrams showing forces, fields, geometry"},
+            {"name": "Final Answer", "weight": 10,
+             "description": "Numerically correct with proper SI units"},
+        ],
+    },
+    {
+        "exam": "jee_adv_descriptive", "paper": "Chemistry",
+        "topic": "Organic & Physical Chemistry",
+        "max_marks": 60,
+        "criteria": [
+            {"name": "Reaction Mechanism", "weight": 40,
+             "description": "Arrow pushing, intermediates, stereochemistry"},
+            {"name": "Equations & Balancing", "weight": 30,
+             "description": "Balanced equations, state symbols, conditions"},
+            {"name": "Structure Drawing", "weight": 20,
+             "description": "IUPAC names, correct structural formulae"},
+            {"name": "Answer Accuracy", "weight": 10,
+             "description": "Numerical values correct with units"},
+        ],
+    },
+    # CBSE English
+    {
+        "exam": "cbse_class12_eng", "paper": "Writing Skills",
+        "topic": "Letter / Article / Speech",
+        "max_marks": 10,
+        "criteria": [
+            {"name": "Format Adherence", "weight": 30,
+             "description": "Correct format for the genre (date, salutation, etc.)"},
+            {"name": "Content Relevance", "weight": 30,
+             "description": "All given points addressed; extra relevant points added"},
+            {"name": "Expression & Vocabulary", "weight": 25,
+             "description": "Idiomatic English, range of vocabulary, no repetition"},
+            {"name": "Grammar & Mechanics", "weight": 15,
+             "description": "Tenses, subject-verb agreement, punctuation, spelling"},
+        ],
+    },
+    {
+        "exam": "cbse_class10_eng", "paper": "Writing Skills",
+        "topic": "Formal Letter / Paragraph",
+        "max_marks": 10,
+        "criteria": [
+            {"name": "Format", "weight": 25,
+             "description": "Prescribed layout for letter/paragraph"},
+            {"name": "Content", "weight": 35,
+             "description": "All points covered, coherent expansion"},
+            {"name": "Language", "weight": 25,
+             "description": "Grade-appropriate vocabulary and sentence variety"},
+            {"name": "Accuracy", "weight": 15,
+             "description": "Spelling, punctuation, grammar"},
+        ],
+    },
+    # NEET descriptive (Biology)
+    {
+        "exam": "neet_descriptive", "paper": "Biology",
+        "topic": "Human Physiology & Genetics",
+        "max_marks": 60,
+        "criteria": [
+            {"name": "Scientific Accuracy", "weight": 40,
+             "description": "Correct terminology, biological processes described correctly"},
+            {"name": "Diagrams", "weight": 25,
+             "description": "Labelled diagrams with clear structures"},
+            {"name": "Examples & Applications", "weight": 20,
+             "description": "Clinical/real-world examples connecting to concepts"},
+            {"name": "Completeness", "weight": 15,
+             "description": "All parts of multi-part questions answered"},
+        ],
+    },
+    # CAT
+    {
+        "exam": "cat_va", "paper": "Verbal Ability",
+        "topic": "Reading Comprehension & Critical Reasoning",
+        "max_marks": 100,
+        "criteria": [
+            {"name": "Inference Quality", "weight": 35,
+             "description": "Logical inferences directly supported by the passage"},
+            {"name": "Argument Evaluation", "weight": 30,
+             "description": "Identify assumptions, strengthen/weaken correctly"},
+            {"name": "Vocabulary in Context", "weight": 20,
+             "description": "Correct interpretation of highlighted words/phrases"},
+            {"name": "Summary Accuracy", "weight": 15,
+             "description": "Central idea captured; no distortion of tone"},
+        ],
+    },
+    # Generic
+    {
+        "exam": "generic", "paper": "General",
+        "topic": None,
+        "max_marks": 100,
+        "criteria": [
+            {"name": "Relevance", "weight": 30,
+             "description": "Answer directly addresses the question asked"},
+            {"name": "Depth & Accuracy", "weight": 30,
+             "description": "Factual correctness, examples, supporting evidence"},
+            {"name": "Structure", "weight": 20,
+             "description": "Introduction, logical body paragraphs, conclusion"},
+            {"name": "Language", "weight": 20,
+             "description": "Grammar, clarity, appropriate vocabulary"},
+        ],
+    },
+]
+
+
+def seed_default_rubrics() -> int:
+    """Idempotent seed — inserts default rubrics that don't yet exist.
+    Returns the count of rubrics newly created (0 = already seeded)."""
+    created = 0
+    for r in _DEFAULT_RUBRICS:
+        try:
+            existing = list_rubrics(exam=r["exam"])
+            already = any(
+                x.paper == r["paper"] and x.topic == r.get("topic")
+                for x in existing
+            )
+            if not already:
+                upsert_rubric(
+                    exam=r["exam"],
+                    paper=r["paper"],
+                    topic=r.get("topic"),
+                    criteria=r["criteria"],
+                    max_marks=r["max_marks"],
+                    model_answer=r.get("model_answer"),
+                    created_by="system",
+                )
+                created += 1
+        except Exception:  # noqa: BLE001
+            pass
+    return created

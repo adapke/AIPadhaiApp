@@ -56,6 +56,7 @@ _log = logging.getLogger("padhai.web")
 from .auth import (
     AuthUser,
     PostgresUserRepository,
+    SQLiteUserRepository,
     hash_password,
     issue_token,
     make_current_user_dependency,
@@ -216,9 +217,11 @@ _repo_lock = threading.Lock()
 
 
 def _get_user_repo():
-    """Lazy getter for the user repo. Falls back to on-demand init so
-    that DATABASE_URL set after module import (e.g. via .env or the
-    lifespan) is still picked up on first request.
+    """Lazy getter for the user repo.
+
+    - When DATABASE_URL is set: returns PostgresUserRepository.
+    - When DATABASE_URL is absent: falls back to SQLiteUserRepository
+      so that signup/login work in a fresh dev checkout without Postgres.
 
     Protected by _repo_lock to prevent concurrent requests from each
     creating their own PostgresJobStore and leaking connection pools."""
@@ -231,12 +234,15 @@ def _get_user_repo():
         db_url = os.environ.get("DATABASE_URL")
         _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
         if not db_url:
-            return None
+            # Dev / single-server mode: SQLite-backed auth
+            _user_repo = SQLiteUserRepository("padhai.db")
+            _log.info("_get_user_repo: using SQLiteUserRepository (no DATABASE_URL)")
+            return _user_repo
         try:
             if _pg_store is None:
                 _pg_store = PostgresJobStore(db_url)
             _user_repo = PostgresUserRepository(_pg_store.pool)
-            _log.info("_get_user_repo: initialised ok")
+            _log.info("_get_user_repo: initialised PostgresUserRepository ok")
         except Exception as e:
             _log.error("_get_user_repo: FAILED: %s", e)
             return None
@@ -645,8 +651,11 @@ async def _lifespan(app: FastAPI):
         _log.warning("[startup] tutor.migrate failed (non-fatal): %s", e)
     try:
         _essay.migrate()
+        seeded = _essay.seed_default_rubrics()
+        if seeded:
+            _log.info("[startup] essay_grader: seeded %d default rubrics", seeded)
     except Exception as e:  # noqa: BLE001
-        _log.warning("[startup] essay_grader.migrate failed (non-fatal): %s", e)
+        _log.warning("[startup] essay_grader.migrate/seed failed (non-fatal): %s", e)
     try:
         _practice.migrate()
     except Exception as e:  # noqa: BLE001
@@ -2884,7 +2893,7 @@ _INDEX_HTML = r"""<!DOCTYPE html>
 
     <div class="nav-group" data-group="tutor">
       <button class="nav-group-header" type="button" aria-expanded="false">
-        <span class="chev"></span><span>Tutor</span><span class="count">2</span>
+        <span class="chev"></span><span>Tutor</span><span class="count">6</span>
       </button>
       <div class="nav-group-body">
         <button class="nav-item" data-module="live">
@@ -2892,6 +2901,21 @@ _INDEX_HTML = r"""<!DOCTYPE html>
         </button>
         <button class="nav-item" data-module="voice">
           <span class="ico">🎙️</span><span>Voice Tutor</span>
+        </button>
+        <button class="nav-item" data-module="essay">
+          <span class="ico">✍️</span><span>Essay Grader</span>
+        </button>
+        <button class="nav-item" data-module="mathvision">
+          <span class="ico">🔢</span><span>Math Check</span>
+        </button>
+        <button class="nav-item" data-module="interview">
+          <span class="ico">🎯</span><span>Mock Interview</span>
+        </button>
+        <button class="nav-item" data-module="adaptive">
+          <span class="ico">🧠</span><span>Adaptive Practice</span>
+        </button>
+        <button class="nav-item" data-module="practice">
+          <span class="ico">📝</span><span>Practice Tests</span>
         </button>
       </div>
     </div>
@@ -3947,20 +3971,307 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
 
     <!-- ===== VOICE TUTOR ===== -->
     <section id="mod-voice" class="module">
-      <h2 class="page-title">Voice tutor</h2>
-      <p class="page-sub">Speak your doubt in any Indian language. The tutor speaks back.</p>
-      <div class="stub">
-        <div class="ico">🎙️</div>
-        <h3>Coming in Phase 3</h3>
-        <p>End-to-end voice loop using <strong>Bhashini ASR</strong> + Claude + <strong>Bhashini TTS</strong>.</p>
-        <ul>
-          <li>Tap-to-talk; release to send</li>
-          <li>Speech-to-text in 14 Indian languages</li>
-          <li>Same grounded-in-your-material chat as the text doubt chat</li>
-          <li>Reply spoken in the same (or different) language</li>
-          <li>~3-second round trip on a 4G connection</li>
-        </ul>
-        <p style="margin-top:14px;">The text version is live now — try the <a href="#" onclick="showModule('chat'); return false;">Doubt chat</a> module.</p>
+      <h2 class="page-title">Voice Tutor</h2>
+      <p class="page-sub">Speak your doubt in any Indian language. Optionally link a lesson so answers are grounded in your material.</p>
+
+      <!-- Lesson context (optional) -->
+      <div class="card" id="vt-lesson-card">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;">
+            <label style="margin-bottom:4px;display:block;font-size:13px;font-weight:600;">Lesson ID <span style="font-weight:400;color:var(--muted);">(optional — grounds answers in your material)</span></label>
+            <input type="text" id="vt-lesson-id" placeholder="Paste a lesson_id, or leave blank for general tutoring" style="margin:0;">
+          </div>
+          <button class="btn-ghost" onclick="showModule('library')" style="white-space:nowrap;margin-top:20px;">Browse library →</button>
+        </div>
+      </div>
+
+      <!-- Mic controls -->
+      <div class="card live-controls">
+        <div class="live-mic-row">
+          <button id="vt-mic" class="live-mic-btn" type="button">
+            <span class="live-mic-ico">🎙️</span>
+            <span id="vt-mic-label">Tap to speak</span>
+          </button>
+          <div class="live-lang">
+            <label for="vt-lang-sel" style="margin:0;">Language</label>
+            <select id="vt-lang-sel">
+              <option value="en-IN">English (India)</option>
+              <option value="hi-IN">Hindi</option>
+              <option value="mr-IN">Marathi</option>
+              <option value="ta-IN">Tamil</option>
+              <option value="te-IN">Telugu</option>
+              <option value="bn-IN">Bengali</option>
+              <option value="gu-IN">Gujarati</option>
+              <option value="kn-IN">Kannada</option>
+              <option value="ml-IN">Malayalam</option>
+              <option value="pa-IN">Punjabi</option>
+            </select>
+          </div>
+        </div>
+        <div class="status" id="vt-status">Ready. Click the mic to start.</div>
+      </div>
+
+      <!-- Conversation transcript -->
+      <div class="card" id="vt-transcript-card" style="display:none;">
+        <div class="card-title">Voice conversation</div>
+        <div id="vt-transcript" class="live-transcript"></div>
+        <div class="qz-actions">
+          <button class="btn-ghost" id="vt-clear">↻ New conversation</button>
+          <button class="btn-ghost" id="vt-stop-speak">⏹ Stop voice</button>
+        </div>
+      </div>
+
+      <div class="card compact" style="background:#f3f4ff; border-color:#d4d6f5; margin-top:14px;">
+        <p style="margin:0; font-size:13px; color:var(--ink);">
+          ℹ️ <strong>How it works:</strong> Your microphone audio is transcribed in your browser (Web Speech API — works in Chrome, Edge, Safari). Only the text is sent to AI Pathshala; raw audio stays on your device. The reply is read aloud by your browser's text-to-speech, also offline.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== ESSAY GRADER ===== -->
+    <section id="mod-essay" class="module">
+      <h2 class="page-title">Essay / Answer Grader</h2>
+      <p class="page-sub">Write a UPSC, JEE, or board descriptive answer. AI scores it against the rubric, gives per-criterion feedback and model answer.</p>
+
+      <div class="card" id="eg-form-card">
+        <div class="row">
+          <div style="flex:1;">
+            <label>Exam</label>
+            <select id="eg-exam">
+              <option value="upsc_mains">UPSC Mains (GS)</option>
+              <option value="upsc_essay">UPSC Essay Paper</option>
+              <option value="jee_adv_descriptive">JEE Advanced (Descriptive)</option>
+              <option value="neet_descriptive">NEET (Descriptive)</option>
+              <option value="cat_va">CAT Verbal Ability</option>
+              <option value="cbse_class12_eng">CBSE Class 12 English</option>
+              <option value="cbse_class10_eng">CBSE Class 10 English</option>
+              <option value="generic">General / Other</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <label>Paper / Rubric</label>
+            <select id="eg-rubric-sel"><option value="">Loading…</option></select>
+          </div>
+        </div>
+        <label>Your answer</label>
+        <textarea id="eg-text" rows="8" placeholder="Write your answer here (minimum 50 words for accurate grading)…" style="width:100%;box-sizing:border-box;font-family:inherit;font-size:14px;padding:10px;border:1px solid var(--line);border-radius:8px;resize:vertical;"></textarea>
+        <button type="button" class="primary" id="eg-submit" style="margin-top:10px;">Grade my answer</button>
+        <div class="status" id="eg-status"></div>
+      </div>
+
+      <div id="eg-result" style="display:none;">
+        <div class="card" id="eg-score-card">
+          <div class="card-title">AI Score</div>
+          <div id="eg-score-display" style="font-size:32px;font-weight:700;color:var(--brand);margin:8px 0;"></div>
+          <div id="eg-criteria-list"></div>
+        </div>
+        <div class="card" style="margin-top:12px;">
+          <div class="card-title">Feedback</div>
+          <div id="eg-feedback" style="white-space:pre-wrap;font-size:14px;line-height:1.6;"></div>
+        </div>
+        <div class="card" style="margin-top:12px;" id="eg-model-answer-card">
+          <div class="card-title">Model Answer</div>
+          <div id="eg-model-answer" style="white-space:pre-wrap;font-size:14px;line-height:1.6;"></div>
+        </div>
+        <div class="qz-actions" style="margin-top:12px;">
+          <button class="btn-ghost" id="eg-try-again">↻ Try another answer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MATH VISION ===== -->
+    <section id="mod-mathvision" class="module">
+      <h2 class="page-title">Math Check</h2>
+      <p class="page-sub">Paste a URL of your handwritten math solution. AI reads it, extracts the steps, and marks the first wrong step.</p>
+
+      <div class="card" id="mv-form-card">
+        <label>Image URL of handwritten solution</label>
+        <input type="url" id="mv-image-url" placeholder="https://i.imgur.com/… or any public JPG/PNG URL">
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">
+          Must be a <strong>public</strong> URL (AI reads it directly). Upload to
+          <a href="https://imgur.com" target="_blank" rel="noopener" style="color:var(--brand);">Imgur</a>,
+          Google Photos (shared link), or any CDN.
+          Supports JPG, PNG, WEBP. Max resolution ~4000×4000 px.
+        </div>
+        <div style="margin-top:12px;">
+          <label>Language</label>
+          <select id="mv-lang" style="width:auto;">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+          </select>
+        </div>
+        <button type="button" class="primary" id="mv-submit" style="margin-top:12px;">Check my work</button>
+        <div class="status" id="mv-status"></div>
+      </div>
+
+      <div id="mv-result" style="display:none;">
+        <div class="card">
+          <div class="card-title">Extracted steps</div>
+          <div id="mv-steps" style="font-family:monospace;font-size:13px;line-height:2;"></div>
+        </div>
+        <div class="card" style="margin-top:12px;" id="mv-validation-card">
+          <div class="card-title">Step validation</div>
+          <div id="mv-validation"></div>
+        </div>
+        <div class="qz-actions" style="margin-top:12px;">
+          <button class="btn-ghost" id="mv-validate-btn">▶ Validate steps</button>
+          <button class="btn-ghost" id="mv-try-again">↻ Check another</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MOCK INTERVIEW ===== -->
+    <section id="mod-interview" class="module">
+      <h2 class="page-title">Mock Interview</h2>
+      <p class="page-sub">AI simulates a UPSC / JEE / placement interview. Answer questions aloud or by typing; get scored feedback at the end.</p>
+
+      <div class="card" id="mi-start-card">
+        <label>Interview track</label>
+        <select id="mi-track">
+          <option value="upsc_personality">UPSC Personality Test (200 marks)</option>
+          <option value="jee_counseling">JEE Advanced Counselling Readiness</option>
+          <option value="iit_placement">IIT/NIT Campus Placement (Tech + HR)</option>
+          <option value="neet_pg">NEET PG Departmental Interview</option>
+          <option value="mba_admission">IIM / ISB Admission Interview</option>
+          <option value="generic">General / Other</option>
+        </select>
+        <button type="button" class="primary" id="mi-start" style="margin-top:12px;">Start interview</button>
+        <div class="status" id="mi-status"></div>
+      </div>
+
+      <div id="mi-session" style="display:none;">
+        <div class="card" id="mi-question-card">
+          <div class="card-title" id="mi-turn-label">Question 1</div>
+          <div id="mi-question" style="font-size:16px;font-weight:600;line-height:1.5;margin-bottom:14px;"></div>
+          <div id="mi-mic-row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            <button id="mi-mic" class="live-mic-btn" style="min-width:140px;" type="button">
+              <span class="live-mic-ico">🎙️</span>
+              <span id="mi-mic-label">Tap to answer</span>
+            </button>
+            <span style="color:var(--muted);font-size:13px;">or</span>
+            <input type="text" id="mi-text-input" placeholder="Type your answer instead…" style="flex:1;margin:0;">
+            <button class="primary" id="mi-submit-answer" style="white-space:nowrap;margin:0;">Submit →</button>
+          </div>
+          <div class="status" id="mi-answer-status" style="margin-top:8px;"></div>
+        </div>
+
+        <div id="mi-transcript-log" style="margin-top:12px;"></div>
+
+        <div class="qz-actions" style="margin-top:12px;">
+          <button class="btn-ghost" id="mi-end">⏹ End &amp; get report</button>
+        </div>
+      </div>
+
+      <div id="mi-report" class="card" style="display:none;margin-top:12px;">
+        <div class="card-title">Interview Report</div>
+        <div id="mi-overall-score" style="font-size:32px;font-weight:700;color:var(--brand);margin:8px 0;"></div>
+        <div id="mi-report-body" style="white-space:pre-wrap;font-size:14px;line-height:1.6;"></div>
+        <div class="qz-actions" style="margin-top:14px;">
+          <button class="btn-ghost" id="mi-restart">↻ Start new interview</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ADAPTIVE PRACTICE ===== -->
+    <section id="mod-adaptive" class="module">
+      <h2 class="page-title">Adaptive Practice</h2>
+      <p class="page-sub">Tell us your syllabus pack. AI builds a personalised question set — harder where you're strong, easier where you need support.</p>
+
+      <div class="card" id="ap-form-card">
+        <div class="row">
+          <div style="flex:1;">
+            <label>Syllabus pack</label>
+            <select id="ap-pack"><option value="">Loading exam packs…</option></select>
+          </div>
+          <div style="flex:1;">
+            <label>Questions per session</label>
+            <select id="ap-count">
+              <option value="5">5 questions</option>
+              <option value="10" selected>10 questions</option>
+              <option value="15">15 questions</option>
+              <option value="20">20 questions</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="primary" id="ap-create" style="margin-top:10px;">Create adaptive pack</button>
+        <div class="status" id="ap-status"></div>
+      </div>
+
+      <div id="ap-list-card" class="card" style="display:none;margin-top:12px;">
+        <div class="card-title">Your packs</div>
+        <div id="ap-list"></div>
+        <button class="btn-ghost" id="ap-refresh" style="margin-top:10px;">↻ Refresh</button>
+      </div>
+    </section>
+
+    <!-- ===== PRACTICE TESTS ===== -->
+    <section id="mod-practice" class="module">
+      <h2 class="page-title">Practice Tests</h2>
+      <p class="page-sub">Generate a timed practice test for your exam. Questions are pulled from our bank and adapted to your weak topics.</p>
+
+      <div class="card" id="pt-form-card">
+        <div class="row">
+          <div style="flex:1;">
+            <label>Exam</label>
+            <select id="pt-exam">
+              <option value="jee_main">JEE Main</option>
+              <option value="jee_advanced">JEE Advanced</option>
+              <option value="neet">NEET</option>
+              <option value="upsc">UPSC CSE (General)</option>
+              <option value="upsc_pre">UPSC Prelims</option>
+              <option value="upsc_mains">UPSC Mains</option>
+              <option value="cat">CAT</option>
+              <option value="gate">GATE</option>
+              <option value="generic">Generic / Other</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <label>Subject</label>
+            <input type="text" id="pt-subject" placeholder="e.g. Physics, General Studies, Quantitative Aptitude" maxlength="64">
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <div style="flex:1;">
+            <label>Time limit</label>
+            <select id="pt-minutes">
+              <option value="10">10 minutes (~7 Qs)</option>
+              <option value="20">20 minutes (~13 Qs)</option>
+              <option value="30" selected>30 minutes (~20 Qs)</option>
+              <option value="45">45 minutes (~30 Qs)</option>
+              <option value="60">60 minutes (~40 Qs)</option>
+              <option value="120">2 hours (~80 Qs)</option>
+            </select>
+          </div>
+          <div style="flex:1; display:flex; align-items:flex-end; padding-bottom:2px;">
+            <button type="button" class="primary" id="pt-create" style="width:100%;">Generate test</button>
+          </div>
+        </div>
+        <div class="status" id="pt-status"></div>
+      </div>
+
+      <!-- Active test UI -->
+      <div id="pt-test-card" class="card" style="display:none; margin-top:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div class="card-title" id="pt-test-title">Test</div>
+          <div id="pt-timer" style="font-size:1.1em; font-weight:600; color:var(--accent);"></div>
+        </div>
+        <div id="pt-questions"></div>
+        <button type="button" class="primary" id="pt-submit" style="margin-top:16px;">Submit test</button>
+        <div class="status" id="pt-submit-status"></div>
+      </div>
+
+      <!-- Score report -->
+      <div id="pt-report-card" class="card" style="display:none; margin-top:12px;">
+        <div class="card-title">Your result</div>
+        <div id="pt-report"></div>
+        <button type="button" class="btn-ghost" id="pt-new" style="margin-top:12px;">+ New test</button>
+      </div>
+
+      <!-- Past tests -->
+      <div id="pt-history-card" class="card" style="margin-top:12px;">
+        <div class="card-title">Recent tests</div>
+        <div id="pt-history"><em style="color:var(--muted-text);">No tests yet.</em></div>
+        <button class="btn-ghost" id="pt-refresh" style="margin-top:10px;">↻ Refresh</button>
       </div>
     </section>
 
@@ -4666,7 +4977,11 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
     </div>
 
     <form id="auth-form">
-      <input type="hidden" name="terms_accepted" value="true">
+      <div class="signup-only">
+        <label>Full name</label>
+        <input type="text" name="name" id="auth-name" placeholder="Your name" maxlength="60">
+      </div>
+
       <label>Email</label>
       <input type="email" name="email" required>
       <label>Password</label>
@@ -4689,6 +5004,11 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
           <input type="email" name="parent_email" id="auth-parent-email">
           <div class="hint">We won't email them anything else.</div>
         </div>
+
+        <label style="display:flex;gap:8px;align-items:center;margin-top:10px;cursor:pointer;">
+          <input type="checkbox" name="terms_accepted" id="auth-terms" value="true" style="width:auto;margin:0;">
+          <span style="font-size:13px;">I agree to the <a href="/terms" target="_blank" style="color:var(--brand);">Terms of Service</a> and <a href="/privacy" target="_blank" style="color:var(--brand);">Privacy Policy</a></span>
+        </label>
       </div>
 
       <button type="submit" class="primary">Continue</button>
@@ -4736,6 +5056,7 @@ function showModule(name) {
   if (name === 'library') loadLibrary();
   if (name === 'school' && typeof schBoot === 'function') schBoot();
   if (name === 'home') initHome();
+  document.dispatchEvent(new CustomEvent('moduleShow', { detail: name }));
 }
 
 document.querySelectorAll('.nav-item').forEach(n => {
@@ -4900,6 +5221,54 @@ function renderAuthCorner() {
   }
 }
 renderAuthCorner();
+
+// AI capability check — runs once on load, gates AI-dependent module UIs.
+let _aiStatus = null;
+async function checkAiStatus() {
+  try {
+    const r = await fetch('/api/ai-status');
+    _aiStatus = await r.json();
+  } catch(_) {
+    _aiStatus = { anthropic_configured: false, features: {} };
+  }
+  if (!_aiStatus.anthropic_configured) {
+    // Show a dismissable notice so admins know what to configure
+    const banner = document.createElement('div');
+    banner.id = 'ai-setup-banner';
+    banner.style.cssText = (
+      'position:fixed;bottom:16px;right:16px;max-width:340px;'
+      + 'background:#1e293b;color:#e2e8f0;padding:14px 16px;border-radius:10px;'
+      + 'font-size:13px;line-height:1.5;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.35);'
+    );
+    banner.innerHTML = (
+      '<div style="font-weight:700;margin-bottom:6px;">⚙ Full AI not configured</div>'
+      + '<div style="color:#94a3b8;">Set <code style="background:#334155;padding:1px 5px;border-radius:3px;">ANTHROPIC_API_KEY</code> '
+      + 'to enable Voice Tutor, Live Lecture, Math Vision, and AI question synthesis. '
+      + 'Essay Grader and Mock Interview run in basic mode without it.</div>'
+      + '<button onclick="this.parentElement.remove()" style="margin-top:10px;background:#334155;'
+      + 'border:0;color:#e2e8f0;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px;">Dismiss</button>'
+    );
+    document.body.appendChild(banner);
+  }
+}
+checkAiStatus();
+
+// Per-module AI gate helper — call on moduleShow to inject a status note
+function showAiNote(statusElId, featureKey) {
+  if (!_aiStatus) return;   // not loaded yet; will show on first interaction
+  const el = document.getElementById(statusElId);
+  if (!el) return;
+  const degraded = (_aiStatus.degraded_without_ai || []).includes(featureKey);
+  if (!_aiStatus.features[featureKey]) {
+    el.textContent = 'AI not configured — set ANTHROPIC_API_KEY on the server to enable this feature.';
+    el.className = 'status error';
+  } else if (degraded) {
+    el.textContent = 'Running in basic mode — set ANTHROPIC_API_KEY on the server for full AI-powered results.';
+    el.className = 'status';
+  } else {
+    if (el.textContent.includes('AI not configured') || el.textContent.includes('basic mode')) el.textContent = '';
+  }
+}
 
 // URL hash navigation — allows external pages (design overview, email
 // links, etc.) to deep-link into any module: /?m=quizmaker or #quizmaker
@@ -5135,6 +5504,14 @@ if (token) notifStartPolling();
 
 function authHeaders() {
   return token ? { 'Authorization': `Bearer ${token}` } : {};
+}
+
+// Gate for features that require sign-in: shows the auth modal and returns false
+// when the user is anonymous; returns true when authenticated.
+function requireAuthOrPrompt() {
+  if (token) return true;
+  $('auth-modal').classList.add('open');
+  return false;
 }
 
 // ---- create lesson ----
@@ -6374,7 +6751,10 @@ async function liveHandleTranscript(transcript) {
     liveAddTurn('tutor', j.reply);
     liveSpeak(j.reply);
   } catch (err) {
-    liveSetStatus('Error: ' + err.message, 'error');
+    const msg = err.message.includes('not configured')
+      ? 'AI service not set up on this server — set ANTHROPIC_API_KEY to enable AI replies.'
+      : 'Error: ' + err.message;
+    liveSetStatus(msg, 'error');
     liveSetButton(null, 'Tap to speak');
   }
 }
@@ -6446,6 +6826,7 @@ function liveStop() {
 }
 
 $('live-mic').addEventListener('click', () => {
+  if (!requireAuthOrPrompt()) return;
   const btn = $('live-mic');
   if (btn.classList.contains('listening')) { liveStop(); return; }
   if (btn.classList.contains('thinking') || btn.classList.contains('speaking')) {
@@ -6473,6 +6854,871 @@ $('live-stop-speak').addEventListener('click', () => {
 if (!liveSupported) {
   liveSetStatus('Voice input requires Chrome, Edge, or Safari. The conversation still works if you type — coming in next update.', 'error');
 }
+
+// ===== VOICE TUTOR =====
+let vtRecognition = null, vtHistory = [], vtSpeaking = null;
+const vtSupported = ('webkitSpeechRecognition' in window) || ('SpeechRecognition' in window);
+
+function vtSetStatus(text, kind) {
+  const el = $('vt-status');
+  el.textContent = text;
+  el.className = 'status' + (kind ? (' ' + kind) : '');
+}
+
+function vtSetButton(state, label) {
+  const btn = $('vt-mic');
+  btn.classList.remove('listening', 'thinking', 'speaking');
+  if (state) btn.classList.add(state);
+  $('vt-mic-label').textContent = label;
+}
+
+function vtAddTurn(who, text) {
+  $('vt-transcript-card').style.display = 'block';
+  const div = document.createElement('div');
+  div.className = 'live-turn ' + who;
+  div.innerHTML = `<span class="who">${who === 'user' ? 'You said' : 'AI tutor'}</span>${text}`;
+  $('vt-transcript').appendChild(div);
+  $('vt-transcript').scrollTop = $('vt-transcript').scrollHeight;
+}
+
+async function vtHandleTranscript(transcript) {
+  vtAddTurn('user', transcript);
+  vtSetButton('thinking', 'Thinking…');
+  vtSetStatus('AI tutor is thinking…', '');
+  try {
+    const fd = new FormData();
+    fd.set('transcript', transcript);
+    fd.set('history_json', JSON.stringify(vtHistory.slice(-8)));
+    const lessonId = $('vt-lesson-id') ? $('vt-lesson-id').value.trim() : '';
+    if (lessonId) fd.set('lesson_id', lessonId);
+    const r = await fetch('/voice/respond', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    const j = await r.json();
+    vtHistory.push({ role: 'user', content: transcript });
+    vtHistory.push({ role: 'assistant', content: j.reply });
+    vtAddTurn('tutor', j.reply);
+    vtSpeak(j.reply);
+  } catch (err) {
+    const msg = err.message.includes('not configured')
+      ? 'AI service not set up on this server — set ANTHROPIC_API_KEY to enable voice replies.'
+      : 'Error: ' + err.message;
+    vtSetStatus(msg, 'error');
+    vtSetButton(null, 'Tap to speak');
+  }
+}
+
+function vtSpeak(text) {
+  if (!('speechSynthesis' in window)) {
+    vtSetStatus('Browser does not support text-to-speech.', 'error');
+    vtSetButton(null, 'Tap to speak');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  const lang = $('vt-lang-sel').value;
+  u.lang = lang;
+  u.rate = 0.92; u.pitch = 1.0;
+  vtSpeaking = u;
+  u.onstart = () => { vtSetButton('speaking', 'Speaking…'); vtSetStatus('AI tutor is speaking…', ''); };
+  u.onend = () => {
+    vtSpeaking = null;
+    vtSetButton(null, 'Tap to speak');
+    vtSetStatus('Ready. Tap the mic to continue.', 'ok');
+  };
+  u.onerror = () => {
+    vtSpeaking = null;
+    vtSetButton(null, 'Tap to speak');
+    vtSetStatus('TTS error. Tap the mic again to retry.', 'error');
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function vtStart() {
+  if (!vtSupported) {
+    vtSetStatus('Voice input requires Chrome, Edge, or Safari.', 'error'); return;
+  }
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new Rec();
+  rec.lang = $('vt-lang-sel').value;
+  rec.continuous = false;
+  rec.interimResults = false;
+  rec.maxAlternatives = 1;
+  rec.onstart = () => {
+    vtSetButton('listening', 'Listening… tap to stop');
+    vtSetStatus('Listening — speak naturally.', '');
+  };
+  rec.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    if (transcript && transcript.trim()) vtHandleTranscript(transcript.trim());
+    else { vtSetButton(null, 'Tap to speak'); vtSetStatus("Didn't catch that. Try again.", 'error'); }
+  };
+  rec.onerror = (e) => {
+    vtSetButton(null, 'Tap to speak');
+    vtSetStatus('Mic error: ' + e.error + '. Check permissions.', 'error');
+  };
+  rec.onend = () => {
+    if ($('vt-mic').classList.contains('listening')) {
+      vtSetButton(null, 'Tap to speak');
+      vtSetStatus('Ready. Tap the mic to start.', '');
+    }
+  };
+  rec.start();
+  vtRecognition = rec;
+}
+
+function vtStop() {
+  if (vtRecognition) {
+    try { vtRecognition.stop(); } catch {}
+    vtRecognition = null;
+  }
+}
+
+$('vt-mic').addEventListener('click', () => {
+  if (!requireAuthOrPrompt()) return;
+  const btn = $('vt-mic');
+  if (btn.classList.contains('listening')) { vtStop(); return; }
+  if (btn.classList.contains('thinking') || btn.classList.contains('speaking')) {
+    window.speechSynthesis.cancel();
+    vtSetButton(null, 'Tap to speak');
+    vtSetStatus('Stopped. Tap the mic to ask again.', '');
+    return;
+  }
+  vtStart();
+});
+
+$('vt-clear').addEventListener('click', () => {
+  vtHistory = [];
+  $('vt-transcript').innerHTML = '';
+  $('vt-transcript-card').style.display = 'none';
+  vtSetStatus('New conversation. Tap the mic to start.', '');
+});
+
+$('vt-stop-speak').addEventListener('click', () => {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  vtSetButton(null, 'Tap to speak');
+  vtSetStatus('Voice stopped.', '');
+});
+
+if (!vtSupported) {
+  vtSetStatus('Voice input requires Chrome, Edge, or Safari.', 'error');
+}
+
+// ===== ESSAY GRADER =====
+let egRubrics = [];
+
+async function egLoadRubrics() {
+  const exam = $('eg-exam').value;
+  try {
+    const r = await fetch(`/api/essay/rubrics?exam=${encodeURIComponent(exam)}`, { headers: authHeaders() });
+    const j = await r.json().catch(() => ({ rows: [] }));
+    egRubrics = j.rows || [];
+    const sel = $('eg-rubric-sel');
+    sel.innerHTML = '';
+    if (!egRubrics.length) {
+      sel.innerHTML = '<option value="">No rubrics for this exam yet</option>';
+      $('eg-submit').disabled = true;
+    } else {
+      egRubrics.forEach(rb => {
+        const opt = document.createElement('option');
+        opt.value = rb.id;
+        opt.textContent = `${rb.paper}${rb.topic ? ' — ' + rb.topic : ''} (${rb.max_marks} marks)`;
+        sel.appendChild(opt);
+      });
+      $('eg-submit').disabled = false;
+    }
+  } catch {}
+}
+
+$('eg-exam').addEventListener('change', egLoadRubrics);
+
+document.addEventListener('moduleShow', (e) => {
+  if (e.detail === 'essay') {
+    egLoadRubrics();
+    showAiNote('eg-status', 'essay_grader');
+  }
+  if (e.detail === 'voice') showAiNote('vt-status', 'voice_tutor');
+  if (e.detail === 'live') showAiNote('live-status', 'live_lecture');
+  if (e.detail === 'mathvision') showAiNote('mv-status', 'math_vision');
+  if (e.detail === 'interview') showAiNote('mi-status', 'mock_interview');
+});
+
+$('eg-submit').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
+  const rubricId = $('eg-rubric-sel').value;
+  const text = $('eg-text').value.trim();
+  if (!rubricId) {
+    $('eg-status').textContent = 'No rubric available for this exam. Ask your teacher to add one.';
+    $('eg-status').className = 'status error';
+    return;
+  }
+  if (!text || text.split(/\s+/).length < 10) {
+    $('eg-status').textContent = 'Please write at least 10 words for grading.';
+    $('eg-status').className = 'status error';
+    return;
+  }
+  $('eg-status').textContent = 'Grading your answer… this may take 10-20 seconds.';
+  $('eg-status').className = 'status';
+  $('eg-submit').disabled = true;
+  try {
+    const fd = new FormData();
+    fd.set('rubric_id', rubricId);
+    fd.set('text', text);
+    fd.set('grade_now', 'true');
+    const r = await fetch('/api/essay/submissions', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    const j = await r.json();
+    $('eg-status').textContent = '';
+    $('eg-form-card').style.display = 'none';
+    $('eg-result').style.display = '';
+    const grade = j.ai_grade || {};
+    const rubric = egRubrics.find(rb => rb.id === rubricId) || {};
+    const score = grade.score !== undefined ? grade.score : null;
+    $('eg-score-display').textContent = score !== null ? `${score} / ${rubric.max_marks || 100}` : 'Graded';
+    const byC = grade.by_criterion || {};
+    const criteria = Array.isArray(byC)
+      ? byC
+      : Object.entries(byC).map(([name, v]) => ({ name, ...v }));
+    $('eg-criteria-list').innerHTML = criteria.map(c =>
+      `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
+        <span>${c.name || c.criterion}</span><span style="font-weight:600;">${c.score !== undefined ? c.score + '/' + (c.weight || c.max_marks || c.max || '?') : '—'}</span>
+      </div>`
+    ).join('');
+    $('eg-feedback').textContent = grade.summary || grade.overall_feedback || 'Graded — see criteria above.';
+    const suggestions = grade.suggestions || [];
+    if (suggestions.length) {
+      $('eg-feedback').textContent += '\n\nSuggestions:\n' + suggestions.map((s, i) => `${i+1}. ${s}`).join('\n');
+    }
+    if (grade.error) {
+      $('eg-feedback').textContent = 'Grading encountered an issue: ' + grade.error;
+    }
+    $('eg-model-answer-card').style.display = 'none';
+  } catch (err) {
+    $('eg-status').textContent = 'Error: ' + err.message;
+    $('eg-status').className = 'status error';
+  } finally {
+    $('eg-submit').disabled = false;
+  }
+});
+
+$('eg-try-again').addEventListener('click', () => {
+  $('eg-result').style.display = 'none';
+  $('eg-form-card').style.display = '';
+  $('eg-text').value = '';
+  $('eg-status').textContent = '';
+});
+
+// ===== MATH VISION =====
+async function mvSubmitAndShow() {
+  if (!requireAuthOrPrompt()) return;
+  const imageUrl = $('mv-image-url').value.trim();
+  if (!imageUrl.startsWith('http')) {
+    $('mv-status').textContent = 'Please enter a valid image URL starting with https://';
+    $('mv-status').className = 'status error';
+    return;
+  }
+  $('mv-status').textContent = 'Reading your handwritten math… (10-30 seconds)';
+  $('mv-status').className = 'status';
+  $('mv-submit').disabled = true;
+  try {
+    const fd = new FormData();
+    fd.set('image_url', imageUrl);
+    fd.set('expected_language', $('mv-lang').value);
+    fd.set('auto_extract', 'true');
+    const r = await fetch('/api/math-vision/submit', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    const j = await r.json();
+    // Handle no-provider / errored state before showing result panel
+    if (j.status === 'errored') {
+      const errMsg = j.error === 'no_provider'
+        ? 'AI not configured — set ANTHROPIC_API_KEY on the server to enable Math Vision.'
+        : ('Extraction failed: ' + (j.error || 'unknown error'));
+      throw new Error(errMsg);
+    }
+    if (j.status === 'rejected') {
+      throw new Error('Image confidence too low — try a clearer, well-lit photo of the handwritten math.');
+    }
+    $('mv-status').textContent = '';
+    $('mv-form-card').style.display = 'none';
+    $('mv-result').style.display = '';
+    window._mvSubmissionId = j.id;
+    const steps = j.steps || [];
+    if (steps.length) {
+      $('mv-steps').innerHTML = steps.map((s, i) =>
+        `<div style="padding:4px 0;"><span style="color:var(--muted);margin-right:8px;">Step ${i+1}:</span>${s}</div>`
+      ).join('');
+    } else {
+      $('mv-steps').textContent = j.extracted_latex || 'No steps extracted — the image may be unclear.';
+    }
+    $('mv-validation').textContent = 'Click "Validate steps" to check each step.';
+  } catch (err) {
+    $('mv-status').textContent = 'Error: ' + err.message;
+    $('mv-status').className = 'status error';
+  } finally {
+    $('mv-submit').disabled = false;
+  }
+}
+
+$('mv-submit').addEventListener('click', mvSubmitAndShow);
+
+$('mv-validate-btn').addEventListener('click', async () => {
+  const sid = window._mvSubmissionId;
+  if (!sid) return;
+  $('mv-validate-btn').disabled = true;
+  $('mv-validation').textContent = 'Validating each step…';
+  try {
+    const r = await fetch(`/api/math-vision/${sid}/validate`, { method: 'POST', headers: authHeaders() });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    const j = await r.json();
+    const perStep = j.per_step || [];
+    if (perStep.length) {
+      $('mv-validation').innerHTML = perStep.map((s, i) => {
+        const ok = s.valid === true;
+        const col = ok ? '#2e7d32' : '#c62828';
+        return `<div style="padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:baseline;">
+          <span style="font-weight:700;color:${col};">${ok ? '✓' : '✗'}</span>
+          <span style="font-size:13px;">${s.step || ('Step ' + (i+1))}</span>
+          ${s.note ? `<span style="font-size:12px;color:var(--muted);">${s.note}</span>` : ''}
+        </div>`;
+      }).join('');
+      if (j.first_wrong_step !== null && j.first_wrong_step !== undefined) {
+        $('mv-validation').innerHTML += `<div style="margin-top:10px;padding:10px;background:#fff3e0;border-radius:8px;font-size:13px;">First error at step ${j.first_wrong_step + 1}. Check your working from that point.</div>`;
+      } else {
+        $('mv-validation').innerHTML += `<div style="margin-top:10px;padding:10px;background:#e8f5e9;border-radius:8px;font-size:13px;">All steps valid!</div>`;
+      }
+    } else {
+      $('mv-validation').textContent = j.overall ? 'All steps look correct!' : 'Could not validate — try again.';
+    }
+  } catch (err) {
+    $('mv-validation').textContent = 'Validation error: ' + err.message;
+  } finally {
+    $('mv-validate-btn').disabled = false;
+  }
+});
+
+$('mv-try-again').addEventListener('click', () => {
+  $('mv-result').style.display = 'none';
+  $('mv-form-card').style.display = '';
+  $('mv-image-url').value = '';
+  $('mv-status').textContent = '';
+  window._mvSubmissionId = null;
+});
+
+// ===== MOCK INTERVIEW =====
+let miInterviewId = null, miCurrentTurnIndex = 0, miRecognition = null;
+const miSupported = ('webkitSpeechRecognition' in window) || ('SpeechRecognition' in window);
+
+$('mi-start').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
+  const track = $('mi-track').value;
+  $('mi-status').textContent = 'Starting interview…';
+  $('mi-status').className = 'status';
+  $('mi-start').disabled = true;
+  try {
+    const fd = new FormData();
+    fd.set('track', track);
+    const r = await fetch('/api/mock-interviews', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    const j = await r.json();
+    // API returns { interview_id, track, started_at, opener: { turn_index, question_text } }
+    miInterviewId = j.interview_id;
+    miCurrentTurnIndex = j.opener ? j.opener.turn_index : 0;
+    $('mi-status').textContent = '';
+    $('mi-start-card').style.display = 'none';
+    $('mi-session').style.display = '';
+    $('mi-question').textContent = j.opener ? j.opener.question_text : 'Interview started.';
+    $('mi-turn-label').textContent = `Question ${miCurrentTurnIndex + 1}`;
+    $('mi-transcript-log').innerHTML = '';
+  } catch (err) {
+    $('mi-status').textContent = 'Error: ' + err.message;
+    $('mi-status').className = 'status error';
+  } finally {
+    $('mi-start').disabled = false;
+  }
+});
+
+async function miSubmitAnswer(answer) {
+  if (!answer.trim() || !miInterviewId) return;
+  $('mi-answer-status').textContent = 'Evaluating…';
+  $('mi-submit-answer').disabled = true;
+  try {
+    const fd = new FormData();
+    fd.set('turn_index', miCurrentTurnIndex);
+    fd.set('answer_text', answer);
+    const r = await fetch(`/api/mock-interviews/${miInterviewId}/answer`, { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    // API returns { feedback, interview_ended, next: { turn_index, question_text } | null }
+    const j = await r.json();
+    $('mi-answer-status').textContent = '';
+    $('mi-text-input').value = '';
+    const log = $('mi-transcript-log');
+    log.innerHTML += `<div class="card" style="margin-bottom:8px;padding:12px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Your answer</div>
+      <div style="font-size:14px;">${answer}</div>
+      ${j.feedback ? `<div style="margin-top:8px;font-size:12px;color:#2e7d32;background:#e8f5e9;padding:6px 10px;border-radius:6px;">${typeof j.feedback === 'string' ? j.feedback : (j.feedback.comment || JSON.stringify(j.feedback))}</div>` : ''}
+    </div>`;
+    log.scrollTop = log.scrollHeight;
+    if (j.interview_ended || !j.next) {
+      miAutoEnd();
+    } else {
+      miCurrentTurnIndex = j.next.turn_index;
+      $('mi-turn-label').textContent = `Question ${miCurrentTurnIndex + 1}`;
+      $('mi-question').textContent = j.next.question_text;
+    }
+  } catch (err) {
+    $('mi-answer-status').textContent = 'Error: ' + err.message;
+    $('mi-answer-status').className = 'status error';
+  } finally {
+    $('mi-submit-answer').disabled = false;
+  }
+}
+
+async function miAutoEnd() {
+  try {
+    const r = await fetch(`/api/mock-interviews/${miInterviewId}/end`, { method: 'POST', headers: authHeaders() });
+    const j = await r.json().catch(() => ({}));
+    miShowReport(j);
+  } catch {}
+}
+
+function miShowReport(data) {
+  $('mi-session').style.display = 'none';
+  $('mi-report').style.display = '';
+  const score = data.overall_score !== undefined ? data.overall_score : (data.feedback && data.feedback.overall_score);
+  $('mi-overall-score').textContent = score !== undefined && score !== null
+    ? `Overall score: ${Math.round(score * 10) / 10} / 100`
+    : 'Interview complete';
+  const fb = data.feedback || {};
+  let html = '';
+  if (typeof fb === 'string') {
+    html = `<p>${fb}</p>`;
+  } else {
+    // Summaries array (heuristic path) or single summary string
+    const summaries = fb.summaries || (fb.summary ? [fb.summary] : []);
+    if (summaries.length) html += `<p style="margin-bottom:10px;">${summaries.join(' ')}</p>`;
+    if (fb.detailed_feedback) html += `<p>${fb.detailed_feedback}</p>`;
+
+    // criteria_avg is a dict {clarity:8, depth:2, ...}; criteria_averages/criteria may be an array
+    const critRaw = fb.criteria_averages || fb.criteria;
+    const critDict = fb.criteria_avg;
+    let crit = [];
+    if (Array.isArray(critRaw) && critRaw.length) {
+      crit = critRaw;
+    } else if (critDict && typeof critDict === 'object') {
+      crit = Object.entries(critDict).map(([name, avg]) => ({ name, avg }));
+    }
+    if (crit.length) {
+      html += '<div style="margin-top:12px;">';
+      crit.forEach(c => {
+        const val = c.score !== undefined ? c.score : (c.avg !== undefined ? c.avg : null);
+        const pct = val !== null ? Math.round((val / (c.max || 10)) * 100) : 50;
+        html += `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
+          <span style="text-transform:capitalize;">${c.name || c.criterion}</span>
+          <span style="font-weight:600;color:${pct>=70?'#2e7d32':pct>=40?'var(--brand)':'#c62828'}">${val !== null ? val + ' / 10' : '—'}</span>
+        </div>`;
+      });
+      html += '</div>';
+    }
+
+    // Improvement tips
+    const tips = fb.top_improvements || fb.improvements || [];
+    if (tips.length) {
+      html += `<div style="margin-top:14px;font-size:13px;"><strong>Areas to improve:</strong><ul style="margin:6px 0 0 18px;">`;
+      tips.forEach(t => { html += `<li style="margin-bottom:4px;">${t}</li>`; });
+      html += '</ul></div>';
+    }
+
+    if (!html) html = `<p>Interview ended. ${score !== undefined ? 'See your score above.' : 'No detailed report available.'}</p>`;
+  }
+  $('mi-report-body').innerHTML = html;
+}
+
+$('mi-submit-answer').addEventListener('click', () => {
+  miSubmitAnswer($('mi-text-input').value.trim());
+});
+
+$('mi-text-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); miSubmitAnswer($('mi-text-input').value.trim()); }
+});
+
+$('mi-mic').addEventListener('click', () => {
+  if (!miSupported) { $('mi-answer-status').textContent = 'Voice needs Chrome/Edge/Safari.'; return; }
+  const btn = $('mi-mic');
+  if (btn.classList.contains('listening')) {
+    if (miRecognition) { try { miRecognition.stop(); } catch {} miRecognition = null; }
+    btn.classList.remove('listening');
+    $('mi-mic-label').textContent = 'Tap to answer';
+    return;
+  }
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new Rec();
+  rec.lang = 'en-IN'; rec.continuous = false; rec.interimResults = false;
+  rec.onstart = () => { btn.classList.add('listening'); $('mi-mic-label').textContent = 'Listening…'; };
+  rec.onresult = (e) => {
+    const t = e.results[0][0].transcript;
+    $('mi-text-input').value = t;
+    btn.classList.remove('listening');
+    $('mi-mic-label').textContent = 'Tap to answer';
+  };
+  rec.onerror = () => { btn.classList.remove('listening'); $('mi-mic-label').textContent = 'Tap to answer'; };
+  rec.onend = () => { btn.classList.remove('listening'); $('mi-mic-label').textContent = 'Tap to answer'; };
+  rec.start(); miRecognition = rec;
+});
+
+$('mi-end').addEventListener('click', () => miAutoEnd());
+
+$('mi-restart').addEventListener('click', () => {
+  miInterviewId = null;
+  $('mi-report').style.display = 'none';
+  $('mi-session').style.display = 'none';
+  $('mi-start-card').style.display = '';
+  $('mi-status').textContent = '';
+  $('mi-transcript-log').innerHTML = '';
+});
+
+// ===== ADAPTIVE PRACTICE =====
+async function apLoadExamPacks() {
+  try {
+    const r = await fetch('/api/exam-packs');
+    const j = await r.json().catch(() => ({ packs: [] }));
+    const packs = j.packs || [];
+    const sel = $('ap-pack');
+    sel.innerHTML = '';
+    if (!packs.length) {
+      sel.innerHTML = '<option value="">No exam packs available</option>';
+      return;
+    }
+    packs.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.code;
+      opt.textContent = p.title;
+      sel.appendChild(opt);
+    });
+  } catch {}
+}
+
+async function apLoadMyPacks() {
+  if (!token) {
+    $('ap-list').innerHTML = '<div style="color:var(--muted);font-size:13px;">Sign in to see your adaptive packs.</div>';
+    $('ap-list-card').style.display = '';
+    return;
+  }
+  try {
+    const r = await fetch('/api/adaptive-packs/me', { headers: authHeaders() });
+    if (!r.ok) return;
+    const j = await r.json();
+    const packs = j.packs || [];
+    if (packs.length === 0) {
+      $('ap-list').innerHTML = '<div style="color:var(--muted);font-size:13px;">No packs yet — select an exam pack above and click Create.</div>';
+    } else {
+      $('ap-list').innerHTML = packs.map(p =>
+        `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);">
+          <div>
+            <div style="font-weight:600;font-size:14px;">${p.title || p.base_pack_code}</div>
+            <div style="font-size:12px;color:var(--muted);">${p.base_pack_code} · Difficulty: ${p.current_difficulty || 'auto'}</div>
+          </div>
+          <button class="btn-ghost" style="font-size:12px;padding:5px 10px;" onclick="apOpenPack('${p.base_pack_code}')">Topics →</button>
+        </div>`
+      ).join('');
+    }
+    $('ap-list-card').style.display = '';
+  } catch {}
+}
+
+async function apOpenPack(packCode) {
+  try {
+    const r = await fetch(`/api/adaptive-packs/${packCode}/topics`, { headers: authHeaders() });
+    if (!r.ok) {
+      $('ap-list').innerHTML = `<div style="color:var(--muted);font-size:13px;">Topics not yet available — the pack is adapting. Try again after your first practice session.</div><button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadMyPacks()">← Back</button>`;
+      return;
+    }
+    const j = await r.json();
+    const topics = j.topics || [];
+    $('ap-list').innerHTML = `<div style="font-weight:600;font-size:14px;margin-bottom:8px;">${packCode} — Topics &amp; Weightage</div>` +
+      (topics.length ? topics.map(t => {
+        const label = t.title || t.topic || t.topic_code || '—';
+        // mastery (0-1) if present; otherwise show adjusted_weightage as percentage of total
+        const mastery = t.mastery !== undefined ? t.mastery : null;
+        const wt = t.adjusted_weightage || t.base_weightage || 0;
+        const pct = mastery !== null ? Math.round(mastery * 100) : null;
+        const color = mastery !== null ? (mastery >= 0.8 ? '#2e7d32' : mastery >= 0.5 ? 'var(--brand)' : '#c62828') : 'var(--muted)';
+        const right = pct !== null
+          ? `<span style="font-weight:600;color:${color};">${pct}% mastery</span>`
+          : `<span style="color:var(--muted);font-size:12px;">${t.is_personalised ? '★ ' : ''}${wt}% weight</span>`;
+        return `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
+          <span>${label}</span>${right}
+        </div>`;
+      }).join('') : '<div style="color:var(--muted);font-size:13px;">No topic data yet.</div>') +
+      `<button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadMyPacks()">← Back to my packs</button>`;
+  } catch {}
+}
+
+$('ap-create').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
+  const pack = $('ap-pack').value;
+  if (!pack) {
+    $('ap-status').textContent = 'Please select an exam pack.';
+    $('ap-status').className = 'status error';
+    return;
+  }
+  $('ap-status').textContent = 'Creating adaptive pack…';
+  $('ap-status').className = 'status';
+  $('ap-create').disabled = true;
+  try {
+    const fd = new FormData();
+    fd.set('base_pack_code', pack);
+    const r = await fetch('/api/adaptive-packs', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.detail || `HTTP ${r.status}`);
+    }
+    $('ap-status').textContent = 'Pack created! You can now view your topic mastery.';
+    $('ap-status').className = 'status ok';
+    await apLoadMyPacks();
+  } catch (err) {
+    $('ap-status').textContent = 'Error: ' + err.message;
+    $('ap-status').className = 'status error';
+  } finally {
+    $('ap-create').disabled = false;
+  }
+});
+
+$('ap-refresh').addEventListener('click', apLoadMyPacks);
+
+// Load on module show
+document.addEventListener('moduleShow', (e) => {
+  if (e.detail === 'adaptive') {
+    apLoadExamPacks(); apLoadMyPacks();
+    showAiNote('ap-status', 'ai_synthesis');
+  }
+});
+
+// ===== PRACTICE TESTS =====
+// answers format: {question_id: "a"} — letter chosen, maps to correct_answer comparison
+let ptCurrentTest = null;
+let ptTimerInterval = null;
+const PT_LETTERS = ['a','b','c','d','e'];
+
+async function ptLoadHistory() {
+  if (!token) {
+    $('pt-history').innerHTML = '<em style="color:var(--muted-text);">Sign in to see your test history.</em>';
+    return;
+  }
+  try {
+    const r = await fetch('/api/practice-tests', { headers: authHeaders() });
+    const data = await r.json();
+    if (!data.rows || data.rows.length === 0) {
+      $('pt-history').innerHTML = '<em style="color:var(--muted-text);">No tests yet.</em>';
+      return;
+    }
+    $('pt-history').innerHTML = data.rows.map(t => {
+      const scoreStr = (t.score != null && t.max != null) ? `${t.score}/${t.max}` : '—';
+      const statusHtml = t.status === 'submitted'
+        ? `<span style="color:var(--green,#22c55e);">${scoreStr}</span>`
+        : `<span style="color:var(--accent);">${t.status}</span>`;
+      const dt = t.submitted_at ? new Date(t.submitted_at * 1000).toLocaleDateString() : 'in progress';
+      return `<div style="padding:8px 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; font-size:13px;">
+        <span><strong>${t.exam}</strong> · ${t.subject} · ${t.question_count} Qs · ${t.target_minutes}min</span>
+        <span>${statusHtml} <span style="color:var(--muted-text);">${dt}</span></span>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    $('pt-history').innerHTML = `<em style="color:var(--error);">Could not load history: ${e.message}</em>`;
+  }
+}
+
+function ptRenderQuestions(questions) {
+  $('pt-questions').innerHTML = questions.map((q, i) => {
+    const qid = q.id || `q${i}`;
+    const opts = (q.options && q.options.length)
+      ? q.options.map((o, j) => `
+          <label style="display:flex;gap:8px;align-items:flex-start;margin:6px 0;cursor:pointer;">
+            <input type="radio" name="ptq-${qid}" data-qid="${qid}" data-letter="${PT_LETTERS[j]}" style="margin-top:3px;"> <span>${o}</span>
+          </label>`).join('')
+      : `<textarea id="pttext-${qid}" data-qid="${qid}" rows="3" style="width:100%;margin-top:8px;padding:8px;" placeholder="Your answer…"></textarea>`;
+    return `<div class="card" style="margin-bottom:10px;padding:14px;">
+      <div style="font-weight:600;margin-bottom:8px;line-height:1.5;">Q${i+1}. ${q.question_text}</div>
+      ${opts}
+    </div>`;
+  }).join('');
+}
+
+function ptStartTimer(minutes) {
+  let remaining = minutes * 60;
+  const update = () => {
+    if (remaining < 0) return;
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    $('pt-timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    if (remaining === 0) {
+      clearInterval(ptTimerInterval);
+      $('pt-timer').textContent = 'Time up!';
+      $('pt-timer').style.color = 'var(--error, #ef4444)';
+      ptSubmitTest();
+    }
+    remaining--;
+  };
+  update();
+  ptTimerInterval = setInterval(update, 1000);
+}
+
+async function ptSubmitTest() {
+  if (!ptCurrentTest) return;
+  clearInterval(ptTimerInterval);
+
+  // Build answers dict: {question_id: chosen_letter}
+  const answers = {};
+  for (const q of ptCurrentTest.questions) {
+    const qid = q.id;
+    // MCQ: find checked radio
+    const checked = document.querySelector(`input[name="ptq-${qid}"]:checked`);
+    if (checked) {
+      answers[qid] = checked.dataset.letter;
+      continue;
+    }
+    // Free text: look for textarea
+    const ta = document.getElementById(`pttext-${qid}`);
+    if (ta && ta.value.trim()) {
+      answers[qid] = ta.value.trim();
+    }
+  }
+
+  ptSetSubmitStatus('Submitting…', '');
+  try {
+    const fd = new FormData();
+    fd.append('answers_json', JSON.stringify(answers));
+    const r = await fetch(`/api/practice-tests/${ptCurrentTest.id}/submit`, { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
+    const result = await r.json();
+    const score = result.score || {};
+    const pct = score.pct != null ? Math.round(score.pct * 100) : null;
+
+    // Build per-question review from score + stored questions
+    const qMap = Object.fromEntries((ptCurrentTest.questions || []).map(q => [q.id, q]));
+    const reviewHtml = (score.per_question || []).map((rv, i) => {
+      const origQ = qMap[rv.question_id] || {};
+      return `<div style="padding:10px; margin-bottom:6px; border-radius:6px; background:${rv.is_correct ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)'}; border-left:3px solid ${rv.is_correct ? '#22c55e' : '#ef4444'};">
+        <div style="font-weight:600; margin-bottom:4px;">${rv.is_correct ? '✓' : '✗'} Q${i+1}: ${origQ.question_text || ''}</div>
+        <div style="font-size:12px; color:var(--muted-text);">Your answer: <strong>${rv.chosen || '(blank)'}</strong>${rv.is_correct ? '' : ` · Correct: <strong>${rv.correct}</strong>`}</div>
+      </div>`;
+    }).join('');
+
+    $('pt-test-card').style.display = 'none';
+    $('pt-report-card').style.display = '';
+    $('pt-report').innerHTML = `
+      <div style="font-size:2.4em; font-weight:700; color:var(--accent); margin-bottom:4px;">${score.total ?? '?'} / ${score.max ?? '?'}</div>
+      <div style="color:var(--muted-text); margin-bottom:18px; font-size:1.1em;">${pct != null ? pct + '% correct' : ''}</div>
+      ${reviewHtml}`;
+    await ptLoadHistory();
+  } catch(e) {
+    ptSetSubmitStatus('Error: ' + e.message, 'error');
+  }
+}
+
+function ptSetStatus(msg, cls) {
+  const el = $('pt-status');
+  el.textContent = msg; el.className = 'status ' + (cls || '');
+}
+
+function ptSetSubmitStatus(msg, cls) {
+  const el = $('pt-submit-status');
+  el.textContent = msg; el.className = 'status ' + (cls || '');
+}
+
+$('pt-create').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
+  const exam = $('pt-exam').value;
+  const subject = ($('pt-subject').value || '').trim();
+  const minutes = parseInt($('pt-minutes').value);
+  if (!subject) { ptSetStatus('Please enter a subject.', 'error'); return; }
+
+  ptSetStatus('Generating test…', '');
+  $('pt-create').disabled = true;
+  try {
+    // 1. Create the test record
+    const fd = new FormData();
+    fd.append('exam', exam);
+    fd.append('subject', subject);
+    fd.append('target_minutes', minutes);
+    const r = await fetch('/api/practice-tests', { method: 'POST', headers: authHeaders(), body: fd });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
+    const test = await r.json();
+
+    // 2. Start the test (marks it in_progress)
+    const r2 = await fetch(`/api/practice-tests/${test.id}/start`, { method: 'POST', headers: authHeaders(), body: new FormData() });
+    if (!r2.ok) { const e2 = await r2.json(); throw new Error(e2.detail || r2.statusText); }
+
+    // 3. Fetch full test with questions
+    const r3 = await fetch(`/api/practice-tests/${test.id}`, { headers: authHeaders() });
+    if (!r3.ok) { const e3 = await r3.json(); throw new Error(e3.detail || r3.statusText); }
+    const fullTest = await r3.json();
+    ptCurrentTest = fullTest;
+
+    if (!fullTest.questions || fullTest.questions.length === 0) {
+      ptSetStatus('No questions found for this exam/subject combination. Try "generic" exam or a different subject.', 'error');
+      $('pt-create').disabled = false;
+      return;
+    }
+
+    ptSetStatus('', '');
+    $('pt-form-card').style.display = 'none';
+    $('pt-test-card').style.display = '';
+    $('pt-report-card').style.display = 'none';
+    $('pt-test-title').textContent = `${exam.toUpperCase()} · ${subject} · ${minutes} min`;
+    // Warn if server generated placeholder questions (no question bank + no API key)
+    if (fullTest.generation_method === 'placeholder') {
+      $('pt-submit-status').textContent =
+        'Note: real questions require ANTHROPIC_API_KEY on the server. '
+        + 'These are placeholder questions for layout testing.';
+      $('pt-submit-status').className = 'status';
+    }
+    ptRenderQuestions(fullTest.questions);
+    clearInterval(ptTimerInterval);
+    ptStartTimer(minutes);
+    await ptLoadHistory();
+  } catch(e) {
+    ptSetStatus('Error: ' + e.message, 'error');
+  } finally {
+    $('pt-create').disabled = false;
+  }
+});
+
+$('pt-submit').addEventListener('click', ptSubmitTest);
+
+$('pt-new').addEventListener('click', () => {
+  ptCurrentTest = null;
+  clearInterval(ptTimerInterval);
+  $('pt-form-card').style.display = '';
+  $('pt-test-card').style.display = 'none';
+  $('pt-report-card').style.display = 'none';
+  ptSetStatus('', '');
+});
+
+$('pt-refresh').addEventListener('click', ptLoadHistory);
+
+document.addEventListener('moduleShow', (e) => {
+  if (e.detail === 'practice') {
+    ptLoadHistory();
+    showAiNote('pt-status', 'ai_synthesis');
+  }
+});
 
 // ===== EXPLAINER =====
 let exLast = null;
@@ -8376,6 +9622,35 @@ def health() -> JSONResponse:
     return JSONResponse(checks)
 
 
+@app.get("/api/ai-status")
+def ai_status() -> JSONResponse:
+    """Returns which AI features are configured on this server.
+    Safe to call without auth — exposes no secrets, just boolean flags."""
+    has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    has_video = bool(
+        os.environ.get("HEYGEN_API_KEY") or
+        os.environ.get("DID_API_KEY") or
+        os.environ.get("TAVUS_API_KEY")
+    )
+    return JSONResponse({
+        "anthropic_configured": has_anthropic,
+        "video_configured": has_video,
+        "features": {
+            "voice_tutor": has_anthropic,           # requires Claude; no fallback
+            "live_lecture": has_anthropic,          # requires Claude; no fallback
+            "essay_grader": True,                   # heuristic fallback works without key
+            "math_vision": has_anthropic,           # requires Claude; no fallback
+            "mock_interview": True,                 # heuristic fallback always works
+            "adaptive_practice": True,              # rule-based; works without key
+            "practice_tests": True,                 # placeholder mode without key
+            "ai_synthesis": has_anthropic,          # question/content generation
+            "lesson_generation": has_anthropic,
+        },
+        # Features that work but are degraded without the API key
+        "degraded_without_ai": [] if has_anthropic else ["essay_grader", "mock_interview", "practice_tests"],
+    })
+
+
 # ---- auth -----------------------------------------------------------------
 
 
@@ -8452,7 +9727,7 @@ def signup(
     terms_accepted: bool = Form(False),
 ) -> JSONResponse:
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
+        raise HTTPException(503, "auth not configured — restart the server")
     if not terms_accepted:
         raise HTTPException(400, "you must accept the Terms of Service to create an account")
     if "@" not in email:
@@ -10845,7 +12120,7 @@ def create_parent_link(
     if role not in ("parent", "child"):
         raise HTTPException(400, "role must be 'parent' or 'child'")
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
+        raise HTTPException(503, "auth not configured — restart the server")
     other = _get_user_repo().find_by_email(other_email)
     if not other:
         raise HTTPException(404, f"no AI Pathshala account for {other_email}")
@@ -12350,8 +13625,60 @@ def live_respond(
         history = []
     # cap history to last 8 turns to keep prompts small
     history = history[-8:]
-    reply = live_tutor_reply(transcript, history=history)
+    try:
+        reply = live_tutor_reply(transcript, history=history)
+    except Exception as e:
+        err = str(e)
+        if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
+        raise HTTPException(500, f"AI error: {err}")
     return {"transcript": transcript, "reply": reply}
+
+
+@app.post("/voice/respond")
+def voice_respond(
+    request: Request,
+    transcript: str = Form(..., min_length=1, max_length=2000),
+    history_json: str = Form("[]"),
+    lesson_id: str = Form(""),
+    user: AuthUser | None = Depends(current_user),
+):
+    """One turn of the Voice Tutor loop.
+
+    Optional `lesson_id` grounds the reply in the cached lesson (same
+    as the text Doubt Chat). Without a lesson_id it behaves like the
+    Live Lecture endpoint but with the VOICE_TUTOR_SYSTEM prompt.
+    Browser handles ASR + TTS; we only handle the reasoning step."""
+    import json as _json
+    import dataclasses
+    from .pedagogy import voice_tutor_reply
+
+    _rate_key = user.id if user else _rl.client_ip_from_request(request)
+    if not _rl.ai_generation.try_consume(_rate_key):
+        raise HTTPException(429, "Too many requests — please wait before asking again.")
+
+    try:
+        history = _json.loads(history_json) if history_json else []
+        if not isinstance(history, list):
+            history = []
+    except _json.JSONDecodeError:
+        history = []
+    history = history[-8:]
+
+    lesson_json: str | None = None
+    if lesson_id and lesson_id.strip():
+        cached = cache.get_lesson_by_key(lesson_id.strip())
+        if cached is not None:
+            lesson_json = _json.dumps(dataclasses.asdict(cached), ensure_ascii=False)
+
+    try:
+        reply = voice_tutor_reply(transcript, history=history, lesson_json=lesson_json)
+    except Exception as e:
+        err = str(e)
+        if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
+        raise HTTPException(500, f"AI error: {err}")
+    return {"transcript": transcript, "reply": reply, "lesson_grounded": lesson_json is not None}
 
 
 @app.get("/jobs")
@@ -13206,7 +14533,7 @@ def change_password(
         raise HTTPException(401, "authentication required")
     _validate_password_complexity(new_password)
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured — set DATABASE_URL")
+        raise HTTPException(503, "auth not configured — restart the server")
     result = _get_user_repo().find_by_email(user.email)
     if not result:
         raise HTTPException(404, "user not found")

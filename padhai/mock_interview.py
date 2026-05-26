@@ -413,7 +413,7 @@ def _grade_answer(
 
     from . import llm_cache, llm_obs
     model = os.environ.get(
-        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5",
+        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5-20251001",
     )
     system_text = _SCORE_SYSTEM_TEMPLATE.format(track=track)
     user_text = (
@@ -529,7 +529,7 @@ def _next_question(
 
     from . import llm_cache, llm_obs
     model = os.environ.get(
-        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5",
+        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5-20251001",
     )
     system_text = _FOLLOWUP_SYSTEM
     convo = []

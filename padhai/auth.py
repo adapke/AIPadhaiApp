@@ -173,6 +173,90 @@ class PostgresUserRepository:
         )
 
 
+# ---- SQLite user repository (dev / single-server mode) --------------------
+
+
+class SQLiteUserRepository:
+    """Local-auth backed by a SQLite `users` table.
+
+    Activates automatically when DATABASE_URL is not set so that
+    signup / login work out of the box in a fresh dev checkout or
+    a single-server production deploy without Postgres."""
+
+    _DDL = """
+    CREATE TABLE IF NOT EXISTS users (
+        id              TEXT PRIMARY KEY,
+        email           TEXT NOT NULL UNIQUE,
+        password_hash   TEXT NOT NULL,
+        subscription_tier  TEXT NOT NULL DEFAULT 'M1',
+        subscription_level TEXT NOT NULL DEFAULT 'L3',
+        account_locked  INTEGER NOT NULL DEFAULT 0,
+        created_at      REAL NOT NULL DEFAULT (unixepoch())
+    );
+    CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+    """
+
+    def __init__(self, db_path: str = "padhai.db"):
+        import sqlite3, uuid as _uuid
+        self._db_path = db_path
+        self._uuid = _uuid
+        conn = sqlite3.connect(db_path)
+        conn.executescript(self._DDL)
+        conn.commit()
+        conn.close()
+
+    def _conn(self):
+        import sqlite3
+        conn = sqlite3.connect(self._db_path)
+        conn.row_factory = sqlite3.Row
+        return conn
+
+    def create(
+        self, email: str, password_hash: str,
+        tier: str = "M1", level: str = "L3",
+    ) -> AuthUser:
+        uid = str(self._uuid.uuid4())
+        with self._conn() as conn:
+            conn.execute(
+                "INSERT INTO users (id, email, password_hash, subscription_tier,"
+                " subscription_level) VALUES (?,?,?,?,?)",
+                (uid, email.lower(), password_hash, tier, level),
+            )
+        return AuthUser(id=uid, email=email.lower(), subscription_tier=tier,
+                        subscription_level=level)
+
+    def find_by_email(self, email: str) -> tuple[AuthUser, str] | None:
+        with self._conn() as conn:
+            row = conn.execute(
+                "SELECT id, email, password_hash, subscription_tier,"
+                " subscription_level, account_locked FROM users WHERE email=?",
+                (email.lower(),),
+            ).fetchone()
+        if not row:
+            return None
+        return (
+            AuthUser(id=row["id"], email=row["email"],
+                     subscription_tier=row["subscription_tier"],
+                     subscription_level=row["subscription_level"],
+                     account_locked=bool(row["account_locked"])),
+            row["password_hash"],
+        )
+
+    def find_by_id(self, user_id: str) -> AuthUser | None:
+        with self._conn() as conn:
+            row = conn.execute(
+                "SELECT id, email, subscription_tier, subscription_level,"
+                " account_locked FROM users WHERE id=?",
+                (user_id,),
+            ).fetchone()
+        if not row:
+            return None
+        return AuthUser(id=row["id"], email=row["email"],
+                        subscription_tier=row["subscription_tier"],
+                        subscription_level=row["subscription_level"],
+                        account_locked=bool(row["account_locked"]))
+
+
 # ---- Tier → provider mapping ---------------------------------------------
 
 # The single source of truth for the LEARN.md §7.1 subscription matrix.
