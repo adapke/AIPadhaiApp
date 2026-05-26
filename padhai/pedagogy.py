@@ -363,6 +363,18 @@ Rules:
 - Be concrete: students need a worked example, not philosophy."""
 
 
+VOICE_TUTOR_SYSTEM = """You are PadhAI's Voice Tutor — a kind, patient AI teacher in a spoken conversation with a student.
+
+Rules:
+- Reply in the SAME language as the student's message. Detect it from the transcript.
+- Keep the answer SHORT — 2-4 sentences, ~30-60 spoken words. The student is listening, not reading.
+- Speak naturally: contractions, simple words, no markdown, no LaTeX, no bullet points.
+- If lesson material is provided, ground your answer in it and mention "as we covered in this lesson" when relevant.
+- If the lesson doesn't cover the question, say so briefly and offer what you know from general knowledge.
+- For numerical problems, walk through ONE clean step at a time.
+- Never start with 'As an AI…'. Just answer like a warm teacher would.
+- If the student asks a non-academic question, gently redirect to studies in one sentence."""
+
 LIVE_TUTOR_SYSTEM = """You are a kind, patient AI tutor speaking aloud with a student in a live conversation.
 
 Rules:
@@ -848,6 +860,33 @@ def live_tutor_reply(
         model=FLASHCARD_MODEL,  # Haiku 4.5 — fast, cheap, conversational
         max_tokens=400,
         system=LIVE_TUTOR_SYSTEM,
+        messages=messages,
+    )
+    return next(b.text for b in response.content if b.type == "text").strip()
+
+
+def voice_tutor_reply(
+    transcript: str,
+    history: list[dict] | None = None,
+    lesson_json: str | None = None,
+    client: anthropic.Anthropic | None = None,
+) -> str:
+    """Lesson-grounded voice reply for the Voice Tutor module.
+
+    If `lesson_json` is provided the model answers in the context of that
+    lesson (same grounding as the text Doubt Chat). Without a lesson it
+    falls back to LIVE_TUTOR_SYSTEM general tutoring.
+    Returns 2-4 sentences in the student's detected language."""
+    client = client or anthropic.Anthropic()
+    system = VOICE_TUTOR_SYSTEM
+    if lesson_json:
+        system = VOICE_TUTOR_SYSTEM + "\n\nLESSON MATERIAL (answer from this first):\n" + lesson_json
+    messages = list(history or [])
+    messages.append({"role": "user", "content": transcript})
+    response = client.messages.create(
+        model=FLASHCARD_MODEL,  # Haiku 4.5 — fast, cheap, conversational
+        max_tokens=400,
+        system=system,
         messages=messages,
     )
     return next(b.text for b in response.content if b.type == "text").strip()
