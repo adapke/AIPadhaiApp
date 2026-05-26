@@ -8796,3 +8796,232 @@ def home_my_dashboard(user=Depends(current_user)):
     from .. import student_home as sh
     user = require_user(user)
     return sh.build_dashboard(user_id=user.id)
+
+
+# ---------- Admin: curriculum topics DB CRUD ----------
+
+_CURRICULUM_TOPICS_DDL = """
+CREATE TABLE IF NOT EXISTS curriculum_topics (
+    id          SERIAL PRIMARY KEY,
+    board       TEXT NOT NULL,
+    class       INTEGER NOT NULL,
+    subject     TEXT NOT NULL,
+    chapter_no  INTEGER NOT NULL,
+    chapter_title TEXT NOT NULL,
+    level       TEXT NOT NULL,
+    summary     TEXT NOT NULL DEFAULT '',
+    topics      JSONB NOT NULL DEFAULT '[]',
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (board, class, subject, chapter_no)
+);
+"""
+
+_curriculum_table_created = False
+
+
+def _ensure_curriculum_table() -> bool:
+    """Create curriculum_topics table if it does not exist. Returns True
+    if a DB connection is available, False in dev/no-DB mode."""
+    global _curriculum_table_created
+    if _curriculum_table_created:
+        return True
+    try:
+        from ..web import get_db_url
+        db_url = get_db_url()
+        if not db_url:
+            return False
+        import psycopg
+        with psycopg.connect(db_url, autocommit=True) as conn:
+            conn.execute(_CURRICULUM_TOPICS_DDL)
+        _curriculum_table_created = True
+        return True
+    except Exception as exc:
+        import logging
+        logging.getLogger(__name__).warning("[curriculum_table] non-fatal: %s", exc)
+        return False
+
+
+@router.get("/api/admin/curriculum")
+def admin_list_curriculum(
+    board: str | None = None,
+    cls: int | None = None,
+    subject: str | None = None,
+    user=Depends(current_user),
+):
+    """List curriculum topics from the DB (admin-only).
+    Falls back to the static CURRICULUM list when no DB is available."""
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
+    if not _ensure_curriculum_table():
+        # No DB — return the static seed list
+        from ..curriculum import CURRICULUM
+        rows = CURRICULUM
+        if board:
+            rows = [r for r in rows if r["board"] == board]
+        if cls is not None:
+            rows = [r for r in rows if r["class"] == cls]
+        if subject:
+            rows = [r for r in rows if r["subject"] == subject]
+        return {"source": "static", "count": len(rows), "rows": rows}
+    try:
+        from ..web import get_db_url
+        import psycopg
+        filters, params = [], []
+        if board:
+            filters.append("board = %s"); params.append(board)
+        if cls is not None:
+            filters.append("class = %s"); params.append(cls)
+        if subject:
+            filters.append("subject = %s"); params.append(subject)
+        where = ("WHERE " + " AND ".join(filters)) if filters else ""
+        with psycopg.connect(get_db_url()) as conn:
+            rows = conn.execute(
+                f"SELECT id, board, class, subject, chapter_no, chapter_title, "
+                f"level, summary, topics FROM curriculum_topics {where} "
+                f"ORDER BY board, class, subject, chapter_no",
+                params,
+            ).fetchall()
+        return {
+            "source": "db",
+            "count": len(rows),
+            "rows": [
+                {"id": r[0], "board": r[1], "class": r[2], "subject": r[3],
+                 "chapter_no": r[4], "chapter_title": r[5],
+                 "level": r[6], "summary": r[7], "topics": r[8]}
+                for r in rows
+            ],
+        }
+    except Exception as exc:
+        raise HTTPException(500, f"db error: {exc}")
+
+
+@router.post("/api/admin/curriculum", status_code=201)
+def admin_add_curriculum_topic(
+    board: str = Form(...),
+    cls: int = Form(..., alias="class"),
+    subject: str = Form(...),
+    chapter_no: int = Form(...),
+    chapter_title: str = Form(...),
+    level: str = Form(...),
+    summary: str = Form(""),
+    topics: str = Form("[]", description="JSON array of topic tag strings"),
+    user=Depends(current_user),
+):
+    """Add a curriculum topic to the DB. Admin-only."""
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
+    import json as _json
+    from ..pedagogy import LEVEL_GUIDANCE
+    if level not in LEVEL_GUIDANCE:
+        raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
+    try:
+        topics_list = _json.loads(topics)
+        if not isinstance(topics_list, list):
+            raise ValueError
+    except Exception:
+        raise HTTPException(400, "topics must be a JSON array of strings")
+    if not _ensure_curriculum_table():
+        raise HTTPException(503, "database not available")
+    try:
+        from ..web import get_db_url
+        import psycopg
+        with psycopg.connect(get_db_url(), autocommit=True) as conn:
+            row = conn.execute(
+                "INSERT INTO curriculum_topics "
+                "(board, class, subject, chapter_no, chapter_title, level, summary, topics) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s) "
+                "ON CONFLICT (board, class, subject, chapter_no) DO UPDATE "
+                "SET chapter_title=EXCLUDED.chapter_title, level=EXCLUDED.level, "
+                "summary=EXCLUDED.summary, topics=EXCLUDED.topics, updated_at=NOW() "
+                "RETURNING id",
+                (board, cls, subject, chapter_no, chapter_title, level,
+                 summary, _json.dumps(topics_list)),
+            ).fetchone()
+        return {"id": row[0], "ok": True}
+    except Exception as exc:
+        raise HTTPException(500, f"db error: {exc}")
+
+
+@router.put("/api/admin/curriculum/{topic_id}")
+def admin_update_curriculum_topic(
+    topic_id: int,
+    chapter_title: str | None = Form(None),
+    level: str | None = Form(None),
+    summary: str | None = Form(None),
+    topics: str | None = Form(None, description="JSON array of topic tag strings"),
+    user=Depends(current_user),
+):
+    """Update a curriculum topic in the DB. Admin-only. Only supplied
+    fields are updated."""
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
+    import json as _json
+    from ..pedagogy import LEVEL_GUIDANCE
+    if level is not None and level not in LEVEL_GUIDANCE:
+        raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
+    topics_list = None
+    if topics is not None:
+        try:
+            topics_list = _json.loads(topics)
+            if not isinstance(topics_list, list):
+                raise ValueError
+        except Exception:
+            raise HTTPException(400, "topics must be a JSON array of strings")
+    if not _ensure_curriculum_table():
+        raise HTTPException(503, "database not available")
+    sets, params = [], []
+    if chapter_title is not None:
+        sets.append("chapter_title = %s"); params.append(chapter_title)
+    if level is not None:
+        sets.append("level = %s"); params.append(level)
+    if summary is not None:
+        sets.append("summary = %s"); params.append(summary)
+    if topics_list is not None:
+        sets.append("topics = %s"); params.append(_json.dumps(topics_list))
+    if not sets:
+        raise HTTPException(400, "no fields to update")
+    sets.append("updated_at = NOW()")
+    params.append(topic_id)
+    try:
+        from ..web import get_db_url
+        import psycopg
+        with psycopg.connect(get_db_url(), autocommit=True) as conn:
+            n = conn.execute(
+                f"UPDATE curriculum_topics SET {', '.join(sets)} WHERE id = %s",
+                params,
+            ).rowcount
+        if n == 0:
+            raise HTTPException(404, "topic not found")
+        return {"ok": True, "updated": n}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"db error: {exc}")
+
+
+@router.delete("/api/admin/curriculum/{topic_id}")
+def admin_delete_curriculum_topic(topic_id: int, user=Depends(current_user)):
+    """Delete a curriculum topic from the DB. Admin-only."""
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
+    if not _ensure_curriculum_table():
+        raise HTTPException(503, "database not available")
+    try:
+        from ..web import get_db_url
+        import psycopg
+        with psycopg.connect(get_db_url(), autocommit=True) as conn:
+            n = conn.execute(
+                "DELETE FROM curriculum_topics WHERE id = %s", (topic_id,)
+            ).rowcount
+        if n == 0:
+            raise HTTPException(404, "topic not found")
+        return {"ok": True}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(500, f"db error: {exc}")

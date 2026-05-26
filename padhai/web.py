@@ -66,7 +66,7 @@ from .cache import Cache
 from .ingest import ingest as ingest_source
 from .db import PostgresJobStore, get_db_url, use_postgres
 from .jobs import Job, JobRunner, JobStore
-from .pedagogy import LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_lesson
+from .pedagogy import BOARD_GUIDANCE, LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_lesson
 from .personalization import (
     OUTPUT_DIMENSIONS,
     USER_TYPE_TONE,
@@ -387,6 +387,7 @@ def _render_worker(job: Job) -> dict:
     teacher = p.get("teacher", True)
     include_quiz = p.get("include_quiz", True)
     render_mode = p.get("render_mode", "animated")
+    board_hint = p.get("board_hint")  # injected by create_lesson when board/exam supplied
     profile_dict = p.get("profile_json")  # v2 path — present when via /api/v2
     dimensions = tuple(profile_dict.get("output_dimensions", [1280, 720])) \
         if profile_dict else (1280, 720)
@@ -443,6 +444,7 @@ def _render_worker(job: Job) -> dict:
             profile_addendum=profile_addendum,
             video_mode=(profile_dict.get("video_mode", "teaching")
                        if profile_dict else "teaching"),
+            board_hint=board_hint,
         )
         store.set_progress(job.id, "creating_storyboard", 40)
         store.set_progress(job.id, "generating_voice", 55)
@@ -8731,6 +8733,7 @@ def tiers() -> JSONResponse:
         {
             "languages": sorted(SUPPORTED_LANGUAGES),
             "levels": sorted(LEVEL_GUIDANCE),
+            "boards": sorted(BOARD_GUIDANCE),
             "themes": sorted(THEME_REGISTRY),
             "talking_head": get_talking_head_provider().name,
         }
@@ -8747,6 +8750,8 @@ def create_lesson(
     teacher: bool = Form(True),
     include_quiz: bool = Form(True),
     render_mode: str = Form("animated"),
+    board: str | None = Form(None, description="curriculum board, e.g. CBSE, ICSE, NEET, JEE"),
+    exam: str | None = Form(None, description="competitive exam context, e.g. NEET, JEE, UPSC"),
     user: AuthUser | None = Depends(current_user),
 ):
     if language not in SUPPORTED_LANGUAGES:
@@ -8823,6 +8828,15 @@ def create_lesson(
             return FileResponse(cache_probe, media_type="video/mp4", filename="lesson.mp4")
         return RedirectResponse(url, status_code=302)
 
+    # Exam key takes precedence over board when both are supplied (e.g. a
+    # CBSE student also doing NEET prep should get NEET-specific framing).
+    from .pedagogy import BOARD_GUIDANCE as _BOARD_GUIDANCE
+    board_hint: str | None = None
+    if exam and exam.upper() in _BOARD_GUIDANCE:
+        board_hint = exam.upper()
+    elif board and board.upper() in _BOARD_GUIDANCE:
+        board_hint = board.upper()
+
     job_payload = {
         "image_path": str(image_path),
         "language": language,
@@ -8836,6 +8850,8 @@ def create_lesson(
         # → web service's local thread pool.
         "talking_head_provider": provider_name,
     }
+    if board_hint:
+        job_payload["board_hint"] = board_hint
     if user is not None:
         job_payload["user_id"] = user.id
         job_payload["subscription_tier"] = user.subscription_tier
@@ -9159,14 +9175,63 @@ def curriculum_index(
 ):
     """Return the curriculum catalogue (no copyrighted content — just
     metadata: chapter titles + topic tags). Used by the Curriculum Map
-    module to render the browseable index."""
-    from .curriculum import CURRICULUM, BOARDS, SUBJECTS, CLASSES
-    rows = CURRICULUM
-    if board: rows = [r for r in rows if r["board"] == board]
-    if cls is not None: rows = [r for r in rows if r["class"] == cls]
-    if subject: rows = [r for r in rows if r["subject"] == subject]
+    module to render the browseable index.
+
+    Static seed list (curriculum.py) is the base; DB rows override or
+    extend it when a curriculum_topics table is available."""
+    from .curriculum import CURRICULUM
+    # Start with the static seed
+    rows: list[dict] = [dict(r) for r in CURRICULUM]
+    # Merge DB overrides / additions when Postgres is available
+    db_url = get_db_url()
+    if db_url:
+        try:
+            import psycopg, json as _json
+            with psycopg.connect(db_url) as conn:
+                db_rows = conn.execute(
+                    "SELECT id, board, class, subject, chapter_no, chapter_title, "
+                    "level, summary, topics FROM curriculum_topics "
+                    "ORDER BY board, class, subject, chapter_no"
+                ).fetchall()
+            if db_rows:
+                # Build index of static rows for deduplication
+                static_idx = {
+                    (r["board"], r["class"], r["subject"], r["chapter_no"])
+                    for r in rows
+                }
+                for dbr in db_rows:
+                    key = (dbr[1], dbr[2], dbr[3], dbr[4])
+                    entry = {
+                        "id": dbr[0], "board": dbr[1], "class": dbr[2],
+                        "subject": dbr[3], "chapter_no": dbr[4],
+                        "chapter_title": dbr[5], "level": dbr[6],
+                        "summary": dbr[7],
+                        "topics": dbr[8] if isinstance(dbr[8], list)
+                                  else _json.loads(dbr[8] or "[]"),
+                        "source": "db",
+                    }
+                    if key in static_idx:
+                        # Override matching static entry
+                        rows = [entry if (
+                            r["board"] == dbr[1] and r["class"] == dbr[2] and
+                            r["subject"] == dbr[3] and r["chapter_no"] == dbr[4]
+                        ) else r for r in rows]
+                    else:
+                        rows.append(entry)
+        except Exception:
+            pass  # DB unavailable — static list is still fully useful
+    # Apply filters after merge
+    if board:
+        rows = [r for r in rows if r["board"] == board]
+    if cls is not None:
+        rows = [r for r in rows if r["class"] == cls]
+    if subject:
+        rows = [r for r in rows if r["subject"] == subject]
+    all_boards = sorted({r["board"] for r in rows}) if not board else [board]
+    all_classes = sorted({r["class"] for r in rows}) if cls is None else [cls]
+    all_subjects = sorted({r["subject"] for r in rows}) if not subject else [subject]
     return {
-        "boards": BOARDS, "classes": CLASSES, "subjects": SUBJECTS,
+        "boards": all_boards, "classes": all_classes, "subjects": all_subjects,
         "entries": rows, "count": len(rows),
     }
 

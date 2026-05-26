@@ -48,6 +48,83 @@ LEVEL_GUIDANCE = {
     "neet_jee": "Pitch this at a NEET/JEE aspirant. Maximum rigour, derivations, common exam traps.",
 }
 
+# Board / exam-specific prompt addenda injected into the user turn.
+# Kept separate from LEVEL_GUIDANCE so the two axes compose independently.
+BOARD_GUIDANCE: dict[str, str] = {
+    "CBSE": (
+        "This student follows the CBSE curriculum (Central Board of Secondary Education). "
+        "Frame examples and explanations around NCERT textbook language. Reference CBSE "
+        "examination patterns (1-mark, 3-mark, 5-mark questions). Use CBSE marking-scheme "
+        "terminology ('diagram', 'tabular form', 'define and explain')."
+    ),
+    "ICSE": (
+        "This student follows the ICSE curriculum (Indian Certificate of Secondary Education). "
+        "ICSE favours depth and analytical reasoning over rote recall. Use precise scientific "
+        "vocabulary. Include application-based examples and comparisons. ICSE questions often "
+        "ask 'Give reasons' or 'Distinguish between' — build that analytical framing."
+    ),
+    "IGCSE": (
+        "This student follows the Cambridge IGCSE curriculum. Use internationally neutral "
+        "examples alongside Indian context. Follow Cambridge command words (Describe, Explain, "
+        "Evaluate, Analyse, Calculate). Include worked examples in the Cambridge style."
+    ),
+    "Maharashtra": (
+        "This student follows the Maharashtra State Board curriculum (SSC/HSC). "
+        "Align terminology with Maharashtra Textbook Bureau (Balbharati) textbooks. "
+        "Include Maharashtra Board exam question patterns and chapter numbering. "
+        "Use Marathi words for key concepts where appropriate."
+    ),
+    "Karnataka": (
+        "This student follows the Karnataka State Board curriculum. "
+        "Align with KTBS (Karnataka Textbook Society) textbook structure. "
+        "Include Karnataka SSLC/PUC exam patterns. Use Kannada words for key concepts "
+        "where helpful."
+    ),
+    "TamilNadu": (
+        "This student follows the Tamil Nadu State Board curriculum (Samacheer Kalvi). "
+        "Use the unified Samacheer Kalvi book structure and terminology. "
+        "Reference Tamil Nadu public exam question patterns. Include Tamil terms for "
+        "key concepts where appropriate."
+    ),
+    "AP_Telangana": (
+        "This student follows the Andhra Pradesh / Telangana State Board curriculum. "
+        "Align with AP SCERT / TS SCERT textbook chapters and terminology. "
+        "Use Telugu words for key concepts where helpful. Include SSC board exam patterns."
+    ),
+    "UP": (
+        "This student follows the Uttar Pradesh Board curriculum (UP Madhyamik Shiksha Parishad). "
+        "Align with UP Board textbook structure. Use Hindi for key technical terms where "
+        "appropriate. Reference UP Board High School / Intermediate exam question patterns."
+    ),
+    "NEET": (
+        "This is a NEET aspirant preparing for the National Eligibility cum Entrance Test (medical). "
+        "Prioritise Biology (Botany + Zoology) with NCERT line-by-line accuracy. For Physics and "
+        "Chemistry, emphasise concepts that appear frequently in NEET. Flag common NEET trap questions "
+        "and distinction-based answers. Use NEET Previous Year Question (PYQ) patterns. "
+        "Accuracy over speed — every fact must be verifiable in NCERT."
+    ),
+    "JEE": (
+        "This is a JEE aspirant preparing for IIT Joint Entrance Examination. "
+        "Apply maximum mathematical rigour — show full derivations from first principles. "
+        "Highlight JEE Main and JEE Advanced previous-year question patterns. "
+        "Stress conceptual depth: multiple-approach solutions, edge cases, and common pitfalls "
+        "that trap JEE students. Include numerical problem-solving steps."
+    ),
+    "UPSC": (
+        "This is a UPSC Civil Services aspirant. Connect every concept to governance, policy, "
+        "current affairs, or constitutional provisions where relevant. Use UPSC answer-writing "
+        "structure: Introduction (define/context) → Body (analysis, examples, linkages) → "
+        "Conclusion (way forward). Aim for inter-disciplinary connections. "
+        "Flag GS Paper relevance (GS1/GS2/GS3/GS4)."
+    ),
+    "SSC": (
+        "This is an SSC aspirant (Staff Selection Commission — CGL/CHSL/MTS). "
+        "Cover GK, reasoning, and quantitative aptitude angles for the topic. "
+        "Use SSC CGL/CHSL exam patterns with short, direct MCQ-style explanations. "
+        "Emphasise speed and accuracy: short-cuts, tricks, and common SSC question types."
+    ),
+}
+
 
 @dataclass
 class Scene:
@@ -113,6 +190,7 @@ def build_user_text(
     level: str,
     target_duration_seconds: int | None = None,
     profile_addendum: str | None = None,
+    board_hint: str | None = None,
 ) -> str:
     """The user-turn prompt that pairs with the image in the request body.
 
@@ -120,12 +198,17 @@ def build_user_text(
     typical narration pace of ~140 words/minute, that's a target word
     budget the model can fit into. `profile_addendum` is the
     PersonalizationProfile.prompt_addendum that carries video_mode,
-    user_type, tone, scene_beats, disclaimers, etc."""
+    user_type, tone, scene_beats, disclaimers, etc.
+    `board_hint` is a free-form board/exam key that maps into BOARD_GUIDANCE."""
     language_name = SUPPORTED_LANGUAGES[language_code]
     parts = [
         f"Target language: {language_name} ({language_code}).",
         f"Difficulty level: {level}. {LEVEL_GUIDANCE[level]}",
     ]
+    if board_hint:
+        guidance = BOARD_GUIDANCE.get(board_hint)
+        if guidance:
+            parts.append(f"Board / exam context: {guidance}")
     if target_duration_seconds:
         word_budget = int(target_duration_seconds * 2.3)  # ~140 wpm
         parts.append(
@@ -935,6 +1018,7 @@ def generate_lesson(
     target_duration_seconds: int | None = None,
     profile_addendum: str | None = None,
     video_mode: str = "teaching",
+    board_hint: str | None = None,
 ) -> Lesson:
     """Generate a video lesson from a textbook-page image.
 
@@ -957,13 +1041,11 @@ def generate_lesson(
 
     image_bytes = image_path.read_bytes()
 
-    # Cache key needs to include both video_mode AND the profile
-    # signature, otherwise two different modes over the same page
-    # collide. v0.11 added profile_addendum to the key; v0.12 adds
-    # video_mode explicitly for clarity.
-    profile_sig = (profile_addendum or "") + f"|mode={video_mode}"
-    if cache is not None and not profile_addendum and video_mode == "teaching":
-        # Old path — pure-teaching, no profile — falls back to legacy
+    # Cache key includes board_hint so CBSE and NEET lessons over the same
+    # page get separate cache entries and don't collide.
+    profile_sig = (profile_addendum or "") + f"|mode={video_mode}|board={board_hint or ''}"
+    if cache is not None and not profile_addendum and video_mode == "teaching" and not board_hint:
+        # Old path — pure-teaching, no profile, no board — falls back to legacy
         # cache key so existing cached lessons stay reusable.
         hit = cache.get_lesson(image_bytes, language_code, level, MODEL)
         if hit is not None:
@@ -975,6 +1057,7 @@ def generate_lesson(
         language_code, level,
         target_duration_seconds=target_duration_seconds,
         profile_addendum=profile_addendum,
+        board_hint=board_hint,
     )
     # v0.12 C1: per-mode prompts + schemas
     system_prompt = _mp.mode_system_prompt(video_mode)
