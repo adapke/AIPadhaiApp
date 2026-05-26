@@ -929,6 +929,62 @@ app.add_middleware(
 )
 
 
+# ---------------------------------------------------------------------------
+# Browser-friendly error handler
+# ---------------------------------------------------------------------------
+# When a user types an API URL directly into the browser address bar (no
+# Authorization header, Accept: text/html), they see raw JSON like
+# {"detail": "sign in to manage an organisation"}.  This is confusing,
+# especially when the user IS signed in on the SPA (token in localStorage).
+#
+# Fix: if the request looks like a browser navigation (accepts text/html,
+# is a GET, hits a non-UI path), redirect to the SPA root so the frontend
+# can pick up the localStorage token and retry the request properly.
+# API clients (curl, fetch, mobile) send Accept: application/json so they
+# are unaffected and continue to receive JSON error bodies.
+from fastapi.exceptions import HTTPException as _HTTPException  # noqa: E402
+from fastapi.responses import RedirectResponse as _RedirectResponse  # noqa: E402
+
+_SPA_PATHS = {"/", "/ui", "/landing", "/home", "/login", "/terms", "/privacy"}
+_API_PREFIX = "/api/"
+_AUTH_PREFIX = "/auth/"
+
+
+@app.exception_handler(_HTTPException)
+async def _browser_friendly_http_exception(request, exc: _HTTPException):
+    """Redirect browsers that hit a protected API URL to the SPA so they
+    can authenticate via the normal UI flow.  Non-browser clients (curl,
+    fetch with Accept: application/json) still get the JSON error."""
+    accept = request.headers.get("accept", "")
+    is_browser_nav = (
+        "text/html" in accept
+        and request.method == "GET"
+        and str(request.url.path) not in _SPA_PATHS
+        and not str(request.url.path).startswith("/static")
+    )
+    # Redirect the browser to the SPA for any error that would otherwise
+    # render as raw JSON.  Covers:
+    #  401 — unauthenticated (no token sent by browser)
+    #  403 — insufficient role
+    #  503 — auth not configured (no DATABASE_URL in dev)
+    _REDIRECT_STATUSES = {401, 403, 503}
+    if is_browser_nav and exc.status_code in _REDIRECT_STATUSES:
+        # Redirect the browser to the SPA root.  The SPA will load the
+        # token from localStorage and the user can navigate normally.
+        # We append ?next= so a future deep-link feature can land them
+        # back at the right page after sign-in.
+        from urllib.parse import quote as _q
+        next_url = _q(str(request.url.path), safe="")
+        return _RedirectResponse(f"/?next={next_url}", status_code=302)
+    # For all other cases (non-browser, non-auth errors) return normal JSON.
+    from fastapi.responses import JSONResponse as _JSONResponse  # noqa: E402
+    return _JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+        headers=getattr(exc, "headers", None) or {},
+    )
+
+
 @app.get("/metrics")
 def metrics_endpoint():
     """JSON snapshot of in-memory request metrics — uptime, per-route
