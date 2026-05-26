@@ -2,7 +2,7 @@
  * 03-auth-modal.cy.js
  *
  * Browser-level (DOM) tests for the auth modal:
- * open/close, tab switching, form field visibility, DPDP under-13 toggle.
+ * open/close, tab switching, form field visibility, DPDP under-18 toggle (India DPDP Act 2023 §9).
  *
  * Does NOT submit the form (that's covered by 02-auth-api.cy.js via
  * cy.request — faster and more reliable).
@@ -86,7 +86,7 @@ describe('Auth modal: form fields', () => {
     cy.get('#auth-form .signup-only').should('not.be.visible');
   });
 
-  it('under-13 parent email block is hidden initially', () => {
+  it('under-18 parent email block is hidden initially (DPDP Act 2023 §9)', () => {
     cy.get('#signup-dpdp').should('not.be.visible');
   });
 
