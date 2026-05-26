@@ -5381,6 +5381,14 @@ function authHeaders() {
   return token ? { 'Authorization': `Bearer ${token}` } : {};
 }
 
+// Gate for features that require sign-in: shows the auth modal and returns false
+// when the user is anonymous; returns true when authenticated.
+function requireAuthOrPrompt() {
+  if (token) return true;
+  $('auth-modal').classList.add('open');
+  return false;
+}
+
 // ---- create lesson ----
 const f = $('f'), go = $('go'), st = $('status'), v = $('v');
 function setStatus(msg, kind='') { st.textContent = msg; st.className = 'status ' + kind; }
@@ -6693,6 +6701,7 @@ function liveStop() {
 }
 
 $('live-mic').addEventListener('click', () => {
+  if (!requireAuthOrPrompt()) return;
   const btn = $('live-mic');
   if (btn.classList.contains('listening')) { liveStop(); return; }
   if (btn.classList.contains('thinking') || btn.classList.contains('speaking')) {
@@ -6843,6 +6852,7 @@ function vtStop() {
 }
 
 $('vt-mic').addEventListener('click', () => {
+  if (!requireAuthOrPrompt()) return;
   const btn = $('vt-mic');
   if (btn.classList.contains('listening')) { vtStop(); return; }
   if (btn.classList.contains('thinking') || btn.classList.contains('speaking')) {
@@ -6904,6 +6914,7 @@ document.addEventListener('moduleShow', (e) => {
 });
 
 $('eg-submit').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
   const rubricId = $('eg-rubric-sel').value;
   const text = $('eg-text').value.trim();
   if (!rubricId) {
@@ -6969,6 +6980,7 @@ $('eg-try-again').addEventListener('click', () => {
 
 // ===== MATH VISION =====
 async function mvSubmitAndShow() {
+  if (!requireAuthOrPrompt()) return;
   const imageUrl = $('mv-image-url').value.trim();
   if (!imageUrl.startsWith('http')) {
     $('mv-status').textContent = 'Please enter a valid image URL starting with https://';
@@ -7063,6 +7075,7 @@ let miInterviewId = null, miCurrentTurnIndex = 0, miRecognition = null;
 const miSupported = ('webkitSpeechRecognition' in window) || ('SpeechRecognition' in window);
 
 $('mi-start').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
   const track = $('mi-track').value;
   $('mi-status').textContent = 'Starting interview…';
   $('mi-status').className = 'status';
@@ -7236,6 +7249,11 @@ async function apLoadExamPacks() {
 }
 
 async function apLoadMyPacks() {
+  if (!token) {
+    $('ap-list').innerHTML = '<div style="color:var(--muted);font-size:13px;">Sign in to see your adaptive packs.</div>';
+    $('ap-list-card').style.display = '';
+    return;
+  }
   try {
     const r = await fetch('/api/adaptive-packs/me', { headers: authHeaders() });
     if (!r.ok) return;
@@ -7281,6 +7299,7 @@ async function apOpenPack(packCode) {
 }
 
 $('ap-create').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
   const pack = $('ap-pack').value;
   if (!pack) {
     $('ap-status').textContent = 'Please select an exam pack.';
@@ -7323,8 +7342,12 @@ let ptTimerInterval = null;
 const PT_LETTERS = ['a','b','c','d','e'];
 
 async function ptLoadHistory() {
+  if (!token) {
+    $('pt-history').innerHTML = '<em style="color:var(--muted-text);">Sign in to see your test history.</em>';
+    return;
+  }
   try {
-    const r = await apiFetch('/api/practice-tests');
+    const r = await fetch('/api/practice-tests', { headers: authHeaders() });
     const data = await r.json();
     if (!data.rows || data.rows.length === 0) {
       $('pt-history').innerHTML = '<em style="color:var(--muted-text);">No tests yet.</em>';
@@ -7406,7 +7429,7 @@ async function ptSubmitTest() {
   try {
     const fd = new FormData();
     fd.append('answers_json', JSON.stringify(answers));
-    const r = await apiFetch(`/api/practice-tests/${ptCurrentTest.id}/submit`, { method: 'POST', body: fd });
+    const r = await fetch(`/api/practice-tests/${ptCurrentTest.id}/submit`, { method: 'POST', headers: authHeaders(), body: fd });
     if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
     const result = await r.json();
     const score = result.score || {};
@@ -7445,6 +7468,7 @@ function ptSetSubmitStatus(msg, cls) {
 }
 
 $('pt-create').addEventListener('click', async () => {
+  if (!requireAuthOrPrompt()) return;
   const exam = $('pt-exam').value;
   const subject = ($('pt-subject').value || '').trim();
   const minutes = parseInt($('pt-minutes').value);
@@ -7458,16 +7482,16 @@ $('pt-create').addEventListener('click', async () => {
     fd.append('exam', exam);
     fd.append('subject', subject);
     fd.append('target_minutes', minutes);
-    const r = await apiFetch('/api/practice-tests', { method: 'POST', body: fd });
+    const r = await fetch('/api/practice-tests', { method: 'POST', headers: authHeaders(), body: fd });
     if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
     const test = await r.json();
 
     // 2. Start the test (marks it in_progress)
-    const r2 = await apiFetch(`/api/practice-tests/${test.id}/start`, { method: 'POST', body: new FormData() });
+    const r2 = await fetch(`/api/practice-tests/${test.id}/start`, { method: 'POST', headers: authHeaders(), body: new FormData() });
     if (!r2.ok) { const e2 = await r2.json(); throw new Error(e2.detail || r2.statusText); }
 
     // 3. Fetch full test with questions
-    const r3 = await apiFetch(`/api/practice-tests/${test.id}`);
+    const r3 = await fetch(`/api/practice-tests/${test.id}`, { headers: authHeaders() });
     if (!r3.ok) { const e3 = await r3.json(); throw new Error(e3.detail || r3.statusText); }
     const fullTest = await r3.json();
     ptCurrentTest = fullTest;
