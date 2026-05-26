@@ -3982,11 +3982,14 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
           <div style="flex:1;">
             <label>Exam</label>
             <select id="eg-exam">
-              <option value="upsc_mains">UPSC Mains</option>
+              <option value="upsc_mains">UPSC Mains (GS)</option>
+              <option value="upsc_essay">UPSC Essay Paper</option>
               <option value="jee_adv_descriptive">JEE Advanced (Descriptive)</option>
-              <option value="cbse_class10_eng">CBSE Class 10 English</option>
+              <option value="neet_descriptive">NEET (Descriptive)</option>
+              <option value="cat_va">CAT Verbal Ability</option>
               <option value="cbse_class12_eng">CBSE Class 12 English</option>
-              <option value="neet_pg">NEET PG</option>
+              <option value="cbse_class10_eng">CBSE Class 10 English</option>
+              <option value="generic">General / Other</option>
             </select>
           </div>
           <div style="flex:1;">
@@ -4918,6 +4921,11 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
     </div>
 
     <form id="auth-form">
+      <div class="signup-only">
+        <label>Full name</label>
+        <input type="text" name="name" id="auth-name" placeholder="Your name" maxlength="60">
+      </div>
+
       <label>Email</label>
       <input type="email" name="email" required>
       <label>Password</label>
@@ -4940,6 +4948,11 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
           <input type="email" name="parent_email" id="auth-parent-email">
           <div class="hint">We won't email them anything else.</div>
         </div>
+
+        <label style="display:flex;gap:8px;align-items:center;margin-top:10px;cursor:pointer;">
+          <input type="checkbox" name="terms_accepted" id="auth-terms" value="true" style="width:auto;margin:0;">
+          <span style="font-size:13px;">I agree to the <a href="/terms" target="_blank" style="color:var(--brand);">Terms of Service</a> and <a href="/privacy" target="_blank" style="color:var(--brand);">Privacy Policy</a></span>
+        </label>
       </div>
 
       <button type="submit" class="primary">Continue</button>
@@ -5172,9 +5185,10 @@ async function checkAiStatus() {
       + 'font-size:13px;line-height:1.5;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.35);'
     );
     banner.innerHTML = (
-      '<div style="font-weight:700;margin-bottom:6px;">⚙ AI features not configured</div>'
+      '<div style="font-weight:700;margin-bottom:6px;">⚙ Full AI not configured</div>'
       + '<div style="color:#94a3b8;">Set <code style="background:#334155;padding:1px 5px;border-radius:3px;">ANTHROPIC_API_KEY</code> '
-      + 'to enable Voice Tutor, Essay Grader, Math Check, and question synthesis.</div>'
+      + 'to enable Voice Tutor, Live Lecture, Math Vision, and AI question synthesis. '
+      + 'Essay Grader and Mock Interview run in basic mode without it.</div>'
       + '<button onclick="this.parentElement.remove()" style="margin-top:10px;background:#334155;'
       + 'border:0;color:#e2e8f0;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px;">Dismiss</button>'
     );
@@ -5188,11 +5202,15 @@ function showAiNote(statusElId, featureKey) {
   if (!_aiStatus) return;   // not loaded yet; will show on first interaction
   const el = document.getElementById(statusElId);
   if (!el) return;
+  const degraded = (_aiStatus.degraded_without_ai || []).includes(featureKey);
   if (!_aiStatus.features[featureKey]) {
     el.textContent = 'AI not configured — set ANTHROPIC_API_KEY on the server to enable this feature.';
     el.className = 'status error';
+  } else if (degraded) {
+    el.textContent = 'Running in basic mode — set ANTHROPIC_API_KEY on the server for full AI-powered results.';
+    el.className = 'status';
   } else {
-    if (el.textContent.includes('AI not configured')) el.textContent = '';
+    if (el.textContent.includes('AI not configured') || el.textContent.includes('basic mode')) el.textContent = '';
   }
 }
 
@@ -7236,20 +7254,41 @@ function miShowReport(data) {
   if (typeof fb === 'string') {
     html = `<p>${fb}</p>`;
   } else {
-    if (fb.summary) html += `<p>${fb.summary}</p>`;
+    // Summaries array (heuristic path) or single summary string
+    const summaries = fb.summaries || (fb.summary ? [fb.summary] : []);
+    if (summaries.length) html += `<p style="margin-bottom:10px;">${summaries.join(' ')}</p>`;
     if (fb.detailed_feedback) html += `<p>${fb.detailed_feedback}</p>`;
-    const crit = fb.criteria_averages || fb.criteria || [];
+
+    // criteria_avg is a dict {clarity:8, depth:2, ...}; criteria_averages/criteria may be an array
+    const critRaw = fb.criteria_averages || fb.criteria;
+    const critDict = fb.criteria_avg;
+    let crit = [];
+    if (Array.isArray(critRaw) && critRaw.length) {
+      crit = critRaw;
+    } else if (critDict && typeof critDict === 'object') {
+      crit = Object.entries(critDict).map(([name, avg]) => ({ name, avg }));
+    }
     if (crit.length) {
       html += '<div style="margin-top:12px;">';
       crit.forEach(c => {
-        const pct = Math.round(((c.score || c.avg || 0) / (c.max || 10)) * 100);
+        const val = c.score !== undefined ? c.score : (c.avg !== undefined ? c.avg : null);
+        const pct = val !== null ? Math.round((val / (c.max || 10)) * 100) : 50;
         html += `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
-          <span>${c.name || c.criterion}</span>
-          <span style="font-weight:600;color:${pct>=70?'#2e7d32':pct>=40?'var(--brand)':'#c62828'}">${c.score || c.avg || '—'}</span>
+          <span style="text-transform:capitalize;">${c.name || c.criterion}</span>
+          <span style="font-weight:600;color:${pct>=70?'#2e7d32':pct>=40?'var(--brand)':'#c62828'}">${val !== null ? val + ' / 10' : '—'}</span>
         </div>`;
       });
       html += '</div>';
     }
+
+    // Improvement tips
+    const tips = fb.top_improvements || fb.improvements || [];
+    if (tips.length) {
+      html += `<div style="margin-top:14px;font-size:13px;"><strong>Areas to improve:</strong><ul style="margin:6px 0 0 18px;">`;
+      tips.forEach(t => { html += `<li style="margin-bottom:4px;">${t}</li>`; });
+      html += '</ul></div>';
+    }
+
     if (!html) html = `<p>Interview ended. ${score !== undefined ? 'See your score above.' : 'No detailed report available.'}</p>`;
   }
   $('mi-report-body').innerHTML = html;
@@ -7356,15 +7395,21 @@ async function apOpenPack(packCode) {
     }
     const j = await r.json();
     const topics = j.topics || [];
-    $('ap-list').innerHTML = `<div style="font-weight:600;font-size:14px;margin-bottom:8px;">${packCode} — Topic Mastery</div>` +
-      (topics.length ? topics.map(t =>
-        `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
-          <span>${t.topic}</span>
-          <span style="color:${t.mastery >= 0.8 ? '#2e7d32' : t.mastery >= 0.5 ? 'var(--brand)' : '#c62828'};">
-            ${Math.round((t.mastery || 0) * 100)}%
-          </span>
-        </div>`
-      ).join('') : '<div style="color:var(--muted);font-size:13px;">No topic data yet — complete a practice session first.</div>') +
+    $('ap-list').innerHTML = `<div style="font-weight:600;font-size:14px;margin-bottom:8px;">${packCode} — Topics &amp; Weightage</div>` +
+      (topics.length ? topics.map(t => {
+        const label = t.title || t.topic || t.topic_code || '—';
+        // mastery (0-1) if present; otherwise show adjusted_weightage as percentage of total
+        const mastery = t.mastery !== undefined ? t.mastery : null;
+        const wt = t.adjusted_weightage || t.base_weightage || 0;
+        const pct = mastery !== null ? Math.round(mastery * 100) : null;
+        const color = mastery !== null ? (mastery >= 0.8 ? '#2e7d32' : mastery >= 0.5 ? 'var(--brand)' : '#c62828') : 'var(--muted)';
+        const right = pct !== null
+          ? `<span style="font-weight:600;color:${color};">${pct}% mastery</span>`
+          : `<span style="color:var(--muted);font-size:12px;">${t.is_personalised ? '★ ' : ''}${wt}% weight</span>`;
+        return `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
+          <span>${label}</span>${right}
+        </div>`;
+      }).join('') : '<div style="color:var(--muted);font-size:13px;">No topic data yet.</div>') +
       `<button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadMyPacks()">← Back to my packs</button>`;
   } catch {}
 }
@@ -9533,16 +9578,18 @@ def ai_status() -> JSONResponse:
         "anthropic_configured": has_anthropic,
         "video_configured": has_video,
         "features": {
-            "voice_tutor": has_anthropic,
-            "live_lecture": has_anthropic,
-            "essay_grader": has_anthropic,
-            "math_vision": has_anthropic,
-            "mock_interview": True,          # heuristic fallback always works
-            "adaptive_practice": True,       # bank-based; synthesis needs anthropic
-            "practice_tests": True,          # bank-based; synthesis needs anthropic
-            "ai_synthesis": has_anthropic,   # question/content generation
+            "voice_tutor": has_anthropic,           # requires Claude; no fallback
+            "live_lecture": has_anthropic,          # requires Claude; no fallback
+            "essay_grader": True,                   # heuristic fallback works without key
+            "math_vision": has_anthropic,           # requires Claude; no fallback
+            "mock_interview": True,                 # heuristic fallback always works
+            "adaptive_practice": True,              # rule-based; works without key
+            "practice_tests": True,                 # placeholder mode without key
+            "ai_synthesis": has_anthropic,          # question/content generation
             "lesson_generation": has_anthropic,
         },
+        # Features that work but are degraded without the API key
+        "degraded_without_ai": [] if has_anthropic else ["essay_grader", "mock_interview", "practice_tests"],
     })
 
 
