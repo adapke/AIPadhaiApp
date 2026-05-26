@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIPadhaiApp Final Pending Product, Architecture, QA Review</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c667a;
+      --line: #dfe5ee;
+      --paper: #ffffff;
+      --soft: #f5f7fb;
+      --p0: #b42318;
+      --p1: #b54708;
+      --p2: #175cd3;
+      --p3: #067647;
+      --brand: #2446c0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eef2f7;
+      font: 15px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    header {
+      background: #111827;
+      color: #fff;
+      padding: 34px 42px 30px;
+      border-bottom: 5px solid #2f6fed;
+    }
+    header h1 { margin: 0 0 10px; font-size: 30px; line-height: 1.15; }
+    header p { margin: 0; max-width: 1080px; color: #d7deea; font-size: 16px; }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: var(--paper);
+      min-height: 100vh;
+      padding: 28px 36px 56px;
+      box-shadow: 0 18px 45px rgba(17, 24, 39, .12);
+    }
+    h2 {
+      margin: 34px 0 12px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+    h3 { margin: 24px 0 8px; font-size: 17px; }
+    p { margin: 8px 0 12px; }
+    .meta, .note { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--soft);
+    }
+    .score {
+      font-size: 28px;
+      font-weight: 750;
+      color: var(--brand);
+      margin: 4px 0 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+      word-wrap: break-word;
+    }
+    th {
+      background: #edf2ff;
+      text-align: left;
+      font-weight: 700;
+    }
+    ul { margin: 8px 0 16px 22px; padding: 0; }
+    li { margin: 5px 0; }
+    code {
+      background: #f0f3f8;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+    }
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .p0 { background: var(--p0); }
+    .p1 { background: var(--p1); }
+    .p2 { background: var(--p2); }
+    .p3 { background: var(--p3); }
+    .ok { color: var(--p3); font-weight: 700; }
+    .warn { color: var(--p1); font-weight: 700; }
+    .bad { color: var(--p0); font-weight: 700; }
+    .toc a { color: #2446c0; text-decoration: none; }
+    .toc li { margin: 4px 0; }
+    .small { font-size: 13px; }
+    @media (max-width: 850px) {
+      header { padding: 26px 22px; }
+      main { padding: 20px 16px 42px; }
+      .grid { grid-template-columns: 1fr; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>AIPadhaiApp Final Pending Product, Architecture, QA Review</h1>
+  <p>
+    Role-based review as Product Owner, Solution Architect, Senior QA Engineer,
+    Senior Principal Engineer, Marketing Head, and Founder. Prepared for the
+    India-first goal: kindergarten to PhD, school boards, college, government
+    exams, private jobs, banking, community, and lifelong learning.
+  </p>
+</header>
+
+<main>
+  <p class="meta">
+    Date: 26 May 2026, Asia/Kolkata. Project reviewed:
+    <code>D:\Ankush\AI work\AIPadhaiApp</code>. Local DB target:
+    <code>postgresql://postgres:****@localhost:5432/padhiaai</code>.
+  </p>
+
+  <h2>1. Executive Decision</h2>
+  <div class="grid">
+    <div class="card">
+      <strong>Internal demo readiness</strong>
+      <div class="score">8.0 / 10</div>
+      <p>Good enough for founder demos and controlled testing after explaining known gaps.</p>
+    </div>
+    <div class="card">
+      <strong>Paid public production readiness</strong>
+      <div class="score">7.2 / 10</div>
+      <p>Not ready until P0 items below are closed and verified on the live browser flow.</p>
+    </div>
+    <div class="card">
+      <strong>Potential after backlog</strong>
+      <div class="score">9.2 - 9.5 / 10</div>
+      <p>Possible only after accuracy benchmark, provider validation, mobile QA, and retention proof.</p>
+    </div>
+  </div>
+
+  <p>
+    The app has strong breadth, a real Postgres-backed backend path, and many
+    valuable education modules. The main risk is not lack of ambition. The main
+    risk is reliability: login state, Postgres module migrations, live process
+    control, AI accuracy, official exam coverage, and production provider
+    validation.
+  </p>
+
+  <p>
+    Founder verdict: <strong>go for internal beta, no-go for paid public launch</strong>
+    until the P0 backlog is fixed and verified with browser automation plus API checks.
+  </p>
+
+  <h2>2. Evidence Checked Today</h2>
+  <table>
+    <tr>
+      <th>Area</th>
+      <th>Result</th>
+      <th>Notes</th>
+    </tr>
+    <tr>
+      <td>Git working tree</td>
+      <td class="ok">Clean</td>
+      <td><code>git status --short</code> returned no pending code changes before this report was added.</td>
+    </tr>
+    <tr>
+      <td>Python syntax</td>
+      <td class="ok">Pass</td>
+      <td><code>python -m compileall -q padhai scripts</code> passed.</td>
+    </tr>
+    <tr>
+      <td>App import with Postgres</td>
+      <td class="ok">Pass</td>
+      <td>TestClient import uses <code>PostgresJobStore</code>. Route table reports 623 method/path entries.</td>
+    </tr>
+    <tr>
+      <td>Live root endpoint</td>
+      <td class="ok">200</td>
+      <td><code>/</code> reports AI Pathshala version <code>3.19.0</code> and 588 endpoint entries.</td>
+    </tr>
+    <tr>
+      <td>Landing and home pages</td>
+      <td class="ok">200</td>
+      <td><code>/landing</code> and <code>/home</code> load as HTML.</td>
+    </tr>
+    <tr>
+      <td>Authenticated dashboard API</td>
+      <td class="ok">Pass by API</td>
+      <td><code>/auth/login</code>, <code>/auth/me</code>, <code>/api/home/me/dashboard</code>, and <code>/api/navigation/manifest</code> work when a valid bearer token is supplied.</td>
+    </tr>
+    <tr>
+      <td>Anonymous dashboard API</td>
+      <td class="ok">401 expected</td>
+      <td><code>/api/home/me/dashboard</code> correctly rejects anonymous access.</td>
+    </tr>
+    <tr>
+      <td>Current browser login flow</td>
+      <td class="bad">Broken</td>
+      <td>Landing stores token under <code>padhai_token</code>, while the new home reads <code>pathshala_token</code>. Result: login succeeds, but home still looks signed out.</td>
+    </tr>
+    <tr>
+      <td>Postgres module migrations</td>
+      <td class="bad">Startup warnings</td>
+      <td>Fresh server attempt logged <code>doubt_clearing.migrate failed: no schema has been selected to create in</code> and same for spaced repetition. This is a production blocker for those modules.</td>
+    </tr>
+    <tr>
+      <td>Local server control</td>
+      <td class="warn">Needs runbook</td>
+      <td>Port <code>8000</code> was occupied by a process the sandbox could not inspect or kill cleanly. A fresh server from the correct folder could not bind. Add deterministic start/stop scripts.</td>
+    </tr>
+  </table>
+
+  <h2>3. P0 Blockers Before Any Public Launch</h2>
+  <table>
+    <tr>
+      <th>Priority</th>
+      <th>Issue</th>
+      <th>Owner</th>
+      <th>Acceptance Criteria</th>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        Login token mismatch. <code>home_ui.py</code> reads
+        <code>pathshala_token</code> for home API calls but landing writes
+        <code>padhai_token</code>.
+      </td>
+      <td>Principal Engineer</td>
+      <td>
+        One canonical token key is used across landing, home, legacy UI, SSO callback,
+        logout, and auth headers. Browser login redirects to <code>/home</code> and
+        immediately renders the authenticated dashboard without manual refresh.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        Postgres migrations for <code>doubt_clearing</code> and
+        <code>spaced_repetition</code> can fail with "no schema selected".
+      </td>
+      <td>Solution Architect</td>
+      <td>
+        All DB pools and module migrations force <code>search_path=public</code> or
+        qualify tables with <code>public.</code>. Startup has zero migration warnings.
+        Add a Postgres startup regression test.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        DPDP child consent threshold is not India-safe. Code comments and flow still
+        reference under-13, but India DPDP child protection is for minors under 18.
+      </td>
+      <td>Product Owner + Legal</td>
+      <td>
+        Age gate, parent/guardian consent, privacy notice, data retention, ad/tracking
+        restrictions, and school consent flows are aligned to India DPDP requirements.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        Live local process management is unreliable. Port <code>8000</code> can stay
+        occupied by stale server code, making QA results misleading.
+      </td>
+      <td>Senior QA + DevOps</td>
+      <td>
+        Add <code>scripts/run_local.ps1</code>, <code>scripts/stop_local.ps1</code>,
+        health output, PID file, and logs. QA must verify current git SHA and project
+        path from a health endpoint.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        Production secrets are not ready. Local <code>.env</code> uses dev JWT secrets.
+      </td>
+      <td>Solution Architect</td>
+      <td>
+        Separate <code>.env.example</code>, local dev env, staging env, and production
+        secret manager. Production refuses startup with dev secrets.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>
+        No end-to-end browser gate for the core student journey.
+      </td>
+      <td>Senior QA Engineer</td>
+      <td>
+        E2E tests cover signup, login, home dashboard, upload, generated study assets,
+        flashcards, quiz, doubt chat, logout, mobile viewport, and reload persistence.
+      </td>
+    </tr>
+  </table>
+
+  <h2>4. Product Owner Review</h2>
+  <h3>What is strong</h3>
+  <ul>
+    <li>Correct ambition: India-first learning operating system, not only a PDF-to-flashcard tool.</li>
+    <li>Good module breadth: exam hub, study studio, AI tutor, mock tests, community, school/teacher/parent, marketplace, admin/trust.</li>
+    <li>Auth and dashboard APIs work when token is supplied correctly.</li>
+  </ul>
+
+  <h3>What must be simplified</h3>
+  <p>
+    The product is currently too broad for a student to understand in one minute.
+    The first screen must focus on the daily student loop:
+  </p>
+  <ol>
+    <li>Pick goal: class, board, exam, semester, job role, or research goal.</li>
+    <li>Add source: textbook, PDF, notes, lecture, video, PYQ, official syllabus.</li>
+    <li>Get plan: today, this week, mock-test date, weak topics.</li>
+    <li>Practice: flashcards, quiz, PYQ, mock, written answer.</li>
+    <li>Ask doubt: cited answer from source or official pack.</li>
+    <li>Community: join cohort, peer group, mentor room, parent/teacher update.</li>
+  </ol>
+
+  <h3>India coverage needed</h3>
+  <table>
+    <tr>
+      <th>Segment</th>
+      <th>Must support</th>
+      <th>Product requirement</th>
+    </tr>
+    <tr>
+      <td>Kindergarten and foundational</td>
+      <td>Foundational literacy, numeracy, stories, speech, parent-led practice.</td>
+      <td>Child-safe UI, parent consent, no open chat, audio-first Hindi/regional flows.</td>
+    </tr>
+    <tr>
+      <td>School boards</td>
+      <td>CBSE, ICSE/CISCE, NIOS, state boards, madrasah/open schooling where relevant.</td>
+      <td>Board, class, medium, subject, chapter, learning outcome, textbook QR/source mapping.</td>
+    </tr>
+    <tr>
+      <td>Entrance exams</td>
+      <td>JEE, NEET, CUET, CLAT, NIFT/NID, hotel management, nursing, pharmacy.</td>
+      <td>Official syllabus, pattern, PYQ, mock strategy, cutoff/score analytics.</td>
+    </tr>
+    <tr>
+      <td>Government jobs</td>
+      <td>UPSC, SSC, railway/RRB, banking, defence, police, teaching, state PSCs.</td>
+      <td>Exam calendar, notification tracker, current affairs, PYQ, state-language support.</td>
+    </tr>
+    <tr>
+      <td>College and professional</td>
+      <td>Semester exams, GATE, CAT, CA/CS/CMA, law, nursing, B.Ed, UGC NET, CSIR NET.</td>
+      <td>Course/semester mapping, long-form notes, research summaries, viva/interview prep.</td>
+    </tr>
+    <tr>
+      <td>PhD and research</td>
+      <td>Literature review, methodology, citations, thesis planning, paper reading.</td>
+      <td>Source-grounded NotebookLM-class workspace with citation discipline.</td>
+    </tr>
+  </table>
+
+  <h2>5. Solution Architect Review</h2>
+  <p>
+    Target architecture should be boring, reliable, and India-scale:
+  </p>
+  <ul>
+    <li>FastAPI web/API tier with strict route ownership and OpenAPI contract tests.</li>
+    <li>Postgres as system of record; pgvector for source-grounded retrieval.</li>
+    <li>Cloud object storage for PDFs, videos, audio, OCR, subtitles, generated artifacts.</li>
+    <li>Redis/RQ or managed queue for long jobs; no in-process queue in production.</li>
+    <li>Provider abstraction for LLM, OCR, TTS, ASR, video, payments, email, SMS, WhatsApp.</li>
+    <li>Observability: structured logs, Sentry, product analytics, queue metrics, DB metrics, alerting.</li>
+    <li>India compliance: DPDP data inventory, consent ledger, deletion/export flow, incident response, audit logs.</li>
+  </ul>
+
+  <h3>Architecture gaps</h3>
+  <table>
+    <tr>
+      <th>Gap</th>
+      <th>Risk</th>
+      <th>Fix</th>
+    </tr>
+    <tr>
+      <td>Some modules still behave like SQLite sidecars or independent DB clients.</td>
+      <td>Scale and backup risk.</td>
+      <td>Move all production modules to Postgres migrations or explicitly mark local-only modules.</td>
+    </tr>
+    <tr>
+      <td>LLM/TTS/live/video/payment/email providers are not fully validated with real credentials.</td>
+      <td>Feature demos pass but production fails at first real user.</td>
+      <td>Create staging provider matrix and run sandbox/live smoke per provider.</td>
+    </tr>
+    <tr>
+      <td>No release provenance in health endpoint.</td>
+      <td>QA cannot prove browser is running current code.</td>
+      <td>Add git SHA, project path, DB backend, migration version, queue backend to <code>/healthz</code>.</td>
+    </tr>
+    <tr>
+      <td>No source-grounding service as core platform primitive.</td>
+      <td>Accuracy risk versus NotebookLM and StudyFetch.</td>
+      <td>Build document ingestion, chunking, embeddings, citation API, and answer-grounding score.</td>
+    </tr>
+  </table>
+
+  <h2>6. Senior QA Engineer Review</h2>
+  <h3>Minimum release gates</h3>
+  <table>
+    <tr>
+      <th>Gate</th>
+      <th>Required tests</th>
+      <th>Pass criteria</th>
+    </tr>
+    <tr>
+      <td>Auth and session</td>
+      <td>Signup, login, reload, logout, SSO callback, token expiry, mobile browser.</td>
+      <td>No token key mismatch. No signed-in user sees signed-out home.</td>
+    </tr>
+    <tr>
+      <td>Student learning loop</td>
+      <td>Upload source, generate notes, flashcards, quiz, audio recap, ask cited doubt, view weak topics.</td>
+      <td>Every action returns visible output and persists after reload.</td>
+    </tr>
+    <tr>
+      <td>Exam pack loop</td>
+      <td>Select CBSE/UPSC/SSC/Banking/JEE/NEET sample packs, start plan, take mock, view result.</td>
+      <td>Pack taxonomy and scoring are deterministic and source-linked.</td>
+    </tr>
+    <tr>
+      <td>Mobile UX</td>
+      <td>360x800 Android, 390x844 iPhone, low bandwidth, offline/retry.</td>
+      <td>No clipped buttons, no hidden menu, no broken bottom nav, no unreadable tables.</td>
+    </tr>
+    <tr>
+      <td>Security</td>
+      <td>OWASP auth, CSRF where cookie auth exists, rate limits, upload validation, prompt injection, IDOR.</td>
+      <td>No critical/high findings before beta.</td>
+    </tr>
+    <tr>
+      <td>Load and cost</td>
+      <td>Login, dashboard, upload, quiz, chat, render queue under target concurrency.</td>
+      <td>P95 dashboard below 800 ms, no queue loss, known cost per active user.</td>
+    </tr>
+  </table>
+
+  <h2>7. Senior Principal Engineer Review</h2>
+  <p>
+    The highest leverage engineering work is not adding another feature. It is
+    making contracts explicit.
+  </p>
+  <ul>
+    <li>Define one auth state contract: token key, email key, expiry, refresh, logout, unauthorized handling.</li>
+    <li>Define one DB contract: all production modules use the same Postgres connection settings and schema.</li>
+    <li>Define one route contract: navigation manifest can only point to routes validated by automated tests.</li>
+    <li>Define one artifact contract: every generated output has source ID, version, owner, storage URL, and deletion policy.</li>
+    <li>Define one AI trust contract: answer must include source citation or say "not found in source".</li>
+  </ul>
+
+  <h3>Principal engineer pending list</h3>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Why it matters</th>
+      <th>Done when</th>
+    </tr>
+    <tr>
+      <td>Canonical session module</td>
+      <td>Prevents another <code>padhai_token</code> vs <code>pathshala_token</code> regression.</td>
+      <td>All frontend pages import/use one helper or generated config.</td>
+    </tr>
+    <tr>
+      <td>DB migration ownership</td>
+      <td>Startup warnings must be treated as failed release gates.</td>
+      <td>CI fails on any migration warning; migration version is visible in health.</td>
+    </tr>
+    <tr>
+      <td>Typed API schemas</td>
+      <td>Frontend and backend are drifting.</td>
+      <td>OpenAPI client or schema tests protect dashboard, auth, manifest, jobs.</td>
+    </tr>
+    <tr>
+      <td>Provider test harness</td>
+      <td>Unconfigured providers hide failures until real users arrive.</td>
+      <td>Each provider has fake, sandbox, and production smoke modes.</td>
+    </tr>
+  </table>
+
+  <h2>8. Marketing Head Review</h2>
+  <h3>Current competitive bar</h3>
+  <p>
+    The market is now crowded. StudyFetch positions around uploaded materials,
+    flashcards, quizzes, practice tests, audio recap, explainer video, lecture
+    recording, and a 24/7 AI tutor. Quizlet and Knowt compete hard on flashcards,
+    practice tests, notes, and mobile study habits. NotebookLM is the trust
+    benchmark for source-grounded study, citations, audio overviews, video
+    overviews, mind maps, flashcards, and quizzes.
+  </p>
+
+  <h3>Positioning recommendation</h3>
+  <p>
+    Do not market as "another AI study app". The stronger wedge is:
+  </p>
+  <p>
+    <strong>India's source-grounded exam operating system for every learner,
+    from school boards to government jobs, in Indian languages.</strong>
+  </p>
+
+  <h3>Messaging pillars</h3>
+  <table>
+    <tr>
+      <th>Pillar</th>
+      <th>Promise</th>
+      <th>Proof needed before marketing</th>
+    </tr>
+    <tr>
+      <td>India-first</td>
+      <td>Boards, state syllabi, government exams, Indian languages, low-data mobile.</td>
+      <td>Verified exam taxonomy and at least 5 flagship packs.</td>
+    </tr>
+    <tr>
+      <td>Trust-first AI</td>
+      <td>Every answer cites source, page, chapter, and official pack when possible.</td>
+      <td>Accuracy benchmark and citation UI.</td>
+    </tr>
+    <tr>
+      <td>Daily progress</td>
+      <td>Weak-topic plan, streaks, flashcards, mocks, reminders.</td>
+      <td>Retention dashboard and notification policy.</td>
+    </tr>
+    <tr>
+      <td>Community</td>
+      <td>Exam cohorts, mentors, doubt rooms, teacher review.</td>
+      <td>Moderation, reporting, minor safety, teacher verification.</td>
+    </tr>
+  </table>
+
+  <h2>9. Founder Review</h2>
+  <h3>What can become a unicorn</h3>
+  <ul>
+    <li>India exam breadth plus source-grounded accuracy.</li>
+    <li>Community around exam cohorts, not generic chat.</li>
+    <li>School and coaching distribution after the student loop is sticky.</li>
+    <li>Teacher/tutor marketplace once content quality is trusted.</li>
+    <li>Low-cost, low-data Android-first experience.</li>
+  </ul>
+
+  <h3>What can kill the company early</h3>
+  <ul>
+    <li>Launching with broken login state: users think the product is not working.</li>
+    <li>Wrong AI answers without citation: trust collapses quickly in exam prep.</li>
+    <li>Under-18 compliance mistakes: India-first product must be India-compliant.</li>
+    <li>Too many modules, no clear daily loop: students churn because they do not know what to do next.</li>
+    <li>Provider and queue failures during first influencer/school pilot.</li>
+  </ul>
+
+  <h2>10. Market Benchmark and Sources</h2>
+  <table>
+    <tr>
+      <th>Reference</th>
+      <th>What it means for AIPadhaiApp</th>
+    </tr>
+    <tr>
+      <td>StudyFetch</td>
+      <td>Users now expect uploaded material to become notes, flashcards, quizzes, practice tests, audio recap, explainer video, and tutor interactions. Source: <a href="https://www.studyfetch.com/features/flashcards">studyfetch.com/features/flashcards</a>.</td>
+    </tr>
+    <tr>
+      <td>NotebookLM</td>
+      <td>Source grounding, citations, audio overviews, video overviews, mind maps, flashcards, and quizzes are now table stakes for serious study. Sources: <a href="https://support.google.com/notebooklm/answer/16212820?hl=en">NotebookLM Audio Overview help</a>, <a href="https://support.google.com/notebooklm/answer/16206563?hl=en">NotebookLM create notebook help</a>.</td>
+    </tr>
+    <tr>
+      <td>Quizlet</td>
+      <td>Practice tests, flashcards, study guides, homework help, and editable AI outputs are expected. Source: <a href="https://quizlet.com/features/ai-study-tools">quizlet.com/features/ai-study-tools</a>.</td>
+    </tr>
+    <tr>
+      <td>Knowt</td>
+      <td>Students expect note/PDF/PPT/video to flashcards and practice tests, plus mobile studying. Source: <a href="https://knowt.com/ai-notes">knowt.com/ai-notes</a>.</td>
+    </tr>
+    <tr>
+      <td>NTA</td>
+      <td>Exam packs must track official bodies and current exam cycles for JEE, NEET, CUET, UGC NET, CSIR NET, SWAYAM, and related exams. Source: <a href="https://nta.ac.in/">nta.ac.in</a>.</td>
+    </tr>
+    <tr>
+      <td>UPSC and SSC</td>
+      <td>Government exam support needs official active exams, schemes, syllabi, and PYQ mapping. Sources: <a href="https://upsc.gov.in/examinations/active-exams">UPSC active exams</a>, <a href="https://ssc.gov.in/for-candidates/scheme-of-examination">SSC scheme of examination</a>.</td>
+    </tr>
+    <tr>
+      <td>DIKSHA and NCERT</td>
+      <td>School coverage should align with NCERT, CBSE, NIOS, and state/UT content where possible. Source: <a href="https://diksha.gov.in/?lang=en">diksha.gov.in</a>.</td>
+    </tr>
+    <tr>
+      <td>Razorpay</td>
+      <td>Paid launch requires webhook signature validation and server-side payment verification, not frontend trust. Source: <a href="https://razorpay.com/docs/webhooks/?preferred-country=IN">Razorpay webhooks docs</a>.</td>
+    </tr>
+  </table>
+
+  <h2>11. 30 / 60 / 90 Day Plan</h2>
+  <table>
+    <tr>
+      <th>Timeframe</th>
+      <th>Build</th>
+      <th>Verify</th>
+      <th>Business outcome</th>
+    </tr>
+    <tr>
+      <td>Days 1-7</td>
+      <td>Fix token contract, Postgres schema warnings, DPDP age gate, local run scripts, health provenance.</td>
+      <td>Browser E2E for login-to-home, API smoke, Postgres startup zero warnings.</td>
+      <td>Internal beta can be trusted by founder/team.</td>
+    </tr>
+    <tr>
+      <td>Days 8-30</td>
+      <td>Source-grounded RAG, citation UI, first 5 verified exam packs, mobile nav polish, provider sandbox.</td>
+      <td>Accuracy benchmark v1, mobile screenshots, upload-to-quiz-to-doubt tests.</td>
+      <td>Closed beta with 50-100 Indian students.</td>
+    </tr>
+    <tr>
+      <td>Days 31-60</td>
+      <td>Mock test engine, PYQ import, weak-topic analytics, community cohorts, moderation queue.</td>
+      <td>Load test, security pass, retention analytics, teacher review workflow.</td>
+      <td>Public beta waitlist and school/coaching pilot.</td>
+    </tr>
+    <tr>
+      <td>Days 61-90</td>
+      <td>Payments, referral, WhatsApp sharing, Android/PWA readiness, production observability.</td>
+      <td>Payment webhook drill, backup restore, incident drill, real provider smoke.</td>
+      <td>First paid cohort with controlled scale.</td>
+    </tr>
+  </table>
+
+  <h2>12. Final Pending Backlog Summary</h2>
+  <table>
+    <tr>
+      <th>Priority</th>
+      <th>Count</th>
+      <th>Theme</th>
+    </tr>
+    <tr>
+      <td><span class="tag p0">P0</span></td>
+      <td>6</td>
+      <td>Login/session, Postgres migrations, DPDP under-18 compliance, local process control, secrets, E2E gates.</td>
+    </tr>
+    <tr>
+      <td><span class="tag p1">P1</span></td>
+      <td>8</td>
+      <td>Source grounding, exam taxonomy, accuracy benchmark, provider validation, mobile QA, payments, observability, all-module Postgres persistence.</td>
+    </tr>
+    <tr>
+      <td><span class="tag p2">P2</span></td>
+      <td>7</td>
+      <td>Community depth, mentor/tutor workflows, marketplace trust, growth loops, teacher tools, parent reports, low-data/offline polish.</td>
+    </tr>
+    <tr>
+      <td><span class="tag p3">P3</span></td>
+      <td>5</td>
+      <td>Advanced PhD workflows, institution procurement dashboards, creator monetization, multi-region scale, deep personalization.</td>
+    </tr>
+  </table>
+
+  <h2>13. Bottom Line</h2>
+  <p>
+    AIPadhaiApp is no longer just a concept. The backend shape and product breadth
+    are meaningful. But the next step is discipline: fix the P0 reliability and
+    compliance issues first, then prove the student loop with accurate,
+    source-grounded exam preparation. If those are done, the app can credibly move
+    toward a 9+ score. Without them, a big feature list will not convert into user
+    trust or retention.
+  </p>
+</main>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "aipadhaiapp",
+  "version": "1.0.0",
+  "description": "Multilingual AI teacher for K-12, coaching, and SAARC markets. Web + mobile + admin console. Started as a scan-to-video CLI in v0.1; now a school-ERP-grade platform at v2.0.4.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:health": "cypress run --spec 'cypress/e2e/01-health.cy.js'",
+    "cy:run:auth": "cypress run --spec 'cypress/e2e/02-auth-api.cy.js,cypress/e2e/03-auth-modal.cy.js'",
+    "cy:run:nav": "cypress run --spec 'cypress/e2e/04-navigation.cy.js'",
+    "cy:run:studio": "cypress run --spec 'cypress/e2e/05-video-studio.cy.js'",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/02-auth-api.cy.js,cypress/e2e/06-upload-api.cy.js,cypress/e2e/09-profile-export.cy.js'",
+    "cy:run:curriculum": "cypress run --spec 'cypress/e2e/10-curriculum-ui.cy.js,cypress/e2e/13-board-exam-wiring.cy.js'",
+    "cy:run:smoke": "cypress run --spec 'cypress/e2e/01-health.cy.js,cypress/e2e/02-auth-api.cy.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:33945/git/adapke/AIPadhaiApp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  }
+}
+

@@ -29,3 +29,9 @@ demo_script.json
 .env
 .env.local
 .env.*.local
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+node_modules/

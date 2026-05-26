@@ -184,7 +184,10 @@ def my_flags(user=Depends(current_user)):
 
 
 @router.get("/api/admin/flags")
-def list_flags():
+def list_flags(user=Depends(current_user)):
+    user = require_user(user)
+    if not getattr(user, "is_admin", False):
+        raise HTTPException(403, "admin access required")
     from .. import feature_flags
     return {
         "rows": [
