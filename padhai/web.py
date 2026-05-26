@@ -56,6 +56,7 @@ _log = logging.getLogger("padhai.web")
 from .auth import (
     AuthUser,
     PostgresUserRepository,
+    SQLiteUserRepository,
     hash_password,
     issue_token,
     make_current_user_dependency,
@@ -216,9 +217,11 @@ _repo_lock = threading.Lock()
 
 
 def _get_user_repo():
-    """Lazy getter for the user repo. Falls back to on-demand init so
-    that DATABASE_URL set after module import (e.g. via .env or the
-    lifespan) is still picked up on first request.
+    """Lazy getter for the user repo.
+
+    - When DATABASE_URL is set: returns PostgresUserRepository.
+    - When DATABASE_URL is absent: falls back to SQLiteUserRepository
+      so that signup/login work in a fresh dev checkout without Postgres.
 
     Protected by _repo_lock to prevent concurrent requests from each
     creating their own PostgresJobStore and leaking connection pools."""
@@ -231,12 +234,15 @@ def _get_user_repo():
         db_url = os.environ.get("DATABASE_URL")
         _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
         if not db_url:
-            return None
+            # Dev / single-server mode: SQLite-backed auth
+            _user_repo = SQLiteUserRepository("padhai.db")
+            _log.info("_get_user_repo: using SQLiteUserRepository (no DATABASE_URL)")
+            return _user_repo
         try:
             if _pg_store is None:
                 _pg_store = PostgresJobStore(db_url)
             _user_repo = PostgresUserRepository(_pg_store.pool)
-            _log.info("_get_user_repo: initialised ok")
+            _log.info("_get_user_repo: initialised PostgresUserRepository ok")
         except Exception as e:
             _log.error("_get_user_repo: FAILED: %s", e)
             return None
@@ -2849,6 +2855,9 @@ _INDEX_HTML = r"""<!DOCTYPE html>
         <button class="nav-item" data-module="adaptive">
           <span class="ico">🧠</span><span>Adaptive Practice</span>
         </button>
+        <button class="nav-item" data-module="practice">
+          <span class="ico">📝</span><span>Practice Tests</span>
+        </button>
       </div>
     </div>
 
@@ -4105,7 +4114,7 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
         <div class="row">
           <div style="flex:1;">
             <label>Syllabus pack</label>
-            <input type="text" id="ap-pack" placeholder="e.g. CBSE_10_Science or JEE_Physics">
+            <select id="ap-pack"><option value="">Loading exam packs…</option></select>
           </div>
           <div style="flex:1;">
             <label>Questions per session</label>
@@ -4125,6 +4134,77 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
         <div class="card-title">Your packs</div>
         <div id="ap-list"></div>
         <button class="btn-ghost" id="ap-refresh" style="margin-top:10px;">↻ Refresh</button>
+      </div>
+    </section>
+
+    <!-- ===== PRACTICE TESTS ===== -->
+    <section id="mod-practice" class="module">
+      <h2 class="page-title">Practice Tests</h2>
+      <p class="page-sub">Generate a timed practice test for your exam. Questions are pulled from our bank and adapted to your weak topics.</p>
+
+      <div class="card" id="pt-form-card">
+        <div class="row">
+          <div style="flex:1;">
+            <label>Exam</label>
+            <select id="pt-exam">
+              <option value="jee_main">JEE Main</option>
+              <option value="jee_advanced">JEE Advanced</option>
+              <option value="neet">NEET</option>
+              <option value="upsc">UPSC CSE (General)</option>
+              <option value="upsc_pre">UPSC Prelims</option>
+              <option value="upsc_mains">UPSC Mains</option>
+              <option value="cat">CAT</option>
+              <option value="gate">GATE</option>
+              <option value="generic">Generic / Other</option>
+            </select>
+          </div>
+          <div style="flex:1;">
+            <label>Subject</label>
+            <input type="text" id="pt-subject" placeholder="e.g. Physics, General Studies, Quantitative Aptitude" maxlength="64">
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <div style="flex:1;">
+            <label>Time limit</label>
+            <select id="pt-minutes">
+              <option value="10">10 minutes (~7 Qs)</option>
+              <option value="20">20 minutes (~13 Qs)</option>
+              <option value="30" selected>30 minutes (~20 Qs)</option>
+              <option value="45">45 minutes (~30 Qs)</option>
+              <option value="60">60 minutes (~40 Qs)</option>
+              <option value="120">2 hours (~80 Qs)</option>
+            </select>
+          </div>
+          <div style="flex:1; display:flex; align-items:flex-end; padding-bottom:2px;">
+            <button type="button" class="primary" id="pt-create" style="width:100%;">Generate test</button>
+          </div>
+        </div>
+        <div class="status" id="pt-status"></div>
+      </div>
+
+      <!-- Active test UI -->
+      <div id="pt-test-card" class="card" style="display:none; margin-top:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div class="card-title" id="pt-test-title">Test</div>
+          <div id="pt-timer" style="font-size:1.1em; font-weight:600; color:var(--accent);"></div>
+        </div>
+        <div id="pt-questions"></div>
+        <button type="button" class="primary" id="pt-submit" style="margin-top:16px;">Submit test</button>
+        <div class="status" id="pt-submit-status"></div>
+      </div>
+
+      <!-- Score report -->
+      <div id="pt-report-card" class="card" style="display:none; margin-top:12px;">
+        <div class="card-title">Your result</div>
+        <div id="pt-report"></div>
+        <button type="button" class="btn-ghost" id="pt-new" style="margin-top:12px;">+ New test</button>
+      </div>
+
+      <!-- Past tests -->
+      <div id="pt-history-card" class="card" style="margin-top:12px;">
+        <div class="card-title">Recent tests</div>
+        <div id="pt-history"><em style="color:var(--muted-text);">No tests yet.</em></div>
+        <button class="btn-ghost" id="pt-refresh" style="margin-top:10px;">↻ Refresh</button>
       </div>
     </section>
 
@@ -6538,7 +6618,10 @@ async function liveHandleTranscript(transcript) {
     liveAddTurn('tutor', j.reply);
     liveSpeak(j.reply);
   } catch (err) {
-    liveSetStatus('Error: ' + err.message, 'error');
+    const msg = err.message.includes('not configured')
+      ? 'AI service not set up on this server — set ANTHROPIC_API_KEY to enable AI replies.'
+      : 'Error: ' + err.message;
+    liveSetStatus(msg, 'error');
     liveSetButton(null, 'Tap to speak');
   }
 }
@@ -6685,7 +6768,10 @@ async function vtHandleTranscript(transcript) {
     vtAddTurn('tutor', j.reply);
     vtSpeak(j.reply);
   } catch (err) {
-    vtSetStatus('Error: ' + err.message, 'error');
+    const msg = err.message.includes('not configured')
+      ? 'AI service not set up on this server — set ANTHROPIC_API_KEY to enable voice replies.'
+      : 'Error: ' + err.message;
+    vtSetStatus(msg, 'error');
     vtSetButton(null, 'Tap to speak');
   }
 }
@@ -7058,9 +7144,31 @@ function miShowReport(data) {
   $('mi-session').style.display = 'none';
   $('mi-report').style.display = '';
   const score = data.overall_score !== undefined ? data.overall_score : (data.feedback && data.feedback.overall_score);
-  $('mi-overall-score').textContent = score !== undefined && score !== null ? `Overall: ${Math.round(score * 10) / 10} / 100` : 'Interview complete';
-  const fb = data.feedback || data;
-  $('mi-report-body').textContent = typeof fb === 'string' ? fb : (fb.summary || fb.detailed_feedback || JSON.stringify(fb, null, 2));
+  $('mi-overall-score').textContent = score !== undefined && score !== null
+    ? `Overall score: ${Math.round(score * 10) / 10} / 100`
+    : 'Interview complete';
+  const fb = data.feedback || {};
+  let html = '';
+  if (typeof fb === 'string') {
+    html = `<p>${fb}</p>`;
+  } else {
+    if (fb.summary) html += `<p>${fb.summary}</p>`;
+    if (fb.detailed_feedback) html += `<p>${fb.detailed_feedback}</p>`;
+    const crit = fb.criteria_averages || fb.criteria || [];
+    if (crit.length) {
+      html += '<div style="margin-top:12px;">';
+      crit.forEach(c => {
+        const pct = Math.round(((c.score || c.avg || 0) / (c.max || 10)) * 100);
+        html += `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
+          <span>${c.name || c.criterion}</span>
+          <span style="font-weight:600;color:${pct>=70?'#2e7d32':pct>=40?'var(--brand)':'#c62828'}">${c.score || c.avg || '—'}</span>
+        </div>`;
+      });
+      html += '</div>';
+    }
+    if (!html) html = `<p>Interview ended. ${score !== undefined ? 'See your score above.' : 'No detailed report available.'}</p>`;
+  }
+  $('mi-report-body').innerHTML = html;
 }
 
 $('mi-submit-answer').addEventListener('click', () => {
@@ -7107,22 +7215,42 @@ $('mi-restart').addEventListener('click', () => {
 });
 
 // ===== ADAPTIVE PRACTICE =====
-async function apLoadPacks() {
+async function apLoadExamPacks() {
+  try {
+    const r = await fetch('/api/exam-packs');
+    const j = await r.json().catch(() => ({ packs: [] }));
+    const packs = j.packs || [];
+    const sel = $('ap-pack');
+    sel.innerHTML = '';
+    if (!packs.length) {
+      sel.innerHTML = '<option value="">No exam packs available</option>';
+      return;
+    }
+    packs.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.code;
+      opt.textContent = p.title;
+      sel.appendChild(opt);
+    });
+  } catch {}
+}
+
+async function apLoadMyPacks() {
   try {
     const r = await fetch('/api/adaptive-packs/me', { headers: authHeaders() });
     if (!r.ok) return;
     const j = await r.json();
     const packs = j.packs || [];
     if (packs.length === 0) {
-      $('ap-list').innerHTML = '<div style="color:var(--muted);font-size:13px;">No packs yet — create one above.</div>';
+      $('ap-list').innerHTML = '<div style="color:var(--muted);font-size:13px;">No packs yet — select an exam pack above and click Create.</div>';
     } else {
       $('ap-list').innerHTML = packs.map(p =>
         `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);">
           <div>
-            <div style="font-weight:600;font-size:14px;">${p.base_pack_code || p.id}</div>
-            <div style="font-size:12px;color:var(--muted);">Difficulty: ${p.current_difficulty || 'auto'} · Questions: ${p.total_questions || '?'}</div>
+            <div style="font-weight:600;font-size:14px;">${p.title || p.base_pack_code}</div>
+            <div style="font-size:12px;color:var(--muted);">${p.base_pack_code} · Difficulty: ${p.current_difficulty || 'auto'}</div>
           </div>
-          <button class="btn-ghost" style="font-size:12px;padding:5px 10px;" onclick="apOpenPack('${p.base_pack_code || p.id}')">View →</button>
+          <button class="btn-ghost" style="font-size:12px;padding:5px 10px;" onclick="apOpenPack('${p.base_pack_code}')">Topics →</button>
         </div>`
       ).join('');
     }
@@ -7133,27 +7261,29 @@ async function apLoadPacks() {
 async function apOpenPack(packCode) {
   try {
     const r = await fetch(`/api/adaptive-packs/${packCode}/topics`, { headers: authHeaders() });
-    if (!r.ok) return;
+    if (!r.ok) {
+      $('ap-list').innerHTML = `<div style="color:var(--muted);font-size:13px;">Topics not yet available — the pack is adapting. Try again after your first practice session.</div><button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadMyPacks()">← Back</button>`;
+      return;
+    }
     const j = await r.json();
     const topics = j.topics || [];
-    $('ap-list').innerHTML = `<div style="font-weight:600;font-size:14px;margin-bottom:8px;">${packCode} — Topics</div>` +
-      topics.map(t =>
+    $('ap-list').innerHTML = `<div style="font-weight:600;font-size:14px;margin-bottom:8px;">${packCode} — Topic Mastery</div>` +
+      (topics.length ? topics.map(t =>
         `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
           <span>${t.topic}</span>
           <span style="color:${t.mastery >= 0.8 ? '#2e7d32' : t.mastery >= 0.5 ? 'var(--brand)' : '#c62828'};">
             ${Math.round((t.mastery || 0) * 100)}%
           </span>
         </div>`
-      ).join('') +
-      `<button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadPacks()">← Back to packs</button>`;
+      ).join('') : '<div style="color:var(--muted);font-size:13px;">No topic data yet — complete a practice session first.</div>') +
+      `<button class="btn-ghost" style="margin-top:10px;font-size:12px;" onclick="apLoadMyPacks()">← Back to my packs</button>`;
   } catch {}
 }
 
 $('ap-create').addEventListener('click', async () => {
-  const pack = $('ap-pack').value.trim();
-  const count = parseInt($('ap-count').value, 10);
+  const pack = $('ap-pack').value;
   if (!pack) {
-    $('ap-status').textContent = 'Please enter a pack code.';
+    $('ap-status').textContent = 'Please select an exam pack.';
     $('ap-status').className = 'status error';
     return;
   }
@@ -7163,16 +7293,14 @@ $('ap-create').addEventListener('click', async () => {
   try {
     const fd = new FormData();
     fd.set('base_pack_code', pack);
-    fd.set('target_question_count', count);
     const r = await fetch('/api/adaptive-packs', { method: 'POST', headers: authHeaders(), body: fd });
     if (!r.ok) {
       const j = await r.json().catch(() => ({}));
       throw new Error(j.detail || `HTTP ${r.status}`);
     }
-    $('ap-status').textContent = 'Pack created!';
+    $('ap-status').textContent = 'Pack created! You can now view your topic mastery.';
     $('ap-status').className = 'status ok';
-    $('ap-pack').value = '';
-    await apLoadPacks();
+    await apLoadMyPacks();
   } catch (err) {
     $('ap-status').textContent = 'Error: ' + err.message;
     $('ap-status').className = 'status error';
@@ -7181,11 +7309,206 @@ $('ap-create').addEventListener('click', async () => {
   }
 });
 
-$('ap-refresh').addEventListener('click', apLoadPacks);
+$('ap-refresh').addEventListener('click', apLoadMyPacks);
 
-// Load packs on module show
+// Load on module show
 document.addEventListener('moduleShow', (e) => {
-  if (e.detail === 'adaptive') apLoadPacks();
+  if (e.detail === 'adaptive') { apLoadExamPacks(); apLoadMyPacks(); }
+});
+
+// ===== PRACTICE TESTS =====
+// answers format: {question_id: "a"} — letter chosen, maps to correct_answer comparison
+let ptCurrentTest = null;
+let ptTimerInterval = null;
+const PT_LETTERS = ['a','b','c','d','e'];
+
+async function ptLoadHistory() {
+  try {
+    const r = await apiFetch('/api/practice-tests');
+    const data = await r.json();
+    if (!data.rows || data.rows.length === 0) {
+      $('pt-history').innerHTML = '<em style="color:var(--muted-text);">No tests yet.</em>';
+      return;
+    }
+    $('pt-history').innerHTML = data.rows.map(t => {
+      const scoreStr = (t.score != null && t.max != null) ? `${t.score}/${t.max}` : '—';
+      const statusHtml = t.status === 'submitted'
+        ? `<span style="color:var(--green,#22c55e);">${scoreStr}</span>`
+        : `<span style="color:var(--accent);">${t.status}</span>`;
+      const dt = t.submitted_at ? new Date(t.submitted_at * 1000).toLocaleDateString() : 'in progress';
+      return `<div style="padding:8px 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; font-size:13px;">
+        <span><strong>${t.exam}</strong> · ${t.subject} · ${t.question_count} Qs · ${t.target_minutes}min</span>
+        <span>${statusHtml} <span style="color:var(--muted-text);">${dt}</span></span>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    $('pt-history').innerHTML = `<em style="color:var(--error);">Could not load history: ${e.message}</em>`;
+  }
+}
+
+function ptRenderQuestions(questions) {
+  $('pt-questions').innerHTML = questions.map((q, i) => {
+    const qid = q.id || `q${i}`;
+    const opts = (q.options && q.options.length)
+      ? q.options.map((o, j) => `
+          <label style="display:flex;gap:8px;align-items:flex-start;margin:6px 0;cursor:pointer;">
+            <input type="radio" name="ptq-${qid}" data-qid="${qid}" data-letter="${PT_LETTERS[j]}" style="margin-top:3px;"> <span>${o}</span>
+          </label>`).join('')
+      : `<textarea id="pttext-${qid}" data-qid="${qid}" rows="3" style="width:100%;margin-top:8px;padding:8px;" placeholder="Your answer…"></textarea>`;
+    return `<div class="card" style="margin-bottom:10px;padding:14px;">
+      <div style="font-weight:600;margin-bottom:8px;line-height:1.5;">Q${i+1}. ${q.question_text}</div>
+      ${opts}
+    </div>`;
+  }).join('');
+}
+
+function ptStartTimer(minutes) {
+  let remaining = minutes * 60;
+  const update = () => {
+    if (remaining < 0) return;
+    const m = Math.floor(remaining / 60);
+    const s = remaining % 60;
+    $('pt-timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    if (remaining === 0) {
+      clearInterval(ptTimerInterval);
+      $('pt-timer').textContent = 'Time up!';
+      $('pt-timer').style.color = 'var(--error, #ef4444)';
+      ptSubmitTest();
+    }
+    remaining--;
+  };
+  update();
+  ptTimerInterval = setInterval(update, 1000);
+}
+
+async function ptSubmitTest() {
+  if (!ptCurrentTest) return;
+  clearInterval(ptTimerInterval);
+
+  // Build answers dict: {question_id: chosen_letter}
+  const answers = {};
+  for (const q of ptCurrentTest.questions) {
+    const qid = q.id;
+    // MCQ: find checked radio
+    const checked = document.querySelector(`input[name="ptq-${qid}"]:checked`);
+    if (checked) {
+      answers[qid] = checked.dataset.letter;
+      continue;
+    }
+    // Free text: look for textarea
+    const ta = document.getElementById(`pttext-${qid}`);
+    if (ta && ta.value.trim()) {
+      answers[qid] = ta.value.trim();
+    }
+  }
+
+  ptSetSubmitStatus('Submitting…', '');
+  try {
+    const fd = new FormData();
+    fd.append('answers_json', JSON.stringify(answers));
+    const r = await apiFetch(`/api/practice-tests/${ptCurrentTest.id}/submit`, { method: 'POST', body: fd });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
+    const result = await r.json();
+    const score = result.score || {};
+    const pct = score.pct != null ? Math.round(score.pct * 100) : null;
+
+    // Build per-question review from score + stored questions
+    const qMap = Object.fromEntries((ptCurrentTest.questions || []).map(q => [q.id, q]));
+    const reviewHtml = (score.per_question || []).map((rv, i) => {
+      const origQ = qMap[rv.question_id] || {};
+      return `<div style="padding:10px; margin-bottom:6px; border-radius:6px; background:${rv.is_correct ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)'}; border-left:3px solid ${rv.is_correct ? '#22c55e' : '#ef4444'};">
+        <div style="font-weight:600; margin-bottom:4px;">${rv.is_correct ? '✓' : '✗'} Q${i+1}: ${origQ.question_text || ''}</div>
+        <div style="font-size:12px; color:var(--muted-text);">Your answer: <strong>${rv.chosen || '(blank)'}</strong>${rv.is_correct ? '' : ` · Correct: <strong>${rv.correct}</strong>`}</div>
+      </div>`;
+    }).join('');
+
+    $('pt-test-card').style.display = 'none';
+    $('pt-report-card').style.display = '';
+    $('pt-report').innerHTML = `
+      <div style="font-size:2.4em; font-weight:700; color:var(--accent); margin-bottom:4px;">${score.total ?? '?'} / ${score.max ?? '?'}</div>
+      <div style="color:var(--muted-text); margin-bottom:18px; font-size:1.1em;">${pct != null ? pct + '% correct' : ''}</div>
+      ${reviewHtml}`;
+    await ptLoadHistory();
+  } catch(e) {
+    ptSetSubmitStatus('Error: ' + e.message, 'error');
+  }
+}
+
+function ptSetStatus(msg, cls) {
+  const el = $('pt-status');
+  el.textContent = msg; el.className = 'status ' + (cls || '');
+}
+
+function ptSetSubmitStatus(msg, cls) {
+  const el = $('pt-submit-status');
+  el.textContent = msg; el.className = 'status ' + (cls || '');
+}
+
+$('pt-create').addEventListener('click', async () => {
+  const exam = $('pt-exam').value;
+  const subject = ($('pt-subject').value || '').trim();
+  const minutes = parseInt($('pt-minutes').value);
+  if (!subject) { ptSetStatus('Please enter a subject.', 'error'); return; }
+
+  ptSetStatus('Generating test…', '');
+  $('pt-create').disabled = true;
+  try {
+    // 1. Create the test record
+    const fd = new FormData();
+    fd.append('exam', exam);
+    fd.append('subject', subject);
+    fd.append('target_minutes', minutes);
+    const r = await apiFetch('/api/practice-tests', { method: 'POST', body: fd });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.detail || r.statusText); }
+    const test = await r.json();
+
+    // 2. Start the test (marks it in_progress)
+    const r2 = await apiFetch(`/api/practice-tests/${test.id}/start`, { method: 'POST', body: new FormData() });
+    if (!r2.ok) { const e2 = await r2.json(); throw new Error(e2.detail || r2.statusText); }
+
+    // 3. Fetch full test with questions
+    const r3 = await apiFetch(`/api/practice-tests/${test.id}`);
+    if (!r3.ok) { const e3 = await r3.json(); throw new Error(e3.detail || r3.statusText); }
+    const fullTest = await r3.json();
+    ptCurrentTest = fullTest;
+
+    if (!fullTest.questions || fullTest.questions.length === 0) {
+      ptSetStatus('No questions found for this exam/subject combination. Try "generic" exam or a different subject.', 'error');
+      $('pt-create').disabled = false;
+      return;
+    }
+
+    ptSetStatus('', '');
+    $('pt-form-card').style.display = 'none';
+    $('pt-test-card').style.display = '';
+    $('pt-report-card').style.display = 'none';
+    $('pt-test-title').textContent = `${exam.toUpperCase()} · ${subject} · ${minutes} min`;
+    ptRenderQuestions(fullTest.questions);
+    clearInterval(ptTimerInterval);
+    ptStartTimer(minutes);
+    await ptLoadHistory();
+  } catch(e) {
+    ptSetStatus('Error: ' + e.message, 'error');
+  } finally {
+    $('pt-create').disabled = false;
+  }
+});
+
+$('pt-submit').addEventListener('click', ptSubmitTest);
+
+$('pt-new').addEventListener('click', () => {
+  ptCurrentTest = null;
+  clearInterval(ptTimerInterval);
+  $('pt-form-card').style.display = '';
+  $('pt-test-card').style.display = 'none';
+  $('pt-report-card').style.display = 'none';
+  ptSetStatus('', '');
+});
+
+$('pt-refresh').addEventListener('click', ptLoadHistory);
+
+document.addEventListener('moduleShow', (e) => {
+  if (e.detail === 'practice') { ptLoadHistory(); }
 });
 
 // ===== EXPLAINER =====
@@ -9164,7 +9487,7 @@ def signup(
     terms_accepted: bool = Form(False),
 ) -> JSONResponse:
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
+        raise HTTPException(503, "auth not configured — restart the server")
     if not terms_accepted:
         raise HTTPException(400, "you must accept the Terms of Service to create an account")
     if "@" not in email:
@@ -11557,7 +11880,7 @@ def create_parent_link(
     if role not in ("parent", "child"):
         raise HTTPException(400, "role must be 'parent' or 'child'")
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured (DATABASE_URL missing)")
+        raise HTTPException(503, "auth not configured — restart the server")
     other = _get_user_repo().find_by_email(other_email)
     if not other:
         raise HTTPException(404, f"no AI Pathshala account for {other_email}")
@@ -13062,7 +13385,13 @@ def live_respond(
         history = []
     # cap history to last 8 turns to keep prompts small
     history = history[-8:]
-    reply = live_tutor_reply(transcript, history=history)
+    try:
+        reply = live_tutor_reply(transcript, history=history)
+    except Exception as e:
+        err = str(e)
+        if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
+        raise HTTPException(500, f"AI error: {err}")
     return {"transcript": transcript, "reply": reply}
 
 
@@ -13102,7 +13431,13 @@ def voice_respond(
         if cached is not None:
             lesson_json = _json.dumps(dataclasses.asdict(cached), ensure_ascii=False)
 
-    reply = voice_tutor_reply(transcript, history=history, lesson_json=lesson_json)
+    try:
+        reply = voice_tutor_reply(transcript, history=history, lesson_json=lesson_json)
+    except Exception as e:
+        err = str(e)
+        if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
+        raise HTTPException(500, f"AI error: {err}")
     return {"transcript": transcript, "reply": reply, "lesson_grounded": lesson_json is not None}
 
 
@@ -13958,7 +14293,7 @@ def change_password(
         raise HTTPException(401, "authentication required")
     _validate_password_complexity(new_password)
     if _get_user_repo() is None:
-        raise HTTPException(503, "auth not configured — set DATABASE_URL")
+        raise HTTPException(503, "auth not configured — restart the server")
     result = _get_user_repo().find_by_email(user.email)
     if not result:
         raise HTTPException(404, "user not found")
