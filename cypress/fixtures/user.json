@@ -1,0 +1,6 @@
+{
+  "password": "Test1234!",
+  "weakPassword": "abc",
+  "noDigitPassword": "NoDigitHere!",
+  "noLetterPassword": "12345678"
+}

@@ -4610,6 +4610,7 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
     </div>
 
     <form id="auth-form">
+      <input type="hidden" name="terms_accepted" value="true">
       <label>Email</label>
       <input type="email" name="email" required>
       <label>Password</label>
