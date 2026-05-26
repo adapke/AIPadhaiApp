@@ -10,9 +10,48 @@ release-by-release summary auditors / new contributors actually read.
 
 ## Unreleased
 
-(nothing pending)
-
 ---
+
+## v3.20.0 — Phase 3 complete: Voice Tutor + 4 AI module UIs wired
+
+All Phase 3 backend modules are now fully connected to the SPA.
+No stubs remain in the student-facing UI.
+
+**Voice Tutor (`mod-voice`)** — replaced the "Coming in Phase 3" stub
+with a real Web Speech API voice loop backed by `POST /voice/respond`.
+Optionally links to a lesson (same grounding as the text Doubt Chat
+but spoken). Backend: `voice_tutor_reply()` + `VOICE_TUTOR_SYSTEM`
+prompt added to `pedagogy.py`.
+
+**Essay Grader (`mod-essay`)** — rubric picker that loads from
+`GET /api/essay/rubrics` on module open; textarea for the answer;
+per-criterion score breakdown + suggestions via `POST /api/essay/submissions`.
+Wires to the fully-implemented `essay_grader.py` backend (L2).
+
+**Math Check (`mod-mathvision`)** — image URL input → AI extracts LaTeX
+steps → step-by-step validation with first-error callout. Wires to
+`math_vision.py` via `POST /api/math-vision/submit` + `/validate` (L3).
+
+**Mock Interview (`mod-interview`)** — track selector (UPSC / JEE /
+placement / NEET PG / MBA) → voice or text answers → live transcript
+with per-answer feedback → final scored report. Correctly wired to
+`mock_interview.py` API field names (`turn_index`, `answer_text`,
+`interview_id`, `opener.question_text`) (L4).
+
+**Adaptive Practice (`mod-adaptive`)** — pack code input → create
+adaptive pack → topic mastery percentages view. Wires to
+`adaptive_packs.py` (L5).
+
+Sidebar Tutor group expanded from 2 → 6 items. `showModule()` now
+dispatches a `moduleShow` custom event so modules can lazy-load data
+(essay rubrics, adaptive pack list) on first visit.
+
+Backend additions:
+- `POST /voice/respond` endpoint
+- `voice_tutor_reply()` + `VOICE_TUTOR_SYSTEM` in `pedagogy.py`
+- `node_modules/` added to `.gitignore`
+
+
 
 ## v3.19.0 — Home UI UX fixes
 
