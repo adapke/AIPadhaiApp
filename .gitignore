@@ -20,6 +20,11 @@ demo_script.json
 *.swp
 *.swo
 
+# SQLite dev databases (created at runtime by SQLiteUserRepository)
+*.db
+*.db-shm
+*.db-wal
+
 # secrets — env files are never committed; share .env.example only
 .env
 .env.local
