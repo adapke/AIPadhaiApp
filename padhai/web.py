@@ -651,8 +651,11 @@ async def _lifespan(app: FastAPI):
         _log.warning("[startup] tutor.migrate failed (non-fatal): %s", e)
     try:
         _essay.migrate()
+        seeded = _essay.seed_default_rubrics()
+        if seeded:
+            _log.info("[startup] essay_grader: seeded %d default rubrics", seeded)
     except Exception as e:  # noqa: BLE001
-        _log.warning("[startup] essay_grader.migrate failed (non-fatal): %s", e)
+        _log.warning("[startup] essay_grader.migrate/seed failed (non-fatal): %s", e)
     try:
         _practice.migrate()
     except Exception as e:  # noqa: BLE001
@@ -4024,8 +4027,13 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
 
       <div class="card" id="mv-form-card">
         <label>Image URL of handwritten solution</label>
-        <input type="url" id="mv-image-url" placeholder="https://… (JPG, PNG, or PDF page URL)">
-        <div style="font-size:12px;color:var(--muted);margin-top:4px;">Tip: upload to Imgur, Google Drive (public link), or any image host.</div>
+        <input type="url" id="mv-image-url" placeholder="https://i.imgur.com/… or any public JPG/PNG URL">
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">
+          Must be a <strong>public</strong> URL (AI reads it directly). Upload to
+          <a href="https://imgur.com" target="_blank" rel="noopener" style="color:var(--brand);">Imgur</a>,
+          Google Photos (shared link), or any CDN.
+          Supports JPG, PNG, WEBP. Max resolution ~4000×4000 px.
+        </div>
         <div style="margin-top:12px;">
           <label>Language</label>
           <select id="mv-lang" style="width:auto;">
@@ -5144,6 +5152,49 @@ function renderAuthCorner() {
   }
 }
 renderAuthCorner();
+
+// AI capability check — runs once on load, gates AI-dependent module UIs.
+let _aiStatus = null;
+async function checkAiStatus() {
+  try {
+    const r = await fetch('/api/ai-status');
+    _aiStatus = await r.json();
+  } catch(_) {
+    _aiStatus = { anthropic_configured: false, features: {} };
+  }
+  if (!_aiStatus.anthropic_configured) {
+    // Show a dismissable notice so admins know what to configure
+    const banner = document.createElement('div');
+    banner.id = 'ai-setup-banner';
+    banner.style.cssText = (
+      'position:fixed;bottom:16px;right:16px;max-width:340px;'
+      + 'background:#1e293b;color:#e2e8f0;padding:14px 16px;border-radius:10px;'
+      + 'font-size:13px;line-height:1.5;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.35);'
+    );
+    banner.innerHTML = (
+      '<div style="font-weight:700;margin-bottom:6px;">⚙ AI features not configured</div>'
+      + '<div style="color:#94a3b8;">Set <code style="background:#334155;padding:1px 5px;border-radius:3px;">ANTHROPIC_API_KEY</code> '
+      + 'to enable Voice Tutor, Essay Grader, Math Check, and question synthesis.</div>'
+      + '<button onclick="this.parentElement.remove()" style="margin-top:10px;background:#334155;'
+      + 'border:0;color:#e2e8f0;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px;">Dismiss</button>'
+    );
+    document.body.appendChild(banner);
+  }
+}
+checkAiStatus();
+
+// Per-module AI gate helper — call on moduleShow to inject a status note
+function showAiNote(statusElId, featureKey) {
+  if (!_aiStatus) return;   // not loaded yet; will show on first interaction
+  const el = document.getElementById(statusElId);
+  if (!el) return;
+  if (!_aiStatus.features[featureKey]) {
+    el.textContent = 'AI not configured — set ANTHROPIC_API_KEY on the server to enable this feature.';
+    el.className = 'status error';
+  } else {
+    if (el.textContent.includes('AI not configured')) el.textContent = '';
+  }
+}
 
 // URL hash navigation — allows external pages (design overview, email
 // links, etc.) to deep-link into any module: /?m=quizmaker or #quizmaker
@@ -6910,7 +6961,14 @@ async function egLoadRubrics() {
 $('eg-exam').addEventListener('change', egLoadRubrics);
 
 document.addEventListener('moduleShow', (e) => {
-  if (e.detail === 'essay') egLoadRubrics();
+  if (e.detail === 'essay') {
+    egLoadRubrics();
+    showAiNote('eg-status', 'essay_grader');
+  }
+  if (e.detail === 'voice') showAiNote('vt-status', 'voice_tutor');
+  if (e.detail === 'live') showAiNote('live-status', 'live_lecture');
+  if (e.detail === 'mathvision') showAiNote('mv-status', 'math_vision');
+  if (e.detail === 'interview') showAiNote('mi-status', 'mock_interview');
 });
 
 $('eg-submit').addEventListener('click', async () => {
@@ -6948,10 +7006,13 @@ $('eg-submit').addEventListener('click', async () => {
     const rubric = egRubrics.find(rb => rb.id === rubricId) || {};
     const score = grade.score !== undefined ? grade.score : null;
     $('eg-score-display').textContent = score !== null ? `${score} / ${rubric.max_marks || 100}` : 'Graded';
-    const criteria = grade.by_criterion || [];
+    const byC = grade.by_criterion || {};
+    const criteria = Array.isArray(byC)
+      ? byC
+      : Object.entries(byC).map(([name, v]) => ({ name, ...v }));
     $('eg-criteria-list').innerHTML = criteria.map(c =>
       `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;">
-        <span>${c.name || c.criterion}</span><span style="font-weight:600;">${c.score !== undefined ? c.score + '/' + (c.max_marks || c.max || '?') : '—'}</span>
+        <span>${c.name || c.criterion}</span><span style="font-weight:600;">${c.score !== undefined ? c.score + '/' + (c.weight || c.max_marks || c.max || '?') : '—'}</span>
       </div>`
     ).join('');
     $('eg-feedback').textContent = grade.summary || grade.overall_feedback || 'Graded — see criteria above.';
@@ -7001,6 +7062,16 @@ async function mvSubmitAndShow() {
       throw new Error(j.detail || `HTTP ${r.status}`);
     }
     const j = await r.json();
+    // Handle no-provider / errored state before showing result panel
+    if (j.status === 'errored') {
+      const errMsg = j.error === 'no_provider'
+        ? 'AI not configured — set ANTHROPIC_API_KEY on the server to enable Math Vision.'
+        : ('Extraction failed: ' + (j.error || 'unknown error'));
+      throw new Error(errMsg);
+    }
+    if (j.status === 'rejected') {
+      throw new Error('Image confidence too low — try a clearer, well-lit photo of the handwritten math.');
+    }
     $('mv-status').textContent = '';
     $('mv-form-card').style.display = 'none';
     $('mv-result').style.display = '';
@@ -7332,7 +7403,10 @@ $('ap-refresh').addEventListener('click', apLoadMyPacks);
 
 // Load on module show
 document.addEventListener('moduleShow', (e) => {
-  if (e.detail === 'adaptive') { apLoadExamPacks(); apLoadMyPacks(); }
+  if (e.detail === 'adaptive') {
+    apLoadExamPacks(); apLoadMyPacks();
+    showAiNote('ap-status', 'ai_synthesis');
+  }
 });
 
 // ===== PRACTICE TESTS =====
@@ -7507,6 +7581,13 @@ $('pt-create').addEventListener('click', async () => {
     $('pt-test-card').style.display = '';
     $('pt-report-card').style.display = 'none';
     $('pt-test-title').textContent = `${exam.toUpperCase()} · ${subject} · ${minutes} min`;
+    // Warn if server generated placeholder questions (no question bank + no API key)
+    if (fullTest.generation_method === 'placeholder') {
+      $('pt-submit-status').textContent =
+        'Note: real questions require ANTHROPIC_API_KEY on the server. '
+        + 'These are placeholder questions for layout testing.';
+      $('pt-submit-status').className = 'status';
+    }
     ptRenderQuestions(fullTest.questions);
     clearInterval(ptTimerInterval);
     ptStartTimer(minutes);
@@ -7532,7 +7613,10 @@ $('pt-new').addEventListener('click', () => {
 $('pt-refresh').addEventListener('click', ptLoadHistory);
 
 document.addEventListener('moduleShow', (e) => {
-  if (e.detail === 'practice') { ptLoadHistory(); }
+  if (e.detail === 'practice') {
+    ptLoadHistory();
+    showAiNote('pt-status', 'ai_synthesis');
+  }
 });
 
 // ===== EXPLAINER =====
@@ -9433,6 +9517,33 @@ def health() -> JSONResponse:
     else:
         checks["db"] = "sqlite (no DATABASE_URL)"
     return JSONResponse(checks)
+
+
+@app.get("/api/ai-status")
+def ai_status() -> JSONResponse:
+    """Returns which AI features are configured on this server.
+    Safe to call without auth — exposes no secrets, just boolean flags."""
+    has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    has_video = bool(
+        os.environ.get("HEYGEN_API_KEY") or
+        os.environ.get("DID_API_KEY") or
+        os.environ.get("TAVUS_API_KEY")
+    )
+    return JSONResponse({
+        "anthropic_configured": has_anthropic,
+        "video_configured": has_video,
+        "features": {
+            "voice_tutor": has_anthropic,
+            "live_lecture": has_anthropic,
+            "essay_grader": has_anthropic,
+            "math_vision": has_anthropic,
+            "mock_interview": True,          # heuristic fallback always works
+            "adaptive_practice": True,       # bank-based; synthesis needs anthropic
+            "practice_tests": True,          # bank-based; synthesis needs anthropic
+            "ai_synthesis": has_anthropic,   # question/content generation
+            "lesson_generation": has_anthropic,
+        },
+    })
 
 
 # ---- auth -----------------------------------------------------------------

@@ -339,7 +339,7 @@ def _synthesise(
     from . import llm_cache, llm_obs
 
     model = os.environ.get(
-        "PADHAI_PRACTICE_MODEL", "claude-haiku-4-5",
+        "PADHAI_PRACTICE_MODEL", "claude-haiku-4-5-20251001",
     )
     system_text = _SYNTH_SYSTEM_TEMPLATE.format(
         exam=exam, count=count, subject=subject,
