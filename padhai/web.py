@@ -4987,16 +4987,16 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
       <label>Password</label>
       <input type="password" name="password" minlength="8" required>
 
-      <!-- DPDP §9 (S2) — DOB collected at signup. When under 13,
-           parent_email is required and the account is locked until
-           the parent clicks the verification link. -->
+      <!-- DPDP §9 (India, 2023) — DOB collected at signup. When under 18,
+           parent/guardian email is required and the account is locked until
+           they click the verification link. -->
       <div class="signup-only">
         <label>Date of birth <span class="hint" style="color:var(--muted); font-weight:400; font-size:12px;">(used to apply child-safety protections)</span></label>
         <input type="date" name="dob" id="auth-dob" max="">
 
         <div class="signup-dpdp" id="signup-dpdp" style="display:none;">
           <div class="signup-locked-banner">
-            <strong>Under-13 account.</strong> Per the Indian DPDP Act
+            <strong>Under-18 account.</strong> Per the Indian DPDP Act 2023
             §9, we need your parent or guardian to verify this account.
             We'll email them a one-time link.
           </div>
@@ -5362,7 +5362,7 @@ $('auth-form').addEventListener('submit', async e => {
   }
 });
 
-// ---- DPDP signup DOB → under-13 toggle ----
+// ---- DPDP signup DOB → under-18 toggle (India DPDP Act 2023 §2(f)) ----
 (function dpdpSignupHook() {
   const dob = $('auth-dob');
   const block = $('signup-dpdp');
@@ -5378,8 +5378,8 @@ $('auth-form').addEventListener('submit', async e => {
     let age = today.getFullYear() - birth.getFullYear();
     const m = today.getMonth() - birth.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-    block.style.display = (age >= 0 && age < 13) ? 'block' : 'none';
-    $('auth-parent-email').required = (age >= 0 && age < 13);
+    block.style.display = (age >= 0 && age < 18) ? 'block' : 'none';
+    $('auth-parent-email').required = (age >= 0 && age < 18);
   });
   // Only show DOB on signup tab, not login
   document.querySelectorAll('.tab').forEach(t => {
@@ -9464,11 +9464,12 @@ Fiduciary under the Digital Personal Data Protection Act 2023 (DPDP Act). Contac
 subscription contract; (c) compliance with legal obligations; (d) legitimate interests
 (fraud prevention, service improvement).</p>
 
-<h2>4. Children's Data (DPDP §9)</h2>
-<p>We do not knowingly collect data from children under 13 without verifiable parental consent.
-Users who declare a date of birth under 13 are placed in a restricted state until a parent or
-guardian provides digital consent via a verifiable email link. We do not serve behavioural
-advertising to children.</p>
+<h2>4. Children's Data (DPDP Act 2023 §9)</h2>
+<p>Under the Digital Personal Data Protection Act 2023, a "child" is any person under eighteen
+years of age. We do not process personal data of users under 18 without verifiable parental or
+guardian consent. Users who declare a date of birth indicating they are under 18 are placed in a
+restricted state until a parent or guardian provides digital consent via a verifiable email link.
+We do not serve behavioural advertising to children under 18.</p>
 
 <h2>5. How We Use Your Data</h2>
 <ul>
@@ -9601,24 +9602,46 @@ def features() -> HTMLResponse:
 
 
 @app.get("/health")
+def _git_sha() -> str:
+    """Return the short git SHA of HEAD, or 'unknown' if not in a repo."""
+    try:
+        import subprocess
+        return subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            stderr=subprocess.DEVNULL, timeout=2,
+        ).decode().strip()
+    except Exception:
+        return "unknown"
+
+
 @app.get("/healthz")
 def health() -> JSONResponse:
     """Liveness + readiness probe. Returns 200 only when the DB pool
     is reachable; 503 otherwise. Load balancers use this to drain
     instances before cycling them. Both /health and /healthz are
-    supported — /healthz is the Kubernetes convention."""
-    checks: dict = {"status": "ok"}
+    supported — /healthz is the Kubernetes convention.
+
+    Includes build provenance so QA can verify the browser is running
+    the correct code: git_sha, db_backend, queue_backend."""
+    checks: dict = {
+        "status": "ok",
+        "git_sha": _git_sha(),
+        "queue_backend": "postgres" if _pg_store is not None else "sqlite",
+    }
     if _pg_store is not None:
         try:
             with _pg_store.pool.connection() as conn, conn.cursor() as cur:
                 cur.execute("SELECT 1")
-            checks["db"] = "ok"
+            checks["db"] = "postgres"
+            checks["db_status"] = "ok"
         except Exception as exc:
-            checks["db"] = f"error: {exc}"
+            checks["db"] = "postgres"
+            checks["db_status"] = f"error: {exc}"
             checks["status"] = "degraded"
             return JSONResponse(checks, status_code=503)
     else:
-        checks["db"] = "sqlite (no DATABASE_URL)"
+        checks["db"] = "sqlite"
+        checks["db_status"] = "ok (no DATABASE_URL)"
     return JSONResponse(checks)
 
 
@@ -9718,8 +9741,8 @@ def signup(
     request: Request,
     email: str = Form(...),
     password: str = Form(..., min_length=8),
-    # DPDP §9: DOB collected at signup. When the user is under 13 we
-    # also require parent_email and lock the account until consent
+    # DPDP Act 2023 §9: DOB collected at signup. When the user is under 18
+    # we require parent_email and lock the account until consent
     # comes back via /auth/parent-consent.
     dob: str | None = Form(None, description="YYYY-MM-DD"),
     parent_email: str | None = Form(None),
@@ -9736,14 +9759,14 @@ def signup(
     if _get_user_repo().find_by_email(email) is not None:
         raise HTTPException(409, "email already registered")
 
-    # DPDP gate: if DOB given AND user is under 13, parent_email is
+    # DPDP gate: if DOB given AND user is under 18, parent_email is
     # required and the account is locked until consent verification.
     is_minor = bool(dob and _dpdp.is_minor(dob))
     if is_minor:
         if not parent_email or "@" not in parent_email:
             raise HTTPException(
                 400,
-                "users under 13 require a parent_email (DPDP Act 2023 §9)",
+                "users under 18 require a parent_email (DPDP Act 2023 §9)",
             )
 
     user = _get_user_repo().create(

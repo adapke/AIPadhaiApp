@@ -40,6 +40,9 @@ JWT_ALG = "HS256"
 JWT_TTL_SECONDS = 7 * 24 * 60 * 60  # 7 days
 
 
+_DEV_SECRET_MARKERS = ("dev-", "change-me", "CHANGE_ME", "secret-change", "placeholder")
+
+
 def _jwt_secret() -> str:
     secret = os.environ.get("PADHAI_JWT_SECRET")
     if not secret:
@@ -47,6 +50,19 @@ def _jwt_secret() -> str:
             "PADHAI_JWT_SECRET not set. Generate one with "
             "`python -c 'import secrets; print(secrets.token_urlsafe(48))'` "
             "and set it on every web/worker process."
+        )
+    if any(m in secret for m in _DEV_SECRET_MARKERS):
+        is_prod = os.environ.get("APP_ENV", "").lower() in ("production", "prod")
+        if is_prod:
+            raise RuntimeError(
+                "PADHAI_JWT_SECRET looks like a dev placeholder. "
+                "Set a cryptographically random secret before deploying to production."
+            )
+        import warnings
+        warnings.warn(
+            "PADHAI_JWT_SECRET looks like a dev placeholder — "
+            "never use this in production.",
+            stacklevel=2,
         )
     return secret
 

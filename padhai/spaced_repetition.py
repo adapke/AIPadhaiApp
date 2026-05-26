@@ -146,7 +146,10 @@ class _DB:
         self._pg = _use_postgres()
         if self._pg:
             import psycopg  # type: ignore[import]
-            self._conn = psycopg.connect(os.environ["DATABASE_URL"])
+            self._conn = psycopg.connect(
+                os.environ["DATABASE_URL"],
+                options="-c search_path=public",
+            )
             if not _schema_applied:
                 for stmt in [s.strip() for s in SCHEMA.split(";") if s.strip()]:
                     self._conn.execute(stmt)

@@ -51,12 +51,11 @@ from pathlib import Path
 from typing import Optional
 
 
-MINOR_AGE_THRESHOLD = 13  # DPDP §2(f): "child" = under-eighteen, but
-                          # §9 specifically applies parental-consent
-                          # requirements to processing of children's
-                          # data. We adopt 13 as the consent threshold
-                          # (aligned with COPPA + most school systems);
-                          # 13-18 users still flagged but unblocked.
+MINOR_AGE_THRESHOLD = 18  # DPDP Act 2023 §2(f): "child" = person under
+                          # eighteen years. §9 requires verifiable parental
+                          # consent before processing any child's personal
+                          # data. India does not adopt COPPA's 13-year
+                          # carve-out — the threshold is explicitly 18.
 
 
 # ---------- schema ----------
@@ -154,9 +153,10 @@ def compute_age(dob_str: str, today: date | None = None) -> int:
 
 
 def is_minor(dob_str: str | None) -> bool:
-    """True when the DOB indicates an under-13 user (consent required).
-    Returns False for missing DOB so legacy accounts don't suddenly
-    get locked — they predate this policy."""
+    """True when the DOB indicates a user under 18 (DPDP §9 — parental
+    consent required before processing personal data of a child).
+    Returns False for missing DOB so legacy accounts are not suddenly
+    locked — they predate this policy."""
     if not dob_str:
         return False
     try:

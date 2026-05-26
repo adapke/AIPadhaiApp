@@ -1240,7 +1240,7 @@ LANDING_HTML = """<!doctype html>
           try {
             const data = await r.json();
             if (data && data.token) {
-              localStorage.setItem('padhai_token', data.token);
+              localStorage.setItem('pathshala_token', data.token);
             }
           } catch(_) {}
           location.href = '/home';

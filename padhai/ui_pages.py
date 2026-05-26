@@ -239,14 +239,14 @@ def _page_shell(*, title: str, body: str, extra_head: str = "", extra_script: st
 <script>
 (function(){{
   // Auth guard — redirect to /landing if no token
-  var tok = localStorage.getItem('padhai_token');
+  var tok = localStorage.getItem('pathshala_token');
   if (!tok) {{ window.location.replace('/landing'); return; }}
 
   // Show user email in nav
   async function loadNavEmail() {{
     try {{
       var r = await fetch('/auth/me', {{headers:{{Authorization:'Bearer '+tok}}}});
-      if (r.status === 401) {{ localStorage.removeItem('padhai_token'); window.location.replace('/landing'); return; }}
+      if (r.status === 401) {{ localStorage.removeItem('pathshala_token'); window.location.replace('/landing'); return; }}
       var d = await r.json();
       var el = document.getElementById('navEmail');
       if (el && d.email) el.textContent = d.email;
@@ -259,7 +259,7 @@ def _page_shell(*, title: str, body: str, extra_head: str = "", extra_script: st
 async function apiFetch(url, opts) {{
   opts = opts || {{}};
   opts.headers = opts.headers || {{}};
-  var tok = localStorage.getItem('padhai_token');
+  var tok = localStorage.getItem('pathshala_token');
   if (tok) opts.headers['Authorization'] = 'Bearer ' + tok;
   return fetch(url, opts);
 }}
@@ -2791,7 +2791,7 @@ def get_lesson_player_html() -> str:
   }
   $('saveNotes').addEventListener('click',async()=>{
     if(!lessonId) return;
-    const tok=localStorage.getItem('padhai_token');
+    const tok=localStorage.getItem('pathshala_token');
     const h={...(tok?{'Authorization':'Bearer '+tok}:{}),'Content-Type':'application/x-www-form-urlencoded'};
     const r=await fetch('/lessons/'+lessonId+'/notes',{method:'POST',credentials:'include',headers:h,
       body:'notes='+encodeURIComponent($('notesTA').value)});
