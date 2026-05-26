@@ -8355,10 +8355,12 @@ def features() -> HTMLResponse:
 
 
 @app.get("/health")
+@app.get("/healthz")
 def health() -> JSONResponse:
     """Liveness + readiness probe. Returns 200 only when the DB pool
     is reachable; 503 otherwise. Load balancers use this to drain
-    instances before cycling them."""
+    instances before cycling them. Both /health and /healthz are
+    supported — /healthz is the Kubernetes convention."""
     checks: dict = {"status": "ok"}
     if _pg_store is not None:
         try:
