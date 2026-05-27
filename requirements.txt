@@ -14,5 +14,8 @@ boto3>=1.35
 bcrypt>=4.2
 pyjwt>=2.9
 redis>=5.0
-rq>=2.0
+# `rq` lives in requirements-optional.txt — the v1.2 smoke test asserts
+# the not-installed fallback path, and prod deploys install it
+# explicitly via `pip install -r requirements-optional.txt` only when
+# REDIS_URL is provisioned. Keeping it here would break smoke CI.
 PyMuPDF>=1.24    # PDF ingest (renders pages to PNG without poppler)
