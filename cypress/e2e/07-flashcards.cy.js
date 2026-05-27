@@ -25,7 +25,7 @@ describe('Flashcard module: navigation', () => {
   });
 
   it('?m=flashcards URL param opens the flashcards module', () => {
-    cy.visit('/?m=flashcards');
+    cy.visit('/ui-legacy?m=flashcards');
     cy.get('#mod-flashcards').should('have.class', 'active');
   });
 });

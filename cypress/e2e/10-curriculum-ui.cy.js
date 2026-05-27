@@ -21,7 +21,7 @@ describe('Curriculum module: navigation', () => {
   });
 
   it('?m=curriculum URL param opens the curriculum module', () => {
-    cy.visit('/?m=curriculum');
+    cy.visit('/ui-legacy?m=curriculum');
     cy.get('#mod-curriculum').should('have.class', 'active');
   });
 });

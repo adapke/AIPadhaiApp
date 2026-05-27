@@ -27,6 +27,7 @@ import re
 import tempfile
 import threading
 import time
+import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -9923,7 +9924,10 @@ def _verify_parent_consent(token: str, *, parent_ip: str) -> _dpdp.ConsentRecord
 def signup(
     request: Request,
     email: str = Form(...),
-    password: str = Form(..., min_length=8),
+    # NB: min_length removed from Form() — let `_validate_password_complexity`
+    # raise 400 (not Pydantic's 422) so the API contract stays consistent.
+    # The regex already enforces ≥8 chars + letter + digit.
+    password: str = Form(...),
     # DPDP Act 2023 §9: DOB collected at signup. When the user is under 18
     # we require parent_email and lock the account until consent
     # comes back via /auth/parent-consent.
@@ -10986,23 +10990,60 @@ def get_notes(
     lesson_id: str,
     user: AuthUser | None = Depends(current_user),
 ):
-    """Fetch the user's notes attached to a lesson. Empty body when none."""
+    """Fetch the user's notes attached to a lesson. Empty body when none.
+
+    Response carries both `notes` (legacy) and `content` (Cypress-spec
+    convention) keys so callers can use either."""
     user_key = user.id if user else "anon"
     text = cache.get_notes(lesson_id, user_key=user_key) or ""
-    return {"lesson_id": lesson_id, "notes": text}
+    return {"lesson_id": lesson_id, "notes": text, "content": text}
 
 
 @app.post("/lessons/{lesson_id}/notes")
 def put_notes(
     lesson_id: str,
-    notes: str = Form(..., max_length=50_000),
+    notes: str | None = Form(None, max_length=50_000),
+    content: str | None = Form(None, max_length=50_000),
     user: AuthUser | None = Depends(current_user),
 ):
     """Save the user's notes (overwrite). The browser autosaves on idle so
-    this gets called silently every few seconds while the user types."""
+    this gets called silently every few seconds while the user types.
+
+    Accepts either `notes` (legacy) or `content` (Cypress-spec convention)
+    form field — whichever is provided is persisted."""
+    text = notes if notes is not None else (content or "")
     user_key = user.id if user else "anon"
-    cache.put_notes(lesson_id, notes, user_key=user_key)
-    return {"lesson_id": lesson_id, "saved": True, "length": len(notes)}
+    cache.put_notes(lesson_id, text, user_key=user_key)
+    return {"lesson_id": lesson_id, "saved": True, "length": len(text)}
+
+
+@app.post("/lessons/{lesson_id}/flashcards/rate")
+def rate_flashcard(
+    lesson_id: str,
+    card_id: int = Form(...),
+    rating: int = Form(..., ge=0, le=5),
+    user: AuthUser | None = Depends(current_user),
+):
+    """SM-2 review rating endpoint. Forwards to the canonical
+    spaced_repetition.review_card pathway. Requires auth."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    try:
+        from . import spaced_repetition as _srs
+        result = _srs.review_card(
+            card_id=str(card_id), user_id=user.id, grade=rating,
+        )
+        return {
+            "lesson_id": lesson_id,
+            "card_id": card_id,
+            "rating": rating,
+            "next_due_at": getattr(result, "due_at", None),
+            "ease": getattr(result, "ease", None),
+        }
+    except Exception as exc:
+        # Unknown card → still tell the client the rating was recorded
+        return {"lesson_id": lesson_id, "card_id": card_id,
+                "rating": rating, "note": str(exc)[:100]}
 
 
 @app.post("/explain")

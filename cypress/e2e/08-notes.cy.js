@@ -25,7 +25,7 @@ describe('Notes module: navigation', () => {
   });
 
   it('?m=notes URL param opens the notes module', () => {
-    cy.visit('/?m=notes');
+    cy.visit('/ui-legacy?m=notes');
     cy.get('#mod-notes').should('have.class', 'active');
   });
 });
