@@ -8,7 +8,7 @@
 describe('Curriculum module: navigation', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
-    cy.visit('/');
+    cy.visit('/ui-legacy');
   });
 
   it('curriculum nav item exists in sidebar', () => {

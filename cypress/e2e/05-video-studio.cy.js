@@ -7,7 +7,7 @@
 
 beforeEach(() => {
   cy.clearLocalStorage();
-  cy.visit('/');
+  cy.visit('/ui-legacy');
   // Navigate to the studio module
   cy.get('#sidebar .nav-item[data-module="studio"]').click({ force: true });
   cy.get('#mod-studio').should('have.class', 'active');

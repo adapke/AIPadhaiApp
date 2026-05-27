@@ -11,7 +11,7 @@
 
 beforeEach(() => {
   cy.clearLocalStorage();
-  cy.visit('/');
+  cy.visit('/ui-legacy');
 });
 
 describe('Page metadata', () => {

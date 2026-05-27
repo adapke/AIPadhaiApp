@@ -7,7 +7,7 @@
 
 beforeEach(() => {
   cy.clearLocalStorage();
-  cy.visit('/');
+  cy.visit('/ui-legacy');
 });
 
 describe('Initial page state', () => {
@@ -65,7 +65,7 @@ describe('Navigation: nav items activate on click', () => {
 describe('URL deep-link: ?m= query param', () => {
   ['studio', 'quizmaker', 'chat', 'curriculum', 'flashcards'].forEach((mod) => {
     it(`?m=${mod} opens that module on load`, () => {
-      cy.visit(`/?m=${mod}`);
+      cy.visit(`/ui-legacy?m=${mod}`);
       cy.get(`#mod-${mod}`).should('have.class', 'active');
     });
   });
@@ -73,12 +73,12 @@ describe('URL deep-link: ?m= query param', () => {
 
 describe('URL deep-link: #hash navigation', () => {
   it('#studio opens the studio module', () => {
-    cy.visit('/#studio');
+    cy.visit('/ui-legacy#studio');
     cy.get('#mod-studio').should('have.class', 'active');
   });
 
   it('#quizmaker opens the quizmaker module', () => {
-    cy.visit('/#quizmaker');
+    cy.visit('/ui-legacy#quizmaker');
     cy.get('#mod-quizmaker').should('have.class', 'active');
   });
 });

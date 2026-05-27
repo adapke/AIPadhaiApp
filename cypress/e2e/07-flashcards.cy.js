@@ -7,7 +7,7 @@
 describe('Flashcard module: navigation', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
-    cy.visit('/');
+    cy.visit('/ui-legacy');
   });
 
   it('flashcards nav item exists in sidebar', () => {

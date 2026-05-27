@@ -7,7 +7,7 @@
 describe('Notes module: navigation', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
-    cy.visit('/');
+    cy.visit('/ui-legacy');
   });
 
   it('notes nav item exists in sidebar', () => {

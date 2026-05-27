@@ -11,7 +11,7 @@
 beforeEach(() => {
   // Clear any leftover auth state from previous tests
   cy.clearLocalStorage();
-  cy.visit('/');
+  cy.visit('/ui-legacy');
 });
 
 describe('Auth corner: unauthenticated state', () => {
