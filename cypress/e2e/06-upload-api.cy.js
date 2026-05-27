@@ -48,7 +48,7 @@ describe('POST /api/uploads — authenticated', () => {
     cy.window().then((win) => {
       const big = new win.Blob([new win.Uint8Array(_25MB + 1024)], { type: 'image/jpeg' });
       const fd = new win.FormData();
-      fd.append('image', big, 'big.jpg');
+      fd.append('file', big, 'big.jpg');
 
       const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
       return win.fetch('/api/uploads', { method: 'POST', body: fd, headers })
@@ -64,7 +64,7 @@ describe('POST /api/uploads — authenticated', () => {
         type: 'application/octet-stream',
       });
       const fd = new win.FormData();
-      fd.append('image', blob, 'evil.exe');
+      fd.append('file', blob, 'evil.exe');
 
       const headers = authToken ? { Authorization: `Bearer ${authToken}` } : {};
       return win.fetch('/api/uploads', { method: 'POST', body: fd, headers })
@@ -87,7 +87,7 @@ describe('POST /api/uploads — authenticated', () => {
       const blob = new win.Blob([bytes], { type: 'image/png' });
 
       const fd = new win.FormData();
-      fd.append('image', blob, 'photo.png');
+      fd.append('file', blob, 'photo.png');
 
       return win.fetch('/api/uploads', {
         method: 'POST',

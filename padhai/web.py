@@ -9847,7 +9847,17 @@ def ai_status() -> JSONResponse:
 def _persist_signup_dpdp(
     *, user_id: str, dob: str, parent_email: str | None, is_minor: bool,
 ) -> None:
-    """Persist DOB/consent state to the active auth store."""
+    """Persist DOB/consent state to the active auth store.
+
+    Postgres path: writes to the `users` table in the configured DB.
+    SQLite path: writes to the SAME db file that SQLiteUserRepository
+    used at construction (where the `users` row actually lives). The
+    earlier version of this function targeted `_dpdp._db_path()`, but
+    that file doesn't have a `users` table — signup crashed with
+    `sqlite3.OperationalError: no such table: users` on every dev /
+    CI signup. Resolving the db path via the live user repo keeps
+    DOB/consent state co-located with the row it describes.
+    """
     if _pg_store is not None:
         with _pg_store.pool.connection() as conn, conn.cursor() as cur:
             cur.execute(
@@ -9857,8 +9867,14 @@ def _persist_signup_dpdp(
             )
         return
 
+    repo = _get_user_repo()
+    sqlite_path = getattr(repo, "_db_path", None) if repo else None
+    if not sqlite_path:
+        # No SQLite repo wired (anonymous-only deployment). Nothing to
+        # persist — the signup itself wouldn't have reached this code.
+        return
     import sqlite3
-    with sqlite3.connect(_dpdp._db_path()) as conn:
+    with sqlite3.connect(sqlite_path) as conn:
         conn.execute(
             "UPDATE users SET dob = ?, parent_email = ?, "
             "account_locked = ? WHERE id = ?",

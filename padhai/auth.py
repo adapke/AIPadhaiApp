@@ -207,6 +207,10 @@ class SQLiteUserRepository:
         subscription_tier  TEXT NOT NULL DEFAULT 'M1',
         subscription_level TEXT NOT NULL DEFAULT 'L3',
         account_locked  INTEGER NOT NULL DEFAULT 0,
+        dob             TEXT,
+        parent_email    TEXT,
+        parent_consent_at REAL,
+        parent_consent_ip TEXT,
         created_at      REAL NOT NULL DEFAULT (unixepoch())
     );
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
@@ -218,6 +222,19 @@ class SQLiteUserRepository:
         self._uuid = _uuid
         conn = sqlite3.connect(db_path)
         conn.executescript(self._DDL)
+        # Idempotent column adds — for repos that existed before the
+        # DPDP columns were part of the DDL. SQLite raises on "duplicate
+        # column" so each one is wrapped in try/except.
+        for stmt in (
+            "ALTER TABLE users ADD COLUMN dob TEXT",
+            "ALTER TABLE users ADD COLUMN parent_email TEXT",
+            "ALTER TABLE users ADD COLUMN parent_consent_at REAL",
+            "ALTER TABLE users ADD COLUMN parent_consent_ip TEXT",
+        ):
+            try:
+                conn.execute(stmt)
+            except sqlite3.OperationalError:
+                pass   # column already exists
         conn.commit()
         conn.close()
 
