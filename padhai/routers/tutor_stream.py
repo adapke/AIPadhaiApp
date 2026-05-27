@@ -37,6 +37,8 @@ router = APIRouter()
 async def tutor_stream_get(
     sid: str,
     text: str = Query(..., min_length=1, max_length=4000),
+    upload_ids: str | None = Query(None, description="Comma-separated upload ids for RAG"),
+    auto_ground: bool = Query(False),
     user=Depends(current_user),
 ):
     """GET variant — easy to consume via EventSource in browsers.
@@ -44,24 +46,38 @@ async def tutor_stream_get(
     accepts the same token via the `Cookie` or `Authorization` header
     that current_user already validates."""
     user = require_user(user)
-    return _make_stream_response(sid=sid, user=user, text=text)
+    return _make_stream_response(
+        sid=sid, user=user, text=text,
+        upload_ids=upload_ids, auto_ground=auto_ground,
+    )
 
 
 @router.post("/api/tutor/sessions/{sid}/stream")
 async def tutor_stream_post(
     sid: str,
     text: str = Form(..., min_length=1, max_length=4000),
+    upload_ids: str | None = Form(None),
+    auto_ground: bool = Form(False),
     user=Depends(current_user),
 ):
     """POST variant — used by `fetch` clients that read the
     ReadableStream from the response body."""
     user = require_user(user)
-    return _make_stream_response(sid=sid, user=user, text=text)
+    return _make_stream_response(
+        sid=sid, user=user, text=text,
+        upload_ids=upload_ids, auto_ground=auto_ground,
+    )
 
 
-def _make_stream_response(*, sid: str, user, text: str) -> StreamingResponse:
+def _make_stream_response(
+    *, sid: str, user, text: str,
+    upload_ids: str | None, auto_ground: bool,
+) -> StreamingResponse:
     return StreamingResponse(
-        _stream(sid=sid, user=user, user_text=text),
+        _stream(
+            sid=sid, user=user, user_text=text,
+            upload_ids_str=upload_ids, auto_ground=auto_ground,
+        ),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",
@@ -71,7 +87,10 @@ def _make_stream_response(*, sid: str, user, text: str) -> StreamingResponse:
     )
 
 
-async def _stream(*, sid: str, user, user_text: str) -> AsyncGenerator[bytes, None]:
+async def _stream(
+    *, sid: str, user, user_text: str,
+    upload_ids_str: str | None = None, auto_ground: bool = False,
+) -> AsyncGenerator[bytes, None]:
     from .. import tutor
 
     session = tutor.get_session(sid)
@@ -132,10 +151,71 @@ async def _stream(*, sid: str, user, user_text: str) -> AsyncGenerator[bytes, No
         return
 
     model = os.environ.get("PADHAI_TUTOR_MODEL", "claude-haiku-4-5-20251001")
-    system_prompt = tutor._build_system_prompt(session)
+    # `_build_system_prompt` is a private helper in tutor.py; if a future
+    # refactor renames it, fall back to a minimal system prompt so the
+    # stream still works (just without the long-memory enrichment).
+    if hasattr(tutor, "_build_system_prompt"):
+        system_prompt = tutor._build_system_prompt(session)
+    else:
+        system_prompt = (
+            "You are an AI tutor for Indian students. Be concise, "
+            "exam-focused, and supportive. Answer in the student's "
+            "preferred language when set."
+        )
+
+    # ---- Source grounding (v3.x) ----
+    # Resolve + authorise upload ids, retrieve top-k chunks, splice into
+    # the system prompt. Citations are emitted to the client BEFORE the
+    # first delta so the UI can render a "Searching your notes…" hint
+    # and reserve real estate for citation tiles.
+    citations_for_client: list[dict] = []
+    if upload_ids_str or auto_ground:
+        upload_ids_list: list[str] = []
+        if upload_ids_str:
+            upload_ids_list = [
+                uid.strip() for uid in upload_ids_str.split(",") if uid.strip()
+            ]
+            try:
+                from .. import uploads as _up
+                for uid in upload_ids_list:
+                    u = _up.get(uid)
+                    if not u:
+                        yield _sse({"type": "error", "message": f"upload {uid!r} not found"})
+                        return
+                    if u.user_id and u.user_id != user.id:
+                        yield _sse({"type": "error", "message": f"upload {uid!r} not yours"})
+                        return
+            except Exception as _e:
+                yield _sse({"type": "error", "message": f"upload check failed: {_e}"})
+                return
+        elif auto_ground and hasattr(tutor, "_recent_indexed_uploads_for_user"):
+            upload_ids_list = tutor._recent_indexed_uploads_for_user(user.id)
+
+        if upload_ids_list and hasattr(tutor, "_retrieve_chunks"):
+            retrieved_hits = tutor._retrieve_chunks(
+                query=user_text, upload_ids=upload_ids_list,
+            )
+            if retrieved_hits and hasattr(tutor, "_format_chunks_for_prompt"):
+                chunks_block, citations_tuple = tutor._format_chunks_for_prompt(retrieved_hits)
+                system_prompt = (
+                    system_prompt
+                    + "\n\n--- STUDENT'S UPLOADED STUDY MATERIAL (cite when used) ---\n"
+                    + chunks_block
+                    + "\n--- END OF SOURCE MATERIAL ---\n\n"
+                    + "When you use facts from the source material, append "
+                    + "a citation like [page N, section X]. If the source "
+                    + "doesn't cover the question, say so honestly."
+                )
+                citations_for_client = list(citations_tuple)
+                yield _sse({
+                    "type": "citations",
+                    "citations": citations_for_client,
+                })
+
+    max_verbatim = getattr(tutor, "MAX_VERBATIM_MESSAGES", 12)
     history = list(session.messages or [])
     history.append({"role": "user", "content": user_text, "ts": time.time()})
-    verbatim = history[-tutor.MAX_VERBATIM_MESSAGES:]
+    verbatim = history[-max_verbatim:]
     api_messages = [
         {"role": m["role"], "content": m["content"]} for m in verbatim
     ]
@@ -203,6 +283,8 @@ async def _stream(*, sid: str, user, user_text: str) -> AsyncGenerator[bytes, No
         "tokens_in": tokens_in, "tokens_out": tokens_out,
         "cost_inr_paise": cost_paise, "cached": cached,
         "latency_ms": latency_ms,
+        "grounded": bool(citations_for_client),
+        "citation_count": len(citations_for_client),
     })
 
 

@@ -38,6 +38,11 @@ _ROUTER_NAMES = (
     "dashboard",     # v3.x — student / parent / teacher dashboards
     "pricing",       # v3.x — pricing page + Razorpay checkout
     "tutor_stream",  # v3.x — SSE streaming companion to /api/tutor/.../message
+    "offline",       # v3.x — offline pack manifest + download for PWA / mobile
+    "messaging",     # v3.x — SMS / WhatsApp parent alerts (MSG91 / Gupshup / Twilio)
+    "digilocker",    # v3.x — DigiLocker credential issuance + consent
+    "commerce",      # v3.x — voucher redemption + DIKSHA export + LLM cost dashboard
+    "doubt_ai",      # v3.x — instant Claude Vision answer for /api/doubts/{did}/ai-answer
 )
 
 

@@ -311,6 +311,142 @@ def queue(
     return [_row_to_doubt(r) for r in rows]
 
 
+def answer_via_ai_vision(
+    *,
+    doubt_id: str,
+    force: bool = False,
+) -> Doubt:
+    """Call Claude Vision to auto-answer a pending image-doubt.
+
+    Used both by:
+      • the synchronous Doubtnut-style "snap → instant AI" student path,
+        called immediately at submit time
+      • the cron `stale_for_ai_escalation()` worker which escalates
+        doubts that no human picked up within PADHAI_DOUBT_AI_ESCALATE_MIN
+
+    `force=True` re-answers even if the doubt already has a response;
+    useful when a student rejects the AI answer and asks for another
+    pass. Default skips already-answered doubts.
+
+    Falls back to a status='errored' update when ANTHROPIC_API_KEY
+    isn't set so the cron worker doesn't crash on dev servers.
+    """
+    doubt = get(doubt_id)
+    if not doubt:
+        raise ValueError(f"doubt {doubt_id!r} not found")
+    if doubt.status == "answered" and not force:
+        return doubt
+
+    # No Claude key → mark errored with a clear reason
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        answer(
+            doubt_id=doubt_id,
+            response_text=(
+                "AI auto-answer unavailable (ANTHROPIC_API_KEY not "
+                "configured on this server). A human tutor will pick "
+                "this up shortly."
+            ),
+            method="ai",
+        )
+        return get(doubt_id)  # type: ignore[return-value]
+
+    try:
+        from anthropic import Anthropic  # noqa: WPS433
+    except ImportError:
+        answer(
+            doubt_id=doubt_id,
+            response_text=(
+                "AI auto-answer unavailable (anthropic SDK missing). "
+                "Human tutor will respond."
+            ),
+            method="ai",
+        )
+        return get(doubt_id)  # type: ignore[return-value]
+
+    from . import llm_obs, llm_cache  # local imports keep cost low
+    import time as _time
+
+    model = os.environ.get(
+        "PADHAI_DOUBT_VISION_MODEL", "claude-sonnet-4-6",
+    )
+    system_text = (
+        "You are an AI doubt-clearer for Indian students. The student "
+        "has uploaded a photo of a problem (textbook page, notebook, "
+        "or whiteboard) plus a written question. Solve the problem "
+        "and explain the steps clearly.\n\n"
+        "Rules:\n"
+        "- Show work step-by-step. No 'the answer is X' without explanation.\n"
+        "- Cite the relevant concept / formula by name.\n"
+        "- Indian student audience — examples should resonate "
+        "(rupees not dollars, Indian context).\n"
+        "- If the image is unreadable, say so honestly + ask the "
+        "student to re-take the photo.\n"
+        "- If the question is in Hindi or another Indian language, "
+        "answer in that language; else default to English."
+    )
+    user_text = (doubt.question_text or "").strip()
+    if not user_text:
+        user_text = "Please solve the problem in this image."
+
+    # Build the message content — image + text
+    content_blocks: list[dict] = []
+    if doubt.image_url:
+        content_blocks.append({
+            "type": "image",
+            "source": {"type": "url", "url": doubt.image_url},
+        })
+    content_blocks.append({"type": "text", "text": user_text})
+
+    started = _time.time()
+    try:
+        client = Anthropic()
+        # System block gets cached — same instructions every call
+        system_block = (
+            [{"type": "text", "text": system_text,
+              "cache_control": {"type": "ephemeral"}}]
+            if llm_cache.is_caching_enabled() else system_text
+        )
+        resp = client.messages.create(
+            model=model,
+            max_tokens=1500,
+            system=system_block,
+            messages=[{"role": "user", "content": content_blocks}],
+        )
+    except Exception as e:  # noqa: BLE001
+        answer(
+            doubt_id=doubt_id,
+            response_text=(
+                f"AI auto-answer failed ({str(e)[:160]}). "
+                "A human tutor will follow up."
+            ),
+            method="ai",
+        )
+        return get(doubt_id)  # type: ignore[return-value]
+
+    latency_ms = int((_time.time() - started) * 1000)
+    reply_text = "".join(b.text for b in resp.content if b.type == "text").strip()
+    if not reply_text:
+        reply_text = "(AI returned an empty response — please retry.)"
+    tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
+    tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
+    cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
+    llm_obs.record_call(
+        module="doubt_clearing",
+        prompt_version="v1-vision",
+        model=model,
+        tokens_in=tokens_in, tokens_out=tokens_out,
+        latency_ms=latency_ms,
+        user_id=doubt.user_id, cached=cached,
+    )
+
+    answer(
+        doubt_id=doubt_id,
+        response_text=reply_text,
+        method="ai",
+    )
+    return get(doubt_id)  # type: ignore[return-value]
+
+
 def stale_for_ai_escalation(*, minutes: float | None = None) -> list[Doubt]:
     """Doubts that have been pending too long. Worker cron picks
     these up + runs L1 AI escalation."""

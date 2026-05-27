@@ -1,0 +1,46 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "padhai-web",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "padhai.web:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--log-level",
+        "info"
+      ],
+      "port": 8000
+    },
+    {
+      "name": "admin-console",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "admin.app:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8001",
+        "--log-level",
+        "info"
+      ],
+      "port": 8001
+    },
+    {
+      "name": "cypress-e2e",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "cypress",
+        "open"
+      ],
+      "port": 0
+    }
+  ]
+}

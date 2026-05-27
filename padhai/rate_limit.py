@@ -78,6 +78,18 @@ login = TokenBucket(capacity=5, rate_per_sec=0.05)               # 5 burst, then
 file_upload = TokenBucket(capacity=20, rate_per_sec=0.5)         # 20 burst, then 1/2s
 
 
+# Default per-key limiter used by the module-level try_consume() helper.
+# Tuned for general-purpose use: 60 burst, then 1 token/second sustained.
+# Routes that need stricter limits should use a named bucket above.
+_default_limiter = TokenBucket(capacity=60, rate_per_sec=1.0)
+
+
+def try_consume(key: str, *, cost: float = 1.0) -> bool:
+    """Module-level convenience wrapper around the default limiter.
+    Used by tests + simple call sites that don't need a named bucket."""
+    return _default_limiter.try_consume(key, cost=cost)
+
+
 def _validate_ip(raw: str) -> str | None:
     """Return the IP string if it is a valid IPv4/IPv6 address, else None."""
     try:

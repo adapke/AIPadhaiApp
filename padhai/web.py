@@ -500,6 +500,75 @@ runner = JobRunner(
 )
 
 
+# ----------------------------------------------------------------------------
+# Provider key validation — called from the lifespan startup hook.
+# ----------------------------------------------------------------------------
+
+# Each entry: env var → (prefix or None, min_len, label)
+# `prefix` is checked only when set; some keys (Bhashini, Razorpay) have no
+# stable prefix so we just enforce a minimum length.
+_PROVIDER_KEY_SPECS = {
+    "ANTHROPIC_API_KEY":   ("sk-ant-", 32, "Anthropic / Claude"),
+    "HEYGEN_API_KEY":      (None,      24, "HeyGen avatar"),
+    "DID_API_KEY":         (None,      24, "D-ID avatar"),
+    "TAVUS_API_KEY":       (None,      24, "Tavus avatar"),
+    "SYNTHESIA_API_KEY":   (None,      24, "Synthesia avatar"),
+    "ELEVENLABS_API_KEY":  (None,      24, "ElevenLabs TTS"),
+    "SARVAM_API_KEY":      (None,      16, "Sarvam.ai Indic TTS"),
+    "BHASHINI_API_KEY":    (None,      16, "Bhashini Indic TTS"),
+    "OPENAI_API_KEY":      ("sk-",     32, "OpenAI"),
+    "RAZORPAY_KEY_ID":     ("rzp_",    16, "Razorpay key_id"),
+    "RAZORPAY_KEY_SECRET": (None,      16, "Razorpay key_secret"),
+    "MSG91_AUTH_KEY":      (None,      16, "MSG91 SMS"),
+    "GUPSHUP_API_KEY":     (None,      16, "Gupshup SMS/WhatsApp"),
+    "TWILIO_ACCOUNT_SID":  ("AC",      32, "Twilio account SID"),
+    "LIVEKIT_API_KEY":     (None,      8,  "LiveKit live video"),
+    "DAILY_API_KEY":       (None,      24, "Daily.co live video"),
+    "S3_ACCESS_KEY_ID":    (None,      8,  "S3 / Cloudflare R2"),
+}
+
+
+def _validate_provider_keys() -> None:
+    """Check each configured provider key has the expected prefix + length.
+    In production (APP_ENV=production) we raise RuntimeError to fail-fast.
+    In dev we emit a warning and keep going so local work isn't blocked."""
+    is_prod = (os.environ.get("APP_ENV") or "").strip().lower() == "production"
+    problems: list[str] = []
+    for env_var, (prefix, min_len, label) in _PROVIDER_KEY_SPECS.items():
+        raw = (os.environ.get(env_var) or "").strip()
+        if not raw:
+            continue   # unset is fine — feature just disabled
+        if len(raw) < min_len:
+            problems.append(
+                f"{env_var} ({label}): too short ({len(raw)} chars, "
+                f"expected ≥{min_len})"
+            )
+            continue
+        if prefix and not raw.startswith(prefix):
+            problems.append(
+                f"{env_var} ({label}): expected prefix {prefix!r}, "
+                f"got {raw[:8]!r}…"
+            )
+            continue
+        # Placeholder detection — common copy-paste mistakes
+        if any(tok in raw.lower() for tok in (
+            "placeholder", "change-me", "change_me", "xxxxx",
+            "your-key", "your_api_key",
+        )):
+            problems.append(
+                f"{env_var} ({label}): looks like a placeholder value"
+            )
+    if not problems:
+        _log.info("[startup] provider keys: all configured keys validated OK")
+        return
+    msg = "Provider key validation failed:\n  - " + "\n  - ".join(problems)
+    if is_prod:
+        _log.error("[startup] %s", msg)
+        raise RuntimeError(msg)
+    else:
+        _log.warning("[startup] %s\n(dev mode — continuing anyway)", msg)
+
+
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
     # Initialise Postgres store + user repo here (not at import time) so
@@ -857,6 +926,13 @@ async def _lifespan(app: FastAPI):
     _log.info("[startup] queue backend: %s", _queue_backend.description())
     if _cdn.is_configured():
         _log.info("[startup] cdn: signed-url delivery enabled")
+
+    # v3.x — validate optional provider keys' format before serving
+    # traffic. In APP_ENV=production we fail-fast on malformed keys
+    # so we don't run with a misconfigured deployment. In dev we just
+    # warn so local work isn't blocked.
+    _validate_provider_keys()
+
     resumed = runner.resume_pending()
     if resumed:
         _log.info("[startup] resumed %d pending jobs from %s", resumed, _DB_PATH)
@@ -14541,6 +14617,7 @@ def export_my_data(
     if not _rl.file_upload.try_consume(_rate_key, cost=5):
         raise HTTPException(429, "rate limit exceeded — please wait before exporting again")
 
+    from datetime import datetime, timezone  # local import — module-level not present
     export: dict = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "schema_version": 1,

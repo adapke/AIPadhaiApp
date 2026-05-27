@@ -44,11 +44,31 @@ def tutor_start(user=Depends(current_user)):
 def tutor_message(
     sid: str,
     text: str = Form(..., min_length=1, max_length=4000),
+    upload_ids: str | None = Form(
+        None,
+        description=(
+            "Comma-separated upload ids to ground the answer in. "
+            "When set, the tutor retrieves from those uploads and "
+            "returns citations alongside the reply."
+        ),
+    ),
+    auto_ground: bool = Form(
+        False,
+        description=(
+            "When true and no upload_ids supplied, the tutor "
+            "auto-pulls from the user's 3 most recent indexed "
+            "uploads. Lets the UI offer a 'use my notes' toggle "
+            "without forcing the student to pick files."
+        ),
+    ),
     user=Depends(current_user),
 ):
-    """Send a user message + get an assistant reply. Synchronous —
-    SSE streaming is a v2.1.x follow-up once the L1 cost cap proves
-    out in production."""
+    """Send a user message + get an assistant reply.
+
+    Source grounding (v3.x): pass upload_ids (comma-separated) or
+    auto_ground=true to RAG over the student's indexed uploads. The
+    response will include a `citations` array.
+    """
     from .. import tutor
     user = require_user(user)
     s = tutor.get_session(sid)
@@ -56,10 +76,26 @@ def tutor_message(
         raise HTTPException(404, "session not found")
     if s.user_id != user.id:
         raise HTTPException(403, "not your session")
+    parsed_upload_ids: list[str] = []
+    if upload_ids:
+        parsed_upload_ids = [
+            uid.strip() for uid in upload_ids.split(",") if uid.strip()
+        ]
+        # Authorise — every upload must belong to this user
+        if parsed_upload_ids:
+            from .. import uploads as _up
+            for uid in parsed_upload_ids:
+                u = _up.get(uid)
+                if not u:
+                    raise HTTPException(404, f"upload {uid!r} not found")
+                if u.user_id and u.user_id != user.id:
+                    raise HTTPException(403, f"upload {uid!r} not yours")
     try:
         result = tutor.send_message(
             sid=sid, user_text=text,
             user_tier=getattr(user, "subscription_tier", "M2") or "M2",
+            upload_ids=parsed_upload_ids or None,
+            auto_ground=auto_ground,
         )
     except ValueError as e:
         raise HTTPException(400, str(e))
@@ -71,6 +107,8 @@ def tutor_message(
         "cost_inr_paise": result.cost_inr_paise,
         "cached": result.cached,
         "over_budget": result.over_budget,
+        "grounded": result.grounded,
+        "citations": list(result.citations),
     }
 
 

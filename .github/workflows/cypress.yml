@@ -1,0 +1,101 @@
+name: Cypress Tests
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Runs tests in parallel with matrix strategy https://on.cypress.io/parallelization
+    # https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations
+    # Also see warning here https://github.com/cypress-io/github-action#parallel
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      matrix:
+        containers: [1, 2] # Uses 2 parallel instances (load-split via Cypress Cloud)
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ---------- Backend (FastAPI / uvicorn) ----------
+      # AIPadhaiApp's "web server" is Python, not Node. Set up Python
+      # first and install runtime deps so uvicorn can import padhai.web.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # Defensive: ensure uvicorn + fastapi are present even if
+          # requirements.txt drifts.
+          pip install fastapi 'pydantic>=2' python-multipart 'uvicorn[standard]'
+
+      - name: Generate ephemeral JWT secret
+        run: |
+          # padhai.web refuses to start without PADHAI_JWT_SECRET.
+          # Generate a one-shot secret per CI run; never reused.
+          echo "PADHAI_JWT_SECRET=$(python -c 'import secrets; print(secrets.token_urlsafe(48))')" >> "$GITHUB_ENV"
+
+      # ---------- Cypress ----------
+      - name: Cypress run
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v7
+        with:
+          # Boot the FastAPI server in the background. The action
+          # handles backgrounding + cleanup automatically.
+          # https://docs.cypress.io/app/continuous-integration/overview#Boot-your-server
+          start: python -m uvicorn padhai.web:app --host 0.0.0.0 --port 8000 --log-level warning
+          # Wait for the healthz probe (cypress.config.js baseUrl is :8000).
+          wait-on: 'http://127.0.0.1:8000/healthz'
+          wait-on-timeout: 120
+          # Records to Cypress Cloud — only when CYPRESS_RECORD_KEY is
+          # configured. Without it the matrix containers each run all
+          # specs locally (still passes, just no load-split or dashboard).
+          # https://docs.cypress.io/cloud/get-started/setup
+          record: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
+          parallel: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
+          # Skip the auto-install when node_modules is cached (faster reruns).
+          install-command: npm ci
+        env:
+          # FastAPI runtime env. Anonymous mode lets specs hit endpoints
+          # without seeding a user; tests that need auth still sign up
+          # via cy.apiSignup() (see cypress/support/commands.js).
+          PADHAI_REQUIRE_AUTH: '0'
+          PADHAI_SKIP_DOTENV: '1'
+          PADHAI_DB_PATH: /tmp/padhai_ci.db
+          # PADHAI_JWT_SECRET was exported to $GITHUB_ENV in the previous step
+
+          # Turn on video capture so Cypress Cloud gets replay footage
+          # alongside the spec results. cypress.config.js gates this on
+          # CYPRESS_RECORD_VIDEO so local interactive runs stay fast.
+          CYPRESS_RECORD_VIDEO: '1'
+
+          # For recording and parallelization you must set your CYPRESS_RECORD_KEY
+          # in GitHub repo → Settings → Secrets → Actions
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Create a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---------- Always-uploaded debug artefacts ----------
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-${{ matrix.containers }}
+          path: cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-${{ matrix.containers }}
+          path: cypress/videos
+          if-no-files-found: ignore
+          retention-days: 7

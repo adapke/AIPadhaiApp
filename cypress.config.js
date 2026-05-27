@@ -1,6 +1,7 @@
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
+  projectId: 's5k23d',
   e2e: {
     // Point at the local dev server — `python run.py` on port 8000.
     // Override via env: CYPRESS_BASE_URL=https://staging.example.com npx cypress run

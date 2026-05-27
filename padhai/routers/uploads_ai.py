@@ -123,32 +123,52 @@ def chat_over_upload(
     except Exception:
         pass
 
-    reply = _tg.send_grounded_message(
-        session_id=sid,
-        user_id=user.id,
-        question_text=question,
-        answer_text=answer_text,
-        retrieved_chunks=citations,
-        ai_call_id=ai_call_id,
-        confidence=hits[0].score if hits else None,
-        surface="upload_chat",
-    )
+    # Grounding wrapper is best-effort — falls back to the raw answer
+    # text if the provenance recorder throws (e.g. schema not migrated
+    # on this deployment yet).
+    try:
+        reply = _tg.send_grounded_message(
+            session_id=sid,
+            user_id=user.id,
+            question_text=question,
+            answer_text=answer_text,
+            retrieved_chunks=citations,
+            ai_call_id=ai_call_id,
+            confidence=hits[0].score if hits else None,
+            surface="upload_chat",
+        )
+    except Exception:
+        reply = None
+
+    citations_out = [
+        {
+            "page_number": h.chunk.page_number,
+            "section": h.chunk.section,
+            "preview": h.chunk.chunk_text[:300],
+            "score": h.score,
+            "matched_tokens": h.matched_tokens,
+        }
+        for h in hits
+    ]
+
+    if reply is None:
+        return {
+            "reply": answer_text,
+            "grounded": bool(hits),
+            "answer_mode": "general",
+            "citation_count": len(hits),
+            "citations": citations_out,
+            "method": method,
+            "provenance_id": None,
+            "note": "grounding recorder unavailable; answer returned without provenance",
+        }
 
     return {
         "reply": reply.text,
         "grounded": reply.grounded,
         "answer_mode": reply.answer_mode,
         "citation_count": reply.citation_count,
-        "citations": [
-            {
-                "page_number": h.chunk.page_number,
-                "section": h.chunk.section,
-                "preview": h.chunk.chunk_text[:300],
-                "score": h.score,
-                "matched_tokens": h.matched_tokens,
-            }
-            for h in hits
-        ],
+        "citations": citations_out,
         "method": method,
         "provenance_id": reply.provenance_id,
     }

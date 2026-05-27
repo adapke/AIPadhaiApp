@@ -192,6 +192,11 @@ class TutorReply:
     cached: bool
     rate_limited: bool = False
     over_budget: bool = False
+    # v3.x — source-grounded RAG. When the caller passes `upload_ids` to
+    # send_message, the tutor retrieves chunks before generating the
+    # reply and returns them here so the UI can render citations.
+    grounded: bool = False
+    citations: tuple = ()      # tuple of dicts so the frozen dataclass stays hashable
 
 
 def send_message(
@@ -199,6 +204,8 @@ def send_message(
     sid: str,
     user_text: str,
     user_tier: str = "M2",
+    upload_ids: list[str] | None = None,
+    auto_ground: bool = False,
 ) -> TutorReply:
     """Append a user message + get an assistant reply. Side effects:
     - Updates tutor_sessions.messages_json + token/cost rollups
@@ -207,7 +214,17 @@ def send_message(
     - Returns canned "over budget" if user exceeded daily tier cap
 
     The cap check happens BEFORE the Claude call so we don't burn
-    money on a user we'd reject anyway."""
+    money on a user we'd reject anyway.
+
+    Source grounding (v3.x):
+      - When `upload_ids` is provided, retrieve top-k chunks from those
+        uploads and inject as cached context for Claude. Citations are
+        returned on the TutorReply.
+      - When `auto_ground=True` and no upload_ids passed, the tutor
+        auto-pulls from the user's 3 most recent indexed uploads. Useful
+        when the SPA wants "study my uploaded notes" without explicit
+        selection.
+    """
     if not user_text or not user_text.strip():
         raise ValueError("user_text required")
     user_text = user_text[:4000]  # hard cap to defend against runaway loops
@@ -247,12 +264,68 @@ def send_message(
             "ANTHROPIC_API_KEY missing.)",
         )
 
-    return _claude_reply(session, user_text)
+    # Resolve uploads for RAG
+    resolved_upload_ids = list(upload_ids) if upload_ids else []
+    if not resolved_upload_ids and auto_ground:
+        resolved_upload_ids = _recent_indexed_uploads_for_user(session.user_id)
+
+    retrieved_hits = []
+    if resolved_upload_ids:
+        retrieved_hits = _retrieve_chunks(
+            query=user_text, upload_ids=resolved_upload_ids,
+        )
+
+    return _claude_reply(session, user_text, retrieved_hits=retrieved_hits)
 
 
-def _claude_reply(session: Session, user_text: str) -> TutorReply:
+def _recent_indexed_uploads_for_user(user_id: str, *, limit: int = 3) -> list[str]:
+    """Return up to `limit` upload ids that belong to the user AND have
+    retrieval chunks indexed. Used by auto_ground=True so the tutor
+    can RAG against the student's latest study material without
+    explicit ID selection."""
+    try:
+        from . import uploads as _up, retrieval as _retr
+        ups = _up.list_for_user(user_id, limit=20)
+        out: list[str] = []
+        for u in ups:
+            if _retr.chunk_count(upload_id=u.id) > 0:
+                out.append(u.id)
+                if len(out) >= limit:
+                    break
+        return out
+    except Exception:
+        return []
+
+
+def _retrieve_chunks(
+    *, query: str, upload_ids: list[str], top_k: int = 5,
+) -> list:
+    """TF-IDF retrieve from the user's indexed uploads. Returns
+    retrieval.RetrievalHit list (or [] if retrieval module missing /
+    no hits)."""
+    try:
+        from . import retrieval as _retr
+        return _retr.retrieve(
+            query=query, upload_ids=upload_ids,
+            top_k=top_k, min_score=0.05,
+        )
+    except Exception:
+        return []
+
+
+def _claude_reply(
+    session: Session,
+    user_text: str,
+    *,
+    retrieved_hits: list | None = None,
+) -> TutorReply:
     """Real Claude call path. Lazy imports the SDK so this module
-    loads without anthropic installed."""
+    loads without anthropic installed.
+
+    `retrieved_hits` (optional) — list of retrieval.RetrievalHit. When
+    present, each chunk is injected into the system prompt as cached
+    context, and the citations are returned on the TutorReply so the
+    UI can render them inline."""
     started = time.time()
     try:
         from anthropic import Anthropic   # noqa: WPS433
@@ -263,6 +336,22 @@ def _claude_reply(session: Session, user_text: str) -> TutorReply:
         )
     model = os.environ.get("PADHAI_TUTOR_MODEL", "claude-haiku-4-5")
     system_prompt = _build_system_prompt(session)
+
+    # Source grounding — inject retrieved chunks into the system prompt
+    # (cacheable: same chunks for the same session won't re-tokenise).
+    citations_tuple: tuple = ()
+    if retrieved_hits:
+        chunks_block, citations_tuple = _format_chunks_for_prompt(retrieved_hits)
+        system_prompt = (
+            system_prompt
+            + "\n\n--- STUDENT'S UPLOADED STUDY MATERIAL (cite when used) ---\n"
+            + chunks_block
+            + "\n--- END OF SOURCE MATERIAL ---\n\n"
+            + "When you use facts from the source material, append a "
+            + "citation like [page N, section X]. If the source doesn't "
+            + "cover the question, say so honestly — don't fabricate."
+        )
+
     history = list(session.messages or [])
     history.append({"role": "user", "content": user_text, "ts": started})
 
@@ -303,7 +392,7 @@ def _claude_reply(session: Session, user_text: str) -> TutorReply:
     )
     llm_obs.record_call(
         module="tutor",
-        prompt_version="v1",
+        prompt_version="v1-grounded" if retrieved_hits else "v1",
         model=model,
         tokens_in=tokens_in, tokens_out=tokens_out,
         latency_ms=latency_ms,
@@ -311,6 +400,23 @@ def _claude_reply(session: Session, user_text: str) -> TutorReply:
         cached=cached,
         cost_inr_paise=cost_paise,
     )
+
+    # Record provenance via tutor_grounding so /admin/grounding audits work.
+    # Best-effort — failure to record is non-fatal.
+    if retrieved_hits:
+        try:
+            from . import retrieval as _retr, tutor_grounding as _tg
+            _tg.send_grounded_message(
+                session_id=session.id,
+                user_id=session.user_id,
+                question_text=user_text,
+                answer_text=reply_text,
+                retrieved_chunks=_retr.hits_to_citations(retrieved_hits),
+                confidence=retrieved_hits[0].score if retrieved_hits else None,
+                surface="tutor",
+            )
+        except Exception as _e:  # noqa: BLE001
+            print(f"[tutor] grounding record non-fatal: {_e}")
 
     # Persist the turn
     history.append({"role": "assistant", "content": reply_text, "ts": time.time()})
@@ -326,7 +432,37 @@ def _claude_reply(session: Session, user_text: str) -> TutorReply:
         session_id=session.id, reply=reply_text,
         tokens_in=tokens_in, tokens_out=tokens_out,
         cost_inr_paise=cost_paise, cached=cached,
+        grounded=bool(retrieved_hits),
+        citations=citations_tuple,
     )
+
+
+def _format_chunks_for_prompt(hits) -> tuple[str, tuple]:
+    """Return (system-prompt-block, citations-tuple-for-TutorReply).
+
+    Citations tuple shape (each dict):
+      {page_number, section, preview, score, upload_id}
+    """
+    parts: list[str] = []
+    citations: list[dict] = []
+    for i, h in enumerate(hits):
+        chunk = h.chunk
+        label = f"[#{i+1}"
+        if chunk.page_number:
+            label += f" · page {chunk.page_number}"
+        if chunk.section:
+            label += f" · {chunk.section}"
+        label += "]"
+        parts.append(f"{label}\n{chunk.chunk_text[:1800]}")
+        citations.append({
+            "index": i + 1,
+            "page_number": chunk.page_number,
+            "section": chunk.section,
+            "preview": chunk.chunk_text[:300],
+            "score": h.score,
+            "upload_id": chunk.upload_id,
+        })
+    return "\n\n".join(parts), tuple(citations)
 
 
 def _record_canned_reply(
