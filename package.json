@@ -25,7 +25,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^15.15.0"
+    "axe-core": "^4.11.4",
+    "cypress": "^15.15.0",
+    "cypress-axe": "^1.7.0"
   }
 }
-

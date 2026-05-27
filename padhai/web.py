@@ -903,6 +903,11 @@ async def _lifespan(app: FastAPI):
     except Exception as e:  # noqa: BLE001
         _log.warning("[startup] adaptive_packs.migrate failed (non-fatal): %s", e)
     try:
+        from . import cwv as _cwv
+        _cwv.migrate()
+    except Exception as e:  # noqa: BLE001
+        _log.warning("[startup] cwv.migrate failed (non-fatal): %s", e)
+    try:
         _step_math.migrate()
     except Exception as e:  # noqa: BLE001
         _log.warning("[startup] step_math.migrate failed (non-fatal): %s", e)

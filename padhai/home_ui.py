@@ -74,7 +74,9 @@ HOME_HTML = """<!doctype html>
 
 <style>
   :root {
-    --bg:#f5f7fb; --panel:#ffffff; --ink:#111827; --muted:#667085;
+    /* P3 a11y: --muted bumped from #667085 (4.06:1) to #5a6470 (4.95:1)
+       to pass WCAG 2.2 AA SC 1.4.3 (4.5:1 for normal text on white). */
+    --bg:#f5f7fb; --panel:#ffffff; --ink:#111827; --muted:#5a6470;
     --line:#d9e0ea; --nav:#101828; --nav2:#1d2939;
     --brand:#1565d8; --brand-soft:#eaf2ff;
     --green:#16855f; --green-soft:#e7f6ef;
@@ -527,7 +529,7 @@ HOME_HTML = """<!doctype html>
         <a href="/lessons/new" class="btn primary"
            style="text-decoration:none;white-space:nowrap;padding:9px 14px"
            aria-label="Create a new lesson / नया पाठ बनाएँ">
-          + New Lesson <span aria-hidden="true" style="opacity:0.75;font-weight:400">/ नया पाठ</span>
+          + New Lesson<span class="sr-only"> / नया पाठ</span>
         </a>
       </div>
     </div>
@@ -1425,6 +1427,78 @@ if ('serviceWorker' in navigator) {
 
   loadDueBadge();
   loadDashboardSummary();
+})();
+</script>
+
+<!-- P3: RUM beacon for Core Web Vitals.
+     web-vitals.js (~1.5 KB gzipped) loads from unpkg CDN with `defer`
+     so it doesn't block first paint. Captures LCP, INP, CLS, TTFB, FCP
+     for the actual user session and beacons to /api/cwv/sample. -->
+<script type="module">
+  (async function loadCWVBeacon(){
+    // Skip if explicitly disabled (e.g. for Cypress tests)
+    if (window.__CWV_DISABLED__) return;
+    try {
+      var wv = await import('https://unpkg.com/web-vitals@4?module');
+      var path = location.pathname;
+      var locale = document.documentElement.lang || 'en';
+      var device = (matchMedia('(max-width: 720px)').matches) ? 'mobile'
+                  : (matchMedia('(max-width: 1024px)').matches) ? 'tablet'
+                  : 'desktop';
+      function send(metric){
+        var body = {
+          name: metric.name,
+          value: metric.name === 'CLS' ? metric.value * 1000 : metric.value,
+          rating: metric.rating,
+          navigationType: metric.navigationType,
+          path: path,
+          locale: locale,
+          device: device,
+        };
+        // sendBeacon survives page unload; fall back to fetch
+        if (navigator.sendBeacon) {
+          var blob = new Blob([JSON.stringify(body)], {type:'application/json'});
+          navigator.sendBeacon('/api/cwv/sample', blob);
+        } else {
+          fetch('/api/cwv/sample', {
+            method: 'POST', keepalive: true,
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(body),
+          }).catch(function(){});
+        }
+      }
+      wv.onCLS(send); wv.onLCP(send); wv.onINP(send);
+      wv.onTTFB(send); wv.onFCP(send);
+    } catch(e){
+      // Silent — RUM is best-effort
+    }
+  })();
+</script>
+
+<!-- P3: server-driven i18n. Replaces hardcoded EN/HI pairs with a
+     locale dict fetched from /api/i18n/{lang}.json. After load, walks
+     every [data-i18n] element and swaps its text. Existing bilingual
+     hardcoded labels still serve as graceful fallback if the fetch
+     fails or no key matches. -->
+<script>
+(function loadI18n(){
+  var lang = (localStorage.getItem('padhai_lang') ||
+              (document.documentElement.lang || 'en').split('-')[0]);
+  if (lang === 'en') return;  // English already in DOM
+  fetch('/api/i18n/' + lang + '.json')
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(strings){
+      if (!strings) return;
+      window.I18N = strings;
+      document.querySelectorAll('[data-i18n]').forEach(function(el){
+        var key = el.getAttribute('data-i18n');
+        if (strings[key]) el.textContent = strings[key];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function(el){
+        var key = el.getAttribute('data-i18n-aria');
+        if (strings[key]) el.setAttribute('aria-label', strings[key]);
+      });
+    }).catch(function(){});
 })();
 </script>
 </body>

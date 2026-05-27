@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "version": "2026.1",
+    "updated_at": "2026-05-27",
+    "notes": "Indian festival + scholarship windows that drive promo-rail copy. Add 1-2 entries per quarter. Date format: YYYY-MM-DD. The promoRail JS picks the next entry within 14 days (or 60d for exam-urgent variants)."
+  },
+  "festivals_2026": [
+    {
+      "code": "makar_sankranti_2026",
+      "date": "2026-01-14",
+      "emoji": "🌾",
+      "title": "Pongal / Makar Sankranti — 2 mock tests free",
+      "sub": "Start the harvest season strong",
+      "cls": "festival",
+      "href": "/practice",
+      "regions": ["TN", "AP", "TS", "KA", "MH", "GJ", "PB"]
+    },
+    {
+      "code": "republic_day_2026",
+      "date": "2026-01-26",
+      "emoji": "🇮🇳",
+      "title": "Republic Day — Free for CBSE Govt school students",
+      "sub": "Apply with your school code",
+      "cls": "scholarship",
+      "href": "/pricing",
+      "regions": ["ALL"]
+    },
+    {
+      "code": "holi_2026",
+      "date": "2026-03-04",
+      "emoji": "🎨",
+      "title": "Holi prep — Free practice tests",
+      "sub": "Daily streak doubled for the festival week",
+      "cls": "festival",
+      "href": "/practice",
+      "regions": ["UP", "BR", "DL", "MH", "MP", "RJ"]
+    },
+    {
+      "code": "eid_ul_fitr_2026",
+      "date": "2026-03-20",
+      "emoji": "🌙",
+      "title": "Eid Mubarak — 30% off all annual plans",
+      "sub": "Limited 5-day offer",
+      "cls": "festival",
+      "href": "/pricing",
+      "regions": ["ALL"]
+    },
+    {
+      "code": "ramnavami_2026",
+      "date": "2026-03-26",
+      "emoji": "🪷",
+      "title": "Ram Navami — Bonus 100 flashcards on signup",
+      "sub": "Auto-applied for new accounts this week",
+      "cls": "festival",
+      "href": "/pricing",
+      "regions": ["UP", "BR", "MP", "RJ", "DL"]
+    },
+    {
+      "code": "rakhi_2026",
+      "date": "2026-08-19",
+      "emoji": "🪢",
+      "title": "Raksha Bandhan — Sibling pack 30% off",
+      "sub": "Add a brother or sister to your plan",
+      "cls": "festival",
+      "href": "/pricing",
+      "regions": ["ALL"]
+    },
+    {
+      "code": "ganesh_chaturthi_2026",
+      "date": "2026-09-04",
+      "emoji": "🐘",
+      "title": "Ganesh Chaturthi — Maharashtra special",
+      "sub": "Free Marathi-medium content for 7 days",
+      "cls": "festival",
+      "href": "/onboarding",
+      "regions": ["MH", "GA"]
+    },
+    {
+      "code": "onam_2026",
+      "date": "2026-08-26",
+      "emoji": "🌺",
+      "title": "Onam offer — Malayalam-medium content unlocked",
+      "sub": "Sadya for your brain too",
+      "cls": "festival",
+      "href": "/onboarding",
+      "regions": ["KL"]
+    },
+    {
+      "code": "navaratri_2026",
+      "date": "2026-10-10",
+      "emoji": "💃",
+      "title": "Navaratri — 9 days of free mock tests",
+      "sub": "One new mock test unlocked daily",
+      "cls": "festival",
+      "href": "/practice",
+      "regions": ["GJ", "MH", "WB", "KA"]
+    },
+    {
+      "code": "diwali_2026",
+      "date": "2026-11-08",
+      "emoji": "🪔",
+      "title": "Diwali offer — ₹999 plan at ₹699",
+      "sub": "Light up your exam prep this season",
+      "cls": "festival",
+      "href": "/pricing",
+      "regions": ["ALL"]
+    },
+    {
+      "code": "children_day_2026",
+      "date": "2026-11-14",
+      "emoji": "🎈",
+      "title": "Children's Day — Free for under-15 students",
+      "sub": "Sign up with school ID + parent consent",
+      "cls": "scholarship",
+      "href": "/pricing",
+      "regions": ["ALL"]
+    }
+  ]
+}

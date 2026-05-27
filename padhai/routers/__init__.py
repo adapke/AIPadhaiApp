@@ -43,6 +43,7 @@ _ROUTER_NAMES = (
     "digilocker",    # v3.x — DigiLocker credential issuance + consent
     "commerce",      # v3.x — voucher redemption + DIKSHA export + LLM cost dashboard
     "doubt_ai",      # v3.x — instant Claude Vision answer for /api/doubts/{did}/ai-answer
+    "ux_signals",    # v3.x — RUM CWV beacon + i18n + festivals + A/B experiments
 )
 
 

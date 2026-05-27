@@ -340,9 +340,9 @@ _PRICING_HTML = """<!doctype html>
   <header>
     <h1>Choose your plan</h1>
     <p class="tagline">Cancel anytime. Pay in INR. Built for Indian students.</p>
-    <div class="cycle-toggle" role="tablist">
-      <button id="cycMonthly" class="active" onclick="setCycle('monthly')">Monthly</button>
-      <button id="cycAnnual" onclick="setCycle('annual')">Annual <span class="save-pill">save 25%</span></button>
+    <div class="cycle-toggle" role="tablist" aria-label="Billing cycle">
+      <button id="cycMonthly" role="tab" aria-selected="true" aria-controls="plans" class="active" onclick="setCycle('monthly')">Monthly</button>
+      <button id="cycAnnual" role="tab" aria-selected="false" aria-controls="plans" onclick="setCycle('annual')">Annual <span class="save-pill">save 25%</span></button>
     </div>
   </header>
 

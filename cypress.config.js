@@ -41,11 +41,17 @@ module.exports = defineConfig({
     },
 
     setupNodeEvents(on, config) {
-      // Task: generate a unique test email address
+      // Task: generate a unique test email address + log helper for
+      // cypress-axe deep-scan spec (14-axe-deep-scan.cy.js).
       on('task', {
         randomEmail() {
           const rand = Math.random().toString(36).slice(2, 10);
           return `cy-test-${rand}@example.com`;
+        },
+        log(msg) {
+          // eslint-disable-next-line no-console
+          console.log(msg);
+          return null;
         },
       });
       return config;
