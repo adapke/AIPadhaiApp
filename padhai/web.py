@@ -9648,29 +9648,120 @@ def health() -> JSONResponse:
 @app.get("/api/ai-status")
 def ai_status() -> JSONResponse:
     """Returns which AI features are configured on this server.
-    Safe to call without auth — exposes no secrets, just boolean flags."""
+    Safe to call without auth — exposes no secrets, just boolean flags.
+
+    `features` reports backend availability; `routes` lists the HTTP
+    endpoints the SPA can use for each. The frontend uses `routes` to
+    decide which navigation tiles to render (vs which to hide / mark
+    'coming soon')."""
     has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
     has_video = bool(
         os.environ.get("HEYGEN_API_KEY") or
         os.environ.get("DID_API_KEY") or
         os.environ.get("TAVUS_API_KEY")
     )
+    has_live_provider = bool(
+        os.environ.get("LIVEKIT_API_KEY") or os.environ.get("DAILY_API_KEY")
+    )
+    has_razorpay = bool(os.environ.get("RAZORPAY_KEY_ID"))
+    has_sarvam_or_bhashini = bool(
+        os.environ.get("SARVAM_API_KEY") or os.environ.get("BHASHINI_API_KEY")
+    )
     return JSONResponse({
         "anthropic_configured": has_anthropic,
         "video_configured": has_video,
+        "live_video_configured": has_live_provider,
+        "razorpay_configured": has_razorpay,
+        "indic_tts_configured": has_sarvam_or_bhashini,
         "features": {
-            "voice_tutor": has_anthropic,           # requires Claude; no fallback
-            "live_lecture": has_anthropic,          # requires Claude; no fallback
-            "essay_grader": True,                   # heuristic fallback works without key
-            "math_vision": has_anthropic,           # requires Claude; no fallback
-            "mock_interview": True,                 # heuristic fallback always works
-            "adaptive_practice": True,              # rule-based; works without key
-            "practice_tests": True,                 # placeholder mode without key
-            "ai_synthesis": has_anthropic,          # question/content generation
+            "voice_tutor": has_anthropic,
+            "voice_tutor_streaming": has_anthropic,
+            "live_lecture": True,                   # stub fallback works without provider
+            "essay_grader": True,
+            "math_vision": has_anthropic,
+            "mock_interview": True,
+            "adaptive_practice": True,
+            "practice_tests": True,
+            "ai_synthesis": has_anthropic,
             "lesson_generation": has_anthropic,
+            "upload_chat": True,                    # RAG works in dev path
+            "upload_flashcards": True,
+            "upload_quiz": True,
+            "upload_summary": True,
+            "onboarding_funnel": True,
+            "student_dashboard": True,
+            "parent_dashboard": True,
+            "teacher_dashboard": True,
+            "pricing_page": True,
+            "subscription_upgrades": True,          # uses mock orders when Razorpay unset
+        },
+        "routes": {
+            "voice_tutor": {
+                "start": "/api/tutor/sessions",
+                "message": "/api/tutor/sessions/{sid}/message",
+                "stream": "/api/tutor/sessions/{sid}/stream",
+            },
+            "essay_grader": {
+                "rubrics": "/api/essay/rubrics",
+                "submit": "/api/essay/submit",
+                "list": "/api/essay/submissions",
+            },
+            "math_vision": {
+                "submit": "/api/math/submit",
+                "extract": "/api/math/{sid}/extract",
+                "validate": "/api/math/{sid}/validate",
+            },
+            "mock_interview": {
+                "start": "/api/mock/start",
+                "turn": "/api/mock/{iid}/turn",
+                "end": "/api/mock/{iid}/end",
+                "tracks": "/api/mock/tracks",
+            },
+            "adaptive_practice": {
+                "view_pack": "/api/adaptive/pack/{base_pack_code}",
+                "rebalance": "/api/adaptive/pack/{base_pack_code}/rebalance",
+                "my_packs": "/api/adaptive/packs",
+            },
+            "practice_tests": {
+                "generate": "/api/practice/generate",
+                "start": "/api/practice/{tid}/start",
+                "submit": "/api/practice/{tid}/submit",
+            },
+            "live_lecture": {
+                "upcoming": "/api/live/upcoming",
+                "schedule": "/api/live/schedule",
+                "join": "/api/live/{lc_id}/join",
+            },
+            "upload_ai": {
+                "chat": "/api/uploads/{uid}/chat",
+                "flashcards": "/api/uploads/{uid}/flashcards",
+                "quiz": "/api/uploads/{uid}/quiz",
+                "summary": "/api/uploads/{uid}/summary",
+            },
+            "onboarding": {
+                "options": "/api/onboarding/options",
+                "status": "/api/onboarding/status",
+                "step": "/api/onboarding/step",
+                "complete": "/api/onboarding/complete",
+            },
+            "dashboards": {
+                "student": "/api/me/dashboard",
+                "parent": "/api/parents/dashboard",
+                "teacher": "/api/teacher/dashboard?org_id=...",
+            },
+            "pricing": {
+                "plans": "/api/pricing/plans",
+                "checkout": "/api/pricing/checkout",
+                "verify": "/api/pricing/verify",
+                "page": "/pricing",
+            },
         },
         # Features that work but are degraded without the API key
-        "degraded_without_ai": [] if has_anthropic else ["essay_grader", "mock_interview", "practice_tests"],
+        "degraded_without_ai": (
+            [] if has_anthropic else
+            ["essay_grader", "mock_interview", "practice_tests",
+             "upload_chat", "upload_quiz", "upload_summary"]
+        ),
     })
 
 
@@ -13996,6 +14087,332 @@ def parent_page() -> HTMLResponse:
     """Parent portal — child progress, fee payment."""
     from . import ui_pages as _ui
     return HTMLResponse(_ui.get_parent_html())
+
+
+@app.get("/onboarding", response_class=HTMLResponse)
+def onboarding_page() -> HTMLResponse:
+    """Multi-step student onboarding wizard. Drives the
+    /api/onboarding/* endpoints declared in padhai/routers/onboarding.py."""
+    return HTMLResponse(_ONBOARDING_HTML)
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+def student_dashboard_page() -> HTMLResponse:
+    """Student dashboard — pulls /api/me/dashboard and renders blocks."""
+    return HTMLResponse(_STUDENT_DASHBOARD_HTML)
+
+
+_ONBOARDING_HTML = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to AI Pathshala</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px;
+      padding: 32px; max-width: 640px; width: 100%; }
+    .progress { display: flex; gap: 6px; margin-bottom: 24px; }
+    .progress div { flex: 1; height: 6px; background: #334155; border-radius: 3px; }
+    .progress div.active { background: #f59e0b; }
+    .progress div.done { background: #10b981; }
+    h1 { margin: 0 0 8px 0; font-size: 26px; }
+    .step-num { color: #94a3b8; font-size: 13px; margin-bottom: 4px; }
+    .options { display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 10px; margin-top: 20px; }
+    @media (max-width: 600px) { .options { grid-template-columns: 1fr; } }
+    .opt { background: #0f172a; border: 1px solid #334155; border-radius: 10px;
+      padding: 14px 16px; cursor: pointer; text-align: left; color: #e2e8f0;
+      font-size: 14px; transition: all 0.15s; }
+    .opt:hover { border-color: #f59e0b; background: #1a2235; }
+    .opt.selected { border-color: #f59e0b; background: #2d2410; }
+    .actions { display: flex; justify-content: space-between; margin-top: 24px; }
+    .btn { padding: 10px 20px; border: 0; border-radius: 8px; cursor: pointer;
+      font-weight: 600; }
+    .btn.next { background: #f59e0b; color: #0f172a; }
+    .btn.next:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn.skip { background: transparent; color: #94a3b8; }
+    .done-screen { text-align: center; padding: 32px 16px; }
+    .done-screen h2 { font-size: 28px; margin: 16px 0 8px; }
+    .done-screen p { color: #94a3b8; margin: 0 0 24px; }
+    .signin-prompt { background: #0f172a; padding: 16px; border-radius: 10px;
+      border: 1px solid #334155; text-align: center; }
+    .signin-prompt a { color: #f59e0b; }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="progress" id="progress"></div>
+    <div id="content">Loading…</div>
+  </div>
+
+  <script>
+    const TOTAL = 5;
+    let CURRENT_STEP = null;
+    let SELECTED_VALUE = null;
+    let STATE = {};
+
+    function authHeaders() {
+      const token = localStorage.getItem('pathshala_token');
+      return token ? { 'Authorization': 'Bearer ' + token } : {};
+    }
+
+    async function loadStatus() {
+      const r = await fetch('/api/onboarding/status', { headers: authHeaders() });
+      if (r.status === 401) {
+        document.getElementById('content').innerHTML =
+          '<div class="signin-prompt">Please <a href="/landing">sign in</a> '
+          + 'to set up your study goals.</div>';
+        return;
+      }
+      const j = await r.json();
+      STATE = j.state || {};
+      if (j.completed) {
+        renderDone();
+        return;
+      }
+      CURRENT_STEP = j.next_step;
+      renderStep();
+    }
+
+    function renderProgress(currentStep) {
+      const bar = document.getElementById('progress');
+      bar.innerHTML = '';
+      for (let i = 1; i <= TOTAL; i++) {
+        const d = document.createElement('div');
+        if (i < currentStep) d.className = 'done';
+        else if (i === currentStep) d.className = 'active';
+        bar.appendChild(d);
+      }
+    }
+
+    function renderStep() {
+      if (!CURRENT_STEP) { renderDone(); return; }
+      renderProgress(CURRENT_STEP.step);
+      const content = document.getElementById('content');
+      content.innerHTML = '<div class="step-num">Step '
+        + CURRENT_STEP.step + ' of ' + TOTAL + '</div>'
+        + '<h1>' + CURRENT_STEP.label + '</h1>'
+        + '<div class="options" id="opts"></div>'
+        + '<div class="actions">'
+        + '  <button class="btn skip" onclick="window.location.href=\\'/home\\'">Skip for now</button>'
+        + '  <button class="btn next" id="nextBtn" disabled onclick="submitStep()">Next →</button>'
+        + '</div>';
+      const opts = document.getElementById('opts');
+      CURRENT_STEP.options.forEach(o => {
+        const b = document.createElement('button');
+        b.className = 'opt';
+        b.textContent = o.label;
+        b.dataset.value = String(o.code);
+        b.onclick = () => {
+          opts.querySelectorAll('.opt').forEach(x => x.classList.remove('selected'));
+          b.classList.add('selected');
+          SELECTED_VALUE = String(o.code);
+          document.getElementById('nextBtn').disabled = false;
+        };
+        opts.appendChild(b);
+      });
+      SELECTED_VALUE = null;
+    }
+
+    async function submitStep() {
+      const fd = new FormData();
+      fd.append('field', CURRENT_STEP.field);
+      fd.append('value', SELECTED_VALUE);
+      const r = await fetch('/api/onboarding/step', {
+        method: 'POST', body: fd, headers: authHeaders(),
+      });
+      if (!r.ok) { alert('Failed to save: ' + r.statusText); return; }
+      const j = await r.json();
+      STATE = j.state;
+      CURRENT_STEP = j.next_step;
+      if (!CURRENT_STEP) {
+        await completeOnboarding();
+      } else {
+        renderStep();
+      }
+    }
+
+    async function completeOnboarding() {
+      const r = await fetch('/api/onboarding/complete', {
+        method: 'POST', headers: authHeaders(),
+      });
+      if (!r.ok) {
+        alert('Could not finalise onboarding. You can update preferences in /profile.');
+      }
+      renderDone();
+    }
+
+    function renderDone() {
+      document.getElementById('progress').innerHTML = '';
+      document.getElementById('content').innerHTML = `
+        <div class="done-screen">
+          <div style="font-size:60px">🎉</div>
+          <h2>You're all set!</h2>
+          <p>Your study plan is being personalised. Let's get learning.</p>
+          <a href="/home" class="btn next" style="display:inline-block;text-decoration:none">Go to my dashboard →</a>
+        </div>
+      `;
+    }
+
+    loadStatus();
+  </script>
+</body>
+</html>
+"""
+
+
+_STUDENT_DASHBOARD_HTML = """<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard · AI Pathshala</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0f172a; color: #e2e8f0;
+      font-family: system-ui, sans-serif; }
+    header { padding: 20px 24px; border-bottom: 1px solid #334155;
+      display: flex; justify-content: space-between; align-items: center; }
+    h1 { margin: 0; font-size: 22px; }
+    nav a { color: #f59e0b; margin-left: 16px; text-decoration: none; font-size: 14px; }
+    main { padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; max-width: 1200px; margin: 0 auto; }
+    @media (max-width: 900px) { main { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { main { grid-template-columns: 1fr; } }
+    .panel { background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+      padding: 18px; }
+    .panel h2 { margin: 0 0 12px 0; font-size: 15px; color: #94a3b8;
+      text-transform: uppercase; letter-spacing: 0.5px; }
+    .big { font-size: 36px; font-weight: 800; margin: 0; }
+    .sub { color: #94a3b8; font-size: 13px; margin: 4px 0 0 0; }
+    .list { list-style: none; padding: 0; margin: 0; }
+    .list li { padding: 8px 0; border-bottom: 1px solid #334155;
+      font-size: 14px; display: flex; justify-content: space-between; }
+    .list li:last-child { border-bottom: 0; }
+    .pill { background: #ef4444; color: #fff; padding: 2px 8px;
+      border-radius: 999px; font-size: 11px; font-weight: 700; }
+    .pill.ok { background: #10b981; }
+    .pill.warn { background: #f59e0b; }
+    .empty { color: #64748b; font-size: 13px; font-style: italic; }
+    .signin { padding: 40px; text-align: center; color: #94a3b8; }
+    .signin a { color: #f59e0b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your dashboard</h1>
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/onboarding">Goals</a>
+      <a href="/pricing">Upgrade</a>
+      <a href="/profile">Settings</a>
+    </nav>
+  </header>
+  <main id="dash">Loading…</main>
+
+  <script>
+    async function load() {
+      const token = localStorage.getItem('pathshala_token');
+      if (!token) {
+        document.getElementById('dash').innerHTML =
+          '<div class="signin">Please <a href="/landing">sign in</a> to see your dashboard.</div>';
+        return;
+      }
+      const r = await fetch('/api/me/dashboard', {
+        headers: { 'Authorization': 'Bearer ' + token },
+      });
+      if (!r.ok) {
+        document.getElementById('dash').innerHTML =
+          '<div class="signin">Dashboard unavailable (' + r.status + ')</div>';
+        return;
+      }
+      const d = await r.json();
+      render(d);
+    }
+
+    function render(d) {
+      const main = document.getElementById('dash');
+      const p = d.profile || {};
+      const onb = d.onboarding || {};
+      const streak = d.streak || {};
+      const mastery = d.mastery || {};
+      const practice = d.practice_tests || {};
+      const mock = d.mock_interviews || {};
+      const essay = d.essays || {};
+      const cards = d.flashcards || {};
+      const live = d.live_classes || {};
+
+      const tiles = [];
+      if (!onb.completed) {
+        tiles.push(`<div class="panel" style="grid-column:1/-1;border-color:#f59e0b">
+          <h2>Setup needed</h2>
+          <p class="sub">Complete onboarding so we can personalise your plan.</p>
+          <a href="/onboarding" style="color:#f59e0b">Set goals →</a>
+        </div>`);
+      }
+      tiles.push(`<div class="panel"><h2>Streak</h2>
+        <p class="big">${streak.current_days || 0}<small style="font-size:13px;color:#94a3b8"> days</small></p>
+        <p class="sub">Longest: ${streak.longest_days || 0} days</p></div>`);
+      tiles.push(`<div class="panel"><h2>Due flashcards</h2>
+        <p class="big">${cards.due_count || 0}</p>
+        <p class="sub">${cards.deck_count || 0} decks total</p>
+        <a href="/flashcards" style="color:#f59e0b;font-size:13px">Study now →</a></div>`);
+      tiles.push(`<div class="panel"><h2>Weak topics</h2>
+        <ul class="list">${
+          (mastery.weak || []).slice(0,5).map(w =>
+            `<li><span>${w.topic_key}</span><span class="pill">${(w.mastery*100).toFixed(0)}%</span></li>`
+          ).join('') || '<li class="empty">No data yet — practice a few topics</li>'
+        }</ul></div>`);
+      tiles.push(`<div class="panel"><h2>Strong topics</h2>
+        <ul class="list">${
+          (mastery.strong || []).slice(0,5).map(s =>
+            `<li><span>${s.topic_key}</span><span class="pill ok">${(s.mastery*100).toFixed(0)}%</span></li>`
+          ).join('') || '<li class="empty">Keep practicing — strong topics will appear here</li>'
+        }</ul></div>`);
+      tiles.push(`<div class="panel"><h2>Recent practice tests</h2>
+        <ul class="list">${
+          (practice.recent || []).slice(0,4).map(t =>
+            `<li><span>${t.exam} · ${t.subject}</span><span class="pill ${
+              t.score ? (t.score.pct >= 0.6 ? 'ok' : 'warn') : ''
+            }">${t.score ? Math.round(t.score.pct*100)+'%' : t.status}</span></li>`
+          ).join('') || '<li class="empty">No tests yet</li>'
+        }</ul></div>`);
+      tiles.push(`<div class="panel"><h2>Mock interviews</h2>
+        <ul class="list">${
+          (mock.recent || []).slice(0,4).map(m =>
+            `<li><span>${m.track}</span><span class="pill ${
+              m.overall_score >= 7 ? 'ok' : m.overall_score ? 'warn' : ''
+            }">${m.overall_score != null ? m.overall_score.toFixed(1) : m.status}</span></li>`
+          ).join('') || '<li class="empty">No interviews yet</li>'
+        }</ul></div>`);
+      tiles.push(`<div class="panel"><h2>Essay scores</h2>
+        <ul class="list">${
+          (essay.recent || []).slice(0,4).map(e =>
+            `<li><span>${e.rubric_id.slice(0,8)}…</span><span class="pill ${
+              e.ai_score >= 60 ? 'ok' : e.ai_score ? 'warn' : ''
+            }">${e.ai_score != null ? e.ai_score.toFixed(0) : '—'}</span></li>`
+          ).join('') || '<li class="empty">No essays graded yet</li>'
+        }</ul></div>`);
+      tiles.push(`<div class="panel"><h2>Live classes</h2>
+        <ul class="list">${
+          (live.upcoming || []).slice(0,4).map(lc => {
+            const when = new Date(lc.scheduled_at * 1000).toLocaleString();
+            return `<li><span>${lc.title}</span><span class="pill warn">${when}</span></li>`;
+          }).join('') || '<li class="empty">No upcoming classes</li>'
+        }</ul></div>`);
+
+      main.innerHTML = tiles.join('');
+    }
+
+    load();
+  </script>
+</body>
+</html>
+"""
 
 
 # ---- User profile ---------------------------------------------------------

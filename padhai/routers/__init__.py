@@ -32,6 +32,12 @@ _ROUTER_NAMES = (
     "me",            # v2.0.3 — /api/me/*, /api/users/me/*, /api/coaching/practice/*
     "orgs_admin",    # v2.0.3 — /api/orgs/{org_id}/* admin-gated
     "v3",            # v2.1.0 — L1 tutor + L6 LLM obs + Q1 flags
+    "learning",      # v3.x — wires essay / math / mock / adaptive / practice / live
+    "uploads_ai",    # v3.x — PDF chat, flashcards, quiz, summary from uploads
+    "onboarding",    # v3.x — class/board/exam/lang/goal onboarding funnel
+    "dashboard",     # v3.x — student / parent / teacher dashboards
+    "pricing",       # v3.x — pricing page + Razorpay checkout
+    "tutor_stream",  # v3.x — SSE streaming companion to /api/tutor/.../message
 )
 
 

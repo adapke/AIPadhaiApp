@@ -289,6 +289,15 @@ HOME_HTML = """<!doctype html>
       <a class="nav-chip" href="/chat">
         <span class="icon">🤖</span>AI Tutor
       </a>
+      <a class="nav-chip" href="/onboarding">
+        <span class="icon">🎯</span>Set goals
+      </a>
+      <a class="nav-chip" href="/pricing">
+        <span class="icon">💎</span>Upgrade
+      </a>
+      <a class="nav-chip" href="/parent">
+        <span class="icon">👨‍👩‍👧</span>Parent view
+      </a>
       <a class="nav-chip" href="/profile">
         <span class="icon">⚙</span>Settings
       </a>
