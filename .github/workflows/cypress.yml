@@ -52,13 +52,19 @@ jobs:
           start: python -m uvicorn padhai.web:app --host 0.0.0.0 --port 8000 --log-level warning
           # Wait for the healthz probe (cypress.config.js baseUrl is :8000).
           wait-on: 'http://127.0.0.1:8000/healthz'
-          wait-on-timeout: 120
+          wait-on-timeout: 180
           # Records to Cypress Cloud — only when CYPRESS_RECORD_KEY is
           # configured. Without it the matrix containers each run all
           # specs locally (still passes, just no load-split or dashboard).
           # https://docs.cypress.io/cloud/get-started/setup
           record: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
           parallel: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
+          # Explicit ci-build-id + group make sure both matrix
+          # containers report into the same Cypress Cloud run. The
+          # default heuristic sometimes drifts when a job retries.
+          ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
+          group: 'GH Actions Linux'
+          tag: ${{ github.event_name }},${{ github.ref_name }}
           # Skip the auto-install when node_modules is cached (faster reruns).
           install-command: npm ci
         env:
