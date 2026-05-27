@@ -9422,6 +9422,65 @@ def home_page() -> HTMLResponse:
     return HTMLResponse(_home_ui.get_home_html())
 
 
+# P2 — India-first SEO. Per-language landing pages so Google can index
+# /home/hi, /home/ta, etc. and serve them for vernacular searches.
+# Each variant carries hreflang tags pointing at every other variant so
+# Google clusters them correctly.
+_SEO_LOCALES = {
+    "hi": ("hi-IN", "हिन्दी"),
+    "ta": ("ta-IN", "தமிழ்"),
+    "te": ("te-IN", "తెలుగు"),
+    "kn": ("kn-IN", "ಕನ್ನಡ"),
+    "ml": ("ml-IN", "മലയാളം"),
+    "mr": ("mr-IN", "मराठी"),
+    "bn": ("bn-IN", "বাংলা"),
+    "gu": ("gu-IN", "ગુજરાતી"),
+    "pa": ("pa-IN", "ਪੰਜਾਬੀ"),
+}
+
+
+@app.get("/home/{lang}", response_class=HTMLResponse, include_in_schema=False)
+def home_page_localized(lang: str) -> HTMLResponse:
+    """Localized landing variant. The HTML is the same SPA — the JS
+    `padhai_lang` localStorage key gets pre-seeded by an inline script
+    so the language switcher and any localized strings render immediately.
+
+    Hreflang tags are emitted in the <head> so search engines cluster all
+    locale variants as alternates of each other (avoids duplicate-content
+    penalties + serves the right locale to vernacular searchers).
+    """
+    if lang not in _SEO_LOCALES and lang != "en":
+        raise HTTPException(404, "unsupported locale")
+    from . import home_ui as _home_ui
+    html = _home_ui.get_home_html()
+    # Inject hreflang + locale pre-seed before </head>
+    hreflangs = [
+        '<link rel="alternate" hreflang="en-IN" href="https://aipadhai.app/home">',
+    ]
+    for code, (iso, _name) in _SEO_LOCALES.items():
+        hreflangs.append(
+            f'<link rel="alternate" hreflang="{iso}" href="https://aipadhai.app/home/{code}">'
+        )
+    hreflangs.append(
+        '<link rel="alternate" hreflang="x-default" href="https://aipadhai.app/home">'
+    )
+    # x-default + html lang attribute swap so screen readers and Chrome
+    # i18n tools both pick up the locale correctly.
+    iso_lang = _SEO_LOCALES.get(lang, ("en-IN", "English"))[0]
+    seed_script = (
+        f'<script>try{{localStorage.setItem("padhai_lang","{lang}")}}'
+        f'catch(_){{}}</script>'
+    )
+    html = html.replace(
+        '<html lang="en">',
+        f'<html lang="{iso_lang}">',
+    ).replace(
+        "</head>",
+        "\n".join(hreflangs) + "\n" + seed_script + "\n</head>",
+    )
+    return HTMLResponse(html)
+
+
 
 _TERMS_HTML = """<!doctype html>
 <html lang="en">

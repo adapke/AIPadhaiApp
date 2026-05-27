@@ -391,6 +391,27 @@ HOME_HTML = """<!doctype html>
   .exam-countdown.urgent{background:#fef2f2;color:#991b1b;
                          border-color:#fecaca}
 
+  /* P2: festival/seasonal promo rail. Single horizontal banner above
+     the metrics row. Gradient varies by category (exam=blue, festival=
+     orange, scholarship=green). Hidden by default; JS reveals + fills. */
+  .promo-rail{display:flex;align-items:center;gap:14px;
+              padding:14px 18px;border-radius:14px;
+              text-decoration:none;color:#fff;font-weight:850;
+              margin:6px 0 16px 0;min-height:64px;
+              background:linear-gradient(135deg,#1565d8,#0d3d8a);
+              box-shadow:0 4px 16px rgba(21,101,216,0.18);
+              transition:transform 0.15s}
+  .promo-rail:hover{transform:translateY(-2px)}
+  .promo-rail.festival{background:linear-gradient(135deg,#f59e0b,#b45309)}
+  .promo-rail.scholarship{background:linear-gradient(135deg,#10b981,#047857)}
+  .promo-rail .emoji{font-size:32px;flex-shrink:0;
+                     filter:drop-shadow(0 2px 4px rgba(0,0,0,0.2))}
+  .promo-rail .body{flex:1;line-height:1.3}
+  .promo-rail .body .title{font-size:15px;display:block}
+  .promo-rail .body .sub{font-size:12px;opacity:0.95;font-weight:400;
+                         display:block;margin-top:2px}
+  .promo-rail .arrow{font-size:20px;opacity:0.85}
+
   /* P1 perf — reserve heights for first-paint stability (CLS budget).
      The trust strip + task grid load synchronously but the hero text
      and metric panels populate async. Reserving min-height stops content
@@ -600,6 +621,15 @@ HOME_HTML = """<!doctype html>
         </div>
       </a>
     </nav>
+
+    <!-- P2: single controlled seasonal promo slot. The report explicitly
+         warns against multiple competing banners ("Use one controlled
+         seasonal/local slot rather than multiple competing banners").
+         Auto-populated by promoRailInit() in JS — picks the next-upcoming
+         exam or Indian festival window. Hidden until JS resolves to avoid
+         FOUC + CLS. -->
+    <a class="promo-rail" id="promoRail" href="#" style="display:none"
+       aria-label="Featured promotion"></a>
 
     <div class="cards3" id="metrics">
       <div class="metric"><div class="num" id="m1">—</div>
@@ -1296,6 +1326,102 @@ if ('serviceWorker' in navigator) {
         }
       }).catch(function(){});
   }
+
+  // --- 6. Promo rail — single controlled seasonal slot ---
+  // Priority order:
+  //   (a) Exam-specific countdown if user has target_exam <60d
+  //   (b) Upcoming Indian festival window (Diwali, Holi, Rakhi, Pongal)
+  //   (c) Scholarship / freebie offer (always-on fallback)
+  // Picks ONE slot — the report explicitly warns against multiple
+  // competing banners.
+  var FESTIVALS_2026 = [
+    {date:'2026-03-04', emoji:'🎨', title:'Holi prep — Free practice tests',
+     sub:'Daily streak doubled for the festival week',
+     cls:'festival', href:'/practice'},
+    {date:'2026-08-19', emoji:'🪢', title:'Raksha Bandhan — Sibling pack 30% off',
+     sub:'Add a brother or sister to your plan', cls:'festival', href:'/pricing'},
+    {date:'2026-10-20', emoji:'🪔', title:'Diwali offer — ₹999 plan at ₹699',
+     sub:'Light up your exam prep this season', cls:'festival', href:'/pricing'},
+    {date:'2026-01-14', emoji:'🌾', title:'Pongal / Makar Sankranti — 2 mock tests free',
+     sub:'Start the harvest season strong', cls:'festival', href:'/practice'},
+  ];
+  function renderPromoRail(targetExam, daysToExam){
+    var el = document.getElementById('promoRail');
+    if (!el) return;
+    var now = Date.now();
+
+    // (a) Exam-urgent — within 60 days
+    if (targetExam && daysToExam != null && daysToExam <= 60 && daysToExam > 0) {
+      var examLabel = (window.EXAM_LABELS_MAP && window.EXAM_LABELS_MAP[targetExam]) || targetExam;
+      el.className = 'promo-rail';
+      el.href = '/practice';
+      el.innerHTML = '<span class="emoji" aria-hidden="true">🎯</span>'
+        + '<span class="body"><span class="title">' + daysToExam
+        + ' days to ' + examLabel + ' — daily mock tests open</span>'
+        + '<span class="sub">Adaptive practice + AI feedback / रोज़ अभ्यास करें</span></span>'
+        + '<span class="arrow" aria-hidden="true">→</span>';
+      el.style.display = 'flex';
+      return;
+    }
+
+    // (b) Upcoming festival within 14 days
+    for (var i = 0; i < FESTIVALS_2026.length; i++) {
+      var f = FESTIVALS_2026[i];
+      var dt = new Date(f.date).getTime();
+      var d = Math.ceil((dt - now) / 86400000);
+      if (d >= 0 && d <= 14) {
+        el.className = 'promo-rail ' + (f.cls || '');
+        el.href = f.href || '/pricing';
+        el.innerHTML = '<span class="emoji" aria-hidden="true">' + f.emoji + '</span>'
+          + '<span class="body"><span class="title">' + f.title + '</span>'
+          + '<span class="sub">' + f.sub + '</span></span>'
+          + '<span class="arrow" aria-hidden="true">→</span>';
+        el.style.display = 'flex';
+        return;
+      }
+    }
+
+    // (c) Always-on scholarship fallback
+    el.className = 'promo-rail scholarship';
+    el.href = '/pricing';
+    el.innerHTML = '<span class="emoji" aria-hidden="true">🎓</span>'
+      + '<span class="body"><span class="title">Free for Class 6-12 students in CBSE Govt schools</span>'
+      + '<span class="sub">Apply with your school code — scholarship program</span></span>'
+      + '<span class="arrow" aria-hidden="true">→</span>';
+    el.style.display = 'flex';
+  }
+
+  // Expose EXAM_LABELS map for the promo rail
+  window.EXAM_LABELS_MAP = EXAM_LABELS;
+
+  // Hook promo into loadDashboardSummary by augmenting after-call
+  var _origLoadDashboardSummary = loadDashboardSummary;
+  loadDashboardSummary = function(){
+    var token = localStorage.getItem('pathshala_token');
+    if (!token) {
+      // Anonymous: still show the fallback promo
+      renderPromoRail(null, null);
+      return;
+    }
+    fetch('/api/me/dashboard', {
+      headers: { 'Authorization': 'Bearer ' + token },
+    }).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if (!d) { renderPromoRail(null, null); return; }
+        var onb = d.onboarding || {};
+        if (onb.target_exam) renderExamCountdown(onb.target_exam);
+        if (onb.preferred_language && sel) {
+          sel.value = onb.preferred_language;
+          localStorage.setItem('padhai_lang', onb.preferred_language);
+        }
+        // Compute days-to-exam for the promo rail
+        var dte = null;
+        if (onb.target_exam && EXAM_DATES[onb.target_exam]) {
+          dte = Math.ceil((new Date(EXAM_DATES[onb.target_exam]) - Date.now()) / 86400000);
+        }
+        renderPromoRail(onb.target_exam, dte);
+      }).catch(function(){ renderPromoRail(null, null); });
+  };
 
   loadDueBadge();
   loadDashboardSummary();
