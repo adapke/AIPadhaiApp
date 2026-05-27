@@ -10059,7 +10059,10 @@ def signup(
         # Log the consent URL server-side only — never expose in the response
         # body so the minor cannot self-approve by extracting the token.
         _log.info("[signup] parental consent URL for user %s: %s", user.id, verify_url)
-    return JSONResponse(response_body)
+    response = JSONResponse(response_body)
+    if response_body.get("token"):
+        return _set_auth_cookie(response, response_body["token"], request)
+    return response
 
 
 @app.get("/auth/parent-consent", name="parent_consent_verify",
@@ -10143,6 +10146,32 @@ def _escape_html(s: str) -> str:
     return html.escape(s)
 
 
+_AUTH_COOKIE_NAME = "pathshala_token"
+
+
+def _set_auth_cookie(
+    response: JSONResponse | HTMLResponse,
+    token: str,
+    request: Request,
+) -> JSONResponse | HTMLResponse:
+    scheme = request.headers.get("x-forwarded-proto", request.url.scheme)
+    response.set_cookie(
+        key=_AUTH_COOKIE_NAME,
+        value=token,
+        max_age=7 * 24 * 60 * 60,
+        httponly=True,
+        secure=scheme == "https",
+        samesite="lax",
+        path="/",
+    )
+    return response
+
+
+def _delete_auth_cookie(response: JSONResponse) -> JSONResponse:
+    response.delete_cookie(_AUTH_COOKIE_NAME, path="/", samesite="lax")
+    return response
+
+
 _PASSWORD_RE = _re.compile(
     r"^(?=.*[A-Za-z])(?=.*\d)\S{8,}$"
 )
@@ -10203,13 +10232,19 @@ def login(
         target_type="user", target_id=user.id,
         **actor,
     )
-    return JSONResponse({
+    token = issue_token(user.id)
+    return _set_auth_cookie(JSONResponse({
         "user_id": user.id,
         "email": user.email,
         "subscription_tier": user.subscription_tier,
         "subscription_level": user.subscription_level,
-        "token": issue_token(user.id),
-    })
+        "token": token,
+    }), token, request)
+
+
+@app.post("/auth/logout")
+def logout() -> JSONResponse:
+    return _delete_auth_cookie(JSONResponse({"ok": True}))
 
 
 # ---------- E7: SSO (Google + Microsoft OIDC) ----------
@@ -10304,7 +10339,7 @@ def sso_callback(
         f"<a href={redirect_after!r}>continue</a></p>"
         f"</body></html>"
     )
-    return HTMLResponse(body)
+    return _set_auth_cookie(HTMLResponse(body), token, request)
 
 
 def _sso_error_page(title: str, detail: str) -> str:

@@ -332,12 +332,13 @@ def make_current_user_dependency(repo_or_getter):
     that returns one of the above. The callable form lets callers defer
     the repo lookup to request time so the dependency works even when the
     repo is initialised after module import (e.g. in the lifespan)."""
-    from fastapi import Header, HTTPException
+    from fastapi import Cookie, Header, HTTPException
 
     require_auth = _require_auth()
 
     async def current_user(
         authorization: str | None = Header(default=None),
+        pathshala_token: str | None = Cookie(default=None),
     ) -> AuthUser | None:
         repo = repo_or_getter() if callable(repo_or_getter) else repo_or_getter
         if repo is None:
@@ -345,8 +346,13 @@ def make_current_user_dependency(repo_or_getter):
                 raise HTTPException(503, "auth required but not configured")
             return None
 
+        token = None
         if authorization and authorization.lower().startswith("bearer "):
             token = authorization[len("bearer "):].strip()
+        elif pathshala_token:
+            token = pathshala_token.strip()
+
+        if token:
             user_id = decode_token(token)
             if user_id is None:
                 raise HTTPException(401, "invalid or expired token")
