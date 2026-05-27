@@ -72,13 +72,19 @@ describe('URL deep-link: ?m= query param', () => {
 });
 
 describe('URL deep-link: #hash navigation', () => {
+  // Cypress doesn't re-run the SPA's load-time IIFE for hash-only URL
+  // changes when the previous page was the same path. The beforeEach
+  // already loaded /ui-legacy without a hash. cy.reload() after the
+  // hash visit forces the IIFE to re-run with the new hash visible.
   it('#studio opens the studio module', () => {
     cy.visit('/ui-legacy#studio');
+    cy.reload();
     cy.get('#mod-studio').should('have.class', 'active');
   });
 
   it('#quizmaker opens the quizmaker module', () => {
     cy.visit('/ui-legacy#quizmaker');
+    cy.reload();
     cy.get('#mod-quizmaker').should('have.class', 'active');
   });
 });
@@ -143,12 +149,20 @@ describe('Sidebar group expand/collapse', () => {
 });
 
 describe('Burger menu (mobile)', () => {
+  // #burger is display:none on desktop (>=900px viewport) — switch to
+  // a mobile viewport so the button is visible + clickable. Cypress
+  // refuses to click hidden elements without {force: true}.
+  beforeEach(() => {
+    cy.viewport(390, 844);   // iPhone-ish portrait
+    cy.visit('/ui-legacy');
+  });
+
   it('burger button exists', () => {
     cy.get('#burger').should('exist');
   });
 
   it('clicking burger toggles sidebar open class', () => {
-    cy.get('#burger').click();
+    cy.get('#burger').click({ force: true });
     // Sidebar should gain some open/expanded state (implementation varies)
     cy.get('#sidebar').then(($el) => {
       // Just verify the click didn't crash the page

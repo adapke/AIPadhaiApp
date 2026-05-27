@@ -18,13 +18,16 @@ describe('General rate limiter: per-IP token bucket', () => {
 });
 
 describe('AI generation rate limit (POST /lessons)', () => {
-  it('first POST /lessons without auth returns 401 (not 429)', () => {
-    // Without auth and without a file, should be 401 (not 429)
+  it('first POST /lessons without auth returns 401 or 422 (not 429)', () => {
+    // FastAPI runs File(...) validation before the auth dependency, so
+    // an empty-body POST returns 422 (validation error) before the auth
+    // gate kicks in. Either 401 OR 422 proves the route isn't 429-ing
+    // pre-emptively — that's all this test is asserting.
     cy.request({
       method: 'POST',
       url: '/lessons',
       failOnStatusCode: false,
-    }).its('status').should('eq', 401);
+    }).its('status').should('be.oneOf', [401, 422]);
   });
 
   it('/api/me/profile rate-limit key is per user, not global', () => {
