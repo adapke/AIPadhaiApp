@@ -10683,7 +10683,12 @@ def curriculum_for_lesson(
     module (Phase 2) and for surfacing 'related practice from CBSE
     Class 8 Chapter 6' under a lesson.
 
+    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0
+    (anonymous users have no lessons of their own to match against).
+
     Cached idempotently. ~₹0.20/call (Haiku 4.5)."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
     from .pedagogy import match_curriculum
     from .curriculum import CURRICULUM
 
@@ -10789,7 +10794,11 @@ def make_flashcards(
 ):
     """Generate (or fetch cached) flashcards for a lesson the student
     watched. Idempotent — second call returns the cached set unless
-    `regenerate=true`. Free for M1/M2 (uses Haiku 4.5, ~₹0.30/call)."""
+    `regenerate=true`. Free for M1/M2 (uses Haiku 4.5, ~₹0.30/call).
+
+    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
     from .pedagogy import generate_flashcards
 
     if not regenerate:
@@ -10993,8 +11002,12 @@ def get_notes(
     """Fetch the user's notes attached to a lesson. Empty body when none.
 
     Response carries both `notes` (legacy) and `content` (Cypress-spec
-    convention) keys so callers can use either."""
-    user_key = user.id if user else "anon"
+    convention) keys so callers can use either.
+
+    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    user_key = user.id
     text = cache.get_notes(lesson_id, user_key=user_key) or ""
     return {"lesson_id": lesson_id, "notes": text, "content": text}
 
@@ -11010,10 +11023,13 @@ def put_notes(
     this gets called silently every few seconds while the user types.
 
     Accepts either `notes` (legacy) or `content` (Cypress-spec convention)
-    form field — whichever is provided is persisted."""
+    form field — whichever is provided is persisted.
+
+    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
     text = notes if notes is not None else (content or "")
-    user_key = user.id if user else "anon"
-    cache.put_notes(lesson_id, text, user_key=user_key)
+    cache.put_notes(lesson_id, text, user_key=user.id)
     return {"lesson_id": lesson_id, "saved": True, "length": len(text)}
 
 
@@ -11417,7 +11433,11 @@ _UPLOAD_DIR = Path(os.environ.get(
 @app.post("/api/uploads", status_code=201)
 def create_upload(
     request: Request,
-    file: UploadFile = File(...),
+    # `file` is Optional so the auth gate fires BEFORE body validation
+    # (FastAPI's `File(...)` validation otherwise returns 422 to anonymous
+    # callers, leaking the contract). When user IS authenticated and file
+    # is missing, we re-raise as 422 manually.
+    file: UploadFile | None = File(None),
     is_whiteboard: bool = Form(False,
         description="True for handwritten content (whiteboard / notebook / "
                     "blackboard photo) — uses the OCR-tolerant analyzer prompt"),
@@ -11432,7 +11452,14 @@ def create_upload(
     The response carries `upload_id` + `page_count` so the UI can show
     "Uploaded 12 pages of textbook.pdf" before the user decides what to
     generate from it.
+
+    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0
+    (uploads live in user's library). Anonymous callers get 401.
     """
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    if file is None:
+        raise HTTPException(422, "file is required")
     _rate_key = _rl.client_ip_from_request(request)
     if not _rl.file_upload.try_consume(_rate_key):
         raise HTTPException(429, "too many uploads — slow down")
