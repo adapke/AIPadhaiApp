@@ -2,17 +2,26 @@ name: Cypress Tests
 
 on: [push]
 
+# Computed once at the job level so every step / matrix container
+# agrees on whether to record. `secrets.X != ''` is the canonical
+# guard that's safe to evaluate in `with:` and `if:`.
+env:
+  HAS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY != '' && 'yes' || 'no' }}
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     # Runs tests in parallel with matrix strategy https://on.cypress.io/parallelization
-    # https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
+    # When CYPRESS_RECORD_KEY is configured, Cypress Cloud splits
+    # specs across the two containers. Without it, the second
+    # container will just duplicate the first's work — wasteful but
+    # not broken; remove the second entry from the matrix if you
+    # don't plan to enable Cypress Cloud.
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
       matrix:
-        containers: [1, 2] # Uses 2 parallel instances (load-split via Cypress Cloud)
+        containers: [1, 2]
 
     steps:
       - name: Checkout
@@ -41,50 +50,48 @@ jobs:
           # Generate a one-shot secret per CI run; never reused.
           echo "PADHAI_JWT_SECRET=$(python -c 'import secrets; print(secrets.token_urlsafe(48))')" >> "$GITHUB_ENV"
 
-      # ---------- Cypress ----------
-      - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+      # ---------- Cypress: RECORDED variant ----------
+      # When CYPRESS_RECORD_KEY is configured, push results + video to
+      # Cypress Cloud (project s5k23d), split load across matrix
+      # containers, and tag the run by event + branch for filtering.
+      - name: Cypress run (recorded + parallel)
+        if: env.HAS_RECORD_KEY == 'yes'
         uses: cypress-io/github-action@v7
         with:
-          # Boot the FastAPI server in the background. The action
-          # handles backgrounding + cleanup automatically.
-          # https://docs.cypress.io/app/continuous-integration/overview#Boot-your-server
           start: python -m uvicorn padhai.web:app --host 0.0.0.0 --port 8000 --log-level warning
-          # Wait for the healthz probe (cypress.config.js baseUrl is :8000).
           wait-on: 'http://127.0.0.1:8000/healthz'
           wait-on-timeout: 180
-          # Records to Cypress Cloud — only when CYPRESS_RECORD_KEY is
-          # configured. Without it the matrix containers each run all
-          # specs locally (still passes, just no load-split or dashboard).
-          # https://docs.cypress.io/cloud/get-started/setup
-          record: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
-          parallel: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
-          # Explicit ci-build-id + group make sure both matrix
-          # containers report into the same Cypress Cloud run. The
-          # default heuristic sometimes drifts when a job retries.
+          record: true
+          parallel: true
           ci-build-id: ${{ github.run_id }}-${{ github.run_attempt }}
           group: 'GH Actions Linux'
           tag: ${{ github.event_name }},${{ github.ref_name }}
-          # Skip the auto-install when node_modules is cached (faster reruns).
           install-command: npm ci
         env:
-          # FastAPI runtime env. Anonymous mode lets specs hit endpoints
-          # without seeding a user; tests that need auth still sign up
-          # via cy.apiSignup() (see cypress/support/commands.js).
           PADHAI_REQUIRE_AUTH: '0'
           PADHAI_SKIP_DOTENV: '1'
           PADHAI_DB_PATH: /tmp/padhai_ci.db
-          # PADHAI_JWT_SECRET was exported to $GITHUB_ENV in the previous step
-
-          # Turn on video capture so Cypress Cloud gets replay footage
-          # alongside the spec results. cypress.config.js gates this on
-          # CYPRESS_RECORD_VIDEO so local interactive runs stay fast.
           CYPRESS_RECORD_VIDEO: '1'
-
-          # For recording and parallelization you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Create a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---------- Cypress: LOCAL variant ----------
+      # When no record key is configured, just run all specs in one
+      # container. NO ci-build-id / group / parallel flags — Cypress
+      # rejects those without --record.
+      - name: Cypress run (local only)
+        if: env.HAS_RECORD_KEY != 'yes'
+        uses: cypress-io/github-action@v7
+        with:
+          start: python -m uvicorn padhai.web:app --host 0.0.0.0 --port 8000 --log-level warning
+          wait-on: 'http://127.0.0.1:8000/healthz'
+          wait-on-timeout: 180
+          install-command: npm ci
+        env:
+          PADHAI_REQUIRE_AUTH: '0'
+          PADHAI_SKIP_DOTENV: '1'
+          PADHAI_DB_PATH: /tmp/padhai_ci.db
+          CYPRESS_RECORD_VIDEO: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # ---------- Always-uploaded debug artefacts ----------
