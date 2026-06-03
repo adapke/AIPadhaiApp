@@ -92,8 +92,35 @@ curl http://localhost:8000/healthz
 **Dev mode**: set `PADHAI_REQUIRE_AUTH=0` in `.env` to allow anonymous
 access. Default is `1` (auth required).
 
-**SQLite auto-mode**: if `DATABASE_URL` is not set, all stores use
-`padhai.db` in the repo root — no Postgres needed for local dev.
+**SQLite auto-mode**: if `DATABASE_URL` is not set, all modules share
+one SQLite file resolved by `padhai.db.sqlite_path()`:
+
+- Env override: `PADHAI_DB_PATH` (any absolute or `~`-prefixed path)
+- Default: `~/.padhai/jobs.db`
+
+This used to differ per module (`auth.py` defaulted to `padhai.db`
+while DPDP used `~/.padhai/jobs.db`) — that mismatch caused the
+parent-consent 500 (cross-DB UPDATE on a missing `users` table). The
+shared helper guarantees every module writes into the same file.
+
+**Mobile dev flow** (Capacitor shells):
+
+```bash
+cd mobile
+# Point the shells at your local backend (defaults to Android emulator's
+# 10.0.2.2:8000 bridge; override with CAPACITOR_SERVER_URL for LAN testing)
+node scripts/configure-server.cjs
+npm run build              # configure + cap sync
+npm run android:run        # configure + emulator launch
+
+# Restore production URLs before a release build:
+npm run build:prod         # NODE_ENV=production configure + cap sync
+```
+
+The script rewrites `server.url`, `server.cleartext` and
+`server.androidScheme` in the three Capacitor configs (student,
+parent, teacher). Cypress smoke for the shell entry URLs lives at
+`cypress/e2e/15-mobile-shell.cy.js`.
 
 ---
 
@@ -527,31 +554,95 @@ Reviewed 2026-06-03. Re-audit before changing.
   top 10 users by spend. Admin still doesn't import `padhai.*` — the
   schema is the contract.
 
+### Also done since last review
+
+- **RAG citations — Essay / Mock Interview / Doubt.** All three now
+  call `citations.record_answer()` with the right surface. Essay +
+  mock-interview record `grounded=False` (no source kind for rubrics);
+  doubts cite the student-snapped `image_url` as a `source_kind='upload'`
+  citation when present. New `mock_interview` surface added to
+  `citations.VALID_SURFACES`.
+- **Per-user daily LLM cost cap.** `llm_obs.check_daily_cap()` enforces
+  `DAILY_COST_CAPS_BY_TIER` (M1=0 → premium-only; M2=₹20/day; M3=₹100/day;
+  M4*=uncapped). Wired into tutor, essay, mock-interview, doubt, lesson,
+  explainer, and practice. Pairs with `BudgetExceeded` exception so
+  callers fall back to heuristic / "human-tutor will follow up" copy.
+- **LLM cost alert thresholds.** New `llm_alerts` table — `record_call`
+  emits one row per (user, day, bucket) at 80% and 100% of cap. Bucket
+  threshold tunable via `PADHAI_LLM_ALERT_PCT`. `llm_obs.recent_alerts()`
+  for the admin dashboard.
+- **Shared SQLite path.** `padhai.db.sqlite_path()` — every module
+  writes into the same file (`PADHAI_DB_PATH` env override → `~/.padhai/jobs.db`).
+  Closes the class of bug that caused the DPDP consent crash.
+- **Production-mode admin gate safeguard.** Startup now refuses to boot
+  when `APP_ENV=production` with neither `DATABASE_URL` nor
+  `PADHAI_SUPERUSER_EMAILS` set — the combination that silently grants
+  admin to every signed-in user via `require_admin_role`'s dev fallback.
+- **Pytest cookie isolation.** Autouse `_isolate_client_cookies` fixture
+  in `tests/conftest.py` clears the session-scoped `TestClient` cookie
+  jar before every test. Stops `pathshala_token` from leaking across
+  tests and masking "requires auth" assertions.
+
 ### Still pending / next up
 
-1. **RAG citations — surface coverage.** Tutor + lesson record citations;
-   Essay Grader, Mock Interview, and Doubt Clearing still don't. Decide
-   per-surface whether `source_only` / `official` modes apply.
-2. **Mobile QA depth.** Capacitor shell loads, but only one Cypress smoke
+1. **Mobile QA depth.** Capacitor shell loads, but only one Cypress smoke
    spec covers it. Add interaction specs (login, lesson playback, offline
    notes) once a CI lane can drive the Capacitor `WebView` directly.
-3. **Accuracy bench coverage.** Golden dataset is intentionally small
+2. **Accuracy bench coverage.** Golden dataset is intentionally small
    (12 items) and structural-only on PRs. Expand to ≥100 items across
    UPSC / JEE / NEET / CBSE; then turn the nightly live-mode gate from
    advisory to blocking.
-4. **Observability depth.** Cost page exists; per-user daily cap
-   enforcement and alert thresholds are not wired yet.
+3. **Multi-page video stitching.** `/lessons` fanout now stamps
+   `parent_job_id` + `page_number` on sibling jobs and `GET /jobs/{id}`
+   surfaces them, but there's no ffmpeg concat into one final MP4 yet —
+   needs a `document_pages` table + sibling-job sync in the worker.
+4. **Architectural debt.** `padhai/web.py` is 15k+ lines / 729 routes;
+   every module rolls its own `_conn()` + schema; no central
+   LLM-call wrapper (each surface duplicates `client.messages.create`
+   + `llm_obs.record_call`). Splitting these is a long-running cleanup.
 
 ---
 
 ## 17. Admin App
 
-Separate Flask app at `admin/app.py`. Runs independently on a different
-port. Uses `ADMIN_JWT_SECRET` (distinct from `PADHAI_JWT_SECRET`).
+`admin/app.py` is a FastAPI app mounted at `/admin/*` on the main
+service. Uses `ADMIN_JWT_SECRET` (distinct from `PADHAI_JWT_SECRET`)
+and its own user table at `~/.padhai/admin.db` (override via
+`ADMIN_DB_PATH`). The admin store is intentionally separate from the
+student SQLite so admin logins don't grant the same session cookie
+as student logins.
 
-Manages: jobs queue, users, essay rubrics, parent consent outbox, signup
-bootstrap. See `.idea/runConfigurations/Admin__standalone_split_out_preview_.xml`
-for the IntelliJ run config.
+### Pages
+
+- `GET /admin/` — dashboard (or login form if not signed in)
+- `GET /admin/jobs` — job queue with retry / cancel
+- `GET /admin/topics` — top topics + language usage
+- `GET /admin/llm-costs` — daily / 7d / 30d cost rollup, top users
+- `GET /admin/api/dashboard` — JSON sibling of the home dashboard
+- `GET /admin/api/llm-costs?hours=N` — JSON LLM cost stats
+
+### First-admin bootstrap
+
+The admin signup endpoint is closed by default. To create the first
+admin:
+
+```bash
+# 1. Set the bootstrap token to something random + remember it
+export ADMIN_BOOTSTRAP_TOKEN="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
+# 2. Boot the server (or restart with the env var in place)
+# 3. Sign up via curl — replace the email + password
+curl -X POST http://localhost:8000/admin/signup \
+  -d "email=admin@example.com&password=YourStrongPw1&display_name=Admin&bootstrap_token=$ADMIN_BOOTSTRAP_TOKEN" \
+  -i
+# 4. Unset the env var after the first admin exists — additional admins
+#    must be invited from inside the console
+unset ADMIN_BOOTSTRAP_TOKEN
+```
+
+Subsequent admin logins go through `POST /admin/login` (sets the
+`admin_token` cookie). Production deployments should additionally set
+`PADHAI_SUPERUSER_EMAILS` so the `/api/admin/*` routes outside the
+mounted Flask app have a non-DB admin gate.
 
 ---
 

@@ -45,6 +45,25 @@ CREATE INDEX IF NOT EXISTS idx_llm_org_time  ON llm_calls(org_id, created_at DES
 CREATE INDEX IF NOT EXISTS idx_llm_module    ON llm_calls(module, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_llm_model     ON llm_calls(model, created_at DESC);
 
+-- One row per user per day per crossed threshold. Prevents alert spam
+-- (record_call would otherwise emit on every call once the user is
+-- past the threshold). Bucket is the percentage band crossed: '80'
+-- when first past 80% of cap, '100' on hitting the cap. New buckets
+-- can be added without schema migration — they're just strings.
+CREATE TABLE IF NOT EXISTS llm_alerts (
+    id              TEXT PRIMARY KEY,
+    user_id         TEXT NOT NULL,
+    day             TEXT NOT NULL,           -- 'YYYY-MM-DD' (UTC)
+    bucket          TEXT NOT NULL,           -- '80' | '100'
+    cap_paise       INTEGER NOT NULL,
+    spent_paise_at_crossing INTEGER NOT NULL,
+    subscription_tier TEXT,
+    created_at      REAL NOT NULL,
+    UNIQUE (user_id, day, bucket)
+);
+CREATE INDEX IF NOT EXISTS idx_llm_alerts_day
+    ON llm_alerts(day, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS llm_flags (
     id              TEXT PRIMARY KEY,
     llm_call_id     TEXT NOT NULL,
@@ -145,13 +164,21 @@ def record_call(
     cached: bool = False,
     request_id: str | None = None,
     cost_inr_paise: int | None = None,
+    subscription_tier: str | None = None,
 ) -> str:
     """Log one LLM call. Swallows every exception — instrumentation
     bugs never block real Claude calls. Returns the row id (for
     later flag-by-id lookup).
 
     If cost_inr_paise is None, it's computed from model + tokens via
-    `estimate_cost_paise()`."""
+    `estimate_cost_paise()`.
+
+    `subscription_tier` (optional) lets `_maybe_emit_alert` evaluate
+    the user's daily cap when this call lands. Without it, alerts are
+    not emitted — but the call still records. Caller modules that
+    already know the tier (tutor / essay / lesson) should pass it so
+    the admin dashboard sees soft-threshold crossings before the user
+    hits the hard cap."""
     if cost_inr_paise is None:
         cost_inr_paise = estimate_cost_paise(
             model=model, tokens_in=tokens_in,
@@ -173,7 +200,113 @@ def record_call(
             )
     except Exception as e:  # noqa: BLE001
         print(f"[llm_obs] record failed (non-fatal): {e}")
+    # Soft-threshold alert — best-effort, never blocks the caller.
+    if user_id and subscription_tier:
+        try:
+            _maybe_emit_alert(
+                user_id=user_id,
+                subscription_tier=subscription_tier,
+            )
+        except Exception as e:  # noqa: BLE001
+            print(f"[llm_obs] alert emit failed (non-fatal): {e}")
     return call_id
+
+
+# Soft-threshold percentage. Crossing this triggers an alert row so
+# the admin dashboard can see "users approaching budget" before they
+# hit the hard cap. Override via PADHAI_LLM_ALERT_PCT (0 disables).
+LLM_ALERT_THRESHOLD_PCT = 0.80
+
+
+def _today_str() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
+def _maybe_emit_alert(
+    *,
+    user_id: str,
+    subscription_tier: str,
+) -> None:
+    """Emit an alert row when the user crosses the soft threshold of
+    their daily cap. Idempotent per (user_id, day, bucket) via the
+    UNIQUE constraint — repeat calls after the crossing are no-ops.
+
+    Buckets: '80' (80% of cap), '100' (hard cap reached). 100% means
+    the user is now blocked; the row is still useful for the dashboard
+    to show "X users blocked today".
+    """
+    try:
+        pct_env = os.environ.get("PADHAI_LLM_ALERT_PCT", "")
+        if pct_env:
+            try:
+                pct = float(pct_env)
+                if pct <= 0:
+                    return  # disabled
+            except ValueError:
+                pct = LLM_ALERT_THRESHOLD_PCT
+        else:
+            pct = LLM_ALERT_THRESHOLD_PCT
+    except Exception:
+        pct = LLM_ALERT_THRESHOLD_PCT
+
+    cap = daily_cap_paise(subscription_tier)
+    if cap is None or cap <= 0:
+        return  # uncapped or no-AI tier
+    spent = user_cost_today_paise(user_id)
+    if spent <= 0:
+        return
+    day = _today_str()
+    soft = int(round(cap * pct))
+    buckets: list[tuple[str, int]] = []
+    if spent >= soft:
+        buckets.append((f"{int(pct * 100)}", soft))
+    if spent >= cap:
+        buckets.append(("100", cap))
+    if not buckets:
+        return
+    with _conn() as conn:
+        for bucket, _threshold in buckets:
+            try:
+                conn.execute(
+                    "INSERT INTO llm_alerts "
+                    "(id, user_id, day, bucket, cap_paise, "
+                    " spent_paise_at_crossing, subscription_tier, "
+                    " created_at) "
+                    "VALUES (?,?,?,?,?,?,?,?)",
+                    (uuid.uuid4().hex, user_id, day, bucket, cap,
+                     spent, subscription_tier, time.time()),
+                )
+                print(
+                    f"[llm_obs] ALERT user={user_id[:8]} tier={subscription_tier} "
+                    f"bucket={bucket}% spent={spent}p cap={cap}p"
+                )
+            except Exception:
+                # UNIQUE constraint hit — already alerted today
+                pass
+
+
+def recent_alerts(*, hours: float = 24.0, limit: int = 100) -> list[dict]:
+    """Pull recent llm_alerts rows for the admin dashboard."""
+    since = time.time() - hours * 3600
+    limit = max(1, min(limit, 500))
+    with _conn() as conn:
+        rows = conn.execute(
+            "SELECT id, user_id, day, bucket, cap_paise, "
+            "       spent_paise_at_crossing, subscription_tier, created_at "
+            "FROM llm_alerts WHERE created_at >= ? "
+            "ORDER BY created_at DESC LIMIT ?",
+            (since, limit),
+        ).fetchall()
+    return [
+        {
+            "id": r[0], "user_id": r[1], "day": r[2],
+            "bucket": r[3], "cap_paise": r[4],
+            "spent_paise_at_crossing": r[5],
+            "subscription_tier": r[6], "created_at": r[7],
+        }
+        for r in rows
+    ]
 
 
 def stats_for_period(*, hours: float = 24.0) -> dict:

@@ -606,6 +606,45 @@ def _validate_provider_keys() -> None:
         _log.warning("[startup] %s\n(dev mode — continuing anyway)", msg)
 
 
+def _validate_admin_gate() -> None:
+    """Refuse to start a production server when no admin gate can be
+    enforced. The combination that triggers silent privilege
+    escalation:
+      • APP_ENV=production
+      • DATABASE_URL unset (no org-membership lookup possible)
+      • PADHAI_SUPERUSER_EMAILS unset (no email-based superuser list)
+
+    In that combination, api_deps.require_admin_role() falls through
+    and treats EVERY authenticated user as admin — meaning any
+    student can read /api/admin/llm/{costs,stats,flags},
+    /api/admin/citations/*, /api/admin/bench/*, etc.
+
+    In dev (APP_ENV != production) we permit the combination because
+    dashboards need to work for the developer; the docstring on
+    require_admin_role already warns about it."""
+    is_prod = (os.environ.get("APP_ENV") or "").strip().lower() == "production"
+    if not is_prod:
+        return
+    has_db = bool(os.environ.get("DATABASE_URL"))
+    has_superuser_list = bool(
+        os.environ.get("PADHAI_SUPERUSER_EMAILS", "").strip(),
+    )
+    if has_db or has_superuser_list:
+        _log.info(
+            "[startup] admin gate: %s configured — require_admin_role "
+            "will enforce.",
+            "DATABASE_URL" if has_db else "PADHAI_SUPERUSER_EMAILS",
+        )
+        return
+    raise RuntimeError(
+        "REFUSING TO START in APP_ENV=production with no admin gate. "
+        "Set either DATABASE_URL (so org-membership lookup works) or "
+        "PADHAI_SUPERUSER_EMAILS=<comma-separated admin emails> before "
+        "deploying. Without one of those, api_deps.require_admin_role "
+        "treats every signed-in user as an admin — privilege escalation."
+    )
+
+
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
     # Initialise Postgres store + user repo here (not at import time) so
@@ -978,6 +1017,11 @@ async def _lifespan(app: FastAPI):
     # so we don't run with a misconfigured deployment. In dev we just
     # warn so local work isn't blocked.
     _validate_provider_keys()
+    # Production-only admin-gate sanity check — refuse to start when
+    # neither DATABASE_URL nor PADHAI_SUPERUSER_EMAILS is set, since
+    # that combination silently grants admin to every authenticated
+    # user via require_admin_role's dev fallback.
+    _validate_admin_gate()
 
     resumed = runner.resume_pending()
     if resumed:

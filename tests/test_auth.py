@@ -131,11 +131,11 @@ class TestLogin:
 # ---------- Authenticated endpoints ------------------------------------------
 
 class TestAuthenticatedEndpoints:
+    # Cookie isolation between tests is provided by the autouse
+    # `_isolate_client_cookies` fixture in conftest.py — no need for
+    # manual `client.cookies.clear()` in each "requires auth" test.
+
     def test_get_profile_requires_auth(self, client: TestClient):
-        # Signup sets a `pathshala_token` cookie and the session-scoped
-        # TestClient persists cookies across tests; clear them so the
-        # auth-required assertion isn't masked by a leftover session.
-        client.cookies.clear()
         r = client.get("/api/me/profile")
         assert r.status_code == 401
 
@@ -148,7 +148,6 @@ class TestAuthenticatedEndpoints:
         assert "subscription_tier" in body
 
     def test_data_export_requires_auth(self, client: TestClient):
-        client.cookies.clear()
         r = client.get("/api/me/data/export")
         assert r.status_code == 401
 
@@ -163,6 +162,5 @@ class TestAuthenticatedEndpoints:
         assert "schema_version" in body
 
     def test_delete_account_requires_auth(self, client: TestClient):
-        client.cookies.clear()
         r = client.delete("/api/me/account")
         assert r.status_code == 401

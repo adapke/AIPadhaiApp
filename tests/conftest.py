@@ -35,10 +35,34 @@ def client():
     scope=session is safe here because each test that mutates state
     (sign-up, profile update) uses a unique random email address so
     tests don't interfere with each other.
+
+    Cookie leakage between tests (signup sets `pathshala_token` and the
+    session-scoped TestClient carries it forward) is prevented by the
+    autouse `_isolate_client_cookies` fixture below.
     """
     from padhai.web import app
     with TestClient(app, raise_server_exceptions=True) as c:
         yield c
+
+
+@pytest.fixture(autouse=True)
+def _isolate_client_cookies(request):
+    """Clear the TestClient cookie jar before every test.
+
+    Without this, a test that calls `signup()` (which sets
+    `pathshala_token` via the response Set-Cookie header) leaks that
+    cookie into every subsequent test in the same session — meaning
+    "requires auth" assertions silently pass because the client is
+    still authenticated from a prior test. Symptom: assertions like
+    `assert r.status_code == 401` get 200/201 instead.
+
+    Only runs when the test asks for the `client` fixture; harmless
+    no-op otherwise.
+    """
+    if "client" in request.fixturenames:
+        c = request.getfixturevalue("client")
+        c.cookies.clear()
+    yield
 
 
 # ---------- Helpers ----------------------------------------------------------

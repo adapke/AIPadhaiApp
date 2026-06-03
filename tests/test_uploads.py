@@ -12,11 +12,9 @@ _25MB = 25 * 1024 * 1024
 
 
 class TestUpload:
+    # Cookie isolation handled by the autouse fixture in conftest.py.
+
     def test_upload_requires_auth(self, client: TestClient):
-        # Session-scoped TestClient carries the `pathshala_token` cookie
-        # from any earlier signup() call. Clear it so this assertion
-        # actually exercises the unauthenticated path.
-        client.cookies.clear()
         r = client.post(
             "/api/uploads",
             files={"file": ("test.jpg", io.BytesIO(b"fake"), "image/jpeg")},
