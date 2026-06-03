@@ -238,10 +238,25 @@ def _conn(read_only: bool = False) -> sqlite3.Connection:
     path = _db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     if read_only:
+        # Eager-create the schema before opening read-only so the first
+        # read on a fresh DB doesn't crash with "no such table". Without
+        # this, has_active_exam(user_id) at app start would 500 the
+        # /api/exam-mode/active endpoint until something else triggered
+        # a write.
+        if not path.exists():
+            sqlite3.connect(str(path), timeout=10.0).executescript(SCHEMA)
         return sqlite3.connect(f"file:{path}?mode=ro", uri=True, timeout=10.0)
     conn = sqlite3.connect(str(path), timeout=10.0)
     conn.executescript(SCHEMA)
     return conn
+
+
+def migrate() -> None:
+    """Idempotent table-create. Called from the FastAPI startup hook
+    alongside every other module's migrate() so org_* tables exist on
+    fresh-DB boots before the first request lands."""
+    with _conn():
+        pass
 
 
 # ---------- dataclasses ----------

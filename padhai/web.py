@@ -643,6 +643,10 @@ async def _lifespan(app: FastAPI):
                     "Fix the schema or DATABASE_URL and redeploy."
                 ) from e
     try:
+        _orgs.migrate()
+    except Exception as e:  # noqa: BLE001
+        _log.warning("[startup] orgs.migrate failed (non-fatal): %s", e)
+    try:
         _dpdp.migrate()
     except Exception as e:  # noqa: BLE001
         _log.warning("[startup] dpdp.migrate failed (non-fatal): %s", e)
@@ -9952,39 +9956,33 @@ def _persist_signup_dpdp(
 
 
 def _verify_parent_consent(token: str, *, parent_ip: str) -> _dpdp.ConsentRecord:
-    """Redeem a parent-consent token against the active auth store."""
-    if _pg_store is None:
-        return _dpdp.verify_consent_token(token, parent_ip=parent_ip)
+    """Redeem a parent-consent token against the active auth store.
 
-    now = time.time()
-    with _dpdp._conn() as conn:
-        row = conn.execute(
-            "SELECT user_id, parent_email, expires_at "
-            "FROM parent_consent_tokens WHERE token = ?",
-            (token,),
-        ).fetchone()
-        if not row:
-            raise ValueError("invalid token")
-        user_id, parent_email, expires_at = row
-        if expires_at < now:
-            conn.execute("DELETE FROM parent_consent_tokens WHERE token = ?",
-                         (token,))
-            raise ValueError("token expired; ask the school admin to re-send")
+    Flow: `dpdp.verify_consent_token()` validates + deletes the token
+    (returns ConsentRecord). We then unlock the user in whichever store
+    is active — Postgres pool when DATABASE_URL is set, otherwise the
+    SQLite user repo. The two stores live in different DBs, so the
+    dpdp module deliberately doesn't try to UPDATE users itself."""
+    rec = _dpdp.verify_consent_token(token, parent_ip=parent_ip)
+
+    if _pg_store is not None:
         with _pg_store.pool.connection() as pg_conn, pg_conn.cursor() as cur:
             cur.execute(
                 "UPDATE users SET parent_consent_at = %s, "
                 "parent_consent_ip = %s, account_locked = FALSE "
                 "WHERE id = %s",
-                (now, parent_ip, user_id),
+                (rec.consented_at, parent_ip, rec.user_id),
             )
-        conn.execute("DELETE FROM parent_consent_tokens WHERE token = ?",
-                     (token,))
-    return _dpdp.ConsentRecord(
-        user_id=user_id,
-        parent_email=parent_email,
-        consented_at=now,
-        consented_ip=parent_ip,
-    )
+        return rec
+
+    repo = _get_user_repo()
+    if repo is not None and hasattr(repo, "unlock_for_consent"):
+        repo.unlock_for_consent(
+            rec.user_id,
+            parent_ip=parent_ip,
+            consented_at=rec.consented_at,
+        )
+    return rec
 
 
 @app.post("/auth/signup")
@@ -10429,7 +10427,17 @@ def create_lesson(
         raise HTTPException(400, str(e))
     image_path = page_images[0]
     extra_pages = page_images[1:]
-    if upload_path != image_path:
+    # ingest() calls `source.resolve()`, so image_path is a normalized
+    # absolute Path while upload_path is whatever NamedTemporaryFile
+    # produced — on Windows the two often differ in casing/separators
+    # even when pointing to the same file. Use samefile() so we don't
+    # accidentally unlink the only copy and crash the subsequent
+    # read_bytes() call.
+    try:
+        same_source = upload_path.samefile(image_path)
+    except (FileNotFoundError, OSError):
+        same_source = upload_path == image_path
+    if not same_source:
         upload_path.unlink(missing_ok=True)
 
     # Synchronous cache short-circuit. Two layers checked in order:
@@ -11590,7 +11598,14 @@ def create_upload(
     page_path = page_images[0]
     # If ingest converted the original (PDF → PNG), the raw upload is
     # no longer needed; the page image is the source of truth.
-    if raw_path != page_path:
+    # See create_lesson() above for the same Path-equality issue —
+    # ingest() resolves the path, so direct `!=` falsely flags the
+    # single-image case and unlinks the file we're about to register.
+    try:
+        same_source = raw_path.samefile(page_path)
+    except (FileNotFoundError, OSError):
+        same_source = raw_path == page_path
+    if not same_source:
         raw_path.unlink(missing_ok=True)
 
     # C5: whiteboard kind biases /analyze toward OCR-tolerant prompt.

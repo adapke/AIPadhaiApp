@@ -13,9 +13,13 @@ _25MB = 25 * 1024 * 1024
 
 class TestUpload:
     def test_upload_requires_auth(self, client: TestClient):
+        # Session-scoped TestClient carries the `pathshala_token` cookie
+        # from any earlier signup() call. Clear it so this assertion
+        # actually exercises the unauthenticated path.
+        client.cookies.clear()
         r = client.post(
             "/api/uploads",
-            files={"image": ("test.jpg", io.BytesIO(b"fake"), "image/jpeg")},
+            files={"file": ("test.jpg", io.BytesIO(b"fake"), "image/jpeg")},
         )
         assert r.status_code == 401
 
@@ -25,7 +29,7 @@ class TestUpload:
         big = io.BytesIO(b"\x00" * (_25MB + 1024))
         r = client.post(
             "/api/uploads",
-            files={"image": ("big.jpg", big, "image/jpeg")},
+            files={"file": ("big.jpg", big, "image/jpeg")},
             headers=auth_headers(token),
         )
         assert r.status_code == 413
@@ -34,10 +38,10 @@ class TestUpload:
         _, token = signup(client)
         r = client.post(
             "/api/uploads",
-            files={"image": ("evil.exe", io.BytesIO(b"MZ\x90\x00"), "application/octet-stream")},
+            files={"file": ("evil.exe", io.BytesIO(b"MZ\x90\x00"), "application/octet-stream")},
             headers=auth_headers(token),
         )
-        # Should reject non-image content type
+        # Endpoint rejects on unsupported suffix (.exe) with 400.
         assert r.status_code in (400, 415)
 
     def test_upload_accepts_valid_image(self, client: TestClient):
@@ -51,7 +55,7 @@ class TestUpload:
         )
         r = client.post(
             "/api/uploads",
-            files={"image": ("photo.png", io.BytesIO(png_1x1), "image/png")},
+            files={"file": ("photo.png", io.BytesIO(png_1x1), "image/png")},
             headers=auth_headers(token),
         )
         # 200 OK or 201 Created; must not be a 4xx/5xx error

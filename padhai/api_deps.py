@@ -79,3 +79,38 @@ def require_owner(*, resource_type: str, resource_id: str, user) -> None:
         raise HTTPException(404, f"{resource_type} not found")
     if owner_id != getattr(user, "id", None):
         raise HTTPException(403, "not your resource")
+
+
+def require_admin_role(user) -> None:
+    """Caller must be an org admin OR a superuser. Used by /api/admin/*
+    routes that aren't mounted under the standalone admin Flask app.
+
+    Resolution order:
+      1. `PADHAI_SUPERUSER_EMAILS` env var (comma-separated) — matched
+         case-insensitively against the caller's email.
+      2. Membership with `admin` role in at least one org.
+      3. Dev fallback: when `DATABASE_URL` is unset (local SQLite mode),
+         any authenticated user is treated as admin so dashboards work.
+
+    Production deployments MUST set either `DATABASE_URL` or
+    `PADHAI_SUPERUSER_EMAILS` to prevent unintended elevation.
+    """
+    import os
+    if user is None:
+        raise HTTPException(401, "sign in to access admin endpoints")
+    superusers = os.environ.get("PADHAI_SUPERUSER_EMAILS", "")
+    email = (getattr(user, "email", "") or "").lower()
+    if email and email in {
+        e.strip().lower() for e in superusers.split(",") if e.strip()
+    }:
+        return
+    try:
+        user_orgs = _orgs.find_orgs_for_user(user.id)
+        for o in user_orgs:
+            if _orgs.user_role_in_org(org_id=o.id, user_id=user.id) == "admin":
+                return
+    except Exception:
+        pass
+    if not os.environ.get("DATABASE_URL"):
+        return
+    raise HTTPException(403, "admin only")

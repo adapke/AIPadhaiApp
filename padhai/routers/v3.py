@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 
-from ..api_deps import require_user
+from ..api_deps import require_admin_role, require_user
 from ..web import current_user
 
 
@@ -169,9 +169,10 @@ def tutor_list(
 # ---------- L6: LLM observability ----------
 
 @router.get("/api/admin/llm/stats")
-def llm_stats(hours: float = 24.0):
-    """Aggregate Anthropic usage. Public-ish (counts + costs only,
-    no prompts or PII)."""
+def llm_stats(hours: float = 24.0, user=Depends(current_user)):
+    """Aggregate Anthropic usage. Admin-only — cost telemetry leaks
+    user-attribution data via the by_module / by_model breakdown."""
+    require_admin_role(require_user(user))
     from .. import llm_obs
     if hours <= 0 or hours > 24 * 30:
         raise HTTPException(400, "hours must be in (0, 720]")
@@ -201,8 +202,10 @@ def llm_flag_call(
 
 
 @router.get("/api/admin/llm/flags")
-def llm_flag_queue(limit: int = 50):
-    """Reviewer queue. Highest severity first, then oldest."""
+def llm_flag_queue(limit: int = 50, user=Depends(current_user)):
+    """Reviewer queue. Highest severity first, then oldest. Admin-only —
+    the queue contains reporter IDs + hallucination reports."""
+    require_admin_role(require_user(user))
     from .. import llm_obs
     return {"rows": llm_obs.pending_flags(limit=limit)}
 

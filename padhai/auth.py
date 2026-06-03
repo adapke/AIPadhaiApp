@@ -289,6 +289,21 @@ class SQLiteUserRepository:
                         subscription_level=row["subscription_level"],
                         account_locked=bool(row["account_locked"]))
 
+    def unlock_for_consent(
+        self, user_id: str, *, parent_ip: str, consented_at: float,
+    ) -> bool:
+        """DPDP §9 — flip account_locked off and record consent
+        metadata. Called from web._verify_parent_consent after
+        dpdp.verify_consent_token returns the consent record."""
+        with self._conn() as conn:
+            cur = conn.execute(
+                "UPDATE users SET parent_consent_at = ?, "
+                " parent_consent_ip = ?, account_locked = 0 "
+                "WHERE id = ?",
+                (consented_at, parent_ip, user_id),
+            )
+            return cur.rowcount > 0
+
 
 # ---- Tier → provider mapping ---------------------------------------------
 

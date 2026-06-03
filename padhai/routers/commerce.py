@@ -16,7 +16,7 @@ from typing import Any
 
 from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
 
-from ..api_deps import require_user
+from ..api_deps import require_admin_role, require_user
 from ..web import current_user
 
 router = APIRouter()
@@ -198,7 +198,7 @@ def llm_costs(
     Permission: caller must be an admin in at least one org.
     """
     user = require_user(user)
-    _require_admin_role(user)
+    require_admin_role(user)
     from .. import llm_obs
     return llm_obs.stats_for_period(hours=hours)
 
@@ -211,7 +211,7 @@ def llm_costs_daily(
     """Per-day cost time-series for the last `days`. Powers the
     line-chart widget on the admin dashboard."""
     user = require_user(user)
-    _require_admin_role(user)
+    require_admin_role(user)
     from .. import llm_obs
     series = []
     now = time.time()
@@ -248,7 +248,7 @@ def llm_costs_by_user(
     """Top users by Claude spend in the last N hours. Helps catch
     runaway abuse / loop bugs before they bankrupt us."""
     user = require_user(user)
-    _require_admin_role(user)
+    require_admin_role(user)
     from .. import llm_obs
     try:
         with llm_obs._conn() as conn:
@@ -283,27 +283,5 @@ def llm_costs_by_user(
         return {"users": [], "count": 0, "hours": hours}
 
 
-def _require_admin_role(user) -> None:
-    """Caller must have admin role in at least one org. For the
-    one-tenant / dev path we treat any authenticated user as admin
-    so the dashboard works in local dev; production should tighten
-    via an explicit SUPERUSER_EMAILS env var."""
-    import os
-    superusers = os.environ.get("PADHAI_SUPERUSER_EMAILS", "")
-    if user.email and user.email.lower() in {
-        e.strip().lower() for e in superusers.split(",") if e.strip()
-    }:
-        return
-    try:
-        from .. import orgs as _orgs
-        user_orgs = _orgs.find_orgs_for_user(user.id)
-        for o in user_orgs:
-            if _orgs.user_role_in_org(org_id=o.id, user_id=user.id) == "admin":
-                return
-    except Exception:
-        pass
-    # In dev (SQLite, no DATABASE_URL) we allow any authenticated
-    # user — admin dashboard isn't useful otherwise.
-    if not __import__("os").environ.get("DATABASE_URL"):
-        return
-    raise HTTPException(403, "admin role required")
+# Admin-role check moved to api_deps.require_admin_role so v3.py and
+# other routers can share the same gate.

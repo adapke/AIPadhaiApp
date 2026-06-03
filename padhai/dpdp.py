@@ -202,8 +202,14 @@ class ConsentRecord:
 
 def verify_consent_token(token: str, *, parent_ip: str) -> ConsentRecord:
     """Single-use redemption. Raises ValueError on invalid/expired
-    token. On success: deletes the token, sets users.parent_consent_at
-    + parent_consent_ip + account_locked=0."""
+    token. Deletes the token row on success.
+
+    Does NOT touch the `users` table — that lives in auth.py's repository
+    (SQLite or Postgres), often on a different DB file from this module's
+    consent-token table. The caller (web._verify_parent_consent) is
+    responsible for updating users.account_locked / parent_consent_at /
+    parent_consent_ip via the active user repo after this call returns.
+    """
     now = time.time()
     with _conn() as conn:
         row = conn.execute(
@@ -218,12 +224,6 @@ def verify_consent_token(token: str, *, parent_ip: str) -> ConsentRecord:
             conn.execute("DELETE FROM parent_consent_tokens WHERE token = ?",
                          (token,))
             raise ValueError("token expired; ask the school admin to re-send")
-        # Record consent + unlock the user atomically.
-        conn.execute(
-            "UPDATE users SET parent_consent_at = ?, parent_consent_ip = ?, "
-            "account_locked = 0 WHERE id = ?",
-            (now, parent_ip, user_id),
-        )
         conn.execute("DELETE FROM parent_consent_tokens WHERE token = ?",
                      (token,))
     return ConsentRecord(
