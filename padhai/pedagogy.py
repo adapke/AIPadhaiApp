@@ -792,16 +792,33 @@ def generate_explainer(
     language_code: str = "en",
     level: str = "middle",
     client: anthropic.Anthropic | None = None,
+    user_id: str | None = None,
+    user_tier: str | None = None,
 ) -> dict:
     """Topic-to-explanation: type a concept name, get a structured mini-lesson.
 
     Free-form input, structured JSON output. Costs ~₹0.30 (Haiku 4.5).
     Caching is by (topic, language, level) — the same 'photosynthesis'
-    request from 1000 students hits the cache 999 times."""
+    request from 1000 students hits the cache 999 times.
+
+    `user_id` + `user_tier` (optional) gate the call behind
+    llm_obs.check_daily_cap so a runaway loop can't burn the budget."""
     if language_code not in SUPPORTED_LANGUAGES:
         raise ValueError(f"language {language_code!r} not supported")
     if level not in LEVEL_GUIDANCE:
         raise ValueError(f"level {level!r} not supported")
+
+    if user_id:
+        from . import llm_obs as _llm_obs
+        try:
+            _llm_obs.check_daily_cap(
+                user_id=user_id, subscription_tier=user_tier,
+            )
+        except _llm_obs.BudgetExceeded as e:
+            raise RuntimeError(
+                f"daily_ai_budget_{e.reason}: spent={e.spent_today_paise}p "
+                f"cap={e.cap_paise}p"
+            ) from e
 
     client = client or anthropic.Anthropic()
     schema = {
@@ -1067,6 +1084,7 @@ def generate_lesson(
     user_id: str | None = None,
     source_upload_id: str | None = None,
     source_page_number: int | None = None,
+    user_tier: str | None = None,
 ) -> Lesson:
     """Generate a video lesson from a textbook-page image.
 
@@ -1098,6 +1116,22 @@ def generate_lesson(
         hit = cache.get_lesson(image_bytes, language_code, level, MODEL)
         if hit is not None:
             return hit
+
+    # Daily cost cap — runs AFTER cache check so cache hits still serve
+    # without burning the user's daily budget (a hit doesn't cost
+    # anything new). Misses go through the cap; a hard refusal raises
+    # so the worker can mark the job failed cleanly.
+    if user_id:
+        from . import llm_obs as _llm_obs
+        try:
+            _llm_obs.check_daily_cap(
+                user_id=user_id, subscription_tier=user_tier,
+            )
+        except _llm_obs.BudgetExceeded as e:
+            raise RuntimeError(
+                f"daily_ai_budget_{e.reason}: spent={e.spent_today_paise}p "
+                f"cap={e.cap_paise}p"
+            ) from e
 
     client = client or anthropic.Anthropic()
 

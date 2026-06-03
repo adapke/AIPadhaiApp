@@ -315,6 +315,7 @@ def answer_via_ai_vision(
     *,
     doubt_id: str,
     force: bool = False,
+    user_tier: str | None = None,
 ) -> Doubt:
     """Call Claude Vision to auto-answer a pending image-doubt.
 
@@ -337,29 +338,55 @@ def answer_via_ai_vision(
     if doubt.status == "answered" and not force:
         return doubt
 
+    # Daily-cap pre-flight. Refuses the Claude call when over budget;
+    # the student gets a "human-tutor will follow up" answer instead.
+    from . import llm_obs as _llm_obs
+    try:
+        _llm_obs.check_daily_cap(
+            user_id=doubt.user_id, subscription_tier=user_tier,
+        )
+    except _llm_obs.BudgetExceeded as e:
+        fallback_msg = (
+            "Daily AI doubt-answer budget reached for your account. "
+            "A human tutor will follow up shortly — or try again tomorrow."
+            if e.reason == "over_budget"
+            else "AI doubt-clearer is a premium feature. A human tutor will follow up."
+        )
+        answer(doubt_id=doubt_id, response_text=fallback_msg, method="ai")
+        _record_doubt_provenance(
+            doubt=doubt, question=doubt.question_text or "",
+            answer_text=fallback_msg, ai_call_id=None,
+            method=f"budget_{e.reason}",
+        )
+        return get(doubt_id)  # type: ignore[return-value]
+
     # No Claude key → mark errored with a clear reason
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        answer(
-            doubt_id=doubt_id,
-            response_text=(
-                "AI auto-answer unavailable (ANTHROPIC_API_KEY not "
-                "configured on this server). A human tutor will pick "
-                "this up shortly."
-            ),
-            method="ai",
+        fallback_msg = (
+            "AI auto-answer unavailable (ANTHROPIC_API_KEY not "
+            "configured on this server). A human tutor will pick "
+            "this up shortly."
+        )
+        answer(doubt_id=doubt_id, response_text=fallback_msg, method="ai")
+        _record_doubt_provenance(
+            doubt=doubt, question=doubt.question_text or "",
+            answer_text=fallback_msg, ai_call_id=None,
+            method="no_api_key",
         )
         return get(doubt_id)  # type: ignore[return-value]
 
     try:
         from anthropic import Anthropic  # noqa: WPS433
     except ImportError:
-        answer(
-            doubt_id=doubt_id,
-            response_text=(
-                "AI auto-answer unavailable (anthropic SDK missing). "
-                "Human tutor will respond."
-            ),
-            method="ai",
+        fallback_msg = (
+            "AI auto-answer unavailable (anthropic SDK missing). "
+            "Human tutor will respond."
+        )
+        answer(doubt_id=doubt_id, response_text=fallback_msg, method="ai")
+        _record_doubt_provenance(
+            doubt=doubt, question=doubt.question_text or "",
+            answer_text=fallback_msg, ai_call_id=None,
+            method="no_sdk",
         )
         return get(doubt_id)  # type: ignore[return-value]
 
@@ -413,13 +440,15 @@ def answer_via_ai_vision(
             messages=[{"role": "user", "content": content_blocks}],
         )
     except Exception as e:  # noqa: BLE001
-        answer(
-            doubt_id=doubt_id,
-            response_text=(
-                f"AI auto-answer failed ({str(e)[:160]}). "
-                "A human tutor will follow up."
-            ),
-            method="ai",
+        fallback_msg = (
+            f"AI auto-answer failed ({str(e)[:160]}). "
+            "A human tutor will follow up."
+        )
+        answer(doubt_id=doubt_id, response_text=fallback_msg, method="ai")
+        _record_doubt_provenance(
+            doubt=doubt, question=user_text,
+            answer_text=fallback_msg, ai_call_id=None,
+            method="claude_error",
         )
         return get(doubt_id)  # type: ignore[return-value]
 
@@ -430,7 +459,7 @@ def answer_via_ai_vision(
     tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
     tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
     cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    llm_obs.record_call(
+    call_id = llm_obs.record_call(
         module="doubt_clearing",
         prompt_version="v1-vision",
         model=model,
@@ -444,7 +473,58 @@ def answer_via_ai_vision(
         response_text=reply_text,
         method="ai",
     )
+    _record_doubt_provenance(
+        doubt=doubt, question=user_text, answer_text=reply_text,
+        ai_call_id=call_id, method="claude",
+    )
     return get(doubt_id)  # type: ignore[return-value]
+
+
+def _record_doubt_provenance(
+    *,
+    doubt: "Doubt",
+    question: str,
+    answer_text: str,
+    ai_call_id: str | None,
+    method: str,
+) -> None:
+    """Persist provenance for an AI-answered doubt.
+
+    Citation surface: when the doubt carried an image (the photo the
+    student snapped of their book/notebook), we record it as a
+    source_kind='upload' citation with source_id=doubt.id. That makes
+    the trust dashboard show doubts as grounded answers, distinguishing
+    them from explainer-mode (no source) replies.
+
+    Best-effort; never raises into the answer flow.
+    """
+    try:
+        from . import citations as _cit
+        citations_payload: list[dict] | None = None
+        if doubt.image_url:
+            citations_payload = [{
+                "source_kind": "upload",
+                "source_id": doubt.id,
+                # Doubt images don't have page numbers — they're snaps.
+                "section": "student-snapped image",
+                "citation_text": doubt.image_url[:1900],
+                "relevance": 1.0,
+            }]
+        _cit.record_answer(
+            surface="doubt",
+            user_id=doubt.user_id,
+            question_text=(question or doubt.question_text or "")[:8000],
+            answer_text=answer_text[:32000],
+            citations=citations_payload,
+            ai_call_id=ai_call_id,
+            answer_mode="general",
+            fallback_reason=(
+                None if method == "claude"
+                else f"doubt_fallback_{method}"
+            ),
+        )
+    except Exception as e:  # noqa: BLE001
+        print(f"[doubt_clearing] provenance non-fatal: {e}")
 
 
 def stale_for_ai_escalation(*, minutes: float | None = None) -> list[Doubt]:

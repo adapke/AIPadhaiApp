@@ -253,6 +253,103 @@ def user_cost_today(user_id: str) -> float:
     return round((r[0] or 0) / 100, 2)
 
 
+def user_cost_today_paise(user_id: str) -> int:
+    """Same as user_cost_today() but returns paise as int — no
+    floating-point creep when summed against a cap."""
+    from datetime import datetime, timezone
+    midnight = datetime.now(timezone.utc).replace(
+        hour=0, minute=0, second=0, microsecond=0,
+    ).timestamp()
+    with _conn() as conn:
+        r = conn.execute(
+            "SELECT COALESCE(SUM(cost_inr_paise), 0) FROM llm_calls "
+            "WHERE user_id = ? AND created_at >= ?",
+            (user_id, midnight),
+        ).fetchone()
+    return int(r[0] or 0)
+
+
+# Daily cost caps by subscription tier (paise). One cap per tier across
+# all AI surfaces — tutor + lesson + essay + doubt + practice all
+# subtract from the same daily budget. Sentinel `0` means "no AI access
+# at this tier"; `None` (from daily_cap_paise) means uncapped.
+DAILY_COST_CAPS_BY_TIER: dict[str, int] = {
+    "M1": 0,         # free tier — no premium AI features
+    "M2": 2000,      # ₹20 / day  (premium-voice tier)
+    "M3": 10000,     # ₹100 / day (lip-sync video tier)
+    # M4* (enterprise tiers) inherit uncapped via daily_cap_paise() below.
+}
+
+
+class BudgetExceeded(Exception):
+    """Raised by check_daily_cap when a user has already spent past
+    their daily AI budget. Carries the numbers so the caller can
+    show a useful message + record provenance with `fallback_reason`."""
+
+    def __init__(
+        self, reason: str, *,
+        spent_today_paise: int, cap_paise: int,
+    ):
+        super().__init__(reason)
+        self.reason = reason
+        self.spent_today_paise = spent_today_paise
+        self.cap_paise = cap_paise
+
+
+def daily_cap_paise(tier: str | None) -> int | None:
+    """Resolve a subscription tier to today's spend cap in paise.
+
+    Returns:
+      • 0    — tier has no AI access at all (caller should refuse with
+               "upgrade your plan" copy)
+      • int  — daily cap in paise; refuse new calls when
+               user_cost_today_paise >= this value
+      • None — tier is uncapped (M4 enterprise sub-tiers)
+    """
+    if not tier:
+        tier = "M1"
+    if tier in DAILY_COST_CAPS_BY_TIER:
+        return DAILY_COST_CAPS_BY_TIER[tier]
+    # M4a / M4b / M4c / M4d / M4e — enterprise, uncapped
+    if tier.startswith("M4"):
+        return None
+    # Unknown tier — treat as free tier (safe default)
+    return DAILY_COST_CAPS_BY_TIER["M1"]
+
+
+def check_daily_cap(
+    *,
+    user_id: str | None,
+    subscription_tier: str | None,
+) -> None:
+    """Pre-flight check before a Claude call. Raises BudgetExceeded
+    when the user has already spent past their daily cap.
+
+    Anonymous users (user_id is None) are NOT tracked — the runaway-
+    abuse vector here is signed-in users with loop bugs or scraping.
+    Anonymous calls are rate-limited via padhai.rate_limit instead.
+    """
+    if not user_id:
+        return
+    cap = daily_cap_paise(subscription_tier)
+    if cap is None:
+        return  # uncapped tier
+    if cap == 0:
+        # Premium feature for a free-tier user
+        raise BudgetExceeded(
+            "premium_feature",
+            spent_today_paise=0,
+            cap_paise=0,
+        )
+    spent = user_cost_today_paise(user_id)
+    if spent >= cap:
+        raise BudgetExceeded(
+            "over_budget",
+            spent_today_paise=spent,
+            cap_paise=cap,
+        )
+
+
 # ---------- hallucination flagging ----------
 
 VALID_SEVERITIES = {"low", "medium", "high"}

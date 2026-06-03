@@ -325,9 +325,11 @@ def _synthesise(
     count: int,
     weak_topics: list[str],
     user_id: str,
+    user_tier: str | None = None,
 ) -> list[dict]:
     """Generate `count` synthetic MCQs via Claude. Returns [] if
-    Claude unavailable — caller pads with placeholders."""
+    Claude unavailable OR the user is over their daily budget — caller
+    pads with placeholders."""
     if count <= 0:
         return []
     if not os.environ.get("ANTHROPIC_API_KEY"):
@@ -337,6 +339,13 @@ def _synthesise(
     except ImportError:
         return []
     from . import llm_cache, llm_obs
+    try:
+        llm_obs.check_daily_cap(
+            user_id=user_id, subscription_tier=user_tier,
+        )
+    except llm_obs.BudgetExceeded as e:
+        print(f"[practice_test] over budget ({e.reason}); skipping Claude call")
+        return []
 
     model = os.environ.get(
         "PADHAI_PRACTICE_MODEL", "claude-haiku-4-5-20251001",

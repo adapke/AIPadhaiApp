@@ -81,7 +81,7 @@ CREATE INDEX IF NOT EXISTS idx_aic_source
 
 
 VALID_SURFACES = frozenset({
-    "tutor", "lesson", "quiz", "essay", "doubt",
+    "tutor", "lesson", "quiz", "essay", "doubt", "mock_interview",
 })
 
 VALID_ANSWER_MODES = frozenset({

@@ -234,28 +234,30 @@ def send_message(
     if session.ended_at is not None:
         raise ValueError("session already ended")
 
-    # Tier-cap check (L6 + daily cost cap)
-    cap = DAILY_COST_CAP_PAISE.get(user_tier)
-    if cap is not None:
-        if cap == 0 and user_tier == "M1":
+    # Tier-cap check — centralised in llm_obs so every AI surface
+    # (tutor, lesson, essay, doubt, mock) draws from the same daily
+    # budget. The local DAILY_COST_CAP_PAISE dict below is kept only
+    # for backward-compat reads; the actual enforcement comes from
+    # llm_obs.check_daily_cap().
+    from . import llm_obs
+    try:
+        llm_obs.check_daily_cap(
+            user_id=session.user_id, subscription_tier=user_tier,
+        )
+    except llm_obs.BudgetExceeded as e:
+        if e.reason == "premium_feature":
             return _record_canned_reply(
                 session,
                 "AI tutor is a premium feature. Upgrade to "
                 "Student Basic or Pro to chat.",
                 over_budget=True,
             )
-        if cap > 0:
-            from . import llm_obs
-            spent_today_paise = int(round(
-                llm_obs.user_cost_today(session.user_id) * 100,
-            ))
-            if spent_today_paise >= cap:
-                return _record_canned_reply(
-                    session,
-                    "You've used your daily AI tutor budget for today. "
-                    "Try again tomorrow — or upgrade your plan.",
-                    over_budget=True,
-                )
+        return _record_canned_reply(
+            session,
+            "You've used your daily AI tutor budget for today. "
+            "Try again tomorrow — or upgrade your plan.",
+            over_budget=True,
+        )
 
     if not is_available():
         return _record_canned_reply(

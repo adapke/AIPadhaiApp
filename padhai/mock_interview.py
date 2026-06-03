@@ -282,9 +282,14 @@ def submit_answer(
     turn_index: int,
     answer_text: str,
     answer_audio_url: str | None = None,
+    user_tier: str | None = None,
 ) -> AnswerResult:
     """Persist the answer + generate a follow-up question (or end the
-    interview at MAX_TURNS). Returns the next Turn or None on end."""
+    interview at MAX_TURNS). Returns the next Turn or None on end.
+
+    `user_tier` lets the HTTP route enforce llm_obs.check_daily_cap
+    before each turn — protects against runaway interview loops
+    bankrupting the Anthropic bill."""
     if not answer_text or not answer_text.strip():
         raise ValueError("answer_text required")
     answer_text = answer_text[:6000]   # hard cap
@@ -304,6 +309,7 @@ def submit_answer(
         question=turn.question_text,
         answer=answer_text,
         user_id=interview.user_id,
+        user_tier=user_tier,
     )
     ai_call_id = feedback.pop("_call_id", None)
 
@@ -401,15 +407,45 @@ Return strict JSON only:
 
 def _grade_answer(
     *, track: str, question: str, answer: str, user_id: str,
+    user_tier: str | None = None,
 ) -> dict:
     """Returns feedback dict + _call_id for L6. Falls back to a
-    heuristic when no Claude key."""
+    heuristic when no Claude key OR when the user is over their
+    daily AI cost cap."""
+    from . import llm_obs as _llm_obs
+    try:
+        _llm_obs.check_daily_cap(user_id=user_id, subscription_tier=user_tier)
+    except _llm_obs.BudgetExceeded as e:
+        result = _heuristic_feedback(answer)
+        result["summary"] = (
+            (f"Daily AI budget reached. " if e.reason == "over_budget"
+             else "Mock-interview AI grading is premium. ")
+            + result.get("summary", "")
+        )
+        _record_mi_provenance(
+            track=track, question=question, answer=answer,
+            user_id=user_id, feedback=result, ai_call_id=None,
+            method=f"budget_{e.reason}",
+        )
+        return result
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        return _heuristic_feedback(answer)
+        result = _heuristic_feedback(answer)
+        _record_mi_provenance(
+            track=track, question=question, answer=answer,
+            user_id=user_id, feedback=result, ai_call_id=None,
+            method="heuristic_no_key",
+        )
+        return result
     try:
         from anthropic import Anthropic   # noqa: WPS433
     except ImportError:
-        return _heuristic_feedback(answer)
+        result = _heuristic_feedback(answer)
+        _record_mi_provenance(
+            track=track, question=question, answer=answer,
+            user_id=user_id, feedback=result, ai_call_id=None,
+            method="heuristic_no_sdk",
+        )
+        return result
 
     from . import llm_cache, llm_obs
     model = os.environ.get(
@@ -431,7 +467,13 @@ def _grade_answer(
         )
     except Exception as e:  # noqa: BLE001
         print(f"[mock_interview] grade failed: {e}")
-        return _heuristic_feedback(answer)
+        result = _heuristic_feedback(answer)
+        _record_mi_provenance(
+            track=track, question=question, answer=answer,
+            user_id=user_id, feedback=result, ai_call_id=None,
+            method="heuristic_claude_error",
+        )
+        return result
     latency_ms = int((time.time() - started) * 1000)
     body = "".join(b.text for b in resp.content if b.type == "text")
     parsed = _parse_score_json(body)
@@ -445,7 +487,61 @@ def _grade_answer(
     )
     parsed["_call_id"] = call_id
     parsed["method"] = "claude"
+    _record_mi_provenance(
+        track=track, question=question, answer=answer,
+        user_id=user_id, feedback=parsed, ai_call_id=call_id,
+        method="claude",
+    )
     return parsed
+
+
+def _record_mi_provenance(
+    *,
+    track: str,
+    question: str,
+    answer: str,
+    user_id: str,
+    feedback: dict,
+    ai_call_id: str | None,
+    method: str,
+) -> None:
+    """Persist per-turn provenance to ai_answer_provenance so the trust
+    dashboard counts mock-interview turns alongside tutor + essay.
+
+    surface='mock_interview' was added to citations.VALID_SURFACES.
+    No citations are attached — interview answers are evaluated
+    against a rubric in the system prompt, not a retrieved document.
+
+    Best-effort; failures here never break the grading flow."""
+    try:
+        from . import citations as _cit
+        scores = feedback.get("scores") or {}
+        summary = feedback.get("summary") or ""
+        improvement = feedback.get("improvement") or ""
+        question_text = (
+            f"Mock interview ({track}) — Q: {question}\n"
+            f"Candidate: {answer[:4000]}"
+        )[:8000]
+        answer_text = (
+            f"Scores: {scores}\n"
+            f"Summary: {summary}\n"
+            f"Improvement: {improvement}"
+        )[:32000]
+        _cit.record_answer(
+            surface="mock_interview",
+            user_id=user_id,
+            question_text=question_text,
+            answer_text=answer_text,
+            ai_call_id=ai_call_id,
+            answer_mode="general",
+            citations=None,
+            fallback_reason=(
+                None if method == "claude"
+                else f"grader_fallback_{method}"
+            ),
+        )
+    except Exception as e:  # noqa: BLE001
+        print(f"[mock_interview] provenance non-fatal: {e}")
 
 
 def _heuristic_feedback(answer: str) -> dict:

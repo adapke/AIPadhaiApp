@@ -341,13 +341,22 @@ Rules:
 """
 
 
-def grade(submission_id: str, *, model: str | None = None) -> GradeResult:
+def grade(
+    submission_id: str,
+    *,
+    model: str | None = None,
+    user_tier: str | None = None,
+) -> GradeResult:
     """Run the AI grader on a submission. Idempotent — re-grading
     overwrites the prior ai_score/feedback.
 
     When ANTHROPIC_API_KEY is unset, falls back to a heuristic
     (length + criteria-keyword overlap) so the dev path produces a
-    real GradeResult shape."""
+    real GradeResult shape.
+
+    `user_tier` is passed by the HTTP route handler so we can enforce
+    `llm_obs.check_daily_cap` BEFORE the Claude call. None defaults
+    to the free tier."""
     sub = get_submission(submission_id)
     if not sub:
         raise ValueError(f"submission {submission_id!r} not found")
@@ -355,9 +364,38 @@ def grade(submission_id: str, *, model: str | None = None) -> GradeResult:
     if not rubric:
         raise ValueError("rubric missing")
 
+    # Daily-cap pre-flight — refuse before spending Anthropic tokens.
+    # Heuristic fallback also fires when over budget (so the user still
+    # gets a number, just from the cheap path).
+    from . import llm_obs as _llm_obs
+    try:
+        _llm_obs.check_daily_cap(
+            user_id=sub.user_id, subscription_tier=user_tier,
+        )
+    except _llm_obs.BudgetExceeded as e:
+        result = _grade_heuristic(sub, rubric)
+        result = GradeResult(
+            submission_id=result.submission_id,
+            score=result.score,
+            by_criterion=result.by_criterion,
+            summary=(
+                f"Daily AI budget reached ({e.spent_today_paise/100:.2f} INR "
+                f"of {e.cap_paise/100:.2f} INR). Heuristic grade returned — "
+                "ask a teacher for a full review or try again tomorrow."
+                if e.reason == "over_budget"
+                else "AI essay grader is a premium feature; heuristic grade returned."
+            ),
+            suggestions=result.suggestions,
+            method=f"budget_{e.reason}",
+        )
+        _persist_grade(sub.id, result, ai_call_id=None)
+        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
+        return result
+
     if not os.environ.get("ANTHROPIC_API_KEY"):
         result = _grade_heuristic(sub, rubric)
         _persist_grade(sub.id, result, ai_call_id=None)
+        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
         return result
 
     # Lazy SDK import — keeps module loadable without anthropic
@@ -366,6 +404,7 @@ def grade(submission_id: str, *, model: str | None = None) -> GradeResult:
     except ImportError:
         result = _grade_heuristic(sub, rubric)
         _persist_grade(sub.id, result, ai_call_id=None)
+        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
         return result
 
     from . import llm_cache, llm_obs
@@ -399,6 +438,7 @@ def grade(submission_id: str, *, model: str | None = None) -> GradeResult:
         print(f"[essay_grader] Claude call failed: {e}")
         result = _grade_heuristic(sub, rubric)
         _persist_grade(sub.id, result, ai_call_id=None)
+        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
         return result
 
     latency_ms = int((time.time() - started) * 1000)
@@ -427,7 +467,55 @@ def grade(submission_id: str, *, model: str | None = None) -> GradeResult:
         method="claude",
     )
     _persist_grade(sub.id, result, ai_call_id=call_id)
+    _record_essay_provenance(sub, rubric, result, ai_call_id=call_id)
     return result
+
+
+def _record_essay_provenance(
+    sub: "Submission",
+    rubric: "Rubric",
+    result: "GradeResult",
+    *,
+    ai_call_id: str | None,
+) -> None:
+    """Persist an ai_answer_provenance row for the grade so the trust
+    dashboard counts essay surfaces alongside tutor + lesson.
+
+    No source citations — the "source" is the rubric itself, and
+    citations.VALID_SOURCE_KINDS doesn't currently include 'rubric'.
+    Recording with answer_mode='general' + no citations means
+    grounded=False; the rubric is identified via question_text.
+
+    Best-effort: failures here never break the grade pipeline.
+    """
+    try:
+        from . import citations as _cit
+        question = (
+            f"Grade submission against rubric "
+            f"{rubric.exam}/{rubric.paper}"
+            + (f"/{rubric.topic}" if rubric.topic else "")
+            + f" (max {rubric.max_marks}): {sub.text[:1500]}"
+        )
+        answer = (
+            f"Score: {result.score}/{rubric.max_marks} ({result.method})\n"
+            f"Summary: {result.summary}\n"
+            f"Suggestions: {' | '.join(result.suggestions[:5])}"
+        )[:32000]
+        _cit.record_answer(
+            surface="essay",
+            user_id=sub.user_id,
+            question_text=question[:8000],
+            answer_text=answer,
+            ai_call_id=ai_call_id,
+            answer_mode="general",
+            citations=None,
+            fallback_reason=(
+                None if result.method == "claude"
+                else f"grader_fallback_{result.method}"
+            ),
+        )
+    except Exception as e:  # noqa: BLE001
+        print(f"[essay_grader] provenance non-fatal: {e}")
 
 
 def _parse_grade_response(body: str, rubric: Rubric) -> dict:

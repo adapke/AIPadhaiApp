@@ -350,6 +350,29 @@ def _render_explainer_video(job: Job) -> dict:
     lesson = explainer_to_lesson(explainer, language, level)
     cache.put_lesson(synthetic_bytes, language, level, MODEL, lesson)
 
+    # Record provenance for the explainer just like teaching lessons do
+    # (see pedagogy._record_lesson_provenance). Explainers have no source
+    # upload, so we pass no citations — answer_mode='general' lets the
+    # row land with grounded=False so the trust dashboard counts both
+    # surfaces in its denominator.
+    if p.get("user_id"):
+        try:
+            from . import citations as _cit
+            _cit.record_answer(
+                surface="lesson",
+                user_id=p["user_id"],
+                question_text=f"Explainer video request: {topic}",
+                answer_text=(
+                    (lesson.title or topic) + "\n\n"
+                    + " | ".join(s.narration for s in lesson.scenes)
+                )[:32000],
+                citations=None,
+                answer_mode="general",
+                fallback_reason="topic_explainer_no_source",
+            )
+        except Exception as e:  # noqa: BLE001
+            print(f"[explainer] provenance non-fatal: {e}")
+
     store.set_progress(job.id, "creating_storyboard", 35)
     store.set_progress(job.id, "generating_voice", 50)
     store.set_progress(job.id, "rendering_video", 70)
@@ -455,6 +478,7 @@ def _render_worker(job: Job) -> dict:
             user_id=p.get("user_id"),
             source_upload_id=p.get("upload_id"),
             source_page_number=p.get("page_number"),
+            user_tier=p.get("subscription_tier"),
         )
         store.set_progress(job.id, "creating_storyboard", 40)
         store.set_progress(job.id, "generating_voice", 55)
@@ -10503,6 +10527,15 @@ def create_lesson(
         # to the right worker — Wav2Lip → GPU instance, everything else
         # → web service's local thread pool.
         "talking_head_provider": provider_name,
+        # Multi-page provenance: the first page is page_number=1 with no
+        # parent; sibling jobs (added below) carry parent_job_id pointing
+        # at this job + their own page_number. Used by:
+        #   • pedagogy._record_lesson_provenance — stamps source_page_number
+        #     on the citation row
+        #   • GET /jobs/{id} — surfaces parent_job_id + page_number so the
+        #     UI knows it's one of several
+        "page_number": 1,
+        "total_pages": 1 + len(extra_pages),
     }
     if board_hint:
         job_payload["board_hint"] = board_hint
@@ -10519,11 +10552,13 @@ def create_lesson(
     # dropping everything and leaving no output for the user.
     extra_jobs = []
     remaining = list(extra_pages)
-    for extra in extra_pages:
+    for page_idx, extra in enumerate(extra_pages, start=2):
         remaining.remove(extra)
         try:
             extra_payload = dict(job_payload)
             extra_payload["image_path"] = str(extra)
+            extra_payload["page_number"] = page_idx
+            extra_payload["parent_job_id"] = job.id
             extra_jobs.append(runner.enqueue(extra_payload))
         except Exception:
             Path(extra).unlink(missing_ok=True)
@@ -10539,8 +10574,13 @@ def create_lesson(
     }
     if extra_jobs:
         response["additional_pages"] = [
-            {"job_id": j.id, "status_url": f"/jobs/{j.id}", "video_url": f"/jobs/{j.id}/video"}
-            for j in extra_jobs
+            {
+                "job_id": j.id,
+                "page_number": idx,
+                "status_url": f"/jobs/{j.id}",
+                "video_url": f"/jobs/{j.id}/video",
+            }
+            for idx, j in enumerate(extra_jobs, start=2)
         ]
         response["total_pages"] = 1 + len(extra_jobs)
     return JSONResponse(status_code=202, content=response)
@@ -11227,14 +11267,32 @@ def explain_video(
     language: str = Form("en"),
     level: str = Form("middle"),
     teacher: bool = Form(True),
+    image: UploadFile | None = File(
+        None,
+        description=(
+            "Optional reference image — e.g. a diagram the student wants "
+            "explained. When present the request is rerouted through the "
+            "lesson pipeline with video_mode='explainer' so the image is "
+            "interpreted by vision while keeping the punchier 5-scene "
+            "explainer structure."
+        ),
+    ),
     user: AuthUser | None = Depends(current_user),
 ):
     """Generate a cartoon-video explainer for a topic.
 
-    Reuses the existing render pipeline: Explainer JSON → 5-scene Lesson
-    → narrated cartoon teacher + scene boards → MP4. Returns a job_id
-    the client polls just like Create Lesson. Video cache shared with
-    /lessons so the same (topic, lang, level) only renders once."""
+    Two modes:
+      • topic only — fast path. generate_explainer (Haiku) → Explainer
+        JSON → explainer_to_lesson → render. Cheapest, ~₹0.30 per render.
+      • topic + image — image-grounded path. Routes through the lessons
+        worker with `video_mode='explainer'` so Claude Opus reads the
+        image but the prompt+schema use the explainer's 5-scene
+        hook→problem→explain→analogy→CTA structure rather than the
+        teaching 5-8 scene format.
+
+    Returns a job_id the client polls just like /lessons. Video cache
+    shared with /lessons so the same (topic, lang, level) only renders
+    once."""
     from .pedagogy import generate_explainer
 
     if language not in SUPPORTED_LANGUAGES:
@@ -11242,6 +11300,67 @@ def explain_video(
     if level not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"level must be one of: {sorted(LEVEL_GUIDANCE)}")
 
+    # ── topic + image: route through the lesson pipeline ────────────
+    if image is not None and image.filename:
+        suffix = Path(image.filename or "page.jpg").suffix.lower() or ".jpg"
+        if suffix not in (".jpg", ".jpeg", ".png", ".gif", ".webp"):
+            raise HTTPException(
+                400,
+                "explainer images must be PNG/JPG/WEBP — PDFs go through /lessons",
+            )
+        _SIZE_LIMIT = 25 * 1024 * 1024
+        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
+            upload_path = Path(f.name)
+            total = 0
+            for chunk in iter(lambda: image.file.read(65536), b""):
+                total += len(chunk)
+                if total > _SIZE_LIMIT:
+                    f.close()
+                    upload_path.unlink(missing_ok=True)
+                    raise HTTPException(413, "file too large (limit 25 MB)")
+                f.write(chunk)
+
+        if teacher:
+            entitled = resolve_provider_for_tier(user)
+            os.environ["PADHAI_TALKING_HEAD_PROVIDER"] = entitled
+            provider = get_talking_head_provider()
+            provider_name = provider.name
+        else:
+            provider_name = "none"
+
+        # Lesson worker reads video_mode out of profile_json.video_mode —
+        # build the smallest possible profile dict that says "explainer".
+        # No PersonalizationProfile needed for the v1 surface.
+        payload = {
+            "image_path": str(upload_path),
+            "language": language,
+            "level": level,
+            "teacher": teacher,
+            "include_quiz": False,   # explainer mode never quizzes
+            "render_mode": "animated",
+            "talking_head_provider": provider_name,
+            "profile_json": {
+                "video_mode": "explainer",
+                "output_dimensions": [1280, 720],
+                "prompt_addendum": f"Topic the learner asked about: {topic}",
+            },
+            "page_number": 1,
+            "total_pages": 1,
+        }
+        if user is not None:
+            payload["user_id"] = user.id
+            payload["subscription_tier"] = user.subscription_tier
+        job = runner.enqueue(payload)
+        return JSONResponse(status_code=202, content={
+            "job_id": job.id,
+            "status": job.status,
+            "status_url": f"/jobs/{job.id}",
+            "video_url": f"/jobs/{job.id}/video",
+            "topic": topic,
+            "mode": "image_grounded_explainer",
+        })
+
+    # ── topic only: fast Haiku → explainer path ─────────────────────
     explainer = cache.get_explainer(topic, language, level)
     if explainer is None:
         explainer = generate_explainer(topic, language_code=language, level=level)
@@ -11275,6 +11394,7 @@ def explain_video(
         "status_url": f"/jobs/{job.id}",
         "video_url": f"/jobs/{job.id}/video",
         "topic": topic,
+        "mode": "topic_only_explainer",
     })
 
 
@@ -14110,6 +14230,7 @@ def get_job(job_id: str):
     if not job:
         raise HTTPException(404, "job not found")
     result = job.result or {}
+    payload = job.payload or {}
     return {
         "id": job.id,
         "status": job.status,
@@ -14122,6 +14243,13 @@ def get_job(job_id: str):
         # lesson_id (chat lookup key) — surfaced so the client can
         # POST /chat/{lesson_id} without re-uploading the source image.
         "lesson_id": result.get("lesson_id") if job.status == "succeeded" else None,
+        # Multi-page correlation — set by create_lesson when a PDF/PPTX
+        # fans out across pages. page_number is 1-indexed; the first
+        # page job's parent_job_id is null (it IS the parent). The UI
+        # can show "Page 3 of 12" when these are present.
+        "page_number": payload.get("page_number"),
+        "total_pages": payload.get("total_pages"),
+        "parent_job_id": payload.get("parent_job_id"),
         # Mirror the result block for clients that want it nested.
         "result": result if job.status == "succeeded" else None,
     }
