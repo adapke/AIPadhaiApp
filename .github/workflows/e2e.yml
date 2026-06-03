@@ -1,0 +1,97 @@
+name: e2e
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'padhai/**'
+      - 'admin/**'
+      - 'cypress/**'
+      - 'scripts/seed_demo.py'
+      - 'scripts/e2e_smoke.py'
+      - 'docker-compose.yml'
+      - 'Dockerfile*'
+      - 'Makefile'
+      - 'requirements*.txt'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'padhai/**'
+      - 'admin/**'
+      - 'cypress/**'
+      - 'docker-compose.yml'
+      - 'Dockerfile*'
+  workflow_dispatch:
+  schedule:
+    # 02:30 IST nightly — catches drift between merge time and the
+    # next morning's standup
+    - cron: '0 21 * * *'
+
+jobs:
+  e2e-compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx (layer cache)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Make .env (secrets pulled from GHA + dummy defaults)
+        run: |
+          cat > .env <<EOF
+          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+          PADHAI_JWT_SECRET=$(openssl rand -base64 48)
+          ADMIN_JWT_SECRET=$(openssl rand -base64 48)
+          ADMIN_BOOTSTRAP_TOKEN=$(openssl rand -base64 32)
+          RAZORPAY_KEY_ID=${{ secrets.RAZORPAY_KEY_ID }}
+          RAZORPAY_KEY_SECRET=${{ secrets.RAZORPAY_KEY_SECRET }}
+          EOF
+          echo ".env created."
+
+      - name: docker-compose up + wait for /healthz
+        run: make up
+
+      - name: Compose status (debug)
+        run: |
+          docker-compose ps
+          docker-compose logs --tail=40 app
+
+      - name: Seed demo dataset
+        run: make seed
+
+      - name: HTTP smoke
+        run: make smoke
+
+      - name: Set up Node for Cypress
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Cypress deps
+        run: npm ci
+
+      - name: Cypress full-flow spec
+        env:
+          CYPRESS_baseUrl: http://localhost:8000
+        run: make cypress
+
+      - name: docker-compose logs on failure
+        if: failure()
+        run: |
+          docker-compose logs --tail=200
+          docker-compose ps
+
+      - name: Teardown
+        if: always()
+        run: make down

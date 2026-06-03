@@ -1,0 +1,133 @@
+# Dev E2E stack — `make e2e` brings this up.
+#
+# Services:
+#   postgres  — primary store
+#   minio     — S3-compatible object storage for rendered MP4s
+#   liquibase — one-shot, runs db/changesets against postgres at boot
+#   app       — FastAPI uvicorn (with hot-reload)
+#
+# Run:
+#   docker-compose up -d              # start
+#   make seed                          # populate demo accounts
+#   curl http://localhost:8000/healthz # sanity
+#   docker-compose down -v             # stop + wipe volumes
+#
+# Env file: docker-compose reads .env from the working directory.
+# Use .env.docker.example as a template; commit nothing with real
+# secrets in it.
+
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: padhai
+      POSTGRES_PASSWORD: padhai
+      POSTGRES_DB: padhai
+    ports:
+      - "5432:5432"
+    volumes:
+      - padhai_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U padhai -d padhai"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # web console
+    volumes:
+      - padhai_minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Create the dev bucket on first run. One-shot — exits when done.
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+      mc alias set local http://minio:9000 minioadmin minioadmin &&
+      (mc mb local/padhai-dev || true) &&
+      mc anonymous set public local/padhai-dev &&
+      echo 'bucket padhai-dev ready'
+      "
+
+  liquibase:
+    image: liquibase/liquibase:4-alpine
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./db/changesets:/liquibase/changelog
+    command: >
+      --url=jdbc:postgresql://postgres:5432/padhai
+      --username=padhai
+      --password=padhai
+      --changeLogFile=001_core_schema.sql
+      update
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+      liquibase:
+        condition: service_completed_successfully
+    environment:
+      # Postgres — uses search_path=public per CLAUDE.md §10
+      DATABASE_URL: postgresql://padhai:padhai@postgres:5432/padhai
+      # JWT + admin
+      PADHAI_JWT_SECRET: ${PADHAI_JWT_SECRET:-dev-jwt-secret-not-for-prod-change-me-please-32chars-at-least}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-dev-admin-secret-not-for-prod-change-me-please-32chars}
+      ADMIN_BOOTSTRAP_TOKEN: ${ADMIN_BOOTSTRAP_TOKEN:-dev-bootstrap-token-replace-me}
+      # Dev affordances
+      PADHAI_REQUIRE_AUTH: "0"
+      APP_ENV: development
+      PADHAI_SKIP_DOTENV: "1"
+      # AI features — leave unset to exercise heuristic fallbacks
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      # Object storage → MinIO
+      S3_ENDPOINT_URL: http://minio:9000
+      S3_BUCKET: padhai-dev
+      AWS_ACCESS_KEY_ID: minioadmin
+      AWS_SECRET_ACCESS_KEY: minioadmin
+      # Razorpay sandbox (optional — leave unset to skip payments E2E)
+      RAZORPAY_KEY_ID: ${RAZORPAY_KEY_ID:-}
+      RAZORPAY_KEY_SECRET: ${RAZORPAY_KEY_SECRET:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      # Source mount → hot-reload
+      - ./padhai:/app/padhai
+      - ./admin:/app/admin
+      - ./scripts:/app/scripts
+      - ./tests:/app/tests
+      - ./cypress:/app/cypress
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+volumes:
+  padhai_pg_data:
+  padhai_minio_data:

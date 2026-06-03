@@ -1,0 +1,49 @@
+# Dev image for docker-compose stack.
+#
+# Differs from production Dockerfile:
+#   - No Piper voice models (~250MB skip)
+#   - No LibreOffice (~400MB skip — dev doesn't need PPTX/DOCX upload)
+#   - Source mounted as volume so code changes hot-reload
+#   - uvicorn --reload instead of gunicorn for live edits
+#
+# Use Dockerfile (no .dev suffix) for production builds; this one is
+# only referenced by docker-compose.yml.
+
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PADHAI_CACHE_DIR=/var/padhai/cache
+
+WORKDIR /app
+
+# Slim system deps — only what the e2e flow actually exercises.
+# ffmpeg: video concat + audio extraction
+# fontconfig + fonts-noto: text rendering for English narration
+# curl + ca-certificates: healthchecks + outbound HTTPS
+# postgresql-client: pg_isready inside healthcheck scripts
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+        ffmpeg \
+        fontconfig \
+        fonts-noto-core \
+        curl \
+        ca-certificates \
+        postgresql-client \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+ && pip install -r requirements.txt
+
+# Code mounted at runtime via docker-compose volumes — keep this
+# layer minimal so rebuilds are fast.
+EXPOSE 8000
+
+# Dev defaults: uvicorn with hot-reload. Compose overrides this when
+# it wants gunicorn parity-test mode.
+CMD ["sh", "-c", "exec python -m uvicorn padhai.web:app \
+    --host 0.0.0.0 --port ${PORT:-8000} \
+    --reload \
+    --log-level info"]
