@@ -64,10 +64,8 @@ CREATE INDEX IF NOT EXISTS idx_audit_target      ON audit_log(target_type, targe
 # ---------- DB plumbing (shared shape with rest of the codebase) ----------
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:

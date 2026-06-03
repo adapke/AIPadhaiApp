@@ -196,10 +196,12 @@ def llm_costs_page(
     if hours not in (24, 24 * 7, 24 * 30):
         hours = 24
     stats = data.llm_cost_stats(hours=float(hours))
+    alerts = data.llm_recent_alerts(hours=float(hours), limit=50)
     return HTMLResponse(render_llm_costs(
         user=user,
         stats=stats,
         selected_hours=hours,
+        alerts=alerts,
     ))
 
 
@@ -208,7 +210,9 @@ def api_llm_costs(
     hours: float = 24.0,
     user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
 ):
-    return data.llm_cost_stats(hours=hours)
+    stats = data.llm_cost_stats(hours=hours)
+    stats["alerts"] = data.llm_recent_alerts(hours=hours, limit=50)
+    return stats
 
 
 # ---------- JSON API ----------

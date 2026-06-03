@@ -405,6 +405,52 @@ def llm_cost_stats(hours: float = 24.0) -> dict:
     }
 
 
+def llm_recent_alerts(hours: float = 24.0, limit: int = 50) -> list[dict]:
+    """Pull recent llm_alerts rows for the admin dashboard.
+
+    Mirrors padhai.llm_obs.recent_alerts() but stays in admin/ so the
+    schema (not the python module) is the cross-service contract.
+    Returns [] when the table doesn't exist yet."""
+    import time as _t
+    since = _t.time() - hours * 3600
+    limit = max(1, min(limit, 500))
+    path = _jobs_db_path()
+    if not path.exists():
+        return []
+    uri = f"file:{path}?mode=ro"
+    try:
+        with sqlite3.connect(uri, uri=True, timeout=10.0) as conn:
+            tbl = conn.execute(
+                "SELECT name FROM sqlite_master "
+                "WHERE type='table' AND name='llm_alerts'"
+            ).fetchone()
+            if not tbl:
+                return []
+            rows = conn.execute(
+                "SELECT id, user_id, day, bucket, cap_paise, "
+                "       spent_paise_at_crossing, subscription_tier, "
+                "       created_at "
+                "FROM llm_alerts WHERE created_at >= ? "
+                "ORDER BY created_at DESC LIMIT ?",
+                (since, limit),
+            ).fetchall()
+    except sqlite3.OperationalError:
+        return []
+    return [
+        {
+            "id": r[0],
+            "user_id": r[1],
+            "day": r[2],
+            "bucket": r[3],
+            "cap_inr": round((r[4] or 0) / 100, 2),
+            "spent_inr_at_crossing": round((r[5] or 0) / 100, 2),
+            "subscription_tier": r[6],
+            "created_at": r[7],
+        }
+        for r in rows
+    ]
+
+
 def _empty_llm_stats(hours: float) -> dict:
     return {
         "hours": hours, "total_calls": 0,

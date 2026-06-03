@@ -4,6 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
+  "description": "Smoke-level golden dataset covering CBSE (Class 8-12), ICSE, Maharashtra State Board, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Target ~100 items at v2; current v1 ships 42 across 5 subject domains × 6 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -88,6 +89,230 @@
       "rubric": "Single-word match.",
       "difficulty": "easy",
       "tags": {"subject": "geography", "board": "Maharashtra"}
+    },
+
+    {
+      "prompt": "Express 0.6 as a fraction in lowest terms.",
+      "expected": {"answer": "3/5"},
+      "rubric": "Accept '3/5'.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+    {
+      "prompt": "What is the LCM of 12 and 18?",
+      "expected": {"answer": "36"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+    {
+      "prompt": "Solve for x: 3(x - 4) = 9.",
+      "expected": {"answer": "7"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "ICSE", "class": "8"}
+    },
+    {
+      "prompt": "Integrate 2x with respect to x. (Constant of integration assumed.)",
+      "expected": {"answer": "x^2"},
+      "rubric": "Accept 'x^2' or 'x²' or 'x*x'.",
+      "difficulty": "medium",
+      "tags": {"subject": "math", "exam": "JEE"}
+    },
+    {
+      "prompt": "What is the value of sin(30 degrees)?",
+      "expected": {"answer": "1/2"},
+      "rubric": "Accept '1/2' or '0.5'.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "What is the slope of the line y = 4x + 7?",
+      "expected": {"answer": "4"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "9"}
+    },
+
+    {
+      "prompt": "Newton's second law states that force equals mass times what?",
+      "expected": {"answer": "acceleration"},
+      "rubric": "Single-word.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "What is the SI unit of pressure?",
+      "expected": {"answer": "pascal"},
+      "rubric": "Accept 'pascal' or 'Pa'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "exam": "NEET"}
+    },
+    {
+      "prompt": "Name the particle that has no electric charge in the atom.",
+      "expected": {"answer": "neutron"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "What is the speed of light in vacuum (in m/s, scientific notation to 1 decimal)?",
+      "expected": {"answer": "3.0e8"},
+      "rubric": "Accept '3.0e8', '3e8', '300000000', '3×10^8'.",
+      "difficulty": "medium",
+      "tags": {"subject": "physics", "exam": "JEE"}
+    },
+
+    {
+      "prompt": "What is the chemical symbol for sodium?",
+      "expected": {"answer": "na"},
+      "rubric": "Case-insensitive 'Na'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "What is the atomic number of carbon?",
+      "expected": {"answer": "6"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "How many electrons are in a neutral oxygen atom?",
+      "expected": {"answer": "8"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "exam": "NEET"}
+    },
+    {
+      "prompt": "What is the pH of pure water at 25 degrees Celsius?",
+      "expected": {"answer": "7"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "Name the longest bone in the human body.",
+      "expected": {"answer": "femur"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "What pigment in plants captures sunlight for photosynthesis?",
+      "expected": {"answer": "chlorophyll"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "What is the basic unit of life?",
+      "expected": {"answer": "cell"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Which organ pumps blood through the human body?",
+      "expected": {"answer": "heart"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "Who was the first Prime Minister of India?",
+      "expected": {"answer": "jawaharlal nehru"},
+      "rubric": "Accept full name lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "gk", "exam": "UPSC"}
+    },
+    {
+      "prompt": "In which year did India gain independence?",
+      "expected": {"answer": "1947"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Name the river that flows through Varanasi.",
+      "expected": {"answer": "ganges"},
+      "rubric": "Accept 'ganges' or 'ganga'.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "exam": "SSC"}
+    },
+    {
+      "prompt": "Which mountain range separates India from Tibet?",
+      "expected": {"answer": "himalayas"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Who is known as the 'Father of the Nation' in India?",
+      "expected": {"answer": "mahatma gandhi"},
+      "rubric": "Accept variants of Gandhi's name.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Name the Indian state with the largest area.",
+      "expected": {"answer": "rajasthan"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "exam": "SSC"}
+    },
+    {
+      "prompt": "Which Indian city is known as the Silicon Valley of India?",
+      "expected": {"answer": "bengaluru"},
+      "rubric": "Accept 'bengaluru' or 'bangalore'.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "exam": "SSC"}
+    },
+    {
+      "prompt": "Who composed the music for the Indian national anthem 'Jana Gana Mana'?",
+      "expected": {"answer": "rabindranath tagore"},
+      "rubric": "Full name lowercase.",
+      "difficulty": "medium",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "What is the official currency of India?",
+      "expected": {"answer": "rupee"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "gk", "exam": "SSC"}
+    },
+
+    {
+      "prompt": "Which Article of the Indian Constitution provides the right to constitutional remedies?",
+      "expected": {"answer": "article 32"},
+      "rubric": "Accept 'Article 32' or '32'.",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which Schedule of the Indian Constitution lists the official languages?",
+      "expected": {"answer": "eighth schedule"},
+      "rubric": "Accept '8th schedule' or 'eighth'.",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+
+    {
+      "prompt": "What is the capital of Karnataka state?",
+      "expected": {"answer": "bengaluru"},
+      "rubric": "Accept 'bengaluru' or 'bangalore'.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "Karnataka"}
+    },
+    {
+      "prompt": "What is the capital of Tamil Nadu state?",
+      "expected": {"answer": "chennai"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "TamilNadu"}
     }
   ]
 }

@@ -59,10 +59,8 @@ VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:

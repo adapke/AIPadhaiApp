@@ -348,10 +348,16 @@ does not adopt COPPA's 13-year carve-out).
 
 ## 10. Database
 
-### Dev (default — no `DATABASE_URL`)
+### Dev / single-server (default — no `DATABASE_URL`)
 
-SQLite at `padhai.db` in repo root (or `~/.padhai/jobs.db` for the
-DPDP module). Auto-created on startup.
+Every module shares one SQLite file resolved by
+`padhai.db.sqlite_path()`:
+
+- Env override: `PADHAI_DB_PATH` (absolute or `~`-prefixed)
+- Default: `~/.padhai/jobs.db`
+
+Auto-created on startup; each module's `migrate()` runs from the
+FastAPI lifespan hook.
 
 ### Production (`DATABASE_URL` set)
 
@@ -363,6 +369,39 @@ schema migrations fail with "no schema selected" on fresh databases.
 
 Postgres migrations managed by Liquibase at `db/changesets/001_core_schema.sql`.
 The first changeset always runs `SET search_path TO public`.
+
+### Backups (SQLite mode)
+
+SQLite has no replication; a single-server SQLite deployment is one
+disk failure from total data loss. Use the online-backup API so the
+copy is consistent under concurrent writes — never just `cp` the
+`.db` file mid-flight.
+
+```bash
+# Daily snapshot — runs against a live DB without blocking writers
+DB="${PADHAI_DB_PATH:-$HOME/.padhai/jobs.db}"
+TARGET="$HOME/.padhai/backups/jobs_$(date -u +%Y%m%d_%H%M%S).db"
+mkdir -p "$(dirname "$TARGET")"
+sqlite3 "$DB" ".backup '$TARGET'"
+
+# Compress + retain the last 14 days
+gzip -9 "$TARGET"
+find "$HOME/.padhai/backups" -name 'jobs_*.db.gz' -mtime +14 -delete
+```
+
+Add to cron (`crontab -e`):
+
+```cron
+# Hourly online backup of the local SQLite DB
+17 * * * * /usr/local/bin/padhai-backup.sh >> /var/log/padhai-backup.log 2>&1
+```
+
+**Restore**: stop the server, gunzip the snapshot to
+`$PADHAI_DB_PATH`, restart. Schema migrations re-run idempotently on
+the next boot — they're all `CREATE TABLE IF NOT EXISTS`.
+
+For Postgres deployments, use `pg_dump` + your provider's PITR; this
+SQLite procedure does not apply.
 
 ### Tables
 
@@ -582,24 +621,57 @@ Reviewed 2026-06-03. Re-audit before changing.
   in `tests/conftest.py` clears the session-scoped `TestClient` cookie
   jar before every test. Stops `pathshala_token` from leaking across
   tests and masking "requires auth" assertions.
+- **LLM cost alerts in admin UI.** `/admin/llm-costs` shows a
+  "Users approaching / over budget" table sourced from
+  `admin/data.py:llm_recent_alerts()`. Tier + bucket% + spent/cap
+  per row with a summary chip ("N approaching, M blocked").
+- **Modules consolidated on shared SQLite path.** All 74 modules in
+  `padhai/` now delegate `_db_path()` to `padhai.db.sqlite_path()`
+  instead of duplicating the env-lookup boilerplate. Two-line
+  one-time replacement; consistent default in every module forever.
+- **Central LLM-call wrapper.** New `padhai/llm_call.py` collapses
+  `client.messages.create` + `llm_obs.record_call` + cap pre-flight
+  into one helper (`call_claude()`). New surfaces start automatically
+  cost-tracked; existing surfaces can migrate opportunistically.
+- **Multi-page video stitching.** `GET /jobs/{leader_id}/combined.mp4`
+  ffmpeg-concats every ready sibling page into one MP4, cached on
+  disk keyed by the participating job ids so partial bundles don't
+  shadow later full ones. `GET /jobs/{id}/combined` returns the JSON
+  status ("3 of 5 pages ready"). `JobStore.find_siblings(leader_id)`
+  is the underlying SQL — uses sqlite's json_extract on the payload.
+- **Accuracy bench dataset expanded.** Golden answers grew from
+  12 → 43 items across CBSE (Class 6-12), ICSE, Maharashtra, TamilNadu,
+  Karnataka, JEE, NEET, UPSC, SSC. Five subject domains: math,
+  physics, chemistry, biology, polity/geography/history/gk.
+- **Mobile interaction Cypress specs.** `cypress/e2e/16-mobile-interactions.cy.js`
+  drives the SPA from the three shell entry URLs — checks the
+  sign-in affordance is present, mode=parent/teacher query params
+  flow into `localStorage.padhai_role`, and PWA-cacheable endpoints
+  (`/manifest.json`, `/api/ai-status`) return the shape the shells
+  cache for offline boot.
+- **SQLite backup procedure.** §10 now documents the sqlite3
+  online-backup pattern (`sqlite3 … ".backup"`) with a cron example
+  and 14-day retention. Closes the "single-server one-disk-failure
+  away from data loss" gap.
 
 ### Still pending / next up
 
-1. **Mobile QA depth.** Capacitor shell loads, but only one Cypress smoke
-   spec covers it. Add interaction specs (login, lesson playback, offline
-   notes) once a CI lane can drive the Capacitor `WebView` directly.
-2. **Accuracy bench coverage.** Golden dataset is intentionally small
-   (12 items) and structural-only on PRs. Expand to ≥100 items across
-   UPSC / JEE / NEET / CBSE; then turn the nightly live-mode gate from
-   advisory to blocking.
-3. **Multi-page video stitching.** `/lessons` fanout now stamps
-   `parent_job_id` + `page_number` on sibling jobs and `GET /jobs/{id}`
-   surfaces them, but there's no ffmpeg concat into one final MP4 yet —
-   needs a `document_pages` table + sibling-job sync in the worker.
+1. **Accuracy bench coverage to 100+.** Dataset at 43 items now;
+   target ≥100 across UPSC / JEE / NEET / CBSE. Then flip the
+   nightly live-mode gate from advisory to blocking.
+2. **Multi-page worker auto-trigger.** `/jobs/{id}/combined.mp4`
+   stitches on demand; no worker auto-runs it on the last sibling's
+   completion. Adding a "combine" job kind that depends on the
+   sibling set would let the UI poll one endpoint instead of N.
+3. **Mobile Cypress against the Capacitor WebView.** `16-mobile-interactions`
+   exercises the SPA but not the native bridge (camera, push,
+   filesystem). Needs a CI lane with a Capacitor build + emulator.
 4. **Architectural debt.** `padhai/web.py` is 15k+ lines / 729 routes;
-   every module rolls its own `_conn()` + schema; no central
-   LLM-call wrapper (each surface duplicates `client.messages.create`
-   + `llm_obs.record_call`). Splitting these is a long-running cleanup.
+   every module still has its own `_conn()` + schema (the path is
+   now shared but each module's connection is still local). Splitting
+   web.py is a long-running cleanup.
+5. **SMS provider matrix.** `messaging.py:814` still has a TODO for
+   non-msg91 providers (twilio, kaleyra, …).
 
 ---
 

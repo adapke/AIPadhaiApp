@@ -538,6 +538,7 @@ def render_llm_costs(
     user: AdminUser,
     stats: dict,
     selected_hours: int,
+    alerts: list[dict] | None = None,
 ) -> str:
     """LLM usage + cost dashboard. Reads from llm_calls (written by
     padhai/llm_obs.py) — see admin/data.py:llm_cost_stats."""
@@ -641,6 +642,8 @@ def render_llm_costs(
       </table>
     </div>
 
+    {_render_alerts_block(alerts or [])}
+
     <style>
       .window-chip {{
         padding:6px 12px; border-radius:99px; border:1px solid var(--line);
@@ -651,6 +654,61 @@ def render_llm_costs(
       }}
       .window-chip:hover {{ background:var(--brand-soft); text-decoration:none; }}
       .window-chip.active:hover {{ background:var(--purple); color:#fff; }}
+      .bucket-pill {{ display:inline-block; padding:2px 10px;
+        border-radius:99px; font-size:11px; font-weight:600;
+        letter-spacing:0.04em; }}
+      .bucket-80 {{ background:#fef3c7; color:#92400e; }}
+      .bucket-100 {{ background:#fee2e2; color:#991b1b; }}
     </style>
     """
     return render_layout("LLM costs", body, user=user)
+
+
+def _render_alerts_block(alerts: list[dict]) -> str:
+    """Section under the LLM-costs dashboard listing recent
+    threshold-crossing alerts. Empty list → no section rendered."""
+    if not alerts:
+        return ""
+
+    def _fmt_user(uid):
+        return _escape((uid or "")[:14] + ("..." if uid and len(uid) > 14 else ""))
+
+    def _bucket_pill(bucket):
+        cls = f"bucket-pill bucket-{_escape(bucket)}"
+        return f'<span class="{cls}">{_escape(bucket)}%</span>'
+
+    rows = "".join(
+        f"<tr>"
+        f"<td>{_fmt_time(a['created_at'])}</td>"
+        f"<td><code>{_fmt_user(a['user_id'])}</code></td>"
+        f"<td>{_escape(a.get('subscription_tier') or '—')}</td>"
+        f"<td>{_bucket_pill(a['bucket'])}</td>"
+        f"<td>&#8377;{a['spent_inr_at_crossing']:,.2f} / "
+        f"&#8377;{a['cap_inr']:,.2f}</td>"
+        f"</tr>"
+        for a in alerts
+    )
+
+    n_at_cap = sum(1 for a in alerts if a["bucket"] == "100")
+    n_warn = sum(1 for a in alerts if a["bucket"] == "80")
+    summary_chip = (
+        f'<span class="bucket-pill bucket-80">{n_warn} approaching</span>  '
+        f'<span class="bucket-pill bucket-100">{n_at_cap} blocked</span>'
+    )
+
+    return f"""
+    <div class="card" style="margin-top:18px;">
+      <h2>Users approaching / over budget {summary_chip}</h2>
+      <p style="color:var(--muted); margin-top:-12px;">
+        Soft alert at 80% of daily cap; hard alert at 100% (user is
+        being refused new AI calls). Idempotent — one row per user per
+        day per bucket. Tunable via <code>PADHAI_LLM_ALERT_PCT</code>.
+      </p>
+      <table>
+        <thead><tr>
+          <th>When</th><th>User</th><th>Tier</th><th>Bucket</th><th>Spent / Cap</th>
+        </tr></thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
+    """

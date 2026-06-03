@@ -201,6 +201,36 @@ class JobStore:
             ).fetchall()
         return [r[0] for r in rows]
 
+    def find_siblings(self, leader_id: str) -> list["Job"]:
+        """Return all sibling jobs (parent_job_id == leader_id) plus
+        the leader itself, sorted by page_number. Used by the
+        multi-page video stitcher to discover every page job belonging
+        to one upload.
+
+        SQLite's json_extract returns NULL for jobs that don't carry
+        the field — those are filtered out by the WHERE clause.
+        Returns [] when nothing matches the leader_id (single-page
+        uploads have no siblings)."""
+        out: list["Job"] = []
+        # Pull the leader itself (page_number=1, no parent_job_id) ...
+        leader = self.get(leader_id)
+        if leader is not None:
+            out.append(leader)
+        # ... then the siblings.
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT id FROM jobs "
+                "WHERE json_extract(payload, '$.parent_job_id') = ? "
+                "ORDER BY CAST(json_extract(payload, '$.page_number') "
+                "         AS INTEGER)",
+                (leader_id,),
+            ).fetchall()
+        for (sid,) in rows:
+            j = self.get(sid)
+            if j is not None:
+                out.append(j)
+        return out
+
     def pending_ids(self) -> list[str]:
         """Jobs left in queued/running state — used to resume on restart."""
         with self._connect() as conn:

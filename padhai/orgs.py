@@ -228,10 +228,8 @@ CREATE INDEX IF NOT EXISTS idx_fee_inv_status ON org_fee_invoices(status);
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn(read_only: bool = False) -> sqlite3.Connection:

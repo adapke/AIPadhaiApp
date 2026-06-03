@@ -130,10 +130,8 @@ _CODE_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{2,31}$")
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:

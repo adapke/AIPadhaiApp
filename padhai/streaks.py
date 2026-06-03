@@ -69,10 +69,8 @@ LEVEL_THRESHOLDS = [0, 100, 300, 600, 1000, 1600, 2500, 3800, 5500, 8000]
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:

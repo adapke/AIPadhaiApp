@@ -24,6 +24,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import tempfile
 import threading
 import time
@@ -14337,6 +14338,165 @@ def get_job_video(job_id: str, request: Request):
     if output_path.exists():
         return FileResponse(output_path, media_type="video/mp4", filename="lesson.mp4")
     raise HTTPException(500, "output missing")
+
+
+def _stitch_page_videos(leader_id: str) -> tuple[Path, list[dict]]:
+    """Concat all page MP4s belonging to one multi-page upload into a
+    single combined.mp4. Returns (path_to_combined_mp4, page_info[]).
+
+    Each entry in page_info is `{job_id, page_number, status}` so the
+    caller can render a "Pages 1, 2, 4 combined (page 3 still rendering)"
+    notice in the UI.
+
+    Pages that are still queued/running or failed are SKIPPED — we
+    ship what's ready rather than blocking the whole bundle on one
+    slow page. The combined file is regenerated on each request when
+    the set of available pages changes (we hash the participating
+    job ids into the filename so a partial bundle never overwrites a
+    later full bundle on disk).
+    """
+    import hashlib
+    import subprocess
+
+    pages = store.find_siblings(leader_id)
+    if not pages:
+        raise HTTPException(404, "no page jobs found for this leader")
+    if len(pages) < 2:
+        # Single-page upload — caller should use /jobs/{id}/video.
+        raise HTTPException(
+            409,
+            "this isn't a multi-page upload; use /jobs/{id}/video instead",
+        )
+
+    ready: list[tuple[int, Path, "Job"]] = []
+    page_info: list[dict] = []
+    for j in pages:
+        page_n = (j.payload or {}).get("page_number") or 0
+        status = j.status
+        page_info.append({
+            "job_id": j.id, "page_number": page_n, "status": status,
+        })
+        if status != "succeeded":
+            continue
+        try:
+            mp4 = _locate_mp4(j)
+            ready.append((int(page_n or 0), mp4, j))
+        except HTTPException:
+            continue
+    if not ready:
+        raise HTTPException(
+            409,
+            f"no page videos ready yet ({len(pages)} pages, none succeeded)",
+        )
+    ready.sort(key=lambda t: t[0])
+
+    # Hash the participating job ids so a partial combine doesn't
+    # shadow a later full one on disk.
+    sig = hashlib.sha256(
+        ",".join(j.id for _, _, j in ready).encode("utf-8"),
+    ).hexdigest()[:12]
+    combined_path = _OUTPUT_DIR / f"{leader_id}_combined_{sig}.mp4"
+    if combined_path.exists():
+        return combined_path, page_info
+
+    if shutil.which("ffmpeg") is None:
+        raise HTTPException(500, "ffmpeg not on PATH")
+
+    # ffmpeg's concat demuxer reads a manifest file of `file '<path>'`
+    # lines. Use that — it's safer than the `concat:` protocol which
+    # only works for some codecs.
+    manifest = _OUTPUT_DIR / f"{leader_id}_combined_{sig}.txt"
+    manifest.write_text(
+        "\n".join(
+            f"file '{str(mp4).replace(chr(39), chr(92) + chr(39))}'"
+            for _, mp4, _ in ready
+        ),
+        encoding="utf-8",
+    )
+    try:
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+                "-i", str(manifest),
+                "-c", "copy",
+                str(combined_path),
+            ],
+            check=True,
+            capture_output=True,
+        )
+    except subprocess.CalledProcessError as e:
+        stderr = (e.stderr or b"").decode("utf-8", errors="replace")[:500]
+        raise HTTPException(500, f"ffmpeg concat failed: {stderr}")
+    finally:
+        manifest.unlink(missing_ok=True)
+    return combined_path, page_info
+
+
+@app.get("/jobs/{job_id}/combined.mp4")
+def get_combined_video(job_id: str, request: Request):
+    """Return one stitched MP4 covering every successfully-rendered
+    page of a multi-page upload. The leader job is the parent (page 1
+    of the upload); siblings have payload.parent_job_id == leader.id.
+
+    409 when no page videos are ready yet, 404 when leader_id is not a
+    multi-page upload, 500 when ffmpeg isn't available. The combined
+    file is cached on local disk keyed by the participating job ids,
+    so partial bundles don't shadow later full bundles.
+    """
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    # CDN: skip — the combined file is request-derived from N source
+    # MP4s and the set changes over time, so caching at the edge
+    # would serve stale bundles.
+    combined_path, _info = _stitch_page_videos(job_id)
+    return FileResponse(
+        combined_path,
+        media_type="video/mp4",
+        filename=f"lesson_{job_id}_combined.mp4",
+    )
+
+
+@app.get("/jobs/{job_id}/combined")
+def get_combined_status(job_id: str):
+    """JSON view of the multi-page combine status — used by the SPA to
+    show "3 of 5 pages ready" before linking to the actual MP4."""
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    pages = store.find_siblings(job_id)
+    if len(pages) < 2:
+        return {
+            "is_multi_page": False,
+            "leader_job_id": job_id,
+            "page_count": len(pages),
+        }
+    by_status: dict[str, int] = {}
+    for j in pages:
+        by_status[j.status] = by_status.get(j.status, 0) + 1
+    return {
+        "is_multi_page": True,
+        "leader_job_id": job_id,
+        "page_count": len(pages),
+        "by_status": by_status,
+        "ready_pages": by_status.get("succeeded", 0),
+        "combined_video_url": (
+            f"/jobs/{job_id}/combined.mp4"
+            if by_status.get("succeeded", 0) > 0 else None
+        ),
+        "pages": [
+            {
+                "job_id": j.id,
+                "page_number": (j.payload or {}).get("page_number"),
+                "status": j.status,
+                "video_url": (
+                    f"/jobs/{j.id}/video" if j.status == "succeeded"
+                    else None
+                ),
+            }
+            for j in pages
+        ],
+    }
 
 
 def _locate_mp4(job: "Job") -> Path:
