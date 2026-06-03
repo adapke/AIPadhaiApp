@@ -118,10 +118,8 @@ OPENING_QUESTIONS = {
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:
@@ -417,6 +415,7 @@ def _grade_answer(
         _llm_obs.check_daily_cap(user_id=user_id, subscription_tier=user_tier)
     except _llm_obs.BudgetExceeded as e:
         result = _heuristic_feedback(answer)
+        result["method"] = f"budget_{e.reason}"
         result["summary"] = (
             (f"Daily AI budget reached. " if e.reason == "over_budget"
              else "Mock-interview AI grading is premium. ")
@@ -430,6 +429,7 @@ def _grade_answer(
         return result
     if not os.environ.get("ANTHROPIC_API_KEY"):
         result = _heuristic_feedback(answer)
+        result["method"] = "heuristic_no_key"
         _record_mi_provenance(
             track=track, question=question, answer=answer,
             user_id=user_id, feedback=result, ai_call_id=None,

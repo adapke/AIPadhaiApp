@@ -235,9 +235,18 @@ def _get_user_repo():
         db_url = os.environ.get("DATABASE_URL")
         _log.debug("_get_user_repo: DATABASE_URL=%s", "SET" if db_url else "MISSING")
         if not db_url:
-            # Dev / single-server mode: SQLite-backed auth
-            _user_repo = SQLiteUserRepository("padhai.db")
-            _log.info("_get_user_repo: using SQLiteUserRepository (no DATABASE_URL)")
+            # Dev / single-server mode: SQLite-backed auth.
+            # Default path now resolves via padhai.db.sqlite_path() so
+            # the users table lives in the same SQLite file as every
+            # other module's tables — without that, DPDP consent
+            # redemption (and any other cross-module write to `users`)
+            # would write into the wrong DB and 500.
+            _user_repo = SQLiteUserRepository()
+            _log.info(
+                "_get_user_repo: using SQLiteUserRepository at %s "
+                "(no DATABASE_URL)",
+                _user_repo._db_path,
+            )
             return _user_repo
         try:
             if _pg_store is None:

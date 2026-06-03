@@ -94,10 +94,10 @@ CREATE TABLE IF NOT EXISTS parent_consent_outbox (
 
 
 def _db_path() -> Path:
-    custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        return Path(custom).expanduser()
-    return Path.home() / ".padhai" / "jobs.db"
+    # Shared helper — keeps every module in lockstep on which SQLite
+    # file holds dev-mode state. See padhai/db.py:sqlite_path().
+    from . import db as _db
+    return _db.sqlite_path()
 
 
 def _conn() -> sqlite3.Connection:

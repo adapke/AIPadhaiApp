@@ -463,3 +463,39 @@ def get_db_url() -> str | None:
 def use_postgres() -> bool:
     url = (get_db_url() or "").strip()
     return url.startswith(("postgres://", "postgresql://"))
+
+
+# ---------- shared SQLite path resolution ----------
+#
+# Most padhai modules keep their own table schemas but write into a
+# *shared* SQLite file when DATABASE_URL is unset. The convention is:
+#
+#   1. If env `PADHAI_DB_PATH` is set, use that file.
+#   2. Otherwise default to `~/.padhai/jobs.db`.
+#
+# Every module copy-pasted a 5-line `_db_path()` doing exactly this.
+# This helper centralises it so:
+#   • A misconfigured module (the bug behind #22 — auth.py defaulting
+#     to `padhai.db` instead of `~/.padhai/jobs.db`) can't desync
+#     from the rest of the app.
+#   • Tests + QA harnesses get one canonical override knob.
+#   • New modules just call `padhai.db.sqlite_path()` — no
+#     boilerplate, no chance of typoing the env key.
+
+
+def sqlite_path() -> "Path":
+    """Resolve the SQLite file every padhai module writes into.
+
+    Env override: `PADHAI_DB_PATH`. Default: `~/.padhai/jobs.db`.
+
+    Creates the parent directory eagerly so the caller can do
+    `sqlite3.connect(str(sqlite_path()))` without a missing-dir
+    failure on a fresh box."""
+    from pathlib import Path as _Path
+    custom = os.environ.get("PADHAI_DB_PATH")
+    if custom:
+        path = _Path(custom).expanduser()
+    else:
+        path = _Path.home() / ".padhai" / "jobs.db"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    return path

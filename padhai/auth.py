@@ -216,8 +216,16 @@ class SQLiteUserRepository:
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     """
 
-    def __init__(self, db_path: str = "padhai.db"):
+    def __init__(self, db_path: str | None = None):
+        """When `db_path` is None we use the project-wide shared
+        SQLite file (env `PADHAI_DB_PATH` → `~/.padhai/jobs.db`) so
+        the `users` table lives in the same DB as every other module's
+        tables. Passing an explicit path is supported for tests that
+        want isolation."""
         import sqlite3, uuid as _uuid
+        if db_path is None:
+            from . import db as _db
+            db_path = str(_db.sqlite_path())
         self._db_path = db_path
         self._uuid = _uuid
         conn = sqlite3.connect(db_path)
