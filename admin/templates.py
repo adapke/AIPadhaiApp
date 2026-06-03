@@ -101,6 +101,7 @@ def render_layout(title: str, body: str, user: AdminUser | None = None) -> str:
         ("/admin/", "Dashboard"),
         ("/admin/jobs", "Jobs"),
         ("/admin/topics", "Topics & Languages"),
+        ("/admin/llm-costs", "LLM Costs"),
     ]
     nav_html = "".join(
         f'<a href="{path}" class="nav-link">{_escape(label)}</a>'
@@ -530,3 +531,126 @@ def render_topics(*, user, topics, languages) -> str:
     </div>
     """
     return render_layout("Topics & languages", body, user=user)
+
+
+def render_llm_costs(
+    *,
+    user: AdminUser,
+    stats: dict,
+    selected_hours: int,
+) -> str:
+    """LLM usage + cost dashboard. Reads from llm_calls (written by
+    padhai/llm_obs.py) — see admin/data.py:llm_cost_stats."""
+
+    def _fmt_int(n: int) -> str:
+        return f"{n:,}"
+
+    def _fmt_inr(amount: float) -> str:
+        return f"&#8377;{amount:,.2f}"
+
+    window_options = [(24, "Last 24h"), (24 * 7, "Last 7d"), (24 * 30, "Last 30d")]
+    window_html = "".join(
+        f'<a href="/admin/llm-costs?hours={hours}" '
+        f'class="window-chip{" active" if hours == selected_hours else ""}">'
+        f'{label}</a>'
+        for hours, label in window_options
+    )
+
+    module_rows = "".join(
+        f"<tr><td>{_escape(m['module'])}</td>"
+        f"<td>{_fmt_int(m['calls'])}</td>"
+        f"<td>{_fmt_int(m['tokens'])}</td>"
+        f"<td>{_fmt_inr(m['cost_inr'])}</td></tr>"
+        for m in stats["by_module"]
+    ) or '<tr><td colspan="4" style="color:var(--muted); padding:20px;">No LLM calls yet in this window.</td></tr>'
+
+    model_rows = "".join(
+        f"<tr><td><code>{_escape(m['model'])}</code></td>"
+        f"<td>{_fmt_int(m['calls'])}</td>"
+        f"<td>{_fmt_int(m['tokens'])}</td>"
+        f"<td>{_fmt_inr(m['cost_inr'])}</td></tr>"
+        for m in stats["by_model"]
+    ) or '<tr><td colspan="4" style="color:var(--muted); padding:20px;">No LLM calls yet in this window.</td></tr>'
+
+    user_rows = "".join(
+        f"<tr><td><code>{_escape(u['user_id'][:14])}…</code></td>"
+        f"<td>{_fmt_int(u['calls'])}</td>"
+        f"<td>{_fmt_inr(u['cost_inr'])}</td></tr>"
+        for u in stats["top_users"]
+    ) or '<tr><td colspan="3" style="color:var(--muted); padding:20px;">No per-user attribution yet.</td></tr>'
+
+    body = f"""
+    <h1>LLM costs</h1>
+    <p style="color:var(--muted); margin-top:-12px;">
+      Per-prompt token + INR cost tracking sourced from <code>llm_calls</code>.
+      Drives daily caps + the cost-saving review. Cached calls get the
+      90% input-token discount baked into the rollup.
+    </p>
+
+    <div class="window-bar" style="display:flex; gap:8px; margin-bottom:16px;">
+      {window_html}
+    </div>
+
+    <div class="grid grid-4">
+      <div class="stat">
+        <div class="label">Total calls</div>
+        <div class="value">{_fmt_int(stats['total_calls'])}</div>
+        <div class="sub">Cache hits: {stats['cache_hit_pct']}%</div>
+      </div>
+      <div class="stat">
+        <div class="label">Total cost</div>
+        <div class="value">{_fmt_inr(stats['total_cost_inr'])}</div>
+        <div class="sub">All Anthropic models</div>
+      </div>
+      <div class="stat">
+        <div class="label">Tokens (in / out)</div>
+        <div class="value" style="font-size:22px;">
+          {_fmt_int(stats['tokens_in'])} / {_fmt_int(stats['tokens_out'])}
+        </div>
+        <div class="sub">Across all calls</div>
+      </div>
+      <div class="stat">
+        <div class="label">Avg latency</div>
+        <div class="value">{_fmt_int(stats['avg_latency_ms'])}<span style="font-size:14px; color:var(--muted);"> ms</span></div>
+        <div class="sub">P50 across calls</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:18px;">
+      <div class="card">
+        <h2>By module</h2>
+        <table>
+          <thead><tr><th>Module</th><th>Calls</th><th>Tokens</th><th>Cost (INR)</th></tr></thead>
+          <tbody>{module_rows}</tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>By model</h2>
+        <table>
+          <thead><tr><th>Model</th><th>Calls</th><th>Tokens</th><th>Cost (INR)</th></tr></thead>
+          <tbody>{model_rows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <h2>Top 10 users by spend</h2>
+      <table>
+        <thead><tr><th>User</th><th>Calls</th><th>Cost (INR)</th></tr></thead>
+        <tbody>{user_rows}</tbody>
+      </table>
+    </div>
+
+    <style>
+      .window-chip {{
+        padding:6px 12px; border-radius:99px; border:1px solid var(--line);
+        background:#fff; color:var(--ink); font-size:13px; font-weight:500;
+      }}
+      .window-chip.active {{
+        background:var(--brand); color:#fff; border-color:var(--brand);
+      }}
+      .window-chip:hover {{ background:var(--brand-soft); text-decoration:none; }}
+      .window-chip.active:hover {{ background:var(--purple); color:#fff; }}
+    </style>
+    """
+    return render_layout("LLM costs", body, user=user)

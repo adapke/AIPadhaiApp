@@ -480,25 +480,67 @@ PID file: `.padhai_server.pid`. Log file: `padhai_server.log`.
 
 ---
 
-## 16. Pending P1 Work (Not Yet Implemented)
+## 16. P1 Work Status
 
-These are the next priority items from the QA review. Do not mark as done
-until fully shipped.
+Reviewed 2026-06-03. Re-audit before changing.
 
-1. **Source-grounded RAG** — lesson generation should cite source pages; no
-   hallucination guard exists yet
-2. **Exam taxonomy** — `exam_taxonomy.py` exists but is not wired to the
-   lesson pipeline's board/level filtering
-3. **Accuracy benchmark** — `accuracy_bench.py` has scaffolding but no
-   automated CI run; needs a golden-answer dataset
-4. **Provider validation** — at startup, validate configured avatar/TTS
-   provider API keys and fail fast with a clear error
-5. **Mobile QA** — mobile layout not tested in Cypress; Capacitor wrapper
-   at `mobile/` is not wired to the main app
-6. **Payments** — `razorpay_client.py` exists but `POST /payments` and
-   subscription upgrade flow are not wired in `web.py`
-7. **Observability** — `observability.py` and `llm_obs.py` exist but LLM
-   cost tracking is not surfaced in the admin dashboard
+### Done
+
+- **Provider validation at startup** — `_PROVIDER_KEY_SPECS` in
+  `padhai/web.py:505-570` validates 16 provider keys (Anthropic, HeyGen,
+  D-ID, ElevenLabs, Sarvam, Bhashini, Razorpay, etc.) by prefix + length
+  + placeholder detection. `_validate_provider_keys()` runs in the
+  FastAPI lifespan at line 940. Fails hard in `APP_ENV=production`,
+  warns in dev.
+- **Payments (Razorpay)** — `razorpay_client.py` wired in `web.py`:
+  `POST /api/payments` creates orders + verifies signatures (lines
+  13008-13038), `POST /api/webhooks/razorpay` (line 13049) handles
+  webhook events. Subscription tier upgrades flow through `auth.py`.
+- **RAG citations — tutor + lesson** — `padhai/tutor.py` records
+  provenance via `tutor_grounding.send_grounded_message()` →
+  `citations.record_answer()`. `padhai/pedagogy.py:generate_lesson()`
+  now accepts `user_id` / `source_upload_id` / `source_page_number` and
+  calls `_record_lesson_provenance()` after generation. Web/render job
+  threads `user_id` and `upload_id` from the job payload into both.
+- **Exam taxonomy → lesson filter** — `exam_taxonomy.taxonomy_scope_for_user()`
+  resolves a user's most-recent active enrollment to `(exam_code, board_hint,
+  chapter_titles, scope_summary)`. `pedagogy.generate_lesson()` auto-fills
+  `board_hint` from the scope and injects `Syllabus scope: …` into the
+  prompt via `build_user_text(taxonomy_scope=…)`.
+- **Accuracy benchmark CI** — `tests/fixtures/golden_answers.json`
+  carries 12 seed items across CBSE / JEE / NEET / UPSC / Maharashtra.
+  `scripts/run_accuracy_bench.py` drives `accuracy_bench.run_benchmark()`
+  in structural mode (every PR, stub runner, no Anthropic key) and live
+  mode (nightly cron or `workflow_dispatch`, real Claude calls).
+  `.github/workflows/accuracy-bench.yml` is the wiring.
+- **Mobile shell wiring** — `mobile/scripts/configure-server.cjs` reads
+  `CAPACITOR_SERVER_URL` (default `http://10.0.2.2:8000` for Android
+  emulator) and rewrites `server.url` + `cleartext` + `androidScheme`
+  across the student / parent / teacher Capacitor configs.
+  `mobile/package.json` npm scripts (`build`, `build:prod`, `android:run`,
+  …) invoke it before `cap sync`. Cypress smoke at
+  `cypress/e2e/15-mobile-shell.cy.js` hits the three shell entry URLs.
+- **LLM cost in admin** — `/admin/llm-costs` (and JSON sibling
+  `/admin/api/llm-costs`) reads from `llm_calls` via
+  `admin/data.py:llm_cost_stats()`. UI in `admin/templates.py:render_llm_costs()`
+  with 24h / 7d / 30d window chips, by-module + by-model tables, and the
+  top 10 users by spend. Admin still doesn't import `padhai.*` — the
+  schema is the contract.
+
+### Still pending / next up
+
+1. **RAG citations — surface coverage.** Tutor + lesson record citations;
+   Essay Grader, Mock Interview, and Doubt Clearing still don't. Decide
+   per-surface whether `source_only` / `official` modes apply.
+2. **Mobile QA depth.** Capacitor shell loads, but only one Cypress smoke
+   spec covers it. Add interaction specs (login, lesson playback, offline
+   notes) once a CI lane can drive the Capacitor `WebView` directly.
+3. **Accuracy bench coverage.** Golden dataset is intentionally small
+   (12 items) and structural-only on PRs. Expand to ≥100 items across
+   UPSC / JEE / NEET / CBSE; then turn the nightly live-mode gate from
+   advisory to blocking.
+4. **Observability depth.** Cost page exists; per-user daily cap
+   enforcement and alert thresholds are not wired yet.
 
 ---
 

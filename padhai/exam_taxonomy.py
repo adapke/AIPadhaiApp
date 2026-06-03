@@ -826,3 +826,82 @@ def pack_stats(pack_code: str) -> dict:
             if total else 0.0
         ),
     }
+
+
+# Map an exam body code → the board_hint key pedagogy.BOARD_GUIDANCE expects.
+# Anything not listed here falls back to the body code uppercased.
+_BODY_TO_BOARD_HINT: dict[str, str] = {
+    "cbse": "CBSE",
+    "icse": "ICSE",
+    "igcse": "IGCSE",
+    "maharashtra": "Maharashtra",
+    "karnataka": "Karnataka",
+    "tamil_nadu": "TamilNadu",
+    "ap_telangana": "AP_Telangana",
+    "up_board": "UP",
+    "nta": "JEE",   # NTA conducts both JEE Main and NEET — JEE is the safer default
+    "upsc": "UPSC",
+    "ssc": "SSC",
+}
+
+# Map specific exam codes that should override the body-level mapping. NEET
+# is conducted by NTA but should use the NEET guidance, not JEE.
+_EXAM_TO_BOARD_HINT: dict[str, str] = {
+    "neet_ug": "NEET",
+    "neet_pg": "NEET",
+    "jee_main": "JEE",
+    "jee_advanced": "JEE",
+    "upsc_cse": "UPSC",
+    "ssc_cgl": "SSC",
+    "ssc_chsl": "SSC",
+}
+
+
+def board_hint_for_exam(exam_code: str) -> str | None:
+    """Translate an exam code to the BOARD_GUIDANCE key used by
+    pedagogy. Returns None when no mapping exists."""
+    if exam_code in _EXAM_TO_BOARD_HINT:
+        return _EXAM_TO_BOARD_HINT[exam_code]
+    exam = get_exam(exam_code)
+    if not exam:
+        return None
+    return _BODY_TO_BOARD_HINT.get(exam.body_code)
+
+
+def taxonomy_scope_for_user(user_id: str) -> dict | None:
+    """Derive a lesson-generation scope from the user's most recent
+    active exam-pack enrollment. Used by pedagogy.generate_lesson to
+    auto-fill board_hint and inject an in-scope topic list into the
+    prompt.
+
+    Returns None when the user has no active enrollment (lesson
+    generation then falls back to the caller-supplied board_hint, or
+    no guidance at all).
+    """
+    enrollments = [
+        e for e in list_user_enrollments(user_id) if e.status == "active"
+    ]
+    if not enrollments:
+        return None
+    pack = get_pack(enrollments[0].pack_code)
+    if not pack:
+        return None
+    exam = get_exam(pack.exam_code)
+    if not exam:
+        return None
+    chapters = list_topics(exam.code, parent_id=None, depth=0)
+    chapter_titles = [c.title for c in chapters][:40]
+    board_hint = board_hint_for_exam(exam.code)
+    scope_summary = (
+        f"Student is preparing for {exam.short_title or exam.title} "
+        f"(pack: {pack.title}). Stay strictly within this syllabus. "
+        f"In-scope chapters: {'; '.join(chapter_titles) or 'see exam taxonomy'}."
+    )
+    return {
+        "exam_code": exam.code,
+        "exam_title": exam.short_title or exam.title,
+        "pack_code": pack.code,
+        "board_hint": board_hint,
+        "chapter_titles": chapter_titles,
+        "scope_summary": scope_summary,
+    }

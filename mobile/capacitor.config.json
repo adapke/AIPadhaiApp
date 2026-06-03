@@ -17,10 +17,17 @@
       "showSpinner": false
     },
     "PushNotifications": {
-      "presentationOptions": ["badge", "sound", "alert"]
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
     },
     "App": {
-      "deepLinks": ["aipathshala://", "https://app.aipathshala.in"]
+      "deepLinks": [
+        "aipathshala://",
+        "https://app.aipathshala.in"
+      ]
     },
     "StatusBar": {
       "style": "DARK",

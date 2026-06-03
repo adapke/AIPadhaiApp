@@ -1,0 +1,71 @@
+name: accuracy-bench
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    # Nightly live run at 19:30 UTC = 01:00 IST — outside peak prompt-cache
+    # window so we don't compete with student traffic.
+    - cron: "30 19 * * *"
+
+jobs:
+  structural:
+    # Every PR: validates the storage layer + judge code paths work
+    # against the golden dataset. Stub runner returns expected answers
+    # verbatim, so pass_rate must be 1.0 — any drift signals a judge or
+    # fixture bug.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run structural benchmark
+        env:
+          PADHAI_DB_PATH: /tmp/padhai_bench_structural.db
+        run: |
+          PYTHONPATH=. python scripts/run_accuracy_bench.py --mode=structural
+
+  live:
+    # Nightly real-model run + manual `workflow_dispatch`. Skipped on
+    # PRs where the ANTHROPIC_API_KEY secret isn't exposed.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install anthropic
+
+      - name: Run live benchmark
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PADHAI_DB_PATH: /tmp/padhai_bench_live.db
+          PADHAI_BENCH_MODEL: claude-haiku-4-5-20251001
+        run: |
+          PYTHONPATH=. python scripts/run_accuracy_bench.py \
+            --mode=live --min-pass-rate 0.70

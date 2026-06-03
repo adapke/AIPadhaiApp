@@ -191,6 +191,7 @@ def build_user_text(
     target_duration_seconds: int | None = None,
     profile_addendum: str | None = None,
     board_hint: str | None = None,
+    taxonomy_scope: str | None = None,
 ) -> str:
     """The user-turn prompt that pairs with the image in the request body.
 
@@ -199,7 +200,10 @@ def build_user_text(
     budget the model can fit into. `profile_addendum` is the
     PersonalizationProfile.prompt_addendum that carries video_mode,
     user_type, tone, scene_beats, disclaimers, etc.
-    `board_hint` is a free-form board/exam key that maps into BOARD_GUIDANCE."""
+    `board_hint` is a free-form board/exam key that maps into BOARD_GUIDANCE.
+    `taxonomy_scope` is the in-scope syllabus summary from
+    exam_taxonomy.taxonomy_scope_for_user — when present the model is
+    instructed to stay within the enrolled exam pack."""
     language_name = SUPPORTED_LANGUAGES[language_code]
     parts = [
         f"Target language: {language_name} ({language_code}).",
@@ -209,6 +213,8 @@ def build_user_text(
         guidance = BOARD_GUIDANCE.get(board_hint)
         if guidance:
             parts.append(f"Board / exam context: {guidance}")
+    if taxonomy_scope:
+        parts.append(f"Syllabus scope: {taxonomy_scope}")
     if target_duration_seconds:
         word_budget = int(target_duration_seconds * 2.3)  # ~140 wpm
         parts.append(
@@ -1058,6 +1064,9 @@ def generate_lesson(
     profile_addendum: str | None = None,
     video_mode: str = "teaching",
     board_hint: str | None = None,
+    user_id: str | None = None,
+    source_upload_id: str | None = None,
+    source_page_number: int | None = None,
 ) -> Lesson:
     """Generate a video lesson from a textbook-page image.
 
@@ -1092,11 +1101,24 @@ def generate_lesson(
 
     client = client or anthropic.Anthropic()
 
+    taxonomy_scope = None
+    if user_id:
+        try:
+            from . import exam_taxonomy as _et
+            scope = _et.taxonomy_scope_for_user(user_id)
+            if scope:
+                taxonomy_scope = scope.get("scope_summary")
+                if not board_hint and scope.get("board_hint"):
+                    board_hint = scope["board_hint"]
+        except Exception as e:  # noqa: BLE001
+            print(f"[pedagogy] taxonomy scope non-fatal: {e}")
+
     user_text = build_user_text(
         language_code, level,
         target_duration_seconds=target_duration_seconds,
         profile_addendum=profile_addendum,
         board_hint=board_hint,
+        taxonomy_scope=taxonomy_scope,
     )
     # v0.12 C1: per-mode prompts + schemas
     system_prompt = _mp.mode_system_prompt(video_mode)
@@ -1130,4 +1152,54 @@ def generate_lesson(
     if cache is not None:
         cache.put_lesson(image_bytes, language_code, level, MODEL, lesson)
 
+    if user_id:
+        _record_lesson_provenance(
+            lesson=lesson, user_id=user_id,
+            source_upload_id=source_upload_id,
+            source_page_number=source_page_number,
+            board_hint=board_hint, level=level,
+        )
+
     return lesson
+
+
+def _record_lesson_provenance(
+    *,
+    lesson: Lesson,
+    user_id: str,
+    source_upload_id: str | None,
+    source_page_number: int | None,
+    board_hint: str | None,
+    level: str,
+) -> None:
+    """Persist a citations.ai_answer_provenance row for the lesson so the
+    trust dashboard can audit grounding rate. Best-effort: failures here
+    must never bubble up and break the lesson render."""
+    try:
+        from . import citations as _cit
+        narration = " | ".join(s.narration for s in lesson.scenes)
+        answer_text = (lesson.title + "\n\n" + narration)[:32000]
+        question_text = (
+            f"Generate {level} lesson"
+            + (f" for {board_hint} curriculum" if board_hint else "")
+            + f" in {lesson.language_name}"
+        )
+        cites: list[dict] = []
+        if source_upload_id:
+            cites.append({
+                "source_kind": "upload",
+                "source_id": source_upload_id,
+                "page_number": source_page_number,
+                "section": lesson.title,
+                "citation_text": lesson.title[:2000] or "uploaded page",
+                "relevance": 1.0,
+            })
+        _cit.record_answer(
+            surface="lesson", user_id=user_id,
+            question_text=question_text,
+            answer_text=answer_text,
+            citations=cites or None,
+            answer_mode="general",
+        )
+    except Exception as e:  # noqa: BLE001
+        print(f"[pedagogy] lesson provenance non-fatal: {e}")

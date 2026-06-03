@@ -1,0 +1,93 @@
+{
+  "code": "padhai_golden_v1",
+  "title": "AIPadhaiApp golden-answer seed (multi-board, v1)",
+  "domain": "school_plus_competitive",
+  "task_kind": "answer_correctness",
+  "reviewed_by": "internal_v1_seed",
+  "items": [
+    {
+      "prompt": "What is the SI unit of electric current?",
+      "expected": {"answer": "ampere"},
+      "rubric": "Accept 'ampere' or 'A'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Solve: 2x + 5 = 17. What is x?",
+      "expected": {"answer": "6"},
+      "rubric": "Numeric answer only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "8"}
+    },
+    {
+      "prompt": "Name the process by which plants make their food.",
+      "expected": {"answer": "photosynthesis"},
+      "rubric": "Single-word lowercase match.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Which gas is most abundant in Earth's atmosphere?",
+      "expected": {"answer": "nitrogen"},
+      "rubric": "Accept 'nitrogen' or 'N2'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "exam": "NEET"}
+    },
+    {
+      "prompt": "What is the chemical formula for water?",
+      "expected": {"answer": "h2o"},
+      "rubric": "Case-insensitive H2O.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Who wrote the Indian national anthem?",
+      "expected": {"answer": "rabindranath tagore"},
+      "rubric": "Match Tagore's full name.",
+      "difficulty": "easy",
+      "tags": {"subject": "gk", "exam": "UPSC"}
+    },
+    {
+      "prompt": "What is the derivative of x^2 with respect to x?",
+      "expected": {"answer": "2x"},
+      "rubric": "Accept '2x' or '2*x'.",
+      "difficulty": "medium",
+      "tags": {"subject": "math", "exam": "JEE"}
+    },
+    {
+      "prompt": "Who was the first President of India?",
+      "expected": {"answer": "rajendra prasad"},
+      "rubric": "Accept first name + surname.",
+      "difficulty": "easy",
+      "tags": {"subject": "gk", "exam": "UPSC"}
+    },
+    {
+      "prompt": "What is the value of acceleration due to gravity on Earth's surface (in m/s^2, to one decimal place)?",
+      "expected": {"answer": "9.8"},
+      "rubric": "Accept 9.8 or 9.81.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "exam": "JEE"}
+    },
+    {
+      "prompt": "Which Article of the Indian Constitution abolishes untouchability?",
+      "expected": {"answer": "article 17"},
+      "rubric": "Accept 'Article 17' or '17'.",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Name the largest organ of the human body.",
+      "expected": {"answer": "skin"},
+      "rubric": "Single-word answer.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "What is the capital of Maharashtra?",
+      "expected": {"answer": "mumbai"},
+      "rubric": "Single-word match.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "Maharashtra"}
+    }
+  ]
+}

@@ -3,15 +3,18 @@
   "version": "1.4.0",
   "description": "Capacitor shell wrapping the AI Pathshala PWA for iOS + Android.",
   "scripts": {
-    "build": "cap sync",
+    "configure": "node scripts/configure-server.cjs",
+    "configure:prod": "NODE_ENV=production node scripts/configure-server.cjs",
+    "build": "npm run configure && cap sync",
+    "build:prod": "npm run configure:prod && cap sync",
     "ios": "cap open ios",
     "android": "cap open android",
-    "ios:run": "cap run ios",
-    "android:run": "cap run android",
-    "android:build": "cd android && ./gradlew assembleRelease",
-    "ios:archive": "cd ios && xcodebuild -workspace App.xcworkspace -scheme App archive",
-    "publish:android": "cd android && ./gradlew bundleRelease && echo 'Upload android/app/build/outputs/bundle/release/app-release.aab to Play Console'",
-    "publish:ios": "echo 'Run: npx cap open ios → Xcode → Product → Archive → Distribute App → App Store Connect'"
+    "ios:run": "npm run configure && cap run ios",
+    "android:run": "npm run configure && cap run android",
+    "android:build": "npm run configure:prod && cd android && ./gradlew assembleRelease",
+    "ios:archive": "npm run configure:prod && cd ios && xcodebuild -workspace App.xcworkspace -scheme App archive",
+    "publish:android": "npm run configure:prod && cd android && ./gradlew bundleRelease && echo 'Upload android/app/build/outputs/bundle/release/app-release.aab to Play Console'",
+    "publish:ios": "echo 'Run: npm run configure:prod && npx cap open ios → Xcode → Product → Archive → Distribute App → App Store Connect'"
   },
   "dependencies": {
     "@capacitor/android": "^6.0.0",

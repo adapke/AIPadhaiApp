@@ -35,6 +35,7 @@ from . import auth, data
 from .templates import (
     render_dashboard,
     render_jobs_queue,
+    render_llm_costs,
     render_login,
     render_topics,
 )
@@ -185,6 +186,29 @@ def topics_page(
         topics=data.popular_topics(limit=50),
         languages=data.language_usage(limit=20),
     ))
+
+
+@app.get("/llm-costs", response_class=HTMLResponse)
+def llm_costs_page(
+    hours: int = 24,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+):
+    if hours not in (24, 24 * 7, 24 * 30):
+        hours = 24
+    stats = data.llm_cost_stats(hours=float(hours))
+    return HTMLResponse(render_llm_costs(
+        user=user,
+        stats=stats,
+        selected_hours=hours,
+    ))
+
+
+@app.get("/api/llm-costs")
+def api_llm_costs(
+    hours: float = 24.0,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+):
+    return data.llm_cost_stats(hours=hours)
 
 
 # ---------- JSON API ----------

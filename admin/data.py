@@ -305,6 +305,116 @@ def cancel_job(job_id: str, admin_email: str) -> None:
             raise HTTPException(404, "job not found or not cancellable")
 
 
+def llm_cost_stats(hours: float = 24.0) -> dict:
+    """LLM usage + cost rollup for the admin dashboard.
+
+    Reads the same llm_calls table that padhai/llm_obs.py writes — admin
+    stays standalone (no padhai import), the schema is the contract.
+    Returns zeros when the table doesn't exist yet (fresh box) instead of
+    raising, so the dashboard renders cleanly on day 1."""
+    import time
+    since = time.time() - hours * 3600
+    path = _jobs_db_path()
+    if not path.exists():
+        return _empty_llm_stats(hours)
+    uri = f"file:{path}?mode=ro"
+    try:
+        with sqlite3.connect(uri, uri=True, timeout=10.0) as conn:
+            tbl = conn.execute(
+                "SELECT name FROM sqlite_master "
+                "WHERE type='table' AND name='llm_calls'"
+            ).fetchone()
+            if not tbl:
+                return _empty_llm_stats(hours)
+            row = conn.execute(
+                "SELECT COUNT(*), COALESCE(SUM(tokens_in),0), "
+                "       COALESCE(SUM(tokens_out),0), "
+                "       COALESCE(SUM(cost_inr_paise),0), "
+                "       COALESCE(AVG(latency_ms),0), "
+                "       SUM(CASE WHEN cached=1 THEN 1 ELSE 0 END) "
+                "FROM llm_calls WHERE created_at >= ?",
+                (since,),
+            ).fetchone()
+            by_module = conn.execute(
+                "SELECT module, COUNT(*), "
+                "       COALESCE(SUM(cost_inr_paise),0), "
+                "       COALESCE(SUM(tokens_in+tokens_out),0) "
+                "FROM llm_calls WHERE created_at >= ? "
+                "GROUP BY module ORDER BY SUM(cost_inr_paise) DESC",
+                (since,),
+            ).fetchall()
+            by_model = conn.execute(
+                "SELECT model, COUNT(*), "
+                "       COALESCE(SUM(cost_inr_paise),0), "
+                "       COALESCE(SUM(tokens_in+tokens_out),0) "
+                "FROM llm_calls WHERE created_at >= ? "
+                "GROUP BY model ORDER BY SUM(cost_inr_paise) DESC",
+                (since,),
+            ).fetchall()
+            top_users = conn.execute(
+                "SELECT user_id, COUNT(*), "
+                "       COALESCE(SUM(cost_inr_paise),0) "
+                "FROM llm_calls "
+                "WHERE created_at >= ? AND user_id IS NOT NULL "
+                "GROUP BY user_id ORDER BY SUM(cost_inr_paise) DESC "
+                "LIMIT 10",
+                (since,),
+            ).fetchall()
+    except sqlite3.OperationalError:
+        return _empty_llm_stats(hours)
+    total_calls = int(row[0] or 0)
+    cached_calls = int(row[5] or 0)
+    return {
+        "hours": hours,
+        "total_calls": total_calls,
+        "tokens_in": int(row[1] or 0),
+        "tokens_out": int(row[2] or 0),
+        "total_cost_inr": round((row[3] or 0) / 100, 2),
+        "avg_latency_ms": int(row[4] or 0),
+        "cached_calls": cached_calls,
+        "cache_hit_pct": (
+            round(cached_calls / total_calls * 100, 1)
+            if total_calls else 0.0
+        ),
+        "by_module": [
+            {
+                "module": r[0],
+                "calls": int(r[1] or 0),
+                "cost_inr": round((r[2] or 0) / 100, 2),
+                "tokens": int(r[3] or 0),
+            }
+            for r in by_module
+        ],
+        "by_model": [
+            {
+                "model": r[0],
+                "calls": int(r[1] or 0),
+                "cost_inr": round((r[2] or 0) / 100, 2),
+                "tokens": int(r[3] or 0),
+            }
+            for r in by_model
+        ],
+        "top_users": [
+            {
+                "user_id": r[0],
+                "calls": int(r[1] or 0),
+                "cost_inr": round((r[2] or 0) / 100, 2),
+            }
+            for r in top_users
+        ],
+    }
+
+
+def _empty_llm_stats(hours: float) -> dict:
+    return {
+        "hours": hours, "total_calls": 0,
+        "tokens_in": 0, "tokens_out": 0,
+        "total_cost_inr": 0.0, "avg_latency_ms": 0,
+        "cached_calls": 0, "cache_hit_pct": 0.0,
+        "by_module": [], "by_model": [], "top_users": [],
+    }
+
+
 def cache_stats() -> dict:
     """Per-tier artifact count + total bytes."""
     root = _cache_dir()

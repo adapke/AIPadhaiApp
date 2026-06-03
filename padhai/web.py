@@ -452,6 +452,9 @@ def _render_worker(job: Job) -> dict:
             video_mode=(profile_dict.get("video_mode", "teaching")
                        if profile_dict else "teaching"),
             board_hint=board_hint,
+            user_id=p.get("user_id"),
+            source_upload_id=p.get("upload_id"),
+            source_page_number=p.get("page_number"),
         )
         store.set_progress(job.id, "creating_storyboard", 40)
         store.set_progress(job.id, "generating_voice", 55)
