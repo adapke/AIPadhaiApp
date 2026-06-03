@@ -44,6 +44,7 @@ _ROUTER_NAMES = (
     "commerce",      # v3.x — voucher redemption + DIKSHA export + LLM cost dashboard
     "doubt_ai",      # v3.x — instant Claude Vision answer for /api/doubts/{did}/ai-answer
     "ux_signals",    # v3.x — RUM CWV beacon + i18n + festivals + A/B experiments
+    "multipage",     # v3.x — multi-page video stitching (/jobs/{id}/combined*)
 )
 
 

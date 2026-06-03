@@ -530,11 +530,47 @@ def _web_handles_payload(payload: dict) -> bool:
     return payload.get("talking_head_provider") != "wav2lip"
 
 
+def _post_succeed_hook(job, result):
+    """Runs after every job-success update. Today's only consumer:
+    multi-page video uploads — when the last sibling completes we
+    pre-stitch combined.mp4 so the UI gets it on first request
+    instead of paying the ffmpeg cost on the polling response.
+
+    Resolves the leader id either from `parent_job_id` (sibling
+    pages) or from `job.id` itself (the leader's own completion).
+    The stitch helper short-circuits when fewer than 2 page jobs
+    exist or when any sibling is still queued/running."""
+    payload = job.payload or {}
+    leader_id = payload.get("parent_job_id") or job.id
+    if not payload.get("total_pages", 1) or payload.get("total_pages", 1) < 2:
+        return
+    try:
+        pages = store.find_siblings(leader_id)
+    except Exception:
+        return
+    if len(pages) < 2:
+        return
+    if not all(j.status == "succeeded" for j in pages):
+        return  # not the last sibling yet
+    try:
+        # Trigger stitch — caches by hashed job-id set so the file
+        # produced here is what /jobs/{leader}/combined.mp4 serves
+        # without re-running ffmpeg.
+        _stitch_page_videos(leader_id)
+        _log.info(
+            "[combine] auto-stitched %d pages for leader %s",
+            len(pages), leader_id,
+        )
+    except Exception as e:
+        _log.warning("[combine] auto-stitch non-fatal: %s", e)
+
+
 runner = JobRunner(
     store,
     worker_fn=_render_worker,
     max_workers=_WORKERS,
     job_filter=_web_handles_payload,
+    post_succeed_hook=_post_succeed_hook,
 )
 
 
@@ -14432,71 +14468,10 @@ def _stitch_page_videos(leader_id: str) -> tuple[Path, list[dict]]:
     return combined_path, page_info
 
 
-@app.get("/jobs/{job_id}/combined.mp4")
-def get_combined_video(job_id: str, request: Request):
-    """Return one stitched MP4 covering every successfully-rendered
-    page of a multi-page upload. The leader job is the parent (page 1
-    of the upload); siblings have payload.parent_job_id == leader.id.
-
-    409 when no page videos are ready yet, 404 when leader_id is not a
-    multi-page upload, 500 when ffmpeg isn't available. The combined
-    file is cached on local disk keyed by the participating job ids,
-    so partial bundles don't shadow later full bundles.
-    """
-    job = store.get(job_id)
-    if not job:
-        raise HTTPException(404, "job not found")
-    # CDN: skip — the combined file is request-derived from N source
-    # MP4s and the set changes over time, so caching at the edge
-    # would serve stale bundles.
-    combined_path, _info = _stitch_page_videos(job_id)
-    return FileResponse(
-        combined_path,
-        media_type="video/mp4",
-        filename=f"lesson_{job_id}_combined.mp4",
-    )
-
-
-@app.get("/jobs/{job_id}/combined")
-def get_combined_status(job_id: str):
-    """JSON view of the multi-page combine status — used by the SPA to
-    show "3 of 5 pages ready" before linking to the actual MP4."""
-    job = store.get(job_id)
-    if not job:
-        raise HTTPException(404, "job not found")
-    pages = store.find_siblings(job_id)
-    if len(pages) < 2:
-        return {
-            "is_multi_page": False,
-            "leader_job_id": job_id,
-            "page_count": len(pages),
-        }
-    by_status: dict[str, int] = {}
-    for j in pages:
-        by_status[j.status] = by_status.get(j.status, 0) + 1
-    return {
-        "is_multi_page": True,
-        "leader_job_id": job_id,
-        "page_count": len(pages),
-        "by_status": by_status,
-        "ready_pages": by_status.get("succeeded", 0),
-        "combined_video_url": (
-            f"/jobs/{job_id}/combined.mp4"
-            if by_status.get("succeeded", 0) > 0 else None
-        ),
-        "pages": [
-            {
-                "job_id": j.id,
-                "page_number": (j.payload or {}).get("page_number"),
-                "status": j.status,
-                "video_url": (
-                    f"/jobs/{j.id}/video" if j.status == "succeeded"
-                    else None
-                ),
-            }
-            for j in pages
-        ],
-    }
+# NB: /jobs/{job_id}/combined.mp4 + /jobs/{job_id}/combined live in
+# padhai/routers/multipage.py — first slice of the web.py split. The
+# routes call back into `_stitch_page_videos` (defined above) via a
+# late import so the helpers stay close to _locate_mp4 + _OUTPUT_DIR.
 
 
 def _locate_mp4(job: "Job") -> Path:

@@ -313,6 +313,229 @@
       "rubric": "Single-word lowercase.",
       "difficulty": "easy",
       "tags": {"subject": "geography", "board": "TamilNadu"}
+    },
+
+    {
+      "prompt": "What is the value of pi to two decimal places?",
+      "expected": {"answer": "3.14"},
+      "rubric": "Accept 3.14 or 3.14159.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "7"}
+    },
+    {
+      "prompt": "How many degrees are in a right angle?",
+      "expected": {"answer": "90"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+    {
+      "prompt": "What is the sum of interior angles of a triangle (in degrees)?",
+      "expected": {"answer": "180"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "ICSE", "class": "7"}
+    },
+    {
+      "prompt": "Solve: log10(100) = ?",
+      "expected": {"answer": "2"},
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {"subject": "math", "board": "CBSE", "class": "11"}
+    },
+    {
+      "prompt": "What is the limit of sin(x)/x as x approaches 0?",
+      "expected": {"answer": "1"},
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {"subject": "math", "exam": "JEE"}
+    },
+    {
+      "prompt": "If a sphere has radius r, what is its volume formula?",
+      "expected": {"answer": "(4/3)*pi*r^3"},
+      "rubric": "Accept variants like '4/3 pi r^3', '(4/3)πr³'.",
+      "difficulty": "medium",
+      "tags": {"subject": "math", "board": "CBSE", "class": "9"}
+    },
+
+    {
+      "prompt": "What is the formula for kinetic energy?",
+      "expected": {"answer": "(1/2)mv^2"},
+      "rubric": "Accept '1/2 mv^2', '0.5*m*v^2'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "11"}
+    },
+    {
+      "prompt": "What is Ohm's law? Express V in terms of I and R.",
+      "expected": {"answer": "v=ir"},
+      "rubric": "Accept 'V = IR', case-insensitive.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Which scientist proposed the theory of relativity?",
+      "expected": {"answer": "albert einstein"},
+      "rubric": "Full name lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "exam": "JEE"}
+    },
+    {
+      "prompt": "What is the SI unit of frequency?",
+      "expected": {"answer": "hertz"},
+      "rubric": "Accept 'hertz' or 'Hz'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Name the phenomenon that bends light when it passes from one medium to another.",
+      "expected": {"answer": "refraction"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "Which gas is produced when an acid reacts with a metal?",
+      "expected": {"answer": "hydrogen"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "What is the chemical symbol for gold?",
+      "expected": {"answer": "au"},
+      "rubric": "Case-insensitive 'Au'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "How many protons does an atom of hydrogen have?",
+      "expected": {"answer": "1"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "exam": "NEET"}
+    },
+    {
+      "prompt": "What is the most reactive group in the periodic table?",
+      "expected": {"answer": "alkali metals"},
+      "rubric": "Accept 'alkali metals' or 'group 1'.",
+      "difficulty": "medium",
+      "tags": {"subject": "chemistry", "exam": "JEE"}
+    },
+    {
+      "prompt": "Name the bond formed by sharing of electrons between atoms.",
+      "expected": {"answer": "covalent bond"},
+      "rubric": "Accept 'covalent' or 'covalent bond'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "What process do plants use to lose excess water?",
+      "expected": {"answer": "transpiration"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "How many chambers does a human heart have?",
+      "expected": {"answer": "4"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "Name the part of the eye that controls the amount of light entering.",
+      "expected": {"answer": "iris"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "What is the longest cell in the human body?",
+      "expected": {"answer": "neuron"},
+      "rubric": "Accept 'neuron' or 'nerve cell'.",
+      "difficulty": "medium",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "Which vitamin is produced when human skin is exposed to sunlight?",
+      "expected": {"answer": "vitamin d"},
+      "rubric": "Accept 'vitamin D' or 'D'.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+
+    {
+      "prompt": "In which year was the Indian Constitution adopted?",
+      "expected": {"answer": "1949"},
+      "rubric": "Numeric only. (Adopted 26 Nov 1949; enforced 26 Jan 1950.)",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Who was the first woman Prime Minister of India?",
+      "expected": {"answer": "indira gandhi"},
+      "rubric": "Full name lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which Indian leader led the Salt March in 1930?",
+      "expected": {"answer": "mahatma gandhi"},
+      "rubric": "Accept 'Gandhi' variants.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Name the body of water that lies between India and Sri Lanka.",
+      "expected": {"answer": "palk strait"},
+      "rubric": "Accept 'Palk Strait' or 'Palk Bay'.",
+      "difficulty": "medium",
+      "tags": {"subject": "geography", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which is the highest peak in India?",
+      "expected": {"answer": "kangchenjunga"},
+      "rubric": "Accept 'Kangchenjunga' or 'K2' is wrong (K2 is in PoK).",
+      "difficulty": "medium",
+      "tags": {"subject": "geography", "exam": "SSC"}
+    },
+    {
+      "prompt": "How many states are in India (as of 2024)?",
+      "expected": {"answer": "28"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "gk", "exam": "SSC"}
+    },
+    {
+      "prompt": "Which Indian river is known as the 'Sorrow of Bihar'?",
+      "expected": {"answer": "kosi"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {"subject": "geography", "exam": "UPSC"}
+    },
+
+    {
+      "prompt": "What is the capital of Gujarat?",
+      "expected": {"answer": "gandhinagar"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "What is the capital of West Bengal?",
+      "expected": {"answer": "kolkata"},
+      "rubric": "Accept 'kolkata' or 'calcutta'.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Which Indian state is the largest producer of tea?",
+      "expected": {"answer": "assam"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "exam": "SSC"}
     }
   ]
 }

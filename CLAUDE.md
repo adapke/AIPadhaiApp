@@ -654,24 +654,51 @@ Reviewed 2026-06-03. Re-audit before changing.
   and 14-day retention. Closes the "single-server one-disk-failure
   away from data loss" gap.
 
+### Also done since last review
+
+- **Accuracy bench expanded 43 → 74 items.** Now covers CBSE Class
+  6–12, ICSE, Maharashtra, TamilNadu, Karnataka, JEE, NEET, UPSC,
+  SSC across math, physics, chemistry, biology, polity/geography/
+  history/gk. Still structural-only on PRs; live-mode gate stays
+  advisory until ≥100 items.
+- **Multi-page worker auto-trigger.** `JobRunner` gained an optional
+  `post_succeed_hook` and `web._post_succeed_hook` checks each
+  job-completion: when all siblings of a multi-page upload are
+  succeeded, it pre-stitches the combined MP4 so the UI's first
+  `/jobs/{id}/combined.mp4` GET serves the cached file.
+- **SMS provider matrix.** `messaging._provider_send()` now
+  dispatches to msg91 / twilio / kaleyra / whatsapp_cloud adapters
+  in addition to sandbox. Each adapter is a thin urllib wrapper —
+  no provider SDK added to requirements.txt. Credentials read
+  lazily so a missing key only fails the specific message.
+- **First slice of web.py split.** `padhai/routers/multipage.py`
+  holds the new `/jobs/{id}/combined.mp4` + `/jobs/{id}/combined`
+  endpoints. Pattern: thin router that late-imports web.py
+  internals, registered via `padhai.routers.all_routers()`. Sets
+  the template for follow-on extractions; web.py is still 15k+
+  lines but this is the proof the extraction works.
+- **Cypress + Capacitor gap documented.** `mobile/CYPRESS_CAPACITOR.md`
+  spells out why Cypress can't drive native plugins (camera, push,
+  filesystem) and lists three follow-up options (emulator bridge,
+  Detox rewrite, accept the gap). Picked option C for now — the
+  SPA-side specs cover most real regression risk.
+
 ### Still pending / next up
 
-1. **Accuracy bench coverage to 100+.** Dataset at 43 items now;
-   target ≥100 across UPSC / JEE / NEET / CBSE. Then flip the
-   nightly live-mode gate from advisory to blocking.
-2. **Multi-page worker auto-trigger.** `/jobs/{id}/combined.mp4`
-   stitches on demand; no worker auto-runs it on the last sibling's
-   completion. Adding a "combine" job kind that depends on the
-   sibling set would let the UI poll one endpoint instead of N.
-3. **Mobile Cypress against the Capacitor WebView.** `16-mobile-interactions`
-   exercises the SPA but not the native bridge (camera, push,
-   filesystem). Needs a CI lane with a Capacitor build + emulator.
-4. **Architectural debt.** `padhai/web.py` is 15k+ lines / 729 routes;
-   every module still has its own `_conn()` + schema (the path is
-   now shared but each module's connection is still local). Splitting
-   web.py is a long-running cleanup.
-5. **SMS provider matrix.** `messaging.py:814` still has a TODO for
-   non-msg91 providers (twilio, kaleyra, …).
+1. **Accuracy bench coverage to 100+.** 74 items shipped; ~26 more
+   needed for the dataset to be statistically robust enough to flip
+   the nightly live-mode gate from advisory to blocking. Pure
+   content work needing subject-matter review per item.
+2. **Mobile native-plugin testing.** SPA is covered; camera / push /
+   filesystem / background still need a Detox or
+   emulator-bridge harness — see `mobile/CYPRESS_CAPACITOR.md`.
+3. **Continue the web.py split.** First slice (`multipage.py`)
+   landed; obvious next candidates are the `/explain*` endpoints,
+   `/api/v2/video-requests*`, and `/api/parents/*`. Each is
+   self-contained.
+4. **Central LLM-call wrapper adoption.** `padhai/llm_call.py`
+   exists but no surface uses it yet. Migrating tutor / essay /
+   lesson opportunistically would remove ~40 lines per surface.
 
 ---
 

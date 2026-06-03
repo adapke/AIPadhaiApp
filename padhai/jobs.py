@@ -295,10 +295,18 @@ class JobRunner:
         worker_fn: Callable[[Job], dict],
         max_workers: int = 1,
         job_filter: Callable[[dict], bool] | None = None,
+        post_succeed_hook: Callable[["Job", dict], None] | None = None,
     ):
         self.store = store
         self.worker_fn = worker_fn
         self.job_filter = job_filter or (lambda payload: True)
+        # `post_succeed_hook(job, result)` runs AFTER the job has been
+        # marked succeeded in the store — gives the web layer a chance
+        # to trigger downstream work (e.g. auto-combine of multi-page
+        # video uploads when the last sibling finishes). Best-effort:
+        # exceptions inside the hook are swallowed so a hook bug
+        # doesn't roll back the successful job.
+        self.post_succeed_hook = post_succeed_hook
         self.executor = ThreadPoolExecutor(
             max_workers=max_workers, thread_name_prefix="padhai-render",
         )
@@ -321,6 +329,22 @@ class JobRunner:
             self.store.update(job_id, status="succeeded", result=result)
         except Exception as e:
             self.store.update(job_id, status="failed", error=str(e))
+            return
+        if self.post_succeed_hook is not None:
+            try:
+                # Re-fetch so the hook sees the persisted succeeded state
+                # — multi-page auto-combine queries the store for sibling
+                # statuses and would otherwise miss the just-finished
+                # job.
+                refreshed = self.store.get(job_id)
+                if refreshed is not None:
+                    self.post_succeed_hook(refreshed, result)
+            except Exception as e:
+                import sys
+                print(
+                    f"jobs.post_succeed_hook failed (non-fatal): {e}",
+                    file=sys.stderr,
+                )
 
     def resume_pending(self) -> int:
         """Re-submit any jobs left in queued/running after a worker

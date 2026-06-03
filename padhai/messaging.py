@@ -793,6 +793,10 @@ def send_due(*, batch_size: int = 50) -> dict:
     return out
 
 
+VALID_SMS_PROVIDERS = frozenset({"sandbox", "msg91", "twilio", "kaleyra"})
+VALID_WHATSAPP_PROVIDERS = frozenset({"sandbox", "whatsapp_cloud", "twilio"})
+
+
 def _provider_send(
     *,
     channel: str,
@@ -800,19 +804,247 @@ def _provider_send(
     body: str,
     template,
 ) -> tuple[str | None, str | None]:
-    """Provider stub. Returns (provider_msg_id, error). Real
-    impls plug in the WhatsApp Business Cloud API / Twilio /
-    MSG91 SDK here. Sandbox = no-op success."""
+    """Provider dispatch. Returns (provider_msg_id, error).
+
+    Selection: `PADHAI_SMS_PROVIDER` / `PADHAI_WHATSAPP_PROVIDER` env
+    var pins the active provider for each channel. Each adapter reads
+    its own credentials at call time (lazy) so a missing key only
+    fails the message it's used for — not the whole module.
+
+    Sandbox returns an immediate fake message id — used by tests and
+    by dev environments without a real provider account.
+
+    Adapters use plain urllib so we don't pull a provider SDK into
+    requirements.txt; the actual HTTP calls are simple POSTs.
+    """
     provider = (
         DEFAULT_WHATSAPP_PROVIDER if channel == "whatsapp"
         else DEFAULT_SMS_PROVIDER
     )
     if provider == "sandbox":
         return f"sandbox_{uuid.uuid4().hex[:12]}", None
-    # Other providers: not implemented in this module — TODO
-    # when env keys + SDK come online. Return error so the
-    # message stays in scheduled state for retry.
-    return None, f"provider {provider!r} not implemented"
+    valid = (
+        VALID_WHATSAPP_PROVIDERS if channel == "whatsapp"
+        else VALID_SMS_PROVIDERS
+    )
+    if provider not in valid:
+        return None, f"provider {provider!r} not in {sorted(valid)}"
+    try:
+        if provider == "msg91":
+            return _send_via_msg91(phone=phone, body=body, template=template)
+        if provider == "twilio":
+            return _send_via_twilio(
+                channel=channel, phone=phone, body=body,
+            )
+        if provider == "kaleyra":
+            return _send_via_kaleyra(phone=phone, body=body)
+        if provider == "whatsapp_cloud":
+            return _send_via_whatsapp_cloud(
+                phone=phone, body=body, template=template,
+            )
+    except Exception as e:  # noqa: BLE001
+        return None, f"provider {provider} error: {e}"
+    return None, f"provider {provider!r} dispatch fell through"
+
+
+# ---------- per-provider adapters ----------
+#
+# Each adapter is a thin urllib wrapper around the provider's REST
+# API. We deliberately avoid bringing in provider SDKs (msg91-python,
+# twilio, etc.) so requirements.txt stays small + cold-start fast.
+
+
+def _http_post_json(url: str, *, headers: dict, payload: dict, timeout: float = 10.0) -> tuple[int, str]:
+    """Minimal urllib POST. Returns (status_code, response_body_text)."""
+    import json as _json
+    import urllib.error
+    import urllib.request
+    data = _json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url, data=data, method="POST",
+        headers={"Content-Type": "application/json", **headers},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace") if hasattr(e, "read") else str(e)
+        return e.code, body
+
+
+def _http_post_form(url: str, *, headers: dict, form: dict, timeout: float = 10.0) -> tuple[int, str]:
+    """Form-encoded POST for providers that don't speak JSON."""
+    import urllib.error
+    import urllib.parse
+    import urllib.request
+    data = urllib.parse.urlencode(form).encode("utf-8")
+    req = urllib.request.Request(
+        url, data=data, method="POST",
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            **headers,
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status, resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace") if hasattr(e, "read") else str(e)
+        return e.code, body
+
+
+def _send_via_msg91(
+    *, phone: str, body: str, template,
+) -> tuple[str | None, str | None]:
+    """MSG91 — India's largest transactional SMS provider.
+    Requires DLT-registered template ids (MSG91_TEMPLATE_ID per
+    template). Reads `MSG91_AUTH_KEY` + `MSG91_SENDER_ID` from env."""
+    import json as _json
+    auth_key = os.environ.get("MSG91_AUTH_KEY", "").strip()
+    sender = os.environ.get("MSG91_SENDER_ID", "").strip()
+    if not auth_key:
+        return None, "MSG91_AUTH_KEY not set"
+    template_id = getattr(template, "msg91_template_id", None) if template else None
+    if not template_id:
+        # MSG91 requires a template id under DLT — refuse if missing
+        return None, "msg91 requires template.msg91_template_id"
+    e164 = phone.lstrip("+")
+    status, resp_text = _http_post_json(
+        "https://control.msg91.com/api/v5/flow/",
+        headers={"authkey": auth_key},
+        payload={
+            "template_id": template_id,
+            "sender": sender or "PADHAI",
+            "short_url": "0",
+            "mobiles": e164,
+            "VAR1": body,
+        },
+    )
+    if status not in (200, 201, 202):
+        return None, f"msg91 http {status}: {resp_text[:200]}"
+    try:
+        j = _json.loads(resp_text)
+        msg_id = j.get("request_id") or j.get("data") or j.get("type")
+        return str(msg_id), None
+    except Exception:
+        return None, f"msg91 unparseable response: {resp_text[:200]}"
+
+
+def _send_via_twilio(
+    *, channel: str, phone: str, body: str,
+) -> tuple[str | None, str | None]:
+    """Twilio REST API for SMS + WhatsApp. Reads `TWILIO_ACCOUNT_SID`,
+    `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_SMS` / `TWILIO_FROM_WHATSAPP`."""
+    import base64
+    import json as _json
+    sid = os.environ.get("TWILIO_ACCOUNT_SID", "").strip()
+    token = os.environ.get("TWILIO_AUTH_TOKEN", "").strip()
+    if not sid or not token:
+        return None, "TWILIO_ACCOUNT_SID / TWILIO_AUTH_TOKEN not set"
+    from_env = (
+        "TWILIO_FROM_WHATSAPP" if channel == "whatsapp"
+        else "TWILIO_FROM_SMS"
+    )
+    from_ = os.environ.get(from_env, "").strip()
+    if not from_:
+        return None, f"{from_env} not set"
+    to_ = (
+        f"whatsapp:{phone}" if channel == "whatsapp" else phone
+    )
+    from_value = (
+        f"whatsapp:{from_}" if channel == "whatsapp" else from_
+    )
+    basic = base64.b64encode(f"{sid}:{token}".encode()).decode()
+    status, resp_text = _http_post_form(
+        f"https://api.twilio.com/2010-04-01/Accounts/{sid}/Messages.json",
+        headers={"Authorization": f"Basic {basic}"},
+        form={"To": to_, "From": from_value, "Body": body},
+    )
+    if status not in (200, 201):
+        return None, f"twilio http {status}: {resp_text[:200]}"
+    try:
+        j = _json.loads(resp_text)
+        return str(j.get("sid", "")), None
+    except Exception:
+        return None, f"twilio unparseable response: {resp_text[:200]}"
+
+
+def _send_via_kaleyra(
+    *, phone: str, body: str,
+) -> tuple[str | None, str | None]:
+    """Kaleyra (India SMS/voice). Reads `KALEYRA_API_KEY`,
+    `KALEYRA_SID`, `KALEYRA_SENDER`."""
+    import json as _json
+    api_key = os.environ.get("KALEYRA_API_KEY", "").strip()
+    sid = os.environ.get("KALEYRA_SID", "").strip()
+    sender = os.environ.get("KALEYRA_SENDER", "").strip()
+    if not api_key or not sid:
+        return None, "KALEYRA_API_KEY / KALEYRA_SID not set"
+    status, resp_text = _http_post_form(
+        f"https://api.kaleyra.io/v1/{sid}/messages",
+        headers={"api-key": api_key},
+        form={
+            "to": phone,
+            "sender": sender or "PADHAI",
+            "type": "TXN",
+            "body": body,
+        },
+    )
+    if status not in (200, 201, 202):
+        return None, f"kaleyra http {status}: {resp_text[:200]}"
+    try:
+        j = _json.loads(resp_text)
+        return str(j.get("id", "")), None
+    except Exception:
+        return None, f"kaleyra unparseable response: {resp_text[:200]}"
+
+
+def _send_via_whatsapp_cloud(
+    *, phone: str, body: str, template,
+) -> tuple[str | None, str | None]:
+    """Meta WhatsApp Business Cloud API. Reads
+    `WHATSAPP_PHONE_NUMBER_ID` + `WHATSAPP_ACCESS_TOKEN`. Supports
+    text messages (no template) or template-language messages when
+    the template carries `whatsapp_template_name`."""
+    import json as _json
+    phone_id = os.environ.get("WHATSAPP_PHONE_NUMBER_ID", "").strip()
+    token = os.environ.get("WHATSAPP_ACCESS_TOKEN", "").strip()
+    if not phone_id or not token:
+        return None, "WHATSAPP_PHONE_NUMBER_ID / WHATSAPP_ACCESS_TOKEN not set"
+    to_ = phone.lstrip("+")
+    template_name = getattr(template, "whatsapp_template_name", None) if template else None
+    if template_name:
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": to_,
+            "type": "template",
+            "template": {
+                "name": template_name,
+                "language": {"code": "en_US"},
+            },
+        }
+    else:
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": to_,
+            "type": "text",
+            "text": {"body": body},
+        }
+    status, resp_text = _http_post_json(
+        f"https://graph.facebook.com/v18.0/{phone_id}/messages",
+        headers={"Authorization": f"Bearer {token}"},
+        payload=payload,
+    )
+    if status not in (200, 201):
+        return None, f"whatsapp_cloud http {status}: {resp_text[:200]}"
+    try:
+        j = _json.loads(resp_text)
+        msgs = j.get("messages") or []
+        if msgs:
+            return str(msgs[0].get("id", "")), None
+        return None, f"whatsapp_cloud response missing messages[]: {resp_text[:200]}"
+    except Exception:
+        return None, f"whatsapp_cloud unparseable response: {resp_text[:200]}"
 
 
 def user_message_stats(user_id: str) -> dict:
