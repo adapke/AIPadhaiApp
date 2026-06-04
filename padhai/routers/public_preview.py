@@ -10,7 +10,6 @@ from __future__ import annotations
 from fastapi import APIRouter, Form, HTTPException, Request
 from fastapi.responses import Response
 
-
 router = APIRouter()
 
 
@@ -52,7 +51,8 @@ def render_diagram(
     height: int = Form(400, ge=100, le=2400),
 ):
     """Preview-render a Claude-emitted diagram spec to SVG."""
-    from .. import diagram_generator as _dgen, rate_limit
+    from .. import diagram_generator as _dgen
+    from .. import rate_limit
     ip = rate_limit.client_ip_from_request(request)
     if not rate_limit.preview_diagram.try_consume(ip):
         raise HTTPException(429, "rate limit exceeded — slow down")
@@ -78,7 +78,8 @@ def score_lesson_alignment(
     chapter: str | None = Form(None, max_length=200),
 ):
     """Score a lesson against the board's curriculum objectives."""
-    from .. import curriculum_scorer as _scorer, rate_limit
+    from .. import curriculum_scorer as _scorer
+    from .. import rate_limit
     ip = rate_limit.client_ip_from_request(request)
     if not rate_limit.preview_scorer.try_consume(ip):
         raise HTTPException(429, "rate limit exceeded — slow down")

@@ -1,0 +1,47 @@
+name: lint
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install ruff
+        run: pip install ruff==0.6.9
+
+      - name: Run ruff lint (F-codes only; see pyproject.toml)
+        run: ruff check padhai/ admin/ tests/ scripts/
+
+      - name: Syntax check all .py files
+        run: |
+          python -c "
+          import ast, sys
+          from pathlib import Path
+          errors = []
+          for f in sorted(Path('.').rglob('*.py')):
+              if '__pycache__' in str(f) or '.venv' in str(f):
+                  continue
+              try:
+                  ast.parse(f.read_text(encoding='utf-8'))
+              except SyntaxError as e:
+                  errors.append(f'{f}: {e}')
+          if errors:
+              for x in errors: print(x)
+              sys.exit(1)
+          print('all .py files parse cleanly')
+          "

@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -112,7 +111,7 @@ def _profile_block(user) -> dict:
 
 def _onboarding_block(user_id: str) -> dict:
     def _go():
-        from .onboarding import _load_state, _next_step_for, _ensure_onboarding_cols
+        from .onboarding import _ensure_onboarding_cols, _load_state, _next_step_for
         _ensure_onboarding_cols()
         state = _load_state(user_id)
         return {

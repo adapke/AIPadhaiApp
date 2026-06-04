@@ -20,7 +20,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-
 # Single source of truth for which routers are wired. Order doesn't
 # matter for correctness (FastAPI dedupes) but matters for readability
 # in the auto-generated /docs page.
@@ -46,6 +45,7 @@ _ROUTER_NAMES = (
     "ux_signals",    # v3.x — RUM CWV beacon + i18n + festivals + A/B experiments
     "multipage",     # v3.x — multi-page video stitching (/jobs/{id}/combined*)
     "explainer",     # v3.x — /explain + /explain/video (Haiku-only + image-grounded)
+    "v2_video",      # v3.x — GET /api/v2/video-requests/{id}/status + /result
 )
 
 

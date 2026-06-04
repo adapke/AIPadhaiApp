@@ -27,7 +27,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-
 # Stable demo emails so re-running picks up the same accounts.
 DEMO = {
     "admin":       {"email": "admin@demo.local",         "password": "Demo1234!", "display_name": "Demo Admin"},

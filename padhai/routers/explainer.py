@@ -49,7 +49,7 @@ def explain_topic(
     1000 students hits the cache 999 times — total cost ~Rs 0.30 for
     all."""
     from .. import web as _web
-    from ..pedagogy import generate_explainer, LEVEL_GUIDANCE, SUPPORTED_LANGUAGES
+    from ..pedagogy import LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_explainer
 
     if language not in SUPPORTED_LANGUAGES:
         raise HTTPException(400, f"language must be one of: {sorted(SUPPORTED_LANGUAGES)}")
@@ -118,8 +118,8 @@ def explain_video(
     cache shared with /lessons so the same (topic, lang, level)
     only renders once."""
     from .. import web as _web
-    from ..pedagogy import generate_explainer, LEVEL_GUIDANCE, SUPPORTED_LANGUAGES
     from ..auth import resolve_provider_for_tier
+    from ..pedagogy import LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_explainer
 
     if language not in SUPPORTED_LANGUAGES:
         raise HTTPException(400, f"language must be one of: {sorted(SUPPORTED_LANGUAGES)}")

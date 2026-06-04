@@ -327,13 +327,6 @@ def _claude_reply(
     context, and the citations are returned on the TutorReply so the
     UI can render them inline."""
     started = time.time()
-    try:
-        from anthropic import Anthropic   # noqa: WPS433
-    except ImportError:
-        return _record_canned_reply(
-            session,
-            "(AI tutor not available — anthropic SDK not installed.)",
-        )
     model = os.environ.get("PADHAI_TUTOR_MODEL", "claude-haiku-4-5")
     system_prompt = _build_system_prompt(session)
 
@@ -361,45 +354,49 @@ def _claude_reply(
         {"role": m["role"], "content": m["content"]} for m in verbatim
     ]
 
+    # One helper handles: anthropic SDK import, messages.create call,
+    # text extraction, token + cost accounting, llm_obs.record_call.
+    # Cap pre-flight runs upstream in send_message() — disable here so
+    # we don't double-check.
+    from . import llm_call
     try:
-        client = Anthropic()
-        resp = client.messages.create(
+        call = llm_call.call_claude(
+            module="tutor",
+            prompt_version="v1-grounded" if retrieved_hits else "v1",
             model=model,
+            user_id=session.user_id,
+            enforce_cap=False,
             max_tokens=600,
             system=system_prompt,
             messages=api_messages,
         )
-        reply_text = "".join(
-            block.text for block in resp.content if block.type == "text"
-        )
-        tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
-        tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
-        cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    except Exception as e:  # noqa: BLE001
+    except RuntimeError as e:
+        # Covers: no key, missing SDK, Claude transport error.
+        # Surface the right canned reply per cause; the wrapper's
+        # error text starts with a stable prefix we can match.
+        msg = str(e)
+        if "ANTHROPIC_API_KEY" in msg or "not configured" in msg:
+            return _record_canned_reply(
+                session,
+                "(AI tutor not configured on this deployment — "
+                "ANTHROPIC_API_KEY missing.)",
+            )
+        if "SDK not installed" in msg or "anthropic" in msg.lower():
+            return _record_canned_reply(
+                session,
+                "(AI tutor not available — anthropic SDK not installed.)",
+            )
         print(f"[tutor] Claude call failed: {e}")
         return _record_canned_reply(
             session,
             "(AI tutor hit a temporary error. Try again in a minute.)",
         )
 
-    latency_ms = int((time.time() - started) * 1000)
-
-    # Cost + observability
-    from . import llm_obs
-    cost_paise = llm_obs.estimate_cost_paise(
-        model=model, tokens_in=tokens_in, tokens_out=tokens_out,
-        cached=cached,
-    )
-    llm_obs.record_call(
-        module="tutor",
-        prompt_version="v1-grounded" if retrieved_hits else "v1",
-        model=model,
-        tokens_in=tokens_in, tokens_out=tokens_out,
-        latency_ms=latency_ms,
-        user_id=session.user_id,
-        cached=cached,
-        cost_inr_paise=cost_paise,
-    )
+    reply_text = call.text
+    tokens_in = call.tokens_in
+    tokens_out = call.tokens_out
+    cached = call.cached
+    cost_paise = call.cost_inr_paise
 
     # Record provenance via tutor_grounding so /admin/grounding audits work.
     # Best-effort — failure to record is non-fatal.

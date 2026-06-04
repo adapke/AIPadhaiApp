@@ -14,11 +14,11 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends, Form, HTTPException
 
 from ..api_deps import require_user
+
 # current_user is closed over `_user_repo` from web.py's lifespan.
 # Import-from-web is safe because web.py defines it (line ~134)
 # before triggering router loading (line ~478).
 from ..web import current_user
-
 
 router = APIRouter()
 

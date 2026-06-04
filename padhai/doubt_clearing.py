@@ -422,22 +422,26 @@ def answer_via_ai_vision(
         })
     content_blocks.append({"type": "text", "text": user_text})
 
-    started = _time.time()
+    # System block gets cached — same instructions every call
+    system_block = (
+        [{"type": "text", "text": system_text,
+          "cache_control": {"type": "ephemeral"}}]
+        if llm_cache.is_caching_enabled() else system_text
+    )
+
+    from . import llm_call
     try:
-        client = Anthropic()
-        # System block gets cached — same instructions every call
-        system_block = (
-            [{"type": "text", "text": system_text,
-              "cache_control": {"type": "ephemeral"}}]
-            if llm_cache.is_caching_enabled() else system_text
-        )
-        resp = client.messages.create(
+        call = llm_call.call_claude(
+            module="doubt_clearing",
+            prompt_version="v1-vision",
             model=model,
+            user_id=doubt.user_id,
+            enforce_cap=False,   # cap already checked above
             max_tokens=1500,
             system=system_block,
             messages=[{"role": "user", "content": content_blocks}],
         )
-    except Exception as e:  # noqa: BLE001
+    except RuntimeError as e:
         fallback_msg = (
             f"AI auto-answer failed ({str(e)[:160]}). "
             "A human tutor will follow up."
@@ -450,22 +454,7 @@ def answer_via_ai_vision(
         )
         return get(doubt_id)  # type: ignore[return-value]
 
-    latency_ms = int((_time.time() - started) * 1000)
-    reply_text = "".join(b.text for b in resp.content if b.type == "text").strip()
-    if not reply_text:
-        reply_text = "(AI returned an empty response — please retry.)"
-    tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
-    tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
-    cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    call_id = llm_obs.record_call(
-        module="doubt_clearing",
-        prompt_version="v1-vision",
-        model=model,
-        tokens_in=tokens_in, tokens_out=tokens_out,
-        latency_ms=latency_ms,
-        user_id=doubt.user_id, cached=cached,
-    )
-
+    reply_text = call.text.strip() or "(AI returned an empty response — please retry.)"
     answer(
         doubt_id=doubt_id,
         response_text=reply_text,
@@ -473,7 +462,7 @@ def answer_via_ai_vision(
     )
     _record_doubt_provenance(
         doubt=doubt, question=user_text, answer_text=reply_text,
-        ai_call_id=call_id, method="claude",
+        ai_call_id=call.call_id, method="claude",
     )
     return get(doubt_id)  # type: ignore[return-value]
 

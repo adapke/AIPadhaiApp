@@ -12,7 +12,7 @@ described in doubt_clearing.py but not previously wired.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException
+from fastapi import APIRouter, Depends, Form, HTTPException
 
 from ..api_deps import require_user
 from ..web import current_user

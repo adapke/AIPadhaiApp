@@ -173,8 +173,8 @@ def feed_for_user(
         ).fetchall()
 
         read_ids = set(r[0] for r in conn.execute(
-            f"SELECT notification_id FROM org_notification_reads "
-            f"WHERE user_id = ?",
+            "SELECT notification_id FROM org_notification_reads "
+            "WHERE user_id = ?",
             (user_id,),
         ).fetchall())
 

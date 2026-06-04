@@ -1,0 +1,48 @@
+# Pre-commit hooks for this repo. Run on every `git commit`.
+#
+# Setup:
+#   pip install pre-commit
+#   pre-commit install
+#
+# First run will be slow (downloads hook envs); subsequent commits
+# only re-run hooks against changed files.
+#
+# Bypass when needed:
+#   git commit --no-verify
+# but please document WHY in the commit message.
+
+repos:
+  # Ruff lint only — F-codes (pyflakes) are blocking; everything
+  # else stays advisory until the codebase has been cleaned through
+  # by surface. See pyproject.toml [tool.ruff.lint] for the rule set.
+  #
+  # ruff-format is deliberately NOT enabled — re-formatting 70+
+  # existing modules would create unmergeable PR-level churn.
+  # Format new code by hand to ruff style; the formatter can be
+  # turned on once existing files are touched anyway.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+
+  # Generic hygiene
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.(md|cy\.js)$'   # markdown trailing-space is sometimes intentional
+      - id: end-of-file-fixer
+      - id: check-yaml
+        exclude: '^db/changesets/master\.xml$'   # XML, not YAML
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: check-merge-conflict
+
+  # Python syntax check — catches what ruff misses (rare)
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-no-eval
+      - id: python-no-log-warn

@@ -29,12 +29,11 @@ import logging
 import time
 from pathlib import Path
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query, Request
+from fastapi import APIRouter, Body, Depends, HTTPException, Query, Request
 from fastapi.responses import JSONResponse
 
 from ..api_deps import require_user
 from ..web import current_user
-
 
 router = APIRouter()
 _log = logging.getLogger("padhai.ux_signals")

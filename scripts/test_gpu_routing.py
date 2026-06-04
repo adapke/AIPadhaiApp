@@ -80,7 +80,7 @@ def main() -> None:
 
     print(f"\nweb worker executed {len(executed_by['web'])} jobs")
     print(f"gpu worker executed {len(executed_by['gpu'])} jobs")
-    print(f"  expected:  web=5 (3 cartoon + 2 heygen), gpu=3 (wav2lip)")
+    print("  expected:  web=5 (3 cartoon + 2 heygen), gpu=3 (wav2lip)")
 
     for jid in submitted:
         job = store.get(jid)

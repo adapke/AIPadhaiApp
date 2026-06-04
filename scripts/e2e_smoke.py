@@ -42,7 +42,6 @@ import urllib.parse
 import urllib.request
 import uuid
 
-
 # 1x1 PNG — same one we use everywhere else. Smallest valid PNG
 # that ingest_source accepts without raising.
 PNG_1X1 = bytes([

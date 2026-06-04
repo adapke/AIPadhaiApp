@@ -25,9 +25,9 @@ RPC.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
+from fastapi import APIRouter, Depends, Form, HTTPException
 
-from ..api_deps import require_user, require_org_role
+from ..api_deps import require_org_role, require_user
 from ..web import current_user
 
 router = APIRouter()

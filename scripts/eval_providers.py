@@ -331,13 +331,13 @@ def main(argv: list[str] | None = None) -> int:
 
     cache_dir = Path(tempfile.mkdtemp(prefix="padhai_eval_"))
     cache = Cache(root=cache_dir)
-    print(f"\nSynthesising shared narration with Piper TTS...")
+    print("\nSynthesising shared narration with Piper TTS...")
     audio = Path(tempfile.mkstemp(suffix=".mp3")[1])
     soft_voice_mp3(args.narration, audio)
     cache.put_audio(args.narration, "en", "gtts", audio)
     audio.unlink()
 
-    print(f"\nRendering each provider's clip (this hits live APIs for hosted ones):\n")
+    print("\nRendering each provider's clip (this hits live APIs for hosted ones):\n")
     print(f"  {'PROVIDER':10s}  {'STATUS':8s}  {'TIME':>7s}  {'DURATION':>9s}  {'COST':>10s}")
     print(f"  {'-'*10}  {'-'*8}  {'-'*7}  {'-'*9}  {'-'*10}")
 

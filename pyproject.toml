@@ -1,0 +1,44 @@
+[tool.ruff]
+# Match the conventions in the existing codebase.
+line-length = 100
+target-version = "py311"
+exclude = [
+    "padhai/__pycache__",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "node_modules",
+    "cypress/videos",
+    "cypress/screenshots",
+]
+
+[tool.ruff.lint]
+# Phased rollout — F-codes (pyflakes) are MUST-FIX bugs (undefined
+# names, unused imports that mask intent, broken string formats).
+# Those go in `select` and break CI.
+#
+# E/I/B/UP/SIM categories add 1000+ findings against the existing
+# 70+ modules — turning them on as blocking would lock new PRs.
+# They live in the pre-commit hook config (advisory format-on-save)
+# but are NOT in the CI lint gate yet. As modules get touched the
+# fixes land naturally; flip them to blocking once the noise floor
+# is near zero.
+select = ["F"]
+
+# Deliberate ignores within F:
+ignore = [
+    "F401",  # unused-import — many modules import-for-side-effects
+             # (migrate() registration). False positive cost > value.
+    "F841",  # unused-local-variable — codebase has many `x = call()`
+             # patterns where the assignment is intentional for the
+             # repr in a debugger or the result of a side-effecting
+             # call. Worth fixing case-by-case, not as a CI block.
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Test files commonly use fixtures + assertions that ruff flags
+"tests/**" = ["B011", "F401"]
+"scripts/qa_*.py" = ["F401"]
+# admin's templates have intentional long format strings
+"admin/templates.py" = ["E501", "UP032"]

@@ -616,7 +616,7 @@ def main() -> int:
     # ============================================================
     with TestClient(app) as c:
         # Public — list published mock papers
-        r = c.get(f"/api/mock/papers?pack_code=ssc_cgl_2026")
+        r = c.get("/api/mock/papers?pack_code=ssc_cgl_2026")
         check(
             "GET /api/mock/papers filtered → 200 + ≥1 paper",
             r.status_code == 200

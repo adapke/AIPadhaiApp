@@ -22,9 +22,9 @@ from __future__ import annotations
 import json
 import os
 import time
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends, Form, HTTPException, Query
+from fastapi import APIRouter, Depends, Form, Query
 from fastapi.responses import StreamingResponse
 
 from ..api_deps import require_user
@@ -289,4 +289,4 @@ async def _stream(
 
 
 def _sse(payload: dict) -> bytes:
-    return f"data: {json.dumps(payload)}\n\n".encode("utf-8")
+    return f"data: {json.dumps(payload)}\n\n".encode()

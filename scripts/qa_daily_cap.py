@@ -16,7 +16,11 @@ if qa_db.exists():
 os.environ.pop("ANTHROPIC_API_KEY", None)
 
 from padhai import (  # noqa: E402
-    citations, doubt_clearing, essay_grader, llm_obs, mock_interview,
+    citations,
+    doubt_clearing,
+    essay_grader,
+    llm_obs,
+    mock_interview,
 )
 
 UID_FREE = f"qa-free-{uuid.uuid4().hex[:8]}"
@@ -47,7 +51,7 @@ def test_check_free_tier_refuses():
         raise AssertionError("expected BudgetExceeded for M1 user")
     except llm_obs.BudgetExceeded as e:
         assert e.reason == "premium_feature", e.reason
-        print(f"  [OK] M1 user -> premium_feature (cap=0p, spent=0p)")
+        print("  [OK] M1 user -> premium_feature (cap=0p, spent=0p)")
 
 
 def test_check_premium_under_budget():

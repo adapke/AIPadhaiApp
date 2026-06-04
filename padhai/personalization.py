@@ -506,7 +506,7 @@ def build_profile(
              "Use full landscape composition.")
         ),
         (
-            f"INCLUDE A 3-QUESTION QUIZ at the end."
+            "INCLUDE A 3-QUESTION QUIZ at the end."
             if template.needs_quiz else
             "Do NOT include a quiz section."
         ),

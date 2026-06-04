@@ -417,7 +417,7 @@ def _grade_answer(
         result = _heuristic_feedback(answer)
         result["method"] = f"budget_{e.reason}"
         result["summary"] = (
-            (f"Daily AI budget reached. " if e.reason == "over_budget"
+            ("Daily AI budget reached. " if e.reason == "over_budget"
              else "Mock-interview AI grading is premium. ")
             + result.get("summary", "")
         )
@@ -436,18 +436,7 @@ def _grade_answer(
             method="heuristic_no_key",
         )
         return result
-    try:
-        from anthropic import Anthropic   # noqa: WPS433
-    except ImportError:
-        result = _heuristic_feedback(answer)
-        _record_mi_provenance(
-            track=track, question=question, answer=answer,
-            user_id=user_id, feedback=result, ai_call_id=None,
-            method="heuristic_no_sdk",
-        )
-        return result
-
-    from . import llm_cache, llm_obs
+    from . import llm_cache, llm_call
     model = os.environ.get(
         "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5-20251001",
     )
@@ -459,37 +448,42 @@ def _grade_answer(
     kwargs = llm_cache.with_caching(
         system_text=system_text, user_text=user_text,
     )
-    started = time.time()
+    # call_claude wraps client.messages.create + record_call. Cap was
+    # already checked upstream above (BudgetExceeded -> heuristic).
     try:
-        client = Anthropic()
-        resp = client.messages.create(
-            model=model, max_tokens=600, **kwargs,
+        call = llm_call.call_claude(
+            module="mock_interview", prompt_version="v1",
+            model=model, user_id=user_id,
+            enforce_cap=False,
+            max_tokens=600,
+            **kwargs,
         )
-    except Exception as e:  # noqa: BLE001
-        print(f"[mock_interview] grade failed: {e}")
+    except RuntimeError as e:
+        # Distinguish SDK-missing from key-missing for the right
+        # heuristic-method tag so the trust dashboard breakdown
+        # stays informative.
+        msg = str(e)
+        if "SDK not installed" in msg:
+            method = "heuristic_no_sdk"
+        elif "not configured" in msg:
+            method = "heuristic_no_key"
+        else:
+            print(f"[mock_interview] grade failed: {e}")
+            method = "heuristic_claude_error"
         result = _heuristic_feedback(answer)
         _record_mi_provenance(
             track=track, question=question, answer=answer,
             user_id=user_id, feedback=result, ai_call_id=None,
-            method="heuristic_claude_error",
+            method=method,
         )
         return result
-    latency_ms = int((time.time() - started) * 1000)
-    body = "".join(b.text for b in resp.content if b.type == "text")
-    parsed = _parse_score_json(body)
-    tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
-    tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
-    cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    call_id = llm_obs.record_call(
-        module="mock_interview", prompt_version="v1",
-        model=model, tokens_in=tokens_in, tokens_out=tokens_out,
-        latency_ms=latency_ms, user_id=user_id, cached=cached,
-    )
-    parsed["_call_id"] = call_id
+
+    parsed = _parse_score_json(call.text)
+    parsed["_call_id"] = call.call_id
     parsed["method"] = "claude"
     _record_mi_provenance(
         track=track, question=question, answer=answer,
-        user_id=user_id, feedback=parsed, ai_call_id=call_id,
+        user_id=user_id, feedback=parsed, ai_call_id=call.call_id,
         method="claude",
     )
     return parsed

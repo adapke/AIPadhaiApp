@@ -18,12 +18,10 @@ just updates `users.subscription_tier` on a successful payment.
 from __future__ import annotations
 
 import logging
-import time
 import uuid
-from typing import Any
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi import APIRouter, Depends, Form, HTTPException
+from fastapi.responses import HTMLResponse
 
 from ..api_deps import require_user
 from ..web import current_user

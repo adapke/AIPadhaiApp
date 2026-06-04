@@ -9537,14 +9537,12 @@ def ui() -> HTMLResponse:
     """Direct link to the goal-led home UI — useful when an API
     client wants to reach the browser UI explicitly without playing
     accept-header games."""
-    from . import home_ui as _home_ui
     return HTMLResponse(_home_ui.get_home_html())
 
 
 @app.get("/home", response_class=HTMLResponse)
 def home_page() -> HTMLResponse:
     """Alias — explicit /home route per the mockup."""
-    from . import home_ui as _home_ui
     return HTMLResponse(_home_ui.get_home_html())
 
 
@@ -9577,7 +9575,6 @@ def home_page_localized(lang: str) -> HTMLResponse:
     """
     if lang not in _SEO_LOCALES and lang != "en":
         raise HTTPException(404, "unsupported locale")
-    from . import home_ui as _home_ui
     html = _home_ui.get_home_html()
     # Inject hreflang + locale pre-seed before </head>
     hreflangs = [
@@ -9830,7 +9827,6 @@ def sitemap_xml() -> Response:
 @app.get("/landing", response_class=HTMLResponse)
 def landing_page() -> HTMLResponse:
     """Public landing for unauthed visitors."""
-    from . import home_ui as _home_ui
     return HTMLResponse(_home_ui.get_landing_html())
 
 
@@ -11732,59 +11728,12 @@ def get_upload(
     }
 
 
-@app.get("/api/v2/video-requests/{request_id}/status")
-def v2_request_status(request_id: str):
-    """PRD §13.4 — Track generation with per-step progress."""
-    job = store.get(request_id)
-    if not job:
-        raise HTTPException(404, "request not found")
-    out = _progress_for_job(job)
-    out["video_request_id"] = request_id
-    if job.error:
-        out["error"] = job.error
-    return out
-
-
-@app.get("/api/v2/video-requests/{request_id}/result")
-def v2_request_result(request_id: str):
-    """PRD §13.5 — Fetch the final artifacts + actions."""
-    job = store.get(request_id)
-    if not job:
-        raise HTTPException(404, "request not found")
-    if job.status != "succeeded":
-        raise HTTPException(
-            409, f"request not ready (status={job.status})",
-        )
-    r = job.result or {}
-    profile_dict = job.payload.get("profile_json")
-    return {
-        "video_request_id": request_id,
-        "video_url": r.get("video_url") or f"/jobs/{request_id}/video",
-        "thumbnail_url": r.get("thumbnail_url"),
-        # PRD §11 output_assets contract — every artifact addressable
-        # separately so apps can pull only what they need (e.g. audio
-        # for walk-to-school mode, srt for the classroom projector).
-        "subtitle_url":     r.get("subtitle_url")     or f"/jobs/{request_id}/subtitles.srt",
-        "subtitle_vtt_url": r.get("subtitle_vtt_url") or f"/jobs/{request_id}/subtitles.vtt",
-        "audio_url":    r.get("audio_url")    or f"/jobs/{request_id}/audio.mp3",
-        "lesson_id": r.get("lesson_id"),
-        "chat_endpoint": (
-            f"/chat/{r['lesson_id']}" if r.get("lesson_id") else None
-        ),
-        "profile": profile_dict,
-        # PRD §13.5 — actions surface
-        "actions": [
-            "ask_doubt",
-            "make_easier",
-            "make_advanced",
-            "change_language",
-            "shorten",
-            "exam_focused",
-            "create_short",
-            "download",
-            "share",
-        ],
-    }
+# GET /api/v2/video-requests/{id}/status + /result moved to
+# padhai/routers/v2_video.py. The two POST endpoints (create +
+# regenerate) stay here for now — they pull in PersonalizationProfile
+# builder + moderation + multipart upload code that's too entangled
+# with web.py internals to lift cleanly. Follow-up extraction tracked
+# in CLAUDE.md §16.
 
 
 @app.post("/api/v2/video-requests/{request_id}/regenerate", status_code=202)
@@ -15060,6 +15009,7 @@ def delete_my_account(
     if not db_url:
         raise HTTPException(503, "database not configured — cannot delete account")
 
+    from datetime import datetime, timezone
     anon_email = f"deleted-{user.id}@deleted.invalid"
     deletion_requested_at = datetime.now(timezone.utc).isoformat()
 

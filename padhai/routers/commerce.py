@@ -9,10 +9,8 @@ Each was identified as a pending gap in the May 2026 audit.
 
 from __future__ import annotations
 
-import json
 import logging
 import time
-from typing import Any
 
 from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
 
@@ -155,7 +153,6 @@ def list_exports(lesson_id: str, user=Depends(current_user)):
     """Audit: what NDEAR manifests have we generated for this lesson?"""
     user = require_user(user)
     try:
-        from .. import diksha as dk
         from .. import diksha as _dk_mod
         _dk_mod.migrate()
         with _dk_mod._conn() as conn:

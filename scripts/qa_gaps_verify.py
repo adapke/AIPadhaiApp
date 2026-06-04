@@ -68,6 +68,7 @@ for a in user_answers:
 
 print("\n=== Gap #3 — confirm /explain/video signature accepts image ===")
 from padhai.web import app
+
 for r in app.routes:
     if getattr(r, "path", "") == "/explain/video":
         # FastAPI stores dependants on the endpoint

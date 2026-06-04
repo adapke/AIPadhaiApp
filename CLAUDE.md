@@ -656,6 +656,37 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Three more `call_claude` migrations.** tutor / mock_interview /
+  doubt_clearing now use `llm_call.call_claude()` instead of the
+  inline client / messages.create / record_call boilerplate. The
+  wrapper is now the proven pattern for 4 of the 6 Claude-calling
+  surfaces (lesson + practice_test still to migrate, opportunistic).
+  Each migration removed ~30-40 lines and made the surface's failure
+  modes (SDK-missing / key-missing / Claude-error) easier to read.
+- **Third router slice.** GET `/api/v2/video-requests/{id}/status`
+  + `/result` moved to `padhai/routers/v2_video.py`. The two POST
+  endpoints (create + regenerate) stay in web.py for now — too
+  many cross-cutting dependencies (PersonalizationProfile,
+  moderation, multipart) to lift cleanly.
+- **SQLite backup script.** `scripts/backup_sqlite.sh` uses the
+  sqlite3 `.backup` API (safe under concurrent writes), gzips the
+  snapshot, prunes >14d by default. Cron template at top of the
+  file. Closes the gap §10 had docs-only for.
+- **Lint gate.** `.github/workflows/lint.yml` runs ruff F-codes
+  (real bugs: undefined names, broken imports) on every PR.
+  `pyproject.toml` carries the ruleset; `.pre-commit-config.yaml`
+  enforces it locally too. Started F-only on purpose — flipping
+  E/I/B/UP/SIM to blocking would have surfaced 1100+ findings in
+  one PR. They live as advisory `ruff --fix` only.
+- **Three real bugs caught by the new lint gate during setup:**
+    1. `padhai/mock_interview.py` — undefined `call_id` after my
+       call_claude migration (should have been `call.call_id`).
+    2. `padhai/web.py:15017` — `datetime.now(timezone.utc)` used
+       without a function-local import; would crash the account-
+       delete endpoint on first call.
+    3. `padhai/db.py:486` — forward-ref `Path` type annotation
+       with no module-level `Path` import; runtime works but
+       static checkers fail.
 - **Docker-compose E2E stack.** `make e2e` brings up postgres:15 +
   minio + liquibase + the app, seeds a demo dataset
   (`scripts/seed_demo.py`), runs the HTTP smoke

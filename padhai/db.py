@@ -483,14 +483,13 @@ def use_postgres() -> bool:
 #     boilerplate, no chance of typoing the env key.
 
 
-def sqlite_path() -> "Path":
+def sqlite_path():
     """Resolve the SQLite file every padhai module writes into.
 
-    Env override: `PADHAI_DB_PATH`. Default: `~/.padhai/jobs.db`.
-
-    Creates the parent directory eagerly so the caller can do
-    `sqlite3.connect(str(sqlite_path()))` without a missing-dir
-    failure on a fresh box."""
+    Returns a `pathlib.Path`. Env override: `PADHAI_DB_PATH`. Default:
+    `~/.padhai/jobs.db`. Creates the parent directory eagerly so the
+    caller can do `sqlite3.connect(str(sqlite_path()))` without a
+    missing-dir failure on a fresh box."""
     from pathlib import Path as _Path
     custom = os.environ.get("PADHAI_DB_PATH")
     if custom:

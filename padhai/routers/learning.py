@@ -20,13 +20,11 @@ imports inside handlers to keep import cost low when the app boots.
 from __future__ import annotations
 
 import time
-from typing import Any
 
 from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
 
 from ..api_deps import require_user
 from ..web import current_user
-
 
 router = APIRouter()
 

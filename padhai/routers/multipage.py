@@ -40,7 +40,7 @@ def get_combined_video(job_id: str, request: Request):
     file is cached on local disk keyed by the participating job ids,
     so partial bundles don't shadow later full bundles.
     """
-    from .. import web as _web   # late import — web.py owns the store
+    from .. import web as _web  # late import — web.py owns the store
     job = _web.store.get(job_id)
     if not job:
         raise HTTPException(404, "job not found")

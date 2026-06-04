@@ -15,7 +15,6 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Form, HTTPException
 
-
 router = APIRouter()
 
 

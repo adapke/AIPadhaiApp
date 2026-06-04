@@ -14,7 +14,6 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from ..api_deps import require_admin_role, require_user
 from ..web import current_user
 
-
 router = APIRouter()
 
 
@@ -324,8 +323,9 @@ def upsert_essay_rubric(
 ):
     """Teacher uploads or edits a rubric. Idempotent on
     (exam, paper, topic)."""
-    from .. import essay_grader
     import json as _json
+
+    from .. import essay_grader
     user = require_user(user)
     try:
         criteria = _json.loads(criteria_json)
@@ -540,8 +540,9 @@ def submit_practice_test(
     """Student submits answers. Returns the score + per-question
     breakdown. Side effect: each question's correctness feeds the
     user's J5 mastery model so future tests adapt."""
-    from .. import practice_test
     import json as _json
+
+    from .. import practice_test
     user = require_user(user)
     t = practice_test.get(tid)
     if not t:
@@ -1221,8 +1222,9 @@ def schedule_mock_event(
 ):
     """Teacher / admin schedules a live mock-test event. The
     question_set_json is the full question list as a JSON array."""
-    from .. import mock_test_events
     import json as _json
+
+    from .. import mock_test_events
     user = require_user(user)
     try:
         qs = _json.loads(question_set_json)
@@ -1301,8 +1303,9 @@ def submit_mock_event_attempt(
     answers_json: str = Form(..., max_length=100000),
     user=Depends(current_user),
 ):
-    from .. import mock_test_events
     import json as _json
+
+    from .. import mock_test_events
     user = require_user(user)
     try:
         answers = _json.loads(answers_json)
@@ -3124,8 +3127,9 @@ def create_training_path(
     duration_min: int | None = Form(None, ge=1, le=10000),
     user=Depends(current_user),
 ):
-    from .. import corporate
     import json as _json
+
+    from .. import corporate
     user = require_user(user)
     try:
         modules = _json.loads(modules_json)
@@ -3266,8 +3270,9 @@ def emit_xapi_statement(
     object_kind: str | None = Form(None, max_length=32),
     result_json: str | None = Form(None, max_length=4000),
 ):
-    from .. import corporate
     import json as _json
+
+    from .. import corporate
     result = None
     if result_json:
         try:
@@ -3321,7 +3326,7 @@ def create_sales_lead(
     """Open endpoint — the "request a demo" form posts here. Rate-
     limited per IP via the preview_scorer bucket so a bot can't
     spam-create leads."""
-    from .. import sales_pipeline, rate_limit
+    from .. import rate_limit, sales_pipeline
     ip = rate_limit.client_ip_from_request(request)
     if not rate_limit.preview_scorer.try_consume(ip):
         raise HTTPException(429, "rate limit exceeded — slow down")
@@ -4555,8 +4560,9 @@ def aff_track_visit(
 ):
     """Open — affiliate landing pixel. Returns ok regardless of
     code validity (don't leak which codes are real)."""
-    from .. import affiliates as aff_mod
     import hashlib as _h
+
+    from .. import affiliates as aff_mod
     ua = request.headers.get("user-agent", "")[:300]
     ip = request.client.host if request.client else ""
     ip_hash = _h.sha256(ip.encode("utf-8")).hexdigest() if ip else None
@@ -4814,8 +4820,9 @@ def dl_admin_enqueue(
     payload_json: str = Form(..., max_length=10000),
     user=Depends(current_user),
 ):
-    from .. import digilocker as dl
     import json as _json
+
+    from .. import digilocker as dl
     user = require_user(user)
     if not getattr(user, "is_admin", False):
         raise HTTPException(403, "admin only")
@@ -5348,8 +5355,9 @@ def bench_admin_add_item(
     weight: float = Form(1.0, gt=0.0, le=10.0),
     user=Depends(current_user),
 ):
-    from .. import accuracy_bench as ab
     import json as _json
+
+    from .. import accuracy_bench as ab
     user = require_user(user)
     if not getattr(user, "is_admin", False):
         raise HTTPException(403, "admin only")
@@ -5483,8 +5491,9 @@ def mock_admin_create_paper(
 ):
     """Create a mock paper template. sections_json is a JSON array
     of {code, title, time_min, marks_per_q}."""
-    from .. import mock_engine as me
     import json as _json
+
+    from .. import mock_engine as me
     user = require_user(user)
     if not getattr(user, "is_admin", False):
         raise HTTPException(403, "admin only")
@@ -6266,8 +6275,7 @@ def dash_parent_child_detail(
 ):
     """Drill-down view for a specific child. Caller must be a
     verified parent of that child."""
-    from .. import dashboards
-    from .. import parents
+    from .. import dashboards, parents
     user = require_user(user)
     if not parents.is_verified_parent_of(
         parent_user_id=user.id, child_user_id=child_user_id,
@@ -6991,8 +6999,9 @@ def soc_reveal(
 ):
     """Final reveal — records citation provenance + marks
     exchange complete."""
-    from .. import socratic_tutor as st
     import json as _json
+
+    from .. import socratic_tutor as st
     user = require_user(user)
     cits = None
     if citations_json:
@@ -7811,8 +7820,9 @@ def off_generate_manifest(
 ):
     """Generate a manifest. files_json is a JSON array of
     {ref_kind, ref_id, priority?, bytes?, url?, title?}."""
-    from .. import offline_packs as off
     import json as _json
+
+    from .. import offline_packs as off
     user = require_user(user)
     try:
         files = _json.loads(files_json)
@@ -8135,8 +8145,9 @@ def msg_schedule(
 ):
     """Schedule a message to the caller. Caller passes the
     template variables as JSON."""
-    from .. import messaging as msg
     import json as _json
+
+    from .. import messaging as msg
     user = require_user(user)
     try:
         variables = _json.loads(variables_json)
@@ -8292,8 +8303,9 @@ def ar_set_segments(
 ):
     """Replace body segments. body_segments_json is a JSON array
     of {transcript, citations?}."""
-    from .. import audio_recap as ar
     import json as _json
+
+    from .. import audio_recap as ar
     user = require_user(user)
     try:
         body = _json.loads(body_segments_json)
@@ -8667,8 +8679,9 @@ def sm_accept_llm_steps(
     """Caller (tutor wrapper) posts LLM-generated steps + the
     final answer. steps_json is a JSON array of
     {latex, explanation?}."""
-    from .. import step_math as sm
     import json as _json
+
+    from .. import step_math as sm
     user = require_user(user)
     try:
         steps = _json.loads(steps_json)
@@ -8743,8 +8756,9 @@ def sm_add_explanation(
 ):
     """Tutor explanation for a flagged step. Caller (tutor
     wrapper) generates the explanation + posts here for caching."""
-    from .. import step_math as sm
     import json as _json
+
+    from .. import step_math as sm
     user = require_user(user)
     citations = None
     if citations_json:
@@ -8912,8 +8926,9 @@ def admin_list_curriculum(
             rows = [r for r in rows if r["subject"] == subject]
         return {"source": "static", "count": len(rows), "rows": rows}
     try:
-        from ..web import get_db_url
         import psycopg
+
+        from ..web import get_db_url
         filters, params = [], []
         if board:
             filters.append("board = %s"); params.append(board)
@@ -8960,6 +8975,7 @@ def admin_add_curriculum_topic(
     if not getattr(user, "is_admin", False):
         raise HTTPException(403, "admin access required")
     import json as _json
+
     from ..pedagogy import LEVEL_GUIDANCE
     if level not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
@@ -8972,8 +8988,9 @@ def admin_add_curriculum_topic(
     if not _ensure_curriculum_table():
         raise HTTPException(503, "database not available")
     try:
-        from ..web import get_db_url
         import psycopg
+
+        from ..web import get_db_url
         with psycopg.connect(get_db_url(), autocommit=True) as conn:
             row = conn.execute(
                 "INSERT INTO curriculum_topics "
@@ -9006,6 +9023,7 @@ def admin_update_curriculum_topic(
     if not getattr(user, "is_admin", False):
         raise HTTPException(403, "admin access required")
     import json as _json
+
     from ..pedagogy import LEVEL_GUIDANCE
     if level is not None and level not in LEVEL_GUIDANCE:
         raise HTTPException(400, f"level must be one of {sorted(LEVEL_GUIDANCE)}")
@@ -9033,8 +9051,9 @@ def admin_update_curriculum_topic(
     sets.append("updated_at = NOW()")
     params.append(topic_id)
     try:
-        from ..web import get_db_url
         import psycopg
+
+        from ..web import get_db_url
         with psycopg.connect(get_db_url(), autocommit=True) as conn:
             n = conn.execute(
                 f"UPDATE curriculum_topics SET {', '.join(sets)} WHERE id = %s",
@@ -9058,8 +9077,9 @@ def admin_delete_curriculum_topic(topic_id: int, user=Depends(current_user)):
     if not _ensure_curriculum_table():
         raise HTTPException(503, "database not available")
     try:
-        from ..web import get_db_url
         import psycopg
+
+        from ..web import get_db_url
         with psycopg.connect(get_db_url(), autocommit=True) as conn:
             n = conn.execute(
                 "DELETE FROM curriculum_topics WHERE id = %s", (topic_id,)

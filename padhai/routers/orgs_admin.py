@@ -13,12 +13,11 @@ Extracted from web.py in v2.0.3. Covers:
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
+from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import StreamingResponse
 
 from ..api_deps import org_or_404, require_org_role, require_user
 from ..web import current_user
-
 
 router = APIRouter()
 

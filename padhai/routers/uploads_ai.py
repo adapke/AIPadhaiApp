@@ -25,11 +25,10 @@ import time
 import uuid
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
+from fastapi import APIRouter, Depends, Form, HTTPException
 
 from ..api_deps import require_user
 from ..web import current_user
-
 
 router = APIRouter()
 
@@ -491,9 +490,9 @@ def _cloze_fallback(chunks: list[str], *, count: int) -> list[dict]:
             "question_text": f"Fill in the blank: {blanked}",
             "options": [
                 f"a) {target}",
-                f"b) (some other plausible term)",
-                f"c) (another distractor)",
-                f"d) None of the above",
+                "b) (some other plausible term)",
+                "c) (another distractor)",
+                "d) None of the above",
             ],
             "correct_answer": "a",
             "explanation": f"Source says: {sentence[:200]}",
@@ -536,6 +535,7 @@ def summary_of_upload(
 
     try:
         from anthropic import Anthropic
+
         from .. import llm_cache, llm_obs
     except ImportError:
         return {"summary": full_text[: max_words * 6], "key_points": [], "method": "extractive"}

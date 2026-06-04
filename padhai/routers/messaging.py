@@ -12,7 +12,7 @@ Wired into the parent-alert flow:
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Body, Depends, Form, HTTPException, Query
+from fastapi import APIRouter, Depends, Form, HTTPException, Query
 
 from ..api_deps import require_user
 from ..web import current_user
@@ -112,7 +112,8 @@ def notify_parent(
     the parent's phone via the parent-link table."""
     import json as _json
     user = require_user(user)
-    from .. import sms, parents as _parents
+    from .. import parents as _parents
+    from .. import sms
 
     # Resolve the link — caller must be the parent of this child OR
     # have a teacher/admin role in an org containing the child.
