@@ -81,13 +81,13 @@ def essay_submit(
     try:
         sub = eg.submit(user_id=user.id, rubric_id=rubric_id, text=text)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     grade_result = None
     if auto_grade:
         try:
             grade_result = eg.grade(sub.id)
         except ValueError as e:
-            raise HTTPException(500, f"grading failed: {e}")
+            raise HTTPException(500, f"grading failed: {e}") from e
     return {
         "submission_id": sub.id,
         "submitted_at": sub.submitted_at,
@@ -109,7 +109,7 @@ def essay_regrade(sid: str, user=Depends(current_user)):
     try:
         result = eg.grade(sid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"submission_id": sid, "grade": _grade_to_dict(result)}
 
 
@@ -189,7 +189,7 @@ def math_submit(
             expected_language=expected_language,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     extracted = None
     validation = None
     if auto_extract:
@@ -314,7 +314,7 @@ def mock_start(
     try:
         interview, first_turn = mi.start(user_id=user.id, track=track)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "interview_id": interview.id,
         "track": interview.track,
@@ -344,7 +344,7 @@ def mock_submit_turn(
             answer_text=answer_text, answer_audio_url=answer_audio_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "interview_id": iid,
         "feedback": result.feedback,
@@ -449,7 +449,7 @@ def adaptive_pack_view(base_pack_code: str, user=Depends(current_user)):
             user_id=user.id, base_pack_code=base_pack_code,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     stale, reason = ap.should_re_adapt(
         user_id=user.id, base_pack_code=base_pack_code,
     )
@@ -474,9 +474,9 @@ def adaptive_pack_rebalance(base_pack_code: str, user=Depends(current_user)):
             user_id=user.id, base_pack_code=base_pack_code,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     except RuntimeError as e:
-        raise HTTPException(500, str(e))
+        raise HTTPException(500, str(e)) from e
     return summary
 
 
@@ -555,7 +555,7 @@ def practice_generate(
             target_questions=target_questions,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _practice_to_dict(test, include_questions=True, hide_answers=True)
 
 
@@ -588,7 +588,7 @@ def practice_submit(
     try:
         score = pt.submit(test_id=tid, answers=answers)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"test_id": tid, "score": score}
 
 
@@ -710,7 +710,7 @@ def live_schedule(
             max_attendees=max_attendees,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _live_to_dict(lc)
 
 
@@ -741,7 +741,7 @@ def live_join(lc_id: str, user=Depends(current_user)):
             live_class_id=lc_id, user_id=user.id, role=role,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     lv.record_join(live_class_id=lc_id, user_id=user.id)
     return {
         "class": _live_to_dict(lc),
@@ -785,7 +785,7 @@ def live_set_status(
     try:
         ok = lv.set_status(live_class_id=lc_id, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok, "status": status}
 
 

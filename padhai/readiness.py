@@ -309,7 +309,7 @@ def compute_readiness(
     try:
         from . import exam_taxonomy as _et
     except ImportError:
-        raise RuntimeError("exam_taxonomy module required")
+        raise RuntimeError("exam_taxonomy module required") from None
     pack = _et.get_pack(pack_code)
     if not pack:
         raise ValueError(f"pack {pack_code!r} not found")

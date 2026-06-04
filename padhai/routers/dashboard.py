@@ -340,7 +340,7 @@ def parent_dashboard(user=Depends(current_user)):
         return result
     except Exception as e:
         _log.warning("[parent_dashboard] failed: %s", e)
-        raise HTTPException(500, "dashboard composition failed")
+        raise HTTPException(500, "dashboard composition failed") from e
 
 
 # ============================================================================
@@ -373,7 +373,7 @@ def teacher_dashboard(
             return dl.teacher_dashboard(user.id, org_id, class_id)
         except Exception as e:
             _log.warning("[teacher_dashboard] failed: %s", e)
-            raise HTTPException(500, "dashboard composition failed")
+            raise HTTPException(500, "dashboard composition failed") from e
     except Exception as e:
         _log.warning("[teacher_dashboard] failed: %s", e)
-        raise HTTPException(500, "dashboard composition failed")
+        raise HTTPException(500, "dashboard composition failed") from e

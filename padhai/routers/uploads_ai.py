@@ -298,7 +298,7 @@ def flashcards_from_upload(
             topic_code=topic_code,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "deck_id": deck.id,
         "title": deck.title,

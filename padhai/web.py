@@ -10397,7 +10397,7 @@ def sso_start(provider: str, request: Request, next: str = "/"):
             redirect_after=next or "/",
         )
     except (ValueError, RuntimeError) as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return RedirectResponse(url, status_code=302)
 
 
@@ -10537,7 +10537,7 @@ def create_lesson(
         page_images = ingest_source(upload_path)
     except ValueError as e:
         upload_path.unlink(missing_ok=True)
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     image_path = page_images[0]
     extra_pages = page_images[1:]
     # ingest() calls `source.resolve()`, so image_path is a normalized
@@ -11440,7 +11440,7 @@ def v2_create_video_request(
             user_subscription_tier=(user.subscription_tier if user else "M1"),
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
     # Route to the right worker. Topic-only goes through the explainer
     # pipeline (no source image needed); file/upload goes through the
@@ -11490,7 +11490,7 @@ def v2_create_video_request(
             page_images = ingest_source(upload_path)
         except ValueError as e:
             upload_path.unlink(missing_ok=True)
-            raise HTTPException(400, str(e))
+            raise HTTPException(400, str(e)) from e
         image_path = page_images[0]
         if upload_path != image_path:
             upload_path.unlink(missing_ok=True)
@@ -11625,7 +11625,7 @@ def create_upload(
         page_images = ingest_source(raw_path)
     except ValueError as e:
         raw_path.unlink(missing_ok=True)
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
     # For multi-page sources (PDF/PPTX/DOCX) we keep ONLY the first
     # page image as the upload's `file_path` — that's what the
@@ -11708,7 +11708,7 @@ def analyze_upload(
             page_path, content_kind=rec.content_kind,
         )
     except Exception as e:
-        raise HTTPException(502, f"content analysis failed: {e}")
+        raise HTTPException(502, f"content analysis failed: {e}") from e
     _uploads.set_analysis(upload_id, analysis)
     return {"upload_id": rec.id, "cached": False, **analysis}
 
@@ -11776,7 +11776,7 @@ def v2_regenerate(
             new_duration_seconds=duration_seconds,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
     # Clone the parent payload, swap in the new profile + derived fields
     payload = {**parent_job.payload}
@@ -11868,103 +11868,8 @@ def _org_to_dict(org: _orgs.Org) -> dict:
 
 
 
-@app.get("/api/orgs/{org_id}/assignments")
-def list_org_assignments_route(
-    org_id: str,
-    class_id: str | None = None,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    items = _orgs.list_assignments(org_id, class_id=class_id, limit=limit)
-    return {
-        "assignments": [
-            {
-                "id": a.id, "class_id": a.class_id, "title": a.title,
-                "topic": a.topic, "language": a.language, "level": a.level,
-                "due_date": a.due_date, "notes": a.notes,
-                "created_at": a.created_at,
-            }
-            for a in items
-        ],
-    }
-
-
-@app.post("/api/orgs/{org_id}/assignments", status_code=201)
-def create_org_assignment_route(
-    org_id: str,
-    class_id: str = Form(...),
-    title: str = Form(..., min_length=2, max_length=120),
-    topic: str = Form(..., min_length=2, max_length=200),
-    language: str = Form("en"),
-    level: str = Form("middle"),
-    due_date: str | None = Form(None),
-    notes: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    a = _orgs.create_assignment(
-        org_id=org_id, class_id=class_id, title=title, topic=topic,
-        language=language, level=level, due_date=due_date, notes=notes,
-        created_by=user.id,
-    )
-    return {
-        "id": a.id, "title": a.title, "topic": a.topic,
-        "language": a.language, "level": a.level, "due_date": a.due_date,
-        "class_id": a.class_id,
-    }
-
-
-# ---------- per-student analytics (E1) ----------
-
-@app.post("/api/orgs/{org_id}/assignments/{aid}/completion")
-def post_completion(
-    org_id: str, aid: str,
-    watch_pct: int | None = Form(None, ge=0, le=100),
-    quiz_score: int | None = Form(None, ge=0, le=100),
-    quiz_attempt: bool = Form(False),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Student progress beacon — called by the player every ~30s
-    (timeupdate) and once at quiz finish. Idempotent on (aid, user).
-
-    Students can only write their own completions; admins/teachers
-    cannot fake progress for a student (use the grading API for that)."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    c = _orgs.record_completion(
-        assignment_id=aid, user_id=user.id,
-        watch_pct=watch_pct, quiz_score=quiz_score,
-        quiz_attempt=quiz_attempt,
-    )
-    return {
-        "assignment_id": c.assignment_id, "watch_pct": c.watch_pct,
-        "quiz_score": c.quiz_score, "quiz_attempts": c.quiz_attempts,
-        "watched_at": c.watched_at, "updated_at": c.updated_at,
-    }
-
-
-@app.get("/api/orgs/{org_id}/assignments/{aid}/stats")
-def get_assignment_stats(
-    org_id: str, aid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Per-assignment class rollup. Admin or teacher only — students
-    don't see other students' scores."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    # Look up class_id from the assignment
-    assignments = _orgs.list_assignments(org_id)
-    a = next((x for x in assignments if x.id == aid), None)
-    if a is None:
-        raise HTTPException(404, "assignment not found")
-    return _orgs.assignment_class_stats(aid, a.class_id)
+# /api/orgs/{id}/assignments* (4 endpoints: list, create, completion, stats)
+# moved to padhai/routers/orgs_assignments.py.
 
 
 @app.get("/api/orgs/{org_id}/students/{uid}/history")
@@ -12078,7 +11983,7 @@ def create_org_notification(
             from datetime import datetime
             send_at = datetime.fromisoformat(send_at_iso).timestamp()
         except ValueError:
-            raise HTTPException(400, f"send_at_iso must be ISO 8601, got {send_at_iso!r}")
+            raise HTTPException(400, f"send_at_iso must be ISO 8601, got {send_at_iso!r}") from None
     try:
         n = _notifs.create(
             org_id=org_id, audience=audience, kind=kind,
@@ -12086,7 +11991,7 @@ def create_org_notification(
             sent_by=user.id, send_at=send_at, channels=channels,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     # I3 — fan out push for everyone whose tokens we hold + who is
     # opted in to this notification's category. Best-effort: if push
     # isn't configured (FCM/APNs keys missing) the per-send log row
@@ -12198,7 +12103,7 @@ def replace_class_timetable_route(
     try:
         slots = json.loads(slots_json)
     except (ValueError, TypeError):
-        raise HTTPException(400, "slots_json must be valid JSON")
+        raise HTTPException(400, "slots_json must be valid JSON") from None
     if not isinstance(slots, list):
         raise HTTPException(400, "slots_json must be a JSON array")
     return _orgs.replace_class_timetable(
@@ -12302,7 +12207,7 @@ def create_org_exam(
     try:
         questions = json.loads(questions_json)
     except (ValueError, TypeError):
-        raise HTTPException(400, "questions_json must be valid JSON")
+        raise HTTPException(400, "questions_json must be valid JSON") from None
     if not isinstance(questions, list):
         raise HTTPException(400, "questions_json must be a JSON array")
     try:
@@ -12313,7 +12218,7 @@ def create_org_exam(
             created_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _exam_to_dict(exam, include_answers=True)
 
 
@@ -12377,7 +12282,7 @@ def submit_exam(
         answers = json.loads(answers_json)
         flags = json.loads(flags_json or "[]")
     except (ValueError, TypeError):
-        raise HTTPException(400, "answers_json / flags_json must be valid JSON")
+        raise HTTPException(400, "answers_json / flags_json must be valid JSON") from None
     try:
         attempt = _orgs.submit_attempt(
             exam_id=eid, user_id=user.id, answers=answers,
@@ -12386,7 +12291,7 @@ def submit_exam(
             flags=flags,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     return _attempt_to_dict(attempt)
 
 
@@ -12422,7 +12327,7 @@ def grade_exam_attempt(
             attempt_id=aid, manual_score=manual_score, feedback=feedback,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     # High-value audit — manual grade override is a known fraud vector.
     _audit.record(
         action="org.exam.grade.override",
@@ -12502,7 +12407,7 @@ def create_org_fee_structure(
             created_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _fee_struct_to_dict(s)
 
 
@@ -12536,7 +12441,7 @@ def generate_fee_invoices(
     try:
         return _orgs.generate_invoices_for_structure(structure_id=sid)
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
 
 
 @app.get("/api/orgs/{org_id}/fees/invoices")
@@ -12654,7 +12559,7 @@ async def razorpay_webhook(request: Request):
     try:
         event = json.loads(body)
     except (ValueError, TypeError):
-        raise HTTPException(400, "invalid JSON")
+        raise HTTPException(400, "invalid JSON") from None
     event_type = event.get("event", "")
     payload = event.get("payload", {})
 
@@ -12713,7 +12618,7 @@ async def razorpay_webhook(request: Request):
                         "[razorpay_webhook] tier upgrade failed for user %s: %s",
                         sub_user_id, exc,
                     )
-                    raise HTTPException(500, "tier upgrade failed")
+                    raise HTTPException(500, "tier upgrade failed") from exc
         return {"ignored": f"{event_type}: no matching plan or user"}
 
     if event_type == "subscription.cancelled":
@@ -12749,7 +12654,7 @@ async def razorpay_webhook(request: Request):
                     )
                     # Re-raise so Razorpay gets a 500 and retries delivery —
                     # a silent 200 would leave the cancelled user on paid tier.
-                    raise HTTPException(500, "tier downgrade failed — will retry")
+                    raise HTTPException(500, "tier downgrade failed — will retry") from exc
         return {"ignored": f"{event_type}: no user_id in notes"}
 
     if event_type not in ("payment.captured", "order.paid"):
@@ -13036,7 +12941,7 @@ def create_coaching_track(
             subjects=subj_list or None, target_year=target_year,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": t.id, "exam": t.exam, "name": t.name,
             "subjects": t.subjects}
 
@@ -13126,7 +13031,7 @@ def saml_acs(
             note=str(e)[:200],
             **_audit.actor_from_request(request),
         )
-        raise HTTPException(401, f"SAML response rejected: {e}")
+        raise HTTPException(401, f"SAML response rejected: {e}") from e
     email = info.get("email")
     if not email:
         raise HTTPException(400, "SAML assertion missing email")
@@ -13576,8 +13481,8 @@ def live_respond(
     except Exception as e:
         err = str(e)
         if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
-            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
-        raise HTTPException(500, f"AI error: {err}")
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY") from e
+        raise HTTPException(500, f"AI error: {err}") from e
     return {"transcript": transcript, "reply": reply}
 
 
@@ -13623,8 +13528,8 @@ def voice_respond(
     except Exception as e:
         err = str(e)
         if "api_key" in err.lower() or "authentication" in err.lower() or "ANTHROPIC" in err:
-            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY")
-        raise HTTPException(500, f"AI error: {err}")
+            raise HTTPException(503, "AI service not configured — set ANTHROPIC_API_KEY") from e
+        raise HTTPException(500, f"AI error: {err}") from e
     return {"transcript": transcript, "reply": reply, "lesson_grounded": lesson_json is not None}
 
 
@@ -13808,7 +13713,7 @@ def _stitch_page_videos(leader_id: str) -> tuple[Path, list[dict]]:
         )
     except subprocess.CalledProcessError as e:
         stderr = (e.stderr or b"").decode("utf-8", errors="replace")[:500]
-        raise HTTPException(500, f"ffmpeg concat failed: {stderr}")
+        raise HTTPException(500, f"ffmpeg concat failed: {stderr}") from e
     finally:
         manifest.unlink(missing_ok=True)
     return combined_path, page_info
@@ -14429,7 +14334,7 @@ async def update_my_profile(
     try:
         body = await request.json()
     except Exception:
-        raise HTTPException(400, "request body must be JSON")
+        raise HTTPException(400, "request body must be JSON") from None
     _ensure_profile_cols()
     allowed = {"display_name", "preferred_language", "preferred_level", "preferred_mode"}
     updates: dict[str, str] = {
@@ -14459,7 +14364,7 @@ async def update_my_profile(
                 f"UPDATE users SET {set_clause} WHERE id = %s", vals,
             )
     except Exception as exc:
-        raise HTTPException(500, f"update failed: {exc}")
+        raise HTTPException(500, f"update failed: {exc}") from exc
     return JSONResponse({"ok": True, "updated": list(updates.keys()), "persisted": True})
 
 
@@ -14605,7 +14510,7 @@ def delete_my_account(
             )
     except Exception as exc:
         _log.error("[delete_account] anonymisation failed for user %s: %s", user.id, exc)
-        raise HTTPException(500, "account deletion failed — please contact support")
+        raise HTTPException(500, "account deletion failed — please contact support") from exc
 
     _audit.record(
         action="dpdp.account_deletion_requested",
@@ -14708,7 +14613,7 @@ def review_flashcard(
             time_seconds=time_seconds,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return JSONResponse({
         "ok": True,
         "card_id": card_id,
@@ -14899,7 +14804,7 @@ def reset_password(
     except HTTPException:
         raise
     except Exception as exc:
-        raise HTTPException(500, f"reset failed: {exc}")
+        raise HTTPException(500, f"reset failed: {exc}") from exc
     return JSONResponse({"ok": True, "message": "Password updated — please sign in."})
 
 
@@ -14930,7 +14835,7 @@ def change_password(
                 (hash_password(new_password), user.id),
             )
     except Exception as exc:
-        raise HTTPException(500, f"update failed: {exc}")
+        raise HTTPException(500, f"update failed: {exc}") from exc
     return JSONResponse({"ok": True, "message": "Password changed — please sign in again."})
 
 

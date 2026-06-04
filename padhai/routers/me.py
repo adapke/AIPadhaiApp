@@ -41,7 +41,7 @@ def register_push_token(
             device_id=device_id, app_version=app_version,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": tok.id, "platform": tok.platform, "active": tok.active,
         "created_at": tok.created_at,
@@ -78,7 +78,7 @@ def set_push_pref(
     try:
         push.set_pref(user_id=user.id, category=category, enabled=enabled)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"prefs": push.get_prefs(user.id)}
 
 
@@ -220,7 +220,7 @@ def record_practice_attempt(
             time_seconds=time_seconds, confidence=confidence,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": aid}
 
 

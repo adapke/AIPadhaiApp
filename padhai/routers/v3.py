@@ -99,7 +99,7 @@ def tutor_message(
             auto_ground=auto_ground,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "session_id": result.session_id,
         "reply": result.reply,
@@ -198,7 +198,7 @@ def llm_flag_call(
             reason=reason, severity=severity, note=note,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"flag_id": fid}
 
 
@@ -265,7 +265,7 @@ def upsert_flag_endpoint(
             enabled_default=enabled_default, rollout_pct=rollout_pct,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "flag_key": f.flag_key, "rollout_pct": f.rollout_pct,
         "enabled_default": f.enabled_default,
@@ -332,7 +332,7 @@ def upsert_essay_rubric(
     try:
         criteria = _json.loads(criteria_json)
     except (ValueError, TypeError):
-        raise HTTPException(400, "criteria_json must be valid JSON")
+        raise HTTPException(400, "criteria_json must be valid JSON") from None
     try:
         r = essay_grader.upsert_rubric(
             exam=exam, paper=paper, topic=topic,
@@ -340,7 +340,7 @@ def upsert_essay_rubric(
             model_answer=model_answer, created_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": r.id, "exam": r.exam, "paper": r.paper,
         "topic": r.topic, "max_marks": r.max_marks,
@@ -364,7 +364,7 @@ def submit_essay(
             user_id=user.id, rubric_id=rubric_id, text=text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     grade = None
     if grade_now:
         try:
@@ -460,7 +460,7 @@ def create_practice_test(
             target_minutes=target_minutes,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": t.id, "exam": t.exam, "subject": t.subject,
         "target_minutes": t.target_minutes,
@@ -556,11 +556,11 @@ def submit_practice_test(
         if not isinstance(answers, dict):
             raise ValueError("answers must be a JSON object")
     except (ValueError, TypeError) as e:
-        raise HTTPException(400, f"answers_json: {e}")
+        raise HTTPException(400, f"answers_json: {e}") from e
     try:
         score = practice_test.submit(test_id=tid, answers=answers)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"score": score}
 
 
@@ -599,7 +599,7 @@ def schedule_live_class(
             max_attendees=max_attendees,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": lc.id, "title": lc.title, "scheduled_at": lc.scheduled_at,
         "duration_min": lc.duration_min, "max_attendees": lc.max_attendees,
@@ -671,7 +671,7 @@ def join_live_class(
             live_class_id=lc_id, user_id=user.id, role=role,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     live_classes.record_join(live_class_id=lc_id, user_id=user.id)
     return token
 
@@ -702,7 +702,7 @@ def set_live_class_status(
         if not live_classes.set_status(live_class_id=lc_id, status=status):
             raise HTTPException(404, "live class not found")
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": True, "status": status}
 
 
@@ -746,7 +746,7 @@ def submit_doubt(
             image_url=image_url, audio_url=audio_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": d.id, "status": d.status, "created_at": d.created_at,
     }
@@ -854,7 +854,7 @@ def answer_doubt(
         ):
             raise HTTPException(409, "doubt not in answerable state")
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": True}
 
 
@@ -958,7 +958,7 @@ def metric_retention(cohort_date: str):
     try:
         return analytics.retention_d1_d7_d30(cohort_date=cohort_date)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.get("/api/admin/metrics/series")
@@ -981,7 +981,7 @@ def metric_rollup(date: str | None = Form(None)):
         try:
             return analytics.rollup_for_date(date)
         except ValueError as e:
-            raise HTTPException(400, str(e))
+            raise HTTPException(400, str(e)) from e
     return analytics.rollup_yesterday()
 
 
@@ -1005,7 +1005,7 @@ def submit_math_image(
             expected_language=expected_language,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if auto_extract:
         try:
             sub = math_vision.extract(submission_id=sub.id)
@@ -1034,7 +1034,7 @@ def validate_math_submission(sid: str, user=Depends(current_user)):
     try:
         result = math_vision.validate(submission_id=sid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "submission_id": result.submission_id,
         "overall": result.overall,
@@ -1097,7 +1097,7 @@ def start_mock_interview(
             user_id=user.id, track=track,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "interview_id": interview.id, "track": interview.track,
         "started_at": interview.started_at,
@@ -1130,7 +1130,7 @@ def submit_mock_interview_answer(
             answer_audio_url=answer_audio_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "feedback": result.feedback,
         "interview_ended": result.next_turn is None,
@@ -1154,7 +1154,7 @@ def end_mock_interview(iid: str, user=Depends(current_user)):
     try:
         ended = mock_interview.end(interview_id=iid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "interview_id": ended.id, "status": ended.status,
         "overall_score": ended.overall_score,
@@ -1233,7 +1233,7 @@ def schedule_mock_event(
         if not isinstance(qs, list):
             raise ValueError("question_set_json must be a JSON array")
     except (ValueError, TypeError) as e:
-        raise HTTPException(400, f"question_set_json: {e}")
+        raise HTTPException(400, f"question_set_json: {e}") from e
     try:
         e = mock_test_events.schedule_event(
             title=title, exam=exam, scheduled_at=scheduled_at,
@@ -1242,7 +1242,7 @@ def schedule_mock_event(
             created_by=user.id,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return {
         "id": e.id, "title": e.title, "exam": e.exam,
         "scheduled_at": e.scheduled_at, "duration_min": e.duration_min,
@@ -1293,7 +1293,7 @@ def start_mock_event_attempt(eid: str, user=Depends(current_user)):
             event_id=eid, user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "attempt_id": attempt.id, "started_at": attempt.started_at,
     }
@@ -1314,13 +1314,13 @@ def submit_mock_event_attempt(
         if not isinstance(answers, dict):
             raise ValueError("answers_json must be a JSON object")
     except (ValueError, TypeError) as e:
-        raise HTTPException(400, f"answers_json: {e}")
+        raise HTTPException(400, f"answers_json: {e}") from e
     try:
         attempt = mock_test_events.submit_attempt(
             event_id=eid, user_id=user.id, answers=answers,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "attempt_id": attempt.id,
         "score": attempt.score, "max_score": attempt.max_score,
@@ -1378,7 +1378,7 @@ def list_forum_threads(
             limit=limit, offset=offset,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": t.id, "scope": t.scope, "scope_key": t.scope_key,
@@ -1408,7 +1408,7 @@ def create_forum_thread(
             title=title, body=body, author_user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "thread_id": thread.id, "scope": thread.scope,
         "opening_post_id": post.id, "created_at": thread.created_at,
@@ -1457,7 +1457,7 @@ def reply_to_thread(
             parent_post_id=parent_post_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "post_id": post.id, "created_at": post.created_at,
     }
@@ -1476,7 +1476,7 @@ def flag_forum_post(
             post_id=pid, flagger_user_id=user.id, reason=reason,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     return result
 
 
@@ -1561,7 +1561,7 @@ def add_family_member(
             role=role, relation=relation,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "group_id": m.group_id, "user_id": m.user_id,
         "role": m.role, "relation": m.relation,
@@ -1582,7 +1582,7 @@ def remove_family_member(
     try:
         ok = family_plans.remove_member(group_id=fid, user_id=uid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "member not found")
     return {"ok": True}
@@ -1620,7 +1620,7 @@ def family_quote(
             child_count=child_count,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "tier": q.tier, "billing_cycle": q.billing_cycle,
         "child_count": q.child_count,
@@ -1651,7 +1651,7 @@ def subscribe_family(
             group_id=fid, tier=tier, billing_cycle=billing_cycle,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": sub.id, "tier": sub.tier,
         "billing_cycle": sub.billing_cycle,
@@ -1733,7 +1733,7 @@ def upsert_my_buddy_profile(
             available_windows=windows, bio=bio, opted_in=opted_in,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "opted_in": p.opted_in,
         "exam": p.exam, "grade": p.grade,
@@ -1774,7 +1774,7 @@ def propose_buddy_pair(
             user_a_id=user.id, user_b_id=candidate_user_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": pair.id, "user_a_id": pair.user_a_id,
         "user_b_id": pair.user_b_id, "status": pair.status,
@@ -1788,7 +1788,7 @@ def accept_buddy_pair(pid: str, user=Depends(current_user)):
     try:
         pair = study_buddies.accept_pair(pair_id=pid, user_id=user.id)
     except (ValueError, PermissionError) as e:
-        raise HTTPException(400 if isinstance(e, ValueError) else 403, str(e))
+        raise HTTPException(400 if isinstance(e, ValueError) else 403, str(e)) from e
     return {
         "id": pair.id, "status": pair.status,
         "accepted_a_at": pair.accepted_a_at,
@@ -1828,7 +1828,7 @@ def list_my_buddy_pairs(
     try:
         rows = study_buddies.my_pairs(user.id, statuses=status_list)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": p.id, "user_a_id": p.user_a_id,
@@ -1856,9 +1856,9 @@ def send_buddy_message(
             pair_id=pid, sender_user_id=user.id, body=body,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": msg.id, "created_at": msg.created_at,
     }
@@ -1874,7 +1874,7 @@ def list_buddy_messages(
     try:
         pair = study_buddies._get_pair_by_id(pid)
     except ValueError:
-        raise HTTPException(404, "pair not found")
+        raise HTTPException(404, "pair not found") from None
     if user.id not in (pair.user_a_id, pair.user_b_id):
         raise HTTPException(403, "not your pair")
     rows = study_buddies.list_messages(pair_id=pid, limit=limit)
@@ -1904,7 +1904,7 @@ def apply_as_creator(
             bio=bio, avatar_url=avatar_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": c.id, "user_id": c.user_id,
         "display_name": c.display_name,
@@ -1963,7 +1963,7 @@ def create_publishing_series(
             cover_url=cover_url,
         )
     except (ValueError, PermissionError) as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": s.id, "title": s.title, "status": s.status,
         "price_paise": s.price_paise,
@@ -1988,9 +1988,9 @@ def add_publishing_lesson(
             video_url=video_url, free_preview=free_preview,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": lsn.id, "position": lsn.position, "title": lsn.title,
         "duration_seconds": lsn.duration_seconds,
@@ -2006,9 +2006,9 @@ def publish_publishing_series(sid: str, user=Depends(current_user)):
             series_id=sid, creator_user_id=user.id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(409, "series already published or archived")
     return {"ok": True}
@@ -2082,7 +2082,7 @@ def purchase_publishing_series(sid: str, user=Depends(current_user)):
     try:
         p = teacher_publishing.purchase(user_id=user.id, series_id=sid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": p.id, "price_paise": p.price_paise,
         "purchased_at": p.purchased_at,
@@ -2125,7 +2125,7 @@ def admin_register_publisher(
             name=name, kind=kind, contact_email=contact_email,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": p.id, "name": p.name, "kind": p.kind,
             "verified": p.verified}
 
@@ -2174,7 +2174,7 @@ def create_content_pack(
             language=language, manifest_url=manifest_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": p.id, "title": p.title, "status": p.status}
 
 
@@ -2188,9 +2188,9 @@ def publish_content_pack(
             pack_id=pid, publisher_id=publisher_id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(409, "pack already published or archived")
     return {"ok": True}
@@ -2262,7 +2262,7 @@ def subscribe_to_content_pack(
             seats=seats, duration_days=duration_days,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": s.id, "seats": s.seats,
         "total_paid_paise": s.total_paid_paise,
@@ -2330,7 +2330,7 @@ def apply_as_mentor(
             languages=langs,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "user_id": p.user_id, "status": p.status,
         "expertise_subjects": p.expertise_subjects,
@@ -2370,7 +2370,7 @@ def admin_set_mentor_status(
     try:
         ok = mentorship.set_mentor_status(user_id=uid, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "mentor not found")
     return {"ok": True}
@@ -2421,7 +2421,7 @@ def request_mentor_session(
             duration_min=duration_min, topic=topic,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": s.id, "scheduled_at": s.scheduled_at,
         "duration_min": s.duration_min, "status": s.status,
@@ -2443,9 +2443,9 @@ def complete_mentor_session(
             actual_duration_min=actual_duration_min, notes=notes,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": s.id, "status": s.status,
         "actual_duration_min": s.actual_duration_min,
@@ -2501,9 +2501,9 @@ def review_mentor_session(
             rating=rating, feedback=feedback,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"review_id": rid}
 
 
@@ -2539,7 +2539,7 @@ def list_ncf_competencies(
     try:
         rows = nep_alignment.list_ncf(stage=stage, area=area)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"key": c.key, "label": c.label,
@@ -2571,7 +2571,7 @@ def score_text_against_framework(
             text=text, framework=framework, stage=stage,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if lesson_id:
         with contextlib.suppress(ValueError):
             nep_alignment.persist_lesson_alignment(
@@ -2660,7 +2660,7 @@ def diksha_import(
                 imported_by=user.id,
             )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": ref.id, "diksha_id": ref.diksha_id,
         "title": ref.title, "content_type": ref.content_type,
@@ -2776,7 +2776,7 @@ def cs_compute_health(
             org_id=org_id, period_days=period_days,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": hs.id, "org_id": hs.org_id, "score": hs.score,
         "band": hs.band, "components": hs.components,
@@ -2835,7 +2835,7 @@ def cs_log_event(
             user_id=user_id, severity=severity, body=body,
         )
     except ValueError as ex:
-        raise HTTPException(400, str(ex))
+        raise HTTPException(400, str(ex)) from ex
     return {
         "id": e.id, "kind": e.kind, "severity": e.severity,
         "created_at": e.created_at,
@@ -2903,7 +2903,7 @@ def cs_emit_onboarding(
             org_id=org_id, step_key=step_key,
         )
     except ValueError as ex:
-        raise HTTPException(400, str(ex))
+        raise HTTPException(400, str(ex)) from ex
     return {"event_id": e.id, "title": e.title}
 
 
@@ -2921,7 +2921,7 @@ def cs_upsert_renewal(
             current_period_end=current_period_end, notes=notes,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "org_id": r.org_id, "plan_tier": r.plan_tier,
         "current_period_end": r.current_period_end,
@@ -2974,7 +2974,7 @@ def list_state_partnerships(
     try:
         rows = state_partnerships.list_all(status=status, region=region)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"state_code": p.state_code, "name": p.name,
@@ -3041,7 +3041,7 @@ def admin_upsert_state(
             contact_email=contact_email, notes=notes,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "state_code": p.state_code, "status": p.status,
         "updated_at": p.updated_at,
@@ -3058,7 +3058,7 @@ def admin_set_state_status(
             state_code=state_code, status=status,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "state not found")
     return {"ok": True}
@@ -3090,7 +3090,7 @@ def admin_register_corp_org(
             integration_kind=integration_kind, seat_limit=seat_limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": c.id, "name": c.name,
         "integration_kind": c.integration_kind,
@@ -3104,7 +3104,7 @@ def admin_list_corp_orgs(status: str | None = None):
     try:
         rows = corporate.list_corp_orgs(status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": c.id, "name": c.name, "industry": c.industry,
@@ -3136,7 +3136,7 @@ def create_training_path(
         if not isinstance(modules, list):
             raise ValueError("modules_json must be a JSON array")
     except (ValueError, TypeError) as e:
-        raise HTTPException(400, f"modules_json: {e}")
+        raise HTTPException(400, f"modules_json: {e}") from e
     try:
         p = corporate.create_path(
             corp_org_id=corp_org_id, title=title,
@@ -3145,7 +3145,7 @@ def create_training_path(
             created_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": p.id, "title": p.title, "status": p.status,
         "module_count": len(p.modules),
@@ -3180,7 +3180,7 @@ def list_training_paths(
             corp_org_id=corp_org_id, status=status, category=category,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": p.id, "corp_org_id": p.corp_org_id,
@@ -3198,7 +3198,7 @@ def publish_training_path(path_id: str):
     try:
         ok = corporate.publish_path(path_id=path_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(409, "path not in draft or not found")
     return {"ok": True}
@@ -3215,7 +3215,7 @@ def enroll_in_path(
             path_id=path_id, employee_user_id=employee_user_id,
         )
     except ValueError as ex:
-        raise HTTPException(400, str(ex))
+        raise HTTPException(400, str(ex)) from ex
     return {
         "id": e.id, "path_id": e.path_id,
         "employee_user_id": e.employee_user_id,
@@ -3254,7 +3254,7 @@ def update_enrollment_progress(
             final_score=final_score,
         )
     except ValueError as ex:
-        raise HTTPException(404, str(ex))
+        raise HTTPException(404, str(ex)) from ex
     return {
         "id": e.id, "completion_pct": e.completion_pct,
         "status": e.status, "completed_at": e.completed_at,
@@ -3278,7 +3278,7 @@ def emit_xapi_statement(
         try:
             result = _json.loads(result_json)
         except (ValueError, TypeError):
-            raise HTTPException(400, "result_json must be valid JSON")
+            raise HTTPException(400, "result_json must be valid JSON") from None
     try:
         sid = corporate.emit_xapi(
             enrollment_id=enrollment_id,
@@ -3287,7 +3287,7 @@ def emit_xapi_statement(
             result=result,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"statement_id": sid}
 
 
@@ -3340,7 +3340,7 @@ def create_sales_lead(
             notes=notes, owner_user_id=owner_user_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": lead.id, "stage": lead.stage, "score": lead.score,
     }
@@ -3360,7 +3360,7 @@ def admin_list_leads(
             source=source, limit=limit, offset=offset,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": l.id, "source": l.source,
@@ -3417,7 +3417,7 @@ def admin_update_lead_stage(
             user_id=user.id, note=note,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": l.id, "stage": l.stage, "score": l.score,
     }
@@ -3452,7 +3452,7 @@ def admin_log_activity(
             body=body, created_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": a.id, "kind": a.kind, "title": a.title,
         "created_at": a.created_at,
@@ -3568,7 +3568,7 @@ def mkt_tutor_apply(
             languages=_split(languages),
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _tutor_to_dict(t)
 
 
@@ -3610,7 +3610,7 @@ def mkt_admin_set_tutor_status(
     try:
         ok = tm.set_tutor_status(user_id=tutor_user_id, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "tutor not found")
     return {"ok": True}
@@ -3651,7 +3651,7 @@ def mkt_book(
             duration_min=duration_min, topic=topic,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _booking_to_dict(b)
 
 
@@ -3669,7 +3669,7 @@ def mkt_list_bookings(
             user_id=user.id, role=role, status=status, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"bookings": [_booking_to_dict(b) for b in rows]}
 
 
@@ -3682,9 +3682,9 @@ def mkt_confirm(booking_id: str, user=Depends(current_user)):
             booking_id=booking_id, tutor_user_id=user.id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _booking_to_dict(b)
 
 
@@ -3695,9 +3695,9 @@ def mkt_start(booking_id: str, user=Depends(current_user)):
     try:
         b = tm.start_session(booking_id=booking_id, user_id=user.id)
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _booking_to_dict(b)
 
 
@@ -3710,9 +3710,9 @@ def mkt_complete(booking_id: str, user=Depends(current_user)):
             booking_id=booking_id, tutor_user_id=user.id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _booking_to_dict(b)
 
 
@@ -3731,9 +3731,9 @@ def mkt_cancel(
             reason=reason, refund=refund,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _booking_to_dict(b)
 
 
@@ -3752,9 +3752,9 @@ def mkt_review(
             rating=rating, feedback=feedback,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": rid}
 
 
@@ -3822,7 +3822,7 @@ def qb_setter_apply(
             bio=bio, credentials=credentials,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _setter_to_dict(s)
 
 
@@ -3889,7 +3889,7 @@ def qb_create_pack(
             subject=subject, difficulty=difficulty,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _qp_to_dict(p)
 
 
@@ -3907,9 +3907,9 @@ def qb_add_question(
             question_id=question_id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"question_count": count}
 
 
@@ -3920,9 +3920,9 @@ def qb_publish_pack(pack_id: str, user=Depends(current_user)):
     try:
         ok = qpm.publish_pack(pack_id=pack_id, setter_user_id=user.id)
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok}
 
 
@@ -3933,7 +3933,7 @@ def qb_archive_pack(pack_id: str, user=Depends(current_user)):
     try:
         ok = qpm.archive_pack(pack_id=pack_id, setter_user_id=user.id)
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     return {"ok": ok}
 
 
@@ -3973,7 +3973,7 @@ def qb_purchase(pack_id: str, user=Depends(current_user)):
     try:
         p = qpm.purchase_pack(pack_id=pack_id, buyer_user_id=user.id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": p.id, "pack_id": p.pack_id,
         "price_paise": p.price_paise,
@@ -4089,7 +4089,7 @@ def vch_admin_create(
             created_by_user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _voucher_to_dict(v)
 
 
@@ -4105,7 +4105,7 @@ def vch_admin_list(
     try:
         rows = vch.list_vouchers(status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"vouchers": [_voucher_to_dict(v) for v in rows]}
 
 
@@ -4122,7 +4122,7 @@ def vch_admin_set_status(
     try:
         ok = vch.set_voucher_status(code=code, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "voucher not found")
     return {"ok": True}
@@ -4145,7 +4145,7 @@ def vch_validate(
             order_paise=order_paise, sku=sku,
         )
     except vch.VoucherError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "voucher_code": r.voucher_code,
         "discount_paise": r.discount_paise,
@@ -4170,7 +4170,7 @@ def vch_redeem(
             order_paise=order_paise, sku=sku,
         )
     except vch.VoucherError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "voucher_code": r.voucher_code,
         "discount_paise": r.discount_paise,
@@ -4210,7 +4210,7 @@ def bun_admin_create(
             description=description,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _bundle_to_dict(b)
 
 
@@ -4240,7 +4240,7 @@ def bun_match(
     try:
         r = vch.apply_bundle(skus=skus, total_paise=total_paise)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "bundle_id": r.bundle_id,
         "discount_paise": r.discount_paise,
@@ -4321,7 +4321,7 @@ def univ_register(
             revenue_share_pct=revenue_share_pct, notes=notes,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _partner_to_dict(p)
 
 
@@ -4338,7 +4338,7 @@ def univ_list(
     try:
         rows = upart.list_partners(status=status, kind=kind)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"partners": [_partner_to_dict(p) for p in rows]}
 
 
@@ -4357,7 +4357,7 @@ def univ_set_status(
             partner_id=partner_id, status=status,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "partner not found")
     return {"ok": True}
@@ -4381,7 +4381,7 @@ def univ_set_lti(
             lti_deployment_id=lti_deployment_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(
             404, "partner not found or not lti13-integrated",
@@ -4412,7 +4412,7 @@ def univ_create_course(
             lesson_manifest_url=lesson_manifest_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _u_course_to_dict(c)
 
 
@@ -4429,7 +4429,7 @@ def univ_list_courses(
             partner_id=partner_id, status=status,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"courses": [_u_course_to_dict(c) for c in rows]}
 
 
@@ -4442,7 +4442,7 @@ def univ_publish_course(course_id: str, user=Depends(current_user)):
     try:
         ok = upart.publish_course(course_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok}
 
 
@@ -4463,7 +4463,7 @@ def univ_enroll(
             our_user_id=our_user_id,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _u_enroll_to_dict(e)
 
 
@@ -4481,7 +4481,7 @@ def univ_progress(
             final_score=final_score,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _u_enroll_to_dict(e)
 
 
@@ -4525,7 +4525,7 @@ def aff_register(
             kind=kind, email=email,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _aff_to_dict(a)
 
 
@@ -4611,7 +4611,7 @@ def aff_admin_list(
     try:
         rows = aff_mod.list_affiliates(status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"affiliates": [_aff_to_dict(a) for a in rows]}
 
 
@@ -4628,7 +4628,7 @@ def aff_admin_set_status(
     try:
         ok = aff_mod.set_affiliate_status(code=code, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "affiliate not found")
     return {"ok": True}
@@ -4722,7 +4722,7 @@ def dl_consent(
             consent_text=consent_text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": c.id, "consent_purposes": c.consent_purposes,
         "consented_at": c.consented_at,
@@ -4792,7 +4792,7 @@ def dl_admin_register_org(
             callback_url=callback_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": o.id, "org_id": o.org_id, "issuer_id": o.issuer_id,
         "status": o.status, "created_at": o.created_at,
@@ -4829,7 +4829,7 @@ def dl_admin_enqueue(
     try:
         payload = _json.loads(payload_json)
     except _json.JSONDecodeError:
-        raise HTTPException(400, "payload_json must be valid JSON")
+        raise HTTPException(400, "payload_json must be valid JSON") from None
     try:
         i = dl.enqueue_issuance(
             org_id=org_id, user_id=target_user_id,
@@ -4837,9 +4837,9 @@ def dl_admin_enqueue(
             payload=payload,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": i.id, "status": i.status,
         "body_sha256": i.body_sha256,
@@ -4864,7 +4864,7 @@ def dl_admin_mark_issued(
             issuance_id=iid, digilocker_uri=digilocker_uri,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(404, "issuance not found or not pending")
     return {"ok": True}
@@ -4939,7 +4939,7 @@ def cit_my_answers(
             grounded_only=grounded_only, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"answers": [_provenance_to_dict(p) for p in rows]}
 
 
@@ -4974,7 +4974,7 @@ def cit_admin_grounding_rate(
     try:
         return cit.grounding_rate(surface=surface, since=since)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.get("/api/admin/citations/source-impact")
@@ -4996,7 +4996,7 @@ def cit_admin_source_impact(
             limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"citations": [_citation_to_dict(c) for c in cites]}
 
 
@@ -5075,7 +5075,7 @@ def tax_exams(
             active_only=active_only,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"exams": [_exam_to_dict(x) for x in rows]}
 
 
@@ -5130,7 +5130,7 @@ def tax_admin_add_topic(
             weightage_pct=weightage_pct, sort_order=sort_order,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _topic_to_dict(t)
 
 
@@ -5188,7 +5188,7 @@ def packs_admin_create(
             estimated_hours=estimated_hours,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _pack_to_dict(p)
 
 
@@ -5210,7 +5210,7 @@ def packs_enroll(
             daily_minutes=daily_minutes,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return {
         "id": e.id, "pack_code": e.pack_code,
         "target_date": e.target_date,
@@ -5255,7 +5255,7 @@ def packs_set_enrollment_status(
             enrollment_id=eid, status=status,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     if not ok:
         raise HTTPException(404, "no row updated")
     return {"ok": True}
@@ -5320,7 +5320,7 @@ def bench_admin_create_dataset(
             version=version, reviewed_by=reviewed_by,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _ds_to_dict(d)
 
 
@@ -5337,7 +5337,7 @@ def bench_admin_list_datasets(
     try:
         rows = ab.list_datasets(domain=domain, status=status)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"datasets": [_ds_to_dict(d) for d in rows]}
 
 
@@ -5365,7 +5365,7 @@ def bench_admin_add_item(
         expected = _json.loads(expected_json)
         tags = _json.loads(tags_json) if tags_json else None
     except _json.JSONDecodeError:
-        raise HTTPException(400, "expected_json/tags_json must be JSON")
+        raise HTTPException(400, "expected_json/tags_json must be JSON") from None
     try:
         it = ab.add_item(
             dataset_id=dataset_id, prompt=prompt,
@@ -5373,7 +5373,7 @@ def bench_admin_add_item(
             difficulty=difficulty, tags=tags, weight=weight,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "id": it.id, "dataset_id": it.dataset_id,
         "prompt": it.prompt,
@@ -5393,7 +5393,7 @@ def bench_admin_publish_dataset(
     try:
         ok = ab.publish_dataset(dataset_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok}
 
 
@@ -5500,7 +5500,7 @@ def mock_admin_create_paper(
     try:
         sections = _json.loads(sections_json)
     except _json.JSONDecodeError:
-        raise HTTPException(400, "sections_json must be JSON array")
+        raise HTTPException(400, "sections_json must be JSON array") from None
     try:
         p = me.create_paper(
             title=title, sections=sections,
@@ -5509,7 +5509,7 @@ def mock_admin_create_paper(
             negative_marking=negative_marking,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _paper_to_dict(p)
 
 
@@ -5534,7 +5534,7 @@ def mock_admin_add_question(
             correct_answer=correct_answer, topic_code=topic_code,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"question_count": count}
 
 
@@ -5547,7 +5547,7 @@ def mock_admin_publish(paper_id: str, user=Depends(current_user)):
     try:
         ok = me.publish_paper(paper_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok}
 
 
@@ -5566,7 +5566,7 @@ def mock_list_papers(
             mode=mode, status="published", limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"papers": [_paper_to_dict(p) for p in rows]}
 
 
@@ -5593,7 +5593,7 @@ def mock_start(paper_id: str, user=Depends(current_user)):
     try:
         a = me.start_attempt(paper_id=paper_id, user_id=user.id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _attempt_to_dict(a)
 
 
@@ -5621,7 +5621,7 @@ def mock_respond(
             marked_review=marked_review,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": True}
 
 
@@ -5637,7 +5637,7 @@ def mock_submit(attempt_id: str, user=Depends(current_user)):
     try:
         graded = me.submit_attempt(attempt_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _attempt_to_dict(graded)
 
 
@@ -5667,7 +5667,7 @@ def mock_attempt_analysis(
     try:
         return me.attempt_analysis(attempt_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.get("/api/mock/me/attempts")
@@ -5730,7 +5730,7 @@ def readiness_me_recompute(
             user_id=user.id, pack_code=pack_code,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _readiness_to_dict(r)
 
 
@@ -5770,7 +5770,7 @@ def tutor_set_mode(
             answer_mode=answer_mode,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "session_id": sm.session_id,
         "answer_mode": sm.answer_mode,
@@ -5967,7 +5967,7 @@ def plan_get_today(
             plan_date=plan_date,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _plan_to_dict(p)
 
 
@@ -5990,7 +5990,7 @@ def plan_regenerate(
             total_minutes=total_minutes, reason=reason,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _plan_to_dict(p)
 
 
@@ -6103,7 +6103,7 @@ def mod_list_queue(
             sla_breached_only=sla_breached_only, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"items": [_flagged_to_dict(f) for f in rows]}
 
 
@@ -6139,7 +6139,7 @@ def mod_decide(
             reviewer_user_id=user.id, reason=reason,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not ok:
         raise HTTPException(
             404, "item not found or not in actionable state",
@@ -6177,7 +6177,7 @@ def mod_admin_scan(
             persist=False,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "score": result.score,
         "rules_triggered": result.rules_triggered,
@@ -6205,7 +6205,7 @@ def reactions_react(
             user_id=user.id, kind=kind,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": ok}    # False = already reacted
 
 
@@ -6235,7 +6235,7 @@ def reactions_counts(target_kind: str, target_id: str):
             target_kind=target_kind, target_id=target_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"counts": counts}
 
 
@@ -6302,7 +6302,7 @@ def _require_teacher(*, user, org_id: str):
             allowed={"teacher", "admin"},
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
 
 
 @router.get("/api/teacher/orgs/{org_id}/dashboard")
@@ -6340,7 +6340,7 @@ def dash_teacher_student(
             student_user_id=student_user_id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
 
 
 # ---------- v3.7 expert review ----------
@@ -6408,7 +6408,7 @@ def er_apply(
             rate_per_review_paise=rate_per_review_paise,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _expert_to_dict(e)
 
 
@@ -6488,7 +6488,7 @@ def er_admin_set_status(
             user_id=expert_user_id, status=status,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     if not ok:
         raise HTTPException(404, "expert not found")
     return {"ok": True}
@@ -6514,7 +6514,7 @@ def er_request(
             subject_hint=subject_hint,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _review_to_dict(r)
 
 
@@ -6541,7 +6541,7 @@ def er_queue(
             target_kind=target_kind, limit=limit,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return {"reviews": [_review_to_dict(r) for r in rows]}
 
 
@@ -6555,9 +6555,9 @@ def er_claim(review_id: str, user=Depends(current_user)):
             review_id=review_id, reviewer_user_id=user.id,
         )
     except PermissionError as exc:
-        raise HTTPException(403, str(exc))
+        raise HTTPException(403, str(exc)) from exc
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _review_to_dict(r)
 
 
@@ -6581,9 +6581,9 @@ def er_decide(
             reason=reason,
         )
     except PermissionError as exc:
-        raise HTTPException(403, str(exc))
+        raise HTTPException(403, str(exc)) from exc
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     return _review_to_dict(r)
 
 
@@ -6628,7 +6628,7 @@ def er_rate(
             rating=rating, rater_user_id=user.id,
         )
     except ValueError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from exc
     if not ok:
         raise HTTPException(404, "expert not found")
     return {"ok": True}
@@ -6698,7 +6698,7 @@ def srs_create_deck(
             visibility=visibility,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _deck_to_dict(d)
 
 
@@ -6778,9 +6778,9 @@ def srs_add_card(
             source_ref=source_ref,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _card_to_dict(card)
 
 
@@ -6819,7 +6819,7 @@ def srs_generate_from_retrieval(
             topic_code=topic_code,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _deck_to_dict(deck)
 
 
@@ -6839,7 +6839,7 @@ def srs_review_card(
             grade=grade, time_seconds=time_seconds,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "card_id": outcome.card_id,
         "new_interval_days": outcome.new_interval,
@@ -6930,7 +6930,7 @@ def soc_start(
             target_depth=target_depth,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _exchange_to_dict(ex)
 
 
@@ -6953,7 +6953,7 @@ def soc_append_tutor(
             exchange_id=eid, tutor_text=tutor_text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _exchange_to_dict(ex2)
 
 
@@ -6975,9 +6975,9 @@ def soc_advance(
             time_seconds=time_seconds,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "exchange_id": result.exchange_id,
         "next_state": result.next_state,
@@ -7008,7 +7008,7 @@ def soc_reveal(
         try:
             cits = _json.loads(citations_json)
         except _json.JSONDecodeError:
-            raise HTTPException(400, "citations_json must be JSON")
+            raise HTTPException(400, "citations_json must be JSON") from None
     try:
         ex = st.reveal(
             exchange_id=eid, user_id=user.id,
@@ -7016,9 +7016,9 @@ def soc_reveal(
             citations=cits, surface=surface,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _exchange_to_dict(ex)
 
 
@@ -7058,7 +7058,7 @@ def soc_my_exchanges(
             user.id, state=state, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "exchanges": [_exchange_to_dict(e) for e in rows],
     }
@@ -7146,7 +7146,7 @@ def res_ingest_paper(
             citation_count=citation_count,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _research_paper_to_dict(p)
 
 
@@ -7213,9 +7213,9 @@ def res_save_summary(
             ai_call_id=ai_call_id,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "paper_id": s.paper_id,
         "short_summary": s.short_summary,
@@ -7237,7 +7237,7 @@ def res_create_collection(
             user_id=user.id, title=title, description=description,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _collection_to_dict(c)
 
 
@@ -7283,9 +7283,9 @@ def res_add_to_collection(
             user_id=user.id, notes=notes,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"position": pos}
 
 
@@ -7340,9 +7340,9 @@ def res_detect_gaps(
             proposed_themes=themes,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"gaps": [_gap_to_dict(g) for g in gaps]}
 
 
@@ -7384,7 +7384,7 @@ def res_flag_citation(
             note=note, tags=tag_list,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _research_citation_to_dict(c)
 
 
@@ -7496,7 +7496,7 @@ def mq_rate(
             review_text=review_text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _market_rating_to_dict(r)
 
 
@@ -7511,7 +7511,7 @@ def mq_list_ratings(
             item_kind=item_kind, item_id=item_id, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "ratings": [_market_rating_to_dict(r) for r in rows],
     }
@@ -7534,7 +7534,7 @@ def mq_get_quality(item_kind: str, item_id: str):
     try:
         q = mq.get_quality(item_kind=item_kind, item_id=item_id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     if not q:
         return {"quality": None}
     return {"quality": _quality_to_dict(q)}
@@ -7554,7 +7554,7 @@ def mq_top_quality(
             min_rating_count=min_rating_count, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"items": [_quality_to_dict(q) for q in rows]}
 
 
@@ -7567,7 +7567,7 @@ def mq_get_item_status(item_kind: str, item_id: str):
             item_kind=item_kind, item_id=item_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.post("/api/market/refunds", status_code=201)
@@ -7588,7 +7588,7 @@ def mq_refund(
             amount_paise=amount_paise, reason=reason,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _refund_to_dict(r)
 
 
@@ -7608,7 +7608,7 @@ def mq_refund_queue(
             status=status, item_kind=item_kind, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"refunds": [_refund_to_dict(r) for r in rows]}
 
 
@@ -7630,7 +7630,7 @@ def mq_refund_decide(
             decision_reason=decision_reason,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _refund_to_dict(r)
 
 
@@ -7668,7 +7668,7 @@ def mq_file_claim(
             evidence_url=evidence_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _claim_to_dict(c)
 
 
@@ -7688,7 +7688,7 @@ def mq_list_claims(
             status=status, item_kind=item_kind, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"claims": [_claim_to_dict(c) for c in rows]}
 
 
@@ -7710,7 +7710,7 @@ def mq_decide_claim(
             decision_reason=decision_reason,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _claim_to_dict(c)
 
 
@@ -7734,7 +7734,7 @@ def mq_admin_set_status(
             updated_by_user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": True}
 
 
@@ -7799,7 +7799,7 @@ def off_set_prefs(
             max_daily_mb=max_daily_mb,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "quality_tier": p.quality_tier,
         "auto_downgrade_on_cellular": p.auto_downgrade_on_cellular,
@@ -7827,7 +7827,7 @@ def off_generate_manifest(
     try:
         files = _json.loads(files_json)
     except _json.JSONDecodeError:
-        raise HTTPException(400, "files_json must be JSON array")
+        raise HTTPException(400, "files_json must be JSON array") from None
     if not isinstance(files, list):
         raise HTTPException(400, "files_json must be array")
     try:
@@ -7838,7 +7838,7 @@ def off_generate_manifest(
             expires_in_hours=expires_in_hours,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _manifest_to_dict(m)
 
 
@@ -7896,9 +7896,9 @@ def off_start_download(
             manifest_id=mid, user_id=user.id, network=network,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _download_to_dict(d)
 
 
@@ -7918,9 +7918,9 @@ def off_update_progress(
             files_completed=files_completed,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _download_to_dict(d)
 
 
@@ -7950,7 +7950,7 @@ def off_my_downloads(
             user.id, status=status, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "downloads": [_download_to_dict(d) for d in rows],
     }
@@ -8019,7 +8019,7 @@ def msg_opt_in(
             channel=channel, consent_text=consent_text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _msg_channel_to_dict(c)
 
 
@@ -8057,7 +8057,7 @@ def msg_my_channels(
             opt_in_status=opt_in_status,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "channels": [_msg_channel_to_dict(c) for c in rows],
     }
@@ -8087,7 +8087,7 @@ def msg_admin_create_template(
             provider_template_id=provider_template_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _msg_template_to_dict(t)
 
 
@@ -8128,7 +8128,7 @@ def msg_list_templates(
             approval_status=approval_status,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "templates": [_msg_template_to_dict(t) for t in rows],
     }
@@ -8154,7 +8154,7 @@ def msg_schedule(
     except _json.JSONDecodeError:
         raise HTTPException(
             400, "variables_json must be JSON object",
-        )
+        ) from None
     if not isinstance(variables, dict):
         raise HTTPException(
             400, "variables_json must be JSON object",
@@ -8166,7 +8166,7 @@ def msg_schedule(
             language=language, channel=channel,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _msg_to_dict(m)
 
 
@@ -8196,7 +8196,7 @@ def msg_my_messages(
             user.id, status=status, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"messages": [_msg_to_dict(m) for m in rows]}
 
 
@@ -8289,7 +8289,7 @@ def ar_create(
             answer_mode=answer_mode,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _recap_to_dict(r)
 
 
@@ -8312,7 +8312,7 @@ def ar_set_segments(
     except _json.JSONDecodeError:
         raise HTTPException(
             400, "body_segments_json must be JSON array",
-        )
+        ) from None
     if not isinstance(body, list):
         raise HTTPException(
             400, "body_segments_json must be array",
@@ -8325,9 +8325,9 @@ def ar_set_segments(
             custom_outro=custom_outro,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _recap_to_dict(r)
 
 
@@ -8348,9 +8348,9 @@ def ar_generate_script(
             query=query, top_k=top_k,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _recap_to_dict(r)
 
 
@@ -8379,7 +8379,7 @@ def ar_my_recaps(
             user.id, status=status, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"recaps": [_recap_to_dict(r) for r in rows]}
 
 
@@ -8475,7 +8475,7 @@ def adapt_create(
             title=title, description=description,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _adaptive_pack_to_dict(p)
 
 
@@ -8515,7 +8515,7 @@ def adapt_re_adapt(
             user_id=user.id, base_pack_code=base_pack_code,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.get("/api/adaptive-packs/{base_pack_code}/topics")
@@ -8534,7 +8534,7 @@ def adapt_topic_view(
             ),
         }
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
 
 
 @router.get("/api/adaptive-packs/{pack_id}/overrides")
@@ -8646,7 +8646,7 @@ def sm_create(
             submission_id=submission_id, language=language,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _step_problem_to_dict(p)
 
 
@@ -8664,7 +8664,7 @@ def sm_solve_sympy(pid: str, user=Depends(current_user)):
     try:
         p = sm.solve_with_sympy(pid)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _step_problem_to_dict(p)
 
 
@@ -8686,7 +8686,7 @@ def sm_accept_llm_steps(
     try:
         steps = _json.loads(steps_json)
     except _json.JSONDecodeError:
-        raise HTTPException(400, "steps_json must be JSON array")
+        raise HTTPException(400, "steps_json must be JSON array") from None
     if not isinstance(steps, list):
         raise HTTPException(400, "steps_json must be array")
     try:
@@ -8696,9 +8696,9 @@ def sm_accept_llm_steps(
             solver=solver,
         )
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _step_problem_to_dict(p)
 
 
@@ -8727,7 +8727,7 @@ def sm_my_problems(
             user.id, status=status, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "problems": [_step_problem_to_dict(p) for p in rows],
     }
@@ -8767,7 +8767,7 @@ def sm_add_explanation(
         except _json.JSONDecodeError:
             raise HTTPException(
                 400, "citations_json must be JSON",
-            )
+            ) from None
     try:
         eid = sm.add_step_explanation(
             step_id=step_id, user_id=user.id,
@@ -8775,7 +8775,7 @@ def sm_add_explanation(
             citations=citations, ai_call_id=ai_call_id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"id": eid}
 
 
@@ -8955,7 +8955,7 @@ def admin_list_curriculum(
             ],
         }
     except Exception as exc:
-        raise HTTPException(500, f"db error: {exc}")
+        raise HTTPException(500, f"db error: {exc}") from exc
 
 
 @router.post("/api/admin/curriculum", status_code=201)
@@ -8984,7 +8984,7 @@ def admin_add_curriculum_topic(
         if not isinstance(topics_list, list):
             raise ValueError
     except Exception:
-        raise HTTPException(400, "topics must be a JSON array of strings")
+        raise HTTPException(400, "topics must be a JSON array of strings") from None
     if not _ensure_curriculum_table():
         raise HTTPException(503, "database not available")
     try:
@@ -9005,7 +9005,7 @@ def admin_add_curriculum_topic(
             ).fetchone()
         return {"id": row[0], "ok": True}
     except Exception as exc:
-        raise HTTPException(500, f"db error: {exc}")
+        raise HTTPException(500, f"db error: {exc}") from exc
 
 
 @router.put("/api/admin/curriculum/{topic_id}")
@@ -9034,7 +9034,7 @@ def admin_update_curriculum_topic(
             if not isinstance(topics_list, list):
                 raise ValueError
         except Exception:
-            raise HTTPException(400, "topics must be a JSON array of strings")
+            raise HTTPException(400, "topics must be a JSON array of strings") from None
     if not _ensure_curriculum_table():
         raise HTTPException(503, "database not available")
     sets, params = [], []
@@ -9065,7 +9065,7 @@ def admin_update_curriculum_topic(
     except HTTPException:
         raise
     except Exception as exc:
-        raise HTTPException(500, f"db error: {exc}")
+        raise HTTPException(500, f"db error: {exc}") from exc
 
 
 @router.delete("/api/admin/curriculum/{topic_id}")
@@ -9090,4 +9090,4 @@ def admin_delete_curriculum_topic(topic_id: int, user=Depends(current_user)):
     except HTTPException:
         raise
     except Exception as exc:
-        raise HTTPException(500, f"db error: {exc}")
+        raise HTTPException(500, f"db error: {exc}") from exc

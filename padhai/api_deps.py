@@ -44,7 +44,7 @@ def require_org_role(org_id: str, user_id: str, allowed: set[str]) -> None:
     try:
         _orgs.require_role(org_id=org_id, user_id=user_id, allowed=allowed)
     except PermissionError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
 
 
 # v3.1 — system-wide ownership-check helper. Centralizes the

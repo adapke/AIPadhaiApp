@@ -513,7 +513,7 @@ def generate_from_questions(
     try:
         from . import question_bank as qb
     except ImportError:
-        raise RuntimeError("question_bank module unavailable")
+        raise RuntimeError("question_bank module unavailable") from None
     deck = create_deck(
         owner_user_id=owner_user_id, title=deck_title,
         pack_code=pack_code,

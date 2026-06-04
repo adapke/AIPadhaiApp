@@ -32,7 +32,7 @@ def list_preschool_activities(
             language=language, activity_type=activity_type, age=age,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "rows": [
             {"id": a.id, "activity_type": a.activity_type,

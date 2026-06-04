@@ -150,7 +150,7 @@ def pricing_checkout(
         )
     except Exception as e:
         _log.error("[checkout] razorpay order create failed: %s", e)
-        raise HTTPException(500, "could not create order")
+        raise HTTPException(500, "could not create order") from e
 
     return {
         "order_id": order["id"],

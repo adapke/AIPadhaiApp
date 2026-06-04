@@ -67,7 +67,7 @@ def create_parent_link(
             relation=relation,
         )
     except ValueError as e:
-        raise HTTPException(409, str(e))
+        raise HTTPException(409, str(e)) from e
 
     # Queue an in-app notification for the OTHER party. Best-effort:
     # notification failure shouldn't block the link creation, the
@@ -109,7 +109,7 @@ def revoke_parent_link(
     try:
         link = _web._parents.revoke(link_id=link_id, acting_user_id=user.id)
     except ValueError as e:
-        raise HTTPException(403, str(e))
+        raise HTTPException(403, str(e)) from e
     return _web._link_to_dict(link)
 
 

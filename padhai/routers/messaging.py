@@ -60,7 +60,7 @@ def sms_send(
     try:
         parsed_vars = _json.loads(variables) if variables else {}
     except _json.JSONDecodeError:
-        raise HTTPException(400, "variables must be valid JSON")
+        raise HTTPException(400, "variables must be valid JSON") from None
 
     try:
         result = sms.send(
@@ -71,7 +71,7 @@ def sms_send(
             user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "outbox_id": result.outbox_id,
         "status": result.status,
@@ -135,7 +135,7 @@ def notify_parent(
         except HTTPException:
             raise
         except Exception:
-            raise HTTPException(403, "you are not this student's parent or teacher")
+            raise HTTPException(403, "you are not this student's parent or teacher") from None
 
     # Look up the parent's phone (or the caller's, when caller is the parent)
     phone = None
@@ -149,7 +149,7 @@ def notify_parent(
     try:
         parsed_vars = _json.loads(variables) if variables else {}
     except Exception:
-        raise HTTPException(400, "variables must be valid JSON")
+        raise HTTPException(400, "variables must be valid JSON") from None
 
     try:
         result = sms.send(
@@ -160,7 +160,7 @@ def notify_parent(
             user_id=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "outbox_id": result.outbox_id,
         "status": result.status,

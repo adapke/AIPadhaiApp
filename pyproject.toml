@@ -19,7 +19,7 @@ exclude = [
 #   • F — pyflakes (undefined names, broken format strings) — clean
 #   • E — pycodestyle errors — clean
 #   • I — isort (import sorting + grouping) — clean
-#   • B — bugbear (likely-bug patterns) — clean ex B008/B904
+#   • B — bugbear (likely-bug patterns) — clean ex B008
 #   • UP — pyupgrade (modern syntax) — clean after one-shot --fix
 #   • SIM — simplify (readability) — clean after one-shot --fix
 #     (16 auto-fixes applied; 13 sites carry `# noqa: SIMxxx` for
@@ -59,9 +59,9 @@ ignore = [
     "B008",  # function-call-in-default-argument — FastAPI's
              # `Depends(get_x)` is THE idiom. Codebase has 530
              # legitimate uses across every router.
-    "B904",  # raise-without-from-inside-except — real exception-
-             # chain hygiene, but 344 existing sites. Triage as a
-             # dedicated sprint; flip blocking when count is < 50.
+    # B904 was once 344 sites; cleaned by an AST-based mass fixer
+    # (scripts/fix_b904.py) and is now blocking — re-introductions
+    # are caught at PR time.
 ]
 
 [tool.ruff.lint.per-file-ignores]

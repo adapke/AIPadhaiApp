@@ -55,5 +55,5 @@ def class_leaderboard_route(
             scope_user_ids=scope, period=period, limit=limit,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"rows": rows, "period": period}

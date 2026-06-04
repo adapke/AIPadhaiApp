@@ -364,7 +364,7 @@ def generate_script_from_query(
     try:
         from . import retrieval as rt
     except ImportError:
-        raise RuntimeError("retrieval module unavailable")
+        raise RuntimeError("retrieval module unavailable") from None
     upload_scope = (
         [recap.source_id] if recap.source_kind == "upload"
         else None
@@ -588,7 +588,7 @@ def _render_segment(
     except Exception as e:  # noqa: BLE001
         raise RuntimeError(
             f"TTS provider {provider!r} failed: {e}",
-        )
+        ) from e
     return str(out_path), _est_duration(segment.transcript)
 
 

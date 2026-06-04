@@ -64,7 +64,7 @@ def set_prefs(
             max_daily_mb=max_daily_mb,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {"ok": True, "quality_tier": quality_tier}
 
 
@@ -113,7 +113,7 @@ def create_manifest(
             ),
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _manifest_to_dict(m)
 
 
@@ -175,7 +175,7 @@ def start_download(
     try:
         d = op.start_download(manifest_id=manifest_id, user_id=user.id)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _download_to_dict(d)
 
 
@@ -194,7 +194,7 @@ def push_progress(
             bytes_done=bytes_done, files_done=files_done,
         )
     except ValueError as e:
-        raise HTTPException(404, str(e))
+        raise HTTPException(404, str(e)) from e
     if not d:
         raise HTTPException(404, "download not found")
     return _download_to_dict(d)

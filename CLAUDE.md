@@ -656,6 +656,30 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **B904 cleaned codebase-wide; gate now blocking.** Wrote
+  `scripts/fix_b904.py` — an AST-based mass fixer that walks
+  every `ExceptHandler`, finds nested `Raise` nodes without a
+  `.cause`, and inserts `from <binding>` (or `from None` when the
+  handler had no `as` clause). First pass had a UTF-8 byte-offset
+  bug (ast's `end_col_offset` is byte-based, not char-based; lines
+  containing em-dashes / smart quotes / Devanagari got corrupted).
+  Rewrote the editor to manipulate bytes; ran across 27 files →
+  344 sites fixed in one pass. v3.py alone had 246. B904 is now
+  blocking in `pyproject.toml`; the fixer ships as a maintained
+  script so future regressions can be cleaned the same way.
+- **Ninth router slice — `/api/orgs/{id}/assignments*`.** Four
+  endpoints (list, create, student completion beacon, class stats
+  rollup) moved to `padhai/routers/orgs_assignments.py`. ~95 lines
+  removed from web.py. The completion POST is intentionally
+  permissive for students (they can only write their own
+  user_id-keyed row) — that policy is in the router gate, not
+  delegated to `_orgs.record_completion`.
+- **Accuracy bench 115 → 130 items.** Added 6 hard items (JEE
+  gravitation / NEET retroviruses / UPSC Article 352 / NEET MO
+  theory / JEE optics / JEE integration), 5 CBSE Class 11/12 items
+  (was only 2 across those classes), and 4 SSC/UPSC/state-board
+  fillers. Distribution now `easy=86 / medium=33 / hard=11`.
+  Structural runner: 130/130 in 2.2s.
 - **Lint gate now F + E + I + B + UP + SIM blocking.** Triaged the
   29 SIM (simplify) findings: 16 auto-fixed cleanly (mostly
   `try-except-pass` → `contextlib.suppress`, `if/else` → ternary,

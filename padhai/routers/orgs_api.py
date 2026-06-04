@@ -63,7 +63,7 @@ def create_my_org(
             board=board, city=city, contact_email=contact_email,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return _web._org_to_dict(org)
 
 
@@ -128,7 +128,7 @@ def add_org_member(
             class_id=class_id, display_name=display_name,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     _web._audit.record(
         action="org.member.invite",
         org_id=org_id, actor_user_id=user.id,

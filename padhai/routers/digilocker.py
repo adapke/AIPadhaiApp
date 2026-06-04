@@ -101,7 +101,7 @@ def grant_consent(
             consent_text=consent_text,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "ok": True,
         "consent_id": c.id,
@@ -150,7 +150,7 @@ def issue_credential(
     try:
         parsed = _json.loads(payload)
     except _json.JSONDecodeError:
-        raise HTTPException(400, "payload must be valid JSON")
+        raise HTTPException(400, "payload must be valid JSON") from None
     try:
         iss = dl.enqueue_issuance(
             org_id=org_id,
@@ -159,7 +159,7 @@ def issue_credential(
             payload=parsed,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "issuance_id": iss.id,
         "status": iss.status,
@@ -230,7 +230,7 @@ def register_org_issuer(
             contact_email=contact_email,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "org_id": org.org_id,
         "issuer_id": org.issuer_id,

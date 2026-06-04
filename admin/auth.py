@@ -150,7 +150,7 @@ def create_user(email: str, password: str, display_name: str | None = None) -> A
                 (uid, email, hash_password(password), display_name, now),
             )
     except sqlite3.IntegrityError:
-        raise HTTPException(409, "email already registered")
+        raise HTTPException(409, "email already registered") from None
     return AdminUser(
         id=uid, email=email, display_name=display_name,
         created_at=now, last_login_at=None,

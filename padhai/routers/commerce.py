@@ -43,7 +43,7 @@ def validate_voucher(
             order_paise=order_paise, sku=sku,
         )
     except vouchers.VoucherError as e:
-        raise HTTPException(422, str(e))
+        raise HTTPException(422, str(e)) from e
     return {
         "voucher_code": result.voucher_code,
         "discount_paise": result.discount_paise,
@@ -71,7 +71,7 @@ def redeem_voucher(
             order_paise=order_paise, sku=sku,
         )
     except vouchers.VoucherError as e:
-        raise HTTPException(422, str(e))
+        raise HTTPException(422, str(e)) from e
     return {
         "voucher_code": result.voucher_code,
         "discount_paise": result.discount_paise,
@@ -137,7 +137,7 @@ def diksha_export(
             exported_by=user.id,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "export_id": record.id,
         "lesson_id": record.lesson_id,

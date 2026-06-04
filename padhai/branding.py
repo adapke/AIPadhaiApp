@@ -214,7 +214,7 @@ def update_branding(
             raise ValueError(
                 f"subdomain {brand_subdomain!r} is already taken by "
                 "another organisation",
-            )
+            ) from e
         raise
     return get_branding(org_id)
 

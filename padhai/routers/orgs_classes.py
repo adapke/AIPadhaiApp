@@ -72,6 +72,6 @@ def create_org_class_route(
             grade_level=grade_level, section=section,
         )
     except ValueError as e:
-        raise HTTPException(409, str(e))
+        raise HTTPException(409, str(e)) from e
     return {"id": c.id, "name": c.name, "grade_level": c.grade_level,
             "section": c.section}

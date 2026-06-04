@@ -435,7 +435,7 @@ def generate_plan(
     try:
         from . import exam_taxonomy as _et
     except ImportError:
-        raise RuntimeError("exam_taxonomy required")
+        raise RuntimeError("exam_taxonomy required") from None
     pack = _et.get_pack(pack_code)
     if not pack:
         raise ValueError(f"pack {pack_code!r} not found")

@@ -183,7 +183,7 @@ def create_personalised_pack(
     try:
         from . import exam_taxonomy as et
     except ImportError:
-        raise RuntimeError("exam_taxonomy required")
+        raise RuntimeError("exam_taxonomy required") from None
     base = et.get_pack(base_pack_code)
     if not base:
         raise ValueError(f"base pack {base_pack_code!r} not found")
@@ -401,7 +401,7 @@ def re_adapt(
     try:
         from . import exam_taxonomy as et
     except ImportError:
-        raise RuntimeError("exam_taxonomy required")
+        raise RuntimeError("exam_taxonomy required") from None
     pack = et.get_pack(base_pack_code)
     if not pack:
         raise ValueError(f"base pack {base_pack_code!r} not found")
@@ -520,7 +520,7 @@ def personalised_topic_view(
     try:
         from . import exam_taxonomy as et
     except ImportError:
-        raise RuntimeError("exam_taxonomy required")
+        raise RuntimeError("exam_taxonomy required") from None
     pack = et.get_pack(base_pack_code)
     if not pack:
         raise ValueError(f"base pack {base_pack_code!r} not found")

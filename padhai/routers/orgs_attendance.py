@@ -73,7 +73,7 @@ def post_class_attendance_route(
     try:
         records = json.loads(records_json)
     except (ValueError, TypeError):
-        raise HTTPException(400, "records_json must be valid JSON")
+        raise HTTPException(400, "records_json must be valid JSON") from None
     if not isinstance(records, list):
         raise HTTPException(400, "records_json must be a JSON array")
     return _web._orgs.mark_attendance(

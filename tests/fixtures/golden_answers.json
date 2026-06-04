@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, Maharashtra/Karnataka/TamilNadu State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Includes easy/medium/hard difficulty mix. v3: 115 items across 5 subject domains x 6 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, Maharashtra/Karnataka/TamilNadu State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Includes easy/medium/hard difficulty mix. v4: 130 items across 5 subject domains x 6 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -1443,6 +1443,199 @@
       "tags": {
         "subject": "geography",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Physics: A satellite of mass m orbits Earth at radius r with speed v. What is its total mechanical energy in terms of the gravitational constant G and Earth mass M?",
+      "expected": {
+        "answer": "-GMm/(2r)"
+      },
+      "rubric": "Accept '-GMm/2r', '-GMm/(2r)', or equivalent symbolic form.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "gravitation"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the value of the definite integral from 0 to pi/2 of sin(x)*cos(x) dx?",
+      "expected": {
+        "answer": "1/2"
+      },
+      "rubric": "Accept '1/2', '0.5', or 'half'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "integration"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which enzyme catalyses the formation of double-stranded DNA from RNA in retroviruses?",
+      "expected": {
+        "answer": "reverse transcriptase"
+      },
+      "rubric": "Accept 'reverse transcriptase' or 'RT'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "molecular_biology"
+      }
+    },
+    {
+      "prompt": "UPSC GS2 Polity: Under which Article can the President of India proclaim a National Emergency?",
+      "expected": {
+        "answer": "article 352"
+      },
+      "rubric": "Accept 'Article 352', '352', or 'Art 352'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC",
+        "topic": "emergency_provisions"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: The bond order of nitrogen molecule N2 according to molecular orbital theory is _____.",
+      "expected": {
+        "answer": "3"
+      },
+      "rubric": "Numeric only. Triple bond.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "chemical_bonding"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Physics: An object is placed at a distance of 20 cm from a concave mirror of focal length 10 cm. What is the magnification of the image (signed)?",
+      "expected": {
+        "answer": "-1"
+      },
+      "rubric": "Accept '-1' (real, inverted, same size).",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "optics"
+      }
+    },
+    {
+      "prompt": "CBSE Class 11 Physics: What is the dimensional formula for linear momentum?",
+      "expected": {
+        "answer": "mlt^-1"
+      },
+      "rubric": "Accept 'MLT^-1', 'M L T^-1', or '[MLT^-1]'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "CBSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Chemistry: Name the type of isomerism shown by [Co(NH3)5Cl]SO4 and [Co(NH3)5(SO4)]Cl.",
+      "expected": {
+        "answer": "ionisation isomerism"
+      },
+      "rubric": "Accept 'ionization isomerism', 'ionisation isomerism', or 'ionic isomerism'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "board": "CBSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Biology: In the lac operon of E. coli, what is the name of the gene that codes for beta-galactosidase?",
+      "expected": {
+        "answer": "lacz"
+      },
+      "rubric": "Accept 'lacZ', 'lac Z', or 'Z gene'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "CBSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "CBSE Class 11 Mathematics: What is the cosine of 60 degrees?",
+      "expected": {
+        "answer": "1/2"
+      },
+      "rubric": "Accept '1/2', '0.5', or 'half'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Physics: What is the SI unit of electric flux?",
+      "expected": {
+        "answer": "volt metre"
+      },
+      "rubric": "Accept 'V m', 'volt-metre', or 'Nm^2/C'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "CBSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "SSC GK: Which Indian state is known as the Spice Garden of India?",
+      "expected": {
+        "answer": "kerala"
+      },
+      "rubric": "Accept 'Kerala' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "ICSE Class 9 History: In which year did the Indian National Congress hold its first session?",
+      "expected": {
+        "answer": "1885"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "board": "ICSE",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 10: What is the largest organ in the human body?",
+      "expected": {
+        "answer": "skin"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "Maharashtra",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "UPSC GS1 History: Who founded the Brahmo Samaj in 1828?",
+      "expected": {
+        "answer": "raja ram mohan roy"
+      },
+      "rubric": "Accept 'Raja Ram Mohan Roy' or 'Rammohan Roy'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
       }
     }
   ]

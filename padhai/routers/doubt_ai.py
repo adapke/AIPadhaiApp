@@ -49,11 +49,11 @@ def doubt_ai_answer(
         except HTTPException:
             raise
         except Exception:
-            raise HTTPException(403, "not your doubt")
+            raise HTTPException(403, "not your doubt") from None
     try:
         d = dc.answer_via_ai_vision(doubt_id=did, force=force)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     return {
         "doubt_id": d.id,
         "status": d.status,
@@ -89,7 +89,7 @@ def doubt_submit_instant(
             audio_url=audio_url,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     # Immediately call Claude Vision
     try:
         d = dc.answer_via_ai_vision(doubt_id=d.id)
@@ -139,7 +139,7 @@ def doubt_cron_escalate(
         except HTTPException:
             raise
         except Exception:
-            raise HTTPException(403, "admin role required")
+            raise HTTPException(403, "admin role required") from None
 
     from .. import doubt_clearing as dc
     stale = dc.stale_for_ai_escalation(minutes=minutes)

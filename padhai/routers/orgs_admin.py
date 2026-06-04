@@ -71,7 +71,7 @@ def update_org_branding(
             brand_subdomain=brand_subdomain,
         )
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     audit.record(
         action="org.branding.update",
         org_id=org_id, actor_user_id=user.id,
@@ -313,7 +313,7 @@ def set_org_residency(
     try:
         after = residency.set_residency(org_id=org_id, region=region)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     audit.record(
         action="org.residency.update",
         org_id=org_id, actor_user_id=user.id,
@@ -359,7 +359,7 @@ def set_custom_domain(
     try:
         s = custom_domains.set_domain(org_id=org_id, domain=domain)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     audit.record(
         action="org.custom_domain.set",
         org_id=org_id, actor_user_id=user.id,
@@ -427,7 +427,7 @@ def set_org_country(
     try:
         applied = countries.set_country(org_id=org_id, code=code)
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     audit.record(
         action="org.country.update",
         org_id=org_id, actor_user_id=user.id,
