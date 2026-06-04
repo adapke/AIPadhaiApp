@@ -45,6 +45,7 @@ _ROUTER_NAMES = (
     "doubt_ai",      # v3.x — instant Claude Vision answer for /api/doubts/{did}/ai-answer
     "ux_signals",    # v3.x — RUM CWV beacon + i18n + festivals + A/B experiments
     "multipage",     # v3.x — multi-page video stitching (/jobs/{id}/combined*)
+    "explainer",     # v3.x — /explain + /explain/video (Haiku-only + image-grounded)
 )
 
 

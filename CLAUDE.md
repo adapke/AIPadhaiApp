@@ -656,6 +656,31 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Docker-compose E2E stack.** `make e2e` brings up postgres:15 +
+  minio + liquibase + the app, seeds a demo dataset
+  (`scripts/seed_demo.py`), runs the HTTP smoke
+  (`scripts/e2e_smoke.py`) + Cypress full-flow spec
+  (`cypress/e2e/17-e2e-full-flow.cy.js`), tears down. Compose pins
+  `PADHAI_DB_PATH=/app/data/jobs.db` to a named volume so SQLite
+  module tables survive rebuilds. CI wired at
+  `.github/workflows/e2e.yml` (PR + nightly cron). See
+  `SPRINT_E2E.md` for the full sprint plan.
+- **Postgres parity for module tables.** New
+  `db/changesets/002_module_tables.sql` covers 12 of the most-
+  touched tables (ai_answer_provenance, ai_citations, llm_calls,
+  llm_alerts, parent_consent_tokens, parent_consent_outbox,
+  exam_packs, exam_pack_enrollments, essay_rubrics,
+  essay_submissions, mock_interviews, mock_interview_turns,
+  doubt_requests). Composed via `db/changesets/master.xml` so
+  adding the next changeset is one `<include>` line.
+- **Central LLM wrapper adopted in essay_grader.** `essay_grader.grade()`
+  now calls `llm_call.call_claude()` instead of duplicating the
+  client + record_call + cost-estimation boilerplate. ~30 lines
+  removed; the wrapper is the recommended pattern for new
+  surfaces and pending migrations.
+- **Second router slice — /explain.** `padhai/routers/explainer.py`
+  holds `POST /explain` + `POST /explain/video`. Same late-import
+  pattern as `multipage.py`. Removes ~135 lines from web.py.
 - **Accuracy bench expanded 43 → 74 items.** Now covers CBSE Class
   6–12, ICSE, Maharashtra, TamilNadu, Karnataka, JEE, NEET, UPSC,
   SSC across math, physics, chemistry, biology, polity/geography/

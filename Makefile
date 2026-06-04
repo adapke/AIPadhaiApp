@@ -64,3 +64,24 @@ test: ## Run pytest + 4 QA harnesses against ad-hoc local server
 
 clean: ## Remove local QA artifacts (DBs, logs)
 	rm -f qa_*.db qa_*.log qa_*.err /tmp/padhai_*.db /tmp/qa_*.db
+
+docker-check: ## Validate docker-compose.yml + Dockerfile.dev without running Docker
+	@echo "==> docker-compose.yml YAML:"
+	@python -c "import yaml; yaml.safe_load(open('docker-compose.yml'))" \
+		&& echo "    OK" || (echo "    FAIL"; exit 1)
+	@echo "==> Dockerfile.dev parseable:"
+	@if [ -f Dockerfile.dev ]; then \
+		head -1 Dockerfile.dev | grep -q '^FROM' && echo "    OK starts with FROM" \
+		|| (echo "    FAIL no FROM"; exit 1); \
+	else echo "    FAIL Dockerfile.dev missing"; exit 1; fi
+	@echo "==> db/changesets/master.xml + included files:"
+	@if [ -f db/changesets/master.xml ] && \
+	   [ -f db/changesets/001_core_schema.sql ] && \
+	   [ -f db/changesets/002_module_tables.sql ]; then \
+		echo "    OK 3 changeset files present"; \
+	else echo "    FAIL changeset files missing"; exit 1; fi
+	@echo "==> services declared:"
+	@python -c "import yaml; d=yaml.safe_load(open('docker-compose.yml')); print('    ' + ', '.join(sorted(d['services'].keys())))"
+	@echo "==> volumes declared:"
+	@python -c "import yaml; d=yaml.safe_load(open('docker-compose.yml')); print('    ' + ', '.join(sorted(d.get('volumes') or {})))"
+	@echo "compose stack ready — run 'make up' on a Docker host"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Master changelog — references every formatted-SQL file in order.
+  docker-compose's liquibase service uses this so all changesets
+  run on `up`, not just the 001 core schema.
+
+  Adding a new file:
+    1. Drop it next to this one (NNN_descriptive_name.sql).
+    2. Add an <include> line in numeric order below.
+    3. `make up` will pick it up on next stack bring-up.
+-->
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <include file="001_core_schema.sql" relativeToChangelogFile="true"/>
+    <include file="002_module_tables.sql" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

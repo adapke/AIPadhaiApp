@@ -390,22 +390,7 @@ def grade(
         _record_essay_provenance(sub, rubric, result, ai_call_id=None)
         return result
 
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        result = _grade_heuristic(sub, rubric)
-        _persist_grade(sub.id, result, ai_call_id=None)
-        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
-        return result
-
-    # Lazy SDK import — keeps module loadable without anthropic
-    try:
-        from anthropic import Anthropic   # noqa: WPS433
-    except ImportError:
-        result = _grade_heuristic(sub, rubric)
-        _persist_grade(sub.id, result, ai_call_id=None)
-        _record_essay_provenance(sub, rubric, result, ai_call_id=None)
-        return result
-
-    from . import llm_cache, llm_obs
+    from . import llm_cache, llm_call
 
     model = model or os.environ.get(
         "PADHAI_ESSAY_GRADER_MODEL", "claude-sonnet-4-6",
@@ -421,41 +406,31 @@ def grade(
         ),
     )
     user_text = f"STUDENT SUBMISSION:\n---\n{sub.text}\n---"
+    kwargs = llm_cache.with_caching(system_text=system_text, user_text=user_text)
 
-    kwargs = llm_cache.with_caching(
-        system_text=system_text, user_text=user_text,
-    )
-
-    started = time.time()
+    # Single helper handles: anthropic SDK import, the messages.create
+    # call, text extraction, token + cost accounting, llm_obs.record_call.
+    # cap pre-flight is disabled here because we already ran
+    # check_daily_cap above (with a heuristic-fallback branch on
+    # BudgetExceeded). Caller-side cap is the cleaner pattern when the
+    # surface has a non-Claude fallback.
     try:
-        client = Anthropic()
-        resp = client.messages.create(
-            model=model, max_tokens=1500, **kwargs,
+        call = llm_call.call_claude(
+            module="essay_grader",
+            prompt_version="v1",
+            model=model,
+            max_tokens=1500,
+            enforce_cap=False,
+            **kwargs,
         )
-    except Exception as e:  # noqa: BLE001
-        print(f"[essay_grader] Claude call failed: {e}")
+    except RuntimeError as e:  # SDK missing / key missing / Claude error
+        print(f"[essay_grader] {e}")
         result = _grade_heuristic(sub, rubric)
         _persist_grade(sub.id, result, ai_call_id=None)
         _record_essay_provenance(sub, rubric, result, ai_call_id=None)
         return result
 
-    latency_ms = int((time.time() - started) * 1000)
-    body = "".join(
-        b.text for b in resp.content if b.type == "text"
-    )
-    parsed = _parse_grade_response(body, rubric)
-    tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
-    tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
-    cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    call_id = llm_obs.record_call(
-        module="essay_grader",
-        prompt_version="v1",
-        model=model,
-        tokens_in=tokens_in, tokens_out=tokens_out,
-        latency_ms=latency_ms,
-        user_id=sub.user_id,
-        cached=cached,
-    )
+    parsed = _parse_grade_response(call.text, rubric)
     result = GradeResult(
         submission_id=sub.id,
         score=parsed["score"],
@@ -464,8 +439,8 @@ def grade(
         suggestions=parsed["suggestions"],
         method="claude",
     )
-    _persist_grade(sub.id, result, ai_call_id=call_id)
-    _record_essay_provenance(sub, rubric, result, ai_call_id=call_id)
+    _persist_grade(sub.id, result, ai_call_id=call.call_id)
+    _record_essay_provenance(sub, rubric, result, ai_call_id=call.call_id)
     return result
 
 
