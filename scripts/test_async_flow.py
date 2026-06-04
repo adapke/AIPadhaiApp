@@ -11,11 +11,10 @@ import tempfile
 import time
 from pathlib import Path
 
-# Patch BEFORE importing padhai.web so the singleton worker uses our stub
-import padhai.jobs as jobs_mod
-
 from fastapi.testclient import TestClient
 
+# Patch BEFORE importing padhai.web so the singleton worker uses our stub
+import padhai.jobs as jobs_mod
 import padhai.web as web_mod
 
 

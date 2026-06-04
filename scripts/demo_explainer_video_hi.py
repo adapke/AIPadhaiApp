@@ -26,7 +26,6 @@ from padhai.render import render_lesson
 from padhai.themes import BINOCS
 from padhai.tts import EspeakProvider
 
-
 # Hindi-translated explainer (same shape as the English one, just हिन्दी text).
 EXPLAINER_HI = {
     "topic": "प्रकाश संश्लेषण",  # "Photosynthesis"

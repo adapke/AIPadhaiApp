@@ -3,12 +3,13 @@
 Run: PYTHONPATH=. python scripts/test_v2_3.py
 """
 from __future__ import annotations
+
 import json
 import os
 import sys
 import tempfile
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -20,6 +21,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import analytics, doubt_clearing, live_classes
     from padhai.web import app
 

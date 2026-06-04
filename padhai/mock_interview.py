@@ -32,7 +32,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS mock_interviews (
     id              TEXT PRIMARY KEY,
@@ -611,7 +610,7 @@ def _next_question(
         return "Tell me about a time you changed your mind on something important."
 
     try:
-        from anthropic import Anthropic   # noqa: WPS433
+        from anthropic import Anthropic  # noqa: WPS433
     except ImportError:
         return random.choice(available) if available else (
             "What's your biggest weakness, and what are you doing about it?"

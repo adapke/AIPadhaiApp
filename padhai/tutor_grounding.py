@@ -37,7 +37,6 @@ from pathlib import Path
 
 from . import citations as _cit
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS tutor_session_modes (
     session_id      TEXT PRIMARY KEY,

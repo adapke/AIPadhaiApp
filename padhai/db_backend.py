@@ -28,7 +28,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
-
 SQLITE = "sqlite"
 POSTGRES = "postgres"
 

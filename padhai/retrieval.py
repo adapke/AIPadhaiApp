@@ -45,7 +45,6 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS doc_chunks (
     id                  TEXT PRIMARY KEY,

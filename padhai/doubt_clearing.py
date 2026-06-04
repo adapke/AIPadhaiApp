@@ -32,7 +32,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS doubt_requests (
     id                TEXT PRIMARY KEY,
@@ -388,8 +387,9 @@ def answer_via_ai_vision(
         )
         return get(doubt_id)  # type: ignore[return-value]
 
-    from . import llm_obs, llm_cache  # local imports keep cost low
     import time as _time
+
+    from . import llm_cache, llm_obs  # local imports keep cost low
 
     model = os.environ.get(
         "PADHAI_DOUBT_VISION_MODEL", "claude-sonnet-4-6",

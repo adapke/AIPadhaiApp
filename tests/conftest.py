@@ -15,7 +15,6 @@ import secrets
 import pytest
 from fastapi.testclient import TestClient
 
-
 # ---------- Environment setup -----------------------------------------------
 # Must be set before importing the app so modules read them at import time.
 

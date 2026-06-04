@@ -12,7 +12,6 @@ from padhai.pedagogy import explainer_to_lesson, pick_diagram
 from padhai.render import render_lesson
 from padhai.themes import BINOCS
 
-
 EXPLAINER = {
     "topic": "Photosynthesis",
     "one_liner": "Green plants use sunlight, water, and carbon dioxide to make their own food and release oxygen.",

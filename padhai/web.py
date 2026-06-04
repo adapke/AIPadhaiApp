@@ -55,6 +55,90 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Redirect
 
 _log = logging.getLogger("padhai.web")
 
+from . import accuracy_bench as _accbench
+from . import adaptive_packs as _adaptive
+from . import affiliates as _affiliates
+from . import analytics as _analytics
+from . import audio_recap as _audio_recap
+from . import audit as _audit
+from . import branding as _branding
+from . import cdn as _cdn
+from . import citations as _citations
+from . import coaching as _coaching
+from . import content_market as _cmkt
+from . import corporate as _corp
+from . import countries as _countries
+from . import curriculum_scorer as _scorer
+from . import custom_domains as _customdom
+from . import customer_success as _cs
+from . import daily_plan as _daily_plan
+from . import dashboards as _dashboards
+from . import db_backend as _db_backend
+from . import diagram_generator as _dgen
+from . import digilocker as _digilocker
+from . import diksha as _diksha
+from . import doubt_clearing as _doubt
+from . import dpdp as _dpdp
+from . import essay_grader as _essay
+from . import exam_taxonomy as _exam_tax
+from . import expert_review as _expert_review
+from . import family_plans as _family
+from . import feature_flags as _flags
+from . import forums as _forums
+from . import home_ui as _home_ui
+from . import indic_polish as _indic
+from . import live_classes as _live
+from . import llm_cache as _llm_cache
+from . import llm_obs as _llm_obs
+from . import marketplace_quality as _mq
+from . import mastery as _mastery
+from . import math_render as _math_render
+from . import math_vision as _math_vision
+from . import mentorship as _mentor
+from . import messaging as _messaging
+from . import mock_engine as _mock_eng
+from . import mock_interview as _mock_iv
+from . import mock_test_events as _mock_te
+from . import moderation as _moderation
+from . import moderation_queue as _modq
+from . import navigation as _navigation
+from . import nep_alignment as _nep
+from . import observability as _obs
+from . import offline_packs as _offline
+from . import practice_test as _practice
+from . import preschool as _preschool
+from . import procurement as _procurement
+from . import push as _push
+from . import question_bank as _qbank
+from . import question_pack_market as _qpmkt
+from . import queue_backend as _queue_backend
+from . import rate_limit as _rl
+from . import readiness as _readiness
+from . import region as _region
+from . import research_tools as _research
+from . import residency as _residency
+from . import retrieval as _retrieval
+from . import sales_pipeline as _sales
+from . import saml as _saml
+from . import schema_v2 as _schema_v2
+from . import scim as _scim
+from . import soc2 as _soc2
+from . import socratic_tutor as _socratic
+from . import spaced_repetition as _srs
+from . import sso as _sso
+from . import state_partnerships as _states
+from . import step_math as _step_math
+from . import streaks as _streaks
+from . import student_home as _student_home
+from . import study_buddies as _buddies
+from . import teacher_publishing as _pub
+from . import tutor as _tutor
+from . import tutor_grounding as _tutor_grd
+from . import tutor_marketplace as _tmkt
+from . import university_partners as _univ
+from . import uploads as _uploads
+from . import voice_sarvam as _sarvam
+from . import vouchers as _vouchers
 from .auth import (
     AuthUser,
     PostgresUserRepository,
@@ -66,8 +150,8 @@ from .auth import (
     verify_password,
 )
 from .cache import Cache
-from .ingest import ingest as ingest_source
 from .db import PostgresJobStore, get_db_url, use_postgres
+from .ingest import ingest as ingest_source
 from .jobs import Job, JobRunner, JobStore
 from .pedagogy import BOARD_GUIDANCE, LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_lesson
 from .personalization import (
@@ -79,91 +163,6 @@ from .personalization import (
     build_profile,
     detect_sensitive_domain,
 )
-from . import moderation as _moderation
-from . import dpdp as _dpdp
-from . import sso as _sso
-from . import uploads as _uploads
-from . import observability as _obs
-from . import schema_v2 as _schema_v2
-from . import branding as _branding
-from . import audit as _audit
-from . import cdn as _cdn
-from . import db_backend as _db_backend
-from . import push as _push
-from . import queue_backend as _queue_backend
-from . import saml as _saml
-from . import scim as _scim
-from . import residency as _residency
-from . import streaks as _streaks
-from . import math_render as _math_render
-from . import diagram_generator as _dgen
-from . import custom_domains as _customdom
-from . import soc2 as _soc2
-from . import region as _region
-from . import question_bank as _qbank
-from . import curriculum_scorer as _scorer
-from . import voice_sarvam as _sarvam
-from . import indic_polish as _indic
-from . import countries as _countries
-from . import coaching as _coaching
-from . import mastery as _mastery
-from . import preschool as _preschool
-from . import procurement as _procurement
-from . import rate_limit as _rl
-from . import feature_flags as _flags
-from . import llm_obs as _llm_obs
-from . import tutor as _tutor
-from . import llm_cache as _llm_cache
-from . import essay_grader as _essay
-from . import practice_test as _practice
-from . import live_classes as _live
-from . import doubt_clearing as _doubt
-from . import analytics as _analytics
-from . import math_vision as _math_vision
-from . import mock_interview as _mock_iv
-from . import mock_test_events as _mock_te
-from . import forums as _forums
-from . import family_plans as _family
-from . import study_buddies as _buddies
-from . import teacher_publishing as _pub
-from . import content_market as _cmkt
-from . import mentorship as _mentor
-from . import nep_alignment as _nep
-from . import diksha as _diksha
-from . import customer_success as _cs
-from . import state_partnerships as _states
-from . import corporate as _corp
-from . import sales_pipeline as _sales
-from . import tutor_marketplace as _tmkt
-from . import question_pack_market as _qpmkt
-from . import vouchers as _vouchers
-from . import university_partners as _univ
-from . import affiliates as _affiliates
-from . import digilocker as _digilocker
-from . import citations as _citations
-from . import exam_taxonomy as _exam_tax
-from . import accuracy_bench as _accbench
-from . import mock_engine as _mock_eng
-from . import readiness as _readiness
-from . import tutor_grounding as _tutor_grd
-from . import retrieval as _retrieval
-from . import daily_plan as _daily_plan
-from . import moderation_queue as _modq
-from . import dashboards as _dashboards
-from . import expert_review as _expert_review
-from . import spaced_repetition as _srs
-from . import socratic_tutor as _socratic
-from . import research_tools as _research
-from . import marketplace_quality as _mq
-from . import offline_packs as _offline
-from . import messaging as _messaging
-from . import audio_recap as _audio_recap
-from . import adaptive_packs as _adaptive
-from . import step_math as _step_math
-from . import navigation as _navigation
-from . import student_home as _student_home
-from . import home_ui as _home_ui
-
 
 # v2.0.1 — size caps on user-supplied input for public preview
 # endpoints. Picked well above realistic lesson use (a quadratic
@@ -176,8 +175,8 @@ _LESSON_TEXT_MAX = 20000
 from .render import render_lesson
 from .storage import LocalDiskStorage, get_storage
 from .talking_head import get_provider as get_talking_head_provider
-from .themes import REGISTRY as THEME_REGISTRY, theme_for_level
-
+from .themes import REGISTRY as THEME_REGISTRY
+from .themes import theme_for_level
 
 # ---- module-level singletons ----
 
@@ -285,8 +284,9 @@ def _render_explainer_video(job: Job) -> dict:
     endpoint cached it). Convert to a Lesson, run the same render
     pipeline, surface a stable `lesson_id` so flashcards / recap / chat
     can all key off the same explainer afterwards."""
-    from .pedagogy import explainer_to_lesson, MODEL
     import json as _json
+
+    from .pedagogy import MODEL, explainer_to_lesson
 
     p = job.payload
     language = p["language"]
@@ -1083,6 +1083,7 @@ app = FastAPI(
 # itself keeps the auth-gated + tightly-coupled endpoints. New routers
 # are added to padhai/routers/__init__.py._ROUTER_NAMES.
 from . import routers as _routers  # noqa: E402  -- after app creation
+
 for _r in _routers.all_routers():
     app.include_router(_r)
 
@@ -1096,6 +1097,8 @@ _obs.install(app)
 # 'unsafe-inline' is kept for now because the SPA uses inline scripts;
 # migrate to nonces in a future refactor to tighten this further.
 from starlette.middleware.base import BaseHTTPMiddleware  # noqa: E402
+
+
 class _CSPMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
         response = await call_next(request)
@@ -1215,6 +1218,7 @@ def metrics_endpoint():
 # and add a `padhai-admin` service to render.yaml pointing at
 # admin/Dockerfile (which already exists for that purpose).
 from admin.app import app as _admin_app
+
 app.mount("/admin", _admin_app)
 
 
@@ -10674,7 +10678,7 @@ def create_lesson(
 
 # ---- chat-on-content (Spark.E equivalent) ---------------------------------
 
-import anthropic as _anthropic   # noqa: E402  — placed here to keep top imports tidy
+import anthropic as _anthropic  # noqa: E402  — placed here to keep top imports tidy
 
 _chat_client: _anthropic.Anthropic | None = None
 
@@ -10768,7 +10772,7 @@ def _compute_user_stats(user_id: str | None, days: int) -> dict:
 
     # Fill every day in the window so the chart shows zeros (parents
     # want to see the gap days, not skip them)
-    from datetime import datetime, timezone, timedelta
+    from datetime import datetime, timedelta, timezone
     series: list[dict] = []
     today = datetime.now(tz=timezone.utc).date()
     for i in range(days):
@@ -10857,8 +10861,8 @@ def make_learning_path(
     thinking — this is a real planning task (Haiku gets task-mix wrong
     in evals). ~₹4-6/call, cached by deterministic input key so the
     same student request returns instantly."""
-    from .pedagogy import generate_learning_path
     from .curriculum import CURRICULUM
+    from .pedagogy import generate_learning_path
 
     subject_list = [s.strip() for s in subjects.split(",") if s.strip()]
     focus_list = [s.strip() for s in focus_topics.split(",") if s.strip()]
@@ -10925,8 +10929,8 @@ def curriculum_for_lesson(
     Cached idempotently. ~₹0.20/call (Haiku 4.5)."""
     if user is None:
         raise HTTPException(401, "authentication required")
-    from .pedagogy import match_curriculum
     from .curriculum import CURRICULUM
+    from .pedagogy import match_curriculum
 
     if not regenerate:
         cached = cache.get_curriculum_matches(lesson_id)
@@ -10971,7 +10975,9 @@ def curriculum_index(
     db_url = get_db_url()
     if db_url:
         try:
-            import psycopg, json as _json
+            import json as _json
+
+            import psycopg
             with psycopg.connect(db_url) as conn:
                 db_rows = conn.execute(
                     "SELECT id, board, class, subject, chapter_no, chapter_title, "
@@ -11079,6 +11085,7 @@ def chat_about_lesson(
         raise HTTPException(429, "Too many requests — please wait before asking again.")
     import dataclasses
     import json
+
     from .pedagogy import MODEL
 
     # S4 anti-cheat: if the user is in the middle of an exam, lock
@@ -11824,13 +11831,12 @@ def v2_list_video_modes():
 # per PRD §19) — this is the lightweight content-management slice.
 # ============================================================================
 
-from . import orgs as _orgs
-
-
 # v2.0.3 — these three helpers moved to padhai/api_deps.py so router
 # modules can import them cleanly. Aliases kept here for backward
 # compatibility with the ~200 call sites in this file.
 from . import api_deps as _api_deps
+from . import orgs as _orgs
+
 _require_user = _api_deps.require_user
 _org_or_404 = _api_deps.org_or_404
 _require_org_role = _api_deps.require_org_role
@@ -11846,135 +11852,12 @@ def _org_to_dict(org: _orgs.Org) -> dict:
     }
 
 
-@app.get("/api/orgs/me")
-def list_my_orgs(user: AuthUser | None = Depends(current_user)):
-    """Orgs the current user belongs to (any role). Returns an empty
-    list for anonymous or unaffiliated users — the UI uses that to
-    show the 'Create your school' first-time form."""
-    if user is None:
-        return {"orgs": []}
-    out = [_org_to_dict(o) for o in _orgs.find_orgs_for_user(user.id)]
-    return {"orgs": out}
+# NB: GET /api/orgs/me, POST /api/orgs, GET /api/orgs/{id}, GET + POST /api/orgs/{id}/members,
+# and POST /api/orgs/{id}/roster moved to padhai/routers/orgs_api.py.
+# The other 30+ /api/orgs/* endpoints (classes, assignments,
+# attendance, fees, exams, branding, notifications) stay in
+# web.py for now — each is its own subsystem worth its own router.
 
-
-@app.post("/api/orgs", status_code=201)
-def create_my_org(
-    name: str = Form(..., min_length=2, max_length=120),
-    kind: str = Form("school"),
-    board: str | None = Form(None),
-    city: str | None = Form(None),
-    contact_email: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Create an organisation. The caller becomes the owner + first
-    admin member automatically."""
-    user = _require_user(user)
-    try:
-        org = _orgs.create_org(
-            name=name, kind=kind, owner_user_id=user.id,
-            board=board, city=city, contact_email=contact_email,
-        )
-    except ValueError as e:
-        raise HTTPException(400, str(e))
-    return _org_to_dict(org)
-
-
-@app.get("/api/orgs/{org_id}")
-def get_org_detail(
-    org_id: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    org = _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    return {
-        "org": _org_to_dict(org),
-        "stats": _orgs.org_stats(org_id),
-        "my_role": _orgs.user_role_in_org(org_id=org_id, user_id=user.id),
-    }
-
-
-@app.get("/api/orgs/{org_id}/members")
-def list_org_members(
-    org_id: str,
-    role: str | None = None,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    members = _orgs.list_members(org_id, role=role, limit=limit)
-    return {
-        "members": [
-            {
-                "id": m.id, "user_id": m.user_id,
-                "invited_email": m.invited_email,
-                "role": m.role, "class_id": m.class_id,
-                "display_name": m.display_name, "joined_at": m.joined_at,
-            }
-            for m in members
-        ],
-    }
-
-
-@app.post("/api/orgs/{org_id}/members", status_code=201)
-def add_org_member(
-    org_id: str,
-    request: Request,
-    email: str = Form(..., min_length=4),
-    role: str = Form("student"),
-    class_id: str | None = Form(None),
-    display_name: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin"})
-    try:
-        m = _orgs.add_member(
-            org_id=org_id, role=role, invited_email=email,
-            class_id=class_id, display_name=display_name,
-        )
-    except ValueError as e:
-        raise HTTPException(400, str(e))
-    _audit.record(
-        action="org.member.invite",
-        org_id=org_id, actor_user_id=user.id,
-        target_type="org_member", target_id=m.id,
-        after={"role": m.role, "email": m.invited_email,
-               "class_id": m.class_id, "display_name": m.display_name},
-        **_audit.actor_from_request(request),
-    )
-    return {
-        "id": m.id, "invited_email": m.invited_email, "role": m.role,
-        "class_id": m.class_id, "display_name": m.display_name,
-    }
-
-
-@app.post("/api/orgs/{org_id}/roster", status_code=201)
-def upload_org_roster(
-    org_id: str,
-    request: Request,
-    csv: UploadFile = File(...),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Bulk CSV roster import. Required column: email. Optional: name,
-    role, class. New classes referenced by name are auto-created.
-    Returns counts so the UI can show "imported N, skipped M"."""
-    user = _require_user(user)
-    _rate_key = _rl.client_ip_from_request(request)
-    if not _rl.file_upload.try_consume(_rate_key):
-        raise HTTPException(429, "too many uploads — slow down")
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin"})
-    suffix = Path(csv.filename or "roster.csv").suffix.lower()
-    if suffix not in (".csv", ".tsv", ".txt"):
-        raise HTTPException(400, "roster must be a CSV/TSV file")
-    body = csv.file.read()
-    if len(body) > 2 * 1024 * 1024:
-        raise HTTPException(413, "CSV too large (limit 2 MB)")
-    return _orgs.import_roster_csv(org_id=org_id, csv_bytes=body)
 
 
 @app.get("/api/orgs/{org_id}/classes")
@@ -13817,6 +13700,7 @@ def live_respond(
     bytes on the wire. Returns 2-4 sentence reply text; the client
     speaks it through speechSynthesis."""
     import json as _json
+
     from .pedagogy import live_tutor_reply
 
     try:
@@ -13851,8 +13735,9 @@ def voice_respond(
     as the text Doubt Chat). Without a lesson_id it behaves like the
     Live Lecture endpoint but with the VOICE_TUTOR_SYSTEM prompt.
     Browser handles ASR + TTS; we only handle the reasoning step."""
-    import json as _json
     import dataclasses
+    import json as _json
+
     from .pedagogy import voice_tutor_reply
 
     _rate_key = user.id if user else _rl.client_ip_from_request(request)

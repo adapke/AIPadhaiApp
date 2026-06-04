@@ -47,7 +47,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS user_phone_channels (
     id              TEXT PRIMARY KEY,

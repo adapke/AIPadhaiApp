@@ -31,7 +31,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS exam_segments (
     code            TEXT PRIMARY KEY,            -- 'kinder' / 'school' / 'college' / 'competitive' / 'govt' / 'job' / 'professional' / 'research'

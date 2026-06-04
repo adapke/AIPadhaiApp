@@ -40,9 +40,17 @@ jobs:
           PYTHONPATH=. python scripts/run_accuracy_bench.py --mode=structural
 
   live:
-    # Nightly real-model run + manual `workflow_dispatch`. Skipped on
-    # PRs where the ANTHROPIC_API_KEY secret isn't exposed.
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # Blocking quality gate as of the 102-item dataset.
+    # Triggers:
+    #   • push to main — every merge runs the live bench, so a
+    #     regression in lesson/explainer generation quality fails
+    #     CI on the merge commit (~$0.50 per run with Haiku)
+    #   • nightly schedule — catches drift between merges (model
+    #     updates, training data shifts)
+    #   • workflow_dispatch — manual re-run
+    # NOT on PRs: the ANTHROPIC_API_KEY secret isn't exposed to
+    # forked-PR workflows by default, so they'd flake.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -61,11 +69,14 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install anthropic
 
-      - name: Run live benchmark
+      - name: Run live benchmark (blocking gate)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PADHAI_DB_PATH: /tmp/padhai_bench_live.db
           PADHAI_BENCH_MODEL: claude-haiku-4-5-20251001
         run: |
+          # 0.75 threshold matches what Haiku 4.5 reliably hits on
+          # the 102-item golden dataset (per offline calibration).
+          # Bump as the dataset + prompts improve.
           PYTHONPATH=. python scripts/run_accuracy_bench.py \
-            --mode=live --min-pass-rate 0.70
+            --mode=live --min-pass-rate 0.75

@@ -40,7 +40,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS bench_datasets (
     id              TEXT PRIMARY KEY,

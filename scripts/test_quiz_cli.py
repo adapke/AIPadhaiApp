@@ -2,7 +2,6 @@
 
 from padhai.quiz_cli import _feedback_script, _format_question_script, match_answer
 
-
 options = {
     "A": "Hemoglobin",
     "B": "Chlorophyll",

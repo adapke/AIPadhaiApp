@@ -25,7 +25,6 @@ import os
 from dataclasses import dataclass
 from typing import Optional
 
-
 SUPPORTED_LANGUAGES = frozenset({
     "hi", "bn", "ta", "te", "mr", "kn", "ml", "pa", "gu", "en-IN",
 })

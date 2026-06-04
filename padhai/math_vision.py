@@ -31,7 +31,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS math_submissions (
     id              TEXT PRIMARY KEY,
@@ -86,7 +85,7 @@ def is_vision_available() -> bool:
 
 def is_sympy_available() -> bool:
     try:
-        import sympy   # noqa: F401, WPS433
+        import sympy  # noqa: F401, WPS433
         return True
     except ImportError:
         return False
@@ -218,7 +217,7 @@ def extract(
         return get(submission_id)  # type: ignore[return-value]
 
     try:
-        from anthropic import Anthropic   # noqa: WPS433
+        from anthropic import Anthropic  # noqa: WPS433
     except ImportError:
         _persist_extract_failure(
             submission_id, error="anthropic-sdk-missing",
@@ -362,7 +361,7 @@ def validate(submission_id: str) -> ValidationResult:
     first_wrong = None
 
     if method == "sympy":
-        import sympy   # noqa: WPS433
+        import sympy  # noqa: WPS433
         prev_expr = None
         for i, step in enumerate(sub.steps):
             parsed_ok = False

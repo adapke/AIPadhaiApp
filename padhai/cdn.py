@@ -41,7 +41,6 @@ import os
 import time
 from urllib.parse import quote
 
-
 # When the CDN edge worker fetches from our origin, it injects this
 # header carrying PADHAI_CDN_ORIGIN_SECRET. If the header is present
 # + matches, we serve directly (no redirect loop). If unset / mismatch,

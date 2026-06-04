@@ -36,7 +36,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS mock_papers (
     id              TEXT PRIMARY KEY,

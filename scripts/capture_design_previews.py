@@ -3,8 +3,8 @@ local server via headless Chromium."""
 
 import asyncio
 from pathlib import Path
-from playwright.async_api import async_playwright
 
+from playwright.async_api import async_playwright
 
 SHOTS = [
     # (module key, label, viewport_w, viewport_h, full_page, extra_setup)

@@ -28,7 +28,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS family_groups (
     id              TEXT PRIMARY KEY,

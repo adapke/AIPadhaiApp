@@ -33,7 +33,6 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-
 ADDITIONS = [
     "ALTER TABLE orgs ADD COLUMN data_residency TEXT DEFAULT 'global'",
 ]

@@ -36,7 +36,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS diksha_content_refs (
     id              TEXT PRIMARY KEY,
@@ -208,7 +207,7 @@ def import_from_api(*, diksha_id: str,
         "DIKSHA_BASE_URL", "https://diksha.gov.in",
     )
     try:
-        import requests   # noqa: WPS433
+        import requests  # noqa: WPS433
     except ImportError as e:
         raise ValueError("requests lib not installed") from e
     headers = {

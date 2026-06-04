@@ -10,8 +10,8 @@ freshly-started container to catch regressions before deploy.
 from __future__ import annotations
 
 import os
-import sys
 import sqlite3
+import sys
 import tempfile
 from pathlib import Path
 
@@ -26,6 +26,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai.web import app
 
     failed: list[str] = []

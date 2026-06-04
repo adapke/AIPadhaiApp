@@ -3,7 +3,11 @@
 Run: PYTHONPATH=. python scripts/test_v3_0.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -15,9 +19,10 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import university_partners as upart
+
     from padhai import affiliates as aff
     from padhai import digilocker as dl
+    from padhai import university_partners as upart
     from padhai.web import app
 
     failed: list[str] = []

@@ -17,15 +17,16 @@ exclude = [
 # Phased rollout. Each category becomes blocking once its noise
 # floor is near zero. Current scope:
 #   • F — pyflakes (undefined names, broken format strings) — clean
-#   • E — pycodestyle errors (real-syntax-style mistakes) — clean
+#   • E — pycodestyle errors — clean
+#   • I — isort (import sorting + grouping) — clean
 # Still advisory (pre-commit only):
-#   • I — isort
-#   • B — bugbear
-#   • UP — pyupgrade
-#   • SIM — simplify
-# When you touch a file, ruff --fix will quietly clean its imports;
-# we'll flip I to blocking once the bulk of files have been touched.
-select = ["F", "E"]
+#   • B — bugbear (likely-bug patterns; ~10 findings to triage)
+#   • UP — pyupgrade (modern syntax; lots of `Optional[X]` → `X | None`)
+#   • SIM — simplify (readability wins; case-by-case)
+# When you touch a file, ruff --fix will quietly clean it. Promote
+# the next category to blocking once `ruff check --select <X>`
+# shows zero findings.
+select = ["F", "E", "I"]
 
 # Deliberate ignores:
 ignore = [

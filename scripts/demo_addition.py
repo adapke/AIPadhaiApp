@@ -14,7 +14,6 @@ from padhai.pedagogy import Lesson, Scene
 from padhai.render import _quiz_narration, render_lesson
 from padhai.themes import KINDERGARTEN
 
-
 LESSON = Lesson(
     title="Learning to Add",
     language_code="en",

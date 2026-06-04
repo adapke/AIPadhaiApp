@@ -36,7 +36,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS audit_log (
     id              TEXT PRIMARY KEY,

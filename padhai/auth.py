@@ -222,7 +222,8 @@ class SQLiteUserRepository:
         the `users` table lives in the same DB as every other module's
         tables. Passing an explicit path is supported for tests that
         want isolation."""
-        import sqlite3, uuid as _uuid
+        import sqlite3
+        import uuid as _uuid
         if db_path is None:
             from . import db as _db
             db_path = str(_db.sqlite_path())

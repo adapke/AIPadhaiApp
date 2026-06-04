@@ -28,7 +28,6 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS feature_flags (
     flag_key         TEXT PRIMARY KEY,

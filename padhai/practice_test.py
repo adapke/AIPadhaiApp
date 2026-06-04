@@ -25,7 +25,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS practice_tests (
     id              TEXT PRIMARY KEY,
@@ -333,7 +332,7 @@ def _synthesise(
     if not os.environ.get("ANTHROPIC_API_KEY"):
         return []
     try:
-        from anthropic import Anthropic   # noqa: WPS433
+        from anthropic import Anthropic  # noqa: WPS433
     except ImportError:
         return []
     from . import llm_cache, llm_obs

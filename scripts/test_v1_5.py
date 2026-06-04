@@ -20,7 +20,8 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import streaks, math_render, diagram_generator
+
+    from padhai import diagram_generator, math_render, streaks
     from padhai.web import app
 
     failed: list[str] = []

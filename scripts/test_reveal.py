@@ -7,7 +7,7 @@ import tempfile
 from pathlib import Path
 
 from padhai.pedagogy import Lesson, Scene
-from padhai.render import _make_reveal_clip, _find_font
+from padhai.render import _find_font, _make_reveal_clip
 from padhai.themes import DARK_ACADEMIC, KINDERGARTEN, WHITEBOARD
 
 scene = Scene(

@@ -38,7 +38,6 @@ from typing import Any
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import ASGIApp
 
-
 # ---------- structured logging ----------
 
 def log_event(event: str, **fields: Any) -> None:

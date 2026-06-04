@@ -27,9 +27,8 @@ import sqlite3
 import time
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS events (

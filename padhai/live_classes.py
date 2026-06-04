@@ -34,7 +34,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS live_classes (
     id              TEXT PRIMARY KEY,
@@ -131,7 +130,7 @@ def _create_room(*, room_id: str, provider: str) -> str:
         # Daily.co room creation. Lazy import; the actual call lands
         # in the v2.3.x ops sprint when DAILY_API_KEY is provisioned.
         try:
-            import requests   # noqa: WPS433
+            import requests  # noqa: WPS433
             r = requests.post(
                 "https://api.daily.co/v1/rooms",
                 headers={
@@ -178,7 +177,7 @@ def issue_access_token(
 
     if provider == "livekit":
         try:
-            from livekit.api import AccessToken, VideoGrants   # noqa: WPS433
+            from livekit.api import AccessToken, VideoGrants  # noqa: WPS433
             at = AccessToken(
                 os.environ["LIVEKIT_API_KEY"],
                 os.environ["LIVEKIT_API_SECRET"],
@@ -204,7 +203,7 @@ def issue_access_token(
 
     if provider == "daily":
         try:
-            import requests   # noqa: WPS433
+            import requests  # noqa: WPS433
             r = requests.post(
                 "https://api.daily.co/v1/meeting-tokens",
                 headers={

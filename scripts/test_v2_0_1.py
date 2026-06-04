@@ -4,7 +4,11 @@ idempotency, deactivate_member helper, custom-domain TLD validation.
 Run: PYTHONPATH=. python scripts/test_v2_0_1.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -16,7 +20,8 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import streaks, custom_domains, orgs, rate_limit
+
+    from padhai import custom_domains, orgs, rate_limit, streaks
     from padhai.web import app
 
     failed: list[str] = []
@@ -42,7 +47,7 @@ def main() -> int:
     # --- Streaks idempotency (the bug) ---
     streaks.migrate()
     # Simulate a user with 6-day streak going into day 7
-    from datetime import datetime, timezone, timedelta
+    from datetime import datetime, timedelta, timezone
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
     import sqlite3

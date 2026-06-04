@@ -32,7 +32,6 @@ from pathlib import Path
 from threading import Lock
 from typing import Callable
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS jobs (
     id          TEXT PRIMARY KEY,

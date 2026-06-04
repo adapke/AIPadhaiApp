@@ -682,6 +682,64 @@
       "rubric": "Accept '21A' or '21-A'.",
       "difficulty": "medium",
       "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+
+    {
+      "prompt": "What is 15% of 200?",
+      "expected": {"answer": "30"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "7"}
+    },
+    {
+      "prompt": "What is the perimeter of a square with side 5 cm?",
+      "expected": {"answer": "20"},
+      "rubric": "Numeric only (cm units optional).",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+    {
+      "prompt": "What is the smallest prime number?",
+      "expected": {"answer": "2"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+
+    {
+      "prompt": "What instrument measures atmospheric pressure?",
+      "expected": {"answer": "barometer"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "What is the chemical name of common salt?",
+      "expected": {"answer": "sodium chloride"},
+      "rubric": "Full chemical name lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "How many bones does an adult human body have?",
+      "expected": {"answer": "206"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "Who wrote the book 'Discovery of India'?",
+      "expected": {"answer": "jawaharlal nehru"},
+      "rubric": "Full name lowercase.",
+      "difficulty": "medium",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which Indian state has the highest literacy rate?",
+      "expected": {"answer": "kerala"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "geography", "exam": "SSC"}
     }
   ]
 }

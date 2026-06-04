@@ -14,7 +14,6 @@ from padhai.pedagogy import Lesson, Scene
 from padhai.render import _quiz_narration, render_lesson
 from padhai.themes import WHITEBOARD
 
-
 LESSON = Lesson(
     title="How Plants Make Their Food",
     language_code="en",

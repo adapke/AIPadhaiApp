@@ -27,7 +27,6 @@ from __future__ import annotations
 
 from typing import Any
 
-
 # Base persona that every mode inherits — covers the cross-cutting
 # rules (don't copy verbatim, be original, calibrate depth). Mode
 # prompts append their specific persona on top.

@@ -11,7 +11,11 @@ Covers:
 Run: PYTHONPATH=. python scripts/test_v3_6.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -23,12 +27,14 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import dashboards as dash
-    from padhai import parents, orgs, mastery, exam_taxonomy as et
-    from padhai import readiness as rd
-    from padhai import mock_engine as me
+
     from padhai import daily_plan as dp
+    from padhai import dashboards as dash
+    from padhai import exam_taxonomy as et
+    from padhai import mastery, orgs, parents
+    from padhai import mock_engine as me
     from padhai import moderation_queue as mq
+    from padhai import readiness as rd
     from padhai.web import app
 
     failed: list[str] = []

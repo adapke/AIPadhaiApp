@@ -9,7 +9,11 @@ Covers:
 Run: PYTHONPATH=. python scripts/test_v3_5.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -21,6 +25,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import moderation_queue as mq
     from padhai.web import app
 

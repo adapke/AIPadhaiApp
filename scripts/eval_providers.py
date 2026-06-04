@@ -45,7 +45,6 @@ from padhai.talking_head import (
 from padhai.themes import WHITEBOARD
 from padhai.tts import get_provider as get_tts_provider
 
-
 COST_PER_MIN_USD = {
     "cartoon":   0.00,
     "wav2lip":   0.02,   # GPU compute only

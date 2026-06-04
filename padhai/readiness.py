@@ -38,7 +38,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS exam_pack_readiness (
     id              TEXT PRIMARY KEY,
@@ -122,8 +121,8 @@ def _mastery_component(*, user_id: str, exam_code: str) -> dict:
     student who's mastered 60% of topics scores higher than one
     who's mastered 30% — weighted by topic weightage_pct."""
     try:
-        from . import mastery as _m
         from . import exam_taxonomy as _et
+        from . import mastery as _m
     except ImportError:
         return {"score": 0.0, "reason": "modules unavailable",
                 "weak": []}
@@ -222,8 +221,8 @@ def _coverage_component(*, user_id: str, exam_code: str) -> dict:
     """What fraction of the exam's chapter tree has the student
     touched (any attempt counts)? Weighted by weightage_pct."""
     try:
-        from . import mastery as _m
         from . import exam_taxonomy as _et
+        from . import mastery as _m
     except ImportError:
         return {"score": 0.0, "reason": "modules unavailable"}
     topics = _et.list_topics(exam_code, depth=0)

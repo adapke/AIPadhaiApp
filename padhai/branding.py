@@ -38,7 +38,6 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-
 # ---------- additive schema migration ----------
 
 ADDITIONS = [

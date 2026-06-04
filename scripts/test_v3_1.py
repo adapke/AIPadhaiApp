@@ -11,7 +11,11 @@ Covers:
 Run: PYTHONPATH=. python scripts/test_v3_1.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -24,10 +28,11 @@ Path(_DB).unlink(missing_ok=True)
 def main() -> int:
     from fastapi import HTTPException
     from fastapi.testclient import TestClient
-    from padhai import citations as cit
-    from padhai import exam_taxonomy as et
+
     from padhai import accuracy_bench as ab
     from padhai import api_deps
+    from padhai import citations as cit
+    from padhai import exam_taxonomy as et
     from padhai.web import app
 
     failed: list[str] = []

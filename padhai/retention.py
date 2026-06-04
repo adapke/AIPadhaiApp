@@ -35,7 +35,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS source_files (
     id              TEXT PRIMARY KEY,

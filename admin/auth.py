@@ -32,7 +32,6 @@ import bcrypt
 import jwt as pyjwt
 from fastapi import HTTPException, Request, status
 
-
 JWT_ALG = "HS256"
 TOKEN_TTL_SECONDS = 60 * 60 * 12  # 12 hours — admin sessions are short
 

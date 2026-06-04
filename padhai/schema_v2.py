@@ -44,7 +44,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 -- PRD §12 document_pages: per-page provenance for a single upload.
 -- One row per page-image fanned out by ingest_source.

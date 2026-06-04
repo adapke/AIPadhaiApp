@@ -2,7 +2,10 @@
 Run: PYTHONPATH=. python scripts/test_v1_6.py
 """
 from __future__ import annotations
-import os, sys, tempfile
+
+import os
+import sys
+import tempfile
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -14,7 +17,8 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import custom_domains, soc2, region
+
+    from padhai import custom_domains, region, soc2
     from padhai.web import app
 
     failed: list[str] = []

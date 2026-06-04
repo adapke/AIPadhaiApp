@@ -33,7 +33,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS org_scim_tokens (
     id              TEXT PRIMARY KEY,

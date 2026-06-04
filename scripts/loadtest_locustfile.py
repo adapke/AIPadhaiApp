@@ -36,7 +36,7 @@ import random
 import time
 
 try:
-    from locust import HttpUser, between, task, events
+    from locust import HttpUser, between, events, task
 except ImportError as e:
     raise SystemExit(
         "locust not installed. Run: pip install locust"

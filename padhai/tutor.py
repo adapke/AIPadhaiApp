@@ -30,7 +30,6 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS tutor_sessions (
     id              TEXT PRIMARY KEY,
@@ -284,7 +283,8 @@ def _recent_indexed_uploads_for_user(user_id: str, *, limit: int = 3) -> list[st
     can RAG against the student's latest study material without
     explicit ID selection."""
     try:
-        from . import uploads as _up, retrieval as _retr
+        from . import retrieval as _retr
+        from . import uploads as _up
         ups = _up.list_for_user(user_id, limit=20)
         out: list[str] = []
         for u in ups:
@@ -402,7 +402,8 @@ def _claude_reply(
     # Best-effort — failure to record is non-fatal.
     if retrieved_hits:
         try:
-            from . import retrieval as _retr, tutor_grounding as _tg
+            from . import retrieval as _retr
+            from . import tutor_grounding as _tg
             _tg.send_grounded_message(
                 session_id=session.id,
                 user_id=session.user_id,

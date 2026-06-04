@@ -22,7 +22,6 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
-
 ADDITIONS = [
     "ALTER TABLE orgs ADD COLUMN country TEXT DEFAULT 'IN'",
     "ALTER TABLE orgs ADD COLUMN currency TEXT DEFAULT 'INR'",

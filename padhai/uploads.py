@@ -32,7 +32,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS uploads (
     id              TEXT PRIMARY KEY,
@@ -241,6 +240,7 @@ def analyze_via_claude(image_path: Path, *, content_kind: str = "image") -> dict
     """
     import base64
     import mimetypes
+
     import anthropic
 
     client = anthropic.Anthropic()

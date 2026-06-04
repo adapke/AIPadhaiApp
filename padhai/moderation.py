@@ -31,7 +31,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
-
 # Categories the classifier returns. Keep this list short — the model
 # is more reliable with fewer classes. "other" is a catch-all for
 # borderline cases that humans should review.

@@ -46,7 +46,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
-
 TOKEN_TTL_SECONDS = 8 * 86400  # 8 days
 
 VALID_RELATIONS = {"father", "mother", "guardian", "other"}

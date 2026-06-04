@@ -40,7 +40,6 @@ import time
 from dataclasses import dataclass
 from typing import Any
 
-
 # No SCHEMA / migrate() — pure read composer.
 
 def migrate() -> None:

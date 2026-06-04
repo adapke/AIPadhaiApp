@@ -8,6 +8,7 @@ web.py and the routers.
 Run: PYTHONPATH=. python scripts/test_v2_0_3.py
 """
 from __future__ import annotations
+
 import os
 import sys
 import tempfile
@@ -22,8 +23,9 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
+    from padhai import api_deps, routers
     from padhai.web import app
-    from padhai import routers, api_deps
 
     failed: list[str] = []
 

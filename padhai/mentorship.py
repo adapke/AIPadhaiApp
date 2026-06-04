@@ -24,7 +24,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS mentor_profiles (
     user_id            TEXT PRIMARY KEY,

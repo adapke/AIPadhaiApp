@@ -11,7 +11,8 @@ from pathlib import Path
 from .cache import Cache
 from .pedagogy import LEVEL_GUIDANCE, SUPPORTED_LANGUAGES, generate_lesson
 from .render import render_lesson
-from .themes import REGISTRY as THEME_REGISTRY, theme_for_level
+from .themes import REGISTRY as THEME_REGISTRY
+from .themes import theme_for_level
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -10,9 +10,13 @@ Covers:
 Run: PYTHONPATH=. python scripts/test_v3_4.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
-from pathlib import Path
+
+import os
+import sys
+import tempfile
+import time
 from datetime import datetime, timedelta
+from pathlib import Path
 
 _DB = os.environ.setdefault(
     "PADHAI_DB_PATH",
@@ -23,6 +27,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import daily_plan as dp
     from padhai import exam_taxonomy as et
     from padhai import mastery

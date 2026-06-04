@@ -24,6 +24,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import audit, cdn, db_backend
     from padhai.web import app
 
@@ -92,7 +93,7 @@ def main() -> int:
             signed,
         )
         # Extract + verify
-        from urllib.parse import urlparse, parse_qs
+        from urllib.parse import parse_qs, urlparse
         parsed = urlparse(signed)
         qs = parse_qs(parsed.query)
         ok = cdn.verify_signed_path(

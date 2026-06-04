@@ -35,7 +35,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS orgs (
     id              TEXT PRIMARY KEY,
@@ -1114,7 +1113,8 @@ def add_timetable_slot(
     room: str | None = None,
 ) -> TimetableSlot:
     """Insert a single timetable slot. Validates day + time format."""
-    import re, uuid
+    import re
+    import uuid
     if day_of_week not in DAY_NAMES:
         raise ValueError("day_of_week must be 1-7")
     time_re = re.compile(r"^[0-2]\d:[0-5]\d$")

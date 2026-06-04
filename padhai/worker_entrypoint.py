@@ -32,8 +32,8 @@ import signal
 import sys
 import time
 
-from . import queue_backend
 from . import jobs as _jobs
+from . import queue_backend
 
 
 def dispatch_one(job_id: str) -> dict:
@@ -50,7 +50,7 @@ def dispatch_one(job_id: str) -> dict:
     # Lazy import — pulls in the heavy render/talking_head deps only
     # inside the worker process, not in the web tier when this module
     # is imported for type/contract reasons.
-    from .web import store, _render_worker  # noqa: WPS433
+    from .web import _render_worker, store  # noqa: WPS433
     job = store.get(job_id)
     if not job:
         raise RuntimeError(f"job {job_id!r} not found in store")
@@ -70,7 +70,7 @@ def dispatch_one(job_id: str) -> dict:
 
 def _run_rq_worker(*, queue_name: str, redis_url: str) -> int:
     import redis as _redis
-    from rq import Worker, Queue, Connection
+    from rq import Connection, Queue, Worker
 
     conn = _redis.from_url(redis_url)
     queue = Queue(name=queue_name, connection=conn)

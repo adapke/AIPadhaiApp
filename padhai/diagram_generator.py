@@ -29,7 +29,6 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SUPPORTED_TYPES = (
     "flowchart", "sequence", "cycle", "bar_chart",
     "tree", "food_chain",

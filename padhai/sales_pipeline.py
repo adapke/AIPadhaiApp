@@ -31,7 +31,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS leads (
     id              TEXT PRIMARY KEY,
@@ -514,7 +513,7 @@ def _fire_webhook(event_kind: str, lead: Lead) -> None:
     if not url:
         return
     try:
-        import requests   # noqa: WPS433
+        import requests  # noqa: WPS433
     except ImportError:
         return
     payload = {

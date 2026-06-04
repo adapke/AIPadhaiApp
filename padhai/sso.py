@@ -40,7 +40,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
 
-
 # ---------- provider configs (well-known OIDC discovery URLs) ----------
 
 PROVIDERS: dict[str, dict[str, str]] = {

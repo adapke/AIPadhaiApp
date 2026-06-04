@@ -35,7 +35,6 @@ import os
 from dataclasses import dataclass
 from typing import Protocol
 
-
 REDIS_BACKEND = "redis"
 INPROCESS_BACKEND = "inprocess"
 

@@ -50,7 +50,6 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Optional
 
-
 MINOR_AGE_THRESHOLD = 18  # DPDP Act 2023 §2(f): "child" = person under
                           # eighteen years. §9 requires verifiable parental
                           # consent before processing any child's personal

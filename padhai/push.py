@@ -45,7 +45,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS push_tokens (
     id          TEXT PRIMARY KEY,

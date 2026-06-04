@@ -40,7 +40,6 @@ from .templates import (
     render_topics,
 )
 
-
 app = FastAPI(
     title="AI Pathshala — Admin Console",
     description="Operations dashboard. Admin-only.",

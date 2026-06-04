@@ -16,7 +16,6 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 
-
 VALID_REGIONS = frozenset({"mumbai", "singapore", "eu", "dev"})
 
 

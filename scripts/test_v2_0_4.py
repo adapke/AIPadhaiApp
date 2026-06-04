@@ -3,6 +3,7 @@
 Run: PYTHONPATH=. python scripts/test_v2_0_4.py
 """
 from __future__ import annotations
+
 import os
 import sys
 import tempfile
@@ -18,6 +19,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import push
     from padhai.web import app
 

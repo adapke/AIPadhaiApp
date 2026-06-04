@@ -59,7 +59,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS step_problems (
     id              TEXT PRIMARY KEY,

@@ -3,6 +3,7 @@
 Run: PYTHONPATH=. python scripts/test_v2_4.py
 """
 from __future__ import annotations
+
 import json
 import os
 import sys
@@ -19,6 +20,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import math_vision, mock_interview, mock_test_events
     from padhai.web import app
 

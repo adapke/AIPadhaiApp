@@ -46,7 +46,6 @@ from typing import Any
 
 from . import talking_head as _th
 
-
 # ---------- chain resolution ----------
 
 # Provider names in the order the router will try them when the

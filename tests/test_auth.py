@@ -6,7 +6,6 @@ from fastapi.testclient import TestClient
 
 from .conftest import auth_headers, random_email, signup
 
-
 # ---------- Signup -----------------------------------------------------------
 
 class TestSignup:

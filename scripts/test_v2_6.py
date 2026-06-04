@@ -3,6 +3,7 @@
 Run: PYTHONPATH=. python scripts/test_v2_6.py
 """
 from __future__ import annotations
+
 import os
 import sys
 import tempfile
@@ -18,7 +19,8 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
-    from padhai import teacher_publishing, content_market, mentorship
+
+    from padhai import content_market, mentorship, teacher_publishing
     from padhai.web import app
 
     failed: list[str] = []

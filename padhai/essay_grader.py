@@ -27,7 +27,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS essay_rubrics (
     id              TEXT PRIMARY KEY,

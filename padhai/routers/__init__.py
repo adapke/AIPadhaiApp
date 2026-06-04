@@ -47,6 +47,7 @@ _ROUTER_NAMES = (
     "explainer",     # v3.x — /explain + /explain/video (Haiku-only + image-grounded)
     "v2_video",      # v3.x — GET /api/v2/video-requests/{id}/status + /result
     "parents",       # v3.x — /api/parents/* (link, revoke, list, stats)
+    "orgs_api",      # v3.x — /api/orgs core CRUD (6 of 37 — others TBD)
 )
 
 

@@ -27,7 +27,6 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass
 
-
 # No SCHEMA / migrate() — pure read composer (mirrors v3.6
 # dashboards.py).
 

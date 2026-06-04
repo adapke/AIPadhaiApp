@@ -11,7 +11,11 @@ Covers:
 Run: PYTHONPATH=. python scripts/test_v3_15.py
 """
 from __future__ import annotations
-import os, sys, tempfile, time
+
+import os
+import sys
+import tempfile
+import time
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -23,6 +27,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import adaptive_packs as ap
     from padhai import exam_taxonomy as et
     from padhai import mastery

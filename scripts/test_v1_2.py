@@ -23,6 +23,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import push, queue_backend
     from padhai.web import app
 

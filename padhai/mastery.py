@@ -27,7 +27,6 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS user_topic_mastery (
     user_id     TEXT NOT NULL,

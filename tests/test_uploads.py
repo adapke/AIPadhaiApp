@@ -7,7 +7,6 @@ from fastapi.testclient import TestClient
 
 from .conftest import auth_headers, signup
 
-
 _25MB = 25 * 1024 * 1024
 
 

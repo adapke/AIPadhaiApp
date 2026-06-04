@@ -47,7 +47,6 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS daily_plans (
     id              TEXT PRIMARY KEY,
@@ -165,8 +164,8 @@ def _pick_weak_topics(
     'practice' + 'revise' blocks. Returns dicts with topic_code,
     title, weightage, mastery."""
     try:
-        from . import mastery as _m
         from . import exam_taxonomy as _et
+        from . import mastery as _m
     except ImportError:
         return []
     topics = _et.list_topics(exam_code, depth=0)

@@ -34,7 +34,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 ADDITIONS = [
     "ALTER TABLE orgs ADD COLUMN custom_domain TEXT",
     "ALTER TABLE orgs ADD COLUMN custom_domain_verified_at REAL",

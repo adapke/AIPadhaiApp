@@ -23,7 +23,6 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS llm_calls (
     id              TEXT PRIMARY KEY,

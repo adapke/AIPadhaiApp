@@ -33,7 +33,6 @@ Schema:
 
 from __future__ import annotations
 
-
 CURRICULUM: list[dict] = [
     # ===================== Class 6 =====================
     # Science (NCERT)

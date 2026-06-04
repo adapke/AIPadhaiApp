@@ -682,6 +682,22 @@ Reviewed 2026-06-03. Re-audit before changing.
 - **Accuracy bench 74 → 94 items.** Six items away from the 100-
   item gate. Added physics/chemistry/biology fundamentals + Indian
   polity articles + Mughal-era history.
+- **Lint gate now F + E + I blocking.** All three rule categories
+  show "All checks passed!" against the full codebase. Ran
+  `ruff --fix --select I` once to sort imports across 21 files
+  (231 safe transformations). Next category to promote: `B`
+  (bugbear) once findings are triaged.
+- **Accuracy bench 94 → 102 items.** Crossed the 100-item gate.
+  Added math/physics/chemistry/biology/history/polity items.
+- **Live accuracy gate is now blocking.** Runs on every push to
+  main (was nightly-only) at `min-pass-rate=0.75`. Per-merge cost
+  is ~$0.50 with Haiku; the value is catching lesson-generation
+  regressions on the merge commit, not 24 h later.
+- **Fifth router slice — `/api/orgs` core CRUD.** Six endpoints
+  moved (me / create / detail / members list+add / roster CSV).
+  ~130 lines off web.py. The other 30+ `/api/orgs/*` subsystems
+  (classes / assignments / attendance / fees / exams / branding /
+  notifications) stay for now — each deserves its own router.
 - **Lint gate tightened to F + E.** `pyproject.toml` enables both
   pyflakes (F) and pycodestyle errors (E) as blocking, with E701/
   E702/E401/E501/E402/E741 explicitly ignored where the codebase's

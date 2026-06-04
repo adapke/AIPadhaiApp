@@ -29,7 +29,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS user_streaks (
     user_id           TEXT PRIMARY KEY,

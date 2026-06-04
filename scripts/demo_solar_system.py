@@ -16,7 +16,6 @@ from padhai.pedagogy import Lesson, Scene
 from padhai.render import _quiz_narration, render_lesson
 from padhai.themes import DARK_ACADEMIC
 
-
 LESSON = Lesson(
     title="Our Solar System",
     language_code="en",

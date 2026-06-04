@@ -27,7 +27,6 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
-
 SUPPORTED_LOCALES = (
     "en", "hi", "ta", "te", "kn", "ml", "mr", "bn", "gu", "pa",
 )

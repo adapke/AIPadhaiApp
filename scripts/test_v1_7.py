@@ -2,7 +2,11 @@
 Run: PYTHONPATH=. python scripts/test_v1_7.py
 """
 from __future__ import annotations
-import json, os, sys, tempfile
+
+import json
+import os
+import sys
+import tempfile
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -14,6 +18,7 @@ Path(_DB).unlink(missing_ok=True)
 
 def main() -> int:
     from fastapi.testclient import TestClient
+
     from padhai import question_bank
     from padhai.web import app
 

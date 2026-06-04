@@ -9,6 +9,7 @@ on an existing database is a no-op. Run on every deploy."""
 from __future__ import annotations
 
 import sys
+
 from padhai.db import PostgresJobStore, get_db_url
 
 
