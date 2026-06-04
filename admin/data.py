@@ -13,6 +13,7 @@ is the contract, not a Python import.
 
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import sqlite3
@@ -476,10 +477,8 @@ def cache_stats() -> dict:
         for entry in path.iterdir():
             if entry.is_file():
                 count += 1
-                try:
+                with contextlib.suppress(OSError):
                     size += entry.stat().st_size
-                except OSError:
-                    pass
         out["tiers"][tier] = {"count": count, "bytes": size}
     out["total_artifacts"] = sum(t["count"] for t in out["tiers"].values())
     out["total_bytes"] = sum(t["bytes"] for t in out["tiers"].values())

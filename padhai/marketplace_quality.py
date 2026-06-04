@@ -839,7 +839,7 @@ def compute_quality_score(
     upheld_claims = sum(c for s, _, c in r3 if s == "upheld")
 
     # Compute composite
-    if rating_avg is None:
+    if rating_avg is None:  # noqa: SIM108
         rating_score = 50.0   # neutral default before any rating
     else:
         rating_score = rating_avg * 20.0

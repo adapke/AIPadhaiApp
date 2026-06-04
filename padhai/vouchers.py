@@ -454,7 +454,7 @@ def find_matching_bundle(skus: list[str]) -> Bundle | None:
     best: Bundle | None = None
     for b in list_bundles(active_only=True):
         required = set(b.sku_codes)
-        if required.issubset(have):
+        if required.issubset(have):  # noqa: SIM102
             if not best or b.bundle_discount_pct > best.bundle_discount_pct:
                 best = b
     return best

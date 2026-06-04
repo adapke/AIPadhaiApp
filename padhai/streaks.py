@@ -196,10 +196,10 @@ def award(*, user_id: str, kind: str, xp_amount: int | None = None,
     # Bonus only on the transition into the milestone — second
     # check against xp_events guarantees idempotency even across
     # process restarts (rare race: two writes complete the same day).
-    if streak_advanced and current == 7 and kind != "streak_7":
+    if streak_advanced and current == 7 and kind != "streak_7":  # noqa: SIM102
         if not _already_awarded_today(user_id, "streak_7"):
             return award(user_id=user_id, kind="streak_7")
-    if streak_advanced and current == 30 and kind != "streak_30":
+    if streak_advanced and current == 30 and kind != "streak_30":  # noqa: SIM102
         if not _already_awarded_today(user_id, "streak_30"):
             return award(user_id=user_id, kind="streak_30")
     return get_streak(user_id)

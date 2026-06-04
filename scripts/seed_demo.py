@@ -19,6 +19,7 @@ endpoints only, so it works against a remote staging server too:
 from __future__ import annotations
 
 import argparse
+import contextlib
 import datetime as dt
 import json
 import os
@@ -59,10 +60,8 @@ def _post(url: str, *, form: dict | None = None, json_body: dict | None = None,
             return resp.status, resp.read().decode("utf-8", errors="replace")
     except urllib.error.HTTPError as e:
         body = ""
-        try:
+        with contextlib.suppress(Exception):
             body = e.read().decode("utf-8", errors="replace")
-        except Exception:
-            pass
         return e.code, body
 
 

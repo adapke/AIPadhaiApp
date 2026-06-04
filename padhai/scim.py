@@ -76,7 +76,7 @@ def migrate() -> None:
             try:
                 conn.execute(stmt)
             except sqlite3.OperationalError as e:
-                if "duplicate column" not in str(e).lower():
+                if "duplicate column" not in str(e).lower():  # noqa: SIM102
                     # users table may not exist yet (Postgres-only auth
                     # path); ignore quietly.
                     if "no such table" not in str(e).lower():

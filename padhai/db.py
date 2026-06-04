@@ -492,9 +492,6 @@ def sqlite_path():
     missing-dir failure on a fresh box."""
     from pathlib import Path as _Path
     custom = os.environ.get("PADHAI_DB_PATH")
-    if custom:
-        path = _Path(custom).expanduser()
-    else:
-        path = _Path.home() / ".padhai" / "jobs.db"
+    path = _Path(custom).expanduser() if custom else _Path.home() / ".padhai" / "jobs.db"
     path.parent.mkdir(parents=True, exist_ok=True)
     return path

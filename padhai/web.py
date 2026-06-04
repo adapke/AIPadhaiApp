@@ -10128,12 +10128,11 @@ def signup(
     # DPDP gate: if DOB given AND user is under 18, parent_email is
     # required and the account is locked until consent verification.
     is_minor = bool(dob and _dpdp.is_minor(dob))
-    if is_minor:
-        if not parent_email or "@" not in parent_email:
-            raise HTTPException(
-                400,
-                "users under 18 require a parent_email (DPDP Act 2023 §9)",
-            )
+    if is_minor and (not parent_email or "@" not in parent_email):
+        raise HTTPException(
+            400,
+            "users under 18 require a parent_email (DPDP Act 2023 §9)",
+        )
 
     user = _get_user_repo().create(
         email=email,
@@ -12162,90 +12161,8 @@ def list_org_notifications(
 
 
 # ---------- E3: Attendance API ----------
-
-@app.get("/api/orgs/{org_id}/classes/{cid}/attendance")
-def get_class_attendance(
-    org_id: str, cid: str,
-    date: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Daily class roll for one date. Students appear in the response
-    even if not yet marked (status: null) so the teacher UI can render
-    the full roster.
-
-    Access: admin, teacher (any), or the student themselves seeing
-    only their own row."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-    if my_role is None:
-        raise HTTPException(403, "not a member of this org")
-    roll = _orgs.class_attendance_for_date(cid, date)
-    if my_role == "student":
-        # Students see only their own row
-        roll = [r for r in roll if r["user_id"] == user.id]
-    return {"date": date, "class_id": cid, "students": roll}
-
-
-@app.post("/api/orgs/{org_id}/classes/{cid}/attendance", status_code=201)
-def post_class_attendance(
-    org_id: str, cid: str,
-    records_json: str = Form(..., description='JSON array of {user_id, date, status, notes?}'),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Bulk-mark attendance. Teachers + admins only."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    try:
-        records = json.loads(records_json)
-    except (ValueError, TypeError):
-        raise HTTPException(400, "records_json must be valid JSON")
-    if not isinstance(records, list):
-        raise HTTPException(400, "records_json must be a JSON array")
-    return _orgs.mark_attendance(
-        org_id=org_id, class_id=cid,
-        marked_by=user.id, records=records,
-    )
-
-
-@app.get("/api/orgs/{org_id}/students/{uid}/attendance")
-def get_student_attendance(
-    org_id: str, uid: str,
-    from_date: str | None = None, to_date: str | None = None,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Per-student attendance record. Admin/teacher see anyone;
-    students see only their own (parents inherit via E8 — not yet)."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-    if my_role is None:
-        raise HTTPException(403, "not a member of this org")
-    if my_role == "student" and user.id != uid:
-        raise HTTPException(403, "students may only view their own attendance")
-    return {
-        "user_id": uid,
-        "records": _orgs.student_attendance_history(
-            org_id=org_id, user_id=uid,
-            from_date=from_date, to_date=to_date,
-        ),
-    }
-
-
-@app.get("/api/orgs/{org_id}/classes/{cid}/attendance/summary")
-def get_class_attendance_summary(
-    org_id: str, cid: str,
-    from_date: str | None = None, to_date: str | None = None,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Per-student rollup over a date range. Admin/teacher only."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    return _orgs.class_attendance_summary(
-        class_id=cid, from_date=from_date, to_date=to_date,
-    )
+# All four /api/orgs/{id}/classes/{cid}/attendance* + per-student
+# attendance endpoints moved to padhai/routers/orgs_attendance.py.
 
 
 # ---------- E6: Timetable API ----------
@@ -13373,7 +13290,7 @@ def scim_patch_user(member_id: str, request: Request, payload: dict):
     org_id = _scim_authenticate(request)
     ops = (payload or {}).get("Operations") or []
     for op in ops:
-        if op.get("op", "").lower() == "replace" and op.get("path") == "active":
+        if op.get("op", "").lower() == "replace" and op.get("path") == "active":  # noqa: SIM102
             if not op.get("value", True):
                 # Soft-delete via the dedicated helper (v2.0.1).
                 _orgs.deactivate_member(

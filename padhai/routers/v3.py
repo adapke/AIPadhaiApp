@@ -9,6 +9,8 @@ of them grows past ~10 endpoints.
 
 from __future__ import annotations
 
+import contextlib
+
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 
 from ..api_deps import require_admin_role, require_user
@@ -2571,13 +2573,11 @@ def score_text_against_framework(
     except ValueError as e:
         raise HTTPException(400, str(e))
     if lesson_id:
-        try:
+        with contextlib.suppress(ValueError):
             nep_alignment.persist_lesson_alignment(
                 lesson_id=lesson_id, framework=framework,
                 matches=result.matches,
             )
-        except ValueError:
-            pass
     return {
         "framework": result.framework,
         "overall_score": result.overall_score,

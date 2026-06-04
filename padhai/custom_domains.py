@@ -26,6 +26,7 @@ Verification flow:
 
 from __future__ import annotations
 
+import contextlib
 import os
 import secrets
 import sqlite3
@@ -59,13 +60,11 @@ def migrate() -> None:
                 except sqlite3.OperationalError as e:
                     if "duplicate column" not in str(e).lower():
                         raise
-            try:
+            with contextlib.suppress(sqlite3.OperationalError):
                 conn.execute(
                     "CREATE UNIQUE INDEX IF NOT EXISTS idx_orgs_custom_domain "
                     "ON orgs(custom_domain) WHERE custom_domain IS NOT NULL"
                 )
-            except sqlite3.OperationalError:
-                pass
     except sqlite3.OperationalError:
         return
 

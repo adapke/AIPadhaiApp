@@ -541,10 +541,7 @@ def decide_review(
     new_status = status_map[action]
     # Commission math
     rate = expert.rate_per_review_paise
-    if action == "reject":
-        commission = int(round(rate * REJECT_RATE_MULTIPLIER))
-    else:
-        commission = rate
+    commission = int(round(rate * REJECT_RATE_MULTIPLIER)) if action == "reject" else rate
     now = time.time()
     with _conn() as conn:
         conn.execute(
@@ -565,7 +562,7 @@ def decide_review(
         )
         # Create verification row for approve / correct (not reject)
         if action in ("approve", "correct"):
-            try:
+            try:  # noqa: SIM105
                 conn.execute(
                     "INSERT INTO expert_verifications "
                     "(id, target_kind, target_id, "

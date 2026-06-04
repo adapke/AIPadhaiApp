@@ -21,12 +21,17 @@ exclude = [
 #   • I — isort (import sorting + grouping) — clean
 #   • B — bugbear (likely-bug patterns) — clean ex B008/B904
 #   • UP — pyupgrade (modern syntax) — clean after one-shot --fix
+#   • SIM — simplify (readability) — clean after one-shot --fix
+#     (16 auto-fixes applied; 13 sites carry `# noqa: SIMxxx` for
+#     intentional structure — see e.g. padhai/auth.py:243 where a
+#     try-pass deliberately preserves a "column already exists" hint)
 # Still advisory (pre-commit only):
-#   • SIM — simplify (readability wins; case-by-case)
+#   • RUF — Ruff-specific lints (some are useful, some are bikesheds)
+#   • C90 — complexity caps (codebase has legacy hotspots)
 # When you touch a file, ruff --fix will quietly clean it. Promote
 # the next category to blocking once `ruff check --select <X>`
 # shows zero findings.
-select = ["F", "E", "I", "B", "UP"]
+select = ["F", "E", "I", "B", "UP", "SIM"]
 
 # Deliberate ignores:
 ignore = [

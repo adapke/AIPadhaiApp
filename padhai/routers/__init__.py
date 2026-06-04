@@ -50,6 +50,7 @@ _ROUTER_NAMES = (
     "orgs_api",      # v3.x — /api/orgs core CRUD (6 of 37 — others TBD)
     "orgs_classes",  # v3.x — /api/orgs/{id}/classes list+create
     "orgs_leaderboard",  # v3.x — /api/orgs/{id}/classes/{cid}/leaderboard (XP / streaks)
+    "orgs_attendance",   # v3.x — /api/orgs/{id}/classes/{cid}/attendance* (4 routes)
 )
 
 

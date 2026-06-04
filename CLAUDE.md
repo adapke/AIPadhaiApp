@@ -656,6 +656,29 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Lint gate now F + E + I + B + UP + SIM blocking.** Triaged the
+  29 SIM (simplify) findings: 16 auto-fixed cleanly (mostly
+  `try-except-pass` → `contextlib.suppress`, `if/else` → ternary,
+  collapsible-if merges, reimplemented-builtin → `any()` /
+  `bool()`). The remaining 13 carry targeted `# noqa: SIMxxx`
+  markers — they're intentionally-structured try-pass blocks with
+  semantically-meaningful tail comments (`pass  # column already
+  exists`) that `contextlib.suppress` would lose, or nested-if
+  patterns where the comment between the two ifs clarifies why
+  they aren't merged. Gate is now strict against new violations.
+- **Eighth router slice — `/api/orgs/{id}/classes/{cid}/attendance*`.**
+  Four endpoints (daily roll GET, bulk-mark POST, per-student
+  history GET, range-summary GET) moved to
+  `padhai/routers/orgs_attendance.py`. Removed ~85 lines from
+  web.py. Same late-import pattern; the student-row filter on the
+  daily roll stays in the router (it's policy, not storage).
+- **Accuracy bench 102 → 115 items.** Closed three coverage gaps:
+  added 4 `hard`-difficulty items (was 0), 4 state-board items
+  (Maharashtra / ICSE / Karnataka / TamilNadu), and 5 medium items
+  in underrepresented UPSC polity / JEE math / NEET chemistry /
+  UPSC history / SSC geography. Distribution now
+  `easy=83 / medium=28 / hard=4`. Structural runner: 115/115
+  passing.
 - **Lint gate now F + E + I + B + UP blocking.** `ruff --fix --select UP`
   cleaned 49 sites (mostly `Optional[X]` → `X | None`, `typing.Iterable`
   → `collections.abc.Iterable`, `datetime.utcnow()` → `datetime.now(UTC)`).

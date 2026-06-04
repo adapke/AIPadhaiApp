@@ -29,6 +29,7 @@ deploys are fine; multi-server would need Redis. The state has a
 from __future__ import annotations
 
 import base64
+import contextlib
 import hashlib
 import os
 import secrets
@@ -154,10 +155,8 @@ def migrate() -> None:
                 except sqlite3.OperationalError as e:
                     if "duplicate column" not in str(e).lower():
                         raise
-            try:
+            with contextlib.suppress(sqlite3.OperationalError):
                 conn.execute(EXTRA_INDEX)
-            except sqlite3.OperationalError:
-                pass
 
         has_orgs = conn.execute(
             "SELECT name FROM sqlite_master WHERE type='table' AND name='orgs'"

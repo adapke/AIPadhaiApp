@@ -187,17 +187,11 @@ def _is_confused(text: str, time_seconds: int | None) -> bool:
         if pat.search(text):
             return True
     # Short + slow → confusion
-    if (len(text) <= SHORT_REPLY_CHARS
-            and (time_seconds or 0) >= SLOW_REPLY_THRESHOLD_SEC):
-        return True
-    return False
+    return bool(len(text) <= SHORT_REPLY_CHARS and (time_seconds or 0) >= SLOW_REPLY_THRESHOLD_SEC)
 
 
 def _wants_reveal(text: str) -> bool:
-    for pat in _REVEAL_REQUEST_PATTERNS:
-        if pat.search(text or ""):
-            return True
-    return False
+    return any(pat.search(text or "") for pat in _REVEAL_REQUEST_PATTERNS)
 
 
 # ---------- lifecycle ----------
@@ -345,7 +339,7 @@ def advance(
     elif current == "diagnose":
         next_state = "hint" if not confused else "hint"
     elif current == "hint":
-        if confused:
+        if confused:  # noqa: SIM108
             next_state = "hint"   # stay, drop simpler hint
         else:
             next_state = "check"

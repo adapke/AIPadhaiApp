@@ -197,9 +197,8 @@ def _detect_kind(latex: str) -> str:
         return "integral"
     if r"\frac{d}" in s or r"\frac{d" in s:
         return "derivative"
-    if "=" in s and "x^{2}" not in s and "^2" not in s:
-        if _LINEAR_PATTERN.match(s):
-            return "linear_equation"
+    if "=" in s and "x^{2}" not in s and "^2" not in s and _LINEAR_PATTERN.match(s):
+        return "linear_equation"
     if "x^{2}" in s or "x^2" in s:
         return "quadratic_equation"
     return "unknown"

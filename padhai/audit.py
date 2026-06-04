@@ -25,6 +25,7 @@ documented. Keep this module boring.
 
 from __future__ import annotations
 
+import contextlib
 import csv
 import io
 import json
@@ -156,10 +157,8 @@ def record(
         # Never let audit failures break the request. Log + continue.
         # If audit logging is broken at scale, the H3 dashboard will
         # show a gap; that's a sev2 to investigate but not a sev0.
-        try:
+        with contextlib.suppress(Exception):
             print(f"[audit] record failed (non-fatal): {e}")
-        except Exception:
-            pass
 
 
 # ---------- read path ----------

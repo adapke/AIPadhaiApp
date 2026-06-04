@@ -20,6 +20,8 @@ template too.
 
 from __future__ import annotations
 
+import contextlib
+
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 
 from ..auth import AuthUser
@@ -70,7 +72,7 @@ def create_parent_link(
     # Queue an in-app notification for the OTHER party. Best-effort:
     # notification failure shouldn't block the link creation, the
     # verify URL is still in the response.
-    try:
+    with contextlib.suppress(Exception):
         _web._notifs.create(
             org_id="parent-link",
             audience=f"user:{other_user.id}",
@@ -86,8 +88,6 @@ def create_parent_link(
             link_url=str(request.url_for("parent_link_verify")) + f"?t={token}",
             sent_by=user.id,
         )
-    except Exception:
-        pass
 
     verify_url = str(request.url_for("parent_link_verify")) + f"?t={token}"
     _web._log.info("[parent_link] verify URL for link %s: %s", link.id, verify_url)

@@ -373,7 +373,7 @@ def flag_post(
         raise ValueError("post not found")
     auto_hidden = False
     with _conn() as conn:
-        try:
+        try:  # noqa: SIM105
             conn.execute(
                 "INSERT INTO forum_flags "
                 "(post_id, flagger_user_id, reason, created_at) "

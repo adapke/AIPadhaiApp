@@ -31,6 +31,7 @@ resolver is the seam.
 
 from __future__ import annotations
 
+import contextlib
 import os
 import re
 import sqlite3
@@ -76,10 +77,8 @@ def migrate() -> None:
             except sqlite3.OperationalError as e:
                 if "duplicate column" not in str(e).lower():
                     raise
-        try:
+        with contextlib.suppress(sqlite3.OperationalError):
             conn.execute(EXTRA_INDEX)
-        except sqlite3.OperationalError:
-            pass
 
 
 # ---------- dataclass + sanitisers ----------

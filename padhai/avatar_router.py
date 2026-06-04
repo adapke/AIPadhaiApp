@@ -122,9 +122,7 @@ def _is_circuit_open(name: str) -> bool:
     s = _stats[name]
     if s.consecutive_failures < _FAIL_THRESHOLD:
         return False
-    if time.time() - s.last_failure_at > _COOL_OFF_SECONDS:
-        return False
-    return True
+    return not time.time() - s.last_failure_at > _COOL_OFF_SECONDS
 
 
 def snapshot() -> dict:

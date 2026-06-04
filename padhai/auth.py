@@ -240,7 +240,7 @@ class SQLiteUserRepository:
             "ALTER TABLE users ADD COLUMN parent_consent_at REAL",
             "ALTER TABLE users ADD COLUMN parent_consent_ip TEXT",
         ):
-            try:
+            try:  # noqa: SIM105
                 conn.execute(stmt)
             except sqlite3.OperationalError:
                 pass   # column already exists

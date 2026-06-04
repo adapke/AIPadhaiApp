@@ -22,6 +22,7 @@ External deps:
 
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import subprocess
@@ -69,10 +70,8 @@ def render_mermaid(spec: str, *, width: int = 800, height: int = 600) -> str:
         raise RuntimeError(f"mermaid render failed: {e.stderr.decode()}") from e
     finally:
         for p in (in_path, out_path):
-            try:
+            with contextlib.suppress(FileNotFoundError):
                 os.unlink(p)
-            except FileNotFoundError:
-                pass
 
 
 # ---------- Custom SVG renderers (no external deps) ----------

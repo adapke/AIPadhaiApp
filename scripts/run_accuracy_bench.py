@@ -46,7 +46,7 @@ def _seed_dataset(fixture: dict) -> str:
     Returns the dataset_id."""
     code = fixture["code"]
     existing = [d for d in bench.list_datasets() if d.code == code]
-    if existing:
+    if existing:  # noqa: SIM108
         # Bump version so we don't clash with the prior immutable row.
         next_version = max(d.version for d in existing) + 1
     else:
@@ -176,7 +176,7 @@ def main() -> int:
         )
         return 1
 
-    if args.mode == "structural":
+    if args.mode == "structural":  # noqa: SIM102
         # In structural mode the stub always returns the expected answer,
         # so a non-perfect pass rate indicates a judge bug or fixture
         # malformation, not a model regression. Fail loudly.
