@@ -682,6 +682,21 @@ Reviewed 2026-06-03. Re-audit before changing.
 - **Accuracy bench 74 → 94 items.** Six items away from the 100-
   item gate. Added physics/chemistry/biology fundamentals + Indian
   polity articles + Mughal-era history.
+- **Lint gate now F + E + I + B blocking.** Bugbear added after
+  fixing 4 B007 unused-loop-control findings + documenting B008
+  (FastAPI `Depends()` is the idiom, 530 sites) and B904
+  (raise-without-from, 344 sites — dedicated sprint planned)
+  as codebase-wide ignores. Promote B904 to active once the
+  count is under ~50.
+- **Sixth router slice — `/api/orgs/{id}/classes`.** List + create
+  moved to `padhai/routers/orgs_classes.py`. Six other class-
+  subsystem routes (attendance, timetable, leaderboard) stay in
+  web.py for now; they're scattered far apart and worth their own
+  slices.
+- **CONTRIBUTING.md.** Onboarding doc covering dev setup, the
+  Makefile commands, code conventions, the ruff phased ruleset,
+  commit message style, and where to add new features. Lives next
+  to README so new contributors land on it via GitHub.
 - **Lint gate now F + E + I blocking.** All three rule categories
   show "All checks passed!" against the full codebase. Ran
   `ruff --fix --select I` once to sort imports across 21 files

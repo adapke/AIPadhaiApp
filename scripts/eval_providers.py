@@ -251,7 +251,7 @@ def composite_grid(
     idx = 0
     for r in range(rows):
         row_inputs = []
-        for c in range(cols):
+        for _c in range(cols):
             if idx < n:
                 row_inputs.append(f"[v{idx}]")
             else:

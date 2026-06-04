@@ -134,7 +134,7 @@ def main() -> None:
 
     for key, (lesson, theme) in SAMPLES.items():
         print(f"\n=== Building {key} sample ({theme.name}) ===")
-        for i, scene in enumerate(lesson.scenes, start=1):
+        for _i, scene in enumerate(lesson.scenes, start=1):
             mp3 = Path(tempfile.mkstemp(suffix=".mp3")[1])
             soft_voice_mp3(scene.narration, mp3)
             cache.put_audio(scene.narration, lesson.language_code, "gtts", mp3)

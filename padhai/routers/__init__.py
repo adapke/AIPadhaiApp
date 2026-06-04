@@ -48,6 +48,7 @@ _ROUTER_NAMES = (
     "v2_video",      # v3.x — GET /api/v2/video-requests/{id}/status + /result
     "parents",       # v3.x — /api/parents/* (link, revoke, list, stats)
     "orgs_api",      # v3.x — /api/orgs core CRUD (6 of 37 — others TBD)
+    "orgs_classes",  # v3.x — /api/orgs/{id}/classes list+create
 )
 
 

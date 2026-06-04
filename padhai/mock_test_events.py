@@ -439,7 +439,7 @@ def _recompute_ranks(event_id: str) -> None:
         total = len(rows)
         if total == 0:
             return
-        for rank, (aid, score) in enumerate(rows, start=1):
+        for rank, (aid, _score) in enumerate(rows, start=1):
             percentile = ((total - rank) / total) * 100 if total > 1 else 100.0
             conn.execute(
                 "UPDATE mock_test_attempts SET "

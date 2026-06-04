@@ -19,14 +19,14 @@ exclude = [
 #   • F — pyflakes (undefined names, broken format strings) — clean
 #   • E — pycodestyle errors — clean
 #   • I — isort (import sorting + grouping) — clean
+#   • B — bugbear (likely-bug patterns) — clean ex B008/B904
 # Still advisory (pre-commit only):
-#   • B — bugbear (likely-bug patterns; ~10 findings to triage)
 #   • UP — pyupgrade (modern syntax; lots of `Optional[X]` → `X | None`)
 #   • SIM — simplify (readability wins; case-by-case)
 # When you touch a file, ruff --fix will quietly clean it. Promote
 # the next category to blocking once `ruff check --select <X>`
 # shows zero findings.
-select = ["F", "E", "I"]
+select = ["F", "E", "I", "B"]
 
 # Deliberate ignores:
 ignore = [
@@ -51,6 +51,12 @@ ignore = [
              # readability.
     "E401",  # multiple-imports-on-one-line — `import a, b` is fine
              # for stdlib siblings.
+    "B008",  # function-call-in-default-argument — FastAPI's
+             # `Depends(get_x)` is THE idiom. Codebase has 530
+             # legitimate uses across every router.
+    "B904",  # raise-without-from-inside-except — real exception-
+             # chain hygiene, but 344 existing sites. Triage as a
+             # dedicated sprint; flip blocking when count is < 50.
 ]
 
 [tool.ruff.lint.per-file-ignores]

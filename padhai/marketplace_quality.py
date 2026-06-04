@@ -856,7 +856,7 @@ def compute_quality_score(
 
     # Copyright penalty — most-severe upheld claim drives it
     copyright_penalty = 0.0
-    for status, severity, count in r3:
+    for status, severity, _count in r3:
         if status == "upheld":
             copyright_penalty = max(
                 copyright_penalty,

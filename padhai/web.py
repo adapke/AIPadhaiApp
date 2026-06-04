@@ -11860,48 +11860,11 @@ def _org_to_dict(org: _orgs.Org) -> dict:
 
 
 
-@app.get("/api/orgs/{org_id}/classes")
-def list_org_classes_route(
-    org_id: str,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    classes = _orgs.list_classes(org_id, limit=limit)
-    return {
-        "classes": [
-            {
-                "id": c.id, "name": c.name,
-                "grade_level": c.grade_level, "section": c.section,
-                "created_at": c.created_at,
-            }
-            for c in classes
-        ],
-    }
+# NB: GET + POST /api/orgs/{org_id}/classes moved to
+# padhai/routers/orgs_classes.py. The other class-subsystem
+# endpoints (attendance, timetable, leaderboard) still live in
+# this file — they'll lift in their own dedicated router slices.
 
-
-@app.post("/api/orgs/{org_id}/classes", status_code=201)
-def create_org_class_route(
-    org_id: str,
-    name: str = Form(..., min_length=1),
-    grade_level: str | None = Form(None),
-    section: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    try:
-        c = _orgs.add_class(
-            org_id=org_id, name=name,
-            grade_level=grade_level, section=section,
-        )
-    except ValueError as e:
-        raise HTTPException(409, str(e))
-    return {"id": c.id, "name": c.name, "grade_level": c.grade_level,
-            "section": c.section}
 
 
 @app.get("/api/orgs/{org_id}/assignments")
