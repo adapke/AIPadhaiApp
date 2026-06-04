@@ -14,19 +14,20 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-# Phased rollout — F-codes (pyflakes) are MUST-FIX bugs (undefined
-# names, unused imports that mask intent, broken string formats).
-# Those go in `select` and break CI.
-#
-# E/I/B/UP/SIM categories add 1000+ findings against the existing
-# 70+ modules — turning them on as blocking would lock new PRs.
-# They live in the pre-commit hook config (advisory format-on-save)
-# but are NOT in the CI lint gate yet. As modules get touched the
-# fixes land naturally; flip them to blocking once the noise floor
-# is near zero.
-select = ["F"]
+# Phased rollout. Each category becomes blocking once its noise
+# floor is near zero. Current scope:
+#   • F — pyflakes (undefined names, broken format strings) — clean
+#   • E — pycodestyle errors (real-syntax-style mistakes) — clean
+# Still advisory (pre-commit only):
+#   • I — isort
+#   • B — bugbear
+#   • UP — pyupgrade
+#   • SIM — simplify
+# When you touch a file, ruff --fix will quietly clean its imports;
+# we'll flip I to blocking once the bulk of files have been touched.
+select = ["F", "E"]
 
-# Deliberate ignores within F:
+# Deliberate ignores:
 ignore = [
     "F401",  # unused-import — many modules import-for-side-effects
              # (migrate() registration). False positive cost > value.
@@ -34,6 +35,21 @@ ignore = [
              # patterns where the assignment is intentional for the
              # repr in a debugger or the result of a side-effecting
              # call. Worth fixing case-by-case, not as a CI block.
+    "E501",  # line-too-long — codebase has many intentionally-long
+             # URLs, SQL, prompt strings. Add `# noqa: E501` on
+             # specific lines that genuinely should be split.
+    "E741",  # ambiguous-variable-name — `l`, `I` etc are sometimes
+             # intentional (`for l in lines`, `I` for identity matrix).
+    "E402",  # module-import-not-at-top — some scripts intentionally
+             # set os.environ BEFORE importing padhai modules.
+    "E701",  # multiple-statements-on-line-with-colon — `if x: return`
+             # is widely used and idiomatic in this codebase.
+    "E702",  # multiple-statements-on-line-with-semicolon — compact
+             # SQL builders use `sql += "..."; params.append(...)` to
+             # keep the SQL + params adjacent. Splitting hurts
+             # readability.
+    "E401",  # multiple-imports-on-one-line — `import a, b` is fine
+             # for stdlib siblings.
 ]
 
 [tool.ruff.lint.per-file-ignores]

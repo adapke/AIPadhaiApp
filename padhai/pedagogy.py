@@ -820,7 +820,6 @@ def generate_explainer(
                 f"cap={e.cap_paise}p"
             ) from e
 
-    client = client or anthropic.Anthropic()
     schema = {
         "type": "object",
         "properties": {
@@ -844,8 +843,17 @@ def generate_explainer(
         ],
         "additionalProperties": False,
     }
-    response = client.messages.create(
+    # Routed through llm_call.call_claude so the Haiku cost lands on
+    # the admin dashboard. Cap pre-flight handled upstream.
+    from . import llm_call
+    call = llm_call.call_claude(
+        module="explainer",
+        prompt_version="v1",
         model=EXPLAINER_MODEL,
+        user_id=user_id,
+        subscription_tier=user_tier,
+        enforce_cap=False,
+        client=client,
         max_tokens=2000,
         system=EXPLAINER_SYSTEM,
         output_config={
@@ -862,7 +870,7 @@ def generate_explainer(
             ),
         }],
     )
-    text = next(b.text for b in response.content if b.type == "text")
+    text = call.text
     return json.loads(text)
 
 
@@ -1158,8 +1166,21 @@ def generate_lesson(
     system_prompt = _mp.mode_system_prompt(video_mode)
     schema = _mp.mode_schema(video_mode, level)
 
-    response = client.messages.create(
+    # Routed through llm_call.call_claude so the cost lands on the
+    # admin dashboard. Before this migration, generate_lesson was the
+    # most-expensive Claude call (Opus + adaptive thinking + JSON
+    # schema) AND the only one that didn't call llm_obs.record_call —
+    # every lesson render was silently uncosted.
+    # cap pre-flight runs upstream (caller passes user_tier from web).
+    from . import llm_call
+    call = llm_call.call_claude(
+        module="lesson",
+        prompt_version=f"v3-{video_mode}",
         model=MODEL,
+        user_id=user_id,
+        subscription_tier=user_tier,
+        enforce_cap=False,
+        client=client,
         max_tokens=8000,
         system=system_prompt,
         thinking={"type": "adaptive"},
@@ -1178,9 +1199,7 @@ def generate_lesson(
         ],
     )
 
-    text = next(b.text for b in response.content if b.type == "text")
-    data = json.loads(text)
-
+    data = json.loads(call.text)
     lesson = parse_lesson_json(data, language_code, level)
 
     if cache is not None:

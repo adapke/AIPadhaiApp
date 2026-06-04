@@ -656,6 +656,12 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **All 6 Claude-calling surfaces on `call_claude`.** Migrating
+  `pedagogy.generate_lesson` revealed it was the most-expensive
+  Claude call (Opus + adaptive thinking) AND the only one not
+  calling `llm_obs.record_call` — every lesson render was silently
+  uncosted. Fixed as a side-effect of the migration.
+  `generate_explainer` + `practice_test._synthesise` also migrated.
 - **Three more `call_claude` migrations.** tutor / mock_interview /
   doubt_clearing now use `llm_call.call_claude()` instead of the
   inline client / messages.create / record_call boilerplate. The
@@ -663,11 +669,25 @@ Reviewed 2026-06-03. Re-audit before changing.
   surfaces (lesson + practice_test still to migrate, opportunistic).
   Each migration removed ~30-40 lines and made the surface's failure
   modes (SDK-missing / key-missing / Claude-error) easier to read.
+- **Fourth router slice — `/api/parents/*`.** All 5 endpoints
+  (link, revoke, list children, list parents, child stats) moved
+  to `padhai/routers/parents.py`. Removed ~175 lines from web.py.
+  The companion `/auth/parent-link/verify` HTML page stays because
+  it shares the `_consent_result_page` template.
 - **Third router slice.** GET `/api/v2/video-requests/{id}/status`
   + `/result` moved to `padhai/routers/v2_video.py`. The two POST
   endpoints (create + regenerate) stay in web.py for now — too
   many cross-cutting dependencies (PersonalizationProfile,
   moderation, multipart) to lift cleanly.
+- **Accuracy bench 74 → 94 items.** Six items away from the 100-
+  item gate. Added physics/chemistry/biology fundamentals + Indian
+  polity articles + Mughal-era history.
+- **Lint gate tightened to F + E.** `pyproject.toml` enables both
+  pyflakes (F) and pycodestyle errors (E) as blocking, with E701/
+  E702/E401/E501/E402/E741 explicitly ignored where the codebase's
+  intentional patterns (compact SQL builders, idiomatic `if x:
+  return`) would generate noise. Next category to flip is `I`
+  (import sort) once `--fix` has been run through the codebase.
 - **SQLite backup script.** `scripts/backup_sqlite.sh` uses the
   sqlite3 `.backup` API (safe under concurrent writes), gzips the
   snapshot, prunes >14d by default. Cron template at top of the

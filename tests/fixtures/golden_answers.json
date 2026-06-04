@@ -536,6 +536,152 @@
       "rubric": "Single-word lowercase.",
       "difficulty": "easy",
       "tags": {"subject": "geography", "exam": "SSC"}
+    },
+
+    {
+      "prompt": "What is the cube root of 27?",
+      "expected": {"answer": "3"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "8"}
+    },
+    {
+      "prompt": "If 5x = 30, what is x?",
+      "expected": {"answer": "6"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "7"}
+    },
+    {
+      "prompt": "What is the value of cos(60 degrees)?",
+      "expected": {"answer": "1/2"},
+      "rubric": "Accept '1/2' or '0.5'.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "What is the area formula for a rectangle?",
+      "expected": {"answer": "length*width"},
+      "rubric": "Accept 'l*w', 'l × w', 'length × width', case-insensitive.",
+      "difficulty": "easy",
+      "tags": {"subject": "math", "board": "CBSE", "class": "6"}
+    },
+
+    {
+      "prompt": "What is the SI unit of power?",
+      "expected": {"answer": "watt"},
+      "rubric": "Accept 'watt' or 'W'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Which law states that pressure of a gas is inversely proportional to volume at constant temperature?",
+      "expected": {"answer": "boyle's law"},
+      "rubric": "Accept 'Boyle's law' or 'Boyle law'.",
+      "difficulty": "medium",
+      "tags": {"subject": "physics", "exam": "NEET"}
+    },
+    {
+      "prompt": "What is the third law of motion?",
+      "expected": {"answer": "action-reaction"},
+      "rubric": "Accept 'action and reaction', 'for every action there is an equal and opposite reaction'.",
+      "difficulty": "easy",
+      "tags": {"subject": "physics", "board": "CBSE", "class": "9"}
+    },
+
+    {
+      "prompt": "What is the chemical formula for table salt?",
+      "expected": {"answer": "nacl"},
+      "rubric": "Case-insensitive 'NaCl'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Which is the lightest element in the periodic table?",
+      "expected": {"answer": "hydrogen"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "exam": "JEE"}
+    },
+    {
+      "prompt": "What is the pH range of acids?",
+      "expected": {"answer": "less than 7"},
+      "rubric": "Accept '<7' or 'below 7' or 'less than 7'.",
+      "difficulty": "easy",
+      "tags": {"subject": "chemistry", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "What is the powerhouse of the cell?",
+      "expected": {"answer": "mitochondria"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "9"}
+    },
+    {
+      "prompt": "Which blood cells fight infection?",
+      "expected": {"answer": "white blood cells"},
+      "rubric": "Accept 'WBC' or 'leukocytes' or 'white blood cells'.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "Name the gland that secretes insulin.",
+      "expected": {"answer": "pancreas"},
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "exam": "NEET"}
+    },
+    {
+      "prompt": "What gas do humans exhale during respiration?",
+      "expected": {"answer": "carbon dioxide"},
+      "rubric": "Accept 'CO2' or 'carbon dioxide'.",
+      "difficulty": "easy",
+      "tags": {"subject": "biology", "board": "CBSE", "class": "10"}
+    },
+
+    {
+      "prompt": "Who founded the Indian National Congress?",
+      "expected": {"answer": "ao hume"},
+      "rubric": "Accept 'A.O. Hume' or 'Allan Octavian Hume'.",
+      "difficulty": "medium",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "In which year did the First War of Indian Independence take place?",
+      "expected": {"answer": "1857"},
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "board": "CBSE", "class": "10"}
+    },
+    {
+      "prompt": "Who was the founder of the Mauryan Empire?",
+      "expected": {"answer": "chandragupta maurya"},
+      "rubric": "Accept 'Chandragupta Maurya'.",
+      "difficulty": "medium",
+      "tags": {"subject": "history", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which Mughal emperor built the Taj Mahal?",
+      "expected": {"answer": "shah jahan"},
+      "rubric": "Accept 'Shah Jahan'.",
+      "difficulty": "easy",
+      "tags": {"subject": "history", "exam": "SSC"}
+    },
+
+    {
+      "prompt": "How many fundamental rights are guaranteed by the Indian Constitution?",
+      "expected": {"answer": "6"},
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
+    },
+    {
+      "prompt": "Which Article guarantees the Right to Education?",
+      "expected": {"answer": "article 21a"},
+      "rubric": "Accept '21A' or '21-A'.",
+      "difficulty": "medium",
+      "tags": {"subject": "polity", "exam": "UPSC"}
     }
   ]
 }

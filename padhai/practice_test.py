@@ -357,31 +357,22 @@ def _synthesise(
         system_text=system_text, user_text=user_text,
     )
 
-    started = time.time()
+    # call_claude wraps the messages.create + record_call + cost
+    # accounting. Cap pre-flight already ran above (`check_daily_cap`).
+    from . import llm_call
     try:
-        client = Anthropic()
-        resp = client.messages.create(
-            model=model, max_tokens=2500, **kwargs,
+        call = llm_call.call_claude(
+            module="practice_test", prompt_version="v1",
+            model=model, user_id=user_id, subscription_tier=user_tier,
+            enforce_cap=False,
+            max_tokens=2500,
+            **kwargs,
         )
-    except Exception as e:  # noqa: BLE001
+    except RuntimeError as e:
         print(f"[practice_test] synth call failed: {e}")
         return []
 
-    latency_ms = int((time.time() - started) * 1000)
-    body = "".join(b.text for b in resp.content if b.type == "text")
-    parsed = _parse_synth(body)
-
-    tokens_in = getattr(resp.usage, "input_tokens", 0) or 0
-    tokens_out = getattr(resp.usage, "output_tokens", 0) or 0
-    cached = bool(getattr(resp.usage, "cache_read_input_tokens", 0))
-    llm_obs.record_call(
-        module="practice_test",
-        prompt_version="v1",
-        model=model,
-        tokens_in=tokens_in, tokens_out=tokens_out,
-        latency_ms=latency_ms,
-        user_id=user_id, cached=cached,
-    )
+    parsed = _parse_synth(call.text)
     out = []
     for q in parsed[:count]:
         q.setdefault("id", "synth-" + uuid.uuid4().hex[:12])

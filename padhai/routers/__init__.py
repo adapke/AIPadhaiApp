@@ -46,6 +46,7 @@ _ROUTER_NAMES = (
     "multipage",     # v3.x — multi-page video stitching (/jobs/{id}/combined*)
     "explainer",     # v3.x — /explain + /explain/video (Haiku-only + image-grounded)
     "v2_video",      # v3.x — GET /api/v2/video-requests/{id}/status + /result
+    "parents",       # v3.x — /api/parents/* (link, revoke, list, stats)
 )
 
 
