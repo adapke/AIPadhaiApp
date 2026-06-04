@@ -656,6 +656,28 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Lint gate now F + E + I + B + UP blocking.** `ruff --fix --select UP`
+  cleaned 49 sites (mostly `Optional[X]` → `X | None`, `typing.Iterable`
+  → `collections.abc.Iterable`, `datetime.utcnow()` → `datetime.now(UTC)`).
+  A follow-up `--fix` cleaned the 17 I001 import-sort fallout from
+  newly-added `UTC` imports. SIM is the next category — still
+  advisory pre-commit only.
+- **Seventh router slice — `/api/orgs/{id}/classes/{cid}/leaderboard`.**
+  Moved to `padhai/routers/orgs_leaderboard.py` as its own slice
+  rather than folded into `orgs_classes.py`, because the I4 streaks /
+  XP / leaderboard subsystem is a different owner (`_streaks` vs
+  `_orgs`) and a different role gate (students can read the
+  leaderboard but not the class roster). Keeping it separate makes
+  the rest of I4 easier to lift wholesale later.
+- **SECURITY.md.** Vuln disclosure policy at the repo root (email
+  + private advisory), supported-versions matrix (main only — no
+  LTS backports), in/out-of-scope guidance, and a "Hardening you
+  should know about" section that documents the enforced gates
+  (JWT secret validation, DPDP §9 minor-locking, admin gate
+  safeguard, provider key validation, per-tier daily LLM cap, SQL
+  parameter-binding, multi-tenant org gate, mobile shell URL
+  rewriter). Reduces the chance a refactor silently regresses
+  one of them.
 - **All 6 Claude-calling surfaces on `call_claude`.** Migrating
   `pedagogy.generate_lesson` revealed it was the most-expensive
   Claude call (Opus + adaptive thinking) AND the only one not

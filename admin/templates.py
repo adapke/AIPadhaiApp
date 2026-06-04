@@ -12,7 +12,8 @@ from __future__ import annotations
 
 import html
 import json
-from typing import Iterable
+from collections.abc import Iterable
+from datetime import UTC
 
 from .auth import AdminUser
 from .data import DashboardSummary
@@ -32,7 +33,7 @@ def _fmt_seconds(s: float | None) -> str:
 
 def _fmt_time(ts: float) -> str:
     from datetime import datetime, timezone
-    dt = datetime.fromtimestamp(ts, tz=timezone.utc)
+    dt = datetime.fromtimestamp(ts, tz=UTC)
     return dt.strftime("%Y-%m-%d %H:%M")
 
 

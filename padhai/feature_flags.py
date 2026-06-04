@@ -190,7 +190,7 @@ def _bucket(flag_key: str, user_id: str) -> int:
     """Deterministic [0,99] bucket from (flag_key, user_id). Stable
     across requests so the same user is always on the same side of
     the rollout boundary — critical for A/B test integrity."""
-    h = hashlib.sha256(f"{flag_key}:{user_id}".encode("utf-8")).digest()
+    h = hashlib.sha256(f"{flag_key}:{user_id}".encode()).digest()
     return int.from_bytes(h[:4], "big") % 100
 
 

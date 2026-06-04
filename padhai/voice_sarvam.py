@@ -57,7 +57,7 @@ def is_available() -> bool:
     return bool(os.environ.get("SARVAM_API_KEY"))
 
 
-def get_config() -> Optional[SarvamConfig]:
+def get_config() -> SarvamConfig | None:
     key = os.environ.get("SARVAM_API_KEY")
     if not key:
         return None

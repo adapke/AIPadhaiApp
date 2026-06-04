@@ -27,7 +27,7 @@ import sqlite3
 import time
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
 SCHEMA = """
@@ -187,7 +187,7 @@ def log_batch(events_iter) -> int:
 def dau(*, date: str | None = None) -> int:
     """Distinct user_ids with at least one event on that UTC date."""
     if date is None:
-        date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        date = datetime.now(UTC).strftime("%Y-%m-%d")
     start, end = _date_bounds(date)
     with _conn() as conn:
         r = conn.execute(
@@ -203,7 +203,7 @@ def mau(*, date: str | None = None) -> int:
     """Distinct user_ids over the trailing 30 UTC days ending on
     `date`."""
     if date is None:
-        date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        date = datetime.now(UTC).strftime("%Y-%m-%d")
     end_start, end_end = _date_bounds(date)
     start = end_end - 30 * 86400
     with _conn() as conn:
@@ -356,7 +356,7 @@ def rollup_for_date(date: str) -> dict:
 
 def rollup_yesterday() -> dict:
     """Convenience for the cron: yesterday in UTC."""
-    yest = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+    yest = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d")
     return rollup_for_date(yest)
 
 
@@ -378,7 +378,7 @@ def get_metric_series(*, metric: str, days: int = 30) -> list[dict]:
     """Time series for one metric, last N days. Drives the dashboard
     line charts."""
     days = max(1, min(days, 365))
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(UTC).date()
     dates = [
         (today - timedelta(days=days - 1 - i)).strftime("%Y-%m-%d")
         for i in range(days)
@@ -402,7 +402,7 @@ def get_metric_series(*, metric: str, days: int = 30) -> list[dict]:
 def _date_bounds(date: str) -> tuple[float, float]:
     """Returns (start_ts, end_ts) for the UTC day in `date`
     ('YYYY-MM-DD')."""
-    d = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    d = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=UTC)
     start = d.timestamp()
     end = (d + timedelta(days=1)).timestamp()
     return start, end

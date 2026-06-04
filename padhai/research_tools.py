@@ -738,7 +738,7 @@ def detect_gaps(
             blob = " ".join([
                 (p["title"] or "").lower(),
                 (p["abstract"] or "").lower(),
-                " ".join((k.lower() for k in p["keywords"])),
+                " ".join(k.lower() for k in p["keywords"]),
             ])
             if theme_l in blob:
                 hits += 1

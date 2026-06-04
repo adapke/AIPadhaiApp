@@ -9,7 +9,7 @@ import os
 import sys
 import tempfile
 import time
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -339,10 +339,10 @@ def main() -> int:
     )
 
     # Retention — synthesise a yesterday signup + today event
-    yest = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+    yest = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d")
     # Backfill: write a synthetic event at yesterday's timestamp
     yest_ts = datetime.strptime(yest, "%Y-%m-%d").replace(
-        tzinfo=timezone.utc,
+        tzinfo=UTC,
     ).timestamp() + 3600
     import sqlite3
     with sqlite3.connect(_DB) as conn:
@@ -371,7 +371,7 @@ def main() -> int:
 
     # Rollup
     rollup = analytics.rollup_for_date(
-        datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+        datetime.now(UTC).strftime("%Y-%m-%d"),
     )
     check(
         "Q3 rollup_for_date persists metrics + returns count",

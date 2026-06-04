@@ -25,7 +25,7 @@ Routes (all under /admin/* once mounted):
 from __future__ import annotations
 
 import secrets as _secrets
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request
@@ -262,7 +262,7 @@ def api_retry_job(
         "job_id": job_id,
         "status": new_status,
         "admin": user.email,
-        "retried_at": datetime.now(timezone.utc).isoformat(),
+        "retried_at": datetime.now(UTC).isoformat(),
     }
 
 

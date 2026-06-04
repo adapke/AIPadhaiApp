@@ -32,7 +32,7 @@ def synthesise_audio(
     text: str,
     language_code: str,
     out_path: Path,
-    cache: "Cache | None" = None,
+    cache: Cache | None = None,
     provider: TTSProvider | None = None,
 ) -> None:
     """Render `text` to an MP3 at out_path via the configured TTS provider.
@@ -216,7 +216,7 @@ def _draw_quiz_slide(
     return img
 
 
-def _draw_kg_decorations(draw: "ImageDraw.ImageDraw", theme: Theme) -> None:
+def _draw_kg_decorations(draw: ImageDraw.ImageDraw, theme: Theme) -> None:
     """Sun + clouds + stars for the kindergarten theme. PIL primitives only —
     no font emoji needed, so it renders identically regardless of installed
     fonts."""
@@ -752,7 +752,7 @@ def _quiz_narration(question: dict, q_num: int) -> tuple[str, str]:
 def render_lesson(
     lesson: Lesson,
     output_path: Path,
-    cache: "Cache | None" = None,
+    cache: Cache | None = None,
     include_quiz: bool = True,
     think_time_seconds: float = 4.0,
     theme: Theme = DARK_ACADEMIC,

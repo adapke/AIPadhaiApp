@@ -1084,7 +1084,7 @@ def generate_lesson(
     language_code: str,
     level: str,
     client: anthropic.Anthropic | None = None,
-    cache: "Cache | None" = None,
+    cache: Cache | None = None,
     target_duration_seconds: int | None = None,
     profile_addendum: str | None = None,
     video_mode: str = "teaching",

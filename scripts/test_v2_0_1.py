@@ -9,6 +9,7 @@ import os
 import sys
 import tempfile
 import time
+from datetime import UTC
 from pathlib import Path
 
 _DB = os.environ.setdefault(
@@ -48,8 +49,8 @@ def main() -> int:
     streaks.migrate()
     # Simulate a user with 6-day streak going into day 7
     from datetime import datetime, timedelta, timezone
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    yesterday = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
+    yesterday = (datetime.now(UTC) - timedelta(days=1)).strftime("%Y-%m-%d")
     import sqlite3
     with sqlite3.connect(_DB) as conn:
         conn.execute(

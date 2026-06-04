@@ -444,9 +444,9 @@ def grade(
 
 
 def _record_essay_provenance(
-    sub: "Submission",
-    rubric: "Rubric",
-    result: "GradeResult",
+    sub: Submission,
+    rubric: Rubric,
+    result: GradeResult,
     *,
     ai_call_id: str | None,
 ) -> None:

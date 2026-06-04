@@ -20,13 +20,13 @@ exclude = [
 #   • E — pycodestyle errors — clean
 #   • I — isort (import sorting + grouping) — clean
 #   • B — bugbear (likely-bug patterns) — clean ex B008/B904
+#   • UP — pyupgrade (modern syntax) — clean after one-shot --fix
 # Still advisory (pre-commit only):
-#   • UP — pyupgrade (modern syntax; lots of `Optional[X]` → `X | None`)
 #   • SIM — simplify (readability wins; case-by-case)
 # When you touch a file, ruff --fix will quietly clean it. Promote
 # the next category to blocking once `ruff check --select <X>`
 # shows zero findings.
-select = ["F", "E", "I", "B"]
+select = ["F", "E", "I", "B", "UP"]
 
 # Deliberate ignores:
 ignore = [

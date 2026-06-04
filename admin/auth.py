@@ -203,7 +203,7 @@ def mark_login(user_id: str) -> None:
 COOKIE_NAME = "admin_token"
 
 
-def _extract_token(request: Request) -> Optional[str]:
+def _extract_token(request: Request) -> str | None:
     auth = request.headers.get("Authorization", "")
     if auth.lower().startswith("bearer "):
         return auth.split(None, 1)[1].strip()
@@ -234,7 +234,7 @@ def require_admin(request: Request) -> AdminUser:
     return user
 
 
-def optional_admin(request: Request) -> Optional[AdminUser]:
+def optional_admin(request: Request) -> AdminUser | None:
     """Like require_admin but returns None instead of raising. Used by
     the home page which decides login vs dashboard render."""
     try:

@@ -26,11 +26,11 @@ import json
 import sqlite3
 import time
 import uuid
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from threading import Lock
-from typing import Callable
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS jobs (
@@ -200,7 +200,7 @@ class JobStore:
             ).fetchall()
         return [r[0] for r in rows]
 
-    def find_siblings(self, leader_id: str) -> list["Job"]:
+    def find_siblings(self, leader_id: str) -> list[Job]:
         """Return all sibling jobs (parent_job_id == leader_id) plus
         the leader itself, sorted by page_number. Used by the
         multi-page video stitcher to discover every page job belonging
@@ -210,7 +210,7 @@ class JobStore:
         the field — those are filtered out by the WHERE clause.
         Returns [] when nothing matches the leader_id (single-page
         uploads have no siblings)."""
-        out: list["Job"] = []
+        out: list[Job] = []
         # Pull the leader itself (page_number=1, no parent_job_id) ...
         leader = self.get(leader_id)
         if leader is not None:
@@ -294,7 +294,7 @@ class JobRunner:
         worker_fn: Callable[[Job], dict],
         max_workers: int = 1,
         job_filter: Callable[[dict], bool] | None = None,
-        post_succeed_hook: Callable[["Job", dict], None] | None = None,
+        post_succeed_hook: Callable[[Job, dict], None] | None = None,
     ):
         self.store = store
         self.worker_fn = worker_fn

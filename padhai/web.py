@@ -10678,6 +10678,8 @@ def create_lesson(
 
 # ---- chat-on-content (Spark.E equivalent) ---------------------------------
 
+from datetime import UTC
+
 import anthropic as _anthropic  # noqa: E402  — placed here to keep top imports tidy
 
 _chat_client: _anthropic.Anthropic | None = None
@@ -10764,7 +10766,7 @@ def _compute_user_stats(user_id: str | None, days: int) -> dict:
 
     for j in recent:
         from datetime import datetime, timezone
-        d = datetime.fromtimestamp(j.created_at, tz=timezone.utc).strftime("%Y-%m-%d")
+        d = datetime.fromtimestamp(j.created_at, tz=UTC).strftime("%Y-%m-%d")
         bucket = activity_by_day.setdefault(d, {"date": d, "lessons": 0, "minutes": 0})
         bucket["lessons"] += 1
         bucket["minutes"] += 6
@@ -10772,9 +10774,9 @@ def _compute_user_stats(user_id: str | None, days: int) -> dict:
 
     # Fill every day in the window so the chart shows zeros (parents
     # want to see the gap days, not skip them)
-    from datetime import datetime, timedelta, timezone
+    from datetime import datetime, timedelta
     series: list[dict] = []
-    today = datetime.now(tz=timezone.utc).date()
+    today = datetime.now(tz=UTC).date()
     for i in range(days):
         d = today - timedelta(days=days - 1 - i)
         key = d.strftime("%Y-%m-%d")
@@ -11343,7 +11345,7 @@ _PROGRESS_STEPS = [
 ]
 
 
-def _progress_for_job(job: "Job") -> dict:
+def _progress_for_job(job: Job) -> dict:
     """Surface the worker-emitted progress step + percent. Falls back
     to synthesising a position from job.status when the worker hasn't
     emitted yet (e.g. job is queued, hasn't been claimed)."""
@@ -13144,32 +13146,10 @@ def create_coaching_track(
 
 
 # ---------- I4: Streaks + XP + leaderboards ----------
-
-
-@app.get("/api/orgs/{org_id}/classes/{class_id}/leaderboard")
-def class_leaderboard(
-    org_id: str, class_id: str,
-    period: str = "alltime",
-    limit: int = 50,
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    members = _orgs.list_members(org_id)
-    scope = [
-        m.user_id for m in members
-        if m.user_id and m.class_id == class_id
-    ]
-    if not scope:
-        return {"rows": []}
-    try:
-        rows = _streaks.leaderboard(
-            scope_user_ids=scope, period=period, limit=limit,
-        )
-    except ValueError as e:
-        raise HTTPException(400, str(e))
-    return {"rows": rows, "period": period}
+# /api/orgs/{id}/classes/{cid}/leaderboard moved to
+# padhai/routers/orgs_leaderboard.py. The other I4 endpoints (streak
+# tick, XP grant, badges) still live in this file — they'll lift
+# in their own slice when the rest of the I4 slab extracts.
 
 
 # ---------- J1 + J2: Math + diagram preview surfaces ----------
@@ -13853,7 +13833,7 @@ def _stitch_page_videos(leader_id: str) -> tuple[Path, list[dict]]:
             "this isn't a multi-page upload; use /jobs/{id}/video instead",
         )
 
-    ready: list[tuple[int, Path, "Job"]] = []
+    ready: list[tuple[int, Path, Job]] = []
     page_info: list[dict] = []
     for j in pages:
         page_n = (j.payload or {}).get("page_number") or 0
@@ -13923,7 +13903,7 @@ def _stitch_page_videos(leader_id: str) -> tuple[Path, list[dict]]:
 # late import so the helpers stay close to _locate_mp4 + _OUTPUT_DIR.
 
 
-def _locate_mp4(job: "Job") -> Path:
+def _locate_mp4(job: Job) -> Path:
     """Return the path to the rendered MP4 on local disk, downloading
     it from object storage if needed. Used by the sidecar artifact
     endpoints (audio.mp3, subtitles.srt) which need direct file access."""
@@ -14585,7 +14565,7 @@ def export_my_data(
 
     from datetime import datetime, timezone  # local import — module-level not present
     export: dict = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": datetime.now(UTC).isoformat(),
         "schema_version": 1,
         "profile": {
             "id": user.id,
@@ -14688,7 +14668,7 @@ def delete_my_account(
 
     from datetime import datetime, timezone
     anon_email = f"deleted-{user.id}@deleted.invalid"
-    deletion_requested_at = datetime.now(timezone.utc).isoformat()
+    deletion_requested_at = datetime.now(UTC).isoformat()
 
     # Ensure profile columns exist before we try to NULL them out —
     # without this, a user who never visited /api/me/profile would hit

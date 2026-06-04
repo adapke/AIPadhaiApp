@@ -21,6 +21,7 @@ import sqlite3
 import time
 import uuid
 from dataclasses import dataclass
+from datetime import UTC
 from pathlib import Path
 
 SCHEMA = """
@@ -219,7 +220,7 @@ LLM_ALERT_THRESHOLD_PCT = 0.80
 
 def _today_str() -> str:
     from datetime import datetime, timezone
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return datetime.now(UTC).strftime("%Y-%m-%d")
 
 
 def _maybe_emit_alert(
@@ -371,7 +372,7 @@ def user_cost_today(user_id: str) -> float:
     """₹ spent on Claude for this user since midnight UTC. Used by
     the per-tier daily cap enforcement."""
     from datetime import datetime, timezone
-    midnight = datetime.now(timezone.utc).replace(
+    midnight = datetime.now(UTC).replace(
         hour=0, minute=0, second=0, microsecond=0,
     ).timestamp()
     with _conn() as conn:
@@ -387,7 +388,7 @@ def user_cost_today_paise(user_id: str) -> int:
     """Same as user_cost_today() but returns paise as int — no
     floating-point creep when summed against a cap."""
     from datetime import datetime, timezone
-    midnight = datetime.now(timezone.utc).replace(
+    midnight = datetime.now(UTC).replace(
         hour=0, minute=0, second=0, microsecond=0,
     ).timestamp()
     with _conn() as conn:

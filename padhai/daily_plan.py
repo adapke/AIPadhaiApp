@@ -44,7 +44,7 @@ import sqlite3
 import time
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 
 SCHEMA = """
@@ -118,7 +118,7 @@ def migrate() -> None:
 
 def _today_iso(tz_offset_min: int = 330) -> str:
     """Default IST (+05:30 = 330 min) — India-first per review."""
-    now = datetime.now(timezone.utc) + timedelta(minutes=tz_offset_min)
+    now = datetime.now(UTC) + timedelta(minutes=tz_offset_min)
     return now.date().isoformat()
 
 

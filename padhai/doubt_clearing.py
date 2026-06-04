@@ -469,7 +469,7 @@ def answer_via_ai_vision(
 
 def _record_doubt_provenance(
     *,
-    doubt: "Doubt",
+    doubt: Doubt,
     question: str,
     answer_text: str,
     ai_call_id: str | None,
