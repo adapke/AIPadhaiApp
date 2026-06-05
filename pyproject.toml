@@ -25,13 +25,17 @@ exclude = [
 #     (16 auto-fixes applied; 13 sites carry `# noqa: SIMxxx` for
 #     intentional structure — see e.g. padhai/auth.py:243 where a
 #     try-pass deliberately preserves a "column already exists" hint)
+#   • RUF — Ruff-specific lints. 200 auto-fixed (RUF100/RUF102/RUF021);
+#     104 unicode-ambiguous sites (RUF001/2/3) are codebase-ignored
+#     because em-dashes and Devanagari are intentional in the Indian-
+#     language UI text + bench data; 35 small judgment-call sites
+#     carry targeted `# noqa: RUFxxx` markers.
 # Still advisory (pre-commit only):
-#   • RUF — Ruff-specific lints (some are useful, some are bikesheds)
 #   • C90 — complexity caps (codebase has legacy hotspots)
 # When you touch a file, ruff --fix will quietly clean it. Promote
 # the next category to blocking once `ruff check --select <X>`
 # shows zero findings.
-select = ["F", "E", "I", "B", "UP", "SIM"]
+select = ["F", "E", "I", "B", "UP", "SIM", "RUF"]
 
 # Deliberate ignores:
 ignore = [
@@ -62,6 +66,12 @@ ignore = [
     # B904 was once 344 sites; cleaned by an AST-based mass fixer
     # (scripts/fix_b904.py) and is now blocking — re-introductions
     # are caught at PR time.
+    "RUF001",  # ambiguous-unicode-character-string — codebase has
+               # em-dashes (—), smart quotes (', '), and Devanagari
+               # ("मुख्यमंत्री") in Indian-language UI strings and
+               # bench answers. These are intentional, not typos.
+    "RUF002",  # same, in docstrings.
+    "RUF003",  # same, in comments.
 ]
 
 [tool.ruff.lint.per-file-ignores]

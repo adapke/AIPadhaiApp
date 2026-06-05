@@ -433,7 +433,7 @@ def book_commission(
     aff = get_affiliate_by_code(attribution.affiliate_code)
     if not aff or aff.status != "active":
         return None
-    commission = int(round(invoice_paise * aff.commission_pct))
+    commission = round(invoice_paise * aff.commission_pct)
     eid = uuid.uuid4().hex
     with _conn() as conn:
         try:

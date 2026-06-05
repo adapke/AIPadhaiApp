@@ -74,7 +74,7 @@ def main() -> int:
     OUTSIDER = "outsider-1"   # no link
 
     # Link parent → child-a (verified)
-    link_a, token_a = parents.invite(
+    _link_a, token_a = parents.invite(
         parent_user_id=PARENT, child_user_id=CHILD_A,
         initiated_by="parent", relation="father",
     )

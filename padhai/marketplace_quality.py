@@ -557,7 +557,7 @@ def expire_stale_refunds() -> int:
                 f"UPDATE market_refund_requests SET "
                 " status = 'auto_expired', decided_at = ? "
                 f"WHERE id IN ({ph})",
-                [now] + ids,
+                [now, *ids],
             )
     # Recompute quality on affected items
     for _, ik, iid in rows:

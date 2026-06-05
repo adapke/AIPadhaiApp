@@ -560,7 +560,7 @@ def run_benchmark(
                     "runner must return dict, got "
                     f"{type(actual).__name__}",
                 )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             skipped += 1
             with _conn() as conn:
                 conn.execute(

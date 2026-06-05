@@ -157,8 +157,8 @@ def main() -> int:
         r = c.get("/landing")
         check(
             "GET /landing → 200 + has auth form",
-            r.status_code == 200
-            and 'name="email"' in r.text or "id=\"email\"" in r.text,
+            (r.status_code == 200
+            and 'name="email"' in r.text) or "id=\"email\"" in r.text,
         )
 
         r = c.get("/home")

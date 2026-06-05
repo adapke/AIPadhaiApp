@@ -52,6 +52,7 @@ _ROUTER_NAMES = (
     "orgs_leaderboard",  # v3.x — /api/orgs/{id}/classes/{cid}/leaderboard (XP / streaks)
     "orgs_attendance",   # v3.x — /api/orgs/{id}/classes/{cid}/attendance* (4 routes)
     "orgs_assignments",  # v3.x — /api/orgs/{id}/assignments* (list, create, completion, stats)
+    "orgs_fees",         # v3.x — /api/orgs/{id}/fees* (structures + invoices + Razorpay)
 )
 
 

@@ -841,7 +841,7 @@ def _provider_send(
             return _send_via_whatsapp_cloud(
                 phone=phone, body=body, template=template,
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         return None, f"provider {provider} error: {e}"
     return None, f"provider {provider!r} dispatch fell through"
 

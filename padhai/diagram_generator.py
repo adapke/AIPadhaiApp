@@ -210,7 +210,7 @@ def render(d: GeneratedDiagram) -> str:
             if t == "food_chain":
                 return render_food_chain(spec.get("species") or [],
                                          width=d.width, height=d.height)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[diagram_generator] render failed: {e}; using placeholder")
     return _fallback_svg(d.alt_text, width=d.width, height=d.height)
 

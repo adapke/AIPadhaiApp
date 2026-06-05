@@ -373,7 +373,7 @@ def answer_via_ai_vision(
         return get(doubt_id)  # type: ignore[return-value]
 
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
     except ImportError:
         fallback_msg = (
             "AI auto-answer unavailable (anthropic SDK missing). "
@@ -510,7 +510,7 @@ def _record_doubt_provenance(
                 else f"doubt_fallback_{method}"
             ),
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[doubt_clearing] provenance non-fatal: {e}")
 
 

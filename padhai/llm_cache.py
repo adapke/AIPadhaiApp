@@ -171,7 +171,7 @@ def submit_batch(requests: list[BatchRequest]) -> BatchSubmission:
     # Real submission would happen here. Lazy import the SDK so this
     # module loads without anthropic installed.
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
         client = Anthropic()
         # SDK shape: client.messages.batches.create(requests=[...])
         # Returns a Batch object with .id, .processing_status, etc.
@@ -194,7 +194,7 @@ def submit_batch(requests: list[BatchRequest]) -> BatchSubmission:
             request_count=len(requests),
             submitted_at=now,
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         # Submission failed — outbox file persists so we can retry.
         print(f"[llm_cache] batch submit failed (outbox retained): {e}")
         return BatchSubmission(
@@ -220,7 +220,7 @@ def poll_batch(batch_id: str) -> dict:
             "results": [],
         }
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
         client = Anthropic()
         b = client.messages.batches.retrieve(batch_id)
         status = getattr(b, "processing_status", "pending")
@@ -241,7 +241,7 @@ def poll_batch(batch_id: str) -> dict:
             "status": "completed", "batch_id": batch_id,
             "results": results,
         }
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         return {
             "status": "errored", "batch_id": batch_id,
             "error": str(e), "results": [],

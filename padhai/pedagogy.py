@@ -1152,7 +1152,7 @@ def generate_lesson(
                 taxonomy_scope = scope.get("scope_summary")
                 if not board_hint and scope.get("board_hint"):
                     board_hint = scope["board_hint"]
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[pedagogy] taxonomy scope non-fatal: {e}")
 
     user_text = build_user_text(
@@ -1254,5 +1254,5 @@ def _record_lesson_provenance(
             citations=cites or None,
             answer_mode="general",
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[pedagogy] lesson provenance non-fatal: {e}")

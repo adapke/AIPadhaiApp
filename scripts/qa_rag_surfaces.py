@@ -18,7 +18,7 @@ if qa_db.exists():
 # the heuristic / no-key paths to run so we exercise those branches.
 os.environ.pop("ANTHROPIC_API_KEY", None)
 
-from padhai import citations, doubt_clearing, essay_grader, mock_interview  # noqa: E402
+from padhai import citations, doubt_clearing, essay_grader, mock_interview
 
 UID = f"qa-user-{uuid.uuid4().hex[:8]}"
 

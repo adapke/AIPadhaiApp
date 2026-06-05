@@ -513,7 +513,7 @@ def _fire_webhook(event_kind: str, lead: Lead) -> None:
     if not url:
         return
     try:
-        import requests  # noqa: WPS433
+        import requests
     except ImportError:
         return
     payload = {
@@ -537,5 +537,5 @@ def _fire_webhook(event_kind: str, lead: Lead) -> None:
     }
     try:
         requests.post(url, json=payload, timeout=5)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[sales] webhook fire failed (non-fatal): {e}")

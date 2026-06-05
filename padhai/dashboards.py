@@ -56,7 +56,7 @@ def _safe(fn, *args, default=None, **kwargs):
     independently optional."""
     try:
         return fn(*args, **kwargs)
-    except Exception:  # noqa: BLE001
+    except Exception:
         return default
 
 

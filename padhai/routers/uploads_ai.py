@@ -605,7 +605,7 @@ def force_reindex(uid: str, user=Depends(current_user)):
     """Force-rebuild the retrieval index for this upload. Used when
     the upload's extracted_text has changed or when initial ingest
     didn't populate retrieval (older uploads)."""
-    user, upload = _resolve_upload(uid, user)
+    user, _upload = _resolve_upload(uid, user)
     from .. import retrieval as _retr
     _retr.delete_upload_chunks(uid)
     n = _retr.index_upload(uid)
@@ -614,7 +614,7 @@ def force_reindex(uid: str, user=Depends(current_user)):
 
 @router.get("/api/uploads/{uid}/index/status")
 def index_status(uid: str, user=Depends(current_user)):
-    user, upload = _resolve_upload(uid, user)
+    user, _upload = _resolve_upload(uid, user)
     from .. import retrieval as _retr
     n = _retr.chunk_count(upload_id=uid)
     return {"upload_id": uid, "chunk_count": n, "indexed": n > 0}

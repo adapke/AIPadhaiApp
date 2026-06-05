@@ -207,7 +207,7 @@ def import_from_api(*, diksha_id: str,
         "DIKSHA_BASE_URL", "https://diksha.gov.in",
     )
     try:
-        import requests  # noqa: WPS433
+        import requests
     except ImportError as e:
         raise ValueError("requests lib not installed") from e
     headers = {
@@ -222,7 +222,7 @@ def import_from_api(*, diksha_id: str,
     try:
         r = requests.get(url, headers=headers, timeout=15)
         r.raise_for_status()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         raise ValueError(f"DIKSHA API fetch failed: {e}") from e
     body = r.json()
     content = (

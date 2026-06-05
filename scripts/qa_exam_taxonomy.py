@@ -28,7 +28,7 @@ qa_db = Path(os.environ["PADHAI_DB_PATH"])
 if qa_db.exists():
     qa_db.unlink()
 
-from padhai import exam_taxonomy, pedagogy  # noqa: E402
+from padhai import exam_taxonomy, pedagogy
 
 UID = f"qa-user-{uuid.uuid4().hex[:8]}"
 

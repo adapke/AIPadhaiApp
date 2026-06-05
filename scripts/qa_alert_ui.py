@@ -14,7 +14,7 @@ qa_db = Path(os.environ["PADHAI_DB_PATH"])
 if qa_db.exists():
     qa_db.unlink()
 
-from padhai import llm_obs  # noqa: E402
+from padhai import llm_obs
 
 # Push alice over 80% of M2 cap (~₹17 / ₹20)
 llm_obs.record_call(
@@ -31,8 +31,8 @@ llm_obs.record_call(
     subscription_tier="M2",
 )
 
-from admin import data, templates  # noqa: E402
-from admin.auth import AdminUser  # noqa: E402
+from admin import data, templates
+from admin.auth import AdminUser
 
 alerts = data.llm_recent_alerts()
 print("alerts in DB:", len(alerts))

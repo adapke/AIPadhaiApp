@@ -419,7 +419,7 @@ def submit_attempt(
                     user_id=user_id, topic_key=tag,
                     correct=is_correct,
                 )
-    except Exception as e_inner:  # noqa: BLE001
+    except Exception as e_inner:
         print(f"[mock_test_event] mastery update non-fatal: {e_inner}")
 
     return _get_attempt_by_id(attempt_id)

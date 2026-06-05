@@ -117,7 +117,7 @@ async def _stream(
         return
     if cap and cap > 0:
         from .. import llm_obs
-        spent_paise = int(round(llm_obs.user_cost_today(user.id) * 100))
+        spent_paise = round(llm_obs.user_cost_today(user.id) * 100)
         if spent_paise >= cap:
             yield _sse({
                 "type": "error",

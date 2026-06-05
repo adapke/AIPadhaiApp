@@ -31,7 +31,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from padhai import accuracy_bench as bench  # noqa: E402
+from padhai import accuracy_bench as bench
 
 
 def _load_fixture(path: Path) -> dict:
@@ -134,7 +134,7 @@ def main() -> int:
 
     try:
         dataset_id = _seed_dataset(fixture)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[bench] seed failed: {e}", file=sys.stderr)
         return 1
 

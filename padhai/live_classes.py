@@ -130,7 +130,7 @@ def _create_room(*, room_id: str, provider: str) -> str:
         # Daily.co room creation. Lazy import; the actual call lands
         # in the v2.3.x ops sprint when DAILY_API_KEY is provisioned.
         try:
-            import requests  # noqa: WPS433
+            import requests
             r = requests.post(
                 "https://api.daily.co/v1/rooms",
                 headers={
@@ -149,7 +149,7 @@ def _create_room(*, room_id: str, provider: str) -> str:
             )
             if r.status_code in (200, 201):
                 return r.json().get("name") or room_id
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[live_classes] Daily.co room create failed: {e}")
     # LiveKit / stub: name is the room
     return room_id
@@ -177,7 +177,7 @@ def issue_access_token(
 
     if provider == "livekit":
         try:
-            from livekit.api import AccessToken, VideoGrants  # noqa: WPS433
+            from livekit.api import AccessToken, VideoGrants
             at = AccessToken(
                 os.environ["LIVEKIT_API_KEY"],
                 os.environ["LIVEKIT_API_SECRET"],
@@ -203,7 +203,7 @@ def issue_access_token(
 
     if provider == "daily":
         try:
-            import requests  # noqa: WPS433
+            import requests
             r = requests.post(
                 "https://api.daily.co/v1/meeting-tokens",
                 headers={
@@ -227,7 +227,7 @@ def issue_access_token(
                     "expires_at": expires_at,
                     "room_url": f"https://aipathshala.daily.co/{lc.room_id}",
                 }
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[live_classes] Daily.co token failed: {e}")
 
     # Stub fallback — HMAC over the claims

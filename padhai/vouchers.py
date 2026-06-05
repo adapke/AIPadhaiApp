@@ -327,11 +327,11 @@ def validate_voucher(
         raise VoucherError("voucher not applicable to this item")
     # Discount math
     if v.kind == "percent":
-        discount = int(round(order_paise * (v.value / 100)))
+        discount = round(order_paise * (v.value / 100))
     elif v.kind == "fixed":
         discount = min(v.value, order_paise)
     else:  # 'bundle' kind treated as percent
-        discount = int(round(order_paise * (v.value / 100)))
+        discount = round(order_paise * (v.value / 100))
     discount = max(0, min(discount, order_paise))
     return DiscountResult(
         discount_paise=discount,
@@ -476,7 +476,7 @@ def apply_bundle(
             discount_paise=0, final_paise=total_paise,
             reason="no matching bundle",
         )
-    discount = int(round(total_paise * (b.bundle_discount_pct / 100)))
+    discount = round(total_paise * (b.bundle_discount_pct / 100))
     discount = max(0, min(discount, total_paise))
     return DiscountResult(
         discount_paise=discount,

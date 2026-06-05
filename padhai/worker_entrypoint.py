@@ -50,7 +50,7 @@ def dispatch_one(job_id: str) -> dict:
     # Lazy import — pulls in the heavy render/talking_head deps only
     # inside the worker process, not in the web tier when this module
     # is imported for type/contract reasons.
-    from .web import _render_worker, store  # noqa: WPS433
+    from .web import _render_worker, store
     job = store.get(job_id)
     if not job:
         raise RuntimeError(f"job {job_id!r} not found in store")
@@ -63,7 +63,7 @@ def dispatch_one(job_id: str) -> dict:
         result = _render_worker(job)
         store.update(job_id, status="succeeded", result=result)
         return result
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         store.update(job_id, status="failed", error=repr(e))
         raise
 

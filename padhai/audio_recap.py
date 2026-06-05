@@ -515,7 +515,7 @@ def render_pending(*, batch_size: int = 10) -> dict:
         try:
             _render_recap(rid)
             out["rendered"] += 1
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             out["failed"] += 1
             with _conn() as conn:
                 conn.execute(
@@ -585,7 +585,7 @@ def _render_segment(
             language_code=language,
             out_path=out_path,
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         raise RuntimeError(
             f"TTS provider {provider!r} failed: {e}",
         ) from e

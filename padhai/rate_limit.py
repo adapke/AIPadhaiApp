@@ -123,6 +123,6 @@ def client_ip_from_request(request) -> str:
                     return candidate
         if request.client:
             return request.client.host
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
     return "unknown"

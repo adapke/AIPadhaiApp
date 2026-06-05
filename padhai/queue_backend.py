@@ -55,7 +55,7 @@ def resolve() -> QueueConfig:
         return QueueConfig(backend=INPROCESS_BACKEND, redis_url=None,
                            rq_available=False)
     try:
-        import rq  # noqa: F401
+        import rq
         return QueueConfig(backend=REDIS_BACKEND, redis_url=url,
                            rq_available=True)
     except ImportError:
@@ -75,7 +75,7 @@ def description() -> str:
             port = p.port or 6379
             db = p.path.lstrip("/") or "0"
             return f"redis-rq://{host}:{port}/{db}"
-        except Exception:  # noqa: BLE001
+        except Exception:
             return "redis-rq://[redacted]"
     if cfg.backend == INPROCESS_BACKEND and cfg.redis_url:
         return ("inprocess (REDIS_URL set but `rq` not installed — "

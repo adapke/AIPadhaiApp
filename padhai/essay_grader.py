@@ -486,7 +486,7 @@ def _record_essay_provenance(
                 else f"grader_fallback_{result.method}"
             ),
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[essay_grader] provenance non-fatal: {e}")
 
 
@@ -844,6 +844,6 @@ def seed_default_rubrics() -> int:
                     created_by="system",
                 )
                 created += 1
-        except Exception:  # noqa: BLE001
+        except Exception:
             pass
     return created

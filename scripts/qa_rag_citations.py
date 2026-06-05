@@ -29,7 +29,7 @@ qa_db = Path(os.environ["PADHAI_DB_PATH"])
 if qa_db.exists():
     qa_db.unlink()
 
-from padhai import citations, pedagogy, tutor_grounding  # noqa: E402
+from padhai import citations, pedagogy, tutor_grounding
 
 UID = f"qa-user-{uuid.uuid4().hex[:8]}"
 SID = f"qa-session-{uuid.uuid4().hex[:8]}"

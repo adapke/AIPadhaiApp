@@ -127,7 +127,7 @@ _LINEAR_PATTERN = re.compile(
 
 def is_sympy_available() -> bool:
     try:
-        import sympy  # noqa: F401
+        import sympy
         return True
     except ImportError:
         return False

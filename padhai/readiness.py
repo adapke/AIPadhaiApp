@@ -261,7 +261,7 @@ def _consistency_component(*, user_id: str) -> dict:
         return {"score": 0.0, "reason": "module unavailable"}
     try:
         snap = _s.snapshot(user_id=user_id)
-    except Exception:  # noqa: BLE001
+    except Exception:
         return {"score": 0.0, "reason": "streaks unavailable"}
     cur = snap.get("current_streak", 0) if isinstance(snap, dict) else 0
     # 30-day cap → 100. Tunable.

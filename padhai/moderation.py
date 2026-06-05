@@ -160,7 +160,7 @@ def classify(
 
     try:
         result = _call_classifier(text)
-    except Exception as e:  # noqa: BLE001 — fail-open path
+    except Exception as e:
         import sys
         print(f"moderation.classify FAILED OPEN: {e}", file=sys.stderr)
         return ModerationResult(allowed=True, category="ok", severity=0,

@@ -239,7 +239,7 @@ def index_page(
                     extracted_text = p.extracted_text
                     page_id = page_id or p.id
                     break
-        except Exception:  # noqa: BLE001
+        except Exception:
             pass
     if not extracted_text or not extracted_text.strip():
         return 0
@@ -289,7 +289,7 @@ def _embed_chunk(chunk_id: str, text: str, conn) -> None:
             if vec:
                 vector_json = json.dumps(vec)
                 dimension = len(vec)
-        except Exception:  # noqa: BLE001
+        except Exception:
             provider = "tokenscore"   # fallback silently
     # Upsert embedding
     conn.execute(
@@ -330,7 +330,7 @@ def index_upload(upload_id: str) -> int:
     try:
         from . import schema_v2 as _sv2
         pages = _sv2.list_pages_for_upload(upload_id)
-    except Exception:  # noqa: BLE001
+    except Exception:
         return 0
     total = 0
     for p in pages:

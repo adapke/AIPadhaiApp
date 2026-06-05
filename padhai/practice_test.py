@@ -222,7 +222,7 @@ def generate(
 
 def _slot_counts(target: int, mix: dict[str, float]) -> dict[str, int]:
     """Distribute target across slots; rounding error goes to standard."""
-    out = {k: int(round(target * v)) for k, v in mix.items()}
+    out = {k: round(target * v) for k, v in mix.items()}
     delta = target - sum(out.values())
     out["standard"] = max(0, out.get("standard", 0) + delta)
     return out
@@ -237,7 +237,7 @@ def _resolve_weak_topics(*, user_id: str, subject: str) -> list[str]:
         # Filter to subject-relevant when key looks like 'subject:topic'
         keys = [m.topic_key for m in weak if not m.topic_key.startswith(":")]
         return keys[:5]
-    except Exception:  # noqa: BLE001
+    except Exception:
         return []
 
 
@@ -332,7 +332,7 @@ def _synthesise(
     if not os.environ.get("ANTHROPIC_API_KEY"):
         return []
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
     except ImportError:
         return []
     from . import llm_cache, llm_obs
@@ -488,6 +488,6 @@ def submit(
                     user_id=t.user_id, topic_key=tag,
                     correct=r["is_correct"],
                 )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[practice_test] mastery update non-fatal: {e}")
     return score

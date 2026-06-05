@@ -396,9 +396,9 @@ def subscribe(
         raise ValueError("publisher missing")
     # Pro-rate for non-annual durations
     annual_inr = pack.price_inr_per_seat_year * seats
-    cost_inr = int(round(annual_inr * (duration_days / 365.0)))
+    cost_inr = round(annual_inr * (duration_days / 365.0))
     total_paise = cost_inr * 100
-    platform_fee_paise = int(round(total_paise * publisher.platform_fee_pct))
+    platform_fee_paise = round(total_paise * publisher.platform_fee_pct)
     publisher_payout_paise = total_paise - platform_fee_paise
     sid = uuid.uuid4().hex
     now = time.time()

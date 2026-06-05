@@ -153,7 +153,7 @@ def feed_for_user(
     audience_clause = " OR ".join(f"audience = {opt}" for opt in audience_options)
 
     org_placeholders = ",".join("?" for _ in org_ids)
-    params: list = list(org_ids) + [now]
+    params: list = [*list(org_ids), now]
 
     where = (
         f"org_id IN ({org_placeholders}) "
@@ -168,7 +168,7 @@ def feed_for_user(
             "FROM org_notifications "
             f"WHERE {where} "
             "ORDER BY send_at DESC LIMIT ?",
-            params + [limit],
+            [*params, limit],
         ).fetchall()
 
         read_ids = set(r[0] for r in conn.execute(

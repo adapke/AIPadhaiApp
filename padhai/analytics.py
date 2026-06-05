@@ -144,7 +144,7 @@ def log(
                  json.dumps(props) if props else None,
                  source, time.time()),
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[analytics] log failed (non-fatal): {e}")
         return None
     return eid
@@ -176,7 +176,7 @@ def log_batch(events_iter) -> int:
                 " source, created_at) VALUES (?,?,?,?,?,?,?,?)",
                 rows,
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[analytics] log_batch failed (non-fatal): {e}")
         return 0
     return len(rows)
@@ -204,7 +204,7 @@ def mau(*, date: str | None = None) -> int:
     `date`."""
     if date is None:
         date = datetime.now(UTC).strftime("%Y-%m-%d")
-    end_start, end_end = _date_bounds(date)
+    _end_start, end_end = _date_bounds(date)
     start = end_end - 30 * 86400
     with _conn() as conn:
         r = conn.execute(

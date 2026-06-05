@@ -299,7 +299,7 @@ def _recount_paper(paper_id: str) -> None:
             "UPDATE mock_papers SET "
             " total_questions = ?, total_marks = ? "
             "WHERE id = ?",
-            (total_q, int(round(total_marks)), paper_id),
+            (total_q, round(total_marks), paper_id),
         )
 
 

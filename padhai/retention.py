@@ -253,7 +253,7 @@ def purge_due(now: float | None = None) -> PurgeResult:
                     bytes_freed += size
             except FileNotFoundError:
                 skipped_missing_file += 1
-            except Exception as e:  # noqa: BLE001 — log + continue
+            except Exception as e:
                 import sys
                 print(f"retention.purge_due: delete failed for {key!r}: {e}",
                       file=sys.stderr)

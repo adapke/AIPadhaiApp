@@ -165,7 +165,7 @@ class ObservabilityMiddleware(BaseHTTPMiddleware):
             response = await call_next(request)
             status = response.status_code
             return response
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             _maybe_capture_exception(e)
             raise
         finally:
@@ -208,7 +208,7 @@ def init_sentry() -> bool:
         _sentry_initialised = True
         log_event("observability.sentry.init", status="ok")
         return True
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         log_event("observability.sentry.init", status="failed", error=str(e))
         return False
 
@@ -230,7 +230,7 @@ def init_posthog() -> bool:
         _posthog_initialised = True
         log_event("observability.posthog.init", status="ok")
         return True
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         log_event("observability.posthog.init", status="failed", error=str(e))
         return False
 
@@ -241,7 +241,7 @@ def _maybe_capture_exception(exc: BaseException) -> None:
     try:
         import sentry_sdk
         sentry_sdk.capture_exception(exc)
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
 
 
@@ -257,7 +257,7 @@ def track(event: str, user_id: str | None = None, **props: Any) -> None:
             event=event,
             properties=props,
         )
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
 
 

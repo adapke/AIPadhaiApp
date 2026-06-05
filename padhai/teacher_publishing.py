@@ -515,7 +515,7 @@ def purchase(
     if not creator:
         raise ValueError("creator missing — contact support")
     fee_pct = creator.platform_fee_pct
-    platform_fee = int(round(s.price_paise * fee_pct))
+    platform_fee = round(s.price_paise * fee_pct)
     creator_payout = s.price_paise - platform_fee
     pid = uuid.uuid4().hex
     now = time.time()

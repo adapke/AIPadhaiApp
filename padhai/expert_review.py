@@ -541,7 +541,7 @@ def decide_review(
     new_status = status_map[action]
     # Commission math
     rate = expert.rate_per_review_paise
-    commission = int(round(rate * REJECT_RATE_MULTIPLIER)) if action == "reject" else rate
+    commission = round(rate * REJECT_RATE_MULTIPLIER) if action == "reject" else rate
     now = time.time()
     with _conn() as conn:
         conn.execute(

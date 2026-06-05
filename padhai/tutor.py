@@ -413,7 +413,7 @@ def _claude_reply(
                 confidence=retrieved_hits[0].score if retrieved_hits else None,
                 surface="tutor",
             )
-        except Exception as _e:  # noqa: BLE001
+        except Exception as _e:
             print(f"[tutor] grounding record non-fatal: {_e}")
 
     # Persist the turn

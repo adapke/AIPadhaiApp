@@ -380,7 +380,7 @@ def _render_explainer_video(job: Job) -> dict:
                 answer_mode="general",
                 fallback_reason="topic_explainer_no_source",
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[explainer] provenance non-fatal: {e}")
 
     store.set_progress(job.id, "creating_storyboard", 35)
@@ -695,7 +695,7 @@ async def _lifespan(app: FastAPI):
                 _pg_store = PostgresJobStore(_db_url)
             _user_repo = PostgresUserRepository(_pg_store.pool)
             _log.info("postgres connected: %s", _db_url.split("@")[-1])
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             _log.error("postgres FAILED — auth will be unavailable: %s", e)
     else:
         _log.warning("DATABASE_URL not set — running in SQLite/anonymous mode")
@@ -737,7 +737,7 @@ async def _lifespan(app: FastAPI):
                                _r.returncode, _r.stderr[:300])
             except FileNotFoundError:
                 _log.warning("[startup] liquibase not in PATH — falling back to init_schema()")
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 _log.warning("[startup] liquibase error (non-fatal): %s", e)
         if not _liquibase_ran:
             try:
@@ -753,287 +753,287 @@ async def _lifespan(app: FastAPI):
                 ) from e
     try:
         _orgs.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] orgs.migrate failed (non-fatal): %s", e)
     try:
         _dpdp.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] dpdp.migrate failed (non-fatal): %s", e)
     try:
         _sso.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] sso.migrate failed (non-fatal): %s", e)
     try:
         _schema_v2.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] schema_v2.migrate failed (non-fatal): %s", e)
     try:
         _branding.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] branding.migrate failed (non-fatal): %s", e)
     try:
         _audit.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] audit.migrate failed (non-fatal): %s", e)
     try:
         _push.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] push.migrate failed (non-fatal): %s", e)
     try:
         _saml.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] saml.migrate failed (non-fatal): %s", e)
     try:
         _scim.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] scim.migrate failed (non-fatal): %s", e)
     try:
         _residency.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] residency.migrate failed (non-fatal): %s", e)
     try:
         _streaks.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] streaks.migrate failed (non-fatal): %s", e)
     try:
         _customdom.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] custom_domains.migrate failed (non-fatal): %s", e)
     try:
         _qbank.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] question_bank.migrate failed (non-fatal): %s", e)
     try:
         _scorer.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] curriculum_scorer.migrate failed (non-fatal): %s", e)
     try:
         _countries.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] countries.migrate failed (non-fatal): %s", e)
     try:
         _coaching.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] coaching.migrate failed (non-fatal): %s", e)
     try:
         _mastery.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] mastery.migrate failed (non-fatal): %s", e)
     try:
         _preschool.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] preschool.migrate failed (non-fatal): %s", e)
     try:
         _flags.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] feature_flags.migrate failed (non-fatal): %s", e)
     try:
         _llm_obs.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] llm_obs.migrate failed (non-fatal): %s", e)
     try:
         _tutor.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] tutor.migrate failed (non-fatal): %s", e)
     try:
         _essay.migrate()
         seeded = _essay.seed_default_rubrics()
         if seeded:
             _log.info("[startup] essay_grader: seeded %d default rubrics", seeded)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] essay_grader.migrate/seed failed (non-fatal): %s", e)
     try:
         _practice.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] practice_test.migrate failed (non-fatal): %s", e)
     try:
         _live.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] live_classes.migrate failed (non-fatal): %s", e)
     try:
         _doubt.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] doubt_clearing.migrate failed (non-fatal): %s", e)
     try:
         _analytics.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] analytics.migrate failed (non-fatal): %s", e)
     try:
         _math_vision.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] math_vision.migrate failed (non-fatal): %s", e)
     try:
         _mock_iv.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] mock_interview.migrate failed (non-fatal): %s", e)
     try:
         _mock_te.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] mock_test_events.migrate failed (non-fatal): %s", e)
     try:
         _forums.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] forums.migrate failed (non-fatal): %s", e)
     try:
         _family.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] family_plans.migrate failed (non-fatal): %s", e)
     try:
         _buddies.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] study_buddies.migrate failed (non-fatal): %s", e)
     try:
         _pub.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] teacher_publishing.migrate failed (non-fatal): %s", e)
     try:
         _cmkt.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] content_market.migrate failed (non-fatal): %s", e)
     try:
         _mentor.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] mentorship.migrate failed (non-fatal): %s", e)
     try:
         _nep.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] nep_alignment.migrate failed (non-fatal): %s", e)
     try:
         _diksha.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] diksha.migrate failed (non-fatal): %s", e)
     try:
         _cs.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] customer_success.migrate failed (non-fatal): %s", e)
     try:
         _states.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] state_partnerships.migrate failed (non-fatal): %s", e)
     try:
         _corp.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] corporate.migrate failed (non-fatal): %s", e)
     try:
         _sales.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] sales_pipeline.migrate failed (non-fatal): %s", e)
     try:
         _tmkt.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] tutor_marketplace.migrate failed (non-fatal): %s", e)
     try:
         _qpmkt.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] question_pack_market.migrate failed (non-fatal): %s", e)
     try:
         _vouchers.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] vouchers.migrate failed (non-fatal): %s", e)
     try:
         _univ.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] university_partners.migrate failed (non-fatal): %s", e)
     try:
         _affiliates.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] affiliates.migrate failed (non-fatal): %s", e)
     try:
         _digilocker.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] digilocker.migrate failed (non-fatal): %s", e)
     try:
         _citations.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] citations.migrate failed (non-fatal): %s", e)
     try:
         _exam_tax.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] exam_taxonomy.migrate failed (non-fatal): %s", e)
     try:
         _accbench.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] accuracy_bench.migrate failed (non-fatal): %s", e)
     try:
         _mock_eng.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] mock_engine.migrate failed (non-fatal): %s", e)
     try:
         _readiness.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] readiness.migrate failed (non-fatal): %s", e)
     try:
         _tutor_grd.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] tutor_grounding.migrate failed (non-fatal): %s", e)
     try:
         _retrieval.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] retrieval.migrate failed (non-fatal): %s", e)
     try:
         _daily_plan.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] daily_plan.migrate failed (non-fatal): %s", e)
     try:
         _modq.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] moderation_queue.migrate failed (non-fatal): %s", e)
     try:
         _dashboards.migrate()    # no-op, kept for symmetry
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] dashboards.migrate failed (non-fatal): %s", e)
     try:
         _expert_review.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] expert_review.migrate failed (non-fatal): %s", e)
     try:
         _srs.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] spaced_repetition.migrate failed (non-fatal): %s", e)
     try:
         _socratic.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] socratic_tutor.migrate failed (non-fatal): %s", e)
     try:
         _research.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] research_tools.migrate failed (non-fatal): %s", e)
     try:
         _mq.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] marketplace_quality.migrate failed (non-fatal): %s", e)
     try:
         _offline.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] offline_packs.migrate failed (non-fatal): %s", e)
     try:
         _messaging.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] messaging.migrate failed (non-fatal): %s", e)
     try:
         _audio_recap.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] audio_recap.migrate failed (non-fatal): %s", e)
     try:
         _adaptive.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] adaptive_packs.migrate failed (non-fatal): %s", e)
     try:
         from . import cwv as _cwv
         _cwv.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] cwv.migrate failed (non-fatal): %s", e)
     try:
         _step_math.migrate()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] step_math.migrate failed (non-fatal): %s", e)
     try:
         _navigation.migrate()    # no-op
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] navigation.migrate failed (non-fatal): %s", e)
     try:
         _student_home.migrate()    # no-op
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.warning("[startup] student_home.migrate failed (non-fatal): %s", e)
     _log.info("[startup] live video: %s", _live.active_provider())
     _log.info("[startup] tutor: %s", "available" if _tutor.is_available() else "not configured")
@@ -1082,7 +1082,7 @@ app = FastAPI(
 # v2.0.2 — extracted routers. Each handles one subsystem; web.py
 # itself keeps the auth-gated + tightly-coupled endpoints. New routers
 # are added to padhai/routers/__init__.py._ROUTER_NAMES.
-from . import routers as _routers  # noqa: E402  -- after app creation
+from . import routers as _routers
 
 for _r in _routers.all_routers():
     app.include_router(_r)
@@ -1096,7 +1096,7 @@ _obs.install(app)
 # rendered in teacher/student UIs (quiz answers, doubt text, etc.).
 # 'unsafe-inline' is kept for now because the SPA uses inline scripts;
 # migrate to nonces in a future refactor to tighten this further.
-from starlette.middleware.base import BaseHTTPMiddleware  # noqa: E402
+from starlette.middleware.base import BaseHTTPMiddleware
 
 
 class _CSPMiddleware(BaseHTTPMiddleware):
@@ -1157,8 +1157,8 @@ app.add_middleware(
 # can pick up the localStorage token and retry the request properly.
 # API clients (curl, fetch, mobile) send Accept: application/json so they
 # are unaffected and continue to receive JSON error bodies.
-from fastapi.exceptions import HTTPException as _HTTPException  # noqa: E402
-from fastapi.responses import RedirectResponse as _RedirectResponse  # noqa: E402
+from fastapi.exceptions import HTTPException as _HTTPException
+from fastapi.responses import RedirectResponse as _RedirectResponse
 
 _SPA_PATHS = {"/", "/ui", "/landing", "/home", "/login", "/terms", "/privacy"}
 _API_PREFIX = "/api/"
@@ -1192,7 +1192,7 @@ async def _browser_friendly_http_exception(request, exc: _HTTPException):
         next_url = _q(str(request.url.path), safe="")
         return _RedirectResponse(f"/?next={next_url}", status_code=302)
     # For all other cases (non-browser, non-auth errors) return normal JSON.
-    from fastapi.responses import JSONResponse as _JSONResponse  # noqa: E402
+    from fastapi.responses import JSONResponse as _JSONResponse
     return _JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.detail},
@@ -10679,7 +10679,7 @@ def create_lesson(
 
 from datetime import UTC
 
-import anthropic as _anthropic  # noqa: E402  — placed here to keep top imports tidy
+import anthropic as _anthropic
 
 _chat_client: _anthropic.Anthropic | None = None
 
@@ -12004,7 +12004,7 @@ def create_org_notification(
         for r in _push.fan_out_for_notification(n, recipients):
             push_summary["delivered"] += r.delivered
             push_summary["failed"] += r.failed
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         # Never let push failures block notification creation.
         _log.warning("[push] fan_out failed for notification %s: %s", n.id, e)
     return {
@@ -12358,191 +12358,9 @@ def get_active_exam_mode(
 
 from . import razorpay_client as _rzp
 
-
-def _fee_struct_to_dict(s) -> dict:
-    return {
-        "id": s.id, "org_id": s.org_id, "name": s.name,
-        "amount_paise": s.amount_paise, "amount_rupees": s.amount_paise / 100,
-        "currency": s.currency, "applies_to": s.applies_to,
-        "due_date": s.due_date, "notes": s.notes,
-        "created_at": s.created_at,
-    }
-
-
-def _invoice_to_dict(inv) -> dict:
-    return {
-        "id": inv.id, "org_id": inv.org_id, "user_id": inv.user_id,
-        "structure_id": inv.structure_id,
-        "amount_paise": inv.amount_paise,
-        "amount_rupees": inv.amount_paise / 100,
-        "currency": inv.currency,
-        "status": inv.status, "due_date": inv.due_date,
-        "paid_at": inv.paid_at,
-        "razorpay_order_id": inv.razorpay_order_id,
-        "razorpay_payment_id": inv.razorpay_payment_id,
-        "receipt_url": inv.receipt_url,
-        "created_at": inv.created_at,
-    }
-
-
-@app.post("/api/orgs/{org_id}/fees/structures", status_code=201)
-def create_org_fee_structure(
-    org_id: str,
-    name: str = Form(..., min_length=2, max_length=120),
-    amount_paise: int = Form(..., ge=100,
-        description="Amount in paise — ₹100 = 10000 paise"),
-    applies_to: str = Form(...,
-        description="'all' or 'class:<class_id>'"),
-    due_date: str | None = Form(None, description="YYYY-MM-DD"),
-    notes: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin"})
-    try:
-        s = _orgs.create_fee_structure(
-            org_id=org_id, name=name, amount_paise=amount_paise,
-            applies_to=applies_to, due_date=due_date, notes=notes,
-            created_by=user.id,
-        )
-    except ValueError as e:
-        raise HTTPException(400, str(e)) from e
-    return _fee_struct_to_dict(s)
-
-
-@app.get("/api/orgs/{org_id}/fees/structures")
-def list_org_fee_structures(
-    org_id: str,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    return {
-        "structures": [_fee_struct_to_dict(s)
-                       for s in _orgs.list_fee_structures(org_id, limit=limit)],
-    }
-
-
-@app.post("/api/orgs/{org_id}/fees/structures/{sid}/generate",
-          status_code=201)
-def generate_fee_invoices(
-    org_id: str, sid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Bulk-create pending invoices for every student the structure
-    applies to. Idempotent — UNIQUE(structure_id, user_id) skips
-    already-invoiced students."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin"})
-    try:
-        return _orgs.generate_invoices_for_structure(structure_id=sid)
-    except ValueError as e:
-        raise HTTPException(404, str(e)) from e
-
-
-@app.get("/api/orgs/{org_id}/fees/invoices")
-def list_org_fee_invoices(
-    org_id: str,
-    status: str | None = None,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Admin/teacher see all invoices in the org. Students see only
-    their own (used by the "Pay my fees" surface)."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-    if my_role is None:
-        raise HTTPException(403, "not a member of this org")
-    # Students get auto-filtered to their own user_id
-    user_filter = user.id if my_role == "student" else None
-    invoices = _orgs.list_invoices(org_id, status=status, user_id=user_filter, limit=limit)
-    return {"invoices": [_invoice_to_dict(i) for i in invoices]}
-
-
-@app.get("/api/orgs/{org_id}/fees/summary")
-def get_fee_summary(
-    org_id: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Admin dashboard top-line numbers."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin"})
-    return _orgs.fee_summary(org_id)
-
-
-@app.post("/api/orgs/{org_id}/fees/invoices/{iid}/pay")
-def init_invoice_payment(
-    org_id: str, iid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Student starts payment — we create a Razorpay order (or a mock
-    when RAZORPAY_KEY_ID is unset) and return the checkout details
-    the client needs to launch Razorpay's hosted page or web SDK."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    inv = _orgs.get_invoice(iid)
-    if not inv or inv.org_id != org_id:
-        raise HTTPException(404, "invoice not found")
-    if inv.user_id != user.id:
-        my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-        if my_role != "admin":
-            raise HTTPException(403, "students may only pay their own invoices")
-    if inv.status == "paid":
-        return {"already_paid": True, "invoice": _invoice_to_dict(inv)}
-    if inv.status in ("cancelled", "refunded"):
-        raise HTTPException(409, f"cannot pay {inv.status} invoice")
-
-    order = _rzp.create_order(
-        amount_paise=inv.amount_paise,
-        currency=inv.currency,
-        receipt=f"inv_{inv.id[:12]}",
-        notes={"invoice_id": inv.id, "user_id": inv.user_id},
-    )
-    _orgs.attach_razorpay_order(invoice_id=inv.id, order_id=order["id"])
-    return {
-        "invoice": _invoice_to_dict(_orgs.get_invoice(iid)),
-        "razorpay_order": order,
-        "razorpay_key_id": (_rzp._env("RAZORPAY_KEY_ID")
-                            if _rzp.is_configured() else None),
-        "mock": order.get("mock", False),
-    }
-
-
-@app.post("/api/orgs/{org_id}/fees/invoices/{iid}/confirm")
-def confirm_invoice_payment(
-    org_id: str, iid: str,
-    razorpay_payment_id: str = Form(...),
-    razorpay_order_id: str = Form(...),
-    razorpay_signature: str = Form(...),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Client-side Razorpay Checkout callback — after the user pays,
-    Razorpay returns the three handshake values. We verify the
-    signature server-side, then mark the invoice paid.
-
-    Mock orders auto-verify (always true) so dev/sandbox can drive
-    the full flow without real keys."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    inv = _orgs.get_invoice(iid)
-    if not inv or inv.org_id != org_id:
-        raise HTTPException(404, "invoice not found")
-    if not _rzp.verify_payment_signature(
-        order_id=razorpay_order_id,
-        payment_id=razorpay_payment_id,
-        signature=razorpay_signature,
-    ):
-        raise HTTPException(400, "signature verification failed")
-    paid = _orgs.mark_invoice_paid(
-        invoice_id=iid, razorpay_payment_id=razorpay_payment_id,
-    )
-    return _invoice_to_dict(paid)
+# Fees subsystem (7 endpoints + helpers) moved to
+# padhai/routers/orgs_fees.py. The Razorpay webhook handler below
+# stays here because it handles both fee + subscription events.
 
 
 @app.post("/api/webhooks/razorpay")
@@ -14358,7 +14176,7 @@ async def update_my_profile(
     try:
         import psycopg
         set_clause = ", ".join(f"{col} = %s" for col in updates)
-        vals = list(updates.values()) + [user.id]
+        vals = [*list(updates.values()), user.id]
         with psycopg.connect(db_url, autocommit=True) as conn:
             conn.execute(
                 f"UPDATE users SET {set_clause} WHERE id = %s", vals,

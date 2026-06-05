@@ -37,7 +37,7 @@ def migrate() -> None:
 def _safe(fn, *args, default=None, **kwargs):
     try:
         return fn(*args, **kwargs)
-    except Exception:    # noqa: BLE001
+    except Exception:
         return default
 
 
@@ -54,7 +54,7 @@ def _resolve_active_pack(user_id: str) -> str | None:
             (e for e in rows if e.status == "active"), None,
         )
         return (active or rows[0]).pack_code
-    except Exception:    # noqa: BLE001
+    except Exception:
         return None
 
 
@@ -69,7 +69,7 @@ def _readiness_summary(
             user_id=user_id, pack_code=pack_code,
             refresh_if_stale=False,
         )
-    except Exception:    # noqa: BLE001
+    except Exception:
         r = None
     if not r:
         return {}
@@ -91,7 +91,7 @@ def _pack_meta(pack_code: str | None) -> dict:
     try:
         from . import exam_taxonomy as et
         p = et.get_pack(pack_code)
-    except Exception:    # noqa: BLE001
+    except Exception:
         p = None
     if not p:
         return {"pack_code": pack_code}
@@ -114,7 +114,7 @@ def _daily_flow(*, user_id: str, pack_code: str | None) -> dict:
         plan = dp.get_or_generate(
             user_id=user_id, pack_code=pack_code,
         )
-    except Exception:    # noqa: BLE001
+    except Exception:
         plan = None
     if not plan:
         return {"plan_id": None, "blocks": []}
@@ -151,7 +151,7 @@ def _strong_topics(*, user_id: str, exam_code: str | None) -> list[str]:
     try:
         from . import mastery as m
         rows = m.list_for_user(user_id, limit=200)
-    except Exception:    # noqa: BLE001
+    except Exception:
         return []
     # Filter to this exam, take top-3 mastery ≥ 0.75 with ≥2 attempts
     strong = []
@@ -168,7 +168,7 @@ def _recent_fallbacks(user_id: str, *, limit: int = 5) -> list[dict]:
     try:
         from . import tutor_grounding as tg
         return tg.user_recent_fallbacks(user_id, limit=limit)
-    except Exception:    # noqa: BLE001
+    except Exception:
         return []
 
 
@@ -198,7 +198,7 @@ def _next_mock(*, user_id: str, pack_code: str | None) -> dict | None:
             "mode": p.mode, "time_min": p.total_time_min,
             "total_questions": p.total_questions,
         }
-    except Exception:    # noqa: BLE001
+    except Exception:
         return None
 
 
@@ -211,7 +211,7 @@ def _community_hint(*, user_id: str, pack_code: str | None) -> dict:
     try:
         from . import readiness as rd
         lb = rd.pack_leaderboard(pack_code, limit=3)
-    except Exception:    # noqa: BLE001
+    except Exception:
         lb = []
     return {
         "pack_code": pack_code,
@@ -225,7 +225,7 @@ def _trust_signal(user_id: str) -> dict:
     try:
         from . import citations as cit
         answers = cit.list_user_answers(user_id=user_id, limit=30)
-    except Exception:    # noqa: BLE001
+    except Exception:
         answers = []
     if not answers:
         return {"sample_size": 0, "grounded_rate": None}
@@ -241,7 +241,7 @@ def _srs_due_count(user_id: str) -> int:
         from . import spaced_repetition as srs
         stats = srs.user_stats(user_id)
         return int(stats.get("due_now") or 0)
-    except Exception:    # noqa: BLE001
+    except Exception:
         return 0
 
 
@@ -300,7 +300,7 @@ def _modules_grouped() -> list[dict]:
     try:
         from . import navigation as nav
         manifest = nav.get_manifest()
-    except Exception:    # noqa: BLE001
+    except Exception:
         return []
     out = []
     for s in manifest["sections"]:

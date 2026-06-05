@@ -105,7 +105,7 @@ def call_claude(
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise RuntimeError("ANTHROPIC_API_KEY not configured")
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
     except ImportError as e:
         raise RuntimeError(
             "anthropic SDK not installed; pip install anthropic"
@@ -118,7 +118,7 @@ def call_claude(
     started = time.time()
     try:
         resp = client.messages.create(**messages_create_kwargs)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         raise RuntimeError(f"Claude call failed: {e}") from e
     latency_ms = int((time.time() - started) * 1000)
 

@@ -188,7 +188,7 @@ class RouterProvider:
         if self._primary and self._primary in chain:
             chain = [self._primary] + [c for c in chain if c != self._primary]
         elif self._primary:
-            chain = [self._primary] + chain
+            chain = [self._primary, *chain]
         # Then sticky (last success in this instance) — minimises
         # re-walking when both work.
         if self._sticky and self._sticky in chain and self._sticky != chain[0]:
@@ -202,7 +202,7 @@ class RouterProvider:
                 continue
             if _is_circuit_open(name):
                 continue
-            provider = _th._build_named_provider(name)  # noqa: SLF001
+            provider = _th._build_named_provider(name)
             with _lock:
                 _stats[name].attempts += 1
             start = time.perf_counter()
@@ -217,7 +217,7 @@ class RouterProvider:
                     s.total_latency_ms += latency_ms
                 self._sticky = name
                 return result
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:
                 with _lock:
                     s = _stats[name]
                     s.failures += 1

@@ -131,7 +131,7 @@ def estimate_cost_paise(
         (tokens_in / 1_000_000.0) * rates["in"]
         + (tokens_out / 1_000_000.0) * rates["out"]
     )
-    return int(round(cost_inr * 100))  # paise
+    return round(cost_inr * 100)  # paise
 
 
 @dataclass(frozen=True)
@@ -198,7 +198,7 @@ def record_call(
                  latency_ms, 1 if cached else 0, request_id,
                  time.time()),
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[llm_obs] record failed (non-fatal): {e}")
     # Soft-threshold alert — best-effort, never blocks the caller.
     if user_id and subscription_tier:
@@ -207,7 +207,7 @@ def record_call(
                 user_id=user_id,
                 subscription_tier=subscription_tier,
             )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[llm_obs] alert emit failed (non-fatal): {e}")
     return call_id
 
@@ -257,7 +257,7 @@ def _maybe_emit_alert(
     if spent <= 0:
         return
     day = _today_str()
-    soft = int(round(cap * pct))
+    soft = round(cap * pct)
     buckets: list[tuple[str, int]] = []
     if spent >= soft:
         buckets.append((f"{int(pct * 100)}", soft))

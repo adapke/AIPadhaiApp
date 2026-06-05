@@ -337,7 +337,7 @@ def advance(
     if demanded:
         next_state = "reveal"
     elif current == "diagnose":
-        next_state = "hint" if not confused else "hint"
+        next_state = "hint" if not confused else "hint"  # noqa: RUF034
     elif current == "hint":
         if confused:  # noqa: SIM108
             next_state = "hint"   # stay, drop simpler hint
@@ -412,7 +412,7 @@ def reveal(
             citations=citations,
         )
         provenance_id = prov.id
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
     now = time.time()
     turns = list(ex.turns)

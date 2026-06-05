@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT))
 
 os.environ.setdefault("PADHAI_DB_PATH", str(ROOT / "qa_test.db"))
 
-from padhai import citations, llm_obs  # noqa: E402
+from padhai import citations, llm_obs
 
 # Caller passes the test user_id as argv[1]
 user_id = sys.argv[1] if len(sys.argv) > 1 else "qa-fallback-user"

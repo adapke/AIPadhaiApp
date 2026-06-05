@@ -272,7 +272,7 @@ class EspeakProvider:
 
     # Map our ISO-639-1 codes → espeak-ng voice names. Some codes are
     # the same; the explicit map keeps this readable.
-    _VOICE_MAP = {
+    _VOICE_MAP = {  # noqa: RUF012
         "en": "en-us", "hi": "hi-IN", "ta": "ta", "te": "te",
         "kn": "kn", "mr": "mr", "bn": "bn", "gu": "gu",
         "pa": "pa", "ml": "ml",

@@ -367,7 +367,7 @@ def book_session(
     # Price = rate × (duration_min/30); paise = INR×100
     blocks = duration_min // 30
     price_paise = tutor.rate_inr_per_30min * 100 * blocks
-    platform_fee = int(round(price_paise * tutor.platform_fee_pct))
+    platform_fee = round(price_paise * tutor.platform_fee_pct)
     tutor_payout = price_paise - platform_fee
     bid = uuid.uuid4().hex
     with _conn() as conn:

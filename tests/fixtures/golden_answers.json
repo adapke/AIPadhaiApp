@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, Maharashtra/Karnataka/TamilNadu State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Includes easy/medium/hard difficulty mix. v4: 130 items across 5 subject domains x 6 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Includes easy/medium/hard difficulty mix. v5: 145 items across 5 subject domains x 7 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -1636,6 +1636,197 @@
       "tags": {
         "subject": "history",
         "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "NEET Physics: A wire of length L and resistance R is stretched to twice its original length while keeping the volume constant. What is the new resistance?",
+      "expected": {
+        "answer": "4R"
+      },
+      "rubric": "Numeric coefficient (4) and 'R'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "NEET",
+        "topic": "current_electricity"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the limit as x approaches 0 of (sin x) / x?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "limits"
+      }
+    },
+    {
+      "prompt": "UPSC GS2 Polity: Which Schedule of the Constitution contains provisions related to the administration of tribal areas in Assam, Meghalaya, Tripura, and Mizoram?",
+      "expected": {
+        "answer": "sixth schedule"
+      },
+      "rubric": "Accept 'Sixth Schedule', '6th Schedule', or 'Schedule VI'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC",
+        "topic": "tribal_administration"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Chemistry: What is the hybridization of the carbon atom in methane (CH4)?",
+      "expected": {
+        "answer": "sp3"
+      },
+      "rubric": "Accept 'sp3', 'sp^3', or 'sp³'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE",
+        "topic": "hybridization"
+      }
+    },
+    {
+      "prompt": "CBSE Class 7 Science: What is the name of the smallest planet in our solar system?",
+      "expected": {
+        "answer": "mercury"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "CBSE Class 8 Mathematics: What is 7 raised to the power of 0?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "CBSE Class 6 Science: Plants that complete their life cycle within one year are called _____.",
+      "expected": {
+        "answer": "annuals"
+      },
+      "rubric": "Accept 'annual', 'annuals', or 'annual plants'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "CBSE Class 8 Science: What gas is used to fill weather balloons because it is lighter than air and non-flammable?",
+      "expected": {
+        "answer": "helium"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "What is the pH of a neutral solution at 25 degrees Celsius?",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "Name the most electronegative element in the periodic table.",
+      "expected": {
+        "answer": "fluorine"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "CBSE Class 10 Chemistry: The IUPAC name of the simplest ketone is _____.",
+      "expected": {
+        "answer": "propanone"
+      },
+      "rubric": "Accept 'propanone' or 'propan-2-one'. Acetone is the common name (lower priority).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "CBSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "IGCSE Physics: State the SI unit of force.",
+      "expected": {
+        "answer": "newton"
+      },
+      "rubric": "Accept 'newton' or 'N'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "Cambridge IGCSE Biology: Name the main pigment that absorbs light energy during photosynthesis.",
+      "expected": {
+        "answer": "chlorophyll"
+      },
+      "rubric": "Single-word lowercase. Accept 'chlorophyll a' or 'chlorophyll'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "SSC GK: Who is known as the Father of the Indian Constitution?",
+      "expected": {
+        "answer": "br ambedkar"
+      },
+      "rubric": "Accept 'B.R. Ambedkar', 'BR Ambedkar', or 'Bhimrao Ambedkar'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "polity",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "SSC Geography: Which is the longest river in India?",
+      "expected": {
+        "answer": "ganga"
+      },
+      "rubric": "Accept 'Ganga' or 'Ganges'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "exam": "SSC"
       }
     }
   ]

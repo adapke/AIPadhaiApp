@@ -128,7 +128,7 @@ def ensure_admin(base_url: str) -> dict | None:
     cfg = DEMO["admin"]
     bootstrap = os.environ.get("ADMIN_BOOTSTRAP_TOKEN", "")
     # Try login first — covers the re-run case
-    st, lb = _post(
+    st, _lb = _post(
         f"{base_url}/admin/login",
         form={"email": cfg["email"], "password": cfg["password"]},
     )
@@ -247,7 +247,7 @@ def consent_token_for_minor(base_url: str) -> str | None:
         token = row[0]
         _log("consent", f"redeem URL: {base_url}/auth/parent-consent?t={token}")
         return token
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log("consent", f"DB read failed: {e}")
         return None
 
@@ -262,7 +262,7 @@ def main() -> int:
     base = args.base_url.rstrip("/")
 
     # Connectivity check
-    st, body = _get(f"{base}/healthz")
+    st, _body = _get(f"{base}/healthz")
     if st != 200:
         print(f"[seed] FATAL: {base}/healthz returned {st}", file=sys.stderr)
         return 1

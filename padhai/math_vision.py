@@ -85,7 +85,7 @@ def is_vision_available() -> bool:
 
 def is_sympy_available() -> bool:
     try:
-        import sympy  # noqa: F401, WPS433
+        import sympy
         return True
     except ImportError:
         return False
@@ -217,7 +217,7 @@ def extract(
         return get(submission_id)  # type: ignore[return-value]
 
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
     except ImportError:
         _persist_extract_failure(
             submission_id, error="anthropic-sdk-missing",
@@ -256,7 +256,7 @@ def extract(
                 ],
             }],
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _persist_extract_failure(
             submission_id, error=str(e)[:500], status="errored",
         )
@@ -361,7 +361,7 @@ def validate(submission_id: str) -> ValidationResult:
     first_wrong = None
 
     if method == "sympy":
-        import sympy  # noqa: WPS433
+        import sympy
         prev_expr = None
         for i, step in enumerate(sub.steps):
             parsed_ok = False
@@ -375,11 +375,11 @@ def validate(submission_id: str) -> ValidationResult:
                     try:
                         eq = sympy.simplify(expr - prev_expr)
                         equals_prev = (eq == 0)
-                    except Exception:  # noqa: BLE001
+                    except Exception:
                         equals_prev = None
                     sympy_ok = parsed_ok
                 prev_expr = expr
-            except Exception:  # noqa: BLE001
+            except Exception:
                 parsed_ok = False
             per_step.append({
                 "idx": i + 1, "expr_latex": step,

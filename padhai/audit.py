@@ -153,7 +153,7 @@ def record(
                     time.time(),
                 ),
             )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         # Never let audit failures break the request. Log + continue.
         # If audit logging is broken at scale, the H3 dashboard will
         # show a gap; that's a sev2 to investigate but not a sev0.

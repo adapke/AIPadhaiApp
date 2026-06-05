@@ -50,7 +50,7 @@ class TestClientIpFromRequest:
         rl = _fresh_limiter()
 
         class FakeRequest:
-            headers = {"cf-connecting-ip": "1.2.3.4"}
+            headers = {"cf-connecting-ip": "1.2.3.4"}  # noqa: RUF012
             client = None
 
         ip = rl.client_ip_from_request(FakeRequest())
@@ -63,7 +63,7 @@ class TestClientIpFromRequest:
             host = "5.6.7.8"
 
         class FakeRequest:
-            headers = {}
+            headers = {}  # noqa: RUF012
             client = FakeClient()
 
         ip = rl.client_ip_from_request(FakeRequest())
@@ -73,7 +73,7 @@ class TestClientIpFromRequest:
         rl = _fresh_limiter()
 
         class FakeRequest:
-            headers = {}
+            headers = {}  # noqa: RUF012
             client = None
 
         ip = rl.client_ip_from_request(FakeRequest())

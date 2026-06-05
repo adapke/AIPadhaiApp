@@ -217,7 +217,7 @@ def find_matches(
         from . import mastery
         my_weak = {m.topic_key for m in mastery.weak_topics(user_id=user_id)}
         my_strong = {m.topic_key for m in mastery.strong_topics(user_id=user_id)}
-    except Exception:  # noqa: BLE001
+    except Exception:
         my_weak = set()
         my_strong = set()
 
@@ -276,7 +276,7 @@ def find_matches(
             if overlap:
                 score += 2
                 reasons.append(f"complementary topics ({len(overlap)})")
-        except Exception:  # noqa: BLE001
+        except Exception:
             pass
         # Window overlap
         if me.available_windows and cand_windows:

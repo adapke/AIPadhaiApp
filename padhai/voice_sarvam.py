@@ -122,7 +122,7 @@ def synthesize(
         r = requests.post(cfg.base_url, json=payload, headers=headers,
                           timeout=30)
         r.raise_for_status()
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         raise ProviderUnavailable(f"sarvam api call failed: {e}") from e
     body = r.json()
     audios = body.get("audios") or []

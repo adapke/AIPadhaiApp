@@ -268,7 +268,7 @@ def _is_govt_segment(exam_code: str) -> bool:
         from . import exam_taxonomy as _et
         e = _et.get_exam(exam_code)
         return e is not None and e.segment_code == "govt"
-    except Exception:  # noqa: BLE001
+    except Exception:
         return False
 
 
@@ -612,7 +612,7 @@ def should_regenerate(
             )
             if current and abs(current.score - last_readiness_score) > READINESS_DRIFT_THRESHOLD:
                 return True, "readiness_drift"
-        except Exception:  # noqa: BLE001
+        except Exception:
             pass
     return False, "fresh"
 

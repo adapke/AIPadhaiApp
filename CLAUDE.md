@@ -656,6 +656,30 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Lint gate now F + E + I + B + UP + SIM + RUF blocking.** `ruff
+  --fix --select RUF` cleaned 200 sites in one pass (mostly RUF100
+  unused-noqa + RUF102 invalid-rule-code + RUF021); `--unsafe-fixes
+  --fix` cleaned 30 more (RUF005 list-concat, RUF046 cast-to-int,
+  RUF034 useless-if-else). The 104 unicode-ambiguous findings
+  (RUF001/2/3 — em-dashes, smart quotes, Devanagari in
+  Indian-language UI strings + bench data) are codebase-ignored
+  as intentional. The remaining 18 (4 RUF012 mutable-class-default
+  on read-only lookup maps + 14 SIM revisits introduced after
+  polish-6) carry targeted `# noqa: RUFxxx/SIMxxx` markers.
+- **Tenth router slice — `/api/orgs/{id}/fees*`.** Seven endpoints
+  (structure CRUD, bulk-invoice generation, invoice list, fee
+  summary, Razorpay payment init, payment confirm) plus two
+  marshalling helpers (`_fee_struct_to_dict`, `_invoice_to_dict`)
+  moved to `padhai/routers/orgs_fees.py`. ~190 lines removed from
+  web.py. The companion `/api/webhooks/razorpay` stays in web.py
+  because it dispatches BOTH fees + subscription-tier events.
+- **Accuracy bench 130 → 145 items.** Added 4 hard items (NEET
+  current-electricity / JEE limits / UPSC 6th Schedule / JEE
+  hybridization), 4 CBSE Class 6-8 items (closing the
+  primary-school gap), 3 chemistry-depth items, 2 IGCSE items
+  (new board coverage — Cambridge curriculum), 2 SSC GK fillers.
+  Distribution now `easy=94 / medium=36 / hard=15`. Structural
+  runner: 145/145 in 3.1s.
 - **B904 cleaned codebase-wide; gate now blocking.** Wrote
   `scripts/fix_b904.py` — an AST-based mass fixer that walks
   every `ExceptHandler`, finds nested `Raise` nodes without a

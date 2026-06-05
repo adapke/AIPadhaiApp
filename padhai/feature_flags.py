@@ -287,7 +287,7 @@ def log_exposure(
                 (_uuid.uuid4().hex, flag_key, user_id, variant,
                  1 if enabled else 0, time.time()),
             )
-    except Exception:  # noqa: BLE001
+    except Exception:
         pass
 
 

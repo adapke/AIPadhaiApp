@@ -83,7 +83,7 @@ def is_library_available() -> bool:
     """python3-saml availability gate. Used by endpoints to return
     503 cleanly when the lib isn't installed."""
     try:
-        import onelogin.saml2.utils  # noqa: F401
+        import onelogin.saml2.utils
         return True
     except ImportError:
         return False

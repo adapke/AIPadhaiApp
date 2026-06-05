@@ -325,7 +325,7 @@ def quote(
             child_discount = 0.30
         else:
             child_discount = 0.40
-        child_price = int(round(base * (1 - child_discount)))
+        child_price = round(base * (1 - child_discount))
         breakdown.append({
             "child_index": i + 1,
             "discount_pct": child_discount,

@@ -503,7 +503,7 @@ def purchase_pack(
     setter = get_setter(pack.setter_user_id)
     if not setter:
         raise ValueError("pack setter missing")
-    fee = int(round(pack.price_paise * setter.platform_fee_pct))
+    fee = round(pack.price_paise * setter.platform_fee_pct)
     payout = pack.price_paise - fee
     pid = uuid.uuid4().hex
     now = time.time()

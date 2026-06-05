@@ -108,7 +108,7 @@ async def cwv_sample(
             ip=ip,
             user_agent=ua,
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         _log.debug("[cwv] sample drop: %s", e)
     return JSONResponse(content=None, status_code=204)
 

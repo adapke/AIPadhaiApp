@@ -376,7 +376,7 @@ def submit_essay(
                 "suggestions": r.suggestions,
                 "method": r.method,
             }
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             grade = {"error": str(e)}
     return {
         "submission_id": sub.id, "ai_grade": grade,
@@ -1009,7 +1009,7 @@ def submit_math_image(
     if auto_extract:
         try:
             sub = math_vision.extract(submission_id=sub.id)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"[math_vision] extract error: {e}")
     return {
         "id": sub.id, "status": sub.status,

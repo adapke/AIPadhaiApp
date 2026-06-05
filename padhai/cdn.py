@@ -149,7 +149,7 @@ def is_origin_fetch(request) -> bool:
     provided = ""
     try:
         provided = request.headers.get(_ORIGIN_HEADER) or ""
-    except Exception:  # noqa: BLE001
+    except Exception:
         return False
     return bool(provided) and hmac.compare_digest(provided, secret)
 

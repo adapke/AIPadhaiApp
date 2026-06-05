@@ -350,7 +350,7 @@ def send_one(
         except _NoProvider:
             failed_reason = "no_provider"
             failed += 1
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             failed_reason = str(e)[:200]
             failed += 1
         rows_to_insert.append((
@@ -370,7 +370,7 @@ def send_one(
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     rows_to_insert,
                 )
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             # Single failure flushes all the log rows for this send,
             # which is acceptable — the platform-side sends already
             # happened. Caller's audit trail will have the gap.

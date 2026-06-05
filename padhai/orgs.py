@@ -748,7 +748,7 @@ def record_completion(
         ).fetchone()
 
         if existing:
-            cid, old_watched, old_pct, old_score, old_attempts = existing
+            cid, _old_watched, old_pct, old_score, old_attempts = existing
             # Watch percent only ratchets up — re-opening the video
             # later shouldn't reset the high-watermark.
             new_pct = max(old_pct or 0, watch_pct) if watch_pct is not None else old_pct
@@ -1234,7 +1234,7 @@ def today_for_user(*, org_id: str, user_id: str) -> list[dict]:
                 f"FROM org_timetable_slots "
                 f"WHERE day_of_week = ? AND class_id IN ({qmarks}) "
                 f"ORDER BY start_time",
-                [iso_dow] + class_ids,
+                [iso_dow, *class_ids],
             ).fetchall()
             for r in student_rows:
                 rows.append({

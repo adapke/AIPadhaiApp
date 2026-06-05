@@ -170,7 +170,7 @@ class JobStore:
         if not kwargs:
             return
         cols = ", ".join(f"{k} = ?" for k in kwargs)
-        vals = list(kwargs.values()) + [job_id]
+        vals = [*list(kwargs.values()), job_id]
         with self._lock, self._connect() as conn:
             conn.execute(f"UPDATE jobs SET {cols} WHERE id = ?", vals)
 

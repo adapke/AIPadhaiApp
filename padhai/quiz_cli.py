@@ -285,7 +285,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if cfg.voice:
         try:
-            import whisper  # noqa: F401
+            import whisper
         except ImportError:
             print(
                 "warning: --voice was requested but the `openai-whisper` package "

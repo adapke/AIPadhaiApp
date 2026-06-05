@@ -533,7 +533,7 @@ def _record_mi_provenance(
                 else f"grader_fallback_{method}"
             ),
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[mock_interview] provenance non-fatal: {e}")
 
 
@@ -610,7 +610,7 @@ def _next_question(
         return "Tell me about a time you changed your mind on something important."
 
     try:
-        from anthropic import Anthropic  # noqa: WPS433
+        from anthropic import Anthropic
     except ImportError:
         return random.choice(available) if available else (
             "What's your biggest weakness, and what are you doing about it?"
@@ -638,7 +638,7 @@ def _next_question(
         resp = client.messages.create(
             model=model, max_tokens=200, **kwargs,
         )
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"[mock_interview] follow-up failed: {e}")
         return (random.choice(available) if available
                 else "Tell me one thing about you that's not on your resume.")

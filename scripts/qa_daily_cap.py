@@ -15,7 +15,7 @@ if qa_db.exists():
     qa_db.unlink()
 os.environ.pop("ANTHROPIC_API_KEY", None)
 
-from padhai import (  # noqa: E402
+from padhai import (
     citations,
     doubt_clearing,
     essay_grader,
