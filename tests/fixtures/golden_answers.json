@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v10: 220 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v11: 235 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2788,6 +2788,198 @@
         "subject": "biology",
         "exam": "NEET",
         "topic": "anatomy"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Mathematics: What is the determinant of the 2x2 matrix [[2,3],[4,5]]?",
+      "expected": {
+        "answer": "-2"
+      },
+      "rubric": "Numeric only. 2*5 - 3*4 = 10 - 12 = -2.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "matrices"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which structure connects two neurons and allows signal transmission?",
+      "expected": {
+        "answer": "synapse"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "nervous_system"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Economy: What is the term for the percentage of bank deposits that must be held with the RBI as reserves?",
+      "expected": {
+        "answer": "cash reserve ratio"
+      },
+      "rubric": "Accept 'Cash Reserve Ratio' or 'CRR'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC",
+        "topic": "banking"
+      }
+    },
+    {
+      "prompt": "JEE Physics: A capacitor of capacitance C is charged to voltage V. What is the energy stored?",
+      "expected": {
+        "answer": "0.5 cv^2"
+      },
+      "rubric": "Accept '(1/2)CV^2', '0.5*C*V^2', or 'CV^2/2'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "capacitors"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 11 Physics: What is the SI unit of angular momentum?",
+      "expected": {
+        "answer": "kg m^2 / s"
+      },
+      "rubric": "Accept 'kg·m²/s', 'kg m^2/s', or 'J·s' (joule-second).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "TamilNadu",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 9 Mathematics: What is the value of pi (π) to 2 decimal places?",
+      "expected": {
+        "answer": "3.14"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "AP_Telangana",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "UP Board High School Physics: What instrument measures atmospheric pressure?",
+      "expected": {
+        "answer": "barometer"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "UP",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "ICSE Class 12 Biology: Name the type of cell division that produces gametes.",
+      "expected": {
+        "answer": "meiosis"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "ICSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "If the LCM of 12 and 18 is 36, what is their GCD (HCF)?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only. 12*18 = LCM*HCF, so 216/36 = 6.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "A shop offers buy-2-get-1-free on items priced Rs 100 each. What is the effective price per item when buying 3?",
+      "expected": {
+        "answer": "66.67"
+      },
+      "rubric": "Accept '66.67', '66.66', '200/3', or 'Rs 66.67'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "How many minutes are there in 3 hours and 45 minutes?",
+      "expected": {
+        "answer": "225"
+      },
+      "rubric": "Numeric only. 3*60 + 45 = 225.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the molarity of a solution that contains 4 grams of NaOH (molar mass 40) in 500 mL of solution?",
+      "expected": {
+        "answer": "0.2"
+      },
+      "rubric": "Numeric only. (4/40)/0.5 = 0.2 mol/L.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "solutions"
+      }
+    },
+    {
+      "prompt": "CBSE Class 10 Chemistry: Name the gas released at the cathode during the electrolysis of water.",
+      "expected": {
+        "answer": "hydrogen"
+      },
+      "rubric": "Single-word lowercase or 'H2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "CBSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "UPSC GS1: Who was the first woman President of India?",
+      "expected": {
+        "answer": "pratibha patil"
+      },
+      "rubric": "Accept 'Pratibha Patil' or 'Pratibha Devisingh Patil'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: Which country hosted the 2024 Summer Olympics?",
+      "expected": {
+        "answer": "france"
+      },
+      "rubric": "Accept 'France' (case-insensitive). Paris was the host city.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "exam": "SSC"
       }
     }
   ]

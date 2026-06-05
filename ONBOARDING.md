@@ -94,9 +94,10 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `padhai/db.py:sqlite_path()` | Shared SQLite path resolver | Closed the bug class where modules wrote to different DBs |
 | `padhai/llm_call.py:call_claude()` | Wrapped Claude call | Auto-records cost + enforces daily cap |
 | `scripts/fix_b904.py` | AST-based B904 mass fixer | Ruff can't autofix B904; this can |
+| `scripts/check_model_constants.py` | Lock invariant #5 (no literal `"claude-*"` outside `models.py`) | Closed bug #8 once and for all |
 | `scripts/backup_sqlite.sh` | Online sqlite3 .backup | Safe under concurrent writes |
-| `make verify` | One-command pre-PR gate | Bundles lint + pytest + structural bench (~20s) |
-| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 220 items across 9 boards/exams |
+| `make verify` | One-command pre-PR gate | Bundles lint + model-id guard + pytest + structural bench (~20s) |
+| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 235 items across 9 boards/exams |
 
 ---
 

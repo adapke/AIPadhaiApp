@@ -678,6 +678,36 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Sixteenth router slice — lesson-detail cache surfaces (5 routes).**
+  `padhai/routers/lesson_detail.py` covers the cache-only lesson
+  derivatives: `POST /lessons/{id}/flashcards` (generate or cached),
+  `POST /lessons/{id}/quiz` (return cached quiz JSON), `GET/POST
+  /lessons/{id}/notes` (per-user persistence), `POST /lessons/{id}/
+  flashcards/rate` (SM-2 review beacon). None of these make a Claude
+  call — they read the already-generated Lesson JSON or persist
+  per-user state. The trickier siblings (`/chat/{id}` with
+  CHAT_SYSTEM_PROMPT + citations, `/recap` with TTS deps,
+  `/curriculum` mapping) stay in web.py for a future slice.
+  ~120 lines off web.py.
+- **Model-id guard — `scripts/check_model_constants.py`.** Locks
+  invariant #5 from ONBOARDING.md ("model IDs come from models.py").
+  Scans every `padhai/**/*.py` file for `"claude-(haiku|sonnet|
+  opus)-..."` string literals and fails if any appear outside the
+  allowlist (`padhai/models.py` — the source of truth, plus
+  `padhai/llm_obs.py` — the pricing table that legitimately needs
+  literal keys, plus `padhai/schema_v2.py` — a SQL column comment).
+  Wired into `make verify` between lint and pytest. Future
+  contributors can't reintroduce the `claude-haiku-4-5` bug class
+  without the gate catching it.
+- **Accuracy bench 220 → 235 items.** Added 4 hard (JEE 2×2
+  determinant, NEET synapse, UPSC CRR, JEE capacitor energy ½CV²),
+  4 state-board variety (TamilNadu Class 11 angular momentum,
+  AP/Telangana π=3.14, UP barometer, ICSE Class 12 meiosis), 3
+  reasoning (LCM/GCD=6, buy-2-get-1-free, 3h45m=225min), 2
+  chemistry depth (NaOH molarity, electrolysis of water cathode),
+  2 GK (Pratibha Patil, Paris 2024 Olympics). Distribution now
+  `easy=136 / medium=64 / hard=35`. Structural runner: 235/235
+  in 4.3s.
 - **Fifteenth router slice — schedule cluster (4 routes).**
   `padhai/routers/orgs_schedule.py` groups the timetable read/
   write, the per-user "what's on today" endpoint, and the per-

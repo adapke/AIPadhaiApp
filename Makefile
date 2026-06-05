@@ -65,9 +65,11 @@ test: ## Run pytest + 4 QA harnesses against ad-hoc local server
 lint: ## Ruff lint (all 9 enforced categories)
 	python -m ruff check padhai/ admin/ tests/ scripts/
 
-verify: ## Quick pre-PR check: lint + pytest + structural bench (~20s on a warm cache)
+verify: ## Quick pre-PR check: lint + pytest + structural bench + model-id guard (~20s on a warm cache)
 	@echo "==> ruff (F E I B UP SIM RUF ARG + B904)"
 	@python -m ruff check padhai/ admin/ tests/ scripts/
+	@echo "==> model-id guard (no literal claude-* outside padhai/models.py)"
+	@python scripts/check_model_constants.py
 	@echo "==> pytest"
 	@PADHAI_SKIP_DOTENV=1 PADHAI_JWT_SECRET=qa-test-secret-abcdef0123456789abcdef0123456789 \
 		PYTHONPATH=. python -m pytest tests/ -q --tb=line
