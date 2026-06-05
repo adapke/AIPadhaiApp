@@ -25,6 +25,8 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS practice_tests (
     id              TEXT PRIMARY KEY,
@@ -345,7 +347,7 @@ def _synthesise(
         return []
 
     model = os.environ.get(
-        "PADHAI_PRACTICE_MODEL", "claude-haiku-4-5-20251001",
+        "PADHAI_PRACTICE_MODEL", _models.HAIKU_MODEL,
     )
     system_text = _SYNTH_SYSTEM_TEMPLATE.format(
         exam=exam, count=count, subject=subject,

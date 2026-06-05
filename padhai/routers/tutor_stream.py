@@ -27,6 +27,7 @@ from collections.abc import AsyncGenerator
 from fastapi import APIRouter, Depends, Form, Query
 from fastapi.responses import StreamingResponse
 
+from .. import models as _models
 from ..api_deps import require_user
 from ..web import current_user
 
@@ -150,7 +151,7 @@ async def _stream(
         yield _sse({"type": "done", "tokens_in": 0, "tokens_out": 0, "cost_inr_paise": 0, "cached": False})
         return
 
-    model = os.environ.get("PADHAI_TUTOR_MODEL", "claude-haiku-4-5-20251001")
+    model = os.environ.get("PADHAI_TUTOR_MODEL", _models.HAIKU_MODEL)
     # `_build_system_prompt` is a private helper in tutor.py; if a future
     # refactor renames it, fall back to a minimal system prompt so the
     # stream still works (just without the long-memory enrichment).

@@ -50,8 +50,7 @@ Category = Literal[
     "copyright", "adult", "other", "ok",
 ]
 
-MODEL = "claude-haiku-4-5-20251001"
-
+from .models import HAIKU_MODEL as MODEL
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS moderation_log (

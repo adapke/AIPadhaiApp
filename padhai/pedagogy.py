@@ -11,10 +11,12 @@ from typing import TYPE_CHECKING
 
 import anthropic
 
+from .models import HAIKU_MODEL, OPUS_MODEL
+
 if TYPE_CHECKING:
     from .cache import Cache
 
-MODEL = "claude-opus-4-7"
+MODEL = OPUS_MODEL
 
 # Language code → human-readable name passed to the model and to gTTS.
 SUPPORTED_LANGUAGES = {
@@ -333,7 +335,7 @@ def image_to_block(image_path: Path) -> dict:
     return _image_to_block(image_path)
 
 
-RECAP_MODEL = "claude-haiku-4-5"  # cheap remix from Lesson JSON, ~₹0.20/call
+RECAP_MODEL = HAIKU_MODEL  # cheap remix from Lesson JSON, ~₹0.20/call
 RECAP_SYSTEM = """You write a podcast-style audio recap of a finished lesson.
 
 Rules:
@@ -346,7 +348,7 @@ Rules:
 - Never invent facts that aren't in the lesson scenes. If a concept wasn't taught, skip it."""
 
 
-EXPLAINER_MODEL = "claude-haiku-4-5"  # topic-to-explanation, ~₹0.30/call
+EXPLAINER_MODEL = HAIKU_MODEL  # topic-to-explanation, ~₹0.30/call
 EXPLAINER_SYSTEM = """You generate a short, focused explainer for a single concept.
 
 Output JSON shape (keys exactly as named, all required):
@@ -393,7 +395,7 @@ Rules:
 - If the student asks a non-academic question, gently redirect to studies in one sentence."""
 
 
-FLASHCARD_MODEL = "claude-haiku-4-5"  # cheap remix — Lesson JSON already has the work
+FLASHCARD_MODEL = HAIKU_MODEL  # cheap remix — Lesson JSON already has the work
 FLASHCARD_SYSTEM = """You convert a structured lesson into spaced-repetition flashcards.
 
 Rules:
@@ -494,7 +496,7 @@ def match_curriculum(
     catalogue_text = json.dumps(short, ensure_ascii=False)
 
     response = client.messages.create(
-        model="claude-haiku-4-5",
+        model=HAIKU_MODEL,
         max_tokens=1500,
         system=CURRICULUM_MATCH_SYSTEM,
         output_config={

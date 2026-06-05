@@ -27,6 +27,7 @@ from typing import Any
 
 from fastapi import APIRouter, Depends, Form, HTTPException
 
+from .. import models as _models
 from ..api_deps import require_user
 from ..web import current_user
 
@@ -189,7 +190,7 @@ def _generate_grounded_answer(
         return _fallback_extractive_answer(chunks), None, "extractive"
 
     from .. import llm_cache, llm_obs
-    model = os.environ.get("PADHAI_UPLOAD_CHAT_MODEL", "claude-sonnet-4-6")
+    model = os.environ.get("PADHAI_UPLOAD_CHAT_MODEL", _models.SONNET_MODEL)
     system_text = (
         "You are a study tutor answering questions about a student's "
         "uploaded study material. ONLY use facts present in the "
@@ -413,7 +414,7 @@ def _generate_quiz_via_claude(
     except ImportError:
         return []
     from .. import llm_cache, llm_obs
-    model = os.environ.get("PADHAI_UPLOAD_QUIZ_MODEL", "claude-haiku-4-5-20251001")
+    model = os.environ.get("PADHAI_UPLOAD_QUIZ_MODEL", _models.HAIKU_MODEL)
     chunks_text = "\n\n".join(
         f"[Chunk {i}]: {c[:1200]}" for i, c in enumerate(chunk_texts[:10])
     )
@@ -540,7 +541,7 @@ def summary_of_upload(
     except ImportError:
         return {"summary": full_text[: max_words * 6], "key_points": [], "method": "extractive"}
 
-    model = os.environ.get("PADHAI_UPLOAD_SUMMARY_MODEL", "claude-haiku-4-5-20251001")
+    model = os.environ.get("PADHAI_UPLOAD_SUMMARY_MODEL", _models.HAIKU_MODEL)
     system_text = (
         "You produce study summaries for Indian students. Return JSON:\n"
         "{ \"summary\": \"<paragraph, ~{max_words} words>\","

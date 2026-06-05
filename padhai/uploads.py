@@ -32,6 +32,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS uploads (
     id              TEXT PRIMARY KEY,
@@ -274,7 +276,7 @@ def analyze_via_claude(image_path: Path, *, content_kind: str = "image") -> dict
     }
 
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",  # Haiku is fine — this is cheap
+        model=_models.HAIKU_MODEL,  # Haiku is fine — this is cheap
         max_tokens=800,
         system=(
             _WHITEBOARD_SYSTEM if content_kind == "whiteboard"

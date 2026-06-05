@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix. v6: 160 items across 6 subject domains x 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v7: 175 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2014,6 +2014,198 @@
       },
       "rubric": "Numeric only.",
       "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Physics: Two resistors of 4 ohms and 6 ohms are connected in parallel. What is the equivalent resistance in ohms?",
+      "expected": {
+        "answer": "2.4"
+      },
+      "rubric": "Numeric only. (4*6)/(4+6) = 2.4 ohms.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "current_electricity"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Name the type of immunity acquired after recovery from a disease.",
+      "expected": {
+        "answer": "active immunity"
+      },
+      "rubric": "Accept 'active immunity', 'naturally-acquired active immunity', or 'acquired immunity'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "immunology"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Economy: What is the term for the situation where a country's central bank lowers interest rates to stimulate borrowing and spending?",
+      "expected": {
+        "answer": "expansionary monetary policy"
+      },
+      "rubric": "Accept 'expansionary monetary policy', 'monetary easing', or 'loose monetary policy'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC",
+        "topic": "monetary_policy"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the determinant of a 2x2 identity matrix?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "matrices"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: Which catalyst is used in the Haber process for ammonia synthesis?",
+      "expected": {
+        "answer": "iron"
+      },
+      "rubric": "Accept 'iron' or 'Fe'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "industrial_chemistry"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 9 Mathematics: What is the area formula for a triangle with base b and height h?",
+      "expected": {
+        "answer": "0.5 b h"
+      },
+      "rubric": "Accept '(1/2)bh', '0.5*b*h', or 'bh/2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "Karnataka",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 10 Science: What is the unit of electric current named after?",
+      "expected": {
+        "answer": "andre-marie ampere"
+      },
+      "rubric": "Accept 'Ampere', 'André-Marie Ampère', or 'Andre Ampere'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "TamilNadu",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "ICSE Class 8 History: Who was the founder of the Mughal dynasty in India?",
+      "expected": {
+        "answer": "babur"
+      },
+      "rubric": "Accept 'Babur' or 'Zahir-ud-din Muhammad Babur'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "board": "ICSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 7 Science: Name the gas that turns lime water milky.",
+      "expected": {
+        "answer": "carbon dioxide"
+      },
+      "rubric": "Accept 'carbon dioxide' or 'CO2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "AP_Telangana",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Mathematics: What is the derivative of e^x with respect to x?",
+      "expected": {
+        "answer": "e^x"
+      },
+      "rubric": "Accept 'e^x', 'e**x', or 'exp(x)'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "CBSE Class 11 Physics: State Newton's Third Law of Motion in one phrase.",
+      "expected": {
+        "answer": "every action has an equal and opposite reaction"
+      },
+      "rubric": "Accept paraphrases of 'every action has an equal and opposite reaction'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "CBSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Biology: Name the process by which a fertilized ovum develops into an embryo.",
+      "expected": {
+        "answer": "embryogenesis"
+      },
+      "rubric": "Accept 'embryogenesis' or 'embryonic development'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "CBSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "If a square has a perimeter of 28 cm, what is the length of one side?",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only (in cm).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "A car travels 240 km in 4 hours. If it continues at the same speed, how far will it travel in 7 hours?",
+      "expected": {
+        "answer": "420"
+      },
+      "rubric": "Numeric only (in km). Speed = 60 km/h, 60 * 7 = 420.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "The product of two consecutive positive integers is 132. What is the larger integer?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only. 11 * 12 = 132.",
+      "difficulty": "medium",
       "tags": {
         "subject": "math",
         "exam": "SSC"

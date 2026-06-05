@@ -32,6 +32,8 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS mock_interviews (
     id              TEXT PRIMARY KEY,
@@ -437,7 +439,7 @@ def _grade_answer(
         return result
     from . import llm_cache, llm_call
     model = os.environ.get(
-        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5-20251001",
+        "PADHAI_MOCK_INTERVIEW_MODEL", _models.HAIKU_MODEL,
     )
     system_text = _SCORE_SYSTEM_TEMPLATE.format(track=track)
     user_text = (
@@ -618,7 +620,7 @@ def _next_question(
 
     from . import llm_cache, llm_obs
     model = os.environ.get(
-        "PADHAI_MOCK_INTERVIEW_MODEL", "claude-haiku-4-5-20251001",
+        "PADHAI_MOCK_INTERVIEW_MODEL", _models.HAIKU_MODEL,
     )
     system_text = _FOLLOWUP_SYSTEM
     convo = []

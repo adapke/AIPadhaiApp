@@ -30,6 +30,8 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS tutor_sessions (
     id              TEXT PRIMARY KEY,
@@ -327,7 +329,7 @@ def _claude_reply(
     context, and the citations are returned on the TutorReply so the
     UI can render them inline."""
     started = time.time()
-    model = os.environ.get("PADHAI_TUTOR_MODEL", "claude-haiku-4-5")
+    model = os.environ.get("PADHAI_TUTOR_MODEL", _models.HAIKU_MODEL)
     system_prompt = _build_system_prompt(session)
 
     # Source grounding — inject retrieved chunks into the system prompt

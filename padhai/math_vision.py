@@ -31,6 +31,8 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS math_submissions (
     id              TEXT PRIMARY KEY,
@@ -227,7 +229,7 @@ def extract(
 
     from . import llm_cache, llm_obs
     model = os.environ.get(
-        "PADHAI_MATH_VISION_MODEL", "claude-opus-4-7",
+        "PADHAI_MATH_VISION_MODEL", _models.OPUS_MODEL,
     )
     user_text = (
         f"Read this handwritten math. Expected language: "

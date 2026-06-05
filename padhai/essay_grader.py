@@ -27,6 +27,8 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS essay_rubrics (
     id              TEXT PRIMARY KEY,
@@ -392,7 +394,7 @@ def grade(
     from . import llm_cache, llm_call
 
     model = model or os.environ.get(
-        "PADHAI_ESSAY_GRADER_MODEL", "claude-sonnet-4-6",
+        "PADHAI_ESSAY_GRADER_MODEL", _models.SONNET_MODEL,
     )
     system_text = _SYSTEM_TEMPLATE.format(
         exam=rubric.exam, paper=rubric.paper,

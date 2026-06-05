@@ -32,6 +32,8 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from . import models as _models
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS doubt_requests (
     id                TEXT PRIMARY KEY,
@@ -392,7 +394,7 @@ def answer_via_ai_vision(
     from . import llm_cache, llm_obs  # local imports keep cost low
 
     model = os.environ.get(
-        "PADHAI_DOUBT_VISION_MODEL", "claude-sonnet-4-6",
+        "PADHAI_DOUBT_VISION_MODEL", _models.SONNET_MODEL,
     )
     system_text = (
         "You are an AI doubt-clearer for Indian students. The student "

@@ -54,6 +54,7 @@ _ROUTER_NAMES = (
     "orgs_assignments",  # v3.x — /api/orgs/{id}/assignments* (list, create, completion, stats)
     "orgs_fees",         # v3.x — /api/orgs/{id}/fees* (structures + invoices + Razorpay)
     "orgs_exams",        # v3.x — /api/orgs/{id}/exams* (school exam create/take/grade)
+    "branding",          # v3.x — branding resolve + logo upload + serve (3 routes)
 )
 
 

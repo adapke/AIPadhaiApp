@@ -422,16 +422,35 @@ SQLite procedure does not apply.
 
 ## 11. AI Models Used
 
-| Module | Default model | Env override |
+Constants live in `padhai/models.py` — import them rather than
+hard-coding strings:
+
+```python
+from .models import HAIKU_MODEL, SONNET_MODEL, OPUS_MODEL
+```
+
+| Tier | Constant | Default | Tier env override |
+|---|---|---|---|
+| Cheap+fast | `HAIKU_MODEL` | `claude-haiku-4-5-20251001` | `PADHAI_HAIKU_MODEL` |
+| Balanced | `SONNET_MODEL` | `claude-sonnet-4-6` | `PADHAI_SONNET_MODEL` |
+| Strongest | `OPUS_MODEL` | `claude-opus-4-7` | `PADHAI_OPUS_MODEL` |
+
+| Module | Tier | Surface env override |
 |---|---|---|
-| Essay grader | `claude-sonnet-4-6` | `PADHAI_ESSAY_GRADER_MODEL` |
-| Mock interview | `claude-haiku-4-5-20251001` | `PADHAI_MOCK_INTERVIEW_MODEL` |
-| Practice tests | `claude-haiku-4-5-20251001` | `PADHAI_PRACTICE_MODEL` |
-| Lesson generation | `claude-sonnet-4-6` | via `pedagogy.py` |
+| Essay grader | Sonnet | `PADHAI_ESSAY_GRADER_MODEL` |
+| Mock interview | Haiku | `PADHAI_MOCK_INTERVIEW_MODEL` |
+| Practice tests | Haiku | `PADHAI_PRACTICE_MODEL` |
+| Tutor | Haiku | `PADHAI_TUTOR_MODEL` |
+| Doubt vision | Sonnet | `PADHAI_DOUBT_VISION_MODEL` |
+| Math vision | Opus | `PADHAI_MATH_VISION_MODEL` |
+| Upload chat / quiz / summary | Sonnet/Haiku | `PADHAI_UPLOAD_*_MODEL` |
+| Lesson generation | Opus | via `pedagogy.py` MODEL |
+| Moderation | Haiku | via `moderation.py` MODEL |
 
 **Model ID format**: always use the full ID including date suffix, e.g.
 `claude-haiku-4-5-20251001`, `claude-sonnet-4-6`. Never use bare
-`claude-haiku-4-5` (invalid since the 2025-10 rename).
+`claude-haiku-4-5` (invalid since the 2025-10 rename) — `models.py`
+carries a startup assert against the bug form.
 
 All Claude calls should use `llm_cache.py:with_caching()` to enable
 Anthropic prompt caching (`cache_control`) for the system prompt block.
@@ -526,7 +545,10 @@ Custom commands (`cypress/support/commands.js`):
    `options="-c search_path=public"`.
 
 8. **Claude model ID** — `claude-haiku-4-5` is invalid; use
-   `claude-haiku-4-5-20251001`.
+   `claude-haiku-4-5-20251001`. Every Claude-using module should
+   import constants from `padhai/models.py` (`HAIKU_MODEL`,
+   `SONNET_MODEL`, `OPUS_MODEL`) — never hard-code model strings.
+   `models.py` carries a startup assert against the buggy bare form.
 
 9. **Signup `terms_accepted`** — Auth form must include an explicit
    `terms_accepted` checkbox. Hidden auto-accept is bad UX and was reverted.
@@ -656,6 +678,38 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Central model-ID registry — `padhai/models.py`.** 13 files used
+  to hardcode Claude model strings (`claude-haiku-4-5-20251001`,
+  `claude-sonnet-4-6`, `claude-opus-4-7`). Each rename — like the
+  2025-10 Haiku rename that invalidated the bare `claude-haiku-4-5`
+  form — required hunting them down. Now there's one module:
+  `HAIKU_MODEL` / `SONNET_MODEL` / `OPUS_MODEL` constants with env
+  overrides (`PADHAI_HAIKU_MODEL` etc.). Surface-specific overrides
+  (`PADHAI_ESSAY_GRADER_MODEL`, `PADHAI_TUTOR_MODEL`, etc.) still
+  work — modules read `os.environ.get("PADHAI_<X>_MODEL",
+  _models.HAIKU_MODEL)`. The module carries a startup assert against
+  the buggy bare form. Migrated 13 files: pedagogy / doubt_clearing
+  / essay_grader / math_vision / mock_interview / practice_test /
+  moderation / uploads / tutor / routers/uploads_ai /
+  routers/tutor_stream. Closes bug #8 in CLAUDE.md §14 (was: tutor.py
+  + pedagogy.py used the invalid `claude-haiku-4-5` form).
+- **Twelfth router slice — branding (3 routes).** All branding
+  endpoints lifted to `padhai/routers/branding.py`:
+  `GET /api/branding/resolve` (public — SPA boot lookup),
+  `POST /api/orgs/{org_id}/branding/logo` (admin — upload), and
+  `GET /branding/logo/{filename}` (public — serve uploaded logos).
+  The two public endpoints are deliberately unauthenticated: the
+  SPA calls resolve on page load before sign-in, and the logo URLs
+  are referenced from HTML/CSS. ~100 lines off web.py.
+- **Accuracy bench 160 → 175 items.** 5 more hard items (JEE parallel
+  resistance, NEET active immunity, UPSC expansionary monetary
+  policy, JEE matrix determinant, NEET Haber-process catalyst), 4
+  state-board depth (Karnataka triangle area, TamilNadu Ampère, ICSE
+  Babur Mughal, AP/Telangana CO₂ lime water), 3 CBSE Class 11/12
+  reinforcement (derivative of e^x, Newton's 3rd law, embryogenesis),
+  3 word-problem math (square perimeter, speed×time, consecutive
+  integers). Distribution now `easy=108 / medium=45 / hard=22`.
+  Structural runner: 175/175 in 3.2s.
 - **Lint gate now F + E + I + B + UP + SIM + RUF + ARG blocking.**
   All 69 ARG (unused-argument) findings carry targeted `# noqa:
   ARG00x` markers after a `--add-noqa` pass. Distribution skews
