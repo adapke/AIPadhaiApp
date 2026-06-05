@@ -313,7 +313,7 @@ def _embed_chunk(chunk_id: str, text: str, conn) -> None:
         )
 
 
-def _external_embed(text: str) -> list[float] | None:
+def _external_embed(text: str) -> list[float] | None:  # noqa: ARG001
     """Stub for external embedding providers. Real impl plugs in
     the user's Anthropic / OSS embed key here. Returns None if no
     provider key is configured — caller falls back to tokenscore."""

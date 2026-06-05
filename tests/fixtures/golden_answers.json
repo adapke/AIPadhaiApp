@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Includes easy/medium/hard difficulty mix. v5: 145 items across 5 subject domains x 7 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix. v6: 160 items across 6 subject domains x 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -1826,6 +1826,196 @@
       "difficulty": "easy",
       "tags": {
         "subject": "geography",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 10 Science: Name the part of the eye that controls the amount of light entering it.",
+      "expected": {
+        "answer": "iris"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "AP_Telangana",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 9 Mathematics: A pair of linear equations is said to be consistent if it has _____ solution(s).",
+      "expected": {
+        "answer": "at least one"
+      },
+      "rubric": "Accept 'one or many', 'at least one', or 'exactly one or infinitely many'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "AP_Telangana",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "AP Board Class 8 Social Studies: Which Indian river is known as the 'Sorrow of Bihar'?",
+      "expected": {
+        "answer": "kosi"
+      },
+      "rubric": "Accept 'Kosi' or 'Koshi'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "board": "AP_Telangana",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "UP Board High School Science: What is the chemical formula for common salt?",
+      "expected": {
+        "answer": "nacl"
+      },
+      "rubric": "Accept 'NaCl' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "UP",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "UP Board Class 9 Mathematics: What is the area of a circle with radius r?",
+      "expected": {
+        "answer": "pi r^2"
+      },
+      "rubric": "Accept 'πr²', 'pi*r^2', 'π r^2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "UP",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "UP Board Intermediate Physics: What is the SI unit of magnetic flux?",
+      "expected": {
+        "answer": "weber"
+      },
+      "rubric": "Accept 'weber' or 'Wb'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "UP",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Name the phase of mitosis during which chromosomes align at the equatorial plate.",
+      "expected": {
+        "answer": "metaphase"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "cell_division"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Economy: What is the term for the difference between the government's total expenditure and total receipts (excluding borrowings)?",
+      "expected": {
+        "answer": "fiscal deficit"
+      },
+      "rubric": "Accept 'fiscal deficit' (case-insensitive).",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC",
+        "topic": "public_finance"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is Avogadro's number to 3 significant figures (in 10^23)?",
+      "expected": {
+        "answer": "6.02"
+      },
+      "rubric": "Accept '6.02', '6.022', or '6.02 x 10^23'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "CBSE Class 11 Chemistry: Name the gas evolved when sodium reacts with water.",
+      "expected": {
+        "answer": "hydrogen"
+      },
+      "rubric": "Single-word lowercase or 'H2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "CBSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "NEET Biology: How many chambers does the human heart have?",
+      "expected": {
+        "answer": "4"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What is the name of the green pigment found in the chloroplasts of plants?",
+      "expected": {
+        "answer": "chlorophyll"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "If a train travels 60 km in 1.5 hours at a uniform speed, what is its speed in km/h?",
+      "expected": {
+        "answer": "40"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "The sum of three consecutive integers is 51. What is the smallest of these three integers?",
+      "expected": {
+        "answer": "16"
+      },
+      "rubric": "Numeric only. (16 + 17 + 18 = 51).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "What is the value of 15% of 200?",
+      "expected": {
+        "answer": "30"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
         "exam": "SSC"
       }
     }

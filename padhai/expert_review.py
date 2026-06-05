@@ -631,7 +631,7 @@ def get_verification(
 # ---------- ratings + earnings ----------
 
 def rate_expert(
-    *, expert_user_id: str, rating: int, rater_user_id: str,
+    *, expert_user_id: str, rating: int, rater_user_id: str,  # noqa: ARG001
 ) -> bool:
     """Student rates an expert's review. 1-5 stars. Roll-up
     feeds the expert's rating_avg + drives queue prioritisation."""

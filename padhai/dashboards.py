@@ -268,7 +268,7 @@ def _child_fallbacks(user_id: str) -> list[dict]:
 
 def teacher_dashboard(
     *,
-    teacher_user_id: str,
+    teacher_user_id: str,  # noqa: ARG001
     org_id: str,
     class_id: str | None = None,
 ) -> dict:
@@ -422,7 +422,7 @@ def _class_moderation_flags(members) -> dict:
 
 def teacher_student_detail(
     *,
-    teacher_user_id: str,
+    teacher_user_id: str,  # noqa: ARG001
     org_id: str,
     student_user_id: str,
 ) -> dict:

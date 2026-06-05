@@ -202,7 +202,7 @@ def _next_mock(*, user_id: str, pack_code: str | None) -> dict | None:
         return None
 
 
-def _community_hint(*, user_id: str, pack_code: str | None) -> dict:
+def _community_hint(*, user_id: str, pack_code: str | None) -> dict:  # noqa: ARG001
     """Pick one community room to surface in the home hero. For
     now we just point at the pack's leaderboard — future versions
     can plug in `forums.py` rooms keyed on the exam code."""

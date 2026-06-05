@@ -361,7 +361,7 @@ def _gather_signals(
 
 def _evaluate_rules_for_topic(
     *,
-    topic_code: str,
+    topic_code: str,  # noqa: ARG001
     topic_signals: dict,
 ) -> tuple[float, list[str]]:
     """For a topic given its signal bundle, apply all rules and

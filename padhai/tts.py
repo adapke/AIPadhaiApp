@@ -233,7 +233,7 @@ class ElevenLabsProvider:
         self.similarity_boost = similarity_boost
         self.timeout = timeout
 
-    def synthesise(self, text: str, language_code: str, out_path: Path) -> None:
+    def synthesise(self, text: str, language_code: str, out_path: Path) -> None:  # noqa: ARG002
         import httpx
 
         url = f"https://api.elevenlabs.io/v1/text-to-speech/{self.voice_id}"

@@ -594,7 +594,7 @@ def main() -> int:
     )
 
     # Crashing runner — items get skipped
-    def crash_runner(prompt: str) -> dict:
+    def crash_runner(prompt: str) -> dict:  # noqa: ARG001
         raise RuntimeError("simulated model timeout")
 
     run3 = ab.run_benchmark(

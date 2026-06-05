@@ -530,7 +530,7 @@ def _web_handles_payload(payload: dict) -> bool:
     return payload.get("talking_head_provider") != "wav2lip"
 
 
-def _post_succeed_hook(job, result):
+def _post_succeed_hook(job, result):  # noqa: ARG001
     """Runs after every job-success update. Today's only consumer:
     multi-page video uploads — when the last sibling completes we
     pre-stitch combined.mp4 so the UI gets it on first request
@@ -683,7 +683,7 @@ def _validate_admin_gate() -> None:
 
 
 @asynccontextmanager
-async def _lifespan(app: FastAPI):
+async def _lifespan(app: FastAPI):  # noqa: ARG001
     # Initialise Postgres store + user repo here (not at import time) so
     # that DATABASE_URL loaded from .env via load_dotenv is guaranteed to
     # be visible before we check use_postgres().
@@ -11159,7 +11159,7 @@ def chat_about_lesson(
 @app.post("/lessons/{lesson_id}/quiz")
 def standalone_quiz(
     lesson_id: str,
-    user: AuthUser | None = Depends(current_user),
+    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
 ):
     """Return the quiz JSON for a cached lesson without rendering a video.
     Used by the Quiz Maker module — the player UI scores the student and
@@ -11181,7 +11181,7 @@ def standalone_quiz(
 def make_recap(
     lesson_id: str,
     regenerate: bool = False,
-    user: AuthUser | None = Depends(current_user),
+    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
 ):
     """Generate (or fetch cached) podcast-style audio recap.
 
@@ -11390,7 +11390,7 @@ def v2_create_video_request(
     duration_seconds: int | None = Form(None),
     output_format: str = Form("16:9"),
     render_tier: str = Form("m1"),
-    include_subtitles: bool = Form(True),
+    include_subtitles: bool = Form(True),  # noqa: ARG001
     user: AuthUser | None = Depends(current_user),
 ):
     """PRD §13.3 — Create a personalized video request.
@@ -11750,7 +11750,7 @@ def v2_regenerate(
     change: str = Form(..., description="make_easier|make_advanced|change_language|shorten|exam_focused|create_short"),
     language: str | None = Form(None),
     duration_seconds: int | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
+    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
 ):
     """PRD §13.6 — Linked regeneration with structured change intent.
 
@@ -12151,193 +12151,8 @@ def _link_to_dict(link) -> dict:
 
 # ---------- E4: Exams + auto-grading (v0.15) ----------
 
-def _exam_to_dict(e, *, include_answers: bool = False) -> dict:
-    """Serialize an exam for API responses. When `include_answers=False`
-    we strip the `answer` field from each question — that's the
-    student-facing view (no peeking at the correct answer)."""
-    questions = []
-    for q in e.questions:
-        clean = dict(q)
-        if not include_answers:
-            clean.pop("answer", None)
-        questions.append(clean)
-    return {
-        "id": e.id, "org_id": e.org_id, "class_id": e.class_id,
-        "title": e.title, "subject": e.subject, "topic": e.topic,
-        "scheduled_at": e.scheduled_at, "duration_min": e.duration_min,
-        "max_marks": e.max_marks, "status": e.status,
-        "questions": questions, "created_at": e.created_at,
-    }
-
-
-def _attempt_to_dict(a) -> dict:
-    return {
-        "id": a.id, "exam_id": a.exam_id, "user_id": a.user_id,
-        "started_at": a.started_at, "submitted_at": a.submitted_at,
-        "answers": a.answers, "auto_score": a.auto_score,
-        "manual_score": a.manual_score, "total_score": a.total_score,
-        "feedback": a.feedback,
-        "tab_blur_count": a.tab_blur_count,
-        "fullscreen_exit_count": a.fullscreen_exit_count,
-        "flags": a.flags,
-    }
-
-
-@app.post("/api/orgs/{org_id}/exams", status_code=201)
-def create_org_exam(
-    org_id: str,
-    class_id: str = Form(...),
-    title: str = Form(..., min_length=2, max_length=160),
-    topic: str = Form(..., min_length=2, max_length=200),
-    questions_json: str = Form(...,
-        description="JSON array of {q, options:{A,B,C,D}, answer, marks, kind}"),
-    duration_min: int = Form(30, ge=1, le=480),
-    subject: str | None = Form(None),
-    scheduled_at: float | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Create an exam. The teacher provides the question set (in v0.15.1
-    the UI will offer "AI-generate from topic" via the existing quiz
-    generator, but that needs Claude in production — see padhai/pedagogy.py).
-
-    Returns the exam with answers INCLUDED (teacher view)."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    try:
-        questions = json.loads(questions_json)
-    except (ValueError, TypeError):
-        raise HTTPException(400, "questions_json must be valid JSON") from None
-    if not isinstance(questions, list):
-        raise HTTPException(400, "questions_json must be a JSON array")
-    try:
-        exam = _orgs.create_exam(
-            org_id=org_id, class_id=class_id, title=title, topic=topic,
-            questions=questions, duration_min=duration_min,
-            subject=subject, scheduled_at=scheduled_at,
-            created_by=user.id,
-        )
-    except ValueError as e:
-        raise HTTPException(400, str(e)) from e
-    return _exam_to_dict(exam, include_answers=True)
-
-
-@app.get("/api/orgs/{org_id}/exams")
-def list_org_exams(
-    org_id: str,
-    class_id: str | None = None,
-    user: AuthUser | None = Depends(current_user),
-):
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-    exams = _orgs.list_exams(org_id, class_id=class_id)
-    # Students see exams WITHOUT correct answers; teachers see all.
-    include_answers = my_role in ("admin", "teacher")
-    return {
-        "exams": [_exam_to_dict(e, include_answers=include_answers)
-                  for e in exams],
-    }
-
-
-@app.post("/api/orgs/{org_id}/exams/{eid}/begin")
-def begin_exam(
-    org_id: str, eid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Student starts the exam — locks in the start_time so the timer
-    can't be reset by refreshing. Idempotent: re-begin returns the
-    same started_at, not a new clock."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"student", "admin", "teacher"})
-    exam = _orgs.get_exam(eid)
-    if not exam or exam.org_id != org_id:
-        raise HTTPException(404, "exam not found")
-    attempt = _orgs.begin_attempt(exam_id=eid, user_id=user.id)
-    return {
-        "attempt": _attempt_to_dict(attempt),
-        "exam": _exam_to_dict(exam, include_answers=False),
-        "deadline_at": attempt.started_at + exam.duration_min * 60,
-    }
-
-
-@app.post("/api/orgs/{org_id}/exams/{eid}/submit")
-def submit_exam(
-    org_id: str, eid: str,
-    answers_json: str = Form(..., description='JSON object: {question_index_str: answer}'),
-    tab_blur_count: int = Form(0, ge=0),
-    fullscreen_exit_count: int = Form(0, ge=0),
-    flags_json: str = Form("[]",
-        description="JSON array of {t, at} anti-cheat event records"),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Student submits. Auto-grades MCQs immediately; free-form
-    questions wait for teacher grading. Anti-cheat counters captured."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"student", "admin", "teacher"})
-    try:
-        answers = json.loads(answers_json)
-        flags = json.loads(flags_json or "[]")
-    except (ValueError, TypeError):
-        raise HTTPException(400, "answers_json / flags_json must be valid JSON") from None
-    try:
-        attempt = _orgs.submit_attempt(
-            exam_id=eid, user_id=user.id, answers=answers,
-            tab_blur_count=tab_blur_count,
-            fullscreen_exit_count=fullscreen_exit_count,
-            flags=flags,
-        )
-    except ValueError as e:
-        raise HTTPException(404, str(e)) from e
-    return _attempt_to_dict(attempt)
-
-
-@app.get("/api/orgs/{org_id}/exams/{eid}/attempts")
-def list_exam_attempts(
-    org_id: str, eid: str,
-    limit: int = Query(default=200, ge=1, le=500),
-    user: AuthUser | None = Depends(current_user),
-):
-    """All attempts on this exam — teacher review surface."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    attempts = _orgs.list_attempts(eid, limit=limit)
-    return {"attempts": [_attempt_to_dict(a) for a in attempts]}
-
-
-@app.post("/api/orgs/{org_id}/exams/{eid}/attempts/{aid}/grade")
-def grade_exam_attempt(
-    org_id: str, eid: str, aid: str,
-    request: Request,
-    manual_score: int = Form(..., ge=0),
-    feedback: str | None = Form(None),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Teacher posts manual marks (for free-form questions). Recomputes
-    total_score = auto + manual."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    try:
-        attempt = _orgs.grade_attempt(
-            attempt_id=aid, manual_score=manual_score, feedback=feedback,
-        )
-    except ValueError as e:
-        raise HTTPException(404, str(e)) from e
-    # High-value audit — manual grade override is a known fraud vector.
-    _audit.record(
-        action="org.exam.grade.override",
-        org_id=org_id, actor_user_id=user.id,
-        target_type="exam_attempt", target_id=aid,
-        after={"exam_id": eid, "manual_score": manual_score,
-               "feedback": feedback, "total_score": attempt.total_score},
-        **_audit.actor_from_request(request),
-    )
-    return _attempt_to_dict(attempt)
+# /api/orgs/{id}/exams* (6 endpoints + _exam_to_dict / _attempt_to_dict
+# helpers) moved to padhai/routers/orgs_exams.py.
 
 
 # ---------- S4: Anti-cheating exam mode ----------
@@ -12821,7 +12636,7 @@ def saml_acs(
     org_id: str,
     request: Request,
     SAMLResponse: str = Form(...),
-    RelayState: str | None = Form(None),
+    RelayState: str | None = Form(None),  # noqa: ARG001
 ):
     """Assertion Consumer Service. IdP POSTs the SAML response here
     after the user authenticates on the IdP side. We validate the
@@ -13274,7 +13089,7 @@ def _age_to_level(age: int) -> str:
 def live_respond(
     transcript: str = Form(..., min_length=1, max_length=2000),
     history_json: str = Form("[]"),
-    user: AuthUser | None = Depends(current_user),
+    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
 ):
     """One turn of the Live Lecture loop.
 
@@ -13703,7 +13518,7 @@ def lesson_new_page() -> HTMLResponse:
 
 
 @app.get("/lessons/{job_id}", response_class=HTMLResponse)
-def lesson_player_page(job_id: str) -> HTMLResponse:
+def lesson_player_page(job_id: str) -> HTMLResponse:  # noqa: ARG001
     """Video player screen with tabs: quiz, chat, flashcards, notes, recap."""
     from . import ui_pages as _ui
     return HTMLResponse(_ui.get_lesson_player_html())
@@ -14475,7 +14290,7 @@ def list_flashcard_decks(
 @app.get("/api/quiz/{lesson_id}")
 def get_quiz_data(
     lesson_id: str,
-    user: AuthUser | None = Depends(current_user),
+    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
 ) -> JSONResponse:
     """Return the quiz questions for a cached lesson (GET version)."""
     cached_lesson = cache.get_lesson_by_key(lesson_id)

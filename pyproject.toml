@@ -30,12 +30,22 @@ exclude = [
 #     because em-dashes and Devanagari are intentional in the Indian-
 #     language UI text + bench data; 35 small judgment-call sites
 #     carry targeted `# noqa: RUFxxx` markers.
+#   • ARG — unused arguments. 69 sites carry `# noqa: ARG00x` after a
+#     `--add-noqa` pass: most are polymorphic provider dispatchers
+#     (push.py, talking_head.py, diagrams.py) where each provider
+#     implements the same shape but uses different params, and
+#     FastAPI's `Depends()` pattern where the dependency is the goal,
+#     not the param itself.
 # Still advisory (pre-commit only):
-#   • C90 — complexity caps (codebase has legacy hotspots)
+#   • PL — pylint (2538 findings, mostly PLC0415 late-imports which we
+#     use intentionally to break import cycles).
+#   • C90 — complexity caps (codebase has legacy hotspots).
+#   • T20 — `print` calls (569 findings, mostly intentional debug logs
+#     in scripts/ and ops surfaces).
 # When you touch a file, ruff --fix will quietly clean it. Promote
 # the next category to blocking once `ruff check --select <X>`
 # shows zero findings.
-select = ["F", "E", "I", "B", "UP", "SIM", "RUF"]
+select = ["F", "E", "I", "B", "UP", "SIM", "RUF", "ARG"]
 
 # Deliberate ignores:
 ignore = [

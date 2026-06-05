@@ -64,7 +64,7 @@ class LocalDiskStorage:
         # added later if any single directory grows beyond ~100k entries.
         return self.root / key
 
-    def put(self, key: str, source: Path, content_type: str = "video/mp4") -> str:
+    def put(self, key: str, source: Path, content_type: str = "video/mp4") -> str:  # noqa: ARG002
         dest = self._path(key)
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, dest)
@@ -80,7 +80,7 @@ class LocalDiskStorage:
     def exists(self, key: str) -> bool:
         return self._path(key).exists()
 
-    def url(self, key: str, expires_seconds: int = 3600) -> str:
+    def url(self, key: str, expires_seconds: int = 3600) -> str:  # noqa: ARG002
         return f"file://{self._path(key)}"
 
 

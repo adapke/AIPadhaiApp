@@ -146,7 +146,7 @@ def touch(storage_key: str) -> None:
         )
 
 
-def set_keep_forever(source_id: str, value: bool, admin_user_id: str) -> None:
+def set_keep_forever(source_id: str, value: bool, admin_user_id: str) -> None:  # noqa: ARG001
     """Admin override — opt this file out of the purge cycle.
     Audit trail lives in moderation_log via the API layer."""
     with _conn() as conn:

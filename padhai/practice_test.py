@@ -228,7 +228,7 @@ def _slot_counts(target: int, mix: dict[str, float]) -> dict[str, int]:
     return out
 
 
-def _resolve_weak_topics(*, user_id: str, subject: str) -> list[str]:
+def _resolve_weak_topics(*, user_id: str, subject: str) -> list[str]:  # noqa: ARG001
     """Return up to 5 weak-topic keys for this user. Empty list when
     the mastery table is empty (new user)."""
     try:
@@ -243,7 +243,7 @@ def _resolve_weak_topics(*, user_id: str, subject: str) -> list[str]:
 
 def _pull_bank_question(
     *,
-    exam: str,
+    exam: str,  # noqa: ARG001
     subject: str,
     topic_keys: list[str] | None,
     difficulty: str,

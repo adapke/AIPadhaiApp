@@ -145,7 +145,7 @@ class RQRunner:
             )
         return len(pending)
 
-    def shutdown(self, wait: bool = False) -> None:
+    def shutdown(self, wait: bool = False) -> None:  # noqa: ARG002
         # RQ workers shut down on their own SIGTERM; nothing to do
         # from the web tier's side.
         return None

@@ -656,6 +656,31 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Lint gate now F + E + I + B + UP + SIM + RUF + ARG blocking.**
+  All 69 ARG (unused-argument) findings carry targeted `# noqa:
+  ARG00x` markers after a `--add-noqa` pass. Distribution skews
+  heavily toward polymorphic provider dispatchers (`talking_head.py`
+  16, `push.py` 12, `diagrams.py` 6) where each provider implements
+  the same shape but uses different subsets of params; the rest are
+  FastAPI's `Depends(get_x)` pattern where the dependency call is
+  the goal, not the param value. Gate now strict against new
+  violations.
+- **Eleventh router slice — `/api/orgs/{id}/exams*`.** Six endpoints
+  (create / list / begin / submit / list-attempts / manual-grade
+  override) plus two marshalling helpers (`_exam_to_dict`,
+  `_attempt_to_dict`) moved to `padhai/routers/orgs_exams.py`.
+  ~165 lines removed from web.py. The audit-log entry on manual
+  grade override (known fraud vector in school deployments) ports
+  cleanly. The companion `/api/exam-mode/active` (anti-cheat status
+  surface) stays in web.py — it's a top-level route, not under
+  `/api/orgs/`.
+- **Accuracy bench 145 → 160 items.** Two new boards: **AP_Telangana**
+  (eye iris / linear equations / Kosi river) and **UP Board** (NaCl
+  formula / πr² / weber). Added 2 hard items (NEET metaphase /
+  UPSC fiscal deficit), 2 chemistry depth, 2 biology depth, 3 word-
+  problem math items (was very lookup-style). Distribution now
+  `easy=102 / medium=41 / hard=17` across **9 board/exam tracks**
+  (was 7). Structural runner: 160/160 in 3.3s.
 - **Lint gate now F + E + I + B + UP + SIM + RUF blocking.** `ruff
   --fix --select RUF` cleaned 200 sites in one pass (mostly RUF100
   unused-noqa + RUF102 invalid-rule-code + RUF021); `--unsafe-fixes

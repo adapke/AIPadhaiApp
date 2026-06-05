@@ -298,7 +298,7 @@ class JobRunner:
     ):
         self.store = store
         self.worker_fn = worker_fn
-        self.job_filter = job_filter or (lambda payload: True)
+        self.job_filter = job_filter or (lambda payload: True)  # noqa: ARG005
         # `post_succeed_hook(job, result)` runs AFTER the job has been
         # marked succeeded in the store — gives the web layer a chance
         # to trigger downstream work (e.g. auto-combine of multi-page

@@ -188,7 +188,7 @@ def _est_duration(text: str) -> float:
     return round(words / WORDS_PER_MINUTE * 60, 1)
 
 
-def _intro_line(title: str, language: str = "en") -> str:
+def _intro_line(title: str, language: str = "en") -> str:  # noqa: ARG001
     """Short opener. Language-aware in future; English baseline."""
     return (
         f"This is a quick audio recap of {title}. "
@@ -196,7 +196,7 @@ def _intro_line(title: str, language: str = "en") -> str:
     )
 
 
-def _outro_line(language: str = "en") -> str:
+def _outro_line(language: str = "en") -> str:  # noqa: ARG001
     return (
         "That's the recap. Open the chapter to dive deeper, "
         "or take a few practice questions to test what you've heard."

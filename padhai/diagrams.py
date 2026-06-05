@@ -61,7 +61,7 @@ def solar_system(
     draw: ImageDraw.ImageDraw,
     x: int, y: int, w: int, h: int,
     theme: Theme,
-    title_font_path: str,
+    title_font_path: str,  # noqa: ARG001
     body_font_path: str,
 ) -> None:
     """Sun + 8 planets in a horizontal line, labelled, with relative sizes
@@ -131,7 +131,7 @@ def photosynthesis(
     draw: ImageDraw.ImageDraw,
     x: int, y: int, w: int, h: int,
     theme: Theme,
-    title_font_path: str,
+    title_font_path: str,  # noqa: ARG001
     body_font_path: str,
 ) -> None:
     """A leaf in the middle with CO₂ + water + sunlight arrows in, and
@@ -223,7 +223,7 @@ def water_cycle(
     draw: ImageDraw.ImageDraw,
     x: int, y: int, w: int, h: int,
     theme: Theme,
-    title_font_path: str,
+    title_font_path: str,  # noqa: ARG001
     body_font_path: str,
 ) -> None:
     """Ocean → evaporation → cloud → rain → ocean, with the sun in the corner."""
@@ -273,9 +273,9 @@ def water_cycle(
 @register("addition_dots")
 def addition_dots(
     draw: ImageDraw.ImageDraw,
-    x: int, y: int, w: int, h: int,
+    x: int, y: int, w: int, h: int,  # noqa: ARG001
     theme: Theme,
-    title_font_path: str,
+    title_font_path: str,  # noqa: ARG001
     body_font_path: str,
 ) -> None:
     """Visualise '3 + 2 = 5' (or whichever sum is hard-coded here) with
@@ -350,7 +350,7 @@ def atom(
     draw: ImageDraw.ImageDraw,
     x: int, y: int, w: int, h: int,
     theme: Theme,
-    title_font_path: str,
+    title_font_path: str,  # noqa: ARG001
     body_font_path: str,
 ) -> None:
     """Nucleus (protons + neutrons) with 2 electron shells. Bohr-style."""

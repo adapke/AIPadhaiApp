@@ -436,8 +436,8 @@ def _platform_send(tok: PushToken, *, title: str, body: str | None,
     raise ValueError(f"unknown platform {tok.platform!r}")
 
 
-def _send_fcm(token: str, *, title: str, body: str | None,
-              payload: dict | None) -> None:
+def _send_fcm(token: str, *, title: str, body: str | None,  # noqa: ARG001
+              payload: dict | None) -> None:  # noqa: ARG001
     """FCM HTTP v1 send. Real call lives in the cutover sprint when
     `FCM_SERVER_KEY` (legacy) or service-account JSON (v1) is set."""
     key = os.environ.get("FCM_SERVER_KEY")
@@ -451,8 +451,8 @@ def _send_fcm(token: str, *, title: str, body: str | None,
     raise _NoProvider("FCM adapter scaffolded; full send lands in v1.4")
 
 
-def _send_apns(token: str, *, title: str, body: str | None,
-               payload: dict | None) -> None:
+def _send_apns(token: str, *, title: str, body: str | None,  # noqa: ARG001
+               payload: dict | None) -> None:  # noqa: ARG001
     """APNs HTTP/2 send via Apple's apns-helper. Same deferred
     pattern as FCM."""
     key_id = os.environ.get("APNS_KEY_ID")
@@ -461,8 +461,8 @@ def _send_apns(token: str, *, title: str, body: str | None,
     raise _NoProvider("APNs adapter scaffolded; full send lands in v1.4")
 
 
-def _send_web(token: str, *, title: str, body: str | None,
-              payload: dict | None) -> None:
+def _send_web(token: str, *, title: str, body: str | None,  # noqa: ARG001
+              payload: dict | None) -> None:  # noqa: ARG001
     """Web Push via VAPID. Doesn't need a Mobile app — Chrome / Edge
     / Firefox PWA installs can subscribe."""
     vapid = os.environ.get("VAPID_PRIVATE_KEY")

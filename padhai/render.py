@@ -281,7 +281,7 @@ def _draw_celebration_slide(
 def _draw_whiteboard_panel(
     draw: ImageDraw.ImageDraw,
     x: int, y: int, w: int, h: int,
-    theme: Theme,
+    theme: Theme,  # noqa: ARG001
 ) -> None:
     """A subtle whiteboard frame inside the slide: light off-white fill +
     soft border + faint corner shadows. Only meaningful when the slide

@@ -207,7 +207,7 @@ def llm_costs_page(
 @app.get("/api/llm-costs")
 def api_llm_costs(
     hours: float = 24.0,
-    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,  # noqa: ARG001
 ):
     stats = data.llm_cost_stats(hours=hours)
     stats["alerts"] = data.llm_recent_alerts(hours=hours, limit=50)
@@ -218,7 +218,7 @@ def api_llm_costs(
 
 @app.get("/api/dashboard")
 def api_dashboard(
-    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,  # noqa: ARG001
 ):
     s = data.dashboard_summary()
     return {
@@ -243,7 +243,7 @@ def api_jobs(
     status: str | None = None,
     limit: int = 50,
     offset: int = 0,
-    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,  # noqa: ARG001
 ):
     return {
         "jobs": data.list_jobs(status=status, limit=limit, offset=offset),
@@ -277,6 +277,6 @@ def api_cancel_job(
 
 @app.get("/api/cache-stats")
 def api_cache_stats(
-    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,
+    user: Annotated[auth.AdminUser, Depends(auth.require_admin)] = None,  # noqa: ARG001
 ):
     return data.cache_stats()

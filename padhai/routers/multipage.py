@@ -30,7 +30,7 @@ router = APIRouter()
 
 
 @router.get("/jobs/{job_id}/combined.mp4")
-def get_combined_video(job_id: str, request: Request):
+def get_combined_video(job_id: str, request: Request):  # noqa: ARG001
     """Return one stitched MP4 covering every successfully-rendered
     page of a multi-page upload. The leader job is the parent (page 1
     of the upload); siblings have payload.parent_job_id == leader.id.

@@ -77,7 +77,7 @@ class CartoonAvatarProvider:
     name = "cartoon"
     in_process = True   # signal to render.py: handle this inline
 
-    def render_clip(self, *args, **kwargs) -> None:  # pragma: no cover
+    def render_clip(self, *args, **kwargs) -> None:  # pragma: no cover  # noqa: ARG002
         raise RuntimeError(
             "CartoonAvatarProvider draws the teacher inline; "
             "render.py should not call render_clip on this provider."
@@ -116,9 +116,9 @@ class HeyGenProvider:
 
     def render_clip(
         self,
-        narration_audio: Path,
+        narration_audio: Path,  # noqa: ARG002
         script_text: str,
-        language_code: str,
+        language_code: str,  # noqa: ARG002
         out_path: Path,
     ) -> None:
         import httpx
@@ -224,9 +224,9 @@ class SynthesiaProvider:
 
     def render_clip(
         self,
-        narration_audio: Path,
+        narration_audio: Path,  # noqa: ARG002
         script_text: str,
-        language_code: str,
+        language_code: str,  # noqa: ARG002
         out_path: Path,
     ) -> None:
         import httpx
@@ -310,9 +310,9 @@ class TavusProvider:
 
     def render_clip(
         self,
-        narration_audio: Path,
+        narration_audio: Path,  # noqa: ARG002
         script_text: str,
-        language_code: str,
+        language_code: str,  # noqa: ARG002
         out_path: Path,
     ) -> None:
         import httpx
@@ -390,9 +390,9 @@ class DeepBrainProvider:
 
     def render_clip(
         self,
-        narration_audio: Path,
+        narration_audio: Path,  # noqa: ARG002
         script_text: str,
-        language_code: str,
+        language_code: str,  # noqa: ARG002
         out_path: Path,
     ) -> None:
         import httpx
@@ -471,10 +471,10 @@ class DIDProvider:
 
     def render_clip(
         self,
-        narration_audio: Path,
-        script_text: str,
-        language_code: str,
-        out_path: Path,
+        narration_audio: Path,  # noqa: ARG002
+        script_text: str,  # noqa: ARG002
+        language_code: str,  # noqa: ARG002
+        out_path: Path,  # noqa: ARG002
     ) -> None:  # pragma: no cover — depends on a paid external service
         # Real implementation would upload narration_audio to a temporary
         # public URL (S3 / GCS / D-ID's own files endpoint), then POST that
@@ -548,8 +548,8 @@ class Wav2LipProvider:
     def render_clip(
         self,
         narration_audio: Path,
-        script_text: str,         # unused — Wav2Lip animates to audio, not text
-        language_code: str,       # unused — Wav2Lip is language-agnostic
+        script_text: str,         # unused — Wav2Lip animates to audio, not text  # noqa: ARG002
+        language_code: str,       # unused — Wav2Lip is language-agnostic  # noqa: ARG002
         out_path: Path,
     ) -> None:
         import shutil

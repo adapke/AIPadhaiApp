@@ -280,7 +280,7 @@ def _flashcards_block(user_id: str) -> dict:
     }
 
 
-def _live_block(user_id: str) -> dict:
+def _live_block(user_id: str) -> dict:  # noqa: ARG001
     def _go():
         from .. import live_classes as lv
         upcoming = lv.list_upcoming(window_hours=168.0)

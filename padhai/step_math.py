@@ -493,7 +493,7 @@ def get_step(step_id: str) -> Step | None:
     )
 
 
-def flag_step(*, step_id: str, user_id: str) -> bool:
+def flag_step(*, step_id: str, user_id: str) -> bool:  # noqa: ARG001
     """Student says 'didn't follow' on a step. Bumps the
     flagged_count; high-flagged steps surface in the admin queue
     for content improvement."""
