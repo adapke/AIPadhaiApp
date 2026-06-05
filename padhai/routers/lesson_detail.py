@@ -175,7 +175,7 @@ def rate_flashcard_route(
             "next_due_at": getattr(result, "due_at", None),
             "ease": getattr(result, "ease", None),
         })
-    except Exception as exc:  # noqa: BLE001 — see docstring
+    except Exception as exc:
         # Unknown card → still tell the client the rating was recorded
         return JSONResponse({
             "lesson_id": lesson_id, "card_id": card_id,
