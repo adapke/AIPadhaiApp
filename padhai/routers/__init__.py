@@ -56,6 +56,7 @@ _ROUTER_NAMES = (
     "orgs_exams",        # v3.x — /api/orgs/{id}/exams* (school exam create/take/grade)
     "branding",          # v3.x — branding resolve + logo upload + serve (3 routes)
     "scim",              # v3.x — SCIM 2.0 /scim/v2/* (IdP provisioning — 4 routes)
+    "notifications",     # v3.x — /api/notifications/* + /api/orgs/{id}/notifications (5 routes)
 )
 
 

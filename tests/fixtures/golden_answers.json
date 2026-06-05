@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v8: 190 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v9: 205 items across 9 boards/exams (crossed the 200-item milestone).",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2402,6 +2402,197 @@
       "tags": {
         "subject": "history",
         "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Mathematics: What is the period of the function f(x) = sin(2x) in radians?",
+      "expected": {
+        "answer": "pi"
+      },
+      "rubric": "Accept 'π', 'pi', or '3.14...'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "trigonometry"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which hormone is secreted by the pancreas to lower blood glucose levels?",
+      "expected": {
+        "answer": "insulin"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "endocrinology"
+      }
+    },
+    {
+      "prompt": "JEE Physics: In simple harmonic motion, what is the phase relationship between displacement and acceleration?",
+      "expected": {
+        "answer": "180 degrees"
+      },
+      "rubric": "Accept '180 degrees', 'π radians', or 'antiphase'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "shm"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Economy: What does GDP stand for in economics?",
+      "expected": {
+        "answer": "gross domestic product"
+      },
+      "rubric": "Accept 'Gross Domestic Product' (case-insensitive).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the oxidation state of sulfur in H2SO4?",
+      "expected": {
+        "answer": "+6"
+      },
+      "rubric": "Accept '+6', '6', or 'VI'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "oxidation"
+      }
+    },
+    {
+      "prompt": "If 5 workers can build a wall in 8 days, how many days will 8 workers take to build the same wall (assuming equal productivity)?",
+      "expected": {
+        "answer": "5"
+      },
+      "rubric": "Numeric only. Inverse proportion: 5*8 = 8*x, so x=5.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "time_work"
+      }
+    },
+    {
+      "prompt": "A number when doubled and increased by 3 gives 17. What is the number?",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only. 2x+3=17, so x=7.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "If the average of 5 numbers is 12, what is their sum?",
+      "expected": {
+        "answer": "60"
+      },
+      "rubric": "Numeric only. Sum = average * count = 12 * 5.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: Which element has the highest first ionization energy in Period 2?",
+      "expected": {
+        "answer": "neon"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "periodic_trends"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which part of the human brain controls balance and coordination?",
+      "expected": {
+        "answer": "cerebellum"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "nervous_system"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: Name the gas produced when an active metal like zinc reacts with hydrochloric acid.",
+      "expected": {
+        "answer": "hydrogen"
+      },
+      "rubric": "Single-word lowercase or 'H2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "Cambridge IGCSE Mathematics: What is the value of cos(0 degrees)?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "IGCSE Chemistry: What is the chemical formula for carbon dioxide?",
+      "expected": {
+        "answer": "co2"
+      },
+      "rubric": "Accept 'CO2' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "SSC GK: Who is known as the 'Iron Man of India' for his role in integrating princely states?",
+      "expected": {
+        "answer": "sardar vallabhbhai patel"
+      },
+      "rubric": "Accept 'Sardar Vallabhbhai Patel', 'Vallabhbhai Patel', or 'Sardar Patel'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: What is the capital of Australia?",
+      "expected": {
+        "answer": "canberra"
+      },
+      "rubric": "Single-word lowercase. (Not Sydney — that's a common trap.)",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "exam": "SSC"
       }
     }
   ]

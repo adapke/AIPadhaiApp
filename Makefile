@@ -1,7 +1,7 @@
 # E2E orchestration. `make e2e` is the one command everything else
 # composes from. See SPRINT_E2E.md for the sprint plan.
 
-.PHONY: help setup up down logs ps seed smoke cypress e2e clean test
+.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify lint
 
 help: ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -61,6 +61,21 @@ test: ## Run pytest + 4 QA harnesses against ad-hoc local server
 	PYTHONPATH=. python -X utf8 scripts/qa_daily_cap.py
 	PYTHONPATH=. python -X utf8 scripts/qa_alert_ui.py
 	PADHAI_DB_PATH=/tmp/qa_bench.db PYTHONPATH=. python -X utf8 scripts/run_accuracy_bench.py --mode=structural
+
+lint: ## Ruff lint (all 9 enforced categories)
+	python -m ruff check padhai/ admin/ tests/ scripts/
+
+verify: ## Quick pre-PR check: lint + pytest + structural bench (~20s on a warm cache)
+	@echo "==> ruff (F E I B UP SIM RUF ARG + B904)"
+	@python -m ruff check padhai/ admin/ tests/ scripts/
+	@echo "==> pytest"
+	@PADHAI_SKIP_DOTENV=1 PADHAI_JWT_SECRET=qa-test-secret-abcdef0123456789abcdef0123456789 \
+		PYTHONPATH=. python -m pytest tests/ -q --tb=line
+	@echo "==> accuracy bench (structural mode — no API key needed)"
+	@PADHAI_DB_PATH=/tmp/qa_bench.db PYTHONPATH=. python -X utf8 \
+		scripts/run_accuracy_bench.py --mode=structural --min-pass-rate=0.5
+	@echo ""
+	@echo "verify green — safe to push."
 
 clean: ## Remove local QA artifacts (DBs, logs)
 	rm -f qa_*.db qa_*.log qa_*.err /tmp/padhai_*.db /tmp/qa_*.db

@@ -678,6 +678,29 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Fourteenth router slice — notifications.** All 5 notification
+  endpoints lifted to `padhai/routers/notifications.py`:
+  `GET/POST /api/notifications/me`, `POST .../{nid}/read`,
+  `POST .../read-all`, and the org-side composer + log
+  (`POST/GET /api/orgs/{id}/notifications`). The `_resolve_audience`
+  helper (audience string → user_id list for push fan-out) ports
+  with the router since this is its only call site. Push fan-out
+  stays best-effort: notification creation never blocks on FCM/APNs
+  failure. ~135 lines off web.py.
+- **`make verify` — one-command pre-PR gate.** Bundles ruff (all
+  9 enforced categories) + pytest (50 tests) + structural-mode
+  accuracy bench (205 items, no API key needed) into ~20 seconds.
+  `make lint` is also exposed standalone. Replaces the multi-step
+  ritual contributors had to remember: ruff, pytest, bench, all
+  with the right env vars. CONTRIBUTING.md still points contributors
+  to `make verify` as the one command they run before pushing.
+- **Accuracy bench 190 → 205 items (crossed the 200 milestone).**
+  Added 5 hard (JEE trig period, NEET insulin, JEE SHM phase, UPSC
+  GDP, NEET sulfur oxidation state), 3 reasoning (workers ratio,
+  number puzzle, average), 3 NEET chemistry/biology depth (neon
+  ionization, cerebellum, Zn+HCl), 2 IGCSE (cos 0, CO2), 2 SSC GK
+  (Sardar Patel, Canberra). Distribution: `easy=122 / medium=56 /
+  hard=27`. Structural runner: 205/205 in 4.1s.
 - **Thirteenth router slice — SCIM 2.0 (`/scim/v2/*`).** All four
   SCIM endpoints + the `_scim_authenticate` bearer-token resolver
   lifted to `padhai/routers/scim.py`: `ServiceProviderConfig`
