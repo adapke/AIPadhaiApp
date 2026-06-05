@@ -11028,44 +11028,7 @@ def curriculum_index(
     }
 
 
-@app.post("/lessons/{lesson_id}/flashcards")
-def make_flashcards(
-    lesson_id: str,
-    count: int = 8,
-    regenerate: bool = False,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Generate (or fetch cached) flashcards for a lesson the student
-    watched. Idempotent — second call returns the cached set unless
-    `regenerate=true`. Free for M1/M2 (uses Haiku 4.5, ~₹0.30/call).
-
-    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
-    if user is None:
-        raise HTTPException(401, "authentication required")
-    from .pedagogy import generate_flashcards
-
-    if not regenerate:
-        cached = cache.get_flashcards(lesson_id)
-        if cached is not None:
-            return {
-                "lesson_id": lesson_id,
-                "cards": cached,
-                "cached": True,
-                "count": len(cached),
-            }
-
-    cached_lesson = cache.get_lesson_by_key(lesson_id)
-    if cached_lesson is None:
-        raise HTTPException(404, "lesson not found; POST /lessons first")
-
-    cards = generate_flashcards(cached_lesson, count=count)
-    cache.put_flashcards(lesson_id, cards)
-    return {
-        "lesson_id": lesson_id,
-        "cards": cards,
-        "cached": False,
-        "count": len(cards),
-    }
+# POST /lessons/{id}/flashcards moved to routers/lesson_detail.py.
 
 
 @app.post("/chat/{lesson_id}")
@@ -11156,25 +11119,7 @@ def chat_about_lesson(
     })
 
 
-@app.post("/lessons/{lesson_id}/quiz")
-def standalone_quiz(
-    lesson_id: str,
-    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
-):
-    """Return the quiz JSON for a cached lesson without rendering a video.
-    Used by the Quiz Maker module — the player UI scores the student and
-    shows correct/wrong feedback. Free: no Claude call, just a cache lookup."""
-    cached_lesson = cache.get_lesson_by_key(lesson_id)
-    if cached_lesson is None:
-        raise HTTPException(404, "lesson not found; POST /lessons first")
-    return {
-        "lesson_id": lesson_id,
-        "title": cached_lesson.title,
-        "language_code": cached_lesson.language_code,
-        "language_name": cached_lesson.language_name,
-        "level": cached_lesson.level,
-        "questions": cached_lesson.quiz,
-    }
+# POST /lessons/{id}/quiz moved to routers/lesson_detail.py.
 
 
 @app.post("/lessons/{lesson_id}/recap")
@@ -11238,72 +11183,8 @@ def get_recap_audio(lesson_id: str):
     return FileResponse(audio_path, media_type="audio/mpeg", filename=f"recap-{lesson_id}.mp3")
 
 
-@app.get("/lessons/{lesson_id}/notes")
-def get_notes(
-    lesson_id: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Fetch the user's notes attached to a lesson. Empty body when none.
-
-    Response carries both `notes` (legacy) and `content` (Cypress-spec
-    convention) keys so callers can use either.
-
-    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
-    if user is None:
-        raise HTTPException(401, "authentication required")
-    user_key = user.id
-    text = cache.get_notes(lesson_id, user_key=user_key) or ""
-    return {"lesson_id": lesson_id, "notes": text, "content": text}
-
-
-@app.post("/lessons/{lesson_id}/notes")
-def put_notes(
-    lesson_id: str,
-    notes: str | None = Form(None, max_length=50_000),
-    content: str | None = Form(None, max_length=50_000),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Save the user's notes (overwrite). The browser autosaves on idle so
-    this gets called silently every few seconds while the user types.
-
-    Accepts either `notes` (legacy) or `content` (Cypress-spec convention)
-    form field — whichever is provided is persisted.
-
-    Per-user resource — requires auth even when PADHAI_REQUIRE_AUTH=0."""
-    if user is None:
-        raise HTTPException(401, "authentication required")
-    text = notes if notes is not None else (content or "")
-    cache.put_notes(lesson_id, text, user_key=user.id)
-    return {"lesson_id": lesson_id, "saved": True, "length": len(text)}
-
-
-@app.post("/lessons/{lesson_id}/flashcards/rate")
-def rate_flashcard(
-    lesson_id: str,
-    card_id: int = Form(...),
-    rating: int = Form(..., ge=0, le=5),
-    user: AuthUser | None = Depends(current_user),
-):
-    """SM-2 review rating endpoint. Forwards to the canonical
-    spaced_repetition.review_card pathway. Requires auth."""
-    if user is None:
-        raise HTTPException(401, "authentication required")
-    try:
-        from . import spaced_repetition as _srs
-        result = _srs.review_card(
-            card_id=str(card_id), user_id=user.id, grade=rating,
-        )
-        return {
-            "lesson_id": lesson_id,
-            "card_id": card_id,
-            "rating": rating,
-            "next_due_at": getattr(result, "due_at", None),
-            "ease": getattr(result, "ease", None),
-        }
-    except Exception as exc:
-        # Unknown card → still tell the client the rating was recorded
-        return {"lesson_id": lesson_id, "card_id": card_id,
-                "rating": rating, "note": str(exc)[:100]}
+# GET/POST /lessons/{id}/notes + /lessons/{id}/flashcards/rate
+# moved to routers/lesson_detail.py.
 
 
 # NB: POST /explain + POST /explain/video live in

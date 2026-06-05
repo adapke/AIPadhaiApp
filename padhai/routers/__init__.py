@@ -58,6 +58,7 @@ _ROUTER_NAMES = (
     "scim",              # v3.x — SCIM 2.0 /scim/v2/* (IdP provisioning — 4 routes)
     "notifications",     # v3.x — /api/notifications/* + /api/orgs/{id}/notifications (5 routes)
     "orgs_schedule",     # v3.x — timetable + today + student-history (4 routes)
+    "lesson_detail",     # v3.x — /lessons/{id}/{flashcards,quiz,notes,rate} (5 cache-only)
 )
 
 
