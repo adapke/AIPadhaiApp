@@ -678,6 +678,30 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Thirteenth router slice — SCIM 2.0 (`/scim/v2/*`).** All four
+  SCIM endpoints + the `_scim_authenticate` bearer-token resolver
+  lifted to `padhai/routers/scim.py`: `ServiceProviderConfig`
+  (IdP discovery), `Users` (list with filter), `Users` POST
+  (provision), `Users/{id}` PATCH (deactivate). The per-org bearer
+  token is the auth surface — `_scim_authenticate` resolves it to
+  `org_id` and 401s on invalid/revoked. ~130 lines off web.py.
+- **Router unit-test harness — `tests/test_routers.py`.** 13 tests
+  covering: (1) every module in `_ROUTER_NAMES` imports without
+  circular errors; (2) one representative URL per extracted slice
+  lands on `app.routes` (catches half-extracted slices); (3) the
+  org-gated routes 401/403 unauthenticated callers BEFORE any DB
+  access; (4) the two intentionally-public branding/SCIM endpoints
+  (resolve + ServiceProviderConfig) return 200 without auth; (5)
+  parametrised tests across 5 `/api/orgs/{id}/<sub>` paths check
+  the role gate runs first. Total tests: 37 → 50.
+- **Accuracy bench 175 → 190 items.** Added 5 reasoning / word-
+  problem items (shopkeeper profit %, rectangle area, ratio
+  problem, pipe fill+empty, simple interest), 4 state-board
+  chemistry/biology (Maharashtra CH4, Karnataka nephron, TamilNadu
+  mitochondria, ICSE acid pH range), 3 CBSE Class 6-8 (equator,
+  Mountbatten, 5! = 120), 3 UPSC GK (ECI, Paris Agreement, Quit
+  India 1942). Bench is now ~16% reasoning problems (was ~10%).
+  Structural runner: 190/190 in 3.8s.
 - **Central model-ID registry — `padhai/models.py`.** 13 files used
   to hardcode Claude model strings (`claude-haiku-4-5-20251001`,
   `claude-sonnet-4-6`, `claude-opus-4-7`). Each rename — like the

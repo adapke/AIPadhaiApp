@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v7: 175 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v8: 190 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2209,6 +2209,199 @@
       "tags": {
         "subject": "math",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "A shopkeeper buys an item for Rs 80 and sells it for Rs 100. What is the percentage profit?",
+      "expected": {
+        "answer": "25"
+      },
+      "rubric": "Numeric only (in %). 20/80 = 25%.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "percentages"
+      }
+    },
+    {
+      "prompt": "A rectangle has length 12 m and breadth 8 m. What is its area in square metres?",
+      "expected": {
+        "answer": "96"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "The ratio of boys to girls in a class is 3:2. If there are 30 students total, how many girls are there?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only. 30 * 2/5 = 12.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "A pipe can fill a tank in 6 hours and another can empty it in 9 hours. If both pipes are opened together, in how many hours will the tank be filled?",
+      "expected": {
+        "answer": "18"
+      },
+      "rubric": "Numeric only. 1/6 - 1/9 = 1/18, so 18 hours.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "time_work"
+      }
+    },
+    {
+      "prompt": "An investment of Rs 5000 earns simple interest at 8% per annum. How much interest is earned in 3 years?",
+      "expected": {
+        "answer": "1200"
+      },
+      "rubric": "Numeric only. SI = P*R*T/100 = 5000*8*3/100 = 1200.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "simple_interest"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 9 Science: What is the chemical formula for methane?",
+      "expected": {
+        "answer": "ch4"
+      },
+      "rubric": "Accept 'CH4' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "Maharashtra",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 10 Biology: Name the structural and functional unit of a kidney.",
+      "expected": {
+        "answer": "nephron"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "Karnataka",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 9 Biology: What is the powerhouse of the cell called?",
+      "expected": {
+        "answer": "mitochondria"
+      },
+      "rubric": "Accept 'mitochondria' or 'mitochondrion'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "TamilNadu",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "ICSE Class 10 Chemistry: What is the pH range of an acidic solution?",
+      "expected": {
+        "answer": "0 to 7"
+      },
+      "rubric": "Accept '0-7', '<7', or 'less than 7'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "ICSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "CBSE Class 6 Geography: What is the name of the imaginary line at 0 degrees latitude?",
+      "expected": {
+        "answer": "equator"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "CBSE Class 8 History: Who was the first Governor-General of independent India?",
+      "expected": {
+        "answer": "lord mountbatten"
+      },
+      "rubric": "Accept 'Lord Mountbatten' or 'Mountbatten'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "CBSE Class 7 Mathematics: What is the value of 5 factorial (5!)?",
+      "expected": {
+        "answer": "120"
+      },
+      "rubric": "Numeric only. 5*4*3*2*1.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "UPSC GS2 Polity: Which body in India is responsible for conducting elections to Parliament and State Legislatures?",
+      "expected": {
+        "answer": "election commission of india"
+      },
+      "rubric": "Accept 'Election Commission of India', 'ECI', or 'Election Commission'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Environment: What is the name of the international agreement adopted in 2015 to combat climate change?",
+      "expected": {
+        "answer": "paris agreement"
+      },
+      "rubric": "Accept 'Paris Agreement' or 'Paris Climate Agreement'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "exam": "UPSC",
+        "topic": "climate"
+      }
+    },
+    {
+      "prompt": "UPSC GS1 History: In which year was the Quit India Movement launched by the Indian National Congress?",
+      "expected": {
+        "answer": "1942"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
       }
     }
   ]
