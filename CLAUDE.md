@@ -678,6 +678,30 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Fifteenth router slice — schedule cluster (4 routes).**
+  `padhai/routers/orgs_schedule.py` groups the timetable read/
+  write, the per-user "what's on today" endpoint, and the per-
+  student assignment-history endpoint. They share a "what's
+  happening in this class for this user" theme and the same
+  org-membership gate. ~85 lines off web.py. Total slices extracted
+  now: 15.
+- **Accuracy bench 205 → 220 items.** Added 4 hard items (JEE wave
+  λ=v/f, NEET propanoic acid IUPAC, JEE e^-x integral, UPSC
+  Article 249), 4 state-board depth (Maharashtra Mariana, Karnataka
+  SONAR, TamilNadu NaOH, UP sin 30°), 3 reasoning (20% discount,
+  triangle angles, x²+y²), 2 IGCSE (chlorophyll b, joule), 2 NEET
+  clinical (vitamin C / scurvy, liver largest gland). Distribution:
+  `easy=130 / medium=59 / hard=31`. Structural runner: 220/220 in
+  3.7s.
+- **ONBOARDING.md — contributor's first-day map.** README + CLAUDE.md
+  + CONTRIBUTING.md were each strong individually but a new
+  contributor still had to read all three plus archaeology the repo
+  for "where do I look for X". ONBOARDING.md is the consolidated
+  map: 5-minute product summary, file-by-task lookup table, full
+  15-router index, the 7 maintained tools, 8 invariants that are
+  codified in CI/lint/asserts, and a 6-step first-day checklist
+  that ends in `make verify`. Lives next to README so GitHub shows
+  it on the repo home.
 - **Fourteenth router slice — notifications.** All 5 notification
   endpoints lifted to `padhai/routers/notifications.py`:
   `GET/POST /api/notifications/me`, `POST .../{nid}/read`,
