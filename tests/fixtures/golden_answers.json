@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v9: 205 items across 9 boards/exams (crossed the 200-item milestone).",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v10: 220 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2593,6 +2593,201 @@
       "tags": {
         "subject": "geography",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Physics: A wave on a string travels with speed v and frequency f. What is its wavelength?",
+      "expected": {
+        "answer": "v/f"
+      },
+      "rubric": "Accept 'v/f', 'v over f', or 'lambda = v/f'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "waves"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the IUPAC name of CH3-CH2-COOH?",
+      "expected": {
+        "answer": "propanoic acid"
+      },
+      "rubric": "Accept 'propanoic acid' or 'propionic acid'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "organic_iupac"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the value of integral from 0 to infinity of e^(-x) dx?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only. (Exponential decay integral.)",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "integration"
+      }
+    },
+    {
+      "prompt": "UPSC GS2: What is the term for the constitutional provision that allows a state to refer a Bill to the Council of States (Rajya Sabha)?",
+      "expected": {
+        "answer": "article 249"
+      },
+      "rubric": "Accept 'Article 249' or 'Art 249'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC",
+        "topic": "centre_state"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 8 Geography: Name the deepest oceanic trench in the world.",
+      "expected": {
+        "answer": "mariana trench"
+      },
+      "rubric": "Accept 'Mariana Trench' or 'Mariana'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "board": "Maharashtra",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 9 Physics: What does SONAR stand for?",
+      "expected": {
+        "answer": "sound navigation and ranging"
+      },
+      "rubric": "Accept 'Sound Navigation and Ranging' (case-insensitive).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "Karnataka",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 10 Chemistry: What is the chemical formula for sodium hydroxide?",
+      "expected": {
+        "answer": "naoh"
+      },
+      "rubric": "Accept 'NaOH' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "TamilNadu",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "UP Board High School Mathematics: What is the value of sin(30 degrees)?",
+      "expected": {
+        "answer": "0.5"
+      },
+      "rubric": "Accept '0.5' or '1/2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "UP",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "A book originally costs Rs 250. After a 20% discount, what is the sale price?",
+      "expected": {
+        "answer": "200"
+      },
+      "rubric": "Numeric only (in rupees). 250 * 0.8 = 200.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "percentages"
+      }
+    },
+    {
+      "prompt": "The sum of the angles of a triangle is _____ degrees.",
+      "expected": {
+        "answer": "180"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "If x = 3 and y = 4, what is the value of x^2 + y^2?",
+      "expected": {
+        "answer": "25"
+      },
+      "rubric": "Numeric only. 9 + 16 = 25.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "Cambridge IGCSE Biology: Name the green pigment that absorbs light during photosynthesis (excluding chlorophyll a).",
+      "expected": {
+        "answer": "chlorophyll b"
+      },
+      "rubric": "Accept 'chlorophyll b'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "IGCSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "IGCSE Physics: State the unit of work and energy in the SI system.",
+      "expected": {
+        "answer": "joule"
+      },
+      "rubric": "Accept 'joule' or 'J'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which vitamin deficiency causes scurvy?",
+      "expected": {
+        "answer": "vitamin c"
+      },
+      "rubric": "Accept 'Vitamin C' or 'ascorbic acid'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "nutrition"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Name the largest gland in the human body.",
+      "expected": {
+        "answer": "liver"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "anatomy"
       }
     }
   ]

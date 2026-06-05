@@ -11872,26 +11872,8 @@ def _org_to_dict(org: _orgs.Org) -> dict:
 # moved to padhai/routers/orgs_assignments.py.
 
 
-@app.get("/api/orgs/{org_id}/students/{uid}/history")
-def get_student_history(
-    org_id: str, uid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """All assignments + completion state for one student.
-
-    Access rules:
-      - admin/teacher: can view any student in the org
-      - student: can view ONLY their own history
-    """
-    user = _require_user(user)
-    _org_or_404(org_id)
-    my_role = _orgs.user_role_in_org(org_id=org_id, user_id=user.id)
-    if my_role is None:
-        raise HTTPException(403, "not a member of this org")
-    if my_role == "student" and user.id != uid:
-        raise HTTPException(403, "students may only view their own history")
-    return {"assignments": _orgs.student_assignment_history(
-        org_id=org_id, user_id=uid)}
+# /api/orgs/{id}/students/{uid}/history moved to
+# padhai/routers/orgs_schedule.py (grouped with timetable + today).
 
 
 # ---------- E2: Notifications (PRD §3.6) ----------
@@ -11927,58 +11909,8 @@ def _resolve_user_org_context(user: AuthUser) -> tuple[list[str], str, str | Non
 
 
 # ---------- E6: Timetable API ----------
-
-@app.get("/api/orgs/{org_id}/classes/{cid}/timetable")
-def get_class_timetable(
-    org_id: str, cid: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """Weekly grid for a class. Anyone in the org can read."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    return {"slots": _orgs.class_timetable(cid)}
-
-
-@app.post("/api/orgs/{org_id}/classes/{cid}/timetable", status_code=201)
-def replace_class_timetable_route(
-    org_id: str, cid: str,
-    slots_json: str = Form(..., description='JSON array of {day_of_week, start_time, end_time, subject, teacher_user_id?, room?}'),
-    user: AuthUser | None = Depends(current_user),
-):
-    """Atomic bulk-replace of a class's timetable. Admin or teacher.
-
-    Format: JSON array. day_of_week 1-7 (1=Monday). start_time + end_time
-    'HH:MM'. subject required. teacher_user_id + room optional.
-
-    Returns {added: N, errors: [(row, reason)]} — partial success is
-    fine; bad rows are reported individually."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher"})
-    try:
-        slots = json.loads(slots_json)
-    except (ValueError, TypeError):
-        raise HTTPException(400, "slots_json must be valid JSON") from None
-    if not isinstance(slots, list):
-        raise HTTPException(400, "slots_json must be a JSON array")
-    return _orgs.replace_class_timetable(
-        org_id=org_id, class_id=cid, slots=slots,
-    )
-
-
-@app.get("/api/orgs/{org_id}/today")
-def get_today_for_user(
-    org_id: str,
-    user: AuthUser | None = Depends(current_user),
-):
-    """What's on for the current user today. Students see their class
-    schedule; teachers see slots they're teaching. Both lists are
-    merged + sorted by start_time."""
-    user = _require_user(user)
-    _org_or_404(org_id)
-    _require_org_role(org_id, user.id, {"admin", "teacher", "student"})
-    return {"slots": _orgs.today_for_user(org_id=org_id, user_id=user.id)}
+# Timetable (GET + POST) + /api/orgs/{id}/today moved to
+# padhai/routers/orgs_schedule.py.
 
 
 # ---------- E8: Parent ↔ child linking (DPDP §9) ----------
