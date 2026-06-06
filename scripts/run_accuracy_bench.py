@@ -1,22 +1,36 @@
 """Accuracy benchmark runner — used by the accuracy-bench CI job.
 
-Two modes:
+Two modes × two judges = the matrix that matters:
 
   --mode=structural  (default; runs without ANTHROPIC_API_KEY)
-    Loads the golden dataset, creates a draft + publishes it, then runs
-    a stub-runner (returns the expected answer verbatim) to verify the
-    storage + judge code paths work end-to-end. Fails on schema errors,
-    storage errors, or judge crashes — but cannot detect real accuracy
-    regressions. Suitable for every PR.
+    Stub-runner returns the expected answer verbatim — verifies the
+    storage + judge code paths end-to-end. Cannot detect model
+    regressions. Every PR.
 
   --mode=live  (requires ANTHROPIC_API_KEY)
-    Same as structural, but the runner calls Claude on each prompt.
-    Produces a real pass-rate. Should be wired to a nightly cron once
-    we have an API key in the CI secret store.
+    Runner calls Claude on each prompt. Produces a real pass-rate.
+
+Judges:
+  --judge=rouge_l  (default) — n-gram LCS overlap. Brittle on
+    paraphrases; good for short-answer fact-recall items.
+  --judge=llm_judge — second Claude call grades CORRECT / PARTIAL /
+    WRONG given (prompt, expected, actual). ~₹0.001 per call.
+    Tolerant of synonyms and valid alternative wordings.
+  --judge=exact_match — lowercase string equality. Strictest.
+  --judge=citation_check — for citation_correctness datasets.
+
+Baseline-capture procedure (prod-5):
+  1. export ANTHROPIC_API_KEY=sk-ant-...
+  2. python scripts/run_accuracy_bench.py \\
+       --mode=live --judge=llm_judge --limit=20 \\
+       --db=/tmp/padhai_bench.db
+  3. Read the `pass_rate=` line in the output — that's the baseline.
+  4. Commit the number into CHANGELOG.md / your run log.
+  Cost: ~₹0.10 (20 answer calls + 20 judge calls at Haiku rates).
 
 Exit codes:
-  0  benchmark completed (structural mode always; live mode if
-     pass_rate >= --min-pass-rate threshold, default 0.70)
+  0  benchmark completed (structural always; live if pass_rate >=
+     --min-pass-rate threshold, default 0.70)
   1  any error (dataset malformed, runner crash, threshold miss)
 """
 from __future__ import annotations
@@ -116,6 +130,10 @@ def main() -> int:
     parser.add_argument("--mode", choices=["structural", "live"], default="structural")
     parser.add_argument("--judge", default="rouge_l")
     parser.add_argument("--min-pass-rate", type=float, default=0.70)
+    parser.add_argument(
+        "--limit", type=int, default=0,
+        help="cap items run (0 = all). Use for cheap baseline samples.",
+    )
     parser.add_argument("--db", default=os.environ.get("PADHAI_DB_PATH", "/tmp/padhai_bench.db"))
     args = parser.parse_args()
 
@@ -127,6 +145,8 @@ def main() -> int:
         return 1
 
     fixture = _load_fixture(fixture_path)
+    if args.limit and args.limit > 0:
+        fixture["items"] = fixture["items"][: args.limit]
     print(f"[bench] fixture: {fixture['code']} ({len(fixture['items'])} items)")
 
     global _STUB_LOOKUP

@@ -414,7 +414,9 @@ def archive_dataset(dataset_id: str) -> bool:
 
 # ---------- judges ----------
 
-def _exact_match(expected: dict, actual: dict) -> tuple[float, str | None]:
+def _exact_match(
+    expected: dict, actual: dict, *, prompt: str | None = None,  # noqa: ARG001
+) -> tuple[float, str | None]:
     e = (expected.get("answer") or "").strip().lower()
     a = (actual.get("answer") or "").strip().lower()
     if not e:
@@ -424,7 +426,9 @@ def _exact_match(expected: dict, actual: dict) -> tuple[float, str | None]:
     return 0.0, f"expected {e!r} != actual {a!r}"
 
 
-def _rouge_l_lite(expected: dict, actual: dict) -> tuple[float, str | None]:
+def _rouge_l_lite(
+    expected: dict, actual: dict, *, prompt: str | None = None,  # noqa: ARG001
+) -> tuple[float, str | None]:
     """Lightweight ROUGE-L approximation — longest common
     subsequence ratio on tokenised words. Good enough for short
     answers; production-grade ROUGE pulls a separate dep."""
@@ -451,7 +455,7 @@ def _rouge_l_lite(expected: dict, actual: dict) -> tuple[float, str | None]:
 
 
 def _quiz_key_check(
-    expected: dict, actual: dict,
+    expected: dict, actual: dict, *, prompt: str | None = None,  # noqa: ARG001
 ) -> tuple[float, str | None]:
     e = expected.get("correct_option")
     a = actual.get("correct_option")
@@ -461,7 +465,7 @@ def _quiz_key_check(
 
 
 def _citation_check(
-    expected: dict, actual: dict,
+    expected: dict, actual: dict, *, prompt: str | None = None,  # noqa: ARG001
 ) -> tuple[float, str | None]:
     """Score = fraction of expected citations that the actual
     answer also covered. Each citation matches on (source_id,
@@ -484,11 +488,88 @@ def _citation_check(
     )
 
 
+# LLM-judge — calls Claude Haiku to grade whether `actual.answer` is
+# acceptable given `expected.answer` and the original prompt. Used when
+# exact_match / rouge_l are too brittle (paraphrases, synonyms, valid
+# alternative wordings). Returns 1.0 for CORRECT, 0.5 for PARTIAL, 0.0
+# for WRONG. Costs ~₹0.001 per call at Haiku rates.
+_LLM_JUDGE_SYSTEM = (
+    "You are grading a student's short answer against an expected "
+    "reference answer. Output exactly one of these three tokens and "
+    "nothing else:\n"
+    "  CORRECT   — the student answer matches the expected meaning "
+    "(synonyms, paraphrases, different wording all count)\n"
+    "  PARTIAL   — on-topic but missing key information OR contains "
+    "a notable error\n"
+    "  WRONG     — incorrect, off-topic, empty, or nonsense\n"
+    "Do not explain. Do not output any other text."
+)
+
+_LLM_JUDGE_VERDICTS = {
+    "CORRECT": 1.0,
+    "PARTIAL": 0.5,
+    "WRONG":   0.0,
+}
+
+
+def _llm_judge_client():
+    """Return an Anthropic client + model id, or raise on missing
+    API key. Lazy-imported so structural mode never pulls anthropic."""
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        raise RuntimeError(
+            "llm_judge requires ANTHROPIC_API_KEY in environment",
+        )
+    from anthropic import Anthropic
+
+    from . import models as _models
+    client = Anthropic()
+    model = os.environ.get("PADHAI_BENCH_JUDGE_MODEL", _models.HAIKU_MODEL)
+    return client, model
+
+
+def _llm_judge(
+    expected: dict, actual: dict, *, prompt: str | None = None,
+) -> tuple[float, str | None]:
+    """Grade actual against expected via a Claude call. Open-coded
+    here (not via llm_call.call_claude) so the bench has zero
+    cross-dependency on cost-tracking / cap-checking — judges are
+    a system-internal QA loop, not a user-facing surface."""
+    exp = (expected.get("answer") or "").strip()
+    act = (actual.get("answer") or "").strip()
+    if not exp:
+        return 0.0, "expected.answer missing"
+    if not act:
+        return 0.0, "actual.answer empty"
+
+    client, model = _llm_judge_client()
+    user_text = (
+        f"Question: {prompt or '(not provided)'}\n"
+        f"Expected: {exp}\n"
+        f"Student:  {act}\n"
+        f"Grade:"
+    )
+    resp = client.messages.create(
+        model=model,
+        max_tokens=10,
+        system=_LLM_JUDGE_SYSTEM,
+        messages=[{"role": "user", "content": user_text}],
+    )
+    text = "".join(b.text for b in resp.content if b.type == "text").strip().upper()
+    # Tolerate trailing punctuation / extra whitespace
+    token = re.split(r"[^A-Z]", text, maxsplit=1)[0]
+    if token in _LLM_JUDGE_VERDICTS:
+        return _LLM_JUDGE_VERDICTS[token], (
+            None if token == "CORRECT" else f"judge: {token}"
+        )
+    return 0.0, f"unparseable verdict: {text!r}"
+
+
 _JUDGES = {
     "exact_match": _exact_match,
     "rouge_l": _rouge_l_lite,
     "quiz_key": _quiz_key_check,
     "citation_check": _citation_check,
+    "llm_judge": _llm_judge,
 }
 
 
@@ -573,7 +654,7 @@ def run_benchmark(
                      f"runner_error: {e}", time.time()),
                 )
             continue
-        score, reason = judge_fn(item.expected, actual)
+        score, reason = judge_fn(item.expected, actual, prompt=item.prompt)
         weighted = score * item.weight
         scores.append(weighted)
         passed = score >= PASS_THRESHOLD

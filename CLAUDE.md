@@ -748,6 +748,44 @@ Reviewed 2026-06-03. Re-audit before changing.
   JEE Advanced, NEET, UPSC Prelims) across recent 5 years =
   ~5000 questions. That's content-acquisition work (OCR + manual
   review), not engineering — the pipeline is ready for it.
+- **prod-5 — LLM-judge for the accuracy bench (single-focus sprint).**
+  The bench had three judges (`exact_match`, `rouge_l`, `quiz_key`)
+  none of which tolerate paraphrases — "Gandhi" vs "Mahatma Gandhi"
+  vs "M.K. Gandhi" all fail `exact_match` and partially-credit
+  under `rouge_l`. So the structural-mode pass_rate=1.000 we
+  ship in CI has been hiding the fact that we'd need a smarter
+  judge to ever flip the live-mode gate from advisory to
+  meaningful. Closed the gap:
+
+  1. `padhai/accuracy_bench.py` — new `_llm_judge()` (Haiku-backed,
+     ~₹0.001 per call) returns 1.0/0.5/0.0 for CORRECT / PARTIAL /
+     WRONG with one-token output. Registered in `VALID_JUDGES` +
+     `_JUDGES`. Judge signature extended to accept `prompt=` so
+     the LLM-judge has question context; existing judges accept
+     and ignore the new kwarg. Lazy-imports anthropic — structural
+     mode still has zero LLM dependency.
+
+  2. `scripts/run_accuracy_bench.py` — new `--limit N` flag for
+     cheap sampling (`--limit=20` keeps the baseline run at ~₹0.10).
+     Docstring documents the full baseline-capture procedure
+     (env var, command, expected output).
+
+  3. `tests/test_llm_judge.py` — 9 regression tests with a fake
+     Anthropic client (no real calls in pytest): CORRECT→1.0,
+     PARTIAL→0.5, WRONG→0.0, trailing-punctuation tolerance,
+     unparseable-verdict guard, empty-actual short-circuit (no
+     judge call burned), missing-API-key clean error, registry
+     consistency, kwarg compatibility across all 4 existing
+     judges.
+
+  Total pytest: 83 → 92.
+
+  Honest gap: the baseline pass_rate is NOT captured yet — that
+  requires `ANTHROPIC_API_KEY` and a 20-call run. The pipeline
+  is ready; the user runs `python scripts/run_accuracy_bench.py
+  --mode=live --judge=llm_judge --limit=20` when they have a key
+  in shell env. Structural CI gate is unchanged (385/385 still
+  passes); LLM-judge is opt-in via `--judge=llm_judge`.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
