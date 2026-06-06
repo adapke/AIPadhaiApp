@@ -1029,6 +1029,56 @@ Reviewed 2026-06-03. Re-audit before changing.
   The catalogue → SPA wiring (swapping hardcoded English in
   `_INDEX_HTML` for `t(key)` calls) is the next sprint —
   without it, the catalogue is ammunition not coverage.
+- **prod-11 — SPA wiring (catalog flows into rendered HTML).**
+  prod-10 brought 8 non-English locales to 100% of the 94-key
+  catalog, but the SPA still served literal English HTML. Closed
+  end-to-end at the request layer:
+
+  1. `padhai/i18n.py` — new `localize_template(html, locale)`:
+     loops the locale's translation pairs (longest-first to avoid
+     substring overlaps), does a literal `str.replace` for each
+     EN value present in the template. Filters out `_meta` keys
+     and values <4 chars (too risky to substring-match — could
+     hit `Up`, `In`). LRU-cached per (template, locale) so the
+     per-request cost is just a dict lookup once the cache is
+     warm.
+
+  2. `padhai/i18n.py` — new `normalise_locale(value)`: maps a
+     raw header / cookie / query value to a supported code.
+     Handles region tags (`hi-IN` → `hi`), Accept-Language priority
+     lists (`ta-IN,en;q=0.9` → `ta`), unknown locales (falls back
+     to `en`).
+
+  3. `padhai/home_ui.py` — `get_home_html(locale=None)` and
+     `get_landing_html(locale=None)` now accept a locale param and
+     call `localize_template` when set.
+
+  4. `padhai/web.py` — new `_locale_from_request(request)` helper
+     resolves locale in this priority order:
+     `?lang=` → `padhai_lang` cookie → `Accept-Language` header
+     → `en` fallback. Wired into `/ui`, `/home`, and the
+     SEO-friendly `/home/{lang}` (which previously only emitted
+     hreflang tags but never localized the body).
+
+  5. `tests/test_i18n_wiring.py` — 11 HTTP-level regression
+     tests using `TestClient`. Canary string is "Sign in" / its
+     8 translations. Tests the four resolution paths (path /
+     query / cookie / default), the unknown-locale fallback
+     behaviour, the substring-guard (no false matches), and
+     the per-locale SEO route for all 9 languages.
+
+  Total pytest: 109 → 120.
+
+  Honest gaps that remain: (a) only the ~47 EN strings in the
+  catalog that match HOME_HTML verbatim get localized — the
+  other ~245 hardcoded English strings (modal copy, error
+  messages, A11y labels with extra characters like
+  `🇮🇳 Home`) still render in English. Closing them is a
+  catalog-expansion + HTML-edit pass, not engineering. (b) The
+  `_INDEX_HTML` legacy SPA at `/ui-legacy` is untouched — it
+  predates the catalog and uses inline `data-lang-key` attributes
+  that need a different rewiring strategy. (c) Mobile shell
+  Capacitor JS doesn't yet read the catalog — it ships English.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,

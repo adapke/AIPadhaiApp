@@ -80,6 +80,68 @@ def missing_keys(locale: str) -> list[str]:
     return [k for k in en if not loc.get(k)]
 
 
+@lru_cache(maxsize=32)
+def _swap_pairs(locale: str) -> tuple[tuple[str, str], ...]:
+    """Return ordered (en_value, localized_value) pairs for the
+    given locale. Longer values first so 'AI Tutor' replaces before
+    'AI'. Excludes meta keys, identical mappings (locale value ==
+    English), and values shorter than 4 chars (too risky to
+    substring-match — could hit code identifiers like 'Up' or 'In').
+    """
+    if locale == "en" or locale not in SUPPORTED_LOCALES:
+        return ()
+    en = load("en")
+    loc = load(locale)
+    pairs: list[tuple[str, str]] = []
+    for key, en_val in en.items():
+        if key.startswith("_meta"):
+            continue
+        loc_val = loc.get(key)
+        if not loc_val or loc_val == en_val:
+            continue
+        if not isinstance(en_val, str) or len(en_val) < 4:
+            continue
+        pairs.append((en_val, loc_val))
+    # Sort longest-first so partial overlaps don't cause double-replace.
+    pairs.sort(key=lambda p: -len(p[0]))
+    return tuple(pairs)
+
+
+@lru_cache(maxsize=64)
+def localize_template(html: str, locale: str) -> str:
+    """Server-side render — swap every English string in `html` for
+    its translation in `locale`. Naive string-replace, but sufficient
+    for the SPA's static UI labels which match en.json verbatim.
+
+    Cached per (html, locale) tuple. Since the templates are
+    module-level constants, the cache stays warm across requests.
+
+    Falls back to returning `html` unchanged when locale == 'en' or
+    the locale has no swap pairs (unknown locale, or all values
+    identical to English)."""
+    if locale == "en":
+        return html
+    pairs = _swap_pairs(locale)
+    if not pairs:
+        return html
+    out = html
+    for en_val, loc_val in pairs:
+        if en_val in out:
+            out = out.replace(en_val, loc_val)
+    return out
+
+
+def normalise_locale(value: str | None) -> str:
+    """Map a raw header/cookie/path value to a supported locale code.
+    Strips region tags (e.g. 'hi-IN' → 'hi'), lowercases, falls back
+    to 'en' for anything unrecognised.
+    """
+    if not value:
+        return "en"
+    code = value.split(",")[0].split("-")[0].strip().lower()
+    return code if code in SUPPORTED_LOCALES else "en"
+
+
 def coverage() -> dict:
     """Translation coverage stats for all locales."""
     en = load("en")

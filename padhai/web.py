@@ -9536,18 +9536,41 @@ def root(accept: str | None = Header(default=None)):
     )
 
 
+def _locale_from_request(request: Request) -> str:
+    """prod-11 — pick a locale for the SPA. Resolution order:
+      1. `?lang=xx` query param (explicit user choice during a visit)
+      2. `padhai_lang` cookie (sticky after the user picks a language)
+      3. `Accept-Language` header (browser/OS preference)
+      4. 'en' fallback
+    Always returns a value in `i18n.SUPPORTED_LOCALES`.
+    """
+    from . import i18n
+    qp = request.query_params.get("lang")
+    if qp:
+        return i18n.normalise_locale(qp)
+    cookie = request.cookies.get("padhai_lang")
+    if cookie:
+        return i18n.normalise_locale(cookie)
+    al = request.headers.get("accept-language", "")
+    return i18n.normalise_locale(al)
+
+
 @app.get("/ui", response_class=HTMLResponse)
-def ui() -> HTMLResponse:
+def ui(request: Request) -> HTMLResponse:
     """Direct link to the goal-led home UI — useful when an API
     client wants to reach the browser UI explicitly without playing
-    accept-header games."""
-    return HTMLResponse(_home_ui.get_home_html())
+    accept-header games. prod-11: locale resolved from ?lang= /
+    cookie / Accept-Language."""
+    locale = _locale_from_request(request)
+    return HTMLResponse(_home_ui.get_home_html(locale=locale))
 
 
 @app.get("/home", response_class=HTMLResponse)
-def home_page() -> HTMLResponse:
-    """Alias — explicit /home route per the mockup."""
-    return HTMLResponse(_home_ui.get_home_html())
+def home_page(request: Request) -> HTMLResponse:
+    """Alias — explicit /home route per the mockup. prod-11: locale
+    resolved from ?lang= / cookie / Accept-Language."""
+    locale = _locale_from_request(request)
+    return HTMLResponse(_home_ui.get_home_html(locale=locale))
 
 
 # P2 — India-first SEO. Per-language landing pages so Google can index
@@ -9579,7 +9602,8 @@ def home_page_localized(lang: str) -> HTMLResponse:
     """
     if lang not in _SEO_LOCALES and lang != "en":
         raise HTTPException(404, "unsupported locale")
-    html = _home_ui.get_home_html()
+    # prod-11 — actually localize the template, not just hreflang.
+    html = _home_ui.get_home_html(locale=lang)
     # Inject hreflang + locale pre-seed before </head>
     hreflangs = [
         '<link rel="alternate" hreflang="en-IN" href="https://aipadhai.app/home">',

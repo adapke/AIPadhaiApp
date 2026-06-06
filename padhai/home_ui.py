@@ -1919,14 +1919,29 @@ LANDING_HTML = """<!doctype html>
 """
 
 
-def get_home_html() -> str:
+def get_home_html(locale: str | None = None) -> str:
     """The goal-led home that consumes /api/navigation/manifest +
-    /api/home/me/dashboard."""
-    return HOME_HTML
+    /api/home/me/dashboard.
+
+    `locale` (prod-11): when set to a supported non-English code,
+    the HOME_HTML template's English UI labels are swapped for the
+    locale's translations via `i18n.localize_template`. Defaults
+    to English when None / 'en' / unknown.
+    """
+    if not locale or locale == "en":
+        return HOME_HTML
+    from . import i18n
+    return i18n.localize_template(HOME_HTML, locale)
 
 
-def get_landing_html() -> str:
+def get_landing_html(locale: str | None = None) -> str:
     """Public landing for unauthed visitors. Carries an inline
     sign-in/signup form that POSTs to /auth/login or /auth/signup
-    (existing endpoints)."""
-    return LANDING_HTML
+    (existing endpoints).
+
+    `locale` (prod-11): same semantics as get_home_html.
+    """
+    if not locale or locale == "en":
+        return LANDING_HTML
+    from . import i18n
+    return i18n.localize_template(LANDING_HTML, locale)
