@@ -946,6 +946,54 @@ Reviewed 2026-06-03. Re-audit before changing.
   classifier is heuristic; a handler that auth-gates via an
   uncommon pattern (e.g. inside an `if/else` branch) might be
   misclassified. The HTTP test in SECURITY.md is the ground truth.
+- **prod-9 — close prod-8's two findings (single-focus sprint).**
+  Both gaps that the tier audit surfaced are now closed end-to-end,
+  with HTTP-level verification:
+
+  1. **`/api/admin/*` anonymous gap (HIGH security).** 112 routes
+     across `v3.py` (110), `catalog.py` (1), and `doubt_ai.py` (1)
+     accepted anonymous traffic — confirmed by direct
+     `TestClient.get(path)` at prod-8 returning 200. Rather than
+     touch 112 handlers, added a router-level dependency injector
+     at `padhai/routers/__init__.py:_inject_admin_dep` that walks
+     every router's routes and prepends
+     `Depends(api_deps.make_admin_dep())` to any route whose path
+     starts with `/api/admin/`. The injection mutates
+     `route.dependencies` (the declarative list) — NOT
+     `route.dependant.dependencies` (the computed tree) — so that
+     `app.include_router` picks it up when building the app's
+     APIRoute copies. Verified: same 4 sentinel paths now return
+     **401** anonymous. Audit ADMIN_ONLY count: 5 → 117.
+
+  2. **Zero tier-gated endpoints.** Gated `POST /api/v2/video-requests`
+     and `POST /api/v2/video-requests/{request_id}/regenerate` at
+     **M2** via inline `_require_tier(user, "M2")`. Long-form
+     personalised video render is the clearest premium feature
+     across competitors (BYJU's / Vedantu / Unacademy). Verified:
+     anonymous POST returns 401. Audit TIER_GATED count: 0 → 2.
+     The remaining premium surfaces (M3/M4* photoreal, premium
+     voice) need pricing decisions before gating — those are
+     product work, not engineering.
+
+  3. **Audit classifier upgrade.** Added `_classify_route_deps()`
+     to `scripts/audit_endpoint_tiers.py` so router-level
+     dependency injections are detected — without this the
+     classifier would have continued to report the 112 newly-gated
+     routes as PUBLIC/ANONYMOUS_OK based on their unchanged
+     handler bodies. The injected-deps check overrides the AST
+     classification.
+
+  4. **Updated regression test baselines** in
+     `tests/test_endpoint_tier_map.py`: EXPECTED_COUNTS now reads
+     `{ADMIN_ONLY: 117, ANONYMOUS_OK: 427, PUBLIC: 163,
+     TIER_GATED: 2, AUTH_REQUIRED: 16, UNKNOWN: 1}`. Replaced the
+     `test_no_tier_gated_endpoints_yet` snapshot with
+     `test_known_tier_gated_endpoints` that pins the exact set of
+     gated endpoints — future gate additions need explicit review.
+
+  `SECURITY.md` "Known gaps" section moved both findings to a
+  **CLOSED at prod-9** state with the fix-shape preserved as
+  history. Total pytest unchanged at 107/107.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,

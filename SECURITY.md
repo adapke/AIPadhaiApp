@@ -222,14 +222,14 @@ Last reviewed: 2026-06-06.
 
 ---
 
-## Known gaps (tracked, not yet fixed)
+## Known gaps (tracked)
 
-Surfaced by `scripts/audit_endpoint_tiers.py` at prod-8. These are
-**real** issues, not classifier defects — verified by anonymous
-`TestClient.get(path)` returning HTTP 200 against a development boot
-of `padhai.web:app`.
+Surfaced by `scripts/audit_endpoint_tiers.py` at prod-8. Both
+findings closed at prod-9 — keeping the history here so future
+contributors can see the pattern and replicate the regression
+catch.
 
-### 1. Unauthenticated `/api/admin/*` endpoints (HIGH)
+### 1. Unauthenticated `/api/admin/*` endpoints (HIGH) — CLOSED at prod-9
 
 Many `/api/admin/*` routes registered by `padhai/routers/v3.py` have
 no `current_user` dependency and no in-handler auth check. Anonymous
@@ -246,17 +246,17 @@ clause, so per-handler auth is opt-in. Many handlers forgot to opt
 in. The path prefix `/api/admin/` is *naming convention only*; the
 router doesn't enforce it.
 
-Fix shape (next sprint): convert `v3.py`'s `router = APIRouter()` to
-`APIRouter(dependencies=[...])` for the `/api/admin/...` subset, OR
-split admin routes into a sibling `routers/v3_admin.py` that carries
-the dependency at the router level. Audit `docs/ENDPOINT_TIER_MAP.md`
-afterwards to confirm the counts move from PUBLIC → ADMIN_ONLY.
+**Fix applied at prod-9**: `padhai/routers/__init__.py:_inject_admin_dep`
+iterates every yielded router and inserts
+`Depends(api_deps.make_admin_dep())` at index 0 of the route's
+`dependencies` list for any path beginning with `/api/admin/`. The
+injection happens *before* `app.include_router` reads the route's
+declarative deps, so the app's APIRoute copy carries the gate.
+Verified anonymous calls return 401 on the four sentinel paths
+above. Audit count moved from ADMIN_ONLY=5 → 117 in
+`docs/ENDPOINT_TIER_MAP.md`.
 
-Until the fix lands: **gate `/api/admin/*` at the reverse proxy**
-(allow only office-IP CIDR or VPN) — `nginx`/Cloudflare WAF rule, not
-application code. Add to PRODUCTION_CHECKLIST.md §6.
-
-### 2. Zero tier-gated endpoints
+### 2. Zero tier-gated endpoints — CLOSED at prod-9 (first gates)
 
 The codebase ships a `_require_tier(user, "Mx")` helper in
 `padhai/web.py` but no endpoint actually calls it. Every "premium"
@@ -265,9 +265,15 @@ free for any signed-in user today. This isn't a security issue —
 it's a revenue issue — but it's surfaced by the same audit so it
 lives here for visibility.
 
-Fix shape: identify the 8–12 endpoints that are intended to be paid,
-add `user = _require_tier(user, "M2")` (or higher) at the top of
-each handler, re-run the audit script, and update
-`docs/ENDPOINT_TIER_MAP.md`. The `test_no_tier_gated_endpoints_yet`
-regression test will appropriately fail and need updating once any
-of them are gated.
+**Initial gates applied at prod-9**: `POST /api/v2/video-requests`
+and `POST /api/v2/video-requests/{request_id}/regenerate` both
+gate at **M2**. Long-form personalised video render is the clearest
+premium feature across competitors. The remaining premium surfaces
+(photoreal avatar tiers M3/M4*, premium voice tutoring) need
+pricing decisions before they get gated — those land in a follow-up
+sprint with product input.
+
+`test_known_tier_gated_endpoints` in `tests/test_endpoint_tier_map.py`
+pins the exact set of gated endpoints. Any future gate addition
+must update both the audit map and the test expectation — that's
+the deliberate review trigger.

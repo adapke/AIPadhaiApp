@@ -10810,6 +10810,11 @@ def v2_create_video_request(
     `/explain/video` worker depending on whether the user provided a
     file or a topic — but all the personalization passes through
     PersonalizationProfile so the script and render adapt correctly."""
+    # prod-9 — tier gate: long-form personalised video render is a
+    # premium feature across all competitors (BYJU's / Vedantu /
+    # Unacademy). M1 (free tier) users get the cartoon-avatar
+    # /lessons path; this richer pipeline requires M2+.
+    user = _require_tier(user, "M2")
     # Moderation gate before any generation work — text-only path for
     # now. Image moderation (vision-based Haiku call) will land in
     # v0.10.1; for now the existing copyright/safety prompts in
@@ -10997,7 +11002,7 @@ def v2_regenerate(
     change: str = Form(..., description="make_easier|make_advanced|change_language|shorten|exam_focused|create_short"),
     language: str | None = Form(None),
     duration_seconds: int | None = Form(None),
-    user: AuthUser | None = Depends(current_user),  # noqa: ARG001
+    user: AuthUser | None = Depends(current_user),
 ):
     """PRD §13.6 — Linked regeneration with structured change intent.
 
@@ -11005,6 +11010,9 @@ def v2_regenerate(
     `change_language` regen only pays for translation+TTS+render, not
     a fresh Claude vision call.
     """
+    # prod-9 — tier gate: regeneration consumes the same render
+    # capacity as the original; gate at the same M2 floor.
+    _require_tier(user, "M2")
     parent_job = store.get(request_id)
     if not parent_job:
         raise HTTPException(404, "request not found")

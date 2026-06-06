@@ -71,10 +71,57 @@ _ROUTER_NAMES = (
 )
 
 
+def _inject_admin_dep(routers):
+    """prod-9 — close the /api/admin/* anonymous-access gap.
+
+    v3.py + a couple of strays declare `/api/admin/*` routes
+    without per-handler auth. Rather than touch 112 handlers, we
+    inject the admin-gate dependency into each `/api/admin/*` route's
+    `dependencies` list BEFORE `app.include_router` reads it.
+
+    Why dependencies and not dependant: `app.include_router` doesn't
+    reuse the router's route objects — it rebuilds them from
+    `route.dependencies` (the declarative list) plus its own. Mutating
+    `route.dependant.dependencies` (the computed tree) is invisible to
+    the app's copy. Mutating `route.dependencies` propagates.
+
+    Idempotent: skipped if the admin dep is already in the list.
+    """
+    from fastapi import Depends
+
+    from .. import api_deps
+    admin_dep_fn = api_deps.make_admin_dep()
+    dep = Depends(admin_dep_fn)
+
+    for router in routers:
+        for route in router.routes:
+            path = getattr(route, "path", "") or ""
+            if not path.startswith("/api/admin/"):
+                continue
+            existing = getattr(route, "dependencies", None)
+            if existing is None:
+                continue
+            # Idempotency check — don't double-inject on a reload.
+            already = any(
+                getattr(d, "dependency", None) is admin_dep_fn
+                for d in existing
+            )
+            if already:
+                continue
+            existing.insert(0, dep)
+
+
 def all_routers():
     """Lazy-import each module and yield its `router`. Avoids importing
     every router at package import time; lets web.py's lifecycle stay
-    in control."""
+    in control.
+
+    Also injects the admin auth dep into `/api/admin/*` routes (see
+    `_inject_admin_dep` — closes the prod-8 finding).
+    """
+    routers = []
     for name in _ROUTER_NAMES:
         mod = __import__(f"padhai.routers.{name}", fromlist=["router"])
-        yield mod.router
+        routers.append(mod.router)
+    _inject_admin_dep(routers)
+    yield from routers

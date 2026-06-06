@@ -65,6 +65,28 @@ def _rel_path(p: str | None) -> str | None:
         return p
 
 
+def _classify_route_deps(route) -> dict:
+    """Inspect the route's declarative dependencies list for the
+    prod-9 router-level admin gate. Returns {admin_via_dep, tier_min}.
+
+    This is the path used by the `_inject_admin_dep` injector in
+    `padhai/routers/__init__.py` — it bypasses the handler body, so
+    AST-walking the handler alone would miss it."""
+    out = {"admin_via_dep": False, "tier_min_via_dep": None}
+    deps = getattr(route, "dependencies", None) or []
+    for d in deps:
+        call = getattr(d, "dependency", None) or getattr(d, "call", None)
+        if call is None:
+            continue
+        name = getattr(call, "__name__", "")
+        # The injected admin dep is the closure returned by
+        # api_deps.make_admin_dep(); it's bound under the local name
+        # `admin_user_dep`.
+        if name in ("admin_user_dep", "_admin_user_dep", "make_admin_dep"):
+            out["admin_via_dep"] = True
+    return out
+
+
 def _classify_endpoint(endpoint) -> dict:
     """Return {tier_class, min_tier, source_file, lineno} for one handler."""
     try:
@@ -172,6 +194,12 @@ def audit() -> dict:
         if _SKIP_PATH_RE.match(path):
             continue
         meta = _classify_endpoint(endpoint)
+        # Router-level deps win — they trump the in-handler classification
+        # because the gate fires before the handler body runs.
+        dep_meta = _classify_route_deps(r)
+        if dep_meta["admin_via_dep"]:
+            meta["tier_class"] = "ADMIN_ONLY"
+            meta["min_tier"] = None
         routes.append({
             "path": path,
             "methods": [m for m in methods if m != "HEAD"],

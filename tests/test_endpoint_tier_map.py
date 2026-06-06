@@ -26,17 +26,19 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 
-# Baseline captured at prod-8 (the audit-write run).
+# Baseline last updated at prod-9. Changes from prod-8:
+#   ADMIN_ONLY: 5 -> 117 (router-level inject closed /api/admin/* gap)
+#   ANONYMOUS_OK: 499 -> 427
+#   PUBLIC: 205 -> 163
+#   TIER_GATED: 0 -> 2 (POST /api/v2/video-requests + regenerate at M2)
 EXPECTED_TOTAL = 726
 EXPECTED_COUNTS = {
-    "ADMIN_ONLY":    5,
-    "ANONYMOUS_OK":  499,
+    "ADMIN_ONLY":    117,
+    "ANONYMOUS_OK":  427,
     "AUTH_REQUIRED": 16,
-    "PUBLIC":        205,
+    "PUBLIC":        163,
+    "TIER_GATED":    2,
     "UNKNOWN":       1,
-    # NOTE: TIER_GATED intentionally absent (count == 0). When the
-    # first endpoint adds `_require_tier(user, "Mx")`, this test
-    # fails with a clear diff, and TIER_GATED gets added here.
 }
 
 # Drift tolerance — counts must match EXACTLY. A "small" change is
@@ -89,19 +91,24 @@ def test_tier_class_distribution_locked():
     )
 
 
-def test_no_tier_gated_endpoints_yet():
-    """Surface the honest gap — at prod-8 NO endpoint gates by tier.
-    This test exists to be deliberately deleted/inverted when the
-    first paid feature lands. Don't quietly assume it's still true."""
+def test_known_tier_gated_endpoints():
+    """At prod-9, two POST endpoints under /api/v2/video-requests gate
+    at M2. If a new tier gate lands, this test fails with a clear diff
+    and needs updating (intentional — pricing changes deserve review).
+    """
     data = _load_map()
-    tier_gated = [
-        r for r in data["routes"] if r["tier_class"] == "TIER_GATED"
-    ]
-    assert tier_gated == [], (
-        f"TIER_GATED endpoints found: "
-        f"{[r['path'] for r in tier_gated]}. "
-        "This test was written when there were zero such endpoints. "
-        "Delete it (and the comment) once tier-gating starts shipping."
+    tier_gated = sorted(
+        (",".join(r["methods"]) + " " + r["path"], r.get("min_tier"))
+        for r in data["routes"] if r["tier_class"] == "TIER_GATED"
+    )
+    expected = sorted([
+        ("POST /api/v2/video-requests", "M2"),
+        ("POST /api/v2/video-requests/{request_id}/regenerate", "M2"),
+    ])
+    assert tier_gated == expected, (
+        f"TIER_GATED set changed.\n"
+        f"  expected: {expected}\n"
+        f"  actual:   {tier_gated}"
     )
 
 

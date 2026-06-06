@@ -114,3 +114,23 @@ def require_admin_role(user) -> None:
     if not os.environ.get("DATABASE_URL"):
         return
     raise HTTPException(403, "admin only")
+
+
+def make_admin_dep():
+    """Build a FastAPI-Depends-able admin gate. Returns a function
+    `f(user = Depends(current_user)) -> AuthUser` that raises 401
+    if unauthenticated, 403 if not admin.
+
+    Late-built (not module-level) so importers don't pull web.py at
+    api_deps load time — that order matters because web.py imports
+    api_deps during its own startup.
+    """
+    from fastapi import Depends
+
+    from .web import current_user as _current_user
+
+    def admin_user_dep(user=Depends(_current_user)):
+        require_admin_role(user)
+        return user
+
+    return admin_user_dep
