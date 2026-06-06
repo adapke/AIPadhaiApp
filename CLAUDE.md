@@ -678,6 +678,18 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twenty-fourth router slice — push admin (3 routes).**
+  `padhai/routers/push_admin.py` covers `POST /api/push/{log_id}/
+  opened` (public client beacon — log_id is the auth), `GET
+  /api/push/log` (authed — scoped to caller's own rows unless
+  they're an admin in any org), `GET /api/push/stats` (public
+  aggregate metrics, no PII). ~60 lines off web.py.
+- **Accuracy bench 340 → 355 items.** Linear slope=3, virus
+  genetic material RNA/DNA, 8 electrons in oxygen, Lok Sabha min
+  age 25, GCD(18,24)=6, boat-stream speed 12.5 km/h, Guru Nanak
+  founded Sikhism, NaCl molar mass 58.5, Sarvodaya by Gandhi,
+  chloroplast for photosynthesis, 0.5 moles in 22g CO2, Jupiter
+  largest planet, c=3×10⁸ m/s, RBCs transport O₂, Gandhi 1948.
 - **Twenty-third router slice — personalisation (2 routes).**
   `padhai/routers/personalisation.py` covers `GET /me/stats`
   (7-day activity rollup — thin wrapper around the shared

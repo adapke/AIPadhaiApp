@@ -66,6 +66,7 @@ _ROUTER_NAMES = (
     "avatar_admin",      # v3.x — /api/avatar-providers + /api/avatar-stats* (3 routes)
     "misc_status",       # v3.x — /api/exam-mode/active + /api/fees/config (2 routes)
     "personalisation",   # v3.x — /me/stats + /learning-path (per-user dashboard)
+    "push_admin",        # v3.x — /api/push/* (3 routes — opened beacon, log, stats)
 )
 
 

@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v18: 340 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v19: 355 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -4302,6 +4302,194 @@
       "difficulty": "easy",
       "tags": {
         "subject": "biology",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the slope of the line y = 3x + 5?",
+      "expected": {
+        "answer": "3"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What is the genetic material in most viruses?",
+      "expected": {
+        "answer": "rna or dna"
+      },
+      "rubric": "Accept 'RNA or DNA', 'RNA/DNA', or specify either acceptable.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: How many electrons does a neutral oxygen atom have?",
+      "expected": {
+        "answer": "8"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS2: What is the minimum age to be elected to the Lok Sabha?",
+      "expected": {
+        "answer": "25"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "Find the GCD (HCF) of 18 and 24.",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "A boat travels 30 km downstream in 2 hours and 30 km upstream in 3 hours. What is the speed of the boat in still water (in km/h)?",
+      "expected": {
+        "answer": "12.5"
+      },
+      "rubric": "Numeric only. Downstream = 15, upstream = 10, boat = 12.5.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 11 History: Who was the founder of the Sikh religion?",
+      "expected": {
+        "answer": "guru nanak"
+      },
+      "rubric": "Accept 'Guru Nanak' or 'Guru Nanak Dev'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "board": "Maharashtra",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 12 Chemistry: What is the molar mass of NaCl in g/mol (Na=23, Cl=35.5)?",
+      "expected": {
+        "answer": "58.5"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "Karnataka",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 10 History: Name the Indian who started the Sarvodaya movement.",
+      "expected": {
+        "answer": "mahatma gandhi"
+      },
+      "rubric": "Accept 'Mahatma Gandhi' or 'M.K. Gandhi'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "board": "TamilNadu",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 12 Biology: Name the organelle responsible for photosynthesis.",
+      "expected": {
+        "answer": "chloroplast"
+      },
+      "rubric": "Accept 'chloroplast' or 'chloroplasts'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "AP_Telangana",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "UP Board Class 11 Chemistry: Calculate the number of moles in 22 grams of CO2 (molar mass 44).",
+      "expected": {
+        "answer": "0.5"
+      },
+      "rubric": "Numeric only. 22/44 = 0.5.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "UP",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "ICSE Class 8 Geography: Name the largest planet in our solar system.",
+      "expected": {
+        "answer": "jupiter"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "ICSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "IGCSE Physics: What is the speed of light in vacuum (in 10^8 m/s, to 1 dp)?",
+      "expected": {
+        "answer": "3.0"
+      },
+      "rubric": "Accept '3', '3.0', or '2.998'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "IGCSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What is the function of red blood cells?",
+      "expected": {
+        "answer": "transport oxygen"
+      },
+      "rubric": "Accept 'transport oxygen', 'carry oxygen', or 'oxygen transport'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "SSC GK: In which year was Mahatma Gandhi assassinated?",
+      "expected": {
+        "answer": "1948"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
         "exam": "SSC"
       }
     }
