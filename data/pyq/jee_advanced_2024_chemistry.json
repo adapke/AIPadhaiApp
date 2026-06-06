@@ -1,0 +1,114 @@
+{
+  "source": "jee_advanced_2024_paper1_chemistry",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2024,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "Number of σ bonds in benzene (C6H6) is:",
+      "options": [
+        "6",
+        "9",
+        "12",
+        "3"
+      ],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "pH of 0.001 M HCl solution is:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Equilibrium",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which has the highest first ionization energy?",
+      "options": [
+        "Na",
+        "Mg",
+        "Al",
+        "Si"
+      ],
+      "correct_answer": "D",
+      "chapter": "Periodic Properties",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Aldol condensation of acetaldehyde gives:",
+      "options": [
+        "acetone",
+        "3-hydroxybutanal",
+        "ethanol",
+        "acetic acid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes and Ketones",
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Coordination number of Na+ in NaCl crystal lattice is:",
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Atomic radius increases down a group because of:",
+      "options": [
+        "increasing nuclear charge",
+        "added electron shells",
+        "decreasing effective nuclear charge",
+        "both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Periodic Properties",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Enthalpy of neutralization of strong acid + strong base is:",
+      "options": [
+        "-57.1 kJ/mol",
+        "-285 kJ/mol",
+        "0",
+        "+57 kJ/mol"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Bohr radius (n=1, H atom) is approximately:",
+      "options": [
+        "0.529 Å",
+        "1.06 Å",
+        "5.29 Å",
+        "0.0529 Å"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

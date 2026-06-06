@@ -1,0 +1,75 @@
+{
+  "source": "cbse_class10_2024_social_science",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "social_science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Who wrote the Indian national anthem?",
+      "options": [
+        "Bankim Chandra",
+        "Rabindranath Tagore",
+        "Subramania Bharati",
+        "Sarojini Naidu"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nationalism in India",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Globalization in India accelerated after which year?",
+      "options": [
+        "1947",
+        "1971",
+        "1991",
+        "2000"
+      ],
+      "correct_answer": "C",
+      "chapter": "Globalization",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Major iron-ore producing state in India:",
+      "options": [
+        "Kerala",
+        "Jharkhand",
+        "Punjab",
+        "Gujarat"
+      ],
+      "correct_answer": "B",
+      "chapter": "Resources",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "First general election in India was held in:",
+      "options": [
+        "1947",
+        "1950",
+        "1951-52",
+        "1957"
+      ],
+      "correct_answer": "C",
+      "chapter": "Political History",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Power sharing arrangement most common in India:",
+      "options": [
+        "caste-based",
+        "federal (centre-state)",
+        "executive-only",
+        "individual"
+      ],
+      "correct_answer": "B",
+      "chapter": "Federalism",
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

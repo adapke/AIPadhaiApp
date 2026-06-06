@@ -1,0 +1,101 @@
+{
+  "source": "upsc_prelims_2024_gs1_geography",
+  "default_board": "upsc",
+  "default_grade": 0,
+  "default_subject": "geography",
+  "default_year": 2024,
+  "default_paper": "prelims",
+  "questions": [
+    {
+      "question_text": "Tropic of Cancer passes through how many Indian states?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correct_answer": "C",
+      "chapter": "India Physical",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Highest peak in India is:",
+      "options": [
+        "K2",
+        "Kanchenjunga",
+        "Nanda Devi",
+        "Everest"
+      ],
+      "correct_answer": "B",
+      "chapter": "India Physical",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which river is known as the Sorrow of Bihar?",
+      "options": [
+        "Ganga",
+        "Kosi",
+        "Brahmaputra",
+        "Yamuna"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rivers of India",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Largest delta in India is formed by:",
+      "options": [
+        "Kaveri",
+        "Krishna",
+        "Sundarbans (Ganga-Brahmaputra)",
+        "Mahanadi"
+      ],
+      "correct_answer": "C",
+      "chapter": "Rivers of India",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which line separates India from China?",
+      "options": [
+        "Radcliffe",
+        "McMahon",
+        "Durand",
+        "Maginot"
+      ],
+      "correct_answer": "B",
+      "chapter": "Boundaries",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Maximum monsoon rainfall in India occurs in:",
+      "options": [
+        "June",
+        "July",
+        "August",
+        "September"
+      ],
+      "correct_answer": "B",
+      "chapter": "Climate",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The Western Ghats are also known as:",
+      "options": [
+        "Sahyadri",
+        "Vindhya",
+        "Satpura",
+        "Aravalli"
+      ],
+      "correct_answer": "A",
+      "chapter": "India Physical",
+      "difficulty": "easy",
+      "marks": 2
+    }
+  ]
+}

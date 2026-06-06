@@ -1,0 +1,62 @@
+{
+  "source": "up_high_school_2024_science",
+  "default_board": "state_up",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Acid present in lemon:",
+      "options": [
+        "acetic",
+        "citric",
+        "lactic",
+        "oxalic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Acids",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Speed of light is approximately:",
+      "options": [
+        "3 × 10⁸ m/s",
+        "3 × 10⁶ m/s",
+        "3 × 10⁵ m/s",
+        "300 m/s"
+      ],
+      "correct_answer": "A",
+      "chapter": "Light",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of protons in oxygen atom:",
+      "options": [
+        "6",
+        "8",
+        "10",
+        "16"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Largest gland in human body:",
+      "options": [
+        "thyroid",
+        "pancreas",
+        "liver",
+        "pituitary"
+      ],
+      "correct_answer": "C",
+      "chapter": "Human Body",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

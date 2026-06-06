@@ -1,0 +1,62 @@
+{
+  "source": "westbengal_madhyamik_2024_mathematics",
+  "default_board": "state_wb",
+  "default_grade": 10,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "If a:b = 2:3, b:c = 4:5, then a:c =",
+      "options": [
+        "8:15",
+        "2:5",
+        "8:5",
+        "15:8"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ratio",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Square root of 144:",
+      "options": [
+        "10",
+        "12",
+        "14",
+        "16"
+      ],
+      "correct_answer": "B",
+      "chapter": "Squares and Roots",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "LCM of 12 and 18:",
+      "options": [
+        "12",
+        "36",
+        "18",
+        "24"
+      ],
+      "correct_answer": "B",
+      "chapter": "Real Numbers",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Slope of line passing through (1,2) and (3,6):",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordinate Geometry",
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

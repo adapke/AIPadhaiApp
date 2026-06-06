@@ -1,0 +1,88 @@
+{
+  "source": "cbse_class12_2024_chemistry",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Coordination number in body-centred cubic lattice:",
+      "options": [
+        "6",
+        "8",
+        "12",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Faraday constant equals approximately:",
+      "options": [
+        "96500 C/mol",
+        "6.022 × 10²³",
+        "9.81 N",
+        "1.6 × 10⁻¹⁹ C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "First-order rate law:",
+      "options": [
+        "k[A]⁰",
+        "k[A]",
+        "k[A]²",
+        "k[A][B]"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Kinetics",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which amino acid has a sulfur atom?",
+      "options": [
+        "alanine",
+        "glycine",
+        "methionine",
+        "valine"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Bond angle in NH3 (ammonia):",
+      "options": [
+        "90°",
+        "107.5°",
+        "109.5°",
+        "120°"
+      ],
+      "correct_answer": "B",
+      "chapter": "p-Block Elements",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Polymer formed by ethene monomers:",
+      "options": [
+        "polythene",
+        "PVC",
+        "nylon",
+        "bakelite"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polymers",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

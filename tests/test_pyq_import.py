@@ -122,3 +122,106 @@ def test_imported_questions_have_required_fields(temp_db):  # noqa: ARG001 (fixt
         assert q.options and len(q.options) == 4, q
         assert q.difficulty in {"easy", "medium", "hard"}, q
         assert q.marks == 4, q
+
+
+# ---------- prod-12: full seed across boards/exams/mediums ----------
+
+# Boards we promise have seed coverage at prod-12. If a future PR
+# accidentally deletes one of these board's last file, the test
+# fails with a clear pointer.
+EXPECTED_BOARDS = frozenset({
+    "jee", "neet", "upsc", "cat",  # national exams
+    "cbse", "icse",                # national boards
+    "state_mh", "state_tn", "state_ka",
+    "state_ap_tg", "state_gj", "state_wb", "state_up",  # state boards
+})
+
+# Hindi-medium subjects — proves the pipeline supports multi-medium
+# (same board, same exam, different rendering medium).
+HINDI_MEDIUM_SUBJECTS = frozenset({"mathematics_hindi", "science_hindi"})
+
+# Floor for total question count across the full seed. Updated at
+# prod-12. Future sprints expanding the seed should raise this.
+MIN_TOTAL_QUESTIONS = 220
+
+
+def test_full_seed_loads_without_errors(temp_db):  # noqa: ARG001
+    """prod-12 — every JSON file under data/pyq/ must import cleanly.
+    Catches malformed JSON, missing required fields, schema drift."""
+    from scripts.import_pyq import import_batch, load_file
+
+    total_errors = []
+    for path in sorted(SEED_DIR.glob("*.json")):
+        data = load_file(path)
+        _, errors = import_batch(data, dry_run=False)
+        if errors:
+            total_errors.extend(f"{path.name}: {e}" for e in errors)
+    assert not total_errors, f"import errors: {total_errors[:5]}"
+
+
+def test_full_seed_has_minimum_question_count(temp_db):  # noqa: ARG001
+    """prod-12 — guard against silent seed-file deletion."""
+    from padhai import question_bank
+    from scripts.import_pyq import import_batch, load_file
+
+    for path in sorted(SEED_DIR.glob("*.json")):
+        import_batch(load_file(path), dry_run=False)
+
+    stats = question_bank.stats()
+    assert stats["total"] >= MIN_TOTAL_QUESTIONS, (
+        f"total questions dropped: expected >={MIN_TOTAL_QUESTIONS}, "
+        f"got {stats['total']}. Did someone delete a seed file?"
+    )
+
+
+def test_full_seed_covers_all_promised_boards(temp_db):  # noqa: ARG001
+    """prod-12 — every board in EXPECTED_BOARDS must have at least
+    one question. Surfaces the case where the last seed file for
+    a state board got removed."""
+    from padhai import question_bank
+    from scripts.import_pyq import import_batch, load_file
+
+    for path in sorted(SEED_DIR.glob("*.json")):
+        import_batch(load_file(path), dry_run=False)
+
+    stats = question_bank.stats()
+    missing = EXPECTED_BOARDS - set(stats["by_board"])
+    assert not missing, (
+        f"boards missing seed coverage: {sorted(missing)}. "
+        f"Currently have: {sorted(stats['by_board'])}"
+    )
+
+
+def test_full_seed_includes_hindi_medium(temp_db):  # noqa: ARG001
+    """prod-12 — Hindi-medium variants prove the pipeline supports
+    multi-medium. Don't let a future cleanup pass delete them."""
+    from padhai import question_bank
+    from scripts.import_pyq import import_batch, load_file
+
+    for path in sorted(SEED_DIR.glob("*.json")):
+        import_batch(load_file(path), dry_run=False)
+
+    stats = question_bank.stats()
+    subjects = set(stats["by_subject"])
+    missing = HINDI_MEDIUM_SUBJECTS - subjects
+    assert not missing, f"Hindi-medium subjects missing: {sorted(missing)}"
+
+
+def test_post_school_exams_use_grade_zero(temp_db):  # noqa: ARG001
+    """prod-12 — UPSC, CAT, SSC etc are post-school exams; the
+    schema reserves grade=0 as a sentinel for those. Catches a
+    regression where the import validator rejects falsy grade values."""
+    from padhai import question_bank
+    from scripts.import_pyq import import_batch, load_file
+
+    for path in sorted(SEED_DIR.glob("*.json")):
+        import_batch(load_file(path), dry_run=False)
+
+    upsc = question_bank.search(board="upsc", limit=200)
+    cat = question_bank.search(board="cat", limit=200)
+    assert all(q.grade == 0 for q in upsc), (
+        f"UPSC questions must have grade=0; got {[q.grade for q in upsc[:3]]}"
+    )
+    assert all(q.grade == 0 for q in cat), (
+        f"CAT questions must have grade=0; got {[q.grade for q in cat[:3]]}"
+    )

@@ -1,0 +1,75 @@
+{
+  "source": "cat_2024_varc",
+  "default_board": "cat",
+  "default_grade": 0,
+  "default_subject": "verbal_ability",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Choose the synonym of 'ephemeral':",
+      "options": [
+        "lasting",
+        "fleeting",
+        "obvious",
+        "important"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "Antonym of 'benevolent':",
+      "options": [
+        "kind",
+        "generous",
+        "malevolent",
+        "wise"
+      ],
+      "correct_answer": "C",
+      "chapter": "Vocabulary",
+      "difficulty": "easy",
+      "marks": 3
+    },
+    {
+      "question_text": "Choose the correctly spelled word:",
+      "options": [
+        "accommodate",
+        "accomodate",
+        "acommodate",
+        "accommadate"
+      ],
+      "correct_answer": "A",
+      "chapter": "Spelling",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "Identify the part of speech of 'quickly' in 'She ran quickly':",
+      "options": [
+        "noun",
+        "verb",
+        "adverb",
+        "adjective"
+      ],
+      "correct_answer": "C",
+      "chapter": "Grammar",
+      "difficulty": "easy",
+      "marks": 3
+    },
+    {
+      "question_text": "Closest meaning to 'ubiquitous':",
+      "options": [
+        "rare",
+        "ancient",
+        "found everywhere",
+        "expensive"
+      ],
+      "correct_answer": "C",
+      "chapter": "Vocabulary",
+      "difficulty": "medium",
+      "marks": 3
+    }
+  ]
+}

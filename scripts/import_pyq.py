@@ -94,9 +94,12 @@ def import_batch(
     errors: list[str] = []
     for i, q in enumerate(data["questions"]):
         merged = merge_defaults(q, data)
-        # Hard requirements: board, grade, subject, question_text
+        # Hard requirements: board, grade, subject, question_text.
+        # Use `is None` so grade=0 (UPSC/CAT — not a school grade)
+        # is treated as explicitly set, not missing.
         for required in ("board", "grade", "subject", "question_text"):
-            if not merged.get(required):
+            val = merged.get(required)
+            if val is None or (isinstance(val, str) and not val.strip()):
                 errors.append(f"item {i}: missing required field {required!r}")
                 break
         else:

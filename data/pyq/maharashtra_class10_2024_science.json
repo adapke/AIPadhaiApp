@@ -1,0 +1,75 @@
+{
+  "source": "maharashtra_ssc_2024_science",
+  "default_board": "state_mh",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Symbol for sodium:",
+      "options": [
+        "S",
+        "So",
+        "Na",
+        "N"
+      ],
+      "correct_answer": "C",
+      "chapter": "Periodic Table",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Insectivorous plant:",
+      "options": [
+        "mango",
+        "rose",
+        "Venus flytrap",
+        "tulsi"
+      ],
+      "correct_answer": "C",
+      "chapter": "Life Processes",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which is a renewable source of energy?",
+      "options": [
+        "coal",
+        "petroleum",
+        "solar",
+        "nuclear (fission)"
+      ],
+      "correct_answer": "C",
+      "chapter": "Energy",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Newton's first law of motion is about:",
+      "options": [
+        "inertia",
+        "action-reaction",
+        "F=ma",
+        "gravity"
+      ],
+      "correct_answer": "A",
+      "chapter": "Force and Motion",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Largest planet in solar system:",
+      "options": [
+        "Earth",
+        "Saturn",
+        "Jupiter",
+        "Neptune"
+      ],
+      "correct_answer": "C",
+      "chapter": "Universe",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

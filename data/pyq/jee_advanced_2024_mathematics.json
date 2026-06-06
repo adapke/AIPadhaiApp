@@ -1,0 +1,114 @@
+{
+  "source": "jee_advanced_2024_paper1_mathematics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "If f(x) = x^3 - 3x + 1, the number of real roots is:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correct_answer": "C",
+      "chapter": "Theory of Equations",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The value of integral from 0 to 1 of x*e^x dx is:",
+      "options": [
+        "1",
+        "e-1",
+        "1/e",
+        "e"
+      ],
+      "correct_answer": "A",
+      "chapter": "Integral Calculus",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of complex solutions of z^4 = 1 is:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "D",
+      "chapter": "Complex Numbers",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If A is a 3x3 matrix with det(A) = 5, then det(2A) =",
+      "options": [
+        "10",
+        "40",
+        "30",
+        "5"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices and Determinants",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The eccentricity of a hyperbola x^2/9 - y^2/16 = 1 is:",
+      "options": [
+        "3/5",
+        "4/3",
+        "5/3",
+        "5/4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Conic Sections",
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "If sin x + cos x = 1/2, then sin(2x) =",
+      "options": [
+        "-3/4",
+        "3/4",
+        "-1/4",
+        "1/4"
+      ],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Solve: log_2 (x) + log_2 (x-1) = 1",
+      "options": [
+        "2",
+        "1",
+        "-1",
+        "no solution"
+      ],
+      "correct_answer": "A",
+      "chapter": "Logarithms",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The vectors (1,2,3), (2,4,6), (1,1,1) are:",
+      "options": [
+        "linearly independent",
+        "linearly dependent",
+        "orthogonal",
+        "unit vectors"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vector Algebra",
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

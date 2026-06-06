@@ -1,0 +1,62 @@
+{
+  "source": "gujarat_ssc_2024_science",
+  "default_board": "state_gj",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Atmospheric pressure at sea level is approximately:",
+      "options": [
+        "101 kPa",
+        "100 Pa",
+        "1 MPa",
+        "10 kPa"
+      ],
+      "correct_answer": "A",
+      "chapter": "Fluids",
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Lever class with effort and load on either side of fulcrum:",
+      "options": [
+        "Class 1",
+        "Class 2",
+        "Class 3",
+        "Class 4"
+      ],
+      "correct_answer": "A",
+      "chapter": "Simple Machines",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Currency of India:",
+      "options": [
+        "dollar",
+        "rupee",
+        "euro",
+        "pound"
+      ],
+      "correct_answer": "B",
+      "chapter": "General Knowledge",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Element with atomic number 1:",
+      "options": [
+        "helium",
+        "hydrogen",
+        "lithium",
+        "carbon"
+      ],
+      "correct_answer": "B",
+      "chapter": "Periodic Table",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

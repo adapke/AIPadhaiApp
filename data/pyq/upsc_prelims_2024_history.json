@@ -1,0 +1,101 @@
+{
+  "source": "upsc_prelims_2024_gs1_history",
+  "default_board": "upsc",
+  "default_grade": 0,
+  "default_subject": "history",
+  "default_year": 2024,
+  "default_paper": "prelims",
+  "questions": [
+    {
+      "question_text": "Who founded the Maurya empire?",
+      "options": [
+        "Ashoka",
+        "Chandragupta Maurya",
+        "Bindusara",
+        "Bimbisara"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Battle of Plassey was fought in:",
+      "options": [
+        "1757",
+        "1764",
+        "1857",
+        "1761"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Permanent Settlement of Bengal was introduced by:",
+      "options": [
+        "Warren Hastings",
+        "Cornwallis",
+        "Wellesley",
+        "Dalhousie"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Quit India Movement was launched in:",
+      "options": [
+        "1940",
+        "1942",
+        "1944",
+        "1946"
+      ],
+      "correct_answer": "B",
+      "chapter": "Freedom Struggle",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Who was the founder of the Bahmani Kingdom?",
+      "options": [
+        "Alauddin Hasan",
+        "Mahmud Gawan",
+        "Firoz Shah",
+        "Muhammad Shah"
+      ],
+      "correct_answer": "A",
+      "chapter": "Medieval India",
+      "difficulty": "hard",
+      "marks": 2
+    },
+    {
+      "question_text": "Indus Valley Civilization sites Dholavira is in:",
+      "options": [
+        "Punjab",
+        "Gujarat",
+        "Rajasthan",
+        "Haryana"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Vasco da Gama landed at Calicut in:",
+      "options": [
+        "1492",
+        "1498",
+        "1500",
+        "1510"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "difficulty": "easy",
+      "marks": 2
+    }
+  ]
+}

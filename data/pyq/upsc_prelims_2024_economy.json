@@ -1,0 +1,88 @@
+{
+  "source": "upsc_prelims_2024_gs1_economy",
+  "default_board": "upsc",
+  "default_grade": 0,
+  "default_subject": "economy",
+  "default_year": 2024,
+  "default_paper": "prelims",
+  "questions": [
+    {
+      "question_text": "RBI was nationalised in:",
+      "options": [
+        "1947",
+        "1949",
+        "1969",
+        "1991"
+      ],
+      "correct_answer": "B",
+      "chapter": "Banking",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "GST is a:",
+      "options": [
+        "direct tax",
+        "indirect tax",
+        "wealth tax",
+        "income tax"
+      ],
+      "correct_answer": "B",
+      "chapter": "Taxation",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Repo rate is the rate at which:",
+      "options": [
+        "RBI lends to banks",
+        "banks lend to public",
+        "banks lend to govt",
+        "Govt lends to RBI"
+      ],
+      "correct_answer": "A",
+      "chapter": "Monetary Policy",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "First five-year plan focused on:",
+      "options": [
+        "industry",
+        "agriculture",
+        "services",
+        "defense"
+      ],
+      "correct_answer": "B",
+      "chapter": "Planning",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Inflation measured by Wholesale Price Index is called:",
+      "options": [
+        "WPI inflation",
+        "CPI inflation",
+        "Core inflation",
+        "Stagflation"
+      ],
+      "correct_answer": "A",
+      "chapter": "Inflation",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Fiscal deficit is:",
+      "options": [
+        "total expenditure - total revenue",
+        "borrowings only",
+        "revenue deficit + capital expenditure",
+        "primary deficit + interest payments"
+      ],
+      "correct_answer": "A",
+      "chapter": "Public Finance",
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

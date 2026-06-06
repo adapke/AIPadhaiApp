@@ -1,0 +1,114 @@
+{
+  "source": "jee_advanced_2024_paper1_physics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2024,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "A particle in SHM has amplitude A and angular frequency ω. Max speed is:",
+      "options": [
+        "Aω",
+        "A/ω",
+        "Aω^2",
+        "A^2 ω"
+      ],
+      "correct_answer": "A",
+      "chapter": "Oscillations",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Two waves of frequencies 256 Hz and 260 Hz beat together. Beat frequency is:",
+      "options": [
+        "2 Hz",
+        "4 Hz",
+        "8 Hz",
+        "516 Hz"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Photon of wavelength 600 nm — its energy is approximately:",
+      "options": [
+        "2.07 eV",
+        "4.14 eV",
+        "1.0 eV",
+        "6.6 eV"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Radioactive isotope half-life 5 years. After 15 years, fraction remaining:",
+      "options": [
+        "1/2",
+        "1/4",
+        "1/8",
+        "1/16"
+      ],
+      "correct_answer": "C",
+      "chapter": "Nuclei",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Young's modulus has dimensions:",
+      "options": [
+        "ML^-1 T^-2",
+        "MLT^-2",
+        "ML^2 T^-2",
+        "MT^-2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Mechanical Properties of Solids",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "In Young's double-slit experiment, fringe width is proportional to:",
+      "options": [
+        "d",
+        "1/d",
+        "d^2",
+        "1/d^2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "A capacitor C charged to V is connected to identical uncharged C. Final V on each:",
+      "options": [
+        "V",
+        "V/2",
+        "2V",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Lorentz force on a charge q moving at v in magnetic field B is:",
+      "options": [
+        "qvB",
+        "qv x B (vector)",
+        "qE",
+        "q/vB"
+      ],
+      "correct_answer": "B",
+      "chapter": "Moving Charges",
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

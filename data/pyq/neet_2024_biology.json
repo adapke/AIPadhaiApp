@@ -1,0 +1,140 @@
+{
+  "source": "neet_2024_biology",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "biology",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "The basic unit of life is:",
+      "options": [
+        "tissue",
+        "cell",
+        "organ",
+        "molecule"
+      ],
+      "correct_answer": "B",
+      "chapter": "Cell Biology",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which blood group is the universal donor?",
+      "options": [
+        "A+",
+        "B+",
+        "AB+",
+        "O-"
+      ],
+      "correct_answer": "D",
+      "chapter": "Body Fluids",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Photosynthesis occurs in:",
+      "options": [
+        "mitochondria",
+        "chloroplast",
+        "nucleus",
+        "ribosome"
+      ],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of chromosomes in normal human somatic cell:",
+      "options": [
+        "23",
+        "46",
+        "44",
+        "48"
+      ],
+      "correct_answer": "B",
+      "chapter": "Cell Division",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Insulin is produced by which cells of the pancreas?",
+      "options": [
+        "alpha cells",
+        "beta cells",
+        "delta cells",
+        "F cells"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Coordination",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The functional unit of kidney is:",
+      "options": [
+        "neuron",
+        "nephron",
+        "alveolus",
+        "villi"
+      ],
+      "correct_answer": "B",
+      "chapter": "Excretory System",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Mendel's law of segregation deals with:",
+      "options": [
+        "one gene",
+        "two genes",
+        "three genes",
+        "chromosomes"
+      ],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "DNA replication is:",
+      "options": [
+        "conservative",
+        "semi-conservative",
+        "dispersive",
+        "non-conservative"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which structure carries oxygen in red blood cells?",
+      "options": [
+        "plasma",
+        "hemoglobin",
+        "platelets",
+        "WBC"
+      ],
+      "correct_answer": "B",
+      "chapter": "Body Fluids",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The smallest functional unit of the lung is:",
+      "options": [
+        "bronchus",
+        "alveolus",
+        "trachea",
+        "diaphragm"
+      ],
+      "correct_answer": "B",
+      "chapter": "Respiratory System",
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

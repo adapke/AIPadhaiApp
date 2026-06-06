@@ -1,0 +1,75 @@
+{
+  "source": "karnataka_sslc_2024_science",
+  "default_board": "state_ka",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Power of a 60W bulb running for 2 hours consumes:",
+      "options": [
+        "60 Wh",
+        "120 Wh",
+        "30 Wh",
+        "120 J"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electricity",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Latin for sodium chloride is:",
+      "options": [
+        "NaCl",
+        "K2SO4",
+        "NaOH",
+        "Na2CO3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Chemical Formulae",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which vitamin deficiency causes rickets?",
+      "options": [
+        "A",
+        "B12",
+        "C",
+        "D"
+      ],
+      "correct_answer": "D",
+      "chapter": "Nutrition",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnetic field around a current carrying wire is:",
+      "options": [
+        "linear",
+        "circular",
+        "elliptical",
+        "spherical"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetic Effects",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of bones in adult human body:",
+      "options": [
+        "196",
+        "206",
+        "216",
+        "300"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Body",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "source": "cat_2024_quant",
+  "default_board": "cat",
+  "default_grade": 0,
+  "default_subject": "quantitative_aptitude",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "If x + y = 7 and xy = 12, what is x^2 + y^2?",
+      "options": [
+        "25",
+        "37",
+        "49",
+        "13"
+      ],
+      "correct_answer": "A",
+      "chapter": "Algebra",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "Speed of train 60 km/h. Distance covered in 90 min:",
+      "options": [
+        "60 km",
+        "75 km",
+        "90 km",
+        "120 km"
+      ],
+      "correct_answer": "C",
+      "chapter": "Speed Time Distance",
+      "difficulty": "easy",
+      "marks": 3
+    },
+    {
+      "question_text": "30% of 250 is:",
+      "options": [
+        "50",
+        "75",
+        "60",
+        "80"
+      ],
+      "correct_answer": "B",
+      "chapter": "Percentages",
+      "difficulty": "easy",
+      "marks": 3
+    },
+    {
+      "question_text": "If a sum doubles in 5 years at SI, rate is:",
+      "options": [
+        "10%",
+        "20%",
+        "5%",
+        "25%"
+      ],
+      "correct_answer": "B",
+      "chapter": "Simple Interest",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "Average of first 10 natural numbers is:",
+      "options": [
+        "5",
+        "5.5",
+        "6",
+        "10"
+      ],
+      "correct_answer": "B",
+      "chapter": "Averages",
+      "difficulty": "easy",
+      "marks": 3
+    },
+    {
+      "question_text": "log base 2 of 32 equals:",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logarithms",
+      "difficulty": "easy",
+      "marks": 3
+    }
+  ]
+}

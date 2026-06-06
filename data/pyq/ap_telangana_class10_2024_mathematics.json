@@ -1,0 +1,75 @@
+{
+  "source": "ap_telangana_ssc_2024_mathematics",
+  "default_board": "state_ap_tg",
+  "default_grade": 10,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "If x² = 49, x equals:",
+      "options": [
+        "7",
+        "-7",
+        "±7",
+        "0"
+      ],
+      "correct_answer": "C",
+      "chapter": "Real Numbers",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Volume of cube with side 5 cm:",
+      "options": [
+        "75 cm³",
+        "125 cm³",
+        "25 cm³",
+        "100 cm³"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mensuration",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sum of angles in a quadrilateral:",
+      "options": [
+        "180°",
+        "270°",
+        "360°",
+        "540°"
+      ],
+      "correct_answer": "C",
+      "chapter": "Geometry",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Linear equation in two variables: 2x + 3y = 6. y when x=0:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Linear Equations",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Discriminant b² - 4ac. For x² + 2x + 1 = 0, value is:",
+      "options": [
+        "0",
+        "4",
+        "-4",
+        "8"
+      ],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

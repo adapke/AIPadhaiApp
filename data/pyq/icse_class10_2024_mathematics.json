@@ -1,0 +1,88 @@
+{
+  "source": "icse_class10_2024_mathematics",
+  "default_board": "icse",
+  "default_grade": 10,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Compound interest on ₹1000 at 10% per annum for 2 years:",
+      "options": [
+        "₹200",
+        "₹210",
+        "₹220",
+        "₹100"
+      ],
+      "correct_answer": "B",
+      "chapter": "Compound Interest",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "If A = {1,2,3}, B = {2,3,4}, then A ∩ B is:",
+      "options": [
+        "{1,4}",
+        "{2,3}",
+        "{1,2,3,4}",
+        "{}"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sets",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Volume of a cylinder, radius 7 cm, height 10 cm (π=22/7):",
+      "options": [
+        "1540 cm³",
+        "770 cm³",
+        "440 cm³",
+        "1080 cm³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Mensuration",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "GST at 18% on ₹500 is:",
+      "options": [
+        "₹90",
+        "₹50",
+        "₹100",
+        "₹85"
+      ],
+      "correct_answer": "A",
+      "chapter": "GST",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Banker's discount on ₹2000 for 3 months at 4%:",
+      "options": [
+        "₹15",
+        "₹20",
+        "₹40",
+        "₹80"
+      ],
+      "correct_answer": "B",
+      "chapter": "Banking",
+      "difficulty": "medium",
+      "marks": 3
+    },
+    {
+      "question_text": "Median of 2, 4, 6, 8, 10:",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Statistics",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

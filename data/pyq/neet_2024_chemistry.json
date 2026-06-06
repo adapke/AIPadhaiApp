@@ -1,0 +1,101 @@
+{
+  "source": "neet_2024_chemistry",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Number of moles in 18 g of water (H2O, molar mass 18 g/mol):",
+      "options": [
+        "0.5",
+        "1",
+        "2",
+        "18"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which gas is responsible for ozone layer depletion?",
+      "options": [
+        "CO2",
+        "CFCs",
+        "N2",
+        "O2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Environmental Chemistry",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Functional group of carboxylic acid is:",
+      "options": [
+        "-OH",
+        "-COOH",
+        "-CHO",
+        "-NH2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Organic Chemistry",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which element exhibits maximum oxidation state?",
+      "options": [
+        "Cl (+7)",
+        "F (+1)",
+        "Na (+1)",
+        "Mg (+2)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Redox Reactions",
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Acid rain is primarily caused by:",
+      "options": [
+        "CO2",
+        "SO2 and NOx",
+        "CFCs",
+        "Methane"
+      ],
+      "correct_answer": "B",
+      "chapter": "Environmental Chemistry",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "VBT predicts the geometry of CH4 to be:",
+      "options": [
+        "linear",
+        "trigonal planar",
+        "tetrahedral",
+        "octahedral"
+      ],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Glucose belongs to which class of compounds?",
+      "options": [
+        "protein",
+        "carbohydrate",
+        "fat",
+        "vitamin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

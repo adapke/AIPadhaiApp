@@ -1,0 +1,114 @@
+{
+  "source": "upsc_prelims_2024_gs1_polity",
+  "default_board": "upsc",
+  "default_grade": 0,
+  "default_subject": "polity",
+  "default_year": 2024,
+  "default_paper": "prelims",
+  "questions": [
+    {
+      "question_text": "The 73rd Constitutional Amendment Act, 1992 relates to:",
+      "options": [
+        "Panchayati Raj",
+        "Municipalities",
+        "Judiciary",
+        "GST"
+      ],
+      "correct_answer": "A",
+      "chapter": "Local Self-Government",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Who is the ex-officio Chairman of the Rajya Sabha?",
+      "options": [
+        "President",
+        "Vice-President",
+        "PM",
+        "Speaker"
+      ],
+      "correct_answer": "B",
+      "chapter": "Parliament",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Article 32 of the Constitution provides:",
+      "options": [
+        "Right to Equality",
+        "Right to Constitutional Remedies",
+        "Right to Education",
+        "Right to Property"
+      ],
+      "correct_answer": "B",
+      "chapter": "Fundamental Rights",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The Directive Principles of State Policy are contained in:",
+      "options": [
+        "Part III",
+        "Part IV",
+        "Part V",
+        "Part VI"
+      ],
+      "correct_answer": "B",
+      "chapter": "DPSP",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Indian Constitution came into effect on:",
+      "options": [
+        "15 Aug 1947",
+        "26 Jan 1950",
+        "26 Nov 1949",
+        "2 Oct 1947"
+      ],
+      "correct_answer": "B",
+      "chapter": "Constitutional History",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "How many Schedules does the Indian Constitution have today?",
+      "options": [
+        "10",
+        "12",
+        "14",
+        "16"
+      ],
+      "correct_answer": "B",
+      "chapter": "Schedules",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Election Commission of India is established by:",
+      "options": [
+        "Article 324",
+        "Article 280",
+        "Article 312",
+        "Article 368"
+      ],
+      "correct_answer": "A",
+      "chapter": "Constitutional Bodies",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Which Article deals with the appointment of the Prime Minister?",
+      "options": [
+        "Article 74",
+        "Article 75",
+        "Article 76",
+        "Article 78"
+      ],
+      "correct_answer": "B",
+      "chapter": "Executive",
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

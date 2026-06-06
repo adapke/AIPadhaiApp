@@ -1,0 +1,114 @@
+{
+  "source": "cbse_class10_2024_mathematics",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "HCF of 12 and 18 is:",
+      "options": [
+        "2",
+        "6",
+        "12",
+        "18"
+      ],
+      "correct_answer": "B",
+      "chapter": "Real Numbers",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Solve: 2x + 3 = 11",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Linear Equations",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Area of a circle with radius 7 cm (π=22/7):",
+      "options": [
+        "154 cm²",
+        "44 cm²",
+        "22 cm²",
+        "77 cm²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Areas Related to Circles",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Discriminant of x² + 4x + 4 = 0 is:",
+      "options": [
+        "0",
+        "4",
+        "8",
+        "16"
+      ],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Pythagoras: legs 3, 4. Hypotenuse:",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "12"
+      ],
+      "correct_answer": "A",
+      "chapter": "Triangles",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Probability of getting a head when a fair coin is tossed:",
+      "options": [
+        "0",
+        "1/4",
+        "1/2",
+        "1"
+      ],
+      "correct_answer": "C",
+      "chapter": "Probability",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mean of 5, 10, 15, 20, 25:",
+      "options": [
+        "10",
+        "15",
+        "20",
+        "25"
+      ],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "sin(30°) equals:",
+      "options": [
+        "0",
+        "1/2",
+        "√3/2",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trigonometry",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "source": "cbse_class10_2024_science",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "pH of pure water at 25°C:",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
+      "correct_answer": "B",
+      "chapter": "Acids Bases Salts",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Heart muscles are made of:",
+      "options": [
+        "smooth muscle",
+        "skeletal muscle",
+        "cardiac muscle",
+        "all of these"
+      ],
+      "correct_answer": "C",
+      "chapter": "Life Processes",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Unit of electric resistance:",
+      "options": [
+        "volt",
+        "ampere",
+        "ohm",
+        "watt"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electricity",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which gas evolved when zinc reacts with HCl?",
+      "options": [
+        "O2",
+        "H2",
+        "Cl2",
+        "CO2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Metals and Non-Metals",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Photosynthesis requires:",
+      "options": [
+        "light, water, CO2",
+        "light, O2, water",
+        "CO2, O2",
+        "only light"
+      ],
+      "correct_answer": "A",
+      "chapter": "Life Processes",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Refractive index of water is approximately:",
+      "options": [
+        "1.0",
+        "1.33",
+        "1.5",
+        "2.0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Light Refraction",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "An object placed at infinity in front of concave mirror, image forms at:",
+      "options": [
+        "pole",
+        "focus",
+        "centre of curvature",
+        "infinity"
+      ],
+      "correct_answer": "B",
+      "chapter": "Light Reflection",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which biome contains the largest carbon stock on land?",
+      "options": [
+        "desert",
+        "tropical forest",
+        "tundra",
+        "savanna"
+      ],
+      "correct_answer": "B",
+      "chapter": "Our Environment",
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

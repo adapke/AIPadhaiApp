@@ -1,0 +1,75 @@
+{
+  "source": "cbse_class10_2024_science_hindi_medium",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "science_hindi",
+  "default_year": 2024,
+  "default_paper": "main_hindi_medium",
+  "questions": [
+    {
+      "question_text": "25°C पर शुद्ध जल का pH है:",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
+      "correct_answer": "B",
+      "chapter": "अम्ल क्षार लवण",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "विद्युत प्रतिरोध का मात्रक:",
+      "options": [
+        "volt",
+        "ampere",
+        "ohm",
+        "watt"
+      ],
+      "correct_answer": "C",
+      "chapter": "विद्युत",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "प्रकाश संश्लेषण के लिए आवश्यक:",
+      "options": [
+        "प्रकाश, पानी, CO2",
+        "प्रकाश, O2, पानी",
+        "CO2, O2",
+        "केवल प्रकाश"
+      ],
+      "correct_answer": "A",
+      "chapter": "जैव प्रक्रम",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "जिंक + तनु HCl से कौन-सी गैस निकलती है?",
+      "options": [
+        "O2",
+        "H2",
+        "Cl2",
+        "CO2"
+      ],
+      "correct_answer": "B",
+      "chapter": "धातु और अधातु",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "जल का अपवर्तनांक लगभग है:",
+      "options": [
+        "1.0",
+        "1.33",
+        "1.5",
+        "2.0"
+      ],
+      "correct_answer": "B",
+      "chapter": "प्रकाश का अपवर्तन",
+      "difficulty": "easy",
+      "marks": 2
+    }
+  ]
+}

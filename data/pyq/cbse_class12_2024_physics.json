@@ -1,0 +1,88 @@
+{
+  "source": "cbse_class12_2024_physics",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Faraday's law of EM induction relates:",
+      "options": [
+        "voltage and current",
+        "EMF and rate of change of magnetic flux",
+        "force and field",
+        "resistance and temperature"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Induction",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Critical angle of a medium with refractive index 1.5 (rounded):",
+      "options": [
+        "42°",
+        "48°",
+        "30°",
+        "60°"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Energy of photon E = hν. Unit of Planck's constant h:",
+      "options": [
+        "J",
+        "J·s",
+        "J/s",
+        "Hz"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Logic gate that gives 1 only when both inputs are 0:",
+      "options": [
+        "AND",
+        "OR",
+        "NOR",
+        "NAND"
+      ],
+      "correct_answer": "C",
+      "chapter": "Semiconductors",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Two equal point charges +q at distance r. Force on each is:",
+      "options": [
+        "zero",
+        "kq²/r²",
+        "kq²/r",
+        "kq/r²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electric Charges",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Maxwell's first equation (Gauss's law for E) is:",
+      "options": [
+        "∮E·dA = q/ε₀",
+        "∮B·dA = 0",
+        "∮E·dl = -dΦB/dt",
+        "∮B·dl = μ₀I"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electromagnetic Waves",
+      "difficulty": "hard",
+      "marks": 2
+    }
+  ]
+}

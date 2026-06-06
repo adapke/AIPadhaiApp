@@ -1079,6 +1079,58 @@ Reviewed 2026-06-03. Re-audit before changing.
   predates the catalog and uses inline `data-lang-key` attributes
   that need a different rewiring strategy. (c) Mobile shell
   Capacitor JS doesn't yet read the catalog — it ships English.
+- **prod-12 — PYQ seed across boards / exams / mediums.**
+  prod-4 shipped 60 JEE Main 2024 questions; production scale is
+  thousands across every major exam. Closing the breadth gap
+  while staying honest about the depth gap:
+
+  1. `scripts/build_pyq_seed.py` — single Python file with all
+     batch data as dicts; emits 27 JSON files under `data/pyq/`.
+     Single source of truth (vs hand-editing 27 JSON files in
+     lockstep). `--check` mode for CI dry-run.
+
+  2. **27 new seed files, 168 new questions, 228 total** across:
+     - **5 national exams**: JEE Main, JEE Advanced, NEET, UPSC
+       Prelims (polity / geography / history / economy), CAT
+       (Quant + VARC)
+     - **2 national boards**: CBSE (Class 10 math/science/social,
+       Class 12 physics/chemistry), ICSE (Class 10 math)
+     - **7 state boards** (Class 10): Maharashtra, TamilNadu,
+       Karnataka, AP/Telangana, Gujarat, WestBengal, UP
+     - **Hindi-medium variants**: CBSE Class 10 math + science
+       rendered in Devanagari (`mathematics_hindi` /
+       `science_hindi` subjects) — proves the pipeline supports
+       multi-medium without schema changes
+
+  3. Fixed `scripts/import_pyq.py` validator — previously rejected
+     `default_grade: 0` as falsy. Post-school exams (UPSC / CAT /
+     SSC) use 0 as a sentinel for "not a school grade"; the
+     validator now uses `is None` so 0 passes.
+
+  4. `tests/test_pyq_import.py` — 5 new prod-12 tests on top of
+     the existing prod-4 set: full-seed-loads-clean, min-228-
+     questions floor, all-13-boards-covered, Hindi-medium subjects
+     present, post-school exams use grade=0. Total pytest:
+     120 → 125.
+
+  Honest gaps that remain:
+    - **Volume**: 228 questions is 1 paper's worth per exam, not
+      the 5+ years × 200+ questions per major exam (~5000 total)
+      that production demands. The pipeline is ready; the gap is
+      content acquisition (OCR + manual review of public papers,
+      or licensing deals).
+    - **Authenticity**: these are *exam-style* questions in the
+      format of each board's paper, not verbatim past-year
+      questions. Replacing a batch with real PYQs is just dropping
+      a JSON file in `data/pyq/`.
+    - **Language mediums**: 2 Hindi-medium variants seeded for
+      CBSE. The 7 state boards have an English-medium seed each
+      but no Marathi / Tamil / Telugu / Kannada / Gujarati /
+      Punjabi / Bengali medium variants yet — also content work.
+    - **Subjects**: CBSE Class 12 covers physics + chemistry but
+      not biology / English / Hindi / accounts; ICSE only math;
+      UPSC Mains entirely absent (only Prelims). Filling these
+      is incremental content sprints.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,

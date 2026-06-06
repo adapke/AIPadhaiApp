@@ -1,0 +1,75 @@
+{
+  "source": "cbse_class10_2024_mathematics_hindi_medium",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "mathematics_hindi",
+  "default_year": 2024,
+  "default_paper": "main_hindi_medium",
+  "questions": [
+    {
+      "question_text": "12 और 18 का म.स.प. (HCF) क्या है?",
+      "options": [
+        "2",
+        "6",
+        "12",
+        "18"
+      ],
+      "correct_answer": "B",
+      "chapter": "वास्तविक संख्याएँ",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "हल कीजिए: 2x + 3 = 11",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "रैखिक समीकरण",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "7 cm त्रिज्या वाले वृत्त का क्षेत्रफल (π=22/7):",
+      "options": [
+        "154 cm²",
+        "44 cm²",
+        "22 cm²",
+        "77 cm²"
+      ],
+      "correct_answer": "A",
+      "chapter": "वृत्तों से संबंधित क्षेत्रफल",
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "sin(30°) का मान क्या है?",
+      "options": [
+        "0",
+        "1/2",
+        "√3/2",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "त्रिकोणमिति",
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "5, 10, 15, 20, 25 का माध्य:",
+      "options": [
+        "10",
+        "15",
+        "20",
+        "25"
+      ],
+      "correct_answer": "B",
+      "chapter": "सांख्यिकी",
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}
