@@ -678,6 +678,40 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-3 — Hindi UI audit (single-focus sprint).** Measured the
+  real i18n gap: 285 hardcoded English UI strings in `_INDEX_HTML`
+  / `HOME_HTML` / `LANDING_HTML` versus 39 i18n keys = **2.5% UI
+  coverage** (not the "10 languages supported" the README implies).
+  Shipped:
+
+  1. `scripts/audit_i18n.py` — reproducible audit, prints
+     coverage % + top-N untranslated by frequency. Wired into
+     `make i18n-audit`.
+
+  2. en.json + hi.json grew from 39 → 94 keys (added 55 strings
+     across nav, modules, CRUD verbs, form labels, footer).
+     Hand-translated Hindi (not machine-translated). Coverage
+     of hardcoded strings now **16.8%** — honest progress, far
+     from done.
+
+  3. `tests/test_i18n_coverage.py` — 4 regression tests pinning
+     `MIN_EN_KEYS = 94`, Hindi parity required, no empty Hindi
+     values, every supported locale has `_meta_name` /
+     `_meta_native`. Floor is monotonic across future sprints.
+
+  Total pytest: 75 → 79.
+
+  Honest gap: other 7 languages (Tamil, Telugu, Kannada, Malayalam,
+  Marathi, Bengali, Gujarati, Punjabi) range from 21% to 42% key
+  coverage. They were 100% against 39 keys; the new 55 keys haven't
+  been translated yet. Hindi is the launch language so it took
+  priority; the rest get back-filled in subsequent sprints.
+
+  Wiring story: the SPA still references hardcoded English text
+  in `_INDEX_HTML`. Catalog growth is step 1. Step 2 (next sprint)
+  is to actually swap the hardcoded strings for `t(key, locale=user_lang)`
+  calls. Without that wiring, the catalog growth is ammunition,
+  not coverage.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
