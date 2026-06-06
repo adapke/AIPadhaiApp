@@ -1,0 +1,72 @@
+name: security-audit
+
+# prod-7: supply-chain CVE gate. Scans declared dependencies against
+# OSV (Open Source Vulnerabilities) + PyPI advisory feeds. Fails the
+# PR if any HIGH or CRITICAL CVE lands in our dep graph.
+#
+# Runs on:
+#   * every push to main (catches a CVE landing in a dep upgrade)
+#   * every PR (catches a new dep that's already vulnerable)
+#   * nightly cron at 03:30 UTC (catches a CVE getting disclosed against
+#     a pinned version we already shipped)
+#   * workflow_dispatch (manual rescan after suppression edits)
+#
+# Suppressions live in `.pip-audit-ignore` — one CVE ID per line. Each
+# suppression must come with a written justification in the file or
+# the PR review will reject it.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'requirements*.txt'
+      - '.github/workflows/security-audit.yml'
+      - '.pip-audit-ignore'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'requirements*.txt'
+      - '.github/workflows/security-audit.yml'
+      - '.pip-audit-ignore'
+  schedule:
+    - cron: '30 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  pip-audit:
+    name: pip-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install pip-audit
+        run: python -m pip install pip-audit
+
+      - name: Build ignore-flags
+        id: ignores
+        run: |
+          if [ -f .pip-audit-ignore ]; then
+            flags=$(grep -vE '^\s*(#|$)' .pip-audit-ignore \
+                    | awk '{print "--ignore-vuln " $1}' | tr '\n' ' ')
+            echo "flags=$flags" >> "$GITHUB_OUTPUT"
+          else
+            echo "flags=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scan requirements.txt
+        run: |
+          python -m pip_audit \
+            -r requirements.txt \
+            ${{ steps.ignores.outputs.flags }}
+
+      - name: Scan requirements-optional.txt
+        run: |
+          python -m pip_audit \
+            -r requirements-optional.txt \
+            ${{ steps.ignores.outputs.flags }}

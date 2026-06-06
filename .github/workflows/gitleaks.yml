@@ -1,0 +1,37 @@
+name: gitleaks
+
+# prod-7: secret scanner. Catches accidental commits of API keys,
+# JWT secrets, AWS / Razorpay / Anthropic tokens.
+#
+# Runs on:
+#   * every push to main (catches a bypass-via-no-verify slipping in)
+#   * every PR (catches secrets in feature branches before review)
+#
+# Local pre-commit hook is also configured (see .pre-commit-config.yaml).
+# CI runs on the full history range of the PR so a secret added then
+# deleted is still caught.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  gitleaks:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history so PR commit-range scan covers everything.
+          fetch-depth: 0
+
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Use the in-repo config (allowlist for known false-positives).
+          config-path: .gitleaks.toml

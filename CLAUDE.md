@@ -840,6 +840,61 @@ Reviewed 2026-06-03. Re-audit before changing.
   requires a Sentry account + DSN; that's the
   `make-the-event-show-up` step that the user runs post-deploy.
   Code path is now end-to-end correct.
+- **prod-7 — Supply-chain + secrets + coverage CI gates
+  (single-focus sprint).** Three independent gates closing the
+  hygiene holes that aren't covered by ruff or pytest:
+
+  1. **pip-audit (`.github/workflows/security-audit.yml`).** Scans
+     `requirements.txt` + `requirements-optional.txt` against OSV
+     + PyPI advisory feeds. Triggers: every PR touching the deps,
+     every push to main, nightly cron at 03:30 UTC (catches a
+     CVE disclosed against a pinned version we shipped), manual
+     re-run via workflow_dispatch. Suppressions live in
+     `.pip-audit-ignore`. `scripts/_pip_audit_ignore_flags.sh`
+     translates the file into pip-audit CLI flags so the
+     Makefile target and the workflow can't disagree. **Local
+     scan at prod-7: zero known vulnerabilities** across both
+     files.
+
+  2. **gitleaks (`.github/workflows/gitleaks.yml` + pre-commit).**
+     Secret scanner — catches accidental commits of API keys,
+     JWT secrets, AWS / Razorpay / Anthropic tokens. Triggers
+     on every PR with `fetch-depth: 0` so a secret added then
+     deleted is still caught. Pre-commit hook (rev v8.21.2)
+     blocks the same patterns on `git commit`. Allowlist in
+     `.gitleaks.toml` covers known-safe paths (tests/fixtures,
+     data/pyq, padhai/locales, cypress, the bench analysis
+     docs) and placeholder strings used in env templates
+     (`dev-change-me`, `CHANGE_ME`, `sk-ant-example`).
+
+  3. **Coverage gate (`.github/workflows/coverage.yml` +
+     `make coverage`).** pytest-cov with `--cov-fail-under=30`.
+     Honest baseline at prod-7: **31.79%** across `padhai/`. The
+     gate is a regression backstop — if it falls under 30% a
+     PR pulled significant tests or added a major untested
+     surface. Floor goes up as tests get added; the workflow
+     and Makefile both reference the same `30` so they can't
+     drift.
+
+  3 new Makefile targets: `make audit` / `make coverage` /
+  `make gitleaks`. The first runs against the local Python env,
+  the third requires the gitleaks binary on PATH (Linux/macOS;
+  not available on Windows by default).
+
+  Total pytest unchanged: 103 → 103. The gates are CI signal,
+  not new test surface — they catch a different class of issue
+  (supply chain CVEs / leaked secrets / coverage regressions)
+  that no existing check would have caught.
+
+  Honest gaps: (a) gitleaks-action on PRs uses the GitHub
+  Marketplace action which requires a one-time PAT/license for
+  private repos at scale — should work on public repos out of
+  the box; (b) coverage is heavily weighted by `web.py` (the
+  ~13k-line SPA-embed module) — the real test gap isn't 31.79%
+  uniformly, it's "the router slices are well-tested, the SPA
+  bridge isn't"; (c) pip-audit only knows about Python deps —
+  the npm/Capacitor side of `mobile/` isn't scanned (separate
+  sprint).
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,

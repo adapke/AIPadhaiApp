@@ -46,3 +46,12 @@ repos:
     hooks:
       - id: python-no-eval
       - id: python-no-log-warn
+
+  # prod-7: secret scanner. Catches accidental commits of API keys,
+  # JWT secrets, AWS access tokens, Razorpay keys, etc. Allowlist
+  # lives in `.gitleaks.toml` for known false-positives (e.g. fixture
+  # strings that look like keys but aren't).
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks

@@ -1,7 +1,7 @@
 # E2E orchestration. `make e2e` is the one command everything else
 # composes from. See SPRINT_E2E.md for the sprint plan.
 
-.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify lint security i18n-audit
+.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify lint security i18n-audit audit coverage gitleaks
 
 help: ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -71,6 +71,25 @@ security: ## Pre-deploy security audit (run before every prod push)
 
 i18n-audit: ## Hardcoded English UI strings vs i18n key coverage
 	@python scripts/audit_i18n.py
+
+audit: ## pip-audit: scan declared deps for known CVEs (requires pip-audit)
+	@echo "==> requirements.txt"
+	@python -m pip_audit -r requirements.txt $$(./scripts/_pip_audit_ignore_flags.sh 2>/dev/null)
+	@echo "==> requirements-optional.txt"
+	@python -m pip_audit -r requirements-optional.txt $$(./scripts/_pip_audit_ignore_flags.sh 2>/dev/null)
+	@echo "no known vulnerabilities."
+
+coverage: ## pytest with coverage, fail-under floor matches CI (30%)
+	@PADHAI_SKIP_DOTENV=1 PADHAI_JWT_SECRET=qa-test-secret-abcdef0123456789abcdef0123456789 \
+		PYTHONPATH=. python -m pytest tests/ \
+		--cov=padhai --cov-report=term --cov-fail-under=30
+
+gitleaks: ## Secret scan working tree + history (requires gitleaks binary)
+	@command -v gitleaks >/dev/null 2>&1 || { \
+		echo "gitleaks not installed. Get it from https://github.com/gitleaks/gitleaks"; \
+		exit 1; \
+	}
+	@gitleaks detect --source . --no-banner --redact --config .gitleaks.toml
 
 verify: ## Quick pre-PR check: lint + invariant guards + pytest + structural bench (~20s on a warm cache)
 	@echo "==> ruff (F E I B UP SIM RUF ARG + B904)"

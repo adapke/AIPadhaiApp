@@ -1,0 +1,47 @@
+# prod-7 — gitleaks configuration
+#
+# Extends the default gitleaks rules with an allowlist for known
+# false-positives in this repo: bench fixture answers that look
+# like keys but aren't, demo / test data, and the JWT secret
+# placeholder used in onboarding docs.
+#
+# To suppress a finding, prefer:
+#   1. Edit the file so the value doesn't look like a secret (rename
+#      a variable, switch placeholders).
+#   2. Add an inline allow comment: `gitleaks:allow`
+#   3. Only as a last resort, add a path/commit to the allowlist
+#      below — with a written reason.
+#
+# Re-scan after edits:
+#   gitleaks detect --source . --no-banner --redact
+#
+# Inherit the upstream ruleset so new rule families (e.g. new
+# provider keys) flow in automatically.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Known-safe paths and patterns for AIPadhaiApp"
+
+# Test fixtures + bench answers + locale files don't carry secrets.
+paths = [
+    '''tests/fixtures/.*''',
+    '''data/pyq/.*\.json''',
+    '''padhai/locales/.*\.json''',
+    '''cypress/.*''',
+    '''COMPETITIVE_ANALYSIS\.md''',
+    '''CHANGELOG\.md''',
+]
+
+# These regexes match docs / templates that look like secrets but
+# are placeholder text. Add sparingly.
+regexes = [
+    # JWT secret placeholders used in env.example / docs
+    '''dev-change-me''',
+    '''CHANGE_ME''',
+    '''secret-change-this''',
+    '''placeholder''',
+    # Example sk-ant-... tokens in onboarding docs
+    '''sk-ant-(api03-)?example''',
+]

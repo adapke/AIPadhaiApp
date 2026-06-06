@@ -1,0 +1,13 @@
+# prod-7 — pip-audit CVE suppression list
+#
+# Format: one CVE / GHSA / PYSEC id per line, comments start with #.
+# Each suppression MUST come with a written reason on the line above
+# it. PR review rejects unjustified entries.
+#
+# Re-run scan after edits:
+#   python -m pip_audit -r requirements.txt -r requirements-optional.txt
+#
+# Re-evaluate the list quarterly — once a vulnerable dep is upgraded,
+# remove the suppression so the gate catches future regressions.
+#
+# (no current suppressions — last full scan was clean at prod-7)
