@@ -1,7 +1,7 @@
 # E2E orchestration. `make e2e` is the one command everything else
 # composes from. See SPRINT_E2E.md for the sprint plan.
 
-.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify lint
+.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify lint security
 
 help: ## Show this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -64,6 +64,10 @@ test: ## Run pytest + 4 QA harnesses against ad-hoc local server
 
 lint: ## Ruff lint (all 9 enforced categories)
 	python -m ruff check padhai/ admin/ tests/ scripts/
+
+security: ## Pre-deploy security audit (run before every prod push)
+	@echo "==> Pre-deploy security audit (codified SECURITY.md invariants)"
+	@python scripts/check_security.py
 
 verify: ## Quick pre-PR check: lint + invariant guards + pytest + structural bench (~20s on a warm cache)
 	@echo "==> ruff (F E I B UP SIM RUF ARG + B904)"

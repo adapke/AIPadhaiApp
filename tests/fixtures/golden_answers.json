@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v19: 355 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v20: 370 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -4490,6 +4490,195 @@
       "difficulty": "easy",
       "tags": {
         "subject": "history",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is the unit of magnetic field strength in SI?",
+      "expected": {
+        "answer": "tesla"
+      },
+      "rubric": "Accept 'tesla' or 'T'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which type of joint is the knee?",
+      "expected": {
+        "answer": "hinge joint"
+      },
+      "rubric": "Accept 'hinge' or 'hinge joint'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the pH of a 0.01 M HCl solution?",
+      "expected": {
+        "answer": "2"
+      },
+      "rubric": "Numeric only. -log(0.01) = 2.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS2: How many fundamental rights are guaranteed by the Indian Constitution?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only (after 44th Amendment).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "Find the median of: 3, 5, 7, 9, 11.",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "Convert 270 degrees to radians (in terms of pi).",
+      "expected": {
+        "answer": "3 pi / 2"
+      },
+      "rubric": "Accept '3π/2', '(3/2)π', or '3 pi / 2'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 12 Physics: Name the discoverer of X-rays.",
+      "expected": {
+        "answer": "wilhelm rontgen"
+      },
+      "rubric": "Accept 'Wilhelm Röntgen' or 'Roentgen' (case-insensitive).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "board": "Maharashtra",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 10 History: Who was the Viceroy of India during the Jallianwala Bagh massacre?",
+      "expected": {
+        "answer": "lord chelmsford"
+      },
+      "rubric": "Accept 'Lord Chelmsford' or 'Chelmsford'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "history",
+        "board": "Karnataka",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "TamilNadu Class 11 Biology: Name the largest gland in the human body.",
+      "expected": {
+        "answer": "liver"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "TamilNadu",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "ICSE Class 10 Mathematics: What is the next term in the sequence 1, 4, 9, 16, _?",
+      "expected": {
+        "answer": "25"
+      },
+      "rubric": "Numeric only. Squares of consecutive integers.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "ICSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "IGCSE Chemistry: What is the symbol for gold on the periodic table?",
+      "expected": {
+        "answer": "au"
+      },
+      "rubric": "Accept 'Au' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What is the term for the study of insects?",
+      "expected": {
+        "answer": "entomology"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Physics: Calculate the de Broglie wavelength of an electron with momentum p (in terms of Planck's constant h).",
+      "expected": {
+        "answer": "h/p"
+      },
+      "rubric": "Accept 'h/p' or 'lambda = h/p'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "quantum"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Environment: Name the protocol that aims to phase out ozone-depleting substances.",
+      "expected": {
+        "answer": "montreal protocol"
+      },
+      "rubric": "Accept 'Montreal Protocol'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "exam": "UPSC",
+        "topic": "environment"
+      }
+    },
+    {
+      "prompt": "SSC GK: In which city is the Taj Mahal located?",
+      "expected": {
+        "answer": "agra"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
         "exam": "SSC"
       }
     }

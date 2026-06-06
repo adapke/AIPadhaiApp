@@ -678,6 +678,39 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Production-readiness sprint (prod-1).** Three deliverables
+  shipping the platform from "polished codebase" to "ready to
+  promote to production":
+
+  1. **`scripts/check_security.py`** — pre-deploy security audit
+     codifying the 8 invariants from SECURITY.md / ONBOARDING.md:
+     JWT-secret strength + placeholder rejection, DPDP §9 minor
+     threshold == 18, admin-gate fallback when `APP_ENV=production`,
+     Anthropic key prefix check, psycopg search_path (advisory),
+     bare-Haiku-model rejection (via the existing model-id guard),
+     router-registry consistency, f-string SQL with user inputs.
+     Wired into a new `make security` target.
+
+  2. **`tests/test_security_invariants.py`** — 17 in-process tests
+     (parametrised) that catch security regressions during
+     `pytest`, not just at `make verify`. Locks: JWT placeholder
+     list, HS256 + bounded TTL, DPDP age 18 + consent TTL, admin
+     gate validator existence, db helpers, no bare Haiku literal,
+     B904 cleanliness, no risky f-string SQL, every org router
+     calls a role gate. Total pytest: 58 → 75.
+
+  3. **`PRODUCTION_CHECKLIST.md`** — deploy-day reference. 12
+     sections covering env vars, DB, provider keys, DPDP, admin
+     gate, rate limits + cost cap, observability, CSP / security
+     headers, multi-tenant guards, mobile shells, backups, SLA
+     alerts. Built on top of `make verify && make security` as
+     the automated 90% — checklist captures the remaining 10%
+     (environment + monitoring) that can't be automated.
+- **Accuracy bench 355 → 370 items.** SI unit tesla, knee hinge
+  joint, pH(HCl 0.01M)=2, 6 fundamental rights, median of 5 nums,
+  270°→3π/2, Röntgen discovered X-rays, Chelmsford Viceroy 1919,
+  liver largest gland, 1-4-9-16-25, Au, entomology, λ=h/p,
+  Montreal Protocol, Taj Mahal in Agra.
 - **Twenty-fourth router slice — push admin (3 routes).**
   `padhai/routers/push_admin.py` covers `POST /api/push/{log_id}/
   opened` (public client beacon — log_id is the auth), `GET

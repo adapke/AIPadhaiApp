@@ -105,9 +105,11 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `scripts/fix_b904.py` | AST-based B904 mass fixer | Ruff can't autofix B904; this can |
 | `scripts/check_model_constants.py` | Lock invariant #5 (no literal `"claude-*"` outside `models.py`) | Closed bug #8 once and for all |
 | `scripts/check_router_registry.py` | Lock the router slice ↔ `_ROUTER_NAMES` invariant | Catches half-wired router additions |
+| `scripts/check_security.py` | Pre-deploy security audit (8 codified SECURITY.md invariants) | `make security` runs it; required before prod push |
 | `scripts/backup_sqlite.sh` | Online sqlite3 .backup | Safe under concurrent writes |
 | `make verify` | One-command pre-PR gate | Bundles lint + 2 guards + pytest + structural bench (~20s) |
-| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 355 items across 9 boards/exams |
+| `make security` | Pre-deploy gate | Codified SECURITY.md hardening checks |
+| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 370 items across 9 boards/exams |
 
 ---
 
