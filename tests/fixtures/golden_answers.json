@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v11: 235 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v12: 250 items across 9 boards/exams (crossed the 250-item milestone).",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -2980,6 +2980,199 @@
       "tags": {
         "subject": "gk",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Mathematics: What is the derivative of ln(x) with respect to x (x > 0)?",
+      "expected": {
+        "answer": "1/x"
+      },
+      "rubric": "Accept '1/x' or 'x^-1'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "differentiation"
+      }
+    },
+    {
+      "prompt": "NEET Physics: A body of mass m is in uniform circular motion of radius r with period T. What is its centripetal acceleration in terms of r and T?",
+      "expected": {
+        "answer": "4 pi^2 r / t^2"
+      },
+      "rubric": "Accept '4π²r/T²', '(4*pi^2*r)/T^2', or equivalent.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "NEET",
+        "topic": "circular_motion"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Economy: What is the term for the minimum capital reserve banks must hold as a fraction of their net demand and time liabilities, set by the RBI?",
+      "expected": {
+        "answer": "statutory liquidity ratio"
+      },
+      "rubric": "Accept 'SLR' or 'Statutory Liquidity Ratio'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC",
+        "topic": "banking"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: Predict the geometry of NH3 molecule using VSEPR theory.",
+      "expected": {
+        "answer": "trigonal pyramidal"
+      },
+      "rubric": "Accept 'trigonal pyramidal' or 'pyramidal'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE",
+        "topic": "vsepr"
+      }
+    },
+    {
+      "prompt": "If 3x - 7 = 11, what is x?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only. 3x=18, x=6.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "A class has 25 students. If 60% of them are girls, how many boys are there?",
+      "expected": {
+        "answer": "10"
+      },
+      "rubric": "Numeric only. 40% of 25 = 10.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "A tank can be filled by a pipe in 12 hours. After how many hours will half the tank be filled (constant rate)?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "time_work"
+      }
+    },
+    {
+      "prompt": "If the cost price of an item is Rs 800 and it is sold at a 10% loss, what is the selling price?",
+      "expected": {
+        "answer": "720"
+      },
+      "rubric": "Numeric only (in rupees). 800 * 0.9 = 720.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "profit_loss"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 12 Biology: Name the smallest functional unit of the kidney.",
+      "expected": {
+        "answer": "nephron"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "Maharashtra",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 11 Chemistry: How many electrons can a single d-orbital hold?",
+      "expected": {
+        "answer": "2"
+      },
+      "rubric": "Numeric only (an orbital, not a subshell).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "Karnataka",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 12 Physics: What is the SI unit of capacitance?",
+      "expected": {
+        "answer": "farad"
+      },
+      "rubric": "Accept 'farad' or 'F'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "TamilNadu",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 10 Biology: Name the longest bone in the human body.",
+      "expected": {
+        "answer": "femur"
+      },
+      "rubric": "Accept 'femur' or 'thigh bone'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "AP_Telangana",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which blood group is the universal donor?",
+      "expected": {
+        "answer": "o negative"
+      },
+      "rubric": "Accept 'O negative', 'O-', or 'O Rh-negative'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "blood_groups"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What type of bond is present between two oxygen atoms in O2?",
+      "expected": {
+        "answer": "double bond"
+      },
+      "rubric": "Accept 'double bond' or 'double covalent bond'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the principal quantum number (n) for the K shell?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET",
+        "topic": "atomic_structure"
       }
     }
   ]

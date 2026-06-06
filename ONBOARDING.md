@@ -54,7 +54,7 @@ The product surface, top-level:
 
 ---
 
-## The 15 router slices (alphabetical)
+## The 17 router slices (alphabetical)
 
 Each `padhai/routers/<name>.py` is self-contained. Convention: lazy
 `from .. import web as _web` inside endpoints so the module imports
@@ -77,6 +77,8 @@ standalone for unit testing. Registry: `padhai/routers/__init__.py`.
 | 13 | `scim.py` | 4 | SCIM 2.0 IdP provisioning |
 | 14 | `notifications.py` | 5 | Feed + compose + push fan-out |
 | 15 | `orgs_schedule.py` | 4 | Timetable + today + student history |
+| 16 | `lesson_detail.py` | 5 | Lesson cache derivatives: flashcards, quiz, notes, SM-2 |
+| 17 | `lesson_chat_recap.py` | 3 | RAG chat + recap text + recap MP3 |
 
 Plus the older slices wired before the polish-N sprints: `catalog`,
 `coaching`, `question_bank`, `me`, `orgs_admin`, `v3`, `learning`,
@@ -97,7 +99,7 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `scripts/check_model_constants.py` | Lock invariant #5 (no literal `"claude-*"` outside `models.py`) | Closed bug #8 once and for all |
 | `scripts/backup_sqlite.sh` | Online sqlite3 .backup | Safe under concurrent writes |
 | `make verify` | One-command pre-PR gate | Bundles lint + model-id guard + pytest + structural bench (~20s) |
-| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 235 items across 9 boards/exams |
+| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 250 items across 9 boards/exams |
 
 ---
 
@@ -176,4 +178,4 @@ open an issue with the output.
 - **Security issues** — `security@aipathshala.in` (see SECURITY.md)
 - **Architecture decisions** — CLAUDE.md §5 is the source of truth
 
-Last reviewed: 2026-06-05.
+Last reviewed: 2026-06-06.

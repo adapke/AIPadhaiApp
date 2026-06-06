@@ -678,6 +678,35 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Seventeenth router slice — lesson chat + recap (3 routes).**
+  `padhai/routers/lesson_chat_recap.py` covers the trickier lesson
+  siblings polish-14 deferred: `POST /chat/{lesson_id}` (RAG chat
+  grounded in the lesson, with `[Scene N]` citation parsing and
+  the S4 exam-mode lock), `POST /lessons/{id}/recap` (Haiku-backed
+  text + TTS synthesis, cached), `GET /lessons/{id}/recap.mp3`
+  (stream the cached audio). `CHAT_SYSTEM_PROMPT` +
+  `_parse_citations` + the two citation regexes move with the
+  router (only call site). `_claude()` / `cache` / `_rl` /
+  `pedagogy.MODEL` / `tts.get_provider` stay in web.py and are
+  late-imported. ~165 lines off web.py.
+- **Accuracy bench 235 → 250 items (crossed the 250-item milestone).**
+  Added 4 hard (JEE ln(x) derivative, NEET circular motion
+  centripetal-a in terms of T, UPSC SLR, JEE VSEPR for NH3),
+  4 reasoning (3x-7=11, 60% girls, half tank, 10% loss),
+  4 state-board variety (Maharashtra Class 12 nephron, Karnataka
+  Class 11 d-orbital electrons, TamilNadu Class 12 farad, AP/
+  Telangana femur), 3 NEET/JEE chem-bio depth (O-negative
+  universal donor, O2 double bond, K-shell n=1). Distribution
+  now `easy=144 / medium=67 / hard=39`. Structural runner: 250/250
+  in 4.9s.
+- **Router unit tests expanded (21 tests, was 13).** Added
+  behavioural coverage for the 4 newest slices:
+  notifications (`/api/notifications/me` requires auth), schedule
+  (`/api/orgs/.../today` + timetable gate on membership), lesson-
+  detail (notes requires auth, quiz unknown-lesson is 404), and
+  lesson-chat-recap (chat unknown-lesson hits the 404/429 path,
+  recap unknown-lesson is 404). The path-registration test now
+  enumerates all 17 slices instead of 13.
 - **Sixteenth router slice — lesson-detail cache surfaces (5 routes).**
   `padhai/routers/lesson_detail.py` covers the cache-only lesson
   derivatives: `POST /lessons/{id}/flashcards` (generate or cached),

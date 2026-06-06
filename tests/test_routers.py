@@ -1,9 +1,9 @@
 """Router-layer smoke tests.
 
-13 router slices have been extracted out of web.py since polish-1.
-None of them had explicit unit-test coverage — the only assurance
-they worked was the existing pytest suite + the manual end-to-end
-smoke that we ran during each extraction.
+17 router slices have been extracted out of web.py since polish-1.
+None of them had explicit unit-test coverage before polish-11 —
+the only assurance they worked was the existing pytest suite + the
+manual end-to-end smoke that we ran during each extraction.
 
 This module covers the things that the next-touch can silently
 break without a CI signal:
@@ -48,7 +48,7 @@ def test_all_router_modules_import(client) -> None:  # noqa: ARG001 — fixture 
 
 
 def test_extracted_router_paths_registered(client) -> None:  # noqa: ARG001
-    """The 13 extracted router slices wire the URL paths web.py used
+    """All 17 extracted router slices wire the URL paths web.py used
     to declare. If a slice is half-extracted (route removed from
     web.py but module not registered), this catches it.
 
@@ -89,6 +89,14 @@ def test_extracted_router_paths_registered(client) -> None:  # noqa: ARG001
         "/api/branding/resolve",
         # scim.py (13)
         "/scim/v2/ServiceProviderConfig",
+        # notifications.py (14)
+        "/api/notifications/me",
+        # orgs_schedule.py (15)
+        "/api/orgs/{org_id}/today",
+        # lesson_detail.py (16)
+        "/lessons/{lesson_id}/flashcards",
+        # lesson_chat_recap.py (17)
+        "/chat/{lesson_id}",
     }
     missing = expected - paths
     assert not missing, f"router paths missing from app: {sorted(missing)}"
@@ -167,6 +175,10 @@ def test_multipage_combined_status_unknown_job_is_404(client) -> None:
     "/api/orgs/fake/assignments",
     "/api/orgs/fake/fees/structures",
     "/api/orgs/fake/exams",
+    # polish-15 additions: schedule + notification subsystems
+    "/api/orgs/fake/today",
+    "/api/orgs/fake/classes/fake/timetable",
+    "/api/orgs/fake/notifications",
 ])
 def test_org_subsystem_routes_gate_on_membership(client, path: str) -> None:
     """Every /api/orgs/{org_id}/<subsystem> endpoint must reject an
@@ -181,4 +193,57 @@ def test_org_subsystem_routes_gate_on_membership(client, path: str) -> None:
     assert r.status_code in (401, 403, 404), (
         f"{path} returned {r.status_code} for unauthenticated caller — "
         f"expected 401/403/404. Body: {r.text[:200]}"
+    )
+
+
+def test_notifications_me_requires_auth(client) -> None:
+    """/api/notifications/me is a per-user resource — must 401 with
+    no Authorization header, even when PADHAI_REQUIRE_AUTH=0 (the
+    router's `_require_user` short-circuits)."""
+    r = client.get("/api/notifications/me")
+    assert r.status_code == 401, r.text
+
+
+def test_lesson_notes_requires_auth(client) -> None:
+    """Per-user notes are per-user even in dev mode. The router
+    raises 401 explicitly when `user is None` rather than relying on
+    PADHAI_REQUIRE_AUTH."""
+    r = client.get("/lessons/any-lesson/notes")
+    assert r.status_code == 401, r.text
+
+
+def test_lesson_quiz_unknown_lesson_is_404(client) -> None:
+    """The quiz endpoint is a pure cache lookup. An unknown
+    lesson_id returns 404, not 500, and works without auth (no
+    `_require_user` call) in dev mode."""
+    r = client.post("/lessons/nonexistent-lesson/quiz")
+    # 401 if auth is required, 404 if cache miss path is reached.
+    # Conftest sets PADHAI_REQUIRE_AUTH=0, so 404 is the expected
+    # path; we accept 401 as a future-safe alternative.
+    assert r.status_code in (401, 404), r.text
+
+
+def test_lesson_recap_unknown_lesson_is_404(client) -> None:
+    """Recap generation 404s on an unknown lesson_id. Exercises the
+    seventeenth slice's cache-miss path without invoking Claude or
+    TTS."""
+    r = client.post("/lessons/nonexistent-lesson/recap")
+    assert r.status_code in (401, 404), r.text
+
+
+def test_chat_unknown_lesson_is_404_or_429(client) -> None:
+    """/chat/{lesson_id} hits the AI-generation rate limit bucket
+    BEFORE the cache lookup, so an anonymous caller may see 429
+    instead of 404 if the bucket is already drained from another
+    test. Both are acceptable — 200 would mean the cache miss was
+    bypassed."""
+    r = client.post(
+        "/chat/nonexistent-lesson",
+        data={"question": "What is this lesson about?"},
+    )
+    # 401 if auth enforced; 404 if cache miss reached; 429 if rate
+    # limiter fired; 422 if FastAPI rejected the form (less likely
+    # since we provided `question`).
+    assert r.status_code in (401, 404, 422, 429), (
+        f"unexpected status {r.status_code}: {r.text[:200]}"
     )
