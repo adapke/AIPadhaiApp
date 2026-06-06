@@ -54,7 +54,7 @@ The product surface, top-level:
 
 ---
 
-## The 17 router slices (alphabetical)
+## The 18 router slices (alphabetical)
 
 Each `padhai/routers/<name>.py` is self-contained. Convention: lazy
 `from .. import web as _web` inside endpoints so the module imports
@@ -79,6 +79,7 @@ standalone for unit testing. Registry: `padhai/routers/__init__.py`.
 | 15 | `orgs_schedule.py` | 4 | Timetable + today + student history |
 | 16 | `lesson_detail.py` | 5 | Lesson cache derivatives: flashcards, quiz, notes, SM-2 |
 | 17 | `lesson_chat_recap.py` | 3 | RAG chat + recap text + recap MP3 |
+| 18 | `curriculum.py` | 2 | NCERT match + catalogue browse |
 
 Plus the older slices wired before the polish-N sprints: `catalog`,
 `coaching`, `question_bank`, `me`, `orgs_admin`, `v3`, `learning`,
@@ -97,9 +98,10 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `padhai/llm_call.py:call_claude()` | Wrapped Claude call | Auto-records cost + enforces daily cap |
 | `scripts/fix_b904.py` | AST-based B904 mass fixer | Ruff can't autofix B904; this can |
 | `scripts/check_model_constants.py` | Lock invariant #5 (no literal `"claude-*"` outside `models.py`) | Closed bug #8 once and for all |
+| `scripts/check_router_registry.py` | Lock the router slice ↔ `_ROUTER_NAMES` invariant | Catches half-wired router additions |
 | `scripts/backup_sqlite.sh` | Online sqlite3 .backup | Safe under concurrent writes |
-| `make verify` | One-command pre-PR gate | Bundles lint + model-id guard + pytest + structural bench (~20s) |
-| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 250 items across 9 boards/exams |
+| `make verify` | One-command pre-PR gate | Bundles lint + 2 guards + pytest + structural bench (~20s) |
+| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 265 items across 9 boards/exams |
 
 ---
 

@@ -60,6 +60,7 @@ _ROUTER_NAMES = (
     "orgs_schedule",     # v3.x — timetable + today + student-history (4 routes)
     "lesson_detail",     # v3.x — /lessons/{id}/{flashcards,quiz,notes,rate} (5 cache-only)
     "lesson_chat_recap", # v3.x — /chat/{id} + /lessons/{id}/recap* (3 Claude/TTS routes)
+    "curriculum",        # v3.x — /lessons/{id}/curriculum + /curriculum/index (2 routes)
 )
 
 

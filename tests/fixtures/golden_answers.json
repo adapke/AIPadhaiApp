@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v12: 250 items across 9 boards/exams (crossed the 250-item milestone).",
+  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v13: 265 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -3173,6 +3173,197 @@
         "subject": "chemistry",
         "exam": "NEET",
         "topic": "atomic_structure"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Mathematics: The complex number z = 1 + i. What is |z|?",
+      "expected": {
+        "answer": "sqrt(2)"
+      },
+      "rubric": "Accept 'sqrt(2)', 'root 2', '1.414', or '√2'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "complex_numbers"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Name the process by which water moves from soil into the roots of plants.",
+      "expected": {
+        "answer": "osmosis"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "plant_physiology"
+      }
+    },
+    {
+      "prompt": "UPSC GS3 Science & Tech: What does the abbreviation ISRO stand for?",
+      "expected": {
+        "answer": "indian space research organisation"
+      },
+      "rubric": "Accept 'Indian Space Research Organisation' (case-insensitive, 'organization' OK).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "gk",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "JEE Physics: Two charges of +q and -q are separated by distance r. What is the magnitude of the dipole moment?",
+      "expected": {
+        "answer": "qr"
+      },
+      "rubric": "Accept 'qr', 'q*r', or 'p = qr'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "electrostatics"
+      }
+    },
+    {
+      "prompt": "A bag contains 6 red balls and 4 blue balls. What is the probability of drawing a red ball at random?",
+      "expected": {
+        "answer": "0.6"
+      },
+      "rubric": "Accept '0.6', '3/5', or '60%'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "If 5 pencils cost Rs 25, how many pencils can you buy for Rs 60?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only. 60/5 = 12 pencils.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "What is the next number in the sequence: 2, 4, 8, 16, _?",
+      "expected": {
+        "answer": "32"
+      },
+      "rubric": "Numeric only. Geometric progression with ratio 2.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "A rectangle has length 12 cm and breadth 5 cm. What is the length of its diagonal in cm?",
+      "expected": {
+        "answer": "13"
+      },
+      "rubric": "Numeric only. sqrt(12^2 + 5^2) = 13.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 10 History: In which year did India gain independence?",
+      "expected": {
+        "answer": "1947"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "board": "Maharashtra",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 9 Physics: What is the SI unit of frequency?",
+      "expected": {
+        "answer": "hertz"
+      },
+      "rubric": "Accept 'hertz' or 'Hz'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "Karnataka",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "ICSE Class 9 Chemistry: What is the atomic number of oxygen?",
+      "expected": {
+        "answer": "8"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "ICSE",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which vitamin is essential for blood clotting?",
+      "expected": {
+        "answer": "vitamin k"
+      },
+      "rubric": "Accept 'Vitamin K' (case-insensitive).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET",
+        "topic": "nutrition"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the molecular formula of glucose?",
+      "expected": {
+        "answer": "c6h12o6"
+      },
+      "rubric": "Accept 'C6H12O6' (case-insensitive).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE",
+        "topic": "biomolecules"
+      }
+    },
+    {
+      "prompt": "UPSC GS1: Name the river that originates from Mansarovar Lake.",
+      "expected": {
+        "answer": "brahmaputra"
+      },
+      "rubric": "Accept 'Brahmaputra' (the Sutlej, Indus, and Karnali also originate there but Brahmaputra is the most common answer).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: The Reserve Bank of India (RBI) was established in which year?",
+      "expected": {
+        "answer": "1935"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "exam": "SSC"
       }
     }
   ]

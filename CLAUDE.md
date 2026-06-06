@@ -678,6 +678,30 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Eighteenth router slice — curriculum mapping (2 routes).**
+  `padhai/routers/curriculum.py` covers `POST /lessons/{id}/curriculum`
+  (NCERT/state-board catalogue match via `pedagogy.match_curriculum`)
+  and `GET /curriculum/index` (browse/filter catalogue with Postgres
+  override merge). Static `CURRICULUM` seed list + the
+  `curriculum_topics` DB-override merge port cleanly. ~120 lines off
+  web.py.
+- **Router registry guard — `scripts/check_router_registry.py`.**
+  Bidirectional structural check: every `padhai/routers/*.py` file
+  appears in `_ROUTER_NAMES`, every name in `_ROUTER_NAMES` has a
+  matching file. Closes the bug class where a router file is added
+  but not registered (endpoints silently don't mount → SPA 404s on
+  the new surface) or registered but the file got deleted (app boot
+  crashes in `all_routers()`). Wired into `make verify` between the
+  model-id guard and pytest. Tested by simulating an unregistered
+  dummy file — guard correctly flagged + exited 1.
+- **Accuracy bench 250 → 265 items.** Added 4 hard (JEE |z| for
+  z=1+i, NEET osmosis, UPSC ISRO, JEE dipole moment qr),
+  4 reasoning (probability 6/10, pencil-cost ratio, GP next term,
+  rectangle diagonal 5-12-13), 3 state-board (Maharashtra 1947,
+  Karnataka hertz, ICSE oxygen Z=8), 2 NEET/JEE chem-bio (vitamin K
+  for clotting, glucose C6H12O6), 2 GK (Brahmaputra source, RBI
+  1935). Distribution now `easy=149 / medium=74 / hard=42`.
+  Structural runner: 265/265 in 4.5s.
 - **Seventeenth router slice — lesson chat + recap (3 routes).**
   `padhai/routers/lesson_chat_recap.py` covers the trickier lesson
   siblings polish-14 deferred: `POST /chat/{lesson_id}` (RAG chat
