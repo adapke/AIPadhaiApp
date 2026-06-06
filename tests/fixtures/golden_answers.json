@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE, ICSE, IGCSE, Maharashtra, Karnataka, TamilNadu, AP-Telangana, UP State Boards + JEE, NEET, UPSC, SSC. v14: 280 items.",
+  "description": "Smoke-level golden dataset. v15: 295 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -3554,6 +3554,193 @@
         "subject": "biology",
         "board": "CBSE",
         "class": "11"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the formula for the area of a circle with radius r?",
+      "expected": {
+        "answer": "pi r^2"
+      },
+      "rubric": "Accept 'pi*r^2', 'πr²', 'π r^2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the atomic number of carbon?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is the unit of pressure in SI?",
+      "expected": {
+        "answer": "pascal"
+      },
+      "rubric": "Accept 'pascal' or 'Pa'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS1: In which year did Vasco da Gama arrive in India?",
+      "expected": {
+        "answer": "1498"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "If x^2 = 49, what are the possible values of x?",
+      "expected": {
+        "answer": "7 and -7"
+      },
+      "rubric": "Accept '7, -7', '±7', or '7 and -7'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "A man is 4 times as old as his son. After 16 years, he will be twice as old. What is the son's current age?",
+      "expected": {
+        "answer": "8"
+      },
+      "rubric": "Numeric only. (4x+16) = 2(x+16), x=8.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "ages"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 8 Science: What is the boiling point of water at sea level in degrees Celsius?",
+      "expected": {
+        "answer": "100"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "Maharashtra",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 10 Biology: How many bones are there in the adult human skull?",
+      "expected": {
+        "answer": "22"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "Karnataka",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 8 History: Who founded the Maurya Empire?",
+      "expected": {
+        "answer": "chandragupta maurya"
+      },
+      "rubric": "Accept 'Chandragupta Maurya' or 'Chandragupta'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "board": "AP_Telangana",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "UP Board Class 9 Geography: Name the longest river in India.",
+      "expected": {
+        "answer": "ganga"
+      },
+      "rubric": "Accept 'Ganga' or 'Ganges'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "UP",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "ICSE Class 10 Mathematics: What is the value of log(10) base 10?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "ICSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What is the normal range of human body temperature in Fahrenheit?",
+      "expected": {
+        "answer": "98.6"
+      },
+      "rubric": "Accept '98.6', '98', '98-99', or 'around 98.6 F'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Physics: A car accelerates from rest at 2 m/s^2 for 5 seconds. What is its final velocity in m/s?",
+      "expected": {
+        "answer": "10"
+      },
+      "rubric": "Numeric only. v = u + at = 0 + 2*5.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS2 Polity: How many members are nominated to the Rajya Sabha by the President of India?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: Which is the largest desert in the world?",
+      "expected": {
+        "answer": "sahara"
+      },
+      "rubric": "Accept 'Sahara' or 'Sahara Desert' (Antarctica is technically a cold desert; Sahara is the canonical hot-desert answer).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "exam": "SSC"
       }
     }
   ]

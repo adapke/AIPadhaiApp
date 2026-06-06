@@ -678,6 +678,21 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twentieth router slice — SSO (3 routes).**
+  `padhai/routers/sso.py` covers the OAuth/OIDC sign-in flow:
+  `GET /auth/sso/providers` (list configured), `GET /auth/sso/
+  {provider}/start` (redirect-to-IdP), `GET /auth/sso/{provider}/
+  callback` (code-exchange → session JWT → localStorage bounce
+  page). `_sso_redirect_uri` + `_sso_error_page` helpers move
+  with the router (only call site). `_set_auth_cookie` +
+  `_escape_html` stay in web.py and are late-imported.
+  ~165 lines off web.py.
+- **Accuracy bench 280 → 295 items.** Added items spanning JEE
+  π r², NEET atomic number of carbon, SI unit pressure pascal,
+  Vasco da Gama 1498, age problem (4x+16=2(x+16) → 8), 22 skull
+  bones, Chandragupta Maurya, log₁₀(10)=1, body temp 98.6°F,
+  v=u+at, Rajya Sabha nominations, Sahara desert, longest river
+  Ganga, and more.
 - **Nineteenth router slice — uploads (3 routes).**
   `padhai/routers/uploads.py` covers the PRD §13.1-2 upload
   pipeline: `POST /api/uploads` (persist + ingest), `POST

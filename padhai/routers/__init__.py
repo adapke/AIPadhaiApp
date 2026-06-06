@@ -62,6 +62,7 @@ _ROUTER_NAMES = (
     "lesson_chat_recap", # v3.x — /chat/{id} + /lessons/{id}/recap* (3 Claude/TTS routes)
     "curriculum",        # v3.x — /lessons/{id}/curriculum + /curriculum/index (2 routes)
     "uploads",           # v3.x — POST/GET /api/uploads* (3 routes — upload/analyze/get)
+    "sso",               # v3.x — /auth/sso/* (3 routes — OAuth/OIDC flow)
 )
 
 
