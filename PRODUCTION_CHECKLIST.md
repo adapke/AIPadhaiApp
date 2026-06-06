@@ -134,8 +134,17 @@ unset ADMIN_BOOTSTRAP_TOKEN   # NEVER leave this in the deployed env
       public ingress)
 - [ ] `/healthz` exposed to load balancer (returns 200 within 5s
       when DB reachable)
-- [ ] `SENTRY_DSN` set + first error verified (e.g., `curl
-      https://your-domain/__sentry_test`)
+- [ ] `SENTRY_DSN` set + first error verified. In production the
+      `/__sentry_test` route requires the `PADHAI_SENTRY_TEST_TOKEN`
+      env var to be set and supplied via the `X-Sentry-Test-Token`
+      header:
+      `curl -H "X-Sentry-Test-Token: $TOKEN" https://your-domain/__sentry_test`
+      Returns 404 in production without the token (DoS-safe). In
+      dev/staging the endpoint is open. Event should land in your
+      Sentry dashboard within 30s; the FastAPI integration tags the
+      route template so it's grep-able as `endpoint:/__sentry_test`.
+      Adjust noise via `SENTRY_DROP_STATUSES` (default drops 401/403/
+      404/405/422/429).
 - [ ] Structured JSON logging on stdout shipped to your aggregator
       (Loki / Datadog / CloudWatch)
 - [ ] Per-request `request_id` correlation header in place

@@ -36,3 +36,14 @@ locust>=2.27
 # Required when: SARVAM_API_KEY is set
 # Uses `requests` which is already pulled by anthropic, but document:
 # requests>=2.32
+
+# --- F2: Sentry error reporting
+# Required when: SENTRY_DSN is set
+# Module: padhai/observability.py
+# [fastapi] extra pulls starlette helpers + the integration class.
+sentry-sdk[fastapi]>=2.0
+
+# --- F3: PostHog product analytics
+# Required when: POSTHOG_API_KEY is set
+# Module: padhai/observability.py (track() helper)
+posthog>=3.0

@@ -36,6 +36,7 @@ from threading import Lock
 from typing import Any
 
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
 from starlette.types import ASGIApp
 
 # ---------- structured logging ----------
@@ -188,9 +189,44 @@ _sentry_initialised = False
 _posthog_initialised = False
 
 
+# HTTP status codes we don't want polluting the Sentry feed. 4xx are
+# usually user errors; 404 in particular dominates noise when bots
+# crawl. 401 is the auth gate firing as designed. Customise via the
+# SENTRY_DROP_STATUSES env var (comma-separated).
+_SENTRY_DROP_DEFAULT = "401,403,404,405,422,429"
+
+
+def _build_before_send():
+    """Return a Sentry before_send hook that drops events whose
+    HTTP status code is in the configured drop-list. Kept open-coded
+    so we don't fight with Sentry's event grouping."""
+    raw = os.environ.get("SENTRY_DROP_STATUSES", _SENTRY_DROP_DEFAULT)
+    drop = {int(s.strip()) for s in raw.split(",") if s.strip().isdigit()}
+
+    def _before_send(event, _hint):
+        # When an HTTPException with one of these status codes flowed
+        # through, drop the event. Sentry stamps the status under
+        # `tags.status_code` when the FastAPI integration is on.
+        tags = (event or {}).get("tags") or {}
+        sc = tags.get("status_code") or tags.get("status")
+        try:
+            if sc and int(sc) in drop:
+                return None
+        except (TypeError, ValueError):
+            pass
+        return event
+
+    return _before_send
+
+
 def init_sentry() -> bool:
     """Lazily set up Sentry if SENTRY_DSN is set. Returns True if
-    initialised. Idempotent."""
+    initialised. Idempotent.
+
+    Picks up the FastAPI integration when sentry-sdk[fastapi] is
+    installed; falls back to the plain SDK otherwise. The middleware's
+    `_maybe_capture_exception` remains as a safety net for routes the
+    integration doesn't cover."""
     global _sentry_initialised
     if _sentry_initialised:
         return True
@@ -199,17 +235,46 @@ def init_sentry() -> bool:
         return False
     try:
         import sentry_sdk
+
+        integrations = []
+        try:
+            from sentry_sdk.integrations.fastapi import FastApiIntegration
+            from sentry_sdk.integrations.starlette import StarletteIntegration
+            integrations.extend([
+                StarletteIntegration(transaction_style="endpoint"),
+                FastApiIntegration(transaction_style="endpoint"),
+            ])
+        except ImportError:
+            # sentry-sdk installed without the [fastapi] extra —
+            # base SDK still works, just no auto route context.
+            log_event(
+                "observability.sentry.fastapi_integration",
+                status="skipped", reason="extras not installed",
+            )
+
         sentry_sdk.init(
             dsn=dsn,
-            environment=os.environ.get("RENDER_SERVICE_NAME", "dev"),
+            environment=os.environ.get(
+                "RENDER_SERVICE_NAME",
+                os.environ.get("APP_ENV", "dev"),
+            ),
+            release=os.environ.get("RENDER_GIT_COMMIT", "").strip() or None,
             traces_sample_rate=float(os.environ.get("SENTRY_TRACES", "0.05")),
             send_default_pii=False,  # never send IPs / emails by default
+            integrations=integrations,
+            before_send=_build_before_send(),
         )
         _sentry_initialised = True
-        log_event("observability.sentry.init", status="ok")
+        log_event(
+            "observability.sentry.init",
+            status="ok",
+            integrations=len(integrations),
+        )
         return True
     except Exception as e:
-        log_event("observability.sentry.init", status="failed", error=str(e))
+        log_event(
+            "observability.sentry.init", status="failed", error=str(e),
+        )
         return False
 
 
@@ -261,12 +326,45 @@ def track(event: str, user_id: str | None = None, **props: Any) -> None:
         pass
 
 
+class _SentryTestException(RuntimeError):
+    """Raised by /__sentry_test on purpose. Distinct type so a Sentry
+    issue filter can drop it without touching real exceptions."""
+
+
+def _register_sentry_test_route(app) -> None:
+    """Register `GET /__sentry_test` — raises an exception so ops can
+    verify the Sentry pipe end-to-end after a deploy.
+
+    Gating:
+      * `APP_ENV != "production"`: open (devs need easy access).
+      * `APP_ENV == "production"`: requires header
+        `X-Sentry-Test-Token: <token>` matching the
+        `PADHAI_SENTRY_TEST_TOKEN` env var. If the env var is unset,
+        the endpoint returns 404 in production — no test-fire path.
+
+    `include_in_schema=False` keeps it off the OpenAPI surface."""
+    from fastapi import HTTPException
+
+    @app.get("/__sentry_test", include_in_schema=False)
+    async def sentry_test(request: Request):
+        if (os.environ.get("APP_ENV") or "").lower() == "production":
+            expected = os.environ.get("PADHAI_SENTRY_TEST_TOKEN", "").strip()
+            supplied = request.headers.get("x-sentry-test-token", "").strip()
+            if not expected or supplied != expected:
+                raise HTTPException(status_code=404, detail="Not Found")
+        raise _SentryTestException(
+            "[sentry-test] intentional exception — Sentry verification",
+        )
+
+
 def install(app) -> None:
     """One-shot setup: init Sentry + PostHog if their keys exist, then
-    add the middleware. Call once from app startup."""
+    add the middleware and register the test-exception route. Call
+    once from app startup."""
     init_sentry()
     init_posthog()
     app.add_middleware(ObservabilityMiddleware)
+    _register_sentry_test_route(app)
     log_event("observability.installed",
               sentry=_sentry_initialised,
               posthog=_posthog_initialised)

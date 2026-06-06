@@ -786,6 +786,60 @@ Reviewed 2026-06-03. Re-audit before changing.
   --mode=live --judge=llm_judge --limit=20` when they have a key
   in shell env. Structural CI gate is unchanged (385/385 still
   passes); LLM-judge is opt-in via `--judge=llm_judge`.
+- **prod-6 — Sentry integration end-to-end (single-focus sprint).**
+  `observability.py` had a half-wired `init_sentry()` since v0.13
+  but: no FastAPI integration registered (so events carried no
+  route context), no test-exception endpoint to validate the pipe
+  after deploys, no SDK in any requirements file (lazy-imported
+  only), no tests, no noise filtering on 4xx. Closed:
+
+  1. `padhai/observability.py` — `init_sentry()` now registers
+     the `StarletteIntegration` + `FastApiIntegration` (transaction
+     style `endpoint` for route-template aggregation), pulls release
+     from `RENDER_GIT_COMMIT`, and installs a `before_send` hook
+     that drops `SENTRY_DROP_STATUSES` events (default: 401/403/
+     404/405/422/429). 5xx and statusless events always flow.
+     Falls back to the plain SDK when the `[fastapi]` extra isn't
+     installed — emits an observability log line so ops sees the
+     downgrade.
+
+  2. `GET /__sentry_test` — auto-registered by `install(app)`.
+     Raises `_SentryTestException` ("intentional — Sentry
+     verification"), routed through the middleware so the integration
+     captures it. Gating: in non-production it's open (devs need
+     easy access); in production it requires
+     `X-Sentry-Test-Token: <PADHAI_SENTRY_TEST_TOKEN>`, otherwise
+     404. Returning 404 (not 500/401) means a bot scanning the
+     internet can't burn the Sentry quota on the endpoint. The
+     exception class is distinct so a Sentry issue filter can drop
+     replays.
+
+  3. `requirements-optional.txt` — declares `sentry-sdk[fastapi]>=2.0`
+     and `posthog>=3.0` (was: lazy-imported but undeclared, so a
+     fresh `pip install -r requirements-optional.txt` was missing
+     the SDK).
+
+  4. `tests/test_sentry_wiring.py` — 11 regression tests covering
+     init-without-DSN (False, no crash), capture-before-init
+     no-op, install-without-Sentry (route still registered),
+     test-route raises in non-prod, returns 404 in prod without
+     token, returns 404 in prod with wrong token, fires in prod
+     with correct token, before_send drops the 6 default 4xx
+     codes, keeps 5xx + statusless events, respects env override.
+     Reloads observability module per-test so the
+     `_sentry_initialised` global isolates cleanly.
+
+  5. `PRODUCTION_CHECKLIST.md` §7 — clarified the test-fire
+     procedure (curl + X-Sentry-Test-Token header, 404 in prod
+     without token).
+
+  Total pytest: 92 → 103. Verified `/__sentry_test` registers on
+  the real `padhai.web:app` (not just synthetic test fixtures).
+
+  Honest gap: the actual DSN-paired dashboard verification still
+  requires a Sentry account + DSN; that's the
+  `make-the-event-show-up` step that the user runs post-deploy.
+  Code path is now end-to-end correct.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
