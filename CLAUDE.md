@@ -678,6 +678,18 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twenty-first router slice — avatar admin (3 routes).**
+  `padhai/routers/avatar_admin.py` covers the photoreal-avatar
+  provider router status surface: `GET /api/avatar-providers`
+  (public — which providers configured), `GET /api/avatar-stats`
+  (authed — per-provider success/fail counts), `POST
+  /api/avatar-stats/reset` (authed — clear circuit-breaker
+  counters). ~35 lines off web.py.
+- **Accuracy bench 295 → 310 items.** SI unit ohm, vitamin C
+  ascorbic acid, sum 1..10 = 55, GST full form, 3-4-5 right
+  triangle area, π ≈ 3.14, water molar mass 18, Vatican City,
+  Rabindranath Tagore, NaCl, joule SI work unit, Republic Day
+  1950, Japanese yen, linear-equation y=2, 46 chromosomes.
 - **Twentieth router slice — SSO (3 routes).**
   `padhai/routers/sso.py` covers the OAuth/OIDC sign-in flow:
   `GET /auth/sso/providers` (list configured), `GET /auth/sso/

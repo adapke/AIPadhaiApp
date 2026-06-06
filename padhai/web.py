@@ -11434,39 +11434,8 @@ def get_fees_config():
 
 from . import avatar_router as _avatar_router
 
-
-@app.get("/api/avatar-providers")
-def list_avatar_providers():
-    """Which photoreal avatar providers are configured on this deploy.
-    Public — the UI uses it to surface which premium-tier options are
-    available without revealing whether keys are set (just provider
-    names + circuit health)."""
-    snap = _avatar_router.snapshot()
-    return {
-        "configured": snap["configured"],
-        "fallback_chain": snap["chain"],
-    }
-
-
-@app.get("/api/avatar-stats")
-def get_avatar_stats(user: AuthUser | None = Depends(current_user)):
-    """Per-provider success/failure counts + latency. Behind auth so
-    we don't leak which keys are working to anonymous visitors.
-
-    Useful for the admin dashboard to see "Synthesia is failing 30%
-    of requests today — switch primary to Tavus."""
-    user = _require_user(user)
-    return _avatar_router.snapshot()
-
-
-@app.post("/api/avatar-stats/reset")
-def reset_avatar_stats(user: AuthUser | None = Depends(current_user)):
-    """Clear the in-memory counters. Useful after fixing a provider
-    issue so the "consecutive_failures" counter doesn't keep the
-    circuit open."""
-    user = _require_user(user)
-    _avatar_router.reset_stats()
-    return {"ok": True}
+# /api/avatar-providers + /api/avatar-stats + /api/avatar-stats/reset
+# moved to padhai/routers/avatar_admin.py.
 
 
 # ---------- E9: White-label branding ----------

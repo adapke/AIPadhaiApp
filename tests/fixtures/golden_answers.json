@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v15: 295 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v16: 310 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -3741,6 +3741,192 @@
       "tags": {
         "subject": "geography",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is the SI unit of resistance?",
+      "expected": {
+        "answer": "ohm"
+      },
+      "rubric": "Accept 'ohm' or 'Ω'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which vitamin is also known as ascorbic acid?",
+      "expected": {
+        "answer": "vitamin c"
+      },
+      "rubric": "Accept 'Vitamin C' or 'ascorbic acid'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the sum of the first 10 positive integers?",
+      "expected": {
+        "answer": "55"
+      },
+      "rubric": "Numeric only. n(n+1)/2 with n=10.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS3: What does GST stand for in Indian taxation?",
+      "expected": {
+        "answer": "goods and services tax"
+      },
+      "rubric": "Accept full form (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "If a triangle has sides 3, 4, 5, what is its area?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only. (1/2)*3*4 (right triangle).",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "What is the value of pi to two decimal places?",
+      "expected": {
+        "answer": "3.14"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 11 Chemistry: What is the molar mass of water in g/mol?",
+      "expected": {
+        "answer": "18"
+      },
+      "rubric": "Numeric only. 2*1 + 16.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "Maharashtra",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 8 Geography: What is the smallest country in the world by area?",
+      "expected": {
+        "answer": "vatican city"
+      },
+      "rubric": "Accept 'Vatican City' or 'Vatican'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "Karnataka",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "TamilNadu Class 9: Who wrote the Indian national anthem?",
+      "expected": {
+        "answer": "rabindranath tagore"
+      },
+      "rubric": "Accept 'Rabindranath Tagore' or 'Tagore'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "board": "TamilNadu",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the chemical formula for table salt?",
+      "expected": {
+        "answer": "nacl"
+      },
+      "rubric": "Accept 'NaCl' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is the SI unit of work?",
+      "expected": {
+        "answer": "joule"
+      },
+      "rubric": "Accept 'joule' or 'J'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS1 History: In which year did India become a Republic?",
+      "expected": {
+        "answer": "1950"
+      },
+      "rubric": "Numeric only. January 26, 1950.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: What is the currency of Japan?",
+      "expected": {
+        "answer": "yen"
+      },
+      "rubric": "Accept 'Yen' or 'Japanese yen'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "If 2x + 3y = 12 and x = 3, what is y?",
+      "expected": {
+        "answer": "2"
+      },
+      "rubric": "Numeric only. 6+3y=12, y=2.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "8"
+      }
+    },
+    {
+      "prompt": "ICSE Class 11 Biology: How many chromosomes does a normal human cell have?",
+      "expected": {
+        "answer": "46"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "ICSE",
+        "class": "11"
       }
     }
   ]

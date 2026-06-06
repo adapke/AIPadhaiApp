@@ -63,6 +63,7 @@ _ROUTER_NAMES = (
     "curriculum",        # v3.x — /lessons/{id}/curriculum + /curriculum/index (2 routes)
     "uploads",           # v3.x — POST/GET /api/uploads* (3 routes — upload/analyze/get)
     "sso",               # v3.x — /auth/sso/* (3 routes — OAuth/OIDC flow)
+    "avatar_admin",      # v3.x — /api/avatar-providers + /api/avatar-stats* (3 routes)
 )
 
 
