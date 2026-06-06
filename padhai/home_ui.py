@@ -179,11 +179,15 @@ HOME_HTML = """<!doctype html>
                gap:8px;cursor:pointer;text-align:left;width:100%;
                font-family:inherit}
   .module-chip:hover{border-color:#bad4ff;background:#eaf2ff}
+  .module-chip.is-disabled{cursor:not-allowed;opacity:.6;
+                           color:#94a3b8;background:#f5f7fb}
+  .module-chip.is-disabled:hover{border-color:var(--line);background:#f5f7fb}
   .module-chip .badge{font-size:10px;font-weight:850;color:var(--green);
                       background:var(--green-soft);border-radius:999px;
                       padding:3px 6px}
   .module-chip .badge.new{color:var(--brand);background:var(--brand-soft)}
   .module-chip .badge.admin{color:var(--violet);background:var(--violet-soft)}
+  .module-chip .badge.soon{color:#64748b;background:#e2e8f0}
   .two-col{display:grid;grid-template-columns:1.12fr .88fr;gap:16px;
            align-items:start}
   .study-step{display:grid;grid-template-columns:34px 1fr auto;gap:10px;
@@ -787,6 +791,65 @@ HOME_HTML = """<!doctype html>
 
   // -------- Section groups: one panel per §26 section,
   //          each with its own chip grid --------
+  // Every chip the home page renders must EITHER navigate to a real
+  // SPA page OR render as visibly-disabled ("Coming soon") with no
+  // click action. We never want a chip that goes to a dev-style
+  // raw-JSON drawer in the user's face. Add entries to chipRoutes
+  // when a new feature page ships.
+  const CHIP_ROUTES = {
+    // exam-hub
+    'student home dashboard':     '/dashboard',
+    'my exam packs':              '/dashboard',
+    'browse exam packs':          '/dashboard',
+    'readiness score':            '/dashboard',
+    'personalised pack overlay':  '/dashboard',
+    // study-studio
+    'upload library':             '/lessons/new',
+    'generate lessons':           '/lessons/new',
+    'doubt chat':                 '/chat',
+    'flashcard decks (srs)':      '/ui-legacy#flashcards',
+    'quiz maker':                 '/quiz',
+    // mocks
+    'browse mocks':               '/ui-legacy#practice',
+    'my attempts':                '/ui-legacy#practice',
+    'question bank':              '/ui-legacy#practice',
+    // ai-tutor
+    'ai tutor':                   '/chat',
+    'start tutor session':        '/chat',
+    'set session mode':           '/chat',
+    'socratic exchanges':         '/chat',
+    'my citations':               '/chat',
+    'source-grounded chat':       '/chat',
+    'voice tutor':                '/chat',
+    'general chat':               '/chat',
+    // school
+    'teacher dashboard':          '/teacher',
+    'teacher studio':             '/teacher',
+    'org members':                '/teacher',
+    'attendance':                 '/teacher',
+    'parent dashboard':           '/parent',
+    'parent view':                '/parent',
+    'parent portal':              '/parent',
+    'fees':                       '/parent',
+    'daily plan completion':      '/dashboard',
+    // profile
+    'profile':                    '/profile',
+    'settings':                   '/profile',
+    'notifications':              '/profile',
+    // admin — Flask app mount
+    'grounding rate dashboard':       '/admin/',
+    'accuracy benchmark dashboard':   '/admin/',
+    'moderation queue':               '/admin/',
+    'expert review queue':            '/admin/',
+    'refund queue':                   '/admin/',
+    'copyright claims':               '/admin/',
+    'dpdp / soc2 audit':              '/admin/',
+  };
+
+  function chipRoute(title) {
+    return CHIP_ROUTES[(title || '').toLowerCase().trim()] || null;
+  }
+
   function renderSectionGroups(m){
     const host = $('sectionGroups');
     if(!m || !m.sections){ host.innerHTML = ''; return; }
@@ -795,45 +858,63 @@ HOME_HTML = """<!doctype html>
       + '<h2>' + escapeHtml(s.title) + '</h2>'
       + '<p class="section-sub">' + escapeHtml(s.description) + '</p>'
       + '<div class="module-grid" data-slug="' + escapeHtml(s.slug) + '">'
-      + s.features.map((f, fi) => (
-          '<button class="module-chip" data-section="'
-          + escapeHtml(s.slug) + '" data-i="' + fi + '">'
-          + '<span>' + escapeHtml(f.title) + '</span>'
-          + (f.badge
-              ? '<span class="badge ' + escapeHtml(f.badge) + '">'
-                + escapeHtml(f.badge) + '</span>'
-              : '')
-          + '</button>'
-        )).join('')
+      + s.features.map((f, fi) => {
+          const enabled = !!chipRoute(f.title);
+          const cls = 'module-chip' + (enabled ? '' : ' is-disabled');
+          const badge = enabled
+            ? (f.badge
+                ? '<span class="badge ' + escapeHtml(f.badge) + '">'
+                  + escapeHtml(f.badge) + '</span>'
+                : '')
+            : '<span class="badge soon">Coming soon</span>';
+          return (
+            '<button class="' + cls + '" data-section="'
+            + escapeHtml(s.slug) + '" data-i="' + fi + '"'
+            + (enabled ? '' : ' disabled aria-disabled="true"')
+            + ' title="' + escapeHtml(
+                enabled ? f.title : f.title + ' — not yet available'
+              ) + '">'
+            + '<span>' + escapeHtml(f.title) + '</span>'
+            + badge
+            + '</button>'
+          );
+        }).join('')
       + '</div></section>'
     )).join('');
-    // Wire chip clicks → drawer (no navigation)
+    // Wire chip clicks → navigate. Disabled chips render with the
+    // `disabled` attribute set so the click never fires.
     document.querySelectorAll('.module-chip').forEach(chip => {
       chip.addEventListener('click', () => {
+        if (chip.disabled) return;
         const sec = manifest.sections.find(
           s => s.slug === chip.dataset.section,
         );
         if(!sec) return;
         const feature = sec.features[parseInt(chip.dataset.i, 10)];
-        openDrawer(feature);
+        const url = chipRoute(feature.title);
+        if (url) window.location.href = url;
       });
     });
   }
 
-  // -------- Drawer --------
+  // -------- Drawer (fallback for chips with no SPA page yet) -----
   let currentFeature = null;
   function openDrawer(f){
     currentFeature = f;
     $('drawerTitle').textContent = f.title;
-    $('drawerDesc').textContent = f.description || 'No description.';
+    $('drawerDesc').textContent = (
+      (f.description || '') +
+      ' — A dedicated UI for this feature is coming soon. ' +
+      'Until then you can preview the raw API response below.'
+    ).trim();
     $('drawerEndpoint').textContent =
       (f.http_method || 'GET') + '  ' + f.endpoint;
     const badge = $('drawerBadge');
-    badge.textContent = f.badge || 'feature';
+    badge.textContent = f.badge || 'preview';
     badge.className = 'pill' + (f.badge === 'admin' ? ' admin' : '');
     $('drawerResult').style.display = 'none';
     $('drawerJson').textContent = '';
-    $('drawerTryBtn').textContent = 'Try it';
+    $('drawerTryBtn').textContent = 'Preview response';
     $('drawerTryBtn').disabled = false;
     $('drawer').classList.add('open');
   }
@@ -1615,8 +1696,29 @@ LANDING_HTML = """<!doctype html>
   .step p{color:var(--muted);font-size:14px;line-height:1.55}
   .step-connector{display:none}
 
-  /* ── Demo anchor placeholder ─────────────────────── */
+  /* ── Demo anchor + inline-video modal ─────────────── */
   #demo{scroll-margin-top:80px}
+  .demo-modal{
+    display:none; position:fixed; inset:0; z-index:9999;
+    background:rgba(0,0,0,.88); align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .demo-modal.show{display:flex}
+  .demo-modal-inner{
+    width:100%; max-width:960px; aspect-ratio:16/9;
+    background:#000; border-radius:12px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.6);
+  }
+  .demo-modal-inner video{
+    width:100%; height:100%; border-radius:12px;
+    background:#000; display:block;
+  }
+  .demo-modal-close{
+    position:absolute; top:-44px; right:0; background:transparent;
+    color:#fff; border:0; font-size:32px; cursor:pointer; padding:4px 12px;
+    line-height:1;
+  }
+  .demo-modal-close:hover{color:#ffd700}
 
   /* ── Auth section ────────────────────────────────── */
   .auth-section{background:#111f38}
@@ -1687,7 +1789,7 @@ LANDING_HTML = """<!doctype html>
   </p>
   <div class="hero-ctas">
     <a class="btn-primary" href="#auth">Start for Free &rarr;</a>
-    <a class="btn-secondary" href="#demo">Watch Demo</a>
+    <a class="btn-secondary" href="#" id="watchDemoBtn">Watch Demo</a>
   </div>
   <div class="stats-bar">
     <span>50,000+ Students</span>
@@ -1751,6 +1853,17 @@ LANDING_HTML = """<!doctype html>
     </div>
   </div>
 </section>
+
+<!-- ── Demo video modal (self-hosted MP4, inline) ───────── -->
+<div class="demo-modal" id="demoModal" role="dialog" aria-modal="true"
+     aria-label="Product demo video">
+  <div class="demo-modal-inner">
+    <button class="demo-modal-close" id="demoModalClose"
+            aria-label="Close demo">&times;</button>
+    <video id="demoModalVideo" controls preload="metadata"
+           playsinline src=""></video>
+  </div>
+</div>
 
 <!-- ── Auth ──────────────────────────────────────────────── -->
 <section class="auth-section" id="auth">
@@ -1896,6 +2009,44 @@ LANDING_HTML = """<!doctype html>
     const ff = document.getElementById('forgotForm');
     ff.style.display = ff.style.display === 'none' ? '' : 'none';
   });
+  // Watch Demo — plays a self-hosted MP4 inline in a modal. We
+  // serve our own Manim-generated Newton's First Law explainer from
+  // /static/landing-demo.mp4 instead of YouTube-embedding, because
+  // most kid-friendly YouTube channels disable embedding (COPPA),
+  // leaving the iframe blocked. Local file streams without any
+  // third-party restriction.
+  //
+  // TODO: replace with a real product-demo screen-capture of the
+  // AI tutor flow once one is recorded. The current Manim animation
+  // shows what AI-generated explainer content looks like — a stand-
+  // in until a proper "here's the platform in action" video exists.
+  const demoSrc = '/static/landing-demo.mp4';
+  const demoBtn = document.getElementById('watchDemoBtn');
+  const demoModal = document.getElementById('demoModal');
+  const demoVideo = document.getElementById('demoModalVideo');
+  const demoCloseBtn = document.getElementById('demoModalClose');
+  function openDemo(ev){
+    if (ev) ev.preventDefault();
+    if (!demoVideo.src) demoVideo.src = demoSrc;
+    demoModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    // Best-effort autoplay (browsers may block w/ unmuted audio).
+    try { demoVideo.play(); } catch (_) {}
+  }
+  function closeDemo(){
+    demoModal.classList.remove('show');
+    try { demoVideo.pause(); } catch (_) {}
+    document.body.style.overflow = '';
+  }
+  if (demoBtn) demoBtn.addEventListener('click', openDemo);
+  if (demoCloseBtn) demoCloseBtn.addEventListener('click', closeDemo);
+  if (demoModal) demoModal.addEventListener('click', (e) => {
+    if (e.target === demoModal) closeDemo();  // click-outside dismisses
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && demoModal.classList.contains('show')) closeDemo();
+  });
+
   document.getElementById('resetBtn').addEventListener('click', async () => {
     const email = document.getElementById('resetEmail').value.trim();
     const msg = document.getElementById('resetMsg');

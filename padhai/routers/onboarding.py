@@ -44,6 +44,7 @@ _ONBOARDING_COLS_SQL = [
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS class_grade TEXT",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS board TEXT",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS target_exam TEXT",
+    "ALTER TABLE users ADD COLUMN IF NOT EXISTS preferred_language TEXT",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS goal_minutes_daily INTEGER",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS onboarding_step INTEGER NOT NULL DEFAULT 0",
     "ALTER TABLE users ADD COLUMN IF NOT EXISTS onboarding_completed_at REAL",
@@ -63,7 +64,7 @@ def _ensure_onboarding_cols() -> None:
             _migrated = True  # SQLite path: handled per-session via best-effort below
             return
         import psycopg
-        with psycopg.connect(db_url, autocommit=True) as conn:
+        with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
             for stmt in _ONBOARDING_COLS_SQL:
                 try:
                     conn.execute(stmt)
@@ -304,7 +305,7 @@ def _load_state(user_id: str) -> dict:
         return {f: None for f in _FIELDS}
     try:
         import psycopg
-        with psycopg.connect(db_url) as conn:
+        with psycopg.connect(db_url, options="-c search_path=public") as conn:
             r = conn.execute(
                 "SELECT class_grade, board, target_exam, "
                 "       preferred_language, goal_minutes_daily, "
@@ -331,7 +332,7 @@ def _persist_field(user_id: str, field: str, value: Any) -> None:
         return  # SQLite dev: silently no-op so UI still progresses
     try:
         import psycopg
-        with psycopg.connect(db_url, autocommit=True) as conn:
+        with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
             conn.execute(
                 f"UPDATE users SET {field} = %s, "
                 "  onboarding_step = GREATEST(COALESCE(onboarding_step, 0), %s) "
@@ -349,7 +350,7 @@ def _mark_complete(user_id: str, *, ts: float) -> None:
         return
     try:
         import psycopg
-        with psycopg.connect(db_url, autocommit=True) as conn:
+        with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
             conn.execute(
                 "UPDATE users SET onboarding_completed_at = %s, "
                 "  onboarding_step = 5 WHERE id = %s",

@@ -86,6 +86,80 @@ def _parse_citations(text: str, total_scenes: int) -> list[dict]:
 
 # ---------- Endpoints ----------
 
+_GENERAL_TUTOR_SYSTEM = (
+    "You are an AI tutor for Indian students preparing for school boards "
+    "(CBSE, ICSE, state) and competitive exams (JEE, NEET, UPSC, CAT). "
+    "Answer the student's question in 2-5 short paragraphs. Be precise, "
+    "show your reasoning briefly when relevant, and use simple language. "
+    "Don't invent citations — this is a general-knowledge tutoring "
+    "session, not a grounded-RAG answer."
+)
+
+
+@router.post("/chat/general")
+def chat_general_route(
+    request: Request,
+    question: str = Form(..., min_length=2),
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """General-purpose AI tutor — no lesson grounding.
+
+    The SPA falls back to /chat/general when the student opens the
+    AI Tutor screen without having a specific lesson selected
+    (`/chat/{lesson_id}` requires a cached lesson). Same rate-limit
+    + exam-mode lock as the lesson-grounded path; answers from Haiku
+    with a short tutor-style system prompt.
+    """
+    from .. import web as _web
+    from ..models import HAIKU_MODEL
+
+    rate_key = user.id if user else _web._rl.client_ip_from_request(request)
+    if not _web._rl.ai_generation.try_consume(rate_key):
+        raise HTTPException(
+            429, "Too many requests — please wait before asking again.",
+        )
+
+    # S4 anti-cheat: exam-mode lock applies to general chat too.
+    if user is not None:
+        active_exam_id = _web._orgs.has_active_exam(user.id)
+        if active_exam_id:
+            raise HTTPException(
+                status_code=423,
+                detail={
+                    "error": "exam_mode_active",
+                    "exam_id": active_exam_id,
+                    "message": (
+                        "AI Tutor is locked while you have an active "
+                        "exam attempt. Submit the exam to continue."
+                    ),
+                },
+            )
+
+    try:
+        response = _web._claude().messages.create(
+            model=HAIKU_MODEL,
+            max_tokens=800,
+            system=_GENERAL_TUTOR_SYSTEM,
+            messages=[{"role": "user", "content": question}],
+        )
+    except Exception as e:
+        # Bubble up as a 502 so the SPA can show a useful message
+        # instead of the generic "Failed to get a response".
+        raise HTTPException(
+            502, f"AI provider error: {type(e).__name__}",
+        ) from e
+
+    answer = next(
+        (b.text for b in response.content if b.type == "text"), "",
+    )
+    return JSONResponse({
+        "question": question,
+        "answer": answer or "(no answer)",
+        "citations": [],
+        "lesson_id": None,
+    })
+
+
 @router.post("/chat/{lesson_id}")
 def chat_about_lesson_route(
     request: Request,

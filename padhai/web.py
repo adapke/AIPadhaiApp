@@ -45,6 +45,35 @@ if os.environ.get("PADHAI_SKIP_DOTENV", "0") not in ("1", "true", "yes"):
     except ImportError:
         pass
 
+# Anthropic SDK env hygiene. Two distinct problems we fix here:
+#
+# 1. SDK 0.96+ reads ANTHROPIC_AUTH_TOKEN first and only falls back to
+#    ANTHROPIC_API_KEY when the former is unset. An *empty* AUTH_TOKEN
+#    (e.g. from a leftover `ANTHROPIC_AUTH_TOKEN=` in .env) produces
+#    `Authorization: Bearer ` which httpx rejects as LocalProtocolError.
+#    Solution: delete every empty ANTHROPIC_* env var.
+#
+# 2. If the user's shell env has an empty `ANTHROPIC_API_KEY=` (common
+#    on Windows / VS Code integrated terminal), then load_dotenv with
+#    override=False above never fills it from .env. Result: client
+#    can't authenticate and every chat call fails with "Could not
+#    resolve authentication method".
+#    Solution: after the empty-var cleanup, re-run load_dotenv with
+#    override=True. It re-loads .env values, this time replacing the
+#    shell's empty placeholders with the real .env values.
+for _k in list(os.environ):
+    if _k.startswith("ANTHROPIC_") and not os.environ[_k].strip():
+        del os.environ[_k]
+if os.environ.get("PADHAI_SKIP_DOTENV", "0") not in ("1", "true", "yes"):
+    try:
+        from dotenv import load_dotenv as _load_dotenv2
+        _load_dotenv2(
+            Path(__file__).resolve().parent.parent / ".env",
+            override=True,
+        )
+    except ImportError:
+        pass
+
 import logging
 import re as _re
 
@@ -12304,6 +12333,28 @@ def parent_page() -> HTMLResponse:
     return HTMLResponse(_ui.get_parent_html())
 
 
+@app.get("/static/landing-demo.mp4", include_in_schema=False)
+def landing_demo_video():
+    """Serve the local Manim-generated Newton's First Law explainer
+    as the landing-page 'Watch Demo' video. We host it ourselves
+    (instead of YouTube-embedding) because most kid-channel YouTube
+    videos disable embedding, leaving the iframe blocked. Local
+    file streams without third-party restrictions.
+
+    TODO: replace with a real product-demo screen-capture of the
+    AI tutor flow once one is recorded."""
+    from pathlib import Path
+    p = Path(__file__).resolve().parent.parent / "data" / "concept_videos" / "newton1_en_manim.mp4"
+    if not p.is_file():
+        raise HTTPException(404, "demo video not on disk")
+    return FileResponse(
+        str(p),
+        media_type="video/mp4",
+        filename="aipathshala-demo.mp4",
+        headers={"Cache-Control": "public, max-age=86400"},
+    )
+
+
 @app.get("/onboarding", response_class=HTMLResponse)
 def onboarding_page() -> HTMLResponse:
     """Multi-step student onboarding wizard. Drives the
@@ -12314,7 +12365,10 @@ def onboarding_page() -> HTMLResponse:
 @app.get("/dashboard", response_class=HTMLResponse)
 def student_dashboard_page() -> HTMLResponse:
     """Student dashboard — pulls /api/me/dashboard and renders blocks."""
-    return HTMLResponse(_STUDENT_DASHBOARD_HTML)
+    return HTMLResponse(
+        _STUDENT_DASHBOARD_HTML,
+        headers={"Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"},
+    )
 
 
 _ONBOARDING_HTML = """<!doctype html>
@@ -12485,143 +12539,544 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard · AI Pathshala</title>
+  <title>Exam Hub · AI Pathshala</title>
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #0f172a; color: #e2e8f0;
-      font-family: system-ui, sans-serif; }
-    header { padding: 20px 24px; border-bottom: 1px solid #334155;
-      display: flex; justify-content: space-between; align-items: center; }
-    h1 { margin: 0; font-size: 22px; }
-    nav a { color: #f59e0b; margin-left: 16px; text-decoration: none; font-size: 14px; }
-    main { padding: 24px; display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 16px; max-width: 1200px; margin: 0 auto; }
-    @media (max-width: 900px) { main { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { main { grid-template-columns: 1fr; } }
-    .panel { background: #1e293b; border: 1px solid #334155; border-radius: 12px;
-      padding: 18px; }
-    .panel h2 { margin: 0 0 12px 0; font-size: 15px; color: #94a3b8;
-      text-transform: uppercase; letter-spacing: 0.5px; }
-    .big { font-size: 36px; font-weight: 800; margin: 0; }
-    .sub { color: #94a3b8; font-size: 13px; margin: 4px 0 0 0; }
-    .list { list-style: none; padding: 0; margin: 0; }
-    .list li { padding: 8px 0; border-bottom: 1px solid #334155;
-      font-size: 14px; display: flex; justify-content: space-between; }
-    .list li:last-child { border-bottom: 0; }
-    .pill { background: #ef4444; color: #fff; padding: 2px 8px;
-      border-radius: 999px; font-size: 11px; font-weight: 700; }
-    .pill.ok { background: #10b981; }
-    .pill.warn { background: #f59e0b; }
-    .empty { color: #64748b; font-size: 13px; font-style: italic; }
-    .signin { padding: 40px; text-align: center; color: #94a3b8; }
-    .signin a { color: #f59e0b; }
+    *{box-sizing:border-box}
+    body{margin:0;background:#0f172a;color:#e2e8f0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    header{padding:18px 24px;border-bottom:1px solid #334155;
+      display:flex;justify-content:space-between;align-items:center;
+      background:#1e293b;position:sticky;top:0;z-index:10}
+    header h1{margin:0;font-size:20px}
+    nav a{color:#fbbf24;margin-left:14px;text-decoration:none;font-size:13px}
+    main{padding:20px 24px;max-width:1200px;margin:0 auto}
+    .section{margin-bottom:24px}
+    .section-header{display:flex;justify-content:space-between;
+      align-items:baseline;margin-bottom:12px}
+    .section-title{margin:0;font-size:18px;font-weight:800}
+    .section-sub{margin:0;color:#94a3b8;font-size:13px}
+    .anchor{scroll-margin-top:80px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    @media(max-width:900px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.grid-3,.grid-2{grid-template-columns:1fr}}
+    .card{background:#1e293b;border:1px solid #334155;border-radius:12px;
+      padding:18px}
+    .card h3{margin:0 0 8px;font-size:14px;color:#cbd5e1;
+      text-transform:uppercase;letter-spacing:.5px}
+    .big{font-size:32px;font-weight:800;margin:0;line-height:1}
+    .sub{color:#94a3b8;font-size:13px;margin:4px 0 0 0}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;
+      border-radius:999px;font-size:12px;font-weight:700;
+      background:#334155;color:#e2e8f0;margin-right:6px;margin-bottom:6px}
+    .chip.ok{background:#065f46;color:#a7f3d0}
+    .chip.amber{background:#78350f;color:#fde68a}
+    .chip.red{background:#7f1d1d;color:#fecaca}
+    .chip.brand{background:#1e40af;color:#bfdbfe}
+    .pill{padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;
+      background:#475569;color:#fff}
+    .pill.ok{background:#10b981}
+    .pill.warn{background:#f59e0b}
+    .pill.red{background:#ef4444}
+    .empty{color:#64748b;font-size:13px;font-style:italic}
+    .btn{background:#fbbf24;color:#0f172a;border:0;padding:8px 14px;
+      border-radius:8px;font-weight:800;cursor:pointer;font-size:13px;
+      text-decoration:none;display:inline-block}
+    .btn:hover{background:#f59e0b}
+    .btn.ghost{background:transparent;color:#fbbf24;border:1px solid #fbbf24}
+    .btn.ghost:hover{background:#fbbf2410}
+    .pack{background:#0f172a;border:1px solid #334155;border-radius:10px;
+      padding:16px;display:flex;flex-direction:column;gap:8px}
+    .pack h4{margin:0;font-size:15px;font-weight:800}
+    .pack .meta{color:#94a3b8;font-size:12px}
+    .pack .desc{color:#cbd5e1;font-size:13px;line-height:1.5}
+    .pack .actions{margin-top:auto;display:flex;gap:8px;padding-top:8px}
+    /* Readiness gauge */
+    .gauge{position:relative;width:140px;height:80px;margin:0 auto 8px}
+    .gauge svg{width:100%;height:100%}
+    .gauge .label{position:absolute;inset:0;display:grid;place-items:center;
+      font-size:24px;font-weight:800;padding-top:18px}
+    /* Mood overlay modal */
+    .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+      z-index:9999;align-items:center;justify-content:center;padding:20px}
+    .modal-bg.open{display:flex}
+    .modal{background:#1e293b;max-width:520px;width:100%;border-radius:14px;
+      padding:24px;border:1px solid #475569}
+    .modal h3{margin:0 0 6px;font-size:18px}
+    .modal p{margin:0 0 14px;color:#94a3b8;font-size:13px}
+    .mood-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+    .mood-btn{flex:1;min-width:80px;padding:10px;background:#0f172a;
+      border:1px solid #334155;border-radius:10px;cursor:pointer;
+      color:#e2e8f0;font-size:13px;font-weight:700;text-align:center}
+    .mood-btn:hover{border-color:#fbbf24}
+    .mood-btn.active{border-color:#fbbf24;background:#fbbf2410}
+    .mood-btn .emoji{font-size:24px;display:block;margin-bottom:4px}
+    .signin{padding:40px;text-align:center;color:#94a3b8}
+    .signin a{color:#fbbf24}
+    .loading{padding:40px;text-align:center;color:#94a3b8}
+    .spinner{display:inline-block;width:22px;height:22px;border:3px solid #334155;
+      border-top-color:#fbbf24;border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
   <header>
-    <h1>Your dashboard</h1>
+    <h1>Exam Hub</h1>
     <nav>
       <a href="/home">Home</a>
       <a href="/onboarding">Goals</a>
-      <a href="/pricing">Upgrade</a>
+      <a href="/chat">AI Tutor</a>
       <a href="/profile">Settings</a>
     </nav>
   </header>
-  <main id="dash">Loading…</main>
+
+  <main>
+    <div id="dashRoot">
+      <div class="loading">
+        <div class="spinner"></div>
+        <div style="margin-top:10px">Loading your dashboard…</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Personalised pack overlay (mood/energy check) -->
+  <div class="modal-bg" id="moodModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3>How are you feeling today?</h3>
+      <p>We'll tune today's plan to your energy level. Pick one in each row.</p>
+      <div style="font-size:12px;color:#cbd5e1;margin-bottom:6px">Mood</div>
+      <div class="mood-row" id="moodRow">
+        <button class="mood-btn" data-val="energetic"><span class="emoji">⚡</span>Energetic</button>
+        <button class="mood-btn" data-val="okay"><span class="emoji">😊</span>Okay</button>
+        <button class="mood-btn" data-val="tired"><span class="emoji">😴</span>Tired</button>
+        <button class="mood-btn" data-val="stressed"><span class="emoji">😰</span>Stressed</button>
+      </div>
+      <div style="font-size:12px;color:#cbd5e1;margin-bottom:6px">Focus time available</div>
+      <div class="mood-row" id="focusRow">
+        <button class="mood-btn" data-val="15"><span class="emoji">⏱</span>15 min</button>
+        <button class="mood-btn" data-val="30"><span class="emoji">📚</span>30 min</button>
+        <button class="mood-btn" data-val="60"><span class="emoji">🎯</span>1 hour</button>
+        <button class="mood-btn" data-val="120"><span class="emoji">🏆</span>2+ hours</button>
+      </div>
+      <div id="moodSuggestion" style="display:none;background:#0f172a;border:1px solid #fbbf24;
+                                     border-radius:10px;padding:14px;margin-bottom:14px;font-size:13px">
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn ghost" onclick="closeMood()">Cancel</button>
+        <button class="btn" id="applyMoodBtn" onclick="applyMood()">Adjust today's plan</button>
+      </div>
+    </div>
+  </div>
 
   <script>
+    var DASH = null;
+    var PACKS = [];
+    var ENROLLMENTS = [];
+    var STATS = null;
+    var moodPick = null, focusPick = null;
+    function token() { return localStorage.getItem('pathshala_token'); }
+    function authH() {
+      var t = token();
+      return t ? { 'Authorization': 'Bearer ' + t } : {};
+    }
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
     async function load() {
-      const token = localStorage.getItem('pathshala_token');
-      if (!token) {
-        document.getElementById('dash').innerHTML =
+      if (!token()) {
+        document.getElementById('dashRoot').innerHTML =
           '<div class="signin">Please <a href="/landing">sign in</a> to see your dashboard.</div>';
         return;
       }
-      const r = await fetch('/api/me/dashboard', {
-        headers: { 'Authorization': 'Bearer ' + token },
+      var results = await Promise.allSettled([
+        fetch('/api/me/dashboard', { headers: authH() }).then(r => r.json()),
+        fetch('/api/exam-packs').then(r => r.json()),
+        fetch('/api/exam-packs/me/enrollments', { headers: authH() }).then(r => r.json()),
+        fetch('/me/stats', { headers: authH() }).then(r => r.json()),
+      ]);
+      DASH = results[0].status === 'fulfilled' ? results[0].value : {};
+      PACKS = (results[1].status === 'fulfilled' ? results[1].value.packs : []) || [];
+      ENROLLMENTS = (results[2].status === 'fulfilled' ? results[2].value.enrollments : []) || [];
+      STATS = results[3].status === 'fulfilled' ? results[3].value : null;
+      render();
+    }
+
+    function gradeLabel(code) {
+      if (!code) return '—';
+      var map = {
+        class_6:'Class 6', class_7:'Class 7', class_8:'Class 8',
+        class_9:'Class 9', class_10:'Class 10', class_11:'Class 11',
+        class_12:'Class 12', jee_aspirant:'JEE Aspirant',
+        neet_aspirant:'NEET Aspirant', upsc_aspirant:'UPSC Aspirant',
+        college:'College', professional:'Working Professional',
+      };
+      return map[code] || code.replace(/_/g,' ');
+    }
+    function boardLabel(code) {
+      if (!code) return '—';
+      var map = {
+        cbse:'CBSE', icse:'ICSE / ISC', state_maharashtra:'Maharashtra Board',
+        state_karnataka:'Karnataka Board', state_tamilnadu:'Tamil Nadu Board',
+        state_andhra_telangana:'AP/Telangana Board', state_up:'UP Board',
+        state_west_bengal:'West Bengal Board', state_gujarat:'Gujarat Board',
+        state_kerala:'Kerala Board', state_rajasthan:'Rajasthan Board',
+        state_bihar:'Bihar Board', igcse:'Cambridge / IGCSE',
+        ib:'International Baccalaureate', open:'NIOS / Open', na:'N/A',
+      };
+      return map[code] || code.replace(/_/g,' ');
+    }
+    function examLabel(code) {
+      if (!code) return '—';
+      var map = {
+        neet_ug:'NEET UG', jee_main:'JEE Main', jee_advanced:'JEE Advanced',
+        cuet_ug:'CUET UG', upsc_cse:'UPSC Civil Services', ssc_cgl:'SSC CGL',
+        ibps_po:'Bank exams (IBPS PO)', cat:'CAT (MBA)', gate:'GATE',
+        neet_pg:'NEET PG', cbse_board_10:'CBSE Class 10 Board',
+        cbse_board_12:'CBSE Class 12 Board', state_board:'State Board',
+        none:'No exam — just learning',
+      };
+      return map[code] || code.replace(/_/g,' ');
+    }
+    function langLabel(code) {
+      var map = {
+        en:'English', hi:'हिन्दी (Hindi)', ta:'தமிழ் (Tamil)',
+        te:'తెలుగు (Telugu)', kn:'ಕನ್ನಡ (Kannada)', ml:'മലയാളം (Malayalam)',
+        mr:'मराठी (Marathi)', bn:'বাংলা (Bengali)', gu:'ગુજરાતી (Gujarati)',
+        pa:'ਪੰਜਾਬੀ (Punjabi)',
+      };
+      return map[code] || code || 'English';
+    }
+
+    // Readiness = weighted blend of onboarding completion + streak + recent activity.
+    // 0–100. Buckets: 0–35 red, 36–65 amber, 66–100 green.
+    function computeReadiness() {
+      var onb = (DASH && DASH.onboarding) || {};
+      var s = (STATS && STATS.summary) || {};
+      var score = 0;
+      // Onboarding completed: 35 points
+      if (onb.completed) score += 35;
+      else if (onb.class_grade) score += 15;
+      // Streak: up to 25 points (7-day streak = full)
+      score += Math.min(25, (s.streak_days || 0) * (25 / 7));
+      // Recent activity: up to 20 points (10 lessons in 7d = full)
+      score += Math.min(20, (s.lessons_in_window || 0) * 2);
+      // Goal alignment: up to 20 points (any pack enrolled)
+      if (ENROLLMENTS.length > 0) score += 20;
+      return Math.max(0, Math.min(100, Math.round(score)));
+    }
+    function readinessLabel(score) {
+      if (score >= 66) return { color:'#10b981', label:'On track' };
+      if (score >= 36) return { color:'#f59e0b', label:'Catching up' };
+      return { color:'#ef4444', label:'Just getting started' };
+    }
+
+    function profileHeader() {
+      var p = (DASH && DASH.profile) || {};
+      var onb = (DASH && DASH.onboarding) || {};
+      var email = p.email || 'student';
+      var name = email.split('@')[0];
+      return (
+        '<div class="card" style="margin-bottom:18px">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">' +
+            '<div>' +
+              '<div style="font-size:13px;color:#94a3b8">Welcome back,</div>' +
+              '<div style="font-size:22px;font-weight:800;margin:2px 0 8px">' + escapeHtml(name) + '</div>' +
+              '<div style="margin-top:4px">' +
+                '<span class="chip brand">' + escapeHtml(gradeLabel(onb.class_grade)) + '</span>' +
+                '<span class="chip">' + escapeHtml(boardLabel(onb.board)) + '</span>' +
+                '<span class="chip ok">Target: ' + escapeHtml(examLabel(onb.target_exam)) + '</span>' +
+                '<span class="chip">' + escapeHtml(langLabel(onb.preferred_language)) + '</span>' +
+                '<span class="chip amber">' + (onb.goal_minutes_daily || 30) + ' min/day</span>' +
+              '</div>' +
+            '</div>' +
+            '<div style="text-align:right">' +
+              '<a class="btn ghost" href="/onboarding">Edit goals</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function studyProgress() {
+      var s = (STATS && STATS.summary) || {};
+      var lessons7 = s.lessons_in_window || 0;
+      var minutes = s.estimated_minutes || 0;
+      var streak = s.streak_days || 0;
+      return (
+        '<div class="grid-3 section">' +
+          '<div class="card"><h3>Streak</h3>' +
+            '<p class="big" style="color:' + (streak >= 3 ? '#10b981' : '#fbbf24') + '">' +
+              streak + '<small style="font-size:13px;color:#94a3b8"> days</small></p>' +
+            '<p class="sub">Open something today to extend it.</p>' +
+          '</div>' +
+          '<div class="card"><h3>Lessons (7 days)</h3>' +
+            '<p class="big">' + lessons7 + '</p>' +
+            '<p class="sub">' + (s.lessons_total || 0) + ' total · ' + (s.languages_count || 0) + ' languages</p>' +
+          '</div>' +
+          '<div class="card"><h3>Time invested (7d)</h3>' +
+            '<p class="big">' + minutes + '<small style="font-size:13px;color:#94a3b8"> min</small></p>' +
+            '<p class="sub">Daily target: ' + (((DASH&&DASH.onboarding)||{}).goal_minutes_daily || 30) + ' min</p>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function readinessSection() {
+      var score = computeReadiness();
+      var meta = readinessLabel(score);
+      // Half-circle gauge with arc filled proportional to score
+      var arc = score / 100 * 180;  // degrees
+      var r = 60;
+      var cx = 70, cy = 70;
+      var endX = cx + r * Math.cos((180 - arc) * Math.PI / 180);
+      var endY = cy - r * Math.sin((180 - arc) * Math.PI / 180);
+      var large = arc > 180 ? 1 : 0;
+      var arcPath = 'M ' + (cx - r) + ' ' + cy
+        + ' A ' + r + ' ' + r + ' 0 ' + large + ' 1 ' + endX + ' ' + endY;
+
+      return (
+        '<section class="section anchor" id="readiness">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Readiness score</h2>' +
+              '<p class="section-sub">How prepared you are right now — based on activity, streak, and goal alignment.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card" style="text-align:center">' +
+            '<div class="gauge">' +
+              '<svg viewBox="0 0 140 80">' +
+                '<path d="M 10 70 A 60 60 0 0 1 130 70" fill="none" stroke="#334155" stroke-width="12" stroke-linecap="round"/>' +
+                '<path d="' + arcPath + '" fill="none" stroke="' + meta.color + '" stroke-width="12" stroke-linecap="round"/>' +
+              '</svg>' +
+              '<div class="label" style="color:' + meta.color + '">' + score + '</div>' +
+            '</div>' +
+            '<div style="font-weight:800;color:' + meta.color + ';font-size:15px">' + meta.label + '</div>' +
+            '<p class="sub" style="max-width:480px;margin:8px auto 0">' +
+              (score >= 66 ? 'Great rhythm. Keep your daily target and add one mock this week.' :
+               score >= 36 ? 'Pick up the streak and enrol in an exam pack to focus your prep.' :
+               'Start with onboarding + enrol in a pack. Even 15 minutes a day moves the needle.') +
+            '</p>' +
+          '</div>' +
+        '</section>'
+      );
+    }
+
+    function myPacksSection() {
+      var body = '';
+      if (ENROLLMENTS.length === 0) {
+        body =
+          '<div class="card" style="text-align:center;padding:32px 20px">' +
+            '<div style="font-size:36px;margin-bottom:8px">📦</div>' +
+            '<div style="font-weight:800;font-size:15px;margin-bottom:4px">No exam packs yet</div>' +
+            '<p class="sub" style="margin-bottom:14px">Enrol in a pack below to get a structured daily plan, mocks, and chapter mastery tracking.</p>' +
+            '<a class="btn" href="#browse-packs">Browse packs ↓</a>' +
+          '</div>';
+      } else {
+        body = '<div class="grid-2">' + ENROLLMENTS.map(function(e) {
+          var pack = PACKS.find(function(p){ return p.code === e.pack_code; }) || {};
+          return (
+            '<div class="pack">' +
+              '<h4>' + escapeHtml(pack.title || e.pack_code) + '</h4>' +
+              '<div class="meta">Enrolled · ' + (e.status || 'active') + '</div>' +
+              '<div class="desc">' + escapeHtml(pack.description || '') + '</div>' +
+              '<div class="actions">' +
+                '<a class="btn" href="/lessons/new">Open daily plan</a>' +
+              '</div>' +
+            '</div>'
+          );
+        }).join('') + '</div>';
+      }
+      return (
+        '<section class="section anchor" id="my-packs">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">My exam packs</h2>' +
+              '<p class="section-sub">Active enrolments — your structured prep paths.</p>' +
+            '</div>' +
+          '</div>' +
+          body +
+        '</section>'
+      );
+    }
+
+    function browsePacksSection() {
+      if (PACKS.length === 0) {
+        return (
+          '<section class="section anchor" id="browse-packs">' +
+            '<div class="section-header">' +
+              '<div>' +
+                '<h2 class="section-title">Browse exam packs</h2>' +
+                '<p class="section-sub">Catalog is being seeded.</p>' +
+              '</div>' +
+            '</div>' +
+            '<div class="card"><p class="empty">No packs in catalog yet.</p></div>' +
+          '</section>'
+        );
+      }
+      // Sort: featured packs first (those matching the user's target exam or board)
+      var onb = (DASH && DASH.onboarding) || {};
+      var sorted = PACKS.slice().sort(function(a, b) {
+        var aMatch = (a.exam_code && onb.target_exam && a.exam_code.indexOf(onb.target_exam.split('_')[0]) >= 0)
+                  || (a.code && onb.board && a.code.indexOf(onb.board) >= 0);
+        var bMatch = (b.exam_code && onb.target_exam && b.exam_code.indexOf(onb.target_exam.split('_')[0]) >= 0)
+                  || (b.code && onb.board && b.code.indexOf(onb.board) >= 0);
+        return (bMatch ? 1 : 0) - (aMatch ? 1 : 0);
       });
-      if (!r.ok) {
-        document.getElementById('dash').innerHTML =
-          '<div class="signin">Dashboard unavailable (' + r.status + ')</div>';
+      var enrolledCodes = new Set(ENROLLMENTS.map(function(e){ return e.pack_code; }));
+      var cards = sorted.map(function(p) {
+        var alreadyIn = enrolledCodes.has(p.code);
+        return (
+          '<div class="pack">' +
+            '<h4>' + escapeHtml(p.title) + '</h4>' +
+            '<div class="meta">' + (p.year ? 'Year ' + p.year + ' · ' : '') + escapeHtml(p.exam_code || '') + '</div>' +
+            '<div class="desc">' + escapeHtml(p.description || '') + '</div>' +
+            (p.pattern_summary ? '<div class="meta">📊 ' + escapeHtml(p.pattern_summary) + '</div>' : '') +
+            (p.cutoff_summary ? '<div class="meta">🎯 ' + escapeHtml(p.cutoff_summary) + '</div>' : '') +
+            '<div class="actions">' +
+              (alreadyIn
+                ? '<button class="btn" disabled style="opacity:.6;cursor:not-allowed">Already enrolled</button>'
+                : '<button class="btn" data-pack="' + escapeHtml(p.code) + '" onclick="enrol(this.dataset.pack)">Enrol in this pack</button>') +
+              (p.syllabus_url ? '<a class="btn ghost" href="' + escapeHtml(p.syllabus_url) + '" target="_blank" rel="noopener">Syllabus</a>' : '') +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+      return (
+        '<section class="section anchor" id="browse-packs">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Browse exam packs</h2>' +
+              '<p class="section-sub">' + PACKS.length + ' packs · ranked for your target.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="grid-2">' + cards + '</div>' +
+        '</section>'
+      );
+    }
+
+    function personalisedOverlaySection() {
+      return (
+        '<section class="section anchor" id="personalised-overlay">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Personalised pack overlay</h2>' +
+              '<p class="section-sub">Tune the plan to your current mood and available focus time.</p>' +
+            '</div>' +
+            '<button class="btn" onclick="openMood()">Adjust the plan →</button>' +
+          '</div>' +
+          '<div class="card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">' +
+            '<div style="font-size:32px">🧠</div>' +
+            '<div style="flex:1;min-width:260px">' +
+              '<div style="font-weight:800;font-size:15px;margin-bottom:4px">Match prep to your state</div>' +
+              '<p class="sub">Click the button to log your mood + available time. The plan rebalances: heavy concepts when you have energy, lighter revision when you do not.</p>' +
+            '</div>' +
+          '</div>' +
+        '</section>'
+      );
+    }
+
+    function render() {
+      var html = profileHeader() +
+        studyProgress() +
+        readinessSection() +
+        personalisedOverlaySection() +
+        myPacksSection() +
+        browsePacksSection();
+      document.getElementById('dashRoot').innerHTML = html;
+      // Hash navigation — if the user came from a chip with a #section anchor
+      if (location.hash) {
+        var t = document.querySelector(location.hash);
+        if (t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); }, 100);
+      }
+    }
+
+    window.enrol = async function(packCode) {
+      if (!token()) { location.href = '/landing'; return; }
+      var btn = event.target;
+      btn.disabled = true; btn.textContent = 'Enrolling…';
+      try {
+        var fd = new URLSearchParams();
+        fd.set('pack_code', packCode);
+        var r = await fetch('/api/exam-packs/enroll', {
+          method:'POST', headers:Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
+          body: fd.toString(),
+        });
+        if (!r.ok) {
+          var t = await r.text();
+          alert('Enrol failed: ' + r.status + ' ' + t.slice(0,200));
+          btn.disabled = false; btn.textContent = 'Enrol in this pack';
+          return;
+        }
+        await load();  // refresh
+      } catch(e) {
+        alert('Network error: ' + e.message);
+        btn.disabled = false; btn.textContent = 'Enrol in this pack';
+      }
+    };
+
+    // Personalised pack overlay (mood/focus)
+    window.openMood = function() {
+      moodPick = null; focusPick = null;
+      document.querySelectorAll('#moodRow .mood-btn, #focusRow .mood-btn')
+        .forEach(function(b){ b.classList.remove('active'); });
+      document.getElementById('moodSuggestion').style.display = 'none';
+      document.getElementById('moodModal').classList.add('open');
+    };
+    window.closeMood = function() {
+      document.getElementById('moodModal').classList.remove('open');
+    };
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('#moodRow .mood-btn, #focusRow .mood-btn');
+      if (!btn) return;
+      var row = btn.closest('.mood-row');
+      row.querySelectorAll('.mood-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      if (row.id === 'moodRow') moodPick = btn.dataset.val;
+      if (row.id === 'focusRow') focusPick = btn.dataset.val;
+      if (moodPick && focusPick) showSuggestion();
+    });
+    function showSuggestion() {
+      var box = document.getElementById('moodSuggestion');
+      var minutes = parseInt(focusPick, 10);
+      var advice = '';
+      if (moodPick === 'energetic' || moodPick === 'okay') {
+        if (minutes >= 60) advice = 'Tackle 1 weak topic + 1 full mock + 10 flashcards. Save the deepest revision for now.';
+        else if (minutes >= 30) advice = 'Pick a weak topic, do focused practice. Skip mocks today.';
+        else advice = '15 quick flashcards + 1 short concept video. Do not aim too big.';
+      } else {
+        if (minutes >= 60) advice = 'Light load: 1 recap video + 15 flashcards + spaced repetition. Avoid new topics.';
+        else if (minutes >= 30) advice = '20 min recap audio while you rest, plus 10 flashcards before sleep.';
+        else advice = '10 flashcards only. Rest is part of the plan — come back tomorrow.';
+      }
+      box.innerHTML = '<strong>Suggested for you:</strong> ' + escapeHtml(advice);
+      box.style.display = '';
+    }
+    window.applyMood = async function() {
+      if (!moodPick || !focusPick) {
+        alert('Pick both a mood and focus time.');
         return;
       }
-      const d = await r.json();
-      render(d);
-    }
-
-    function render(d) {
-      const main = document.getElementById('dash');
-      const p = d.profile || {};
-      const onb = d.onboarding || {};
-      const streak = d.streak || {};
-      const mastery = d.mastery || {};
-      const practice = d.practice_tests || {};
-      const mock = d.mock_interviews || {};
-      const essay = d.essays || {};
-      const cards = d.flashcards || {};
-      const live = d.live_classes || {};
-
-      const tiles = [];
-      if (!onb.completed) {
-        tiles.push(`<div class="panel" style="grid-column:1/-1;border-color:#f59e0b">
-          <h2>Setup needed</h2>
-          <p class="sub">Complete onboarding so we can personalise your plan.</p>
-          <a href="/onboarding" style="color:#f59e0b">Set goals →</a>
-        </div>`);
-      }
-      tiles.push(`<div class="panel"><h2>Streak</h2>
-        <p class="big">${streak.current_days || 0}<small style="font-size:13px;color:#94a3b8"> days</small></p>
-        <p class="sub">Longest: ${streak.longest_days || 0} days</p></div>`);
-      tiles.push(`<div class="panel"><h2>Due flashcards</h2>
-        <p class="big">${cards.due_count || 0}</p>
-        <p class="sub">${cards.deck_count || 0} decks total</p>
-        <a href="/flashcards" style="color:#f59e0b;font-size:13px">Study now →</a></div>`);
-      tiles.push(`<div class="panel"><h2>Weak topics</h2>
-        <ul class="list">${
-          (mastery.weak || []).slice(0,5).map(w =>
-            `<li><span>${w.topic_key}</span><span class="pill">${(w.mastery*100).toFixed(0)}%</span></li>`
-          ).join('') || '<li class="empty">No data yet — practice a few topics</li>'
-        }</ul></div>`);
-      tiles.push(`<div class="panel"><h2>Strong topics</h2>
-        <ul class="list">${
-          (mastery.strong || []).slice(0,5).map(s =>
-            `<li><span>${s.topic_key}</span><span class="pill ok">${(s.mastery*100).toFixed(0)}%</span></li>`
-          ).join('') || '<li class="empty">Keep practicing — strong topics will appear here</li>'
-        }</ul></div>`);
-      tiles.push(`<div class="panel"><h2>Recent practice tests</h2>
-        <ul class="list">${
-          (practice.recent || []).slice(0,4).map(t =>
-            `<li><span>${t.exam} · ${t.subject}</span><span class="pill ${
-              t.score ? (t.score.pct >= 0.6 ? 'ok' : 'warn') : ''
-            }">${t.score ? Math.round(t.score.pct*100)+'%' : t.status}</span></li>`
-          ).join('') || '<li class="empty">No tests yet</li>'
-        }</ul></div>`);
-      tiles.push(`<div class="panel"><h2>Mock interviews</h2>
-        <ul class="list">${
-          (mock.recent || []).slice(0,4).map(m =>
-            `<li><span>${m.track}</span><span class="pill ${
-              m.overall_score >= 7 ? 'ok' : m.overall_score ? 'warn' : ''
-            }">${m.overall_score != null ? m.overall_score.toFixed(1) : m.status}</span></li>`
-          ).join('') || '<li class="empty">No interviews yet</li>'
-        }</ul></div>`);
-      tiles.push(`<div class="panel"><h2>Essay scores</h2>
-        <ul class="list">${
-          (essay.recent || []).slice(0,4).map(e =>
-            `<li><span>${e.rubric_id.slice(0,8)}…</span><span class="pill ${
-              e.ai_score >= 60 ? 'ok' : e.ai_score ? 'warn' : ''
-            }">${e.ai_score != null ? e.ai_score.toFixed(0) : '—'}</span></li>`
-          ).join('') || '<li class="empty">No essays graded yet</li>'
-        }</ul></div>`);
-      tiles.push(`<div class="panel"><h2>Live classes</h2>
-        <ul class="list">${
-          (live.upcoming || []).slice(0,4).map(lc => {
-            const when = new Date(lc.scheduled_at * 1000).toLocaleString();
-            return `<li><span>${lc.title}</span><span class="pill warn">${when}</span></li>`;
-          }).join('') || '<li class="empty">No upcoming classes</li>'
-        }</ul></div>`);
-
-      main.innerHTML = tiles.join('');
-    }
+      // Persist to a profile-style endpoint when one exists. For now,
+      // stash in localStorage so the overlay survives page reloads.
+      try {
+        localStorage.setItem('padhai_mood_today', moodPick);
+        localStorage.setItem('padhai_focus_min_today', focusPick);
+      } catch(_) {}
+      closeMood();
+      // Show the suggestion as a sticky banner on the dashboard
+      var p = document.createElement('div');
+      p.className = 'card';
+      p.style.borderColor = '#fbbf24';
+      p.style.marginBottom = '14px';
+      p.innerHTML =
+        '<strong style="color:#fbbf24">Plan adjusted</strong> · ' +
+        'Mood: ' + escapeHtml(moodPick) + ' · ' + escapeHtml(focusPick) + ' min available. ' +
+        'Open the plan from My Exam Packs above.';
+      document.getElementById('dashRoot').prepend(p);
+    };
 
     load();
   </script>

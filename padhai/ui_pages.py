@@ -1218,7 +1218,7 @@ def get_quiz_html() -> str:
     // Show feedback
     var fb = document.getElementById('feedback');
     var badge = document.getElementById('feedbackBadge');
-    badge.textContent = chosen === null ? '⏱ Time\'s up! The correct answer was ' + correct
+    badge.textContent = chosen === null ? "⏱ Time's up! The correct answer was " + correct
       : (isCorrect ? '✓ Correct!' : '✗ Incorrect. Correct answer: ' + correct);
     badge.style.color = isCorrect ? 'var(--green)' : 'var(--red)';
     document.getElementById('explanationText').textContent = q.explanation || '';
@@ -2246,8 +2246,48 @@ def get_parent_html() -> str:
   </div>
 
   <div id="parentContent" style="display:none">
-    <!-- Children cards -->
+    <!-- Children cards + Link button -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-weight:800;font-size:15px">Your Children</div>
+      <button id="openLinkChildBtn" class="btn btn-primary btn-sm">+ Link a child</button>
+    </div>
     <div id="childrenGrid" style="display:grid;gap:14px;margin-bottom:20px"></div>
+
+    <!-- Link-child modal -->
+    <div id="linkChildModal" style="display:none;position:fixed;inset:0;
+         z-index:9999;background:rgba(0,0,0,.55);align-items:center;
+         justify-content:center;padding:20px">
+      <div style="background:#fff;max-width:440px;width:100%;
+           border-radius:12px;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.25)">
+        <h3 style="margin:0 0 6px;font-size:18px">Link your child</h3>
+        <p style="margin:0 0 16px;color:var(--muted);font-size:13px">
+          Enter your child's account email. They'll get a notification to
+          confirm the link. Both accounts must already be signed up.
+        </p>
+        <form id="linkChildForm">
+          <label style="display:block;font-weight:700;font-size:13px;margin-bottom:4px"
+                 for="linkChildEmail">Child's email</label>
+          <input id="linkChildEmail" type="email" required
+                 placeholder="child@example.com"
+                 style="width:100%;padding:9px 12px;border:1px solid var(--line);
+                        border-radius:8px;font-size:14px;margin-bottom:12px">
+          <label style="display:block;font-weight:700;font-size:13px;margin-bottom:4px"
+                 for="linkChildRelation">Relationship (optional)</label>
+          <input id="linkChildRelation" type="text"
+                 placeholder="mother, father, guardian…"
+                 style="width:100%;padding:9px 12px;border:1px solid var(--line);
+                        border-radius:8px;font-size:14px;margin-bottom:14px">
+          <div id="linkChildError" class="alert alert-error" style="display:none"></div>
+          <div id="linkChildSuccess" class="alert alert-success" style="display:none"></div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button type="button" id="cancelLinkChildBtn" class="btn btn-sm">Cancel</button>
+            <button type="submit" id="submitLinkChildBtn" class="btn btn-primary btn-sm">
+              Send link request
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- Expanded child detail -->
     <div id="childDetail" style="display:none">
@@ -2342,7 +2382,7 @@ def get_parent_html() -> str:
     if (!list.length) {
       grid.innerHTML = '<div class="empty-state"><div class="icon">👶</div>' +
         '<h3>No children linked</h3>' +
-        '<p>Ask your school admin to link your account to your child\'s profile.</p></div>';
+        "<p>Use the <strong>+ Link a child</strong> button above to send a link request to your child's account, or ask your school admin if your child is enrolled through a school.</p></div>";
       return;
     }
     grid.innerHTML = '';
@@ -2516,6 +2556,76 @@ def get_parent_html() -> str:
       setTimeout(function() { s.style.display = 'none'; }, 3000);
     } catch(e) {}
     btn.disabled = false; btn.textContent = 'Save notification settings';
+  });
+
+  // ──────── Link-a-child modal flow ───────────────────────────
+  var linkModal = document.getElementById('linkChildModal');
+  var openBtn = document.getElementById('openLinkChildBtn');
+  var cancelBtn = document.getElementById('cancelLinkChildBtn');
+  var form = document.getElementById('linkChildForm');
+  var errBox = document.getElementById('linkChildError');
+  var okBox = document.getElementById('linkChildSuccess');
+  var submitBtn = document.getElementById('submitLinkChildBtn');
+
+  function openLinkModal() {
+    errBox.style.display = 'none';
+    okBox.style.display = 'none';
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send link request';
+    linkModal.style.display = 'flex';
+  }
+  function closeLinkModal() { linkModal.style.display = 'none'; }
+  if (openBtn) openBtn.addEventListener('click', openLinkModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeLinkModal);
+  if (linkModal) linkModal.addEventListener('click', function(e) {
+    if (e.target === linkModal) closeLinkModal();
+  });
+
+  if (form) form.addEventListener('submit', async function(ev) {
+    ev.preventDefault();
+    errBox.style.display = 'none';
+    okBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    var email = document.getElementById('linkChildEmail').value.trim();
+    var relation = document.getElementById('linkChildRelation').value.trim();
+    var fd = new URLSearchParams();
+    fd.set('other_email', email);
+    fd.set('role', 'parent');
+    if (relation) fd.set('relation', relation);
+    try {
+      var r = await apiFetch('/api/parents/link', {
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body: fd.toString(),
+      });
+      if (!r.ok) {
+        var t = await r.text();
+        var msg = 'HTTP ' + r.status;
+        try { var j = JSON.parse(t); if (j.detail) msg = j.detail; } catch(_) {}
+        errBox.textContent = msg;
+        errBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send link request';
+        return;
+      }
+      okBox.textContent = (
+        'Link request sent. Your child will receive an in-app ' +
+        'notification to confirm. Once they accept, they appear here.'
+      );
+      okBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send another';
+      // Refresh the children list in case the link was auto-accepted
+      // (some flows skip the confirmation step).
+      setTimeout(function() { loadParent(); }, 800);
+    } catch (e) {
+      errBox.textContent = 'Network error: ' + e.message;
+      errBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send link request';
+    }
   });
 
   loadParent();
