@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v20: 370 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v21: 385 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -4679,6 +4679,194 @@
       "difficulty": "easy",
       "tags": {
         "subject": "geography",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is the SI unit of electric potential?",
+      "expected": {
+        "answer": "volt"
+      },
+      "rubric": "Accept 'volt' or 'V'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Name the smallest unit of life.",
+      "expected": {
+        "answer": "cell"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the molar mass of CO2?",
+      "expected": {
+        "answer": "44"
+      },
+      "rubric": "Numeric only. 12 + 16*2.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS2: Article 21 of the Indian Constitution guarantees what right?",
+      "expected": {
+        "answer": "right to life and personal liberty"
+      },
+      "rubric": "Accept 'right to life', 'right to life and personal liberty', or 'right to life and liberty'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "Solve: 7x = 49. What is x?",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "A train 100m long crosses a pole in 5 seconds. What is its speed in m/s?",
+      "expected": {
+        "answer": "20"
+      },
+      "rubric": "Numeric only. 100/5.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 10 Geography: What is the capital of Maharashtra?",
+      "expected": {
+        "answer": "mumbai"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "Maharashtra",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 11 Biology: What is the basic unit of the nervous system?",
+      "expected": {
+        "answer": "neuron"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "Karnataka",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 9 Chemistry: Name the gas that turns lime water milky.",
+      "expected": {
+        "answer": "carbon dioxide"
+      },
+      "rubric": "Accept 'carbon dioxide' or 'CO2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "TamilNadu",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 10 Mathematics: What is the formula for compound interest?",
+      "expected": {
+        "answer": "p(1+r/100)^n"
+      },
+      "rubric": "Accept 'P(1+r/100)^n', 'A=P(1+r/100)^n', or equivalent.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "AP_Telangana",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "UP Board Class 12 Biology: Name the longest cell in the human body.",
+      "expected": {
+        "answer": "neuron"
+      },
+      "rubric": "Accept 'neuron' or 'nerve cell'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "UP",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "ICSE Class 10 Geography: Name the line of latitude that divides Earth into Northern and Southern hemispheres.",
+      "expected": {
+        "answer": "equator"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "geography",
+        "board": "ICSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "IGCSE Mathematics: What is the value of 5! (5 factorial)?",
+      "expected": {
+        "answer": "120"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the symbol for sodium?",
+      "expected": {
+        "answer": "na"
+      },
+      "rubric": "Accept 'Na' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "SSC GK: Who is known as the Father of the Nation in India?",
+      "expected": {
+        "answer": "mahatma gandhi"
+      },
+      "rubric": "Accept 'Mahatma Gandhi' or 'Gandhi'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
         "exam": "SSC"
       }
     }

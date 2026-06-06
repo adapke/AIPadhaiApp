@@ -67,6 +67,7 @@ _ROUTER_NAMES = (
     "misc_status",       # v3.x — /api/exam-mode/active + /api/fees/config (2 routes)
     "personalisation",   # v3.x — /me/stats + /learning-path (per-user dashboard)
     "push_admin",        # v3.x — /api/push/* (3 routes — opened beacon, log, stats)
+    "dpdp_rights",       # v3.x — /api/me/data/export + DELETE /api/me/account (DPDP §11/§12)
 )
 
 

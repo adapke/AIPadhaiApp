@@ -54,7 +54,7 @@ The product surface, top-level:
 
 ---
 
-## The 24 router slices (alphabetical)
+## The 25 router slices (alphabetical)
 
 Each `padhai/routers/<name>.py` is self-contained. Convention: lazy
 `from .. import web as _web` inside endpoints so the module imports
@@ -86,6 +86,7 @@ standalone for unit testing. Registry: `padhai/routers/__init__.py`.
 | 22 | `misc_status.py` | 2 | Exam-mode-active + fees-config (small public status) |
 | 23 | `personalisation.py` | 2 | /me/stats + /learning-path (per-user planning) |
 | 24 | `push_admin.py` | 3 | Push beacon / log / stats |
+| 25 | `dpdp_rights.py` | 2 | DPDP §11 data export + §12 right-to-erasure |
 
 Plus the older slices wired before the polish-N sprints: `catalog`,
 `coaching`, `question_bank`, `me`, `orgs_admin`, `v3`, `learning`,
@@ -109,7 +110,7 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `scripts/backup_sqlite.sh` | Online sqlite3 .backup | Safe under concurrent writes |
 | `make verify` | One-command pre-PR gate | Bundles lint + 2 guards + pytest + structural bench (~20s) |
 | `make security` | Pre-deploy gate | Codified SECURITY.md hardening checks |
-| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 370 items across 9 boards/exams |
+| `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 385 items across 9 boards/exams |
 
 ---
 

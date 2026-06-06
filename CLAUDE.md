@@ -678,6 +678,33 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twenty-fifth router slice — DPDP rights (2 routes).**
+  `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
+  (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
+  rate-limited via file_upload bucket with cost=5) and `DELETE
+  /api/me/account` (DPDP §12 — anonymise email + lock account
+  immediately, schedule full purge within 30 days, irreversible).
+  Both append audit-log entries so the compliance officer can
+  prove the request was honoured. Endpoints existed in web.py
+  since v3.x but didn't have a dedicated home; consolidating
+  them in their own slice makes the legal contract auditable.
+  ~165 lines off web.py.
+- **COMPETITIVE_ANALYSIS.md.** First-pass competitive deep-dive
+  vs the Indian EdTech field (BYJU's / Vedantu / Unacademy /
+  PhysicsWallah + international Khanmigo / StudyFetch /
+  NotebookLM). Inventories what the codebase actually has from
+  the 25 sprints (only counting working implementations, not
+  PRD aspirations). Identifies P0 / P1 / P2 gaps with engineering
+  vs ops effort estimates. Verdict: feature surface matches or
+  beats ~80% of competitors; blockers to launch are content
+  (PYQ database), localisation (Hindi UI audit), trust (outcome
+  stories), and GTM — not engineering. Maps the next 6 prod-N
+  sprints to the P0 list.
+- **Accuracy bench 370 → 385 items.** volt, cell, CO2 molar mass,
+  Article 21 right to life, 7x=49, train 100m/5s speed, Mumbai,
+  neuron unit of nervous system, CO2 turns lime water milky,
+  compound interest formula, neuron longest cell, equator,
+  5!=120, Na for sodium, Mahatma Gandhi Father of the Nation.
 - **Production-readiness sprint (prod-1).** Three deliverables
   shipping the platform from "polished codebase" to "ready to
   promote to production":
