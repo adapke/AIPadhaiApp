@@ -26,17 +26,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 
-# Baseline last updated at prod-9. Changes from prod-8:
-#   ADMIN_ONLY: 5 -> 117 (router-level inject closed /api/admin/* gap)
-#   ANONYMOUS_OK: 499 -> 427
-#   PUBLIC: 205 -> 163
-#   TIER_GATED: 0 -> 2 (POST /api/v2/video-requests + regenerate at M2)
-EXPECTED_TOTAL = 726
+# Baseline last updated at prod-14. Changes from prod-9:
+#   PUBLIC: 163 -> 166 (3 new /api/concept-videos/* routes added)
+#   Total: 726 -> 729
+EXPECTED_TOTAL = 729
 EXPECTED_COUNTS = {
     "ADMIN_ONLY":    117,
     "ANONYMOUS_OK":  427,
     "AUTH_REQUIRED": 16,
-    "PUBLIC":        163,
+    "PUBLIC":        166,
     "TIER_GATED":    2,
     "UNKNOWN":       1,
 }

@@ -68,6 +68,7 @@ _ROUTER_NAMES = (
     "personalisation",   # v3.x — /me/stats + /learning-path (per-user dashboard)
     "push_admin",        # v3.x — /api/push/* (3 routes — opened beacon, log, stats)
     "dpdp_rights",       # v3.x — /api/me/data/export + DELETE /api/me/account (DPDP §11/§12)
+    "concept_videos",    # prod-14 — curated YouTube/Khan/etc concept-video catalog
 )
 
 

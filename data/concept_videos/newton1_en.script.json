@@ -1,0 +1,23 @@
+{
+  "title": "Newton's First Law of Motion",
+  "intro": "Did you know that a ball won't move unless you push it, and once it's rolling, it keeps rolling? This is Newton's First Law of Motion, one of the most important ideas in physics!",
+  "key_points": [
+    {
+      "heading": "What is Inertia?",
+      "narration": "Newton's First Law says that an object at rest stays at rest, and an object in motion stays in motion unless a force acts on it. This property is called inertia. Inertia is the tendency of objects to resist any change in their state of motion."
+    },
+    {
+      "heading": "Objects at Rest",
+      "narration": "When you're sitting in a stationary car and suddenly the car moves forward, you feel pushed backward. This happens because your body wants to stay at rest due to inertia. That's why we need seatbelts to protect us!"
+    },
+    {
+      "heading": "Objects in Motion",
+      "narration": "Imagine a skating player gliding on ice. Once they start moving, they keep gliding forward even without pushing further because there's very little friction. They need friction or another force to slow down and stop."
+    },
+    {
+      "heading": "Real Life Example",
+      "narration": "When you're on a bus and it suddenly brakes, you lurch forward. This is inertia again! Your body continues moving forward while the bus stops. Newton's First Law explains why we need forces to change motion."
+    }
+  ],
+  "outro": "Newton's First Law teaches us that objects naturally resist changes in motion—this resistance is inertia, and it's everywhere in our daily lives!"
+}

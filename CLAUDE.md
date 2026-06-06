@@ -1131,6 +1131,73 @@ Reviewed 2026-06-03. Re-audit before changing.
       not biology / English / Hindi / accounts; ICSE only math;
       UPSC Mains entirely absent (only Prelims). Filling these
       is incremental content sprints.
+- **prod-13 (slide-based explainer)** — first iteration: Claude
+  Haiku writes a 6-section script, gTTS narrates, PIL renders
+  slides, moviepy assembles MP4. `scripts/generate_concept_video.py`
+  produces `data/concept_videos/newton1_en.mp4` (~₹0.19/video). User
+  rejected as "too PPT-like" → pivoted to Manim.
+- **prod-13b (Manim animation)** — second iteration:
+  `scripts/generate_manim_video.py` has Claude Sonnet write a
+  Manim CE Scene class, renders via the bundled imageio-ffmpeg
+  binary. Produces real animated explainers (ball motion, force
+  arrows, friction in red, applied force in green). ~₹4/video
+  (Sonnet writes the scene). User reviewed against Peekaboo Kidz
+  / Dr.Binocs reference and concluded the gap to studio-cartoon
+  quality is too large for Manim to bridge. Cost analysis showed
+  building a Veo3-equivalent model is genuinely impossible at
+  startup scale (\$300M-1B). Pivoted again to embed strategy.
+- **prod-14 — Concept-video embed catalog.** The honest startup
+  answer: embed Peekaboo Kidz / Khan Academy / CrashCourse /
+  FuseSchool / 3Blue1Brown content via YouTube iframes. AI focuses
+  on the personalisation layer (practice / doubt-clearing / mock
+  interviews) which is the real differentiator vs BYJU's. Shipped:
+
+  1. `padhai/concept_videos.py` — schema + upsert + search +
+     stats. Three quality tiers: `verified` (URL human-confirmed),
+     `channel_seed` (trusted channel, curator needs to confirm
+     specific URL), `ai_fallback` (no curated content, SPA falls
+     back to /explain/video). Substring-LIKE search with English
+     possessive stripping ("Newton's First Law" ↔ "newton first
+     law"); Devanagari preserved for Hindi queries.
+
+  2. `padhai/routers/concept_videos.py` — `GET /api/concept-videos`,
+     `GET /api/concept-videos/stats`, `GET /api/concept-videos/{id}`.
+     Public (no auth) so the SPA can hit them on load. Registered
+     in the router registry.
+
+  3. `scripts/build_concept_videos.py` — 22 seed rows across
+     physics / biology / chemistry / mathematics / geography:
+     1 **verified** (the Peekaboo Newton's First Law URL the user
+     shared) + 21 **channel_seed** (trusted channels, curator
+     spot-checks the specific URL before launch). Includes 1
+     Hindi-medium row from Magnet Brains to prove multi-language
+     pipeline.
+
+  4. `tests/test_concept_videos.py` — 12 regression tests:
+     normalisation (possessive stripping, Devanagari preservation),
+     embed-URL derivation, upsert+search roundtrip, grade-band
+     filter, validation (source + quality_tier), idempotency,
+     full HTTP smoke through TestClient, seed-catalog quality
+     ratio (≥1 verified, ≥10 channel_seed). Total pytest:
+     125 → 137.
+
+  5. Endpoint tier map updated: 726 → 729 routes (3 new public).
+     `tests/test_endpoint_tier_map.py` baselines updated.
+
+  Honest gaps that remain:
+    - **21 of 22 seed rows need curator confirmation** before
+      launch. A human spends ~30s per URL to flip channel_seed
+      → verified. Total curation: ~10 min for prod-14's seed.
+    - **No SPA wiring yet** — the API is live, but the home/chat
+      surfaces don't yet call `/api/concept-videos?concept=...`
+      to embed the video into the lesson flow. Next sprint.
+    - **Search is substring-LIKE on normalised name** — not
+      semantic. "How does light bend?" won't find the "Light
+      Refraction" video. Adding Claude-powered concept extraction
+      from the student's question is a future sprint.
+    - **No YouTube embed liveness check** — a deleted video stays
+      in the DB. A nightly job that HEADs each embed URL would
+      catch this; not built yet.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
