@@ -1,0 +1,190 @@
+{
+  "source": "jee_main_2024_january_session_mathematics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "If x^2 - 5x + 6 = 0, what are the roots of the equation?",
+      "options": ["2 and 3", "1 and 6", "-2 and -3", "3 and 4"],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "topic_tags": ["roots", "factoring"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the derivative of sin(2x) with respect to x?",
+      "options": ["cos(2x)", "2 cos(2x)", "-2 cos(2x)", "sin(2x)"],
+      "correct_answer": "B",
+      "chapter": "Differential Calculus",
+      "topic_tags": ["chain_rule", "trigonometry"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The value of integral from 0 to pi/2 of sin(x) dx is:",
+      "options": ["0", "1", "-1", "pi/2"],
+      "correct_answer": "B",
+      "chapter": "Integral Calculus",
+      "topic_tags": ["definite_integral", "trigonometry"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If the determinant of a 2x2 matrix [[a, b], [c, d]] equals 0, then:",
+      "options": ["a = d", "ad = bc", "a + d = b + c", "ab = cd"],
+      "correct_answer": "B",
+      "chapter": "Matrices and Determinants",
+      "topic_tags": ["determinant", "linear_algebra"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of ways to arrange the letters of the word MATHEMATICS is:",
+      "options": ["11!", "11!/(2! * 2! * 2!)", "11!/(2! * 2!)", "11!/2!"],
+      "correct_answer": "B",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": ["permutation", "repeated_letters"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The locus of a point equidistant from two given points is:",
+      "options": ["A circle", "A straight line", "Perpendicular bisector of the line joining them", "Ellipse"],
+      "correct_answer": "C",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["locus", "perpendicular_bisector"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If z = 1 + i, what is |z^2|?",
+      "options": ["1", "2", "sqrt(2)", "4"],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["modulus", "complex_arithmetic"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The probability of getting a sum of 7 when two dice are rolled is:",
+      "options": ["1/6", "1/12", "5/36", "7/36"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["dice", "favorable_outcomes"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Find the limit as x approaches 0 of (1 - cos x)/x^2:",
+      "options": ["0", "1/2", "1", "Does not exist"],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": ["L_Hopital", "trigonometric_limits"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The equation of a circle with center (2, -3) and radius 5 is:",
+      "options": ["(x-2)^2 + (y+3)^2 = 25", "(x+2)^2 + (y-3)^2 = 25", "(x-2)^2 + (y-3)^2 = 5", "(x+2)^2 + (y+3)^2 = 5"],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["circle", "equation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the binomial coefficient C(8, 3)?",
+      "options": ["56", "28", "112", "120"],
+      "correct_answer": "A",
+      "chapter": "Binomial Theorem",
+      "topic_tags": ["combinations", "factorial"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The general solution of dy/dx = y is:",
+      "options": ["y = ce^x", "y = e^x + c", "y = ln x + c", "y = cx"],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": ["first_order", "separable"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If the vectors a = (1, 2, 3) and b = (2, -1, 0), what is a · b?",
+      "options": ["0", "5", "-1", "6"],
+      "correct_answer": "A",
+      "chapter": "Vector Algebra",
+      "topic_tags": ["dot_product"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The eccentricity of the ellipse x^2/25 + y^2/16 = 1 is:",
+      "options": ["3/5", "4/5", "5/4", "5/3"],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": ["ellipse", "eccentricity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The sum of the first n terms of the AP 2, 5, 8, ... is:",
+      "options": ["n(3n+1)/2", "n(3n-1)/2", "n(n+1)/2", "n(2n+1)/2"],
+      "correct_answer": "A",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["arithmetic_progression", "sum_of_n_terms"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If A and B are events with P(A) = 0.4, P(B) = 0.5, and P(A and B) = 0.2, then P(A|B) is:",
+      "options": ["0.4", "0.5", "0.8", "0.1"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["conditional_probability"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The minimum value of the function f(x) = x^2 - 4x + 7 is:",
+      "options": ["3", "4", "7", "11"],
+      "correct_answer": "A",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["maxima_minima", "quadratic"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the value of sin(75°) - sin(15°)?",
+      "options": ["1/sqrt(2)", "1/2", "sqrt(3)/2", "sqrt(2)"],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "topic_tags": ["sum_difference_formulas"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The inverse of the function f(x) = 2x + 3 is:",
+      "options": ["(x - 3)/2", "(x + 3)/2", "2x - 3", "2(x - 3)"],
+      "correct_answer": "A",
+      "chapter": "Functions",
+      "topic_tags": ["inverse_function", "linear"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "How many real roots does x^3 - 6x^2 + 11x - 6 = 0 have?",
+      "options": ["1", "2", "3", "0"],
+      "correct_answer": "C",
+      "chapter": "Theory of Equations",
+      "topic_tags": ["cubic", "rational_roots"],
+      "difficulty": "hard",
+      "marks": 4
+    }
+  ]
+}

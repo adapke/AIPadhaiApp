@@ -712,6 +712,42 @@ Reviewed 2026-06-03. Re-audit before changing.
   is to actually swap the hardcoded strings for `t(key, locale=user_lang)`
   calls. Without that wiring, the catalog growth is ammunition,
   not coverage.
+- **prod-4 — PYQ ingest pipeline (single-focus sprint).** JEE /
+  NEET / UPSC students treat past-year questions as table stakes;
+  `padhai/question_bank.py` had the schema + `upsert()` API since
+  v1.6 but no batch loader, so the table was always empty. Closed
+  the gap end-to-end:
+
+  1. `scripts/import_pyq.py` — JSON batch loader. Reads one file
+     per exam-year batch with `default_board` / `default_grade` /
+     `default_subject` / `default_year` / `default_paper` plus a
+     `questions[]` array (per-question overrides supported).
+     Idempotent via `question_bank.upsert()` on the natural key
+     `(board, grade, subject, year, paper, question_text)`. Glob
+     expansion for `data/pyq/*.json`. `--dry-run` for CI.
+
+  2. Seed dataset: 60 JEE Main 2024 questions across math (20),
+     physics (20), chemistry (20). Distribution covers easy /
+     medium / hard. Lives in `data/pyq/jee_main_2024_{math,physics,
+     chemistry}.json` so the pipeline can be exercised offline
+     without a separate download.
+
+  3. `tests/test_pyq_import.py` — 4 regression tests pinning the
+     contract: seed files present, end-to-end import lands all 60
+     rows in `question_bank`, idempotency (re-running doesn't
+     double-insert), every imported row has board/grade/subject/
+     year/paper/correct_answer/options/difficulty/marks populated.
+     Uses `tmp_path` SQLite via `monkeypatch.setenv("PADHAI_DB_PATH")`
+     so tests never touch the dev DB.
+
+  Total pytest: 79 → 83. Verified end-to-end: dry-run + real import
+  both report `total loaded: 60; errors: 0`, replay stays at 60.
+
+  Honest gap: 60 questions covers one exam session of one board-
+  year. Production should target 200+ per major exam (JEE Main,
+  JEE Advanced, NEET, UPSC Prelims) across recent 5 years =
+  ~5000 questions. That's content-acquisition work (OCR + manual
+  review), not engineering — the pipeline is ready for it.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,

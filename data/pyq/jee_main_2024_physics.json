@@ -1,0 +1,190 @@
+{
+  "source": "jee_main_2024_january_session_physics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "A body moves with uniform velocity. Its acceleration is:",
+      "options": ["zero", "constant non-zero", "increasing", "decreasing"],
+      "correct_answer": "A",
+      "chapter": "Kinematics",
+      "topic_tags": ["uniform_velocity", "acceleration"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The SI unit of work and energy is:",
+      "options": ["Newton", "Joule", "Watt", "Pascal"],
+      "correct_answer": "B",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": ["si_units"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the value of acceleration due to gravity (g) on Earth's surface in m/s^2?",
+      "options": ["9.8", "10", "8.9", "11"],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": ["g_value"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Two resistors of 4 ohm and 6 ohm are connected in parallel. The equivalent resistance is:",
+      "options": ["10 ohm", "2.4 ohm", "1.5 ohm", "24 ohm"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["parallel_circuit", "resistance"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The dimensional formula for momentum is:",
+      "options": ["MLT^-1", "ML^2T^-2", "MLT^-2", "ML^2T^-1"],
+      "correct_answer": "A",
+      "chapter": "Units and Measurements",
+      "topic_tags": ["dimensional_analysis"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "A capacitor of 4 microfarad is charged to 100 V. The energy stored is:",
+      "options": ["0.02 J", "0.04 J", "0.2 J", "0.4 J"],
+      "correct_answer": "A",
+      "chapter": "Electrostatic Potential and Capacitance",
+      "topic_tags": ["capacitor_energy"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The de Broglie wavelength of an electron is given by:",
+      "options": ["h/mv", "hv/m", "mv/h", "m/hv"],
+      "correct_answer": "A",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["de_broglie", "wavelength"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The half-life of a radioactive substance is the time taken for:",
+      "options": ["all atoms to decay", "half the atoms to decay", "the activity to become half", "Both B and C"],
+      "correct_answer": "D",
+      "chapter": "Nuclei",
+      "topic_tags": ["radioactive_decay", "half_life"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The focal length of a convex lens is positive. The image of an object placed at the focus is formed at:",
+      "options": ["the focus on the same side", "infinity", "twice the focal length", "the optical center"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["convex_lens", "image_formation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the magnitude of the magnetic field at the center of a circular coil of radius r carrying current I, with N turns?",
+      "options": ["μ₀NI/(2r)", "μ₀I/(2r)", "μ₀NI/r", "μ₀I/r"],
+      "correct_answer": "A",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["magnetic_field", "circular_coil"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The period of a simple pendulum of length L is:",
+      "options": ["2π√(L/g)", "2π√(g/L)", "π√(L/g)", "√(L/g)"],
+      "correct_answer": "A",
+      "chapter": "Oscillations",
+      "topic_tags": ["simple_pendulum", "period"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The speed of sound in air at NTP is approximately:",
+      "options": ["330 m/s", "3 x 10^8 m/s", "1500 m/s", "100 m/s"],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": ["sound_speed"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Photoelectric effect proves the:",
+      "options": ["wave nature of light", "particle nature of light", "both A and B", "neither A nor B"],
+      "correct_answer": "B",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["photoelectric_effect"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Two charges +q and -q are separated by a distance d. The dipole moment is:",
+      "options": ["qd", "q/d", "2qd", "qd/2"],
+      "correct_answer": "A",
+      "chapter": "Electric Charges and Fields",
+      "topic_tags": ["dipole_moment"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An object moves in a circular path of radius r with speed v. Its centripetal acceleration is:",
+      "options": ["v^2/r", "v/r", "vr", "v^2 r"],
+      "correct_answer": "A",
+      "chapter": "Motion in a Plane",
+      "topic_tags": ["circular_motion", "centripetal_acceleration"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The first law of thermodynamics is essentially a statement of:",
+      "options": ["conservation of momentum", "conservation of energy", "conservation of mass", "increase in entropy"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["first_law", "energy_conservation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An object is thrown vertically upward with initial velocity u. The time to reach maximum height is:",
+      "options": ["u/g", "u/(2g)", "2u/g", "g/u"],
+      "correct_answer": "A",
+      "chapter": "Kinematics",
+      "topic_tags": ["projectile", "free_fall"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Coulomb's law states that the force between two point charges is inversely proportional to:",
+      "options": ["the distance", "the square of the distance", "the cube of the distance", "the square root of the distance"],
+      "correct_answer": "B",
+      "chapter": "Electric Charges and Fields",
+      "topic_tags": ["coulombs_law"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What does the area under a velocity-time graph represent?",
+      "options": ["acceleration", "displacement", "force", "momentum"],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": ["velocity_time_graph"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The energy stored in a stretched spring (force constant k, extension x) is:",
+      "options": ["kx", "kx^2", "(1/2)kx^2", "2kx"],
+      "correct_answer": "C",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": ["elastic_potential_energy", "spring"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

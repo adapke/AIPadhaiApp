@@ -1,0 +1,190 @@
+{
+  "source": "jee_main_2024_january_session_chemistry",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2024,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "The atomic number of carbon is:",
+      "options": ["4", "6", "8", "12"],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["atomic_number", "carbon"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The molecular formula of methane is:",
+      "options": ["CH3", "CH4", "C2H4", "C2H6"],
+      "correct_answer": "B",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["alkane", "molecular_formula"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is an example of an alkali metal?",
+      "options": ["Calcium", "Sodium", "Aluminum", "Iron"],
+      "correct_answer": "B",
+      "chapter": "Periodic Classification",
+      "topic_tags": ["alkali_metal", "group_1"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The pH of pure water at 25°C is:",
+      "options": ["6", "7", "8", "10"],
+      "correct_answer": "B",
+      "chapter": "Equilibrium",
+      "topic_tags": ["pH", "neutrality"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of moles in 36 g of water is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["moles", "molar_mass"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The IUPAC name of CH3-CH2-OH is:",
+      "options": ["Methanol", "Ethanol", "Propanol", "Butanol"],
+      "correct_answer": "B",
+      "chapter": "Organic Chemistry",
+      "topic_tags": ["IUPAC_nomenclature", "alcohol"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Avogadro's number is:",
+      "options": ["6.022 × 10^23", "9.81 × 10^8", "3 × 10^8", "1.6 × 10^-19"],
+      "correct_answer": "A",
+      "chapter": "Mole Concept",
+      "topic_tags": ["avogadro_number"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which gas is liberated when zinc reacts with dilute hydrochloric acid?",
+      "options": ["Oxygen", "Hydrogen", "Chlorine", "Carbon dioxide"],
+      "correct_answer": "B",
+      "chapter": "Hydrogen",
+      "topic_tags": ["acid_metal_reaction", "hydrogen"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The hybridization of carbon in methane (CH4) is:",
+      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["hybridization", "tetrahedral"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which catalyst is used in the Haber process for the synthesis of ammonia?",
+      "options": ["Platinum", "Iron", "Nickel", "Vanadium"],
+      "correct_answer": "B",
+      "chapter": "p-Block Elements",
+      "topic_tags": ["haber_process", "catalyst"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The oxidation state of sulfur in H2SO4 is:",
+      "options": ["+2", "+4", "+6", "-2"],
+      "correct_answer": "C",
+      "chapter": "Redox Reactions",
+      "topic_tags": ["oxidation_state", "sulfuric_acid"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is the strongest reducing agent?",
+      "options": ["F2", "Cl2", "Br2", "I2"],
+      "correct_answer": "D",
+      "chapter": "Redox Reactions",
+      "topic_tags": ["reducing_agent", "halogens"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The geometry of NH3 is:",
+      "options": ["Linear", "Trigonal planar", "Tetrahedral", "Pyramidal"],
+      "correct_answer": "D",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["VSEPR", "ammonia_geometry"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which functional group is present in CH3-CHO?",
+      "options": ["Alcohol", "Aldehyde", "Ketone", "Carboxylic acid"],
+      "correct_answer": "B",
+      "chapter": "Organic Chemistry",
+      "topic_tags": ["aldehyde", "functional_groups"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is an isotope of hydrogen?",
+      "options": ["Helium", "Deuterium", "Lithium", "Oxygen"],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["isotope", "hydrogen"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "What is the chemical formula of sulphuric acid?",
+      "options": ["HCl", "HNO3", "H2SO4", "H3PO4"],
+      "correct_answer": "C",
+      "chapter": "Acids and Bases",
+      "topic_tags": ["chemical_formula", "acid"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The most electronegative element is:",
+      "options": ["Oxygen", "Fluorine", "Chlorine", "Nitrogen"],
+      "correct_answer": "B",
+      "chapter": "Periodic Properties",
+      "topic_tags": ["electronegativity", "fluorine"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The first law of thermodynamics is mathematically expressed as:",
+      "options": ["ΔU = q + w", "ΔS > 0", "PV = nRT", "ΔG = ΔH - TΔS"],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["first_law", "internal_energy"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is the correct electronic configuration of Na (Z=11)?",
+      "options": ["1s² 2s² 2p⁶ 3s¹", "1s² 2s² 2p⁶", "1s² 2s² 2p⁵ 3s²", "1s² 2s² 2p⁶ 3s²"],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["electronic_configuration", "sodium"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The compound formed when methane is treated with chlorine in presence of sunlight is mainly:",
+      "options": ["CH3Cl", "CH2Cl2", "CHCl3", "CCl4"],
+      "correct_answer": "A",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["chlorination", "substitution_reaction"],
+      "difficulty": "medium",
+      "marks": 4
+    }
+  ]
+}
