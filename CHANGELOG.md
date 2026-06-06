@@ -10,6 +10,54 @@ release-by-release summary auditors / new contributors actually read.
 
 ## Unreleased
 
+### polish-N sprint stack — codebase hardening since v3.20
+
+A run of small focused sprints (numbered `polish` → `polish-17` as of
+this writing) targeting three themes: extract web.py into composable
+router slices, expand the lint gate, grow the accuracy bench. Each
+sprint shipped 4 items in one tight commit. Full sprint-by-sprint
+detail in the commit messages — `git log --grep "polish-"`.
+
+**Lint gate** — promoted to blocking, in order: `F` (pyflakes) →
+`E` (pycodestyle errors) → `I` (isort) → `B` (bugbear) → `UP`
+(pyupgrade) → `SIM` (simplify) → `RUF` (Ruff-specific) → `ARG`
+(unused-arguments) → `B904` (raise-without-from inside except).
+Nine categories enforced. B904 alone was 344 sites cleaned by a
+custom AST-based mass fixer (`scripts/fix_b904.py`).
+
+**Router extraction** — 19 slices lifted out of web.py
+(`padhai/routers/`): multipage, explainer, v2_video, parents,
+orgs_api, orgs_classes, orgs_leaderboard, orgs_attendance,
+orgs_assignments, orgs_fees, orgs_exams, branding, scim,
+notifications, orgs_schedule, lesson_detail, lesson_chat_recap,
+curriculum, uploads.
+
+**Maintained tools** — `scripts/fix_b904.py` (AST B904 mass fixer),
+`scripts/check_model_constants.py` (no literal `claude-*` outside
+`padhai/models.py`), `scripts/check_router_registry.py` (router
+file ↔ `_ROUTER_NAMES` bidirectional check), `scripts/
+backup_sqlite.sh` (online `.backup` API), `make verify` (one-
+command pre-PR gate).
+
+**Central tooling** — `padhai/models.py` (Claude model-ID registry,
+closes bug #8), `padhai/db.py:sqlite_path()` (shared SQLite path,
+closes DPDP cross-DB crash), `padhai/llm_call.py:call_claude()`
+(wraps client.messages.create + cost tracking + daily cap).
+
+**Accuracy bench** — grew from 12 → 280 items across 9 board/exam
+tracks (CBSE 6-12, ICSE, IGCSE, Maharashtra, Karnataka, TamilNadu,
+AP/Telangana, UP + JEE / NEET / UPSC / SSC). ~16% reasoning items
+(was 0% lookup-style). Structural mode runs in <5s and is gated on
+every PR; live mode runs on push to main with
+`--min-pass-rate=0.75`.
+
+**Docs** — `SECURITY.md`, `CONTRIBUTING.md`, `ONBOARDING.md`
+(contributor first-day map with 19-router index + maintained tools
++ invariants).
+
+**Tests** — pytest grew 37 → 58 (added `tests/test_routers.py`
+covering all 18+ extracted slices).
+
 ---
 
 ## v3.20.0 — Phase 3 complete: Voice Tutor + 4 AI module UIs wired

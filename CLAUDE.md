@@ -678,6 +678,27 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Nineteenth router slice — uploads (3 routes).**
+  `padhai/routers/uploads.py` covers the PRD §13.1-2 upload
+  pipeline: `POST /api/uploads` (persist + ingest), `POST
+  /api/uploads/{id}/analyze` (Claude vision → topic/grade/...),
+  `GET /api/uploads/{id}` (look up on page reload). The
+  `_UPLOAD_DIR` constant moves with the router (only call site).
+  Not to be confused with `uploads_ai.py` which already exists
+  and covers the RAG chat/flashcards/quiz/summary AI surface over
+  an already-analyzed upload. ~165 lines off web.py.
+- **CHANGELOG.md polish-N section.** Consolidated the 17 polish
+  sprints (multi-month run hardening web.py + lint + bench) into
+  one "polish-N sprint stack" entry under Unreleased. Lists the
+  9 enforced lint categories (F E I B UP SIM RUF ARG + B904), the
+  19 router slices, the 5 maintained tools, central tooling, the
+  bench growth (12 → 280 items across 9 boards), the new docs,
+  and the test count growth (37 → 58).
+- **Accuracy bench 265 → 280 items.** Added items spanning JEE
+  trig (sin π/2), NEET DNA full form, JEE organic IUPAC (propene),
+  UPSC Tryst-with-Destiny speech, percentage arithmetic, 2^10
+  TamilNadu, ammonia NH3 ICSE, Newton's 2nd law numerical, and
+  more.
 - **Eighteenth router slice — curriculum mapping (2 routes).**
   `padhai/routers/curriculum.py` covers `POST /lessons/{id}/curriculum`
   (NCERT/state-board catalogue match via `pedagogy.match_curriculum`)

@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset covering CBSE (Class 6-12), ICSE, IGCSE, Maharashtra/Karnataka/TamilNadu/AP-Telangana/UP State Boards, JEE Main/Advanced, NEET UG, UPSC GS, SSC GK. Easy/medium/hard mix with reasoning problems. v13: 265 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset covering CBSE, ICSE, IGCSE, Maharashtra, Karnataka, TamilNadu, AP-Telangana, UP State Boards + JEE, NEET, UPSC, SSC. v14: 280 items.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -3364,6 +3364,196 @@
       "tags": {
         "subject": "history",
         "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the value of sin(pi/2)?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE",
+        "topic": "trigonometry"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which gas do plants release during photosynthesis?",
+      "expected": {
+        "answer": "oxygen"
+      },
+      "rubric": "Accept 'oxygen' or 'O2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the IUPAC name of CH3-CH=CH2?",
+      "expected": {
+        "answer": "propene"
+      },
+      "rubric": "Accept 'propene' or 'prop-1-ene'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE",
+        "topic": "organic_iupac"
+      }
+    },
+    {
+      "prompt": "UPSC GS1 History: Who delivered the famous 'Tryst with Destiny' speech?",
+      "expected": {
+        "answer": "jawaharlal nehru"
+      },
+      "rubric": "Accept 'Jawaharlal Nehru' or 'Nehru'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "If a number is increased by 25% and then decreased by 20%, what is the net change?",
+      "expected": {
+        "answer": "0"
+      },
+      "rubric": "Numeric only. 1.25 * 0.8 = 1.0, so 0% net change.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "percentages"
+      }
+    },
+    {
+      "prompt": "What is the smallest prime number?",
+      "expected": {
+        "answer": "2"
+      },
+      "rubric": "Numeric only. 1 is NOT prime.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "If a clock shows 3:15, what is the angle between the hour and minute hands?",
+      "expected": {
+        "answer": "7.5"
+      },
+      "rubric": "Accept '7.5' or '7.5 degrees'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC",
+        "topic": "clocks"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 9 Geography: Name the longest river in Maharashtra.",
+      "expected": {
+        "answer": "godavari"
+      },
+      "rubric": "Accept 'Godavari'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "geography",
+        "board": "Maharashtra",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 10 Mathematics: What is 2^10?",
+      "expected": {
+        "answer": "1024"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "TamilNadu",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "ICSE Class 10 Chemistry: What is the chemical formula of ammonia?",
+      "expected": {
+        "answer": "nh3"
+      },
+      "rubric": "Accept 'NH3' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "board": "ICSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "NEET Biology: What does DNA stand for?",
+      "expected": {
+        "answer": "deoxyribonucleic acid"
+      },
+      "rubric": "Accept 'Deoxyribonucleic acid' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Physics: A 5 kg object accelerates at 2 m/s^2. What net force is required (in newtons)?",
+      "expected": {
+        "answer": "10"
+      },
+      "rubric": "Numeric only. F = ma = 5*2 = 10 N.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE",
+        "topic": "newtons_laws"
+      }
+    },
+    {
+      "prompt": "UPSC GS2 Polity: Which Article of the Indian Constitution deals with the right to equality?",
+      "expected": {
+        "answer": "article 14"
+      },
+      "rubric": "Accept 'Article 14', '14', or 'Art 14'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "polity",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: Who painted the Mona Lisa?",
+      "expected": {
+        "answer": "leonardo da vinci"
+      },
+      "rubric": "Accept 'Leonardo da Vinci' or 'da Vinci'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "CBSE Class 11 Biology: What is the powerhouse of the cell?",
+      "expected": {
+        "answer": "mitochondria"
+      },
+      "rubric": "Accept 'mitochondria' or 'mitochondrion'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "board": "CBSE",
+        "class": "11"
       }
     }
   ]

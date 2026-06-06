@@ -61,6 +61,7 @@ _ROUTER_NAMES = (
     "lesson_detail",     # v3.x — /lessons/{id}/{flashcards,quiz,notes,rate} (5 cache-only)
     "lesson_chat_recap", # v3.x — /chat/{id} + /lessons/{id}/recap* (3 Claude/TTS routes)
     "curriculum",        # v3.x — /lessons/{id}/curriculum + /curriculum/index (2 routes)
+    "uploads",           # v3.x — POST/GET /api/uploads* (3 routes — upload/analyze/get)
 )
 
 
