@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v17: 325 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v18: 340 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -4115,6 +4115,194 @@
         "subject": "math",
         "board": "CBSE",
         "class": "12"
+      }
+    },
+    {
+      "prompt": "JEE Mathematics: What is the value of e (Euler's number) to 2 decimal places?",
+      "expected": {
+        "answer": "2.72"
+      },
+      "rubric": "Accept '2.72' or '2.71' or '2.718'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: How many pairs of cranial nerves are there in humans?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the chemical formula of methane?",
+      "expected": {
+        "answer": "ch4"
+      },
+      "rubric": "Accept 'CH4' (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS1: In which year was the Indian National Congress founded?",
+      "expected": {
+        "answer": "1885"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "What is the LCM of 4 and 6?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "If 5 people can complete a task in 12 days, in how many days can 10 people complete it (constant work rate)?",
+      "expected": {
+        "answer": "6"
+      },
+      "rubric": "Numeric only. Inverse proportion.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 9 History: Who was the first Indian to win a Nobel Prize?",
+      "expected": {
+        "answer": "rabindranath tagore"
+      },
+      "rubric": "Accept 'Rabindranath Tagore' or 'Tagore'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "board": "Maharashtra",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 10 Mathematics: Find the area of a square with side 7 cm.",
+      "expected": {
+        "answer": "49"
+      },
+      "rubric": "Numeric only (in cm^2).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "Karnataka",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 11 Chemistry: What is the most abundant element in Earth's crust?",
+      "expected": {
+        "answer": "oxygen"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "chemistry",
+        "board": "TamilNadu",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 11 Physics: State the unit of acceleration in the SI system.",
+      "expected": {
+        "answer": "m/s^2"
+      },
+      "rubric": "Accept 'm/s^2', 'metre per second squared', 'm s^-2'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "AP_Telangana",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "UP Board Class 10 Biology: Name the largest animal cell.",
+      "expected": {
+        "answer": "ostrich egg"
+      },
+      "rubric": "Accept 'ostrich egg' or 'ostrich egg cell'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "UP",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "ICSE Class 12 Mathematics: What is the formula for the volume of a sphere?",
+      "expected": {
+        "answer": "(4/3) pi r^3"
+      },
+      "rubric": "Accept '(4/3)πr³', '4/3*pi*r^3', '(4/3) pi r^3'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "ICSE",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "Cambridge IGCSE Mathematics: What is sin(90 degrees)?",
+      "expected": {
+        "answer": "1"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "IGCSE",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "JEE Advanced Physics: What is the kinetic energy of a 2 kg object moving at 5 m/s (in joules)?",
+      "expected": {
+        "answer": "25"
+      },
+      "rubric": "Numeric only. KE = (1/2)mv^2 = 0.5*2*25.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "SSC GK: What is the longest bone in the human body?",
+      "expected": {
+        "answer": "femur"
+      },
+      "rubric": "Accept 'femur' or 'thigh bone'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "SSC"
       }
     }
   ]

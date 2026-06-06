@@ -678,6 +678,22 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twenty-third router slice — personalisation (2 routes).**
+  `padhai/routers/personalisation.py` covers `GET /me/stats`
+  (7-day activity rollup — thin wrapper around the shared
+  `_compute_user_stats` that parents.py's `/children/{cid}/stats`
+  also uses) and `POST /learning-path` (multi-week study plan via
+  Opus + adaptive thinking, deterministically cached on the
+  input key — the most expensive Claude surface in the codebase
+  at ~₹4-6/call). User's library (recent succeeded lesson jobs)
+  is folded into the plan so the planner can recommend re-watches
+  rather than always proposing new generation. ~75 lines off
+  web.py.
+- **Accuracy bench 325 → 340 items.** Euler's e≈2.72, 12 cranial
+  nerves, CH4, INC 1885, LCM(4,6)=12, 5-people-12-days inverse
+  proportion, Tagore first Nobel, 49 cm² square area, oxygen
+  most abundant in crust, m/s² acceleration unit, ostrich egg
+  largest cell, (4/3)πr³, sin(90°)=1, KE=25 J, femur longest bone.
 - **Twenty-second router slice — misc status (2 routes).**
   `padhai/routers/misc_status.py` bundles two small status
   endpoints that don't fit a larger subsystem:
