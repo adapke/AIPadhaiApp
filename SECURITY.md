@@ -218,4 +218,56 @@ explaining why.
 - **Security:** security@aipathshala.in
 - **General:** see CONTRIBUTING.md
 
-Last reviewed: 2026-06-04.
+Last reviewed: 2026-06-06.
+
+---
+
+## Known gaps (tracked, not yet fixed)
+
+Surfaced by `scripts/audit_endpoint_tiers.py` at prod-8. These are
+**real** issues, not classifier defects — verified by anonymous
+`TestClient.get(path)` returning HTTP 200 against a development boot
+of `padhai.web:app`.
+
+### 1. Unauthenticated `/api/admin/*` endpoints (HIGH)
+
+Many `/api/admin/*` routes registered by `padhai/routers/v3.py` have
+no `current_user` dependency and no in-handler auth check. Anonymous
+callers can hit them and receive 200. Examples confirmed:
+
+- `GET /api/admin/flags/{flag_key}/exposures`
+- `GET /api/admin/forums/flagged`
+- `GET /api/admin/doubts/stats`
+- `GET /api/admin/cs/at-risk`
+
+Root cause: `padhai/routers/v3.py:19` declares `router = APIRouter()`
+with **no** `dependencies=[Depends(current_user), require_admin_role]`
+clause, so per-handler auth is opt-in. Many handlers forgot to opt
+in. The path prefix `/api/admin/` is *naming convention only*; the
+router doesn't enforce it.
+
+Fix shape (next sprint): convert `v3.py`'s `router = APIRouter()` to
+`APIRouter(dependencies=[...])` for the `/api/admin/...` subset, OR
+split admin routes into a sibling `routers/v3_admin.py` that carries
+the dependency at the router level. Audit `docs/ENDPOINT_TIER_MAP.md`
+afterwards to confirm the counts move from PUBLIC → ADMIN_ONLY.
+
+Until the fix lands: **gate `/api/admin/*` at the reverse proxy**
+(allow only office-IP CIDR or VPN) — `nginx`/Cloudflare WAF rule, not
+application code. Add to PRODUCTION_CHECKLIST.md §6.
+
+### 2. Zero tier-gated endpoints
+
+The codebase ships a `_require_tier(user, "Mx")` helper in
+`padhai/web.py` but no endpoint actually calls it. Every "premium"
+feature (photoreal avatar, multi-page video, advanced practice) is
+free for any signed-in user today. This isn't a security issue —
+it's a revenue issue — but it's surfaced by the same audit so it
+lives here for visibility.
+
+Fix shape: identify the 8–12 endpoints that are intended to be paid,
+add `user = _require_tier(user, "M2")` (or higher) at the top of
+each handler, re-run the audit script, and update
+`docs/ENDPOINT_TIER_MAP.md`. The `test_no_tier_gated_endpoints_yet`
+regression test will appropriately fail and need updating once any
+of them are gated.

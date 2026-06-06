@@ -1,0 +1,7999 @@
+{
+  "counts": {
+    "ADMIN_ONLY": 5,
+    "ANONYMOUS_OK": 499,
+    "AUTH_REQUIRED": 16,
+    "PUBLIC": 205,
+    "UNKNOWN": 1
+  },
+  "routes": [
+    {
+      "lineno": 9498,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "root",
+      "path": "/",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 348,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sentry_test",
+      "path": "/__sentry_test",
+      "reason": "unparseable source",
+      "source_file": "padhai/observability.py",
+      "tier_class": "UNKNOWN"
+    },
+    {
+      "lineno": 8460,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "adapt_create",
+      "path": "/api/adaptive-packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8482,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_my_packs",
+      "path": "/api/adaptive-packs/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8494,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_get",
+      "path": "/api/adaptive-packs/{base_pack_code}/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8506,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "adapt_re_adapt",
+      "path": "/api/adaptive-packs/{base_pack_code}/re-adapt",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8577,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_should",
+      "path": "/api/adaptive-packs/{base_pack_code}/should-re-adapt",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8521,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_topic_view",
+      "path": "/api/adaptive-packs/{base_pack_code}/topics",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8590,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "adapt_delete",
+      "path": "/api/adaptive-packs/{pack_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8540,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_overrides",
+      "path": "/api/adaptive-packs/{pack_id}/overrides",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8556,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adapt_signals",
+      "path": "/api/adaptive-packs/{pack_id}/signals",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 440,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adaptive_pack_view",
+      "path": "/api/adaptive/pack/{base_pack_code}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 465,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "adaptive_pack_rebalance",
+      "path": "/api/adaptive/pack/{base_pack_code}/rebalance",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 505,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adaptive_pack_signals",
+      "path": "/api/adaptive/pack/{base_pack_code}/signals",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 483,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "adaptive_my_packs",
+      "path": "/api/adaptive/packs",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4602,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "aff_admin_list",
+      "path": "/api/admin/affiliates",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4652,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "aff_admin_list_commissions",
+      "path": "/api/admin/affiliates/commissions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4637,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "aff_admin_mark_paid",
+      "path": "/api/admin/affiliates/commissions/{commission_id}/paid",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4679,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "aff_admin_summary",
+      "path": "/api/admin/affiliates/program-summary",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4618,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "aff_admin_set_status",
+      "path": "/api/admin/affiliates/{code}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8413,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "ar_admin_render",
+      "path": "/api/admin/audio-recaps/render-pending",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5327,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_list_datasets",
+      "path": "/api/admin/bench/datasets",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5301,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_create_dataset",
+      "path": "/api/admin/bench/datasets",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5344,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_add_item",
+      "path": "/api/admin/bench/datasets/{dataset_id}/items",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5384,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_publish_dataset",
+      "path": "/api/admin/bench/datasets/{dataset_id}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5400,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_list_runs",
+      "path": "/api/admin/bench/runs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5421,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_get_run",
+      "path": "/api/admin/bench/runs/{run_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5433,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "bench_admin_trust_dashboard",
+      "path": "/api/admin/bench/trust-dashboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4193,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "bun_admin_create",
+      "path": "/api/admin/bundles",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4962,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cit_admin_grounding_rate",
+      "path": "/api/admin/citations/grounding-rate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4980,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cit_admin_source_impact",
+      "path": "/api/admin/citations/source-impact",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2116,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_register_publisher",
+      "path": "/api/admin/content/publishers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2133,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_verify_publisher",
+      "path": "/api/admin/content/publishers/{pid}/verify",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3101,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_list_corp_orgs",
+      "path": "/api/admin/corporate/orgs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3075,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_register_corp_org",
+      "path": "/api/admin/corporate/orgs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3303,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "corp_completion_stats",
+      "path": "/api/admin/corporate/orgs/{corp_id}/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2804,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_at_risk",
+      "path": "/api/admin/cs/at-risk",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2853,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_unresolved_alerts",
+      "path": "/api/admin/cs/events",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2822,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_log_event",
+      "path": "/api/admin/cs/events",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2845,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_resolve_event",
+      "path": "/api/admin/cs/events/{eid}/resolve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2768,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_compute_health",
+      "path": "/api/admin/cs/health/compute",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2788,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_latest_health",
+      "path": "/api/admin/cs/health/{org_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2895,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_emit_onboarding",
+      "path": "/api/admin/cs/onboarding/emit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2889,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_onboarding_steps",
+      "path": "/api/admin/cs/onboarding/steps",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2868,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_org_events",
+      "path": "/api/admin/cs/orgs/{org_id}/events",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2933,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cs_upcoming_renewals",
+      "path": "/api/admin/cs/renewals",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2910,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_upsert_renewal",
+      "path": "/api/admin/cs/renewals/upsert",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2955,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cs_record_renewal_action",
+      "path": "/api/admin/cs/renewals/{org_id}/action",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8905,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_list_curriculum",
+      "path": "/api/admin/curriculum",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8961,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_add_curriculum_topic",
+      "path": "/api/admin/curriculum",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 9071,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "admin_delete_curriculum_topic",
+      "path": "/api/admin/curriculum/{topic_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 9011,
+      "methods": [
+        "PUT"
+      ],
+      "min_tier": null,
+      "name": "admin_update_curriculum_topic",
+      "path": "/api/admin/curriculum/{topic_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4814,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_enqueue",
+      "path": "/api/admin/digilocker/issuances",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4873,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_mark_failed",
+      "path": "/api/admin/digilocker/issuances/{iid}/failed",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4850,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_mark_issued",
+      "path": "/api/admin/digilocker/issuances/{iid}/issued",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4775,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_register_org",
+      "path": "/api/admin/digilocker/orgs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4802,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_activate",
+      "path": "/api/admin/digilocker/orgs/{org_id}/activate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4888,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dl_admin_stats",
+      "path": "/api/admin/digilocker/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 113,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "doubt_cron_escalate",
+      "path": "/api/admin/doubts/cron/escalate",
+      "source_file": "padhai/routers/doubt_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 870,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "doubt_stats",
+      "path": "/api/admin/doubts/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5164,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "packs_admin_create",
+      "path": "/api/admin/exam-packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5264,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "packs_admin_stats",
+      "path": "/api/admin/exam-packs/{code}/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5108,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tax_admin_add_topic",
+      "path": "/api/admin/exam-taxonomy/exams/{exam_code}/topics",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6646,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_admin_expire_stale",
+      "path": "/api/admin/expert-reviews/expire-stale",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6637,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_admin_stats",
+      "path": "/api/admin/expert-reviews/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6461,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_admin_approve",
+      "path": "/api/admin/experts/{expert_user_id}/approve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6476,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_admin_set_status",
+      "path": "/api/admin/experts/{expert_user_id}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 228,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_flags",
+      "path": "/api/admin/flags",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 249,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upsert_flag_endpoint",
+      "path": "/api/admin/flags",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 275,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "delete_flag_endpoint",
+      "path": "/api/admin/flags/{flag_key}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 287,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "flag_exposures",
+      "path": "/api/admin/flags/{flag_key}/exposures",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1493,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_flagged_queue",
+      "path": "/api/admin/forums/flagged",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 723,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "live_provider_status",
+      "path": "/api/admin/live-classes/provider",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 569,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cost_opt_status",
+      "path": "/api/admin/llm/cost-opt",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 187,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "llm_costs",
+      "path": "/api/admin/llm/costs",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ADMIN_ONLY"
+    },
+    {
+      "lineno": 239,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "llm_costs_by_user",
+      "path": "/api/admin/llm/costs/by-user",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ADMIN_ONLY"
+    },
+    {
+      "lineno": 203,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "llm_costs_daily",
+      "path": "/api/admin/llm/costs/daily",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ADMIN_ONLY"
+    },
+    {
+      "lineno": 205,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "llm_flag_queue",
+      "path": "/api/admin/llm/flags",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ADMIN_ONLY"
+    },
+    {
+      "lineno": 172,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "llm_stats",
+      "path": "/api/admin/llm/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ADMIN_ONLY"
+    },
+    {
+      "lineno": 7675,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_list_claims",
+      "path": "/api/admin/market/copyright-claims",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7695,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_decide_claim",
+      "path": "/api/admin/market/copyright-claims/{claim_id}/decide",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7595,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_refund_queue",
+      "path": "/api/admin/market/refunds",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7637,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_refund_expire_stale",
+      "path": "/api/admin/market/refunds/expire-stale",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7615,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_refund_decide",
+      "path": "/api/admin/market/refunds/{refund_id}/decide",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7717,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_admin_set_status",
+      "path": "/api/admin/market/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3585,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_admin_approve_tutor",
+      "path": "/api/admin/marketplace/tutors/{tutor_user_id}/approve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3600,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_admin_set_tutor_status",
+      "path": "/api/admin/marketplace/tutors/{tutor_user_id}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2365,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_set_mentor_status",
+      "path": "/api/admin/mentors/{uid}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8224,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_admin_bounce",
+      "path": "/api/admin/messaging/bounce",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8210,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_admin_send_due",
+      "path": "/api/admin/messaging/send-due",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8066,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_admin_create_template",
+      "path": "/api/admin/messaging/templates",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8094,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_admin_approve_template",
+      "path": "/api/admin/messaging/templates/{code}/approve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 921,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metric_dau",
+      "path": "/api/admin/metrics/dau",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 933,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metric_events_by_kind",
+      "path": "/api/admin/metrics/events-by-kind",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 941,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "metric_funnel",
+      "path": "/api/admin/metrics/funnel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 927,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metric_mau",
+      "path": "/api/admin/metrics/mau",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 953,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metric_retention",
+      "path": "/api/admin/metrics/retention",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 975,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "metric_rollup",
+      "path": "/api/admin/metrics/rollup",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 964,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metric_series",
+      "path": "/api/admin/metrics/series",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5481,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_admin_create_paper",
+      "path": "/api/admin/mock/papers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5541,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_admin_publish",
+      "path": "/api/admin/mock/papers/{paper_id}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5516,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_admin_add_question",
+      "path": "/api/admin/mock/papers/{paper_id}/questions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6084,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mod_list_queue",
+      "path": "/api/admin/moderation/queue",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6110,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mod_get_item",
+      "path": "/api/admin/moderation/queue/{item_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6125,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mod_decide",
+      "path": "/api/admin/moderation/queue/{item_id}/decide",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6159,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mod_admin_scan",
+      "path": "/api/admin/moderation/scan",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6150,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mod_stats",
+      "path": "/api/admin/moderation/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1933,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_approve_creator",
+      "path": "/api/admin/publishing/creators/{cid}/approve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3853,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_admin_list_setters",
+      "path": "/api/admin/qb-market/setters",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3839,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_admin_verify_setter",
+      "path": "/api/admin/qb-market/setters/{setter_user_id}/verify",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3490,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_set_crm_external_id",
+      "path": "/api/admin/sales/crm/{lead_id}/external-id",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3349,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_list_leads",
+      "path": "/api/admin/sales/leads",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3382,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_get_lead",
+      "path": "/api/admin/sales/leads/{lead_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3462,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_list_activities",
+      "path": "/api/admin/sales/leads/{lead_id}/activities",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3439,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_log_activity",
+      "path": "/api/admin/sales/leads/{lead_id}/activities",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3426,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_assign_lead",
+      "path": "/api/admin/sales/leads/{lead_id}/assign",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3482,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_recompute_lead_score",
+      "path": "/api/admin/sales/leads/{lead_id}/recompute-score",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3405,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_update_lead_stage",
+      "path": "/api/admin/sales/leads/{lead_id}/stage",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3476,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_sales_pipeline",
+      "path": "/api/admin/sales/pipeline",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 145,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "soc2_dashboard",
+      "path": "/api/admin/soc2/dashboard",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3067,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "admin_state_pipeline",
+      "path": "/api/admin/states/pipeline",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3020,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_upsert_state",
+      "path": "/api/admin/states/upsert",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3051,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "admin_set_state_status",
+      "path": "/api/admin/states/{state_code}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8793,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sm_admin_high_flagged",
+      "path": "/api/admin/step-math/high-flagged",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4328,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "univ_list",
+      "path": "/api/admin/university/partners",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4299,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_register",
+      "path": "/api/admin/university/partners",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4366,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_set_lti",
+      "path": "/api/admin/university/partners/{partner_id}/lti",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4488,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "univ_stats",
+      "path": "/api/admin/university/partners/{partner_id}/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4345,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_set_status",
+      "path": "/api/admin/university/partners/{partner_id}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4096,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "vch_admin_list",
+      "path": "/api/admin/vouchers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4059,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "vch_admin_create",
+      "path": "/api/admin/vouchers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4112,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "vch_admin_set_status",
+      "path": "/api/admin/vouchers/{code}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4578,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "aff_attribute",
+      "path": "/api/affiliates/attribute",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4532,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "aff_me",
+      "path": "/api/affiliates/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4542,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "aff_me_earnings",
+      "path": "/api/affiliates/me/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4512,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "aff_register",
+      "path": "/api/affiliates/register",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4552,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "aff_track_visit",
+      "path": "/api/affiliates/track-visit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9910,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ai_status",
+      "path": "/api/ai-status",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8270,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "ar_create",
+      "path": "/api/audio-recaps",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8369,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ar_my_recaps",
+      "path": "/api/audio-recaps/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8406,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ar_my_stats",
+      "path": "/api/audio-recaps/me/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8397,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "ar_delete",
+      "path": "/api/audio-recaps/{rid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8357,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ar_get",
+      "path": "/api/audio-recaps/{rid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8386,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "ar_cancel",
+      "path": "/api/audio-recaps/{rid}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8334,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "ar_generate_script",
+      "path": "/api/audio-recaps/{rid}/generate-script",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8296,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "ar_set_segments",
+      "path": "/api/audio-recaps/{rid}/segments",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 31,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_avatar_providers_route",
+      "path": "/api/avatar-providers",
+      "source_file": "padhai/routers/avatar_admin.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 45,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_avatar_stats_route",
+      "path": "/api/avatar-stats",
+      "source_file": "padhai/routers/avatar_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 59,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "reset_avatar_stats_route",
+      "path": "/api/avatar-stats/reset",
+      "source_file": "padhai/routers/avatar_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 58,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "resolve_branding_route",
+      "path": "/api/branding/resolve",
+      "source_file": "padhai/routers/branding.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1751,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "find_buddy_matches",
+      "path": "/api/buddies/matches",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1692,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_buddy_profile",
+      "path": "/api/buddies/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1711,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upsert_my_buddy_profile",
+      "path": "/api/buddies/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1743,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "opt_out_buddy",
+      "path": "/api/buddies/me/opt-out",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1817,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_buddy_pairs",
+      "path": "/api/buddies/pairs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1765,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "propose_buddy_pair",
+      "path": "/api/buddies/pairs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1784,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "accept_buddy_pair",
+      "path": "/api/buddies/pairs/{pid}/accept",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1799,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "decline_buddy_pair",
+      "path": "/api/buddies/pairs/{pid}/decline",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1808,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dissolve_buddy_pair",
+      "path": "/api/buddies/pairs/{pid}/dissolve",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1867,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_buddy_messages",
+      "path": "/api/buddies/pairs/{pid}/messages",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1846,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "send_buddy_message",
+      "path": "/api/buddies/pairs/{pid}/messages",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4217,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "bun_list",
+      "path": "/api/bundles",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4229,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "bun_match",
+      "path": "/api/bundles/match",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4925,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cit_my_answers",
+      "path": "/api/citations/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4946,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cit_get",
+      "path": "/api/citations/{provenance_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 28,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "coaching_daily_digest",
+      "path": "/api/coaching/digest",
+      "source_file": "padhai/routers/coaching.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 203,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "record_practice_attempt",
+      "path": "/api/coaching/practice/attempts",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 227,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_practice_stats",
+      "path": "/api/coaching/practice/stats",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 14,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_coaching_tracks",
+      "path": "/api/coaching/tracks",
+      "source_file": "padhai/routers/coaching.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11405,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_coaching_track",
+      "path": "/api/coaching/tracks",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2273,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_content_subscriptions",
+      "path": "/api/content/orgs/{org_id}/subscriptions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2199,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_content_packs",
+      "path": "/api/content/packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2154,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_content_pack",
+      "path": "/api/content/packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2229,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_content_pack",
+      "path": "/api/content/packs/{pid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2181,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "publish_content_pack",
+      "path": "/api/content/packs/{pid}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2247,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "subscribe_to_content_pack",
+      "path": "/api/content/packs/{pid}/subscribe",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2141,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_content_publishers",
+      "path": "/api/content/publishers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2291,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "content_publisher_earnings",
+      "path": "/api/content/publishers/{pid}/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3226,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_enrollment_endpoint",
+      "path": "/api/corporate/enrollments/{enrollment_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3243,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "update_enrollment_progress",
+      "path": "/api/corporate/enrollments/{enrollment_id}/progress",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3294,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_xapi_statements",
+      "path": "/api/corporate/enrollments/{enrollment_id}/xapi",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3264,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "emit_xapi_statement",
+      "path": "/api/corporate/enrollments/{enrollment_id}/xapi",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3171,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_training_paths",
+      "path": "/api/corporate/paths",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3120,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_training_path",
+      "path": "/api/corporate/paths",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3156,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_training_path",
+      "path": "/api/corporate/paths/{path_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3207,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "enroll_in_path",
+      "path": "/api/corporate/paths/{path_id}/enroll",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3195,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "publish_training_path",
+      "path": "/api/corporate/paths/{path_id}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 162,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_countries",
+      "path": "/api/countries",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 180,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_curriculum_objectives",
+      "path": "/api/curriculum/objectives",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 71,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "score_lesson_alignment",
+      "path": "/api/curriculum/score",
+      "source_file": "padhai/routers/public_preview.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 46,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cwv_sample",
+      "path": "/api/cwv/sample",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 116,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cwv_stats",
+      "path": "/api/cwv/stats",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 128,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cwv_stats_by_path",
+      "path": "/api/cwv/stats/by-path",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 139,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "cwv_stats_one_path",
+      "path": "/api/cwv/stats/path",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6015,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "plan_block_done",
+      "path": "/api/daily-plan/blocks/{block_id}/done",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6038,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "plan_recent",
+      "path": "/api/daily-plan/me/recent",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5953,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "plan_get_today",
+      "path": "/api/daily-plan/me/{pack_code}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5974,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "plan_regenerate",
+      "path": "/api/daily-plan/me/{pack_code}/regenerate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5997,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "plan_should_regen",
+      "path": "/api/daily-plan/me/{pack_code}/should-regenerate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6054,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "plan_stats",
+      "path": "/api/daily-plan/me/{pack_code}/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6027,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "plan_skip",
+      "path": "/api/daily-plan/{plan_id}/skip",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 113,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "revoke_consent",
+      "path": "/api/digilocker/consent",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 65,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_consent",
+      "path": "/api/digilocker/consent",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4703,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_consent",
+      "path": "/api/digilocker/consent",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 81,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "grant_consent",
+      "path": "/api/digilocker/consent",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4732,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dl_consent_me",
+      "path": "/api/digilocker/consent/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4747,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "dl_consent_revoke",
+      "path": "/api/digilocker/consent/me/revoke",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4690,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dl_doc_types",
+      "path": "/api/digilocker/doc-types",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 40,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "doc_types",
+      "path": "/api/digilocker/doc-types",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 172,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_issuances",
+      "path": "/api/digilocker/issuances",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4758,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dl_my_issuances",
+      "path": "/api/digilocker/issuances/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 183,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "issuance_status",
+      "path": "/api/digilocker/issuances/{iid}",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 128,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "issue_credential",
+      "path": "/api/digilocker/issue",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 241,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "activate_org_issuer",
+      "path": "/api/digilocker/orgs/{org_id}/activate",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 213,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "register_org_issuer",
+      "path": "/api/digilocker/orgs/{org_id}/issuer",
+      "source_file": "padhai/routers/digilocker.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 87,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "diksha_export",
+      "path": "/api/diksha/export",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2709,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "export_lesson_ndear",
+      "path": "/api/diksha/export-ndear",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 151,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_exports",
+      "path": "/api/diksha/exports/{lesson_id}",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2626,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "diksha_import",
+      "path": "/api/diksha/import",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2750,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "latest_ndear_export",
+      "path": "/api/diksha/lessons/{lesson_id}/latest-export",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2671,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_diksha_refs",
+      "path": "/api/diksha/refs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2694,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_diksha_ref",
+      "path": "/api/diksha/refs/{ref_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2617,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "diksha_status",
+      "path": "/api/diksha/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 780,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_doubts",
+      "path": "/api/doubts",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 731,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_doubt",
+      "path": "/api/doubts",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 13025,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_doubt_queue",
+      "path": "/api/doubts/queue",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 798,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "doubt_queue",
+      "path": "/api/doubts/queue/pending",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 66,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "doubt_submit_instant",
+      "path": "/api/doubts/submit-instant",
+      "source_file": "padhai/routers/doubt_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 755,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_doubt",
+      "path": "/api/doubts/{did}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 23,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "doubt_ai_answer",
+      "path": "/api/doubts/{did}/ai-answer",
+      "source_file": "padhai/routers/doubt_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 832,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "answer_doubt",
+      "path": "/api/doubts/{did}/answer",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 861,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cancel_doubt",
+      "path": "/api/doubts/{did}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 823,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "claim_doubt",
+      "path": "/api/doubts/{did}/claim",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 298,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_essay_rubrics",
+      "path": "/api/essay/rubrics",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 36,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "essay_rubrics",
+      "path": "/api/essay/rubrics",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 316,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upsert_essay_rubric",
+      "path": "/api/essay/rubrics",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 58,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "essay_rubric_detail",
+      "path": "/api/essay/rubrics/{rubric_id}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 405,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_essays",
+      "path": "/api/essay/submissions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 137,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "essay_my_submissions",
+      "path": "/api/essay/submissions",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 350,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_essay",
+      "path": "/api/essay/submissions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 386,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_essay_submission",
+      "path": "/api/essay/submissions/{sid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 116,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "essay_get_submission",
+      "path": "/api/essay/submissions/{sid}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 98,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "essay_regrade",
+      "path": "/api/essay/submissions/{sid}/grade",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 423,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "human_review_essay",
+      "path": "/api/essay/submissions/{sid}/human-review",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 72,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "essay_submit",
+      "path": "/api/essay/submit",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 880,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "log_events_endpoint",
+      "path": "/api/events",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 29,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_active_exam_mode_route",
+      "path": "/api/exam-mode/active",
+      "source_file": "padhai/routers/misc_status.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5137,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "packs_list",
+      "path": "/api/exam-packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5222,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "packs_my_enrollments",
+      "path": "/api/exam-packs/me/enrollments",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5240,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "packs_set_enrollment_status",
+      "path": "/api/exam-packs/me/enrollments/{eid}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5155,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "packs_get",
+      "path": "/api/exam-packs/{code}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5195,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "packs_enroll",
+      "path": "/api/exam-packs/{code}/enroll",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5746,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "readiness_pack_leaderboard",
+      "path": "/api/exam-packs/{code}/leaderboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5051,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tax_bodies",
+      "path": "/api/exam-taxonomy/bodies",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5065,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tax_exams",
+      "path": "/api/exam-taxonomy/exams",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5082,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tax_exam_detail",
+      "path": "/api/exam-taxonomy/exams/{exam_code}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5091,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tax_exam_topics",
+      "path": "/api/exam-taxonomy/exams/{exam_code}/topics",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5037,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tax_segments",
+      "path": "/api/exam-taxonomy/segments",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 247,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "experiments_for_me",
+      "path": "/api/experiments/me",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6521,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_queue",
+      "path": "/api/expert-reviews/queue",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6497,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_request",
+      "path": "/api/expert-reviews/request",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6590,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_get",
+      "path": "/api/expert-reviews/{review_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6548,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_claim",
+      "path": "/api/expert-reviews/{review_id}/claim",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6564,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_decide",
+      "path": "/api/expert-reviews/{review_id}/decide",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6435,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_list_public",
+      "path": "/api/experts",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 6381,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_apply",
+      "path": "/api/experts/apply",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6415,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_me",
+      "path": "/api/experts/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6425,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_me_earnings",
+      "path": "/api/experts/me/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6616,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "er_rate",
+      "path": "/api/experts/{expert_user_id}/rate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1510,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_family",
+      "path": "/api/families",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1527,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_families",
+      "path": "/api/families/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1610,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "family_quote",
+      "path": "/api/families/quote",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1591,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_family_members",
+      "path": "/api/families/{fid}/members",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1543,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "add_family_member",
+      "path": "/api/families/{fid}/members",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1571,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "remove_family_member",
+      "path": "/api/families/{fid}/members/{uid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1635,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "subscribe_family",
+      "path": "/api/families/{fid}/subscribe",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1666,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_family_subscription",
+      "path": "/api/families/{fid}/subscription",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 42,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_fees_config_route",
+      "path": "/api/fees/config",
+      "source_file": "padhai/routers/misc_status.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 235,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "festivals_next",
+      "path": "/api/festivals/next",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 205,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "festivals_upcoming",
+      "path": "/api/festivals/upcoming",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12809,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_flashcard_decks",
+      "path": "/api/flashcards/decks",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 12746,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "flashcards_due_queue",
+      "path": "/api/flashcards/due",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 12778,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "review_flashcard",
+      "path": "/api/flashcards/{card_id}/review",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 1483,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "delete_forum_post",
+      "path": "/api/forums/posts/{pid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1466,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "flag_forum_post",
+      "path": "/api/forums/posts/{pid}/flag",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1365,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_forum_threads",
+      "path": "/api/forums/threads",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1395,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_forum_thread",
+      "path": "/api/forums/threads",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1418,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_forum_thread",
+      "path": "/api/forums/threads/{tid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1445,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "reply_to_thread",
+      "path": "/api/forums/threads/{tid}/reply",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2601,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "framework_coverage_summary",
+      "path": "/api/frameworks/coverage",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2589,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_lesson_framework_alignment",
+      "path": "/api/frameworks/lessons/{lesson_id}/alignment",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2534,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_ncf_competencies",
+      "path": "/api/frameworks/ncf",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2520,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_nep_competencies",
+      "path": "/api/frameworks/nep",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2554,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "score_text_against_framework",
+      "path": "/api/frameworks/score",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8850,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "home_my_dashboard",
+      "path": "/api/home/me/dashboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 168,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "i18n_coverage",
+      "path": "/api/i18n/coverage",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 176,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "i18n_supported",
+      "path": "/api/i18n/locales",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 154,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "i18n_locale",
+      "path": "/api/i18n/{lang}.json",
+      "source_file": "padhai/routers/ux_signals.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 104,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "indic_normalize",
+      "path": "/api/indic/normalize",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 89,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "indic_profile",
+      "path": "/api/indic/profile",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 578,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "schedule_live_class",
+      "path": "/api/live-classes",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 611,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "upcoming_live_classes",
+      "path": "/api/live-classes/upcoming",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 635,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_live_class",
+      "path": "/api/live-classes/{lc_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 709,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_live_class_attendees",
+      "path": "/api/live-classes/{lc_id}/attendees",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 655,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "join_live_class",
+      "path": "/api/live-classes/{lc_id}/join",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 679,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "leave_live_class",
+      "path": "/api/live-classes/{lc_id}/leave",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 687,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "set_live_class_status",
+      "path": "/api/live-classes/{lc_id}/status",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 674,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "live_provider_info",
+      "path": "/api/live/provider",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 681,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "live_schedule",
+      "path": "/api/live/schedule",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 658,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "live_upcoming",
+      "path": "/api/live/upcoming",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 717,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "live_get",
+      "path": "/api/live/{lc_id}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 727,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "live_join",
+      "path": "/api/live/{lc_id}/join",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 753,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "live_leave",
+      "path": "/api/live/{lc_id}/leave",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 764,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "live_set_status",
+      "path": "/api/live/{lc_id}/status",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 183,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "llm_flag_call",
+      "path": "/api/llm/calls/{call_id}/flag",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7647,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_file_claim",
+      "path": "/api/market/copyright-claims",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7543,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_top_quality",
+      "path": "/api/market/quality/top",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 7529,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_get_quality",
+      "path": "/api/market/quality/{item_kind}/{item_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 7480,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_rate",
+      "path": "/api/market/ratings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7503,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_list_ratings",
+      "path": "/api/market/ratings/{item_kind}/{item_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 7520,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_mark_helpful",
+      "path": "/api/market/ratings/{rating_id}/helpful",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7573,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mq_refund",
+      "path": "/api/market/refunds",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7561,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mq_get_item_status",
+      "path": "/api/market/status/{item_kind}/{item_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3658,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mkt_list_bookings",
+      "path": "/api/marketplace/bookings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3636,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_book",
+      "path": "/api/marketplace/bookings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3719,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_cancel",
+      "path": "/api/marketplace/bookings/{booking_id}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3704,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_complete",
+      "path": "/api/marketplace/bookings/{booking_id}/complete",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3676,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_confirm",
+      "path": "/api/marketplace/bookings/{booking_id}/confirm",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3740,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_review",
+      "path": "/api/marketplace/bookings/{booking_id}/review",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3691,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_start",
+      "path": "/api/marketplace/bookings/{booking_id}/start",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3619,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mkt_search_tutors",
+      "path": "/api/marketplace/tutors",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3542,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mkt_tutor_apply",
+      "path": "/api/marketplace/tutors/apply",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3575,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mkt_tutor_me",
+      "path": "/api/marketplace/tutors/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3771,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mkt_tutor_earnings",
+      "path": "/api/marketplace/tutors/me/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3761,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mkt_list_reviews",
+      "path": "/api/marketplace/tutors/{tutor_user_id}/reviews",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1068,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_math_submissions",
+      "path": "/api/math-vision",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 990,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_math_image",
+      "path": "/api/math-vision/submit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1047,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_math_submission",
+      "path": "/api/math-vision/{sid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1023,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "validate_math_submission",
+      "path": "/api/math-vision/{sid}/validate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 271,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "math_my_submissions",
+      "path": "/api/math/submissions",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 176,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "math_submit",
+      "path": "/api/math/submit",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 248,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "math_get",
+      "path": "/api/math/{sid}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 215,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "math_extract_only",
+      "path": "/api/math/{sid}/extract",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 235,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "math_validate",
+      "path": "/api/math/{sid}/validate",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 169,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "delete_my_account_route",
+      "path": "/api/me/account",
+      "source_file": "padhai/routers/dpdp_rights.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 41,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_dashboard",
+      "path": "/api/me/dashboard",
+      "source_file": "padhai/routers/dashboard.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 64,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_weak_topics",
+      "path": "/api/me/dashboard/weak-topics",
+      "source_file": "padhai/routers/dashboard.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 50,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "export_my_data_route",
+      "path": "/api/me/data/export",
+      "source_file": "padhai/routers/dpdp_rights.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 216,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_flags",
+      "path": "/api/me/flags",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 133,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_mastery",
+      "path": "/api/me/mastery",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 172,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "recommend_difficulty",
+      "path": "/api/me/mastery/recommend",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 151,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "record_mastery_signal",
+      "path": "/api/me/mastery/signal",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 187,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_weak_topics",
+      "path": "/api/me/mastery/weak",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 12631,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_profile",
+      "path": "/api/me/profile",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 12665,
+      "methods": [
+        "PUT"
+      ],
+      "min_tier": null,
+      "name": "update_my_profile",
+      "path": "/api/me/profile",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 87,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_streak",
+      "path": "/api/me/streak",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 118,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_streak_calendar",
+      "path": "/api/me/streak/calendar",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 107,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "opt_into_streaks",
+      "path": "/api/me/streak/opt",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2466,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_mentor_sessions",
+      "path": "/api/mentor-sessions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2455,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cancel_mentor_session",
+      "path": "/api/mentor-sessions/{sid}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2431,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "complete_mentor_session",
+      "path": "/api/mentor-sessions/{sid}/complete",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2489,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "review_mentor_session",
+      "path": "/api/mentor-sessions/{sid}/review",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2379,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_mentors_endpoint",
+      "path": "/api/mentors",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2299,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "apply_as_mentor",
+      "path": "/api/mentors/apply",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2341,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_mentor_profile",
+      "path": "/api/mentors/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2510,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_mentor_reviews",
+      "path": "/api/mentors/{mentor_user_id}/reviews",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2406,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "request_mentor_session",
+      "path": "/api/mentors/{mentor_user_id}/sessions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8046,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "msg_my_channels",
+      "path": "/api/messaging/channels/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8203,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "msg_my_stats",
+      "path": "/api/messaging/me/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8186,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "msg_my_messages",
+      "path": "/api/messaging/messages/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8173,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_cancel",
+      "path": "/api/messaging/messages/{message_id}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8005,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_opt_in",
+      "path": "/api/messaging/opt-in",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8026,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_opt_out",
+      "path": "/api/messaging/opt-out",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8137,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "msg_schedule",
+      "path": "/api/messaging/schedule",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8116,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "msg_list_templates",
+      "path": "/api/messaging/templates",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1214,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "schedule_mock_event",
+      "path": "/api/mock-events",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1254,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "upcoming_mock_events",
+      "path": "/api/mock-events/upcoming",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1331,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_event_leaderboard",
+      "path": "/api/mock-events/{eid}/leaderboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1348,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_mock_event_attempt",
+      "path": "/api/mock-events/{eid}/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1275,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "register_for_mock_event",
+      "path": "/api/mock-events/{eid}/register",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1285,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "start_mock_event_attempt",
+      "path": "/api/mock-events/{eid}/start",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1339,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_event_stats",
+      "path": "/api/mock-events/{eid}/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1302,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_mock_event_attempt",
+      "path": "/api/mock-events/{eid}/submit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1194,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_mock_interviews",
+      "path": "/api/mock-interviews",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1088,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "start_mock_interview",
+      "path": "/api/mock-interviews",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1166,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_mock_interview",
+      "path": "/api/mock-interviews/{iid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1111,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_mock_interview_answer",
+      "path": "/api/mock-interviews/{iid}/answer",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1145,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "end_mock_interview",
+      "path": "/api/mock-interviews/{iid}/end",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5644,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_get_attempt",
+      "path": "/api/mock/attempts/{attempt_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5656,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_attempt_analysis",
+      "path": "/api/mock/attempts/{attempt_id}/analysis",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5600,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_respond",
+      "path": "/api/mock/attempts/{attempt_id}/respond",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5628,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_submit",
+      "path": "/api/mock/attempts/{attempt_id}/submit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5673,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_my_attempts",
+      "path": "/api/mock/me/attempts",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5554,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_list_papers",
+      "path": "/api/mock/papers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5573,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_get_paper",
+      "path": "/api/mock/papers/{paper_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5582,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_cohort_stats",
+      "path": "/api/mock/papers/{paper_id}/cohort-stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5589,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_start",
+      "path": "/api/mock/papers/{paper_id}/start",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 385,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_my_sessions",
+      "path": "/api/mock/sessions",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 307,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_start",
+      "path": "/api/mock/start",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 399,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_tracks",
+      "path": "/api/mock/tracks",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 369,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "mock_get",
+      "path": "/api/mock/{iid}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 356,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_end",
+      "path": "/api/mock/{iid}/end",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 326,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mock_submit_turn",
+      "path": "/api/mock/{iid}/turn",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8824,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "nav_manifest",
+      "path": "/api/navigation/manifest",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8843,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "nav_list_sections",
+      "path": "/api/navigation/sections",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8833,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "nav_section",
+      "path": "/api/navigation/sections/{slug}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 70,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_notifications_route",
+      "path": "/api/notifications/me",
+      "source_file": "padhai/routers/notifications.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 104,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mark_all_read_route",
+      "path": "/api/notifications/read-all",
+      "source_file": "padhai/routers/notifications.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 92,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mark_notification_read_route",
+      "path": "/api/notifications/{nid}/read",
+      "source_file": "padhai/routers/notifications.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 213,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_downloads",
+      "path": "/api/offline/downloads",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 160,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "start_download",
+      "path": "/api/offline/downloads",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7940,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "off_my_downloads",
+      "path": "/api/offline/downloads/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7927,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "off_cancel_download",
+      "path": "/api/offline/downloads/{did}/cancel",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 203,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "cancel_download",
+      "path": "/api/offline/downloads/{did}/cancel",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7905,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "off_update_progress",
+      "path": "/api/offline/downloads/{did}/progress",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 182,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "push_progress",
+      "path": "/api/offline/downloads/{did}/progress",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 120,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_manifests",
+      "path": "/api/offline/manifests",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7810,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "off_generate_manifest",
+      "path": "/api/offline/manifests",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 75,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_manifest",
+      "path": "/api/offline/manifests",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7845,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "off_list_manifests",
+      "path": "/api/offline/manifests/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7872,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "off_delete_manifest",
+      "path": "/api/offline/manifests/{mid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 146,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "delete_manifest",
+      "path": "/api/offline/manifests/{mid}",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7860,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "off_get_manifest",
+      "path": "/api/offline/manifests/{mid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 134,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_manifest",
+      "path": "/api/offline/manifests/{mid}",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7883,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "off_start_download",
+      "path": "/api/offline/manifests/{mid}/download",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7770,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "off_get_prefs",
+      "path": "/api/offline/prefs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 36,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_prefs",
+      "path": "/api/offline/prefs",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7783,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "off_set_prefs",
+      "path": "/api/offline/prefs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 50,
+      "methods": [
+        "PUT"
+      ],
+      "min_tier": null,
+      "name": "set_prefs",
+      "path": "/api/offline/prefs",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7959,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "off_usage_today",
+      "path": "/api/offline/usage/today",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 227,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "usage_today",
+      "path": "/api/offline/usage/today",
+      "source_file": "padhai/routers/offline.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 239,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "onboarding_complete",
+      "path": "/api/onboarding/complete",
+      "source_file": "padhai/routers/onboarding.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 173,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "onboarding_options",
+      "path": "/api/onboarding/options",
+      "source_file": "padhai/routers/onboarding.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 189,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "onboarding_status",
+      "path": "/api/onboarding/status",
+      "source_file": "padhai/routers/onboarding.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 202,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "onboarding_step",
+      "path": "/api/onboarding/step",
+      "source_file": "padhai/routers/onboarding.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 47,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_my_org",
+      "path": "/api/orgs",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 35,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_orgs",
+      "path": "/api/orgs/me",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 70,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_org_detail",
+      "path": "/api/orgs/{org_id}",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 29,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_assignments_route",
+      "path": "/api/orgs/{org_id}/assignments",
+      "source_file": "padhai/routers/orgs_assignments.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 56,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_org_assignment_route",
+      "path": "/api/orgs/{org_id}/assignments",
+      "source_file": "padhai/routers/orgs_assignments.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 85,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "post_completion_route",
+      "path": "/api/orgs/{org_id}/assignments/{aid}/completion",
+      "source_file": "padhai/routers/orgs_assignments.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 114,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_assignment_stats_route",
+      "path": "/api/orgs/{org_id}/assignments/{aid}/stats",
+      "source_file": "padhai/routers/orgs_assignments.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 104,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_audit",
+      "path": "/api/orgs/{org_id}/audit",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 130,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "export_org_audit_csv",
+      "path": "/api/orgs/{org_id}/audit/export.csv",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 36,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_org_branding",
+      "path": "/api/orgs/{org_id}/branding",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 51,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "update_org_branding",
+      "path": "/api/orgs/{org_id}/branding",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 74,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upload_org_logo_route",
+      "path": "/api/orgs/{org_id}/branding/logo",
+      "source_file": "padhai/routers/branding.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 31,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_classes_route",
+      "path": "/api/orgs/{org_id}/classes",
+      "source_file": "padhai/routers/orgs_classes.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 56,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_org_class_route",
+      "path": "/api/orgs/{org_id}/classes",
+      "source_file": "padhai/routers/orgs_classes.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 33,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_class_attendance_route",
+      "path": "/api/orgs/{org_id}/classes/{cid}/attendance",
+      "source_file": "padhai/routers/orgs_attendance.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 58,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "post_class_attendance_route",
+      "path": "/api/orgs/{org_id}/classes/{cid}/attendance",
+      "source_file": "padhai/routers/orgs_attendance.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 110,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_class_attendance_summary_route",
+      "path": "/api/orgs/{org_id}/classes/{cid}/attendance/summary",
+      "source_file": "padhai/routers/orgs_attendance.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 63,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_class_timetable_route",
+      "path": "/api/orgs/{org_id}/classes/{cid}/timetable",
+      "source_file": "padhai/routers/orgs_schedule.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 78,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "replace_class_timetable_route",
+      "path": "/api/orgs/{org_id}/classes/{cid}/timetable",
+      "source_file": "padhai/routers/orgs_schedule.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 32,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "class_leaderboard_route",
+      "path": "/api/orgs/{org_id}/classes/{class_id}/leaderboard",
+      "source_file": "padhai/routers/orgs_leaderboard.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 399,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_org_country",
+      "path": "/api/orgs/{org_id}/country",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 416,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "set_org_country",
+      "path": "/api/orgs/{org_id}/country",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 377,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "remove_custom_domain",
+      "path": "/api/orgs/{org_id}/custom-domain",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 330,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_custom_domain",
+      "path": "/api/orgs/{org_id}/custom-domain",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 348,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "set_custom_domain",
+      "path": "/api/orgs/{org_id}/custom-domain",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 281,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_org_residency",
+      "path": "/api/orgs/{org_id}/data-residency",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 301,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "set_org_residency",
+      "path": "/api/orgs/{org_id}/data-residency",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 112,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_exams_route",
+      "path": "/api/orgs/{org_id}/exams",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 71,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_org_exam_route",
+      "path": "/api/orgs/{org_id}/exams",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 197,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_exam_attempts_route",
+      "path": "/api/orgs/{org_id}/exams/{eid}/attempts",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 212,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "grade_exam_attempt_route",
+      "path": "/api/orgs/{org_id}/exams/{eid}/attempts/{aid}/grade",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 136,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "begin_exam_route",
+      "path": "/api/orgs/{org_id}/exams/{eid}/begin",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 159,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_exam_route",
+      "path": "/api/orgs/{org_id}/exams/{eid}/submit",
+      "source_file": "padhai/routers/orgs_exams.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 138,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_fee_invoices_route",
+      "path": "/api/orgs/{org_id}/fees/invoices",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 217,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "confirm_invoice_payment_route",
+      "path": "/api/orgs/{org_id}/fees/invoices/{iid}/confirm",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 174,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "init_invoice_payment_route",
+      "path": "/api/orgs/{org_id}/fees/invoices/{iid}/pay",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 98,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_fee_structures_route",
+      "path": "/api/orgs/{org_id}/fees/structures",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 67,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_org_fee_structure_route",
+      "path": "/api/orgs/{org_id}/fees/structures",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 117,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "generate_fee_invoices_route",
+      "path": "/api/orgs/{org_id}/fees/structures/{sid}/generate",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 161,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_fee_summary_route",
+      "path": "/api/orgs/{org_id}/fees/summary",
+      "source_file": "padhai/routers/orgs_fees.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 86,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_members",
+      "path": "/api/orgs/{org_id}/members",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 111,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "add_org_member",
+      "path": "/api/orgs/{org_id}/members",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 180,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_org_notifications_route",
+      "path": "/api/orgs/{org_id}/notifications",
+      "source_file": "padhai/routers/notifications.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 114,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_org_notification_route",
+      "path": "/api/orgs/{org_id}/notifications",
+      "source_file": "padhai/routers/notifications.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 146,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upload_org_roster",
+      "path": "/api/orgs/{org_id}/roster",
+      "source_file": "padhai/routers/orgs_api.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 156,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_org_saml",
+      "path": "/api/orgs/{org_id}/saml",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 177,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "upsert_org_saml",
+      "path": "/api/orgs/{org_id}/saml",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 239,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_scim_tokens",
+      "path": "/api/orgs/{org_id}/scim/tokens",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 212,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_scim_token",
+      "path": "/api/orgs/{org_id}/scim/tokens",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 258,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "revoke_scim_token",
+      "path": "/api/orgs/{org_id}/scim/tokens/{token_id}",
+      "source_file": "padhai/routers/orgs_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 85,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_student_attendance_route",
+      "path": "/api/orgs/{org_id}/students/{uid}/attendance",
+      "source_file": "padhai/routers/orgs_attendance.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 35,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_student_history_route",
+      "path": "/api/orgs/{org_id}/students/{uid}/history",
+      "source_file": "padhai/routers/orgs_schedule.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 114,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_today_for_user_route",
+      "path": "/api/orgs/{org_id}/today",
+      "source_file": "padhai/routers/orgs_schedule.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6271,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dash_parent_child_detail",
+      "path": "/api/parent/me/children/{child_user_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6261,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dash_parent_me",
+      "path": "/api/parent/me/dashboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 116,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_children",
+      "path": "/api/parents/children",
+      "source_file": "padhai/routers/parents.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 150,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_child_stats",
+      "path": "/api/parents/children/{child_user_id}/stats",
+      "source_file": "padhai/routers/parents.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 332,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "parent_dashboard",
+      "path": "/api/parents/dashboard",
+      "source_file": "padhai/routers/dashboard.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 33,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_parent_link",
+      "path": "/api/parents/link",
+      "source_file": "padhai/routers/parents.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 100,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "revoke_parent_link",
+      "path": "/api/parents/link/{link_id}/revoke",
+      "source_file": "padhai/routers/parents.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 133,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_parents",
+      "path": "/api/parents/me/parents",
+      "source_file": "padhai/routers/parents.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 102,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "notify_parent",
+      "path": "/api/parents/{child_id}/notify",
+      "source_file": "padhai/routers/messaging.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 500,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_my_practice_tests",
+      "path": "/api/practice-tests",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 445,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_practice_test",
+      "path": "/api/practice-tests",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 473,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_practice_test",
+      "path": "/api/practice-tests/{tid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 522,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "start_practice_test",
+      "path": "/api/practice-tests/{tid}/start",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 536,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "submit_practice_test",
+      "path": "/api/practice-tests/{tid}/submit",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 541,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "practice_generate",
+      "path": "/api/practice/generate",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 614,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "practice_my_tests",
+      "path": "/api/practice/tests",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 595,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "practice_get",
+      "path": "/api/practice/{tid}",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 562,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "practice_start",
+      "path": "/api/practice/{tid}/start",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 575,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "practice_submit",
+      "path": "/api/practice/{tid}/submit",
+      "source_file": "padhai/routers/learning.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 23,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_preschool_activities",
+      "path": "/api/preschool/activities",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 48,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "preschool_categories",
+      "path": "/api/preschool/categories",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 121,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "pricing_checkout",
+      "path": "/api/pricing/checkout",
+      "source_file": "padhai/routers/pricing.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 110,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "pricing_plans",
+      "path": "/api/pricing/plans",
+      "source_file": "padhai/routers/pricing.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 168,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "pricing_verify",
+      "path": "/api/pricing/verify",
+      "source_file": "padhai/routers/pricing.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 56,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "procurement_skus",
+      "path": "/api/procurement/skus",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 66,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "procurement_sku",
+      "path": "/api/procurement/skus/{code}",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 1892,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "apply_as_creator",
+      "path": "/api/publishing/creators",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1915,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_my_creator_profile",
+      "path": "/api/publishing/creators/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2107,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_publishing_earnings",
+      "path": "/api/publishing/me/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2092,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_publishing_purchases",
+      "path": "/api/publishing/me/purchases",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1945,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_publishing_series",
+      "path": "/api/publishing/series",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2046,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_publishing_series",
+      "path": "/api/publishing/series/{sid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1973,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "add_publishing_lesson",
+      "path": "/api/publishing/series/{sid}/lessons",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2000,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "publish_publishing_series",
+      "path": "/api/publishing/series/{sid}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2078,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "purchase_publishing_series",
+      "path": "/api/publishing/series/{sid}/purchase",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2017,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "publishing_storefront",
+      "path": "/api/publishing/storefront",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 42,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_push_log_route",
+      "path": "/api/push/log",
+      "source_file": "padhai/routers/push_admin.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 85,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "push_stats_route",
+      "path": "/api/push/stats",
+      "source_file": "padhai/routers/push_admin.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 32,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "mark_push_opened_route",
+      "path": "/api/push/{log_id}/opened",
+      "source_file": "padhai/routers/push_admin.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4002,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_my_purchases",
+      "path": "/api/qb-market/me/purchases",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3940,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_browse_packs",
+      "path": "/api/qb-market/packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3870,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_create_pack",
+      "path": "/api/qb-market/packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3960,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_get_pack",
+      "path": "/api/qb-market/packs/{pack_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 3929,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_archive_pack",
+      "path": "/api/qb-market/packs/{pack_id}/archive",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3916,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_publish_pack",
+      "path": "/api/qb-market/packs/{pack_id}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3969,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_purchase",
+      "path": "/api/qb-market/packs/{pack_id}/purchase",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3986,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_pack_question_ids",
+      "path": "/api/qb-market/packs/{pack_id}/questions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3896,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_add_question",
+      "path": "/api/qb-market/packs/{pack_id}/questions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3810,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "qb_setter_apply",
+      "path": "/api/qb-market/setters/apply",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3829,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_setter_me",
+      "path": "/api/qb-market/setters/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4027,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_setter_earnings",
+      "path": "/api/qb-market/setters/me/earnings",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4017,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qb_my_packs",
+      "path": "/api/qb-market/setters/me/packs",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 13,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qbank_search",
+      "path": "/api/question-bank/search",
+      "source_file": "padhai/routers/question_bank.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 51,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qbank_stats",
+      "path": "/api/question-bank/stats",
+      "source_file": "padhai/routers/question_bank.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 57,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "qbank_get",
+      "path": "/api/question-bank/{qid}",
+      "source_file": "padhai/routers/question_bank.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12838,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_quiz_data",
+      "path": "/api/quiz/{lesson_id}",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6212,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "reactions_unreact",
+      "path": "/api/reactions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6190,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "reactions_react",
+      "path": "/api/reactions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6242,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "reactions_my_for_target",
+      "path": "/api/reactions/me/{target_kind}/{target_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6228,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "reactions_counts",
+      "path": "/api/reactions/{target_kind}/{target_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5737,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "readiness_me_list",
+      "path": "/api/readiness/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5703,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "readiness_me_get",
+      "path": "/api/readiness/me/{pack_code}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5721,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "readiness_me_recompute",
+      "path": "/api/readiness/me/{pack_code}/recompute",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 77,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_region",
+      "path": "/api/region",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 43,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "render_diagram",
+      "path": "/api/render/diagram",
+      "source_file": "padhai/routers/public_preview.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 24,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "render_math",
+      "path": "/api/render/math",
+      "source_file": "padhai/routers/public_preview.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 7363,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_flag_citation",
+      "path": "/api/research/citations",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7391,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_list_my_citations",
+      "path": "/api/research/citations/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7410,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "res_delete_citation",
+      "path": "/api/research/citations/{citation_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7227,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_create_collection",
+      "path": "/api/research/collections",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7244,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_my_collections",
+      "path": "/api/research/collections/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7256,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_get_collection",
+      "path": "/api/research/collections/{cid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7323,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_detect_gaps",
+      "path": "/api/research/collections/{cid}/detect-gaps",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7349,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_list_gaps",
+      "path": "/api/research/collections/{cid}/gaps",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7309,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_lit_map",
+      "path": "/api/research/collections/{cid}/map",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7271,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_add_to_collection",
+      "path": "/api/research/collections/{cid}/papers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7292,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "res_remove_from_collection",
+      "path": "/api/research/collections/{cid}/papers/{paper_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7118,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_ingest_paper",
+      "path": "/api/research/papers",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7153,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_my_papers",
+      "path": "/api/research/papers/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7163,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "res_get_paper",
+      "path": "/api/research/papers/{paper_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7186,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "res_save_summary",
+      "path": "/api/research/papers/{paper_id}/summary",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5886,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "retr_query",
+      "path": "/api/retrieval/query",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5913,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "retr_stats",
+      "path": "/api/retrieval/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5876,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "retr_delete_chunks",
+      "path": "/api/retrieval/uploads/{upload_id}/chunks",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5862,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "retr_list_chunks",
+      "path": "/api/retrieval/uploads/{upload_id}/chunks",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5849,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "retr_index_upload",
+      "path": "/api/retrieval/uploads/{upload_id}/index",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 3311,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_sales_lead",
+      "path": "/api/sales/leads",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 85,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sms_outbox",
+      "path": "/api/sms/outbox",
+      "source_file": "padhai/routers/messaging.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 23,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sms_provider",
+      "path": "/api/sms/provider",
+      "source_file": "padhai/routers/messaging.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 43,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sms_send",
+      "path": "/api/sms/send",
+      "source_file": "padhai/routers/messaging.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 30,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sms_templates",
+      "path": "/api/sms/templates",
+      "source_file": "padhai/routers/messaging.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6914,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "soc_start",
+      "path": "/api/socratic/exchanges",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7036,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "soc_get",
+      "path": "/api/socratic/exchanges/{eid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7025,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "soc_abandon",
+      "path": "/api/socratic/exchanges/{eid}/abandon",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6960,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "soc_advance",
+      "path": "/api/socratic/exchanges/{eid}/advance",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6992,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "soc_reveal",
+      "path": "/api/socratic/exchanges/{eid}/reveal",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6937,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "soc_append_tutor",
+      "path": "/api/socratic/exchanges/{eid}/tutor-turn",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7048,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "soc_my_exchanges",
+      "path": "/api/socratic/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 7067,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "soc_my_stats",
+      "path": "/api/socratic/me/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6826,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "srs_review_card",
+      "path": "/api/srs/cards/{card_id}/review",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6870,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_card_state",
+      "path": "/api/srs/cards/{card_id}/state",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6681,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "srs_create_deck",
+      "path": "/api/srs/decks",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6787,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "srs_generate_from_retrieval",
+      "path": "/api/srs/decks/from-retrieval",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6705,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_my_decks",
+      "path": "/api/srs/decks/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6715,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_public_decks",
+      "path": "/api/srs/decks/public",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 6752,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "srs_delete_deck",
+      "path": "/api/srs/decks/{deck_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6734,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_get_deck",
+      "path": "/api/srs/decks/{deck_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6763,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "srs_add_card",
+      "path": "/api/srs/decks/{deck_id}/cards",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6890,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_my_stats",
+      "path": "/api/srs/me/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6853,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "srs_due_queue",
+      "path": "/api/srs/queue",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 2969,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_state_partnerships",
+      "path": "/api/states",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 2997,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_state_partnership",
+      "path": "/api/states/{state_code}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 8815,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sm_my_stats",
+      "path": "/api/step-math/me/stats",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8632,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sm_create",
+      "path": "/api/step-math/problems",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8717,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sm_my_problems",
+      "path": "/api/step-math/problems/me",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8705,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sm_get",
+      "path": "/api/step-math/problems/{pid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8671,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sm_accept_llm_steps",
+      "path": "/api/step-math/problems/{pid}/llm-steps",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8653,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sm_solve_sympy",
+      "path": "/api/step-math/problems/{pid}/solve-sympy",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8746,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sm_add_explanation",
+      "path": "/api/step-math/steps/{step_id}/explanation",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8782,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sm_list_explanations",
+      "path": "/api/step-math/steps/{step_id}/explanations",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 8736,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "sm_flag_step",
+      "path": "/api/step-math/steps/{step_id}/flag",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 350,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "teacher_dashboard",
+      "path": "/api/teacher/dashboard",
+      "source_file": "padhai/routers/dashboard.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6308,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dash_teacher_org",
+      "path": "/api/teacher/orgs/{org_id}/dashboard",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 6324,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "dash_teacher_student",
+      "path": "/api/teacher/orgs/{org_id}/students/{student_user_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 118,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_tts_providers",
+      "path": "/api/tts/providers",
+      "source_file": "padhai/routers/catalog.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 5816,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_my_fallbacks",
+      "path": "/api/tutor/me/fallbacks",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 150,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_list",
+      "path": "/api/tutor/sessions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 24,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_start",
+      "path": "/api/tutor/sessions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 116,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_get",
+      "path": "/api/tutor/sessions/{sid}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 133,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_end",
+      "path": "/api/tutor/sessions/{sid}/end",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 44,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_message",
+      "path": "/api/tutor/sessions/{sid}/message",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5781,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_get_mode",
+      "path": "/api/tutor/sessions/{sid}/mode",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5756,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_set_mode",
+      "path": "/api/tutor/sessions/{sid}/mode",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 37,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_stream_get",
+      "path": "/api/tutor/sessions/{sid}/stream",
+      "source_file": "padhai/routers/tutor_stream.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 56,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_stream_post",
+      "path": "/api/tutor/sessions/{sid}/stream",
+      "source_file": "padhai/routers/tutor_stream.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 5799,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "tutor_set_test_active",
+      "path": "/api/tutor/sessions/{sid}/test-active",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4419,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "univ_list_courses",
+      "path": "/api/university/courses",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4392,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_create_course",
+      "path": "/api/university/courses",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4449,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_enroll",
+      "path": "/api/university/courses/{course_id}/enroll",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4436,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_publish_course",
+      "path": "/api/university/courses/{course_id}/publish",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4470,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "univ_progress",
+      "path": "/api/university/enrollments/{enrollment_id}/progress",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 50,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_upload_route",
+      "path": "/api/uploads",
+      "source_file": "padhai/routers/uploads.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 63,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "chat_over_upload",
+      "path": "/api/uploads/{uid}/chat",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 249,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "flashcards_from_upload",
+      "path": "/api/uploads/{uid}/flashcards",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 604,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "force_reindex",
+      "path": "/api/uploads/{uid}/index",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 616,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "index_status",
+      "path": "/api/uploads/{uid}/index/status",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 328,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "quiz_from_upload",
+      "path": "/api/uploads/{uid}/quiz",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 510,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "summary_of_upload",
+      "path": "/api/uploads/{uid}/summary",
+      "source_file": "padhai/routers/uploads_ai.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 190,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_upload_route",
+      "path": "/api/uploads/{upload_id}",
+      "source_file": "padhai/routers/uploads.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 145,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "analyze_upload_route",
+      "path": "/api/uploads/{upload_id}/analyze",
+      "source_file": "padhai/routers/uploads.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 63,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_push_prefs",
+      "path": "/api/users/me/push-prefs",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 70,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "set_push_pref",
+      "path": "/api/users/me/push-prefs",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 51,
+      "methods": [
+        "DELETE"
+      ],
+      "min_tier": null,
+      "name": "deactivate_push_token",
+      "path": "/api/users/me/push-tokens",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 28,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "register_push_token",
+      "path": "/api/users/me/push-tokens",
+      "source_file": "padhai/routers/me.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 11051,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "v2_list_video_modes",
+      "path": "/api/v2/video-modes",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10781,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "v2_create_video_request",
+      "path": "/api/v2/video-requests",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 10994,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "v2_regenerate",
+      "path": "/api/v2/video-requests/{request_id}/regenerate",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 40,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "v2_request_result",
+      "path": "/api/v2/video-requests/{request_id}/result",
+      "source_file": "padhai/routers/v2_video.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 26,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "v2_request_status",
+      "path": "/api/v2/video-requests/{request_id}/status",
+      "source_file": "padhai/routers/v2_video.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 6600,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "er_verification_lookup",
+      "path": "/api/verifications/{target_kind}/{target_id}",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 4181,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "vch_my_redemptions",
+      "path": "/api/vouchers/me/redemptions",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4157,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "vch_redeem",
+      "path": "/api/vouchers/redeem",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 4131,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "vch_validate",
+      "path": "/api/vouchers/validate",
+      "source_file": "padhai/routers/v3.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 57,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "redeem_voucher",
+      "path": "/api/vouchers/{code}/redeem",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 28,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "validate_voucher",
+      "path": "/api/vouchers/{code}/validate",
+      "source_file": "padhai/routers/commerce.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 11207,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "razorpay_webhook",
+      "path": "/api/webhooks/razorpay",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12992,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "change_password",
+      "path": "/auth/change-password",
+      "source_file": "padhai/web.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 12926,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "forgot_password",
+      "path": "/auth/forgot-password",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9837,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "login_page_redirect",
+      "path": "/auth/login",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10303,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "login",
+      "path": "/auth/login",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10359,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "logout",
+      "path": "/auth/logout",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10369,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "me",
+      "path": "/auth/me",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 10182,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "parent_consent_verify",
+      "path": "/auth/parent-consent",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12956,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "reset_password",
+      "path": "/auth/reset-password",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11479,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "saml_acs",
+      "path": "/auth/saml/{org_id}/acs",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11466,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "saml_sp_metadata",
+      "path": "/auth/saml/{org_id}/metadata",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10102,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "signup",
+      "path": "/auth/signup",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 53,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sso_providers_route",
+      "path": "/auth/sso/providers",
+      "source_file": "padhai/routers/sso.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 87,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sso_callback_route",
+      "path": "/auth/sso/{provider}/callback",
+      "source_file": "padhai/routers/sso.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 62,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sso_start_route",
+      "path": "/auth/sso/{provider}/start",
+      "source_file": "padhai/routers/sso.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 118,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "serve_branding_logo_route",
+      "path": "/branding/logo/{filename}",
+      "source_file": "padhai/routers/branding.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12247,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "chat_page",
+      "path": "/chat",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 89,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "chat_about_lesson_route",
+      "path": "/chat/{lesson_id}",
+      "source_file": "padhai/routers/lesson_chat_recap.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 83,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "curriculum_index_route",
+      "path": "/curriculum/index",
+      "source_file": "padhai/routers/curriculum.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12282,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "student_dashboard_page",
+      "path": "/dashboard",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 36,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "explain_topic",
+      "path": "/explain",
+      "source_file": "padhai/routers/explainer.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 87,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "explain_video",
+      "path": "/explain/video",
+      "source_file": "padhai/routers/explainer.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 9857,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "features",
+      "path": "/features",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12233,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "flashcards_page",
+      "path": "/flashcards",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9866,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "_git_sha",
+      "path": "/health",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9879,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "health",
+      "path": "/healthz",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9547,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "home_page",
+      "path": "/home",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9570,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "home_page_localized",
+      "path": "/home/{lang}",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11875,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "list_jobs",
+      "path": "/jobs",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 11907,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_job",
+      "path": "/jobs/{job_id}",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12083,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_job_audio",
+      "path": "/jobs/{job_id}/audio.mp3",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 55,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_combined_status",
+      "path": "/jobs/{job_id}/combined",
+      "source_file": "padhai/routers/multipage.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 32,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_combined_video",
+      "path": "/jobs/{job_id}/combined.mp4",
+      "source_file": "padhai/routers/multipage.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12110,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_job_subtitles",
+      "path": "/jobs/{job_id}/subtitles.srt",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12173,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_job_subtitles_vtt",
+      "path": "/jobs/{job_id}/subtitles.vtt",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11938,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_job_video",
+      "path": "/jobs/{job_id}/video",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9831,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "landing_page",
+      "path": "/landing",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 44,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "make_learning_path_route",
+      "path": "/learning-path",
+      "source_file": "padhai/routers/personalisation.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 10396,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "create_lesson",
+      "path": "/lessons",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 12219,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "lesson_new_page",
+      "path": "/lessons/new",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12226,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "lesson_player_page",
+      "path": "/lessons/{job_id}",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 34,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "curriculum_for_lesson_route",
+      "path": "/lessons/{lesson_id}/curriculum",
+      "source_file": "padhai/routers/curriculum.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 42,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "make_flashcards_route",
+      "path": "/lessons/{lesson_id}/flashcards",
+      "source_file": "padhai/routers/lesson_detail.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 151,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "rate_flashcard_route",
+      "path": "/lessons/{lesson_id}/flashcards/rate",
+      "source_file": "padhai/routers/lesson_detail.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 107,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_notes_route",
+      "path": "/lessons/{lesson_id}/notes",
+      "source_file": "padhai/routers/lesson_detail.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 127,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "put_notes_route",
+      "path": "/lessons/{lesson_id}/notes",
+      "source_file": "padhai/routers/lesson_detail.py",
+      "tier_class": "AUTH_REQUIRED"
+    },
+    {
+      "lineno": 84,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "standalone_quiz_route",
+      "path": "/lessons/{lesson_id}/quiz",
+      "source_file": "padhai/routers/lesson_detail.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 186,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "make_recap_route",
+      "path": "/lessons/{lesson_id}/recap",
+      "source_file": "padhai/routers/lesson_chat_recap.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 241,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "get_recap_audio_route",
+      "path": "/lessons/{lesson_id}/recap.mp3",
+      "source_file": "padhai/routers/lesson_chat_recap.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11794,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "live_respond",
+      "path": "/live/respond",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 9844,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "login_shortcut_redirect",
+      "path": "/login",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11562,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "pwa_manifest",
+      "path": "/manifest.json",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 30,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "my_stats_route",
+      "path": "/me/stats",
+      "source_file": "padhai/routers/personalisation.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 1203,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "metrics_endpoint",
+      "path": "/metrics",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12275,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "onboarding_page",
+      "path": "/onboarding",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12268,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "parent_page",
+      "path": "/parent",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 207,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "pricing_page",
+      "path": "/pricing",
+      "source_file": "padhai/routers/pricing.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9800,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "privacy_page",
+      "path": "/privacy",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12254,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "profile_page",
+      "path": "/profile",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12240,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "quiz_page",
+      "path": "/quiz",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9805,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "robots_txt",
+      "path": "/robots.txt",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 48,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "scim_spc_route",
+      "path": "/scim/v2/ServiceProviderConfig",
+      "source_file": "padhai/routers/scim.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 68,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "scim_list_users_route",
+      "path": "/scim/v2/Users",
+      "source_file": "padhai/routers/scim.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 112,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "scim_create_user_route",
+      "path": "/scim/v2/Users",
+      "source_file": "padhai/routers/scim.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 155,
+      "methods": [
+        "PATCH"
+      ],
+      "min_tier": null,
+      "name": "scim_patch_user_route",
+      "path": "/scim/v2/Users/{member_id}",
+      "source_file": "padhai/routers/scim.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9818,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "sitemap_xml",
+      "path": "/sitemap.xml",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11716,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "service_worker",
+      "path": "/sw.js",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12261,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "teacher_page",
+      "path": "/teacher",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9795,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "terms_page",
+      "path": "/terms",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10383,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tiers",
+      "path": "/tiers",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9539,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ui",
+      "path": "/ui",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 9850,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "ui_legacy",
+      "path": "/ui-legacy",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 11828,
+      "methods": [
+        "POST"
+      ],
+      "min_tier": null,
+      "name": "voice_respond",
+      "path": "/voice/respond",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    }
+  ],
+  "total": 726
+}

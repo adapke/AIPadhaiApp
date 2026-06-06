@@ -895,6 +895,57 @@ Reviewed 2026-06-03. Re-audit before changing.
   bridge isn't"; (c) pip-audit only knows about Python deps —
   the npm/Capacitor side of `mobile/` isn't scanned (separate
   sprint).
+- **prod-8 — Endpoint tier audit + machine-readable map
+  (single-focus sprint).** `_require_tier()` lives in
+  `padhai/web.py` but no canonical inventory of which routes
+  actually use it. The map surfaces what's free / paid / admin.
+  Shipped:
+
+  1. `scripts/audit_endpoint_tiers.py` — boots the app, walks
+     `app.routes`, AST-inspects each handler. Classification
+     order (first match wins): ADMIN_ONLY (calls
+     `require_admin_role`), TIER_GATED (calls
+     `_require_tier(..., "Mx")`), AUTH_REQUIRED (raises 401
+     when `user is None`), ANONYMOUS_OK (accepts user=None
+     silently), PUBLIC (no current_user param at all). Outputs
+     `data/endpoint_tier_map.json` + `docs/ENDPOINT_TIER_MAP.md`.
+
+  2. `data/endpoint_tier_map.json` + `docs/ENDPOINT_TIER_MAP.md`
+     — checked-in snapshots. The JSON is the test contract; the
+     Markdown is the human-readable table for product / ops.
+
+  3. `tests/test_endpoint_tier_map.py` — 4 regression tests
+     pinning EXPECTED_TOTAL=726 and EXPECTED_COUNTS exactly. A
+     refactor that adds/removes/reclassifies a route fails CI
+     with a clean diff. The `test_no_tier_gated_endpoints_yet`
+     test is intentionally a snapshot of the gap — designed to
+     be deliberately deleted when the first paid feature gates.
+
+  **Real findings the audit surfaced** (not classifier defects —
+  verified by anonymous `TestClient.get(path)` returning 200):
+
+  - **726 endpoints, 0 are tier-gated.** Every premium feature is
+    free for any signed-in user. `_require_tier()` exists, no
+    handler calls it.
+  - **Many `/api/admin/*` routes in v3.py have NO auth at all.**
+    Confirmed anonymous-accessible:
+    `/api/admin/flags/{key}/exposures`, `/api/admin/forums/flagged`,
+    `/api/admin/doubts/stats`, `/api/admin/cs/at-risk`. Root cause:
+    `padhai/routers/v3.py:19` is `APIRouter()` without
+    `dependencies=[...]`, so handlers have to opt in to auth —
+    many forgot. Path prefix `/api/admin/` is naming-only.
+
+  Both findings documented in `SECURITY.md` under "Known gaps
+  (tracked, not yet fixed)" with proposed fix shapes. Total
+  pytest: 103 → 107.
+
+  Honest gaps: (a) `/__sentry_test` shows up as UNKNOWN because
+  it's defined inside a closure (`_register_sentry_test_route`)
+  and `inspect.getsource` returns the outer function — the route
+  is correctly gated, just unclassifiable by AST. (b) The
+  classifier is heuristic; a handler that auth-gates via an
+  uncommon pattern (e.g. inside an `if/else` branch) might be
+  misclassified. The HTTP test in SECURITY.md is the ground truth.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
