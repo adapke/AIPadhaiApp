@@ -994,6 +994,41 @@ Reviewed 2026-06-03. Re-audit before changing.
   `SECURITY.md` "Known gaps" section moved both findings to a
   **CLOSED at prod-9** state with the fix-shape preserved as
   history. Total pytest unchanged at 107/107.
+- **prod-10 — i18n to 100% for all 8 non-Hindi locales.**
+  prod-3 baseline was 21-42% for the 7 non-Hindi/non-English
+  languages — they were "100% of 39 keys" before the catalogue
+  grew to 94, then regressed. Closed the gap by hand-translating
+  every missing key:
+
+  1. `scripts/build_locales.py` — single auditable source of
+     truth. Translations live as Python dicts (one per locale),
+     the script emits all 8 JSON files in one pass. `--check`
+     mode verifies parity without writing. Catches "key in
+     translation file but not in EN" (extra) AND "key in EN but
+     not translated" (missing).
+
+  2. **All 8 locales now at 100%** of the 94-key EN catalogue:
+     ta (Tamil), te (Telugu), kn (Kannada), ml (Malayalam),
+     mr (Marathi), bn (Bengali), gu (Gujarati), pa (Punjabi).
+     Native-script throughout; English borrowings preserved
+     where they're the conventional form in Indian-English
+     (DPDP, UPI, Razorpay, WhatsApp, AI).
+
+  3. `tests/test_i18n_coverage.py` — added
+     `test_supported_locales_at_or_above_floor` (≥90% gate,
+     monotonic) and `test_no_empty_values_in_supported_locales`
+     (catches the silent-fallback-to-English failure mode).
+     Total pytest: 107 → 109.
+
+  Honest gap that remains: these are first-pass translations.
+  Native-speaker review (especially for technical education
+  terms — "rubric", "spaced repetition", "adaptive practice")
+  is still the right gate before production launch. The
+  infrastructure to catch broken/empty translations is now in
+  place; quality is a content-review pass, not engineering.
+  The catalogue → SPA wiring (swapping hardcoded English in
+  `_INDEX_HTML` for `t(key)` calls) is the next sprint —
+  without it, the catalogue is ammunition not coverage.
 - **Twenty-fifth router slice — DPDP rights (2 routes).**
   `padhai/routers/dpdp_rights.py` lifts `GET /api/me/data/export`
   (DPDP §11 — full personal-data dump as JSON, schema_version: 1,
