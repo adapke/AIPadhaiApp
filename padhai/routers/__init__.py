@@ -64,6 +64,7 @@ _ROUTER_NAMES = (
     "uploads",           # v3.x — POST/GET /api/uploads* (3 routes — upload/analyze/get)
     "sso",               # v3.x — /auth/sso/* (3 routes — OAuth/OIDC flow)
     "avatar_admin",      # v3.x — /api/avatar-providers + /api/avatar-stats* (3 routes)
+    "misc_status",       # v3.x — /api/exam-mode/active + /api/fees/config (2 routes)
 )
 
 

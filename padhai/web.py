@@ -11266,16 +11266,7 @@ def _link_to_dict(link) -> dict:
 
 # ---------- S4: Anti-cheating exam mode ----------
 
-@app.get("/api/exam-mode/active")
-def get_active_exam_mode(
-    user: AuthUser | None = Depends(current_user),
-):
-    """Returns the exam_id of any in-progress attempt this user has,
-    else None. Client polls this on the doubt-chat / voice-tutor
-    pages to know whether to lock those features."""
-    if user is None:
-        return {"active_exam_id": None}
-    return {"active_exam_id": _orgs.has_active_exam(user.id)}
+# GET /api/exam-mode/active moved to padhai/routers/misc_status.py.
 
 
 # ---------- E5: Fees + invoicing (v0.16) ----------
@@ -11418,16 +11409,7 @@ async def razorpay_webhook(request: Request):
     return {"invoice_id": inv.id, "status": "paid"}
 
 
-@app.get("/api/fees/config")
-def get_fees_config():
-    """Public — tells the client whether Razorpay is wired (so the
-    UI can decide whether to show the real Checkout SDK or a
-    "Pay via mock order" affordance for sandbox testing)."""
-    return {
-        "razorpay_configured": _rzp.is_configured(),
-        "razorpay_key_id": (_rzp._env("RAZORPAY_KEY_ID")
-                            if _rzp.is_configured() else None),
-    }
+# GET /api/fees/config moved to padhai/routers/misc_status.py.
 
 
 # ---------- A2: Avatar router observability ----------

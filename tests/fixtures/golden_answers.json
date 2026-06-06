@@ -4,7 +4,7 @@
   "domain": "school_plus_competitive",
   "task_kind": "answer_correctness",
   "reviewed_by": "internal_v1_seed",
-  "description": "Smoke-level golden dataset. v16: 310 items across 9 boards/exams.",
+  "description": "Smoke-level golden dataset. v17: 325 items across 9 boards/exams.",
   "items": [
     {
       "prompt": "What is the SI unit of electric current?",
@@ -3927,6 +3927,194 @@
         "subject": "biology",
         "board": "ICSE",
         "class": "11"
+      }
+    },
+    {
+      "prompt": "JEE Physics: What is escape velocity from Earth (in km/s, to 1 dp)?",
+      "expected": {
+        "answer": "11.2"
+      },
+      "rubric": "Accept '11.2' or '11.19'.",
+      "difficulty": "hard",
+      "tags": {
+        "subject": "physics",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "NEET Biology: Which organelle is known as the 'protein factory' of the cell?",
+      "expected": {
+        "answer": "ribosome"
+      },
+      "rubric": "Accept 'ribosome' or 'ribosomes'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "biology",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "JEE Chemistry: What is the SI unit of amount of substance?",
+      "expected": {
+        "answer": "mole"
+      },
+      "rubric": "Accept 'mole' or 'mol'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "JEE"
+      }
+    },
+    {
+      "prompt": "UPSC GS1: Who composed Vande Mataram?",
+      "expected": {
+        "answer": "bankim chandra chattopadhyay"
+      },
+      "rubric": "Accept 'Bankim Chandra Chattopadhyay' or 'Bankim Chandra Chatterjee'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "history",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "If two angles of a triangle are 50 and 70 degrees, what is the third angle?",
+      "expected": {
+        "answer": "60"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "7"
+      }
+    },
+    {
+      "prompt": "What is 7 x 8?",
+      "expected": {
+        "answer": "56"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "6"
+      }
+    },
+    {
+      "prompt": "Maharashtra State Board Class 10 History: Who was the first Maratha king?",
+      "expected": {
+        "answer": "shivaji"
+      },
+      "rubric": "Accept 'Shivaji' or 'Chhatrapati Shivaji Maharaj'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "history",
+        "board": "Maharashtra",
+        "class": "10"
+      }
+    },
+    {
+      "prompt": "Karnataka State Board Class 11 Physics: Name the law that states that current is proportional to voltage in a resistor.",
+      "expected": {
+        "answer": "ohm's law"
+      },
+      "rubric": "Accept 'Ohm's Law' or 'Ohm law'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "Karnataka",
+        "class": "11"
+      }
+    },
+    {
+      "prompt": "TamilNadu Samacheer Kalvi Class 12 Biology: Name the process of programmed cell death.",
+      "expected": {
+        "answer": "apoptosis"
+      },
+      "rubric": "Single-word lowercase.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "biology",
+        "board": "TamilNadu",
+        "class": "12"
+      }
+    },
+    {
+      "prompt": "AP/Telangana SCERT Class 9 Mathematics: What is sqrt(144)?",
+      "expected": {
+        "answer": "12"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "math",
+        "board": "AP_Telangana",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "ICSE Class 9 Physics: What is the unit of electric charge?",
+      "expected": {
+        "answer": "coulomb"
+      },
+      "rubric": "Accept 'coulomb' or 'C'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "physics",
+        "board": "ICSE",
+        "class": "9"
+      }
+    },
+    {
+      "prompt": "NEET Chemistry: What is the pH of pure water at 25 degrees C?",
+      "expected": {
+        "answer": "7"
+      },
+      "rubric": "Numeric only.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "chemistry",
+        "exam": "NEET"
+      }
+    },
+    {
+      "prompt": "UPSC GS3: What does FDI stand for in economics?",
+      "expected": {
+        "answer": "foreign direct investment"
+      },
+      "rubric": "Accept full form (case-insensitive).",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "economy",
+        "exam": "UPSC"
+      }
+    },
+    {
+      "prompt": "SSC GK: Who invented the telephone?",
+      "expected": {
+        "answer": "alexander graham bell"
+      },
+      "rubric": "Accept 'Alexander Graham Bell' or 'Graham Bell'.",
+      "difficulty": "easy",
+      "tags": {
+        "subject": "gk",
+        "exam": "SSC"
+      }
+    },
+    {
+      "prompt": "CBSE Class 12 Mathematics: What is the integral of 1/x with respect to x?",
+      "expected": {
+        "answer": "ln|x| + c"
+      },
+      "rubric": "Accept 'ln(x)+C', 'ln|x|+C', 'log_e x + C'.",
+      "difficulty": "medium",
+      "tags": {
+        "subject": "math",
+        "board": "CBSE",
+        "class": "12"
       }
     }
   ]

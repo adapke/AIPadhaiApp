@@ -678,6 +678,19 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **Twenty-second router slice — misc status (2 routes).**
+  `padhai/routers/misc_status.py` bundles two small status
+  endpoints that don't fit a larger subsystem:
+  `GET /api/exam-mode/active` (authed — S4 anti-cheat: is this
+  user in an active exam attempt? doubt-chat + voice-tutor poll
+  this), `GET /api/fees/config` (public — Razorpay configured?
+  surfaces just the public key_id, nothing sensitive).
+  ~20 lines off web.py.
+- **Accuracy bench 310 → 325 items.** Escape velocity 11.2 km/s,
+  ribosome protein factory, mole SI, Vande Mataram by Bankim
+  Chandra, triangle third angle 60°, 7×8=56, Shivaji first
+  Maratha king, Ohm's law, apoptosis, √144=12, coulomb,
+  pH 7, FDI full form, telephone Bell, ∫1/x dx = ln|x|+C.
 - **Twenty-first router slice — avatar admin (3 routes).**
   `padhai/routers/avatar_admin.py` covers the photoreal-avatar
   provider router status surface: `GET /api/avatar-providers`
