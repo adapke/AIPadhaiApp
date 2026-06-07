@@ -69,6 +69,7 @@ _ROUTER_NAMES = (
     "push_admin",        # v3.x — /api/push/* (3 routes — opened beacon, log, stats)
     "dpdp_rights",       # v3.x — /api/me/data/export + DELETE /api/me/account (DPDP §11/§12)
     "concept_videos",    # prod-14 — curated YouTube/Khan/etc concept-video catalog
+    "new_ui_pages",      # prod-28 — dedicated /essay /interview /practice /adaptive /math /voice /live /recap /notes /curriculum /path /library /school pages
 )
 
 

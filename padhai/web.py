@@ -10420,7 +10420,11 @@ def logout() -> JSONResponse:
 
 
 @app.get("/auth/me")
+@app.get("/api/me")
 def me(user: AuthUser | None = Depends(current_user)) -> JSONResponse:
+    """Current authenticated user. /api/me is an alias for /auth/me —
+    older callers used the longer path, so both are wired to keep them
+    working."""
     if user is None:
         return JSONResponse({"authenticated": False})
     return JSONResponse({
@@ -11671,20 +11675,32 @@ def _default_logo_data_uri(color: str) -> str:
 
 
 _SERVICE_WORKER_JS = """\
-// AI Pathshala service worker — v1.0 D3
+// AI Pathshala service worker — v1.1 D3 (prod-20)
 //
 // Two cache layers:
-//   shell-v1 : the SPA HTML + the static assets it needs to boot
-//              offline (fonts, fallback icons)
+//   shell-v2 : static assets that the SPA needs to boot offline
+//              (fonts, fallback icons). Page HTML is NOT cached
+//              cache-first any more — see fetch handler below.
 //   media-v1 : generated videos + audio that the user has
 //              explicitly "saved offline"
 //
-// Network-first for API calls — we never serve stale lesson data.
+// Network-first for API calls AND for top-level page navigations
+// — we never serve stale dashboards / onboarding / chat shells.
 // Cache-first for video/audio media (heavy bytes; offline is the
 // whole point of caching them).
 
-const SHELL_CACHE = 'padhai-shell-v1';
+const SHELL_CACHE = 'padhai-shell-v2';
 const MEDIA_CACHE = 'padhai-media-v1';
+
+// Top-level pages that must always reflect the latest server-rendered
+// HTML — the bug at prod-20 was that the dashboard was stuck on a
+// cached version because the SW served it cache-first. These routes
+// go network-first; if offline, we fall back to whatever's cached.
+const NETWORK_FIRST_PAGES = [
+  '/dashboard', '/home', '/landing', '/onboarding',
+  '/chat', '/quiz', '/profile', '/parent', '/teacher',
+  '/lessons/new', '/pricing', '/terms', '/privacy',
+];
 
 self.addEventListener('install', (event) => {
   // Pre-cache the SPA shell. We don't list specific assets — the
@@ -11693,14 +11709,24 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // Clean up older versioned caches when we bump the version.
+  // Wipe ALL old versioned caches when we bump the version. The
+  // previous handler only deleted things that didn't end in `-v1`,
+  // so a v1 → v2 bump now correctly evicts `padhai-shell-v1`.
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.filter(k => !k.endsWith('-v1')).map(k => caches.delete(k))
+      keys
+        .filter(k => k !== SHELL_CACHE && k !== MEDIA_CACHE)
+        .map(k => caches.delete(k))
     )),
   );
   self.clients.claim();
 });
+
+function isNetworkFirstPage(pathname) {
+  // Exact match OR path starting with one of the prefixes (covers
+  // /home/hi, /lessons/new, /chat/general, etc).
+  return NETWORK_FIRST_PAGES.some(p => pathname === p || pathname.startsWith(p + '/'));
+}
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
@@ -11730,7 +11756,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // SPA shell + everything else: cache-first with network fallback.
+  // Top-level page HTML: network-first so server-side template edits
+  // land immediately. Falls back to cache for offline.
+  if (req.mode === 'navigate' || isNetworkFirstPage(url.pathname)) {
+    event.respondWith(networkFirstHtml(req));
+    return;
+  }
+
+  // Static assets: cache-first with network fallback.
   event.respondWith(cacheFirst(req, SHELL_CACHE));
 });
 
@@ -11756,6 +11789,23 @@ async function networkFirstJson(req) {
       JSON.stringify({ error: 'offline', detail: "You're offline — try again when you have a connection." }),
       { status: 503, headers: { 'Content-Type': 'application/json' } },
     );
+  }
+}
+
+async function networkFirstHtml(req) {
+  // Page HTML: try the network first so a server-side template edit
+  // is visible on the next reload. Update the cache when the network
+  // succeeds so we have something to serve offline. If the network
+  // fails, fall back to the cached copy.
+  const cache = await caches.open(SHELL_CACHE);
+  try {
+    const resp = await fetch(req);
+    if (resp.ok) cache.put(req, resp.clone());
+    return resp;
+  } catch (e) {
+    const hit = await cache.match(req);
+    if (hit) return hit;
+    return new Response('Offline', { status: 504, statusText: 'Offline' });
   }
 }
 
@@ -12824,6 +12874,127 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       );
     }
 
+    function activitySection() {
+      // 7 activity tiles restored from the previous dashboard layout.
+      // Pulls from /api/me/dashboard (DASH) — same shape as before:
+      // flashcards, mastery, practice_tests, mock_interviews, essays,
+      // live_classes. Empty states stay friendly for new users.
+      var d = DASH || {};
+      var cards = (d.flashcards || {});
+      var mastery = (d.mastery || {});
+      var practice = (d.practice_tests || {});
+      var mock = (d.mock_interviews || {});
+      var essay = (d.essays || {});
+      var live = (d.live_classes || {});
+      var onb = (d.onboarding || {});
+
+      var setupBanner = '';
+      if (!onb.completed) {
+        setupBanner =
+          '<div class="card" style="border-color:#f59e0b;margin-bottom:12px">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">' +
+              '<div>' +
+                '<div style="font-weight:800;color:#f59e0b;margin-bottom:4px">⚠ Setup needed</div>' +
+                '<p class="sub" style="margin:0">Complete onboarding so we can personalise your plan.</p>' +
+              '</div>' +
+              '<a class="btn" href="/onboarding">Set goals →</a>' +
+            '</div>' +
+          '</div>';
+      }
+
+      function tile(title, body, anchor) {
+        var link = anchor
+          ? '<div style="margin-top:8px"><a href="' + anchor.href + '" style="color:#fbbf24;font-size:12px;text-decoration:none">' + escapeHtml(anchor.label) + '</a></div>'
+          : '';
+        return (
+          '<div class="card">' +
+            '<h3>' + escapeHtml(title) + '</h3>' +
+            body +
+            link +
+          '</div>'
+        );
+      }
+
+      function listFrom(arr, renderItem, emptyMsg) {
+        if (!arr || arr.length === 0) {
+          return '<ul class="list"><li class="empty">' + escapeHtml(emptyMsg) + '</li></ul>';
+        }
+        return '<ul class="list">' + arr.slice(0, 4).map(renderItem).join('') + '</ul>';
+      }
+
+      var due = (cards.due_count != null ? cards.due_count : 0);
+      var deckCount = (cards.deck_count != null ? cards.deck_count : 0);
+      var dueTile = tile('Due flashcards',
+        '<p class="big">' + due + '</p>' +
+        '<p class="sub">' + deckCount + ' decks total</p>',
+        {href:'/flashcards', label:'Study now →'}
+      );
+
+      var weakTile = tile('Weak topics',
+        listFrom(mastery.weak, function(w) {
+          var pct = (w.mastery != null) ? Math.round(w.mastery * 100) : 0;
+          var cls = pct < 40 ? 'pill red' : (pct < 60 ? 'pill warn' : 'pill');
+          return '<li><span>' + escapeHtml(w.topic_key || '') + '</span><span class="' + cls + '">' + pct + '%</span></li>';
+        }, 'No data yet — practice a few topics')
+      );
+
+      var strongTile = tile('Strong topics',
+        listFrom(mastery.strong, function(s) {
+          var pct = (s.mastery != null) ? Math.round(s.mastery * 100) : 0;
+          return '<li><span>' + escapeHtml(s.topic_key || '') + '</span><span class="pill ok">' + pct + '%</span></li>';
+        }, 'Keep practising — strong topics will appear here')
+      );
+
+      var testsTile = tile('Recent practice tests',
+        listFrom(practice.recent, function(t) {
+          var label = t.score ? Math.round(t.score.pct * 100) + '%' : (t.status || '—');
+          var cls = t.score ? (t.score.pct >= 0.6 ? 'pill ok' : 'pill warn') : 'pill';
+          var meta = escapeHtml((t.exam || '') + (t.subject ? ' · ' + t.subject : ''));
+          return '<li><span>' + meta + '</span><span class="' + cls + '">' + label + '</span></li>';
+        }, 'No tests taken yet')
+      );
+
+      var mocksTile = tile('Mock interviews',
+        listFrom(mock.recent, function(m) {
+          var label = m.overall_score != null ? m.overall_score.toFixed(1) : (m.status || '—');
+          var cls = m.overall_score != null ? (m.overall_score >= 7 ? 'pill ok' : 'pill warn') : 'pill';
+          return '<li><span>' + escapeHtml(m.track || '') + '</span><span class="' + cls + '">' + label + '</span></li>';
+        }, 'No interviews yet')
+      );
+
+      var essayTile = tile('Essay scores',
+        listFrom(essay.recent, function(e) {
+          var sc = e.ai_score;
+          var label = sc != null ? Math.round(sc) : '—';
+          var cls = sc != null ? (sc >= 60 ? 'pill ok' : 'pill warn') : 'pill';
+          var rid = (e.rubric_id || '').slice(0, 8) + (e.rubric_id ? '…' : '');
+          return '<li><span>' + escapeHtml(rid) + '</span><span class="' + cls + '">' + label + '</span></li>';
+        }, 'No essays graded yet')
+      );
+
+      var liveTile = tile('Live classes',
+        listFrom(live.upcoming, function(lc) {
+          var when = lc.scheduled_at ? new Date(lc.scheduled_at * 1000).toLocaleString() : 'TBD';
+          return '<li><span>' + escapeHtml(lc.title || '') + '</span><span class="pill warn">' + escapeHtml(when) + '</span></li>';
+        }, 'No upcoming classes')
+      );
+
+      return (
+        '<section class="section anchor" id="activity">' +
+          setupBanner +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Your activity</h2>' +
+              '<p class="section-sub">Quick view of recent progress across every learning module.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="grid-3">' +
+            dueTile + weakTile + strongTile + testsTile + mocksTile + essayTile + liveTile +
+          '</div>' +
+        '</section>'
+      );
+    }
+
     function readinessSection() {
       var score = computeReadiness();
       var meta = readinessLabel(score);
@@ -12978,14 +13149,548 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       );
     }
 
+    // In-app syllabus surfaces — every card links to /syllabus, not
+    // to external NCERT / CBSE / NTA / state-board sites. The
+    // /syllabus page hosts chapter outlines for each board / exam.
+    var STUDY_MATERIALS = [
+      {category:'CBSE — Class 6 to 8', icon:'📘', items:[
+        {title:'View full syllabus + chapter outlines', url:'/syllabus#cbse_6_8', kind:'In-app'},
+        {title:'Practice tests for these classes', url:'/practice', kind:'In-app'},
+        {title:'Flashcards for these classes', url:'/flashcards', kind:'In-app'},
+      ]},
+      {category:'CBSE — Class 9 & 10 (Board)', icon:'📗', items:[
+        {title:'View full syllabus + chapter outlines', url:'/syllabus#cbse_9_10', kind:'In-app'},
+        {title:'Class 10 practice tests', url:'/practice', kind:'In-app'},
+        {title:'Flashcards for board exam prep', url:'/flashcards', kind:'In-app'},
+      ]},
+      {category:'CBSE — Class 11 & 12 (Board)', icon:'📕', items:[
+        {title:'View full syllabus + chapter outlines', url:'/syllabus#cbse_11_12', kind:'In-app'},
+        {title:'Class 12 practice tests', url:'/practice', kind:'In-app'},
+        {title:'Flashcards for board exam prep', url:'/flashcards', kind:'In-app'},
+      ]},
+      {category:'JEE Main + Advanced', icon:'🧪', items:[
+        {title:'View full JEE syllabus', url:'/syllabus#jee', kind:'In-app'},
+        {title:'JEE practice tests (Main + Advanced)', url:'/practice', kind:'In-app'},
+        {title:'Concept videos for tough chapters', url:'/dashboard#concept-videos', kind:'In-app'},
+      ]},
+      {category:'NEET UG (Medical)', icon:'🩺', items:[
+        {title:'View full NEET syllabus', url:'/syllabus#neet', kind:'In-app'},
+        {title:'NEET practice tests (Bio / Chem / Phy)', url:'/practice', kind:'In-app'},
+        {title:'Concept videos for tough chapters', url:'/dashboard#concept-videos', kind:'In-app'},
+      ]},
+      {category:'UPSC Civil Services', icon:'🏛️', items:[
+        {title:'View full UPSC syllabus (Prelims + Mains)', url:'/syllabus#upsc', kind:'In-app'},
+        {title:'UPSC practice tests', url:'/practice', kind:'In-app'},
+        {title:'Essay grader (rubric-aligned)', url:'/essay', kind:'In-app'},
+      ]},
+      {category:'ICSE / ISC (CISCE)', icon:'📔', items:[
+        {title:'View full ICSE / ISC syllabus', url:'/syllabus#icse', kind:'In-app'},
+        {title:'ICSE Class 10 practice tests', url:'/practice', kind:'In-app'},
+        {title:'Flashcards for ICSE / ISC', url:'/flashcards', kind:'In-app'},
+      ]},
+      {category:'State boards (Maharashtra / TN / KA / AP / UP)', icon:'🗺️', items:[
+        {title:'View state-board syllabi', url:'/syllabus#state', kind:'In-app'},
+        {title:'State-board practice tests', url:'/practice', kind:'In-app'},
+        {title:'State-board flashcards', url:'/flashcards', kind:'In-app'},
+      ]},
+      {category:'Bank exams + SSC + Government', icon:'🏦', items:[
+        {title:'View Bank / SSC / RBI syllabi', url:'/syllabus#bank_ssc', kind:'In-app'},
+        {title:'Quant / Reasoning practice tests', url:'/practice', kind:'In-app'},
+        {title:'Banking / GA flashcards', url:'/flashcards', kind:'In-app'},
+      ]},
+    ];
+
+    // Flashcard decks keyed to board / exam — at least 10 cards per
+    // deck, written to the actual syllabus of each. Default deck is
+    // auto-selected from the user's class_grade + target_exam + board
+    // (see resolveDefaultDeck() below).
+    var DECKS = {
+      cbse_6_8: { label: 'CBSE Class 6–8', icon: '📘', cards: [
+        {q:"Define a fraction.", a:"A number representing a part of a whole, written as a/b where a is the numerator, b is the denominator (b ≠ 0).", subject:'Math'},
+        {q:"Area of a rectangle with length l and breadth b?", a:"Area = l × b. Unit: square unit (e.g., m²).", subject:'Math'},
+        {q:"What is the HCF of 12 and 18?", a:"6 — common factors are 1, 2, 3, 6; the highest is 6.", subject:'Math'},
+        {q:"What is photosynthesis?", a:"Process where green plants use sunlight, CO₂, and water to make food (glucose), releasing oxygen.", subject:'Science'},
+        {q:"Name the three states of matter.", a:"Solid, Liquid, Gas. (Plasma is the fourth, found in stars.)", subject:'Science'},
+        {q:"Which is the largest planet in our solar system?", a:"Jupiter — about 11 times the diameter of Earth.", subject:'Science'},
+        {q:"Who founded the Mauryan Empire?", a:"Chandragupta Maurya, around 322 BCE.", subject:'History'},
+        {q:"Longest river in India?", a:"The Ganga (~2,525 km from Gangotri to the Bay of Bengal).", subject:'Geography'},
+        {q:"Capital of India?", a:"New Delhi.", subject:'GK'},
+        {q:"Name the three branches of the Indian government.", a:"Legislature (makes laws), Executive (enforces laws), Judiciary (interprets laws).", subject:'Civics'},
+      ]},
+      cbse_9_10: { label: 'CBSE Class 9–10 (Board)', icon: '📗', cards: [
+        {q:"State Newton's Second Law of Motion.", a:"F = m × a — net force equals mass times acceleration. SI unit of force: Newton (N).", subject:'Physics'},
+        {q:"What is Ohm's Law?", a:"V = I × R — voltage across a conductor is directly proportional to the current through it (at constant temperature).", subject:'Physics'},
+        {q:"Difference between atomic number and mass number?", a:"Atomic number = number of protons. Mass number = protons + neutrons.", subject:'Chemistry'},
+        {q:"Define an acid in chemistry.", a:"A substance that releases H⁺ ions in aqueous solution; pH < 7. Examples: HCl, H₂SO₄.", subject:'Chemistry'},
+        {q:"Pythagoras Theorem", a:"In a right-angled triangle: a² + b² = c², where c is the hypotenuse.", subject:'Math'},
+        {q:"Quadratic formula", a:"x = (−b ± √(b² − 4ac)) / (2a), for ax² + bx + c = 0.", subject:'Math'},
+        {q:"Photosynthesis equation", a:"6CO₂ + 6H₂O → (sunlight + chlorophyll) → C₆H₁₂O₆ + 6O₂.", subject:'Biology'},
+        {q:"Three sectors of the Indian economy?", a:"Primary (agriculture, fishing), Secondary (manufacturing), Tertiary (services).", subject:'Economics'},
+        {q:"Who led the Salt March / Dandi March (1930)?", a:"Mahatma Gandhi — 240-mile march from Sabarmati to Dandi to protest the British salt tax.", subject:'History'},
+        {q:"SI unit of electrical resistance?", a:"Ohm (Ω) — defined as 1 volt per ampere (1 V/A).", subject:'Physics'},
+        {q:"Difference between mitosis and meiosis?", a:"Mitosis: 2 identical diploid cells (growth/repair). Meiosis: 4 genetically different haploid cells (gametes).", subject:'Biology'},
+      ]},
+      cbse_11_12: { label: 'CBSE Class 11–12 (Board)', icon: '📕', cards: [
+        {q:"Define work in physics.", a:"W = F · d · cos θ — work is the dot product of force and displacement. SI unit: Joule (J).", subject:'Physics'},
+        {q:"Le Chatelier's Principle", a:"If a system at equilibrium is disturbed (change in concentration, T, P), it shifts to oppose the change and restore equilibrium.", subject:'Chemistry'},
+        {q:"Derivative of sin(x)?", a:"cos(x). And d/dx[cos x] = −sin x.", subject:'Math'},
+        {q:"Integration by parts formula", a:"∫u dv = uv − ∫v du. (Pick u = LIATE: Log, Inverse trig, Algebraic, Trig, Exponential.)", subject:'Math'},
+        {q:"What is mitosis?", a:"Cell division producing two genetically identical diploid daughter cells. Stages: Prophase → Metaphase → Anaphase → Telophase.", subject:'Biology'},
+        {q:"Mendel's Law of Segregation", a:"During gamete formation, the two alleles for a heritable trait separate so each gamete carries one allele.", subject:'Biology'},
+        {q:"Right-hand rule (for a current-carrying wire)", a:"Thumb = current direction; curled fingers = direction of magnetic field around the wire.", subject:'Physics'},
+        {q:"Hybridization of carbon in CH₄ (methane)?", a:"sp³ — tetrahedral geometry, 4 equivalent C–H bonds at 109.5°.", subject:'Chemistry'},
+        {q:"Avogadro's number", a:"6.022 × 10²³ particles per mole.", subject:'Chemistry'},
+        {q:"Third kinematic equation (without time)?", a:"v² = u² + 2as. (u = initial velocity, v = final velocity, a = acceleration, s = displacement.)", subject:'Physics'},
+        {q:"Define osmotic pressure (π).", a:"π = MRT (van't Hoff equation) — pressure required to stop osmotic flow of solvent into a solution.", subject:'Chemistry'},
+      ]},
+      jee: { label: 'JEE Main + Advanced', icon: '🧪', cards: [
+        {q:"Equation of an ellipse with centre at origin (a > b)?", a:"x²/a² + y²/b² = 1. Eccentricity e = √(1 − b²/a²); foci at (±ae, 0).", subject:'Math'},
+        {q:"Lorentz force on a charged particle", a:"F = q(E + v × B). Magnetic force does no work; only changes direction.", subject:'Physics'},
+        {q:"Einstein's photoelectric equation", a:"K_max = hν − φ. φ = work function; threshold frequency ν₀ = φ/h.", subject:'Physics'},
+        {q:"Binomial coefficient nCr", a:"nCr = n! / (r!(n−r)!) — number of ways to choose r objects from n.", subject:'Math'},
+        {q:"IUPAC name of (CH₃)₂CH–CH₂–OH", a:"2-methylpropan-1-ol (common name: isobutanol).", subject:'Chemistry'},
+        {q:"Doppler effect — observer moving toward source", a:"f' = f × (v + v₀)/v, where v₀ = observer's speed, v = speed of sound in medium.", subject:'Physics'},
+        {q:"Crystal Field Theory: weak field ligands?", a:"Produce smaller splitting Δ; high-spin complexes. Order (low to high Δ): I⁻ < Br⁻ < Cl⁻ < F⁻ < OH⁻ < H₂O < NH₃ < CN⁻ < CO (spectrochemical series).", subject:'Chemistry'},
+        {q:"lim x→0 (sin x)/x = ?", a:"1. Standard limit; used to derive d/dx(sin x) = cos x.", subject:'Math'},
+        {q:"Bohr radius of hydrogen atom", a:"a₀ = 0.529 Å = 5.29 × 10⁻¹¹ m (radius of n=1 orbit).", subject:'Physics'},
+        {q:"de Broglie wavelength", a:"λ = h / p = h / (mv). All matter has wave properties; significant only at quantum scales.", subject:'Physics'},
+        {q:"Sum of an infinite GP", a:"S∞ = a / (1 − r), valid only when |r| < 1.", subject:'Math'},
+      ]},
+      neet: { label: 'NEET UG', icon: '🩺', cards: [
+        {q:"Calvin cycle (dark reaction) — site within the chloroplast?", a:"Stroma — the fluid surrounding thylakoids. Uses ATP + NADPH from light reaction to fix CO₂.", subject:'Biology'},
+        {q:"Why are mitochondria called the 'powerhouse of the cell'?", a:"They generate most of the cell's ATP via the Krebs cycle and oxidative phosphorylation (electron transport chain on inner membrane).", subject:'Biology'},
+        {q:"Largest gland in the human body?", a:"Liver (~1.5 kg in adults). Produces bile, detoxifies blood, stores glycogen, makes plasma proteins.", subject:'Biology'},
+        {q:"Insulin is secreted by which cells?", a:"β (beta) cells of the Islets of Langerhans in the pancreas. Glucagon is secreted by α cells.", subject:'Biology'},
+        {q:"Mendel's Law of Independent Assortment", a:"Genes for different traits assort independently during gamete formation (only true for unlinked genes on different chromosomes).", subject:'Biology'},
+        {q:"Number of pairs of cranial nerves in humans?", a:"12 pairs — Olfactory, Optic, Oculomotor, Trochlear, Trigeminal, Abducens, Facial, Vestibulocochlear, Glossopharyngeal, Vagus, Accessory, Hypoglossal.", subject:'Biology'},
+        {q:"IUPAC name of acetone (CH₃COCH₃)?", a:"Propan-2-one.", subject:'Chemistry'},
+        {q:"Markovnikov's Rule", a:"In addition of HX to an unsymmetrical alkene, H attaches to the carbon with more H atoms already; X goes to the more substituted carbon.", subject:'Chemistry'},
+        {q:"Bohr's angular momentum quantization", a:"L = m·v·r = nh/(2π), where n = 1, 2, 3 ... (principal quantum number).", subject:'Physics'},
+        {q:"Function of ribosomes?", a:"Site of protein synthesis — translate mRNA into polypeptide chains. Found free in cytoplasm or attached to rough ER.", subject:'Biology'},
+        {q:"What is the universal blood donor?", a:"O-negative — no A, B, or Rh antigens on RBCs, so any recipient's immune system accepts it.", subject:'Biology'},
+      ]},
+      upsc: { label: 'UPSC Civil Services', icon: '🏛️', cards: [
+        {q:"Article 14 of the Indian Constitution?", a:"Right to Equality before law — 'The State shall not deny to any person equality before the law or the equal protection of the laws within the territory of India.'", subject:'Polity'},
+        {q:"Article 32 vs Article 226?", a:"Art 32: Supreme Court's writ jurisdiction (only for Fundamental Rights, can't be suspended except during emergency under Art 359). Art 226: High Court's writ jurisdiction (broader — for any legal right).", subject:'Polity'},
+        {q:"Who appoints the Comptroller and Auditor General (CAG)?", a:"President of India (Article 148). Tenure: 6 years or 65 years of age, whichever is earlier. Removed by same procedure as a Supreme Court judge.", subject:'Polity'},
+        {q:"What are Directive Principles of State Policy (DPSP)?", a:"Part IV (Articles 36–51) — non-justiciable guidelines borrowed from the Irish Constitution. Examples: equal pay, free legal aid, Uniform Civil Code, environmental protection.", subject:'Polity'},
+        {q:"Who founded the Indian National Congress (1885)?", a:"Allan Octavian Hume (retired British civil servant). First session: Bombay, December 1885. First president: W.C. Bonnerjee.", subject:'History'},
+        {q:"Which Mauryan emperor adopted Buddhism after a war?", a:"Ashoka the Great — after the Kalinga War (~261 BCE). Spread Buddhism via rock and pillar edicts, sent missions abroad.", subject:'History'},
+        {q:"Source and mouth of the Ganga?", a:"Source: Gangotri Glacier in Uttarakhand. Mouth: Bay of Bengal via Sundarbans delta (West Bengal + Bangladesh).", subject:'Geography'},
+        {q:"What is the Cash Reserve Ratio (CRR)?", a:"% of total deposits that commercial banks must keep with the RBI as reserves. RBI uses CRR as a monetary policy tool to control liquidity.", subject:'Economy'},
+        {q:"Sangam literature is associated with which dynasties?", a:"Cholas, Pandyas, and Cheras — Tamil dynasties of the early historical period (~300 BCE to 300 CE) in South India.", subject:'History'},
+        {q:"What is a Western Disturbance?", a:"Extra-tropical storm originating in the Mediterranean / Caspian Sea, bringing winter rain to North-West India and snow to the Himalayas. Critical for rabi crops.", subject:'Geography'},
+        {q:"42nd Constitutional Amendment (1976) — key change?", a:"Called the 'Mini-Constitution' — added 'Socialist, Secular' to Preamble, made DPSPs prevail over Fundamental Rights, added 10 Fundamental Duties (Art 51A).", subject:'Polity'},
+      ]},
+      icse: { label: 'ICSE / ISC (CISCE)', icon: '📔', cards: [
+        {q:"ICSE Class 10 Math — total surface area of a cone?", a:"TSA = πr² + πrl = πr(r + l), where l = slant height. CSA (curved) = πrl.", subject:'Math'},
+        {q:"Define photosynthesis (ICSE Biology).", a:"Process where green plants synthesize organic food (glucose) from CO₂ and H₂O using sunlight, with chlorophyll as catalyst, releasing O₂ as a by-product.", subject:'Biology'},
+        {q:"Boyle's Law", a:"At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume: PV = constant, so P₁V₁ = P₂V₂.", subject:'Chemistry'},
+        {q:"Charles's Law", a:"At constant pressure, volume of a fixed mass of gas is directly proportional to absolute temperature (Kelvin): V/T = constant, so V₁/T₁ = V₂/T₂.", subject:'Chemistry'},
+        {q:"Define molarity.", a:"Moles of solute per litre of solution. M = (moles of solute) / (volume of solution in L).", subject:'Chemistry'},
+        {q:"Slope of line through (x₁,y₁) and (x₂,y₂)?", a:"m = (y₂ − y₁) / (x₂ − x₁). If vertical line, slope is undefined.", subject:'Math'},
+        {q:"Define osmosis (ICSE Bio).", a:"Net movement of solvent molecules (usually water) across a selectively permeable membrane from a region of lower solute concentration to higher.", subject:'Biology'},
+        {q:"Who founded the Maratha Empire?", a:"Chhatrapati Shivaji Maharaj — crowned at Raigad fort in 1674. Used guerrilla tactics (Ganimi Kava) against Mughals and Bijapur Sultanate.", subject:'History'},
+        {q:"Electromagnetic induction — Faraday's law?", a:"EMF = −dΦ/dt — induced EMF in a conductor equals the rate of change of magnetic flux through it. Negative sign = Lenz's law (opposes the change).", subject:'Physics'},
+        {q:"SI unit of work / energy?", a:"Joule (J). 1 J = 1 N·m = 1 kg·m²/s².", subject:'Physics'},
+        {q:"ISC Class 12 Bio — chromosomal disorder caused by trisomy 21?", a:"Down's syndrome — extra copy of chromosome 21 (47 chromosomes total instead of 46).", subject:'Biology'},
+      ]},
+      state: { label: 'State boards (MH/TN/KN/AP/UP)', icon: '🗺️', cards: [
+        {q:"Maharashtra State was formed in which year, from which earlier state?", a:"1 May 1960 — Bombay State was split into Maharashtra (Marathi-speaking) and Gujarat (Gujarati-speaking).", subject:'History/Polity'},
+        {q:"Capital of Karnataka?", a:"Bengaluru (formerly Bangalore — renamed 2014).", subject:'Geography'},
+        {q:"Telangana — formation date and parent state?", a:"2 June 2014 — carved out of Andhra Pradesh as India's 29th state. Capital: Hyderabad.", subject:'History/Polity'},
+        {q:"Largest delta in India?", a:"Sundarbans Delta — formed by Ganga and Brahmaputra rivers, spans West Bengal (India) and Bangladesh. UNESCO Heritage Site.", subject:'Geography'},
+        {q:"Tamil Nadu's official language and capital?", a:"Tamil (one of the world's oldest classical languages). Capital: Chennai (formerly Madras).", subject:'GK'},
+        {q:"Konark Sun Temple — which state and built by whom?", a:"Odisha — built ~1250 CE by King Narasimhadeva I of the Eastern Ganga Dynasty. UNESCO World Heritage Site.", subject:'History/GK'},
+        {q:"Highest peak in the Western Ghats?", a:"Anamudi (~2,695 m) in Kerala — also the highest peak in South India outside the Himalayas.", subject:'Geography'},
+        {q:"Asia's largest tulip garden is in which Indian state?", a:"Jammu & Kashmir — Indira Gandhi Memorial Tulip Garden in Srinagar, on Zabarwan range foothills near Dal Lake.", subject:'Geography/GK'},
+        {q:"Bihar's capital city and its ancient name?", a:"Patna — ancient Pataliputra, capital of the Mauryan and Gupta empires.", subject:'Geography/History'},
+        {q:"Which state is the 'Spice Garden of India'?", a:"Kerala — major producer of cardamom, black pepper, ginger, cinnamon, cloves, nutmeg.", subject:'Geography/GK'},
+        {q:"Uttar Pradesh State Board examinations — official body?", a:"UPMSP (Uttar Pradesh Madhyamik Shiksha Parishad), based in Prayagraj.", subject:'Education/GK'},
+      ]},
+      bank_ssc: { label: 'Bank / SSC / Government exams', icon: '🏦', cards: [
+        {q:"Profit and Loss percentages — always over what?", a:"Always over Cost Price (CP). Profit% = (Profit/CP) × 100; Loss% = (Loss/CP) × 100.", subject:'Quant'},
+        {q:"Simple Interest formula", a:"SI = (P × R × T) / 100, where P = principal, R = rate % p.a., T = time in years. Amount = P + SI.", subject:'Quant'},
+        {q:"Compound Interest formula", a:"A = P × (1 + R/100)ⁿ, for n full years compounded annually. CI = A − P.", subject:'Quant'},
+        {q:"Average of the first n natural numbers?", a:"(n + 1) / 2. e.g., average of 1 to 10 = 5.5.", subject:'Quant'},
+        {q:"How many squares (of all sizes) on a chessboard?", a:"204 — sum of 1² + 2² + ... + 8² = 8·9·17/6 = 204.", subject:'Reasoning'},
+        {q:"Speed–time–distance relationship", a:"Speed = Distance / Time. Average speed for equal distances at speeds a, b = 2ab/(a+b) (harmonic mean).", subject:'Quant'},
+        {q:"Who appoints the Governor of the RBI?", a:"The Central Government, after recommendation by the Financial Sector Regulatory Appointments Search Committee (FSRASC).", subject:'GK / Banking'},
+        {q:"Largest desert in the world by area?", a:"Antarctic Polar Desert (cold desert, ~14 million km²). Sahara is the largest hot desert (~9 million km²).", subject:'GK / Geography'},
+        {q:"IBPS conducts recruitment for which banks?", a:"Public sector banks (excluding SBI which conducts its own SBI PO/Clerk). Also for RRBs and specialist officers.", subject:'Banking/GK'},
+        {q:"SSC CGL — name two Group B Gazetted posts.", a:"Assistant Audit Officer (CAG), Assistant Section Officer (CSS), Inspector (Income Tax / Central Excise), Sub-Inspector (CBI). Most senior: Assistant Audit/Accounts Officer.", subject:'GK / SSC'},
+        {q:"Repo rate vs Reverse Repo rate?", a:"Repo: rate at which RBI lends to banks. Reverse repo: rate at which RBI borrows from banks. Repo > Reverse repo.", subject:'Banking'},
+      ]},
+    };
+
+    function resolveDefaultDeck(onb) {
+      var cls = (onb && onb.class_grade) || '';
+      var exam = (onb && onb.target_exam) || '';
+      var board = (onb && onb.board) || '';
+      // Priority 1: ICSE board overrides class default if 6-12.
+      if (board === 'icse' && cls && cls.indexOf('class_') === 0) {
+        return 'icse';
+      }
+      // Priority 2: post-school target exams.
+      if (exam === 'jee_main' || exam === 'jee_advanced') return 'jee';
+      if (exam === 'neet_ug' || exam === 'neet_pg') return 'neet';
+      if (exam === 'upsc_cse') return 'upsc';
+      if (exam === 'ssc_cgl' || exam === 'ibps_po' || exam === 'gate' || exam === 'cat') return 'bank_ssc';
+      // Priority 3: class grade.
+      if (['class_6','class_7','class_8'].indexOf(cls) >= 0) return 'cbse_6_8';
+      if (['class_9','class_10'].indexOf(cls) >= 0) return 'cbse_9_10';
+      if (['class_11','class_12'].indexOf(cls) >= 0) return 'cbse_11_12';
+      // Priority 4: state board → state deck.
+      if (board && board.indexOf('state_') === 0) return 'state';
+      // Sensible default: 9-10 covers the most-asked board exam material.
+      return 'cbse_9_10';
+    }
+
+    function studyMaterialsSection() {
+      var cards = STUDY_MATERIALS.map(function(g) {
+        var links = g.items.map(function(it) {
+          return (
+            '<a href="' + escapeHtml(it.url) + '" ' +
+              'style="display:flex;justify-content:space-between;align-items:center;' +
+              'padding:8px 0;border-bottom:1px solid #334155;text-decoration:none;color:#e2e8f0">' +
+              '<span style="font-size:13px;flex:1">' + escapeHtml(it.title) + '</span>' +
+              '<span class="chip" style="margin:0 0 0 8px">' + escapeHtml(it.kind) + '</span>' +
+            '</a>'
+          );
+        }).join('');
+        return (
+          '<div class="card">' +
+            '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">' +
+              '<div style="font-size:24px">' + g.icon + '</div>' +
+              '<h3 style="margin:0;font-size:14px">' + escapeHtml(g.category) + '</h3>' +
+            '</div>' +
+            '<div>' + links + '</div>' +
+          '</div>'
+        );
+      }).join('');
+      return (
+        '<section class="section anchor" id="study-materials">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Study materials & syllabus</h2>' +
+              '<p class="section-sub">Full chapter-level syllabus for every major board and exam, plus the practice tests, flashcards and concept videos that go with each. Everything in-app — no jumps to NCERT / CBSE / NTA sites.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="grid-3">' + cards + '</div>' +
+        '</section>'
+      );
+    }
+
+    function sampleFlashcardsSection() {
+      // Decide default deck from the user's onboarding.
+      var onb = (DASH && DASH.onboarding) || {};
+      window._flashDeck = resolveDefaultDeck(onb);
+      window._flashIdx = 0;
+      window._flashRevealed = false;
+
+      window.flashRender = function() {
+        var deckKey = window._flashDeck;
+        var deck = DECKS[deckKey] || DECKS.cbse_9_10;
+        // Selector row — keep highlighted chip styled
+        var sel = document.getElementById('deckSelector');
+        if (sel) {
+          sel.innerHTML = Object.keys(DECKS).map(function(k) {
+            var d = DECKS[k];
+            var active = (k === deckKey);
+            return '<button data-deck="' + k + '" onclick="flashSwitchDeck(this.dataset.deck)" ' +
+              'class="chip" style="cursor:pointer;border:0;' +
+              (active ? 'background:#fbbf24;color:#0f172a;font-weight:800' : '') + '">' +
+              d.icon + ' ' + escapeHtml(d.label) + ' (' + d.cards.length + ')</button>';
+          }).join(' ');
+        }
+        var card = deck.cards[window._flashIdx];
+        var face = window._flashRevealed ? card.a : card.q;
+        var box = document.getElementById('cardBox');
+        if (!box) return;
+        box.innerHTML =
+          '<div style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">' +
+            '<span>' + escapeHtml(deck.label) + ' · ' + escapeHtml(card.subject) +
+              ' · card ' + (window._flashIdx + 1) + ' of ' + deck.cards.length + '</span>' +
+            '<span>' + (window._flashRevealed ? 'Answer' : 'Tap to reveal') + '</span>' +
+          '</div>' +
+          '<div style="font-size:17px;font-weight:600;line-height:1.55;min-height:100px;display:flex;align-items:center">' +
+            escapeHtml(face) +
+          '</div>';
+        var btn = document.getElementById('flashBtn');
+        if (btn) btn.textContent = window._flashRevealed ? 'Hide answer' : 'Show answer';
+      };
+      window.flashFlip = function() {
+        window._flashRevealed = !window._flashRevealed;
+        window.flashRender();
+      };
+      window.flashNext = function() {
+        var deck = DECKS[window._flashDeck];
+        window._flashIdx = (window._flashIdx + 1) % deck.cards.length;
+        window._flashRevealed = false;
+        window.flashRender();
+      };
+      window.flashPrev = function() {
+        var deck = DECKS[window._flashDeck];
+        window._flashIdx = (window._flashIdx - 1 + deck.cards.length) % deck.cards.length;
+        window._flashRevealed = false;
+        window.flashRender();
+      };
+      window.flashSwitchDeck = function(k) {
+        if (!DECKS[k]) return;
+        window._flashDeck = k;
+        window._flashIdx = 0;
+        window._flashRevealed = false;
+        window.flashRender();
+      };
+
+      return (
+        '<section class="section anchor" id="sample-flashcards">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Flashcards by syllabus / board / exam</h2>' +
+              '<p class="section-sub">9 decks aligned to actual board / exam syllabi. We picked one to match your profile — switch any time.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card" style="margin-bottom:10px">' +
+            '<div id="deckSelector" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px"></div>' +
+            '<div id="cardBox" onclick="flashFlip()" style="cursor:pointer;padding:14px;background:#0f172a;border:1px solid #334155;border-radius:10px;min-height:140px">' +
+              '<div style="color:#94a3b8;font-size:13px">Loading…</div>' +
+            '</div>' +
+            '<div style="display:flex;gap:8px;margin-top:12px;justify-content:space-between;flex-wrap:wrap">' +
+              '<button class="btn ghost" onclick="flashPrev()">← Previous</button>' +
+              '<button class="btn" id="flashBtn" onclick="flashFlip()">Show answer</button>' +
+              '<button class="btn ghost" onclick="flashNext()">Next →</button>' +
+            '</div>' +
+          '</div>' +
+          '<a class="btn ghost" href="/flashcards">Open full flashcards →</a>' +
+        '</section>'
+      );
+    }
+
+    function moreModulesSection() {
+      // 13 modules ported to dedicated new-UI pages in prod-28.
+      var modules = [
+        {url:'/essay',      name:'Essay grader',      desc:'Submit an answer, get rubric-based AI feedback', icon:'📝'},
+        {url:'/interview',  name:'Mock interview',    desc:'AI-driven turn-by-turn interview practice',      icon:'🎤'},
+        {url:'/practice',   name:'Practice tests',    desc:'Adaptive timed practice across subjects',        icon:'📊'},
+        {url:'/adaptive',   name:'Adaptive practice', desc:'Personalised packs from weak-topic signals',     icon:'🎯'},
+        {url:'/math',       name:'Math Vision',       desc:'Snap a math problem, get a step-by-step solve', icon:'🧮'},
+        {url:'/voice',      name:'Voice tutor',       desc:'Talk to the AI tutor — voice in, voice out',    icon:'🎙️'},
+        {url:'/live',       name:'Live lecture',      desc:'Live class browse + book + join',               icon:'📡'},
+        {url:'/recap',      name:'Lesson recap',      desc:'Podcast-style audio summaries of past lessons', icon:'🎧'},
+        {url:'/notes',      name:'Notes',             desc:'Per-lesson personal notes, exportable',         icon:'📒'},
+        {url:'/curriculum', name:'Curriculum',        desc:'Browse NCERT / state-board chapter coverage',   icon:'📚'},
+        {url:'/path',       name:'Learning paths',    desc:'Multi-week plans aligned to your target exam',  icon:'🛤'},
+        {url:'/library',    name:'Upload library',    desc:'All textbook scans you have uploaded',          icon:'📁'},
+        {url:'/school',     name:'School & orgs',     desc:'Orgs you are a member of (classes, fees)',      icon:'🏫'},
+      ];
+      var cards = modules.map(function(m) {
+        return (
+          '<a class="card" href="' + m.url + '" ' +
+            'style="display:flex;gap:14px;text-decoration:none;color:inherit;' +
+            'align-items:center;border:1px solid #334155">' +
+            '<div style="font-size:28px;line-height:1">' + m.icon + '</div>' +
+            '<div style="flex:1;min-width:0">' +
+              '<div style="font-weight:800;font-size:15px;margin-bottom:2px">' +
+                escapeHtml(m.name) +
+              '</div>' +
+              '<div class="meta" style="line-height:1.4">' + escapeHtml(m.desc) + '</div>' +
+            '</div>' +
+            '<div style="color:#fbbf24;font-weight:800">→</div>' +
+          '</a>'
+        );
+      }).join('');
+      return (
+        '<section class="section anchor" id="more-modules">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">All modules</h2>' +
+              '<p class="section-sub">Every AI Pathshala tool, now with its own dedicated page in the new UI.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="grid-2">' + cards + '</div>' +
+        '</section>'
+      );
+    }
+
+    function conceptVideosSection() {
+      // Container only — populated by loadConceptVideos() after first paint
+      // so the dashboard renders fast without waiting on YouTube.
+      return (
+        '<section class="section anchor" id="concept-videos">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Concept videos</h2>' +
+              '<p class="section-sub">Curated explanations from trusted channels (Peekaboo Kidz, Khan Academy, CrashCourse, …). Click a card to watch.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card" style="margin-bottom:12px">' +
+            '<form id="cvForm" onsubmit="searchConceptVideos(event)" style="display:flex;gap:8px;flex-wrap:wrap">' +
+              '<input id="cvQuery" type="text" placeholder="Search a concept e.g. Newton, photosynthesis, fractions" ' +
+                'style="flex:1;min-width:220px;padding:10px;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;font-size:14px" />' +
+              '<button class="btn" type="submit">Search</button>' +
+            '</form>' +
+          '</div>' +
+          '<div id="cvResults" class="grid-3"></div>' +
+        '</section>'
+      );
+    }
+
+    function videoThumb(videoId) {
+      // YouTube generates these for any public video.
+      return 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg';
+    }
+    function ytIdFromEmbed(url) {
+      var m = /\/embed\/([A-Za-z0-9_-]+)/.exec(url || '');
+      return m ? m[1] : '';
+    }
+
+    function renderConceptVideoCards(rows) {
+      var out = document.getElementById('cvResults');
+      if (!rows || rows.length === 0) {
+        out.innerHTML = '<div class="card"><p class="empty">No matching videos yet.</p></div>';
+        return;
+      }
+      out.innerHTML = rows.map(function(v, i) {
+        var vid = ytIdFromEmbed(v.embed_url);
+        var thumb = vid ? videoThumb(vid) : '';
+        var tierLabel = v.quality_tier === 'verified'
+          ? '<span class="chip ok">verified</span>'
+          : v.quality_tier === 'channel_seed'
+          ? '<span class="chip amber">channel pick</span>'
+          : '<span class="chip">ai pick</span>';
+        // Cache the row on a global so the modal can fetch fresh metadata
+        // without depending on row index.
+        window._cvRows = window._cvRows || [];
+        window._cvRows[i] = v;
+        return (
+          '<div class="card" style="padding:0;overflow:hidden">' +
+            (thumb
+              ? '<div onclick="playConceptVideo(' + i + ')" style="display:block;background:#0f172a;cursor:pointer">' +
+                '<img src="' + thumb + '" alt="" style="width:100%;height:140px;object-fit:cover;display:block">' +
+                '</div>'
+              : '') +
+            '<div style="padding:14px">' +
+              '<div style="margin-bottom:6px">' + tierLabel +
+                '<span class="chip">' + escapeHtml(v.subject || '') + '</span>' +
+                (v.grade_min ? '<span class="chip">Cl ' + v.grade_min + (v.grade_max && v.grade_max!==v.grade_min ? '-'+v.grade_max : '') + '</span>' : '') +
+              '</div>' +
+              '<div style="font-weight:800;font-size:14px;margin-bottom:4px;line-height:1.4">' +
+                escapeHtml(v.title || v.concept) + '</div>' +
+              '<div class="meta">' + escapeHtml(v.channel || '') + '</div>' +
+              '<div style="margin-top:10px">' +
+                '<button class="btn" onclick="playConceptVideo(' + i + ')">▶ Watch here</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    // Inline modal player — no redirect to YouTube. We use YouTube's
+    // privacy-enhanced /embed/ URL (loaded only when the user clicks),
+    // so playback happens on this page.
+    window.playConceptVideo = function(idx) {
+      var v = (window._cvRows || [])[idx];
+      if (!v) return;
+      var vid = ytIdFromEmbed(v.embed_url);
+      // Self-hosted fallback for the verified Newton demo (the Peekaboo
+      // Kidz iframe is COPPA-blocked).
+      var selfHosted = (v.concept || '').toLowerCase().indexOf('newton') >= 0 &&
+                        (v.channel || '').toLowerCase().indexOf('peekaboo') >= 0;
+      var inner;
+      if (selfHosted) {
+        inner =
+          '<video controls autoplay style="width:100%;max-height:70vh;background:#000">' +
+            '<source src="/static/landing-demo.mp4" type="video/mp4">' +
+          '</video>';
+      } else if (vid) {
+        // youtube-nocookie embed: same-origin iframe, no redirect.
+        inner =
+          '<iframe src="https://www.youtube-nocookie.com/embed/' + vid +
+            '?autoplay=1&modestbranding=1&rel=0" ' +
+            'style="width:100%;aspect-ratio:16/9;border:0" ' +
+            'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      } else {
+        // No specific video URL curated yet — give the student real
+        // in-app alternatives instead of dumping them to YouTube.
+        var concept = encodeURIComponent(v.concept || '');
+        inner =
+          '<div class="card" style="background:#0f172a;border-color:#fbbf24">' +
+            '<div style="font-weight:800;font-size:15px;margin-bottom:8px;color:#fbbf24">No specific video curated for this concept yet</div>' +
+            '<p class="sub" style="margin-bottom:14px">We have a channel pick but not a verified specific URL. While we sort that out, here is what works in-app right now:</p>' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
+              '<a class="btn" href="/chat?topic=' + concept + '">💬 Ask AI tutor</a>' +
+              '<a class="btn" href="/syllabus">📚 Read the syllabus</a>' +
+              '<a class="btn" href="/flashcards">🃏 Practise flashcards</a>' +
+              '<a class="btn" href="/practice">📝 Take a practice test</a>' +
+            '</div>' +
+          '</div>';
+      }
+      var modal = document.getElementById('videoModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'videoModal';
+        modal.className = 'modal-bg';
+        modal.onclick = function(e) { if (e.target === modal) closeVideoModal(); };
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML =
+        '<div class="modal" style="max-width:880px;width:100%;padding:16px">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px">' +
+            '<div>' +
+              '<div style="font-weight:800;font-size:15px">' + escapeHtml(v.title || v.concept) + '</div>' +
+              '<div class="meta">' + escapeHtml(v.channel || '') + '</div>' +
+            '</div>' +
+            '<button class="btn ghost" onclick="closeVideoModal()">Close ✕</button>' +
+          '</div>' +
+          inner +
+        '</div>';
+      modal.classList.add('open');
+    };
+    window.closeVideoModal = function() {
+      var modal = document.getElementById('videoModal');
+      if (modal) { modal.innerHTML = ''; modal.classList.remove('open'); }
+    };
+
+    async function loadConceptVideos(query) {
+      var out = document.getElementById('cvResults');
+      if (!out) return;
+      out.innerHTML = '<div class="card"><div class="spinner"></div><span style="margin-left:10px">Loading…</span></div>';
+      // Default seed query — try the user's preferred subject first
+      var url = '/api/concept-videos?limit=6';
+      if (query) url += '&concept=' + encodeURIComponent(query);
+      try {
+        var r = await fetch(url);
+        var d = await r.json();
+        renderConceptVideoCards(d.rows || []);
+      } catch(e) {
+        out.innerHTML = '<div class="card"><p class="empty">Could not load videos: ' + escapeHtml(e.message) + '</p></div>';
+      }
+    }
+
+    window.searchConceptVideos = function(e) {
+      e.preventDefault();
+      var q = document.getElementById('cvQuery').value.trim();
+      loadConceptVideos(q);
+    };
+
     function render() {
       var html = profileHeader() +
         studyProgress() +
+        activitySection() +
         readinessSection() +
         personalisedOverlaySection() +
         myPacksSection() +
-        browsePacksSection();
+        browsePacksSection() +
+        studyMaterialsSection() +
+        sampleFlashcardsSection() +
+        conceptVideosSection() +
+        moreModulesSection();
       document.getElementById('dashRoot').innerHTML = html;
+      // Populate the dynamic pieces after the rest is rendered.
+      loadConceptVideos('');
+      if (window.flashRender) window.flashRender();
       // Hash navigation — if the user came from a chip with a #section anchor
       if (location.hash) {
         var t = document.querySelector(location.hash);
@@ -12998,11 +13703,8 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       var btn = event.target;
       btn.disabled = true; btn.textContent = 'Enrolling…';
       try {
-        var fd = new URLSearchParams();
-        fd.set('pack_code', packCode);
-        var r = await fetch('/api/exam-packs/enroll', {
-          method:'POST', headers:Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
-          body: fd.toString(),
+        var r = await fetch('/api/exam-packs/' + encodeURIComponent(packCode) + '/enroll', {
+          method:'POST', headers: authH(),
         });
         if (!r.ok) {
           var t = await r.text();
@@ -13317,6 +14019,56 @@ def list_flashcard_decks(
             for d in decks
         ],
         "count": len(decks),
+    })
+
+
+@app.post("/api/flashcards/seed-starter")
+def seed_starter_flashcards(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """One-time seed of 9 board/exam-aligned starter decks for the user.
+
+    Idempotent: if the user already has decks, returns the count without
+    re-seeding. Otherwise creates ~97 cards across CBSE 6-8, CBSE 9-10,
+    CBSE 11-12, JEE, NEET, UPSC, ICSE, state boards and bank/SSC."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import spaced_repetition as _sr
+    from . import starter_flashcards as _starter
+    _sr.migrate()
+
+    existing = _sr.list_my_decks(user.id, limit=1)
+    if existing:
+        return JSONResponse({
+            "seeded": False,
+            "reason": "user already has decks",
+            "deck_count": len(_sr.list_my_decks(user.id, limit=500)),
+        })
+
+    created_decks = 0
+    created_cards = 0
+    for deck_spec in _starter.STARTER_DECKS:
+        deck = _sr.create_deck(
+            owner_user_id=user.id,
+            title=deck_spec["title"],
+            description=deck_spec.get("description"),
+            topic_code=deck_spec.get("topic_code"),
+            language=deck_spec.get("language", "en"),
+            visibility="private",
+        )
+        created_decks += 1
+        for front, back in deck_spec["cards"]:
+            _sr.add_card(
+                deck_id=deck.id,
+                owner_user_id=user.id,
+                front=front,
+                back=back,
+            )
+            created_cards += 1
+    return JSONResponse({
+        "seeded": True,
+        "decks_created": created_decks,
+        "cards_created": created_cards,
     })
 
 

@@ -873,13 +873,38 @@ def get_flashcards_html() -> str:
     try {
       var r = await apiFetch(url);
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      cards = await r.json();
+      var payload = await r.json();
+      // Endpoint returns {cards:[...], count:N} — be tolerant of older
+      // array-only shapes too.
+      cards = Array.isArray(payload) ? payload : (payload.cards || []);
     } catch(e) {
       document.getElementById('fcErrorMsg').textContent = 'Failed to load cards: ' + e.message;
       showArea('errorState');
       return;
     }
     if (!cards.length) {
+      // First-time visitor: seed the 9 board/exam starter decks, then
+      // reload. The endpoint is idempotent — second call is a no-op.
+      try {
+        var seedR = await apiFetch('/api/flashcards/seed-starter',
+                                   {method:'POST'});
+        if (seedR.ok) {
+          var seedJson = await seedR.json();
+          if (seedJson.seeded || seedJson.deck_count > 0) {
+            // Re-fetch decks + due cards now that the SRS has content.
+            await loadDecks();
+            var r2 = await apiFetch('/api/flashcards/due');
+            if (r2.ok) cards = await r2.json();
+            // cards is an array OR {cards:[],count:N} — accept both
+            if (cards && cards.cards) cards = cards.cards;
+            if (cards && cards.length) {
+              showArea('cardArea');
+              showCard(0);
+              return;
+            }
+          }
+        }
+      } catch(e) { /* fall through to allDoneState */ }
       showArea('allDoneState');
       return;
     }
@@ -891,11 +916,17 @@ def get_flashcards_html() -> str:
     try {
       var r = await apiFetch('/api/flashcards/decks');
       if (!r.ok) return;
-      var decks = await r.json();
+      var payload = await r.json();
+      // Endpoint returns {decks:[...], count:N} — be tolerant of legacy
+      // array-only shapes too.
+      var decks = Array.isArray(payload) ? payload : (payload.decks || []);
+      // Clear any existing options past the first ("All decks")
+      while (deckSelect.options.length > 1) deckSelect.remove(1);
       decks.forEach(function(d) {
         var opt = document.createElement('option');
         opt.value = d.id;
-        opt.textContent = escapeHtml(d.title);
+        opt.textContent = escapeHtml(d.title) +
+          (d.card_count ? ' (' + d.card_count + ')' : '');
         deckSelect.appendChild(opt);
       });
     } catch(e) {}

@@ -1004,37 +1004,35 @@ HOME_HTML = """<!doctype html>
       return;
     }
     $('heroHeadline').textContent = dash.hero.headline || 'Welcome';
-    $('heroActions').innerHTML = (dash.hero.actions || []).map((a, i) => (
-      '<button class="' + (a.kind === 'primary' ? 'primary' : '')
-      + '" data-i="' + i + '">' + escapeHtml(a.title) + '</button>'
-    )).join('');
-    document.querySelectorAll('#heroActions button').forEach(b => {
-      const idx = parseInt(b.dataset.i, 10);
-      const a = dash.hero.actions[idx];
-      b.addEventListener('click', () => {
-        // Hero actions are big-deal CTAs — they scroll to the
-        // most relevant section instead of dumping raw JSON.
-        const map = {
-          'Continue today\\'s plan': 'today',
-          'Open Study Studio': 'study-studio',
-          'Take 20-min mock': 'mocks',
-          'Ask AI tutor': 'ai-tutor',
-        };
-        const scrollSlug = map[a.title];
-        if(scrollSlug){
-          const t = $('group-' + scrollSlug) || $('panel-' + scrollSlug);
-          if(t){ t.scrollIntoView({behavior:'smooth'}); return; }
-        }
-        // Fallback: open drawer
-        openDrawer({
-          title: a.title,
-          description: 'Run this action.',
-          endpoint: a.endpoint || '/',
-          http_method: 'GET',
-          badge: 'action',
-        });
-      });
-    });
+    // Hero CTAs navigate to working pages — no smooth-scroll-to-nothing,
+    // no dev drawer fallback. Every action MUST land on a real surface.
+    const HERO_TARGETS = {
+      'continue today': '/dashboard',
+      'continue todays plan': '/dashboard',
+      'open study studio': '/lessons/new',
+      'take 20-min mock': '/quiz',
+      'take a mock': '/quiz',
+      'ask ai tutor': '/chat',
+      'review flashcards': '/flashcards',
+      'browse exam packs': '/dashboard#browse-packs',
+      'open exam hub': '/dashboard',
+    };
+    function heroHref(title) {
+      const k = (title || '').toLowerCase().replace(/['']/g, '').trim();
+      // Try exact, then by-prefix
+      if (HERO_TARGETS[k]) return HERO_TARGETS[k];
+      for (const key in HERO_TARGETS) {
+        if (k.startsWith(key)) return HERO_TARGETS[key];
+      }
+      // Sensible default — dashboard is always navigable
+      return '/dashboard';
+    }
+    $('heroActions').innerHTML = (dash.hero.actions || []).map((a) => {
+      const href = heroHref(a.title);
+      const cls = (a.kind === 'primary' ? 'primary' : '');
+      return '<a class="btn ' + cls + '" href="' + href + '">'
+        + escapeHtml(a.title) + '</a>';
+    }).join('');
     const pack = dash.exam_pack || {};
     const r = dash.readiness || {};
     if(pack.title){
