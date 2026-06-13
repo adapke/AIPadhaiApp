@@ -1,0 +1,235 @@
+{
+  "source": "gate_2024_computer_science",
+  "default_board": "gate",
+  "default_grade": 0,
+  "default_subject": "computer_science",
+  "default_year": 2024,
+  "default_paper": "gate_cs",
+  "questions": [
+    {
+      "question_text": "Time complexity of binary search on sorted array of n elements:",
+      "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+      "correct_answer": "B",
+      "chapter": "Algorithms",
+      "topic_tags": ["binary_search", "complexity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Worst case time complexity of QuickSort:",
+      "options": ["O(n)", "O(log n)", "O(n log n)", "O(n²)"],
+      "correct_answer": "D",
+      "chapter": "Algorithms",
+      "topic_tags": ["quicksort"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which data structure uses LIFO?",
+      "options": ["Queue", "Stack", "Tree", "Graph"],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": ["stack", "LIFO"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "BFS uses which data structure?",
+      "options": ["Stack", "Queue", "Priority queue", "Heap"],
+      "correct_answer": "B",
+      "chapter": "Graph Algorithms",
+      "topic_tags": ["BFS", "queue"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Maximum number of nodes in a binary tree of height h:",
+      "options": ["2^h", "2^(h+1) - 1", "h²", "h"],
+      "correct_answer": "B",
+      "chapter": "Trees",
+      "topic_tags": ["binary_tree"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hash table collision can be resolved by:",
+      "options": ["Chaining", "Open addressing", "Both A and B", "None"],
+      "correct_answer": "C",
+      "chapter": "Hashing",
+      "topic_tags": ["collision", "hashing"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Dynamic programming is used when problem has:",
+      "options": ["Overlapping subproblems and optimal substructure", "Sorted input", "Single pass solution", "No recursion"],
+      "correct_answer": "A",
+      "chapter": "Algorithms",
+      "topic_tags": ["DP"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Process state when waiting for I/O is:",
+      "options": ["Running", "Ready", "Blocked", "Terminated"],
+      "correct_answer": "C",
+      "chapter": "Operating Systems",
+      "topic_tags": ["process_state"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Page replacement algorithm that minimises faults theoretically:",
+      "options": ["FIFO", "LRU", "Optimal (Belady)", "Random"],
+      "correct_answer": "C",
+      "chapter": "Operating Systems",
+      "topic_tags": ["page_replacement"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Deadlock requires which of:",
+      "options": ["Mutual exclusion", "Hold and wait", "No preemption", "All of these + circular wait"],
+      "correct_answer": "D",
+      "chapter": "Operating Systems",
+      "topic_tags": ["deadlock"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Normal form that eliminates partial dependencies:",
+      "options": ["1NF", "2NF", "3NF", "BCNF"],
+      "correct_answer": "B",
+      "chapter": "Databases",
+      "topic_tags": ["normalisation"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "ACID property — D stands for:",
+      "options": ["Determinism", "Durability", "Distribution", "Domain"],
+      "correct_answer": "B",
+      "chapter": "Databases",
+      "topic_tags": ["ACID"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which is a non-relational database?",
+      "options": ["PostgreSQL", "MySQL", "MongoDB", "Oracle"],
+      "correct_answer": "C",
+      "chapter": "Databases",
+      "topic_tags": ["NoSQL"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "TCP is which type of protocol?",
+      "options": ["Connectionless", "Connection-oriented", "Broadcast only", "Unicast only"],
+      "correct_answer": "B",
+      "chapter": "Computer Networks",
+      "topic_tags": ["TCP"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "OSI layer responsible for routing:",
+      "options": ["Physical", "Data link", "Network", "Transport"],
+      "correct_answer": "C",
+      "chapter": "Computer Networks",
+      "topic_tags": ["OSI", "network_layer"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Default port for HTTP:",
+      "options": ["21", "22", "80", "443"],
+      "correct_answer": "C",
+      "chapter": "Computer Networks",
+      "topic_tags": ["ports"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Default port for HTTPS:",
+      "options": ["80", "443", "8080", "22"],
+      "correct_answer": "B",
+      "chapter": "Computer Networks",
+      "topic_tags": ["ports"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "RAM is which type of memory?",
+      "options": ["Permanent", "Volatile", "Sequential", "Read-only"],
+      "correct_answer": "B",
+      "chapter": "Computer Architecture",
+      "topic_tags": ["RAM"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Cache memory is between:",
+      "options": ["RAM and HDD", "CPU and RAM", "HDD and CPU", "Internet and CPU"],
+      "correct_answer": "B",
+      "chapter": "Computer Architecture",
+      "topic_tags": ["cache"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Pipelining improves:",
+      "options": ["Latency", "Throughput", "Memory", "Storage"],
+      "correct_answer": "B",
+      "chapter": "Computer Architecture",
+      "topic_tags": ["pipeline"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "P vs NP — for P=NP to hold, problems verifiable in poly time must also be:",
+      "options": ["Solvable in poly time", "Decidable", "Reducible", "Halting"],
+      "correct_answer": "A",
+      "chapter": "Complexity Theory",
+      "topic_tags": ["P_NP"],
+      "difficulty": "hard",
+      "marks": 2
+    },
+    {
+      "question_text": "Inheritance is an OOP concept that:",
+      "options": ["Hides data", "Reuses parent class properties", "Splits modules", "Encrypts code"],
+      "correct_answer": "B",
+      "chapter": "Programming Languages",
+      "topic_tags": ["OOP", "inheritance"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Recursion uses which data structure internally?",
+      "options": ["Queue", "Stack", "Hash table", "Linked list"],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": ["recursion", "stack"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Big-O of best-case insertion into sorted array (at end):",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+      "correct_answer": "A",
+      "chapter": "Algorithms",
+      "topic_tags": ["array_ops"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Dijkstra's algorithm requires graph to have:",
+      "options": ["Non-negative weights", "Negative weights", "Cycles", "Unweighted edges"],
+      "correct_answer": "A",
+      "chapter": "Graph Algorithms",
+      "topic_tags": ["Dijkstra"],
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

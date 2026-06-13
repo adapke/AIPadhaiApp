@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class12_2025_chemistry_board",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Which is the principal ore of aluminium?",
+      "options": ["Magnetite", "Bauxite", "Hematite", "Galena"],
+      "correct_answer": "B",
+      "chapter": "General Principles of Metallurgy",
+      "topic_tags": ["ores", "aluminium"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Le Chatelier's principle applies to:",
+      "options": ["Saturated solutions only", "Equilibrium reactions", "Combustion only", "Acid-base only"],
+      "correct_answer": "B",
+      "chapter": "Chemical Equilibrium",
+      "topic_tags": ["Le_Chatelier"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Molarity is defined as moles of solute per:",
+      "options": ["litre of solvent", "litre of solution", "kg of solvent", "kg of solution"],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": ["molarity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Standard hydrogen electrode (SHE) potential is taken as:",
+      "options": ["0 V", "1 V", "-1 V", "0.76 V"],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["SHE", "reference"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Order of a reaction can be:",
+      "options": ["Only positive integer", "Only fractional", "Zero, fractional or integer", "Always 1"],
+      "correct_answer": "C",
+      "chapter": "Chemical Kinetics",
+      "topic_tags": ["order_of_reaction"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Tyndall effect is observed in:",
+      "options": ["True solution", "Suspension", "Colloid", "Distilled water"],
+      "correct_answer": "C",
+      "chapter": "Surface Chemistry",
+      "topic_tags": ["Tyndall", "colloid"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of oxygen atoms in K2Cr2O7 is:",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "C",
+      "chapter": "d and f Block",
+      "topic_tags": ["dichromate", "formula"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Coordination number of Na+ in NaCl crystal is:",
+      "options": ["4", "6", "8", "12"],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": ["NaCl", "coordination_number"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Lanthanoid contraction is due to:",
+      "options": ["Poor shielding by 4f electrons", "Poor shielding by 3d", "Increase in nuclear charge alone", "Decrease in atomic number"],
+      "correct_answer": "A",
+      "chapter": "d and f Block",
+      "topic_tags": ["lanthanoid_contraction"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hybridisation of Cr in [Cr(NH3)6]³⁺ is:",
+      "options": ["sp3", "dsp2", "d2sp3", "sp3d2"],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": ["hybridisation", "octahedral_complex"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "IUPAC name of (CH3)2CHCH2OH is:",
+      "options": ["2-methylpropan-1-ol", "2-methylpropan-2-ol", "1-methylpropan-2-ol", "Butan-2-ol"],
+      "correct_answer": "A",
+      "chapter": "Alcohols and Phenols",
+      "topic_tags": ["IUPAC"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Reaction of phenol with FeCl3 gives:",
+      "options": ["White precipitate", "Yellow colour", "Violet colour", "No reaction"],
+      "correct_answer": "C",
+      "chapter": "Phenols",
+      "topic_tags": ["FeCl3_test"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Cannizzaro reaction is given by:",
+      "options": ["Acetaldehyde", "Propanal", "Benzaldehyde (no alpha-H)", "Acetone"],
+      "correct_answer": "C",
+      "chapter": "Aldehydes and Ketones",
+      "topic_tags": ["Cannizzaro"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Most basic among the following amines is:",
+      "options": ["NH3", "CH3NH2", "(CH3)2NH", "Aniline"],
+      "correct_answer": "C",
+      "chapter": "Amines",
+      "topic_tags": ["basicity"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Glucose and fructose are:",
+      "options": ["Same molecule", "Geometrical isomers", "Functional isomers", "Optical isomers only"],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": ["isomerism", "carbohydrates"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "DNA contains the sugar:",
+      "options": ["Glucose", "Ribose", "Deoxyribose", "Sucrose"],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": ["DNA", "sugar"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Nylon-6,6 is a:",
+      "options": ["Addition polymer", "Condensation polymer", "Co-polymer of one monomer", "Natural polymer"],
+      "correct_answer": "B",
+      "chapter": "Polymers",
+      "topic_tags": ["condensation", "Nylon"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Aspirin chemically is:",
+      "options": ["Acetylsalicylic acid", "Salicylic acid", "Paracetamol", "Phenol"],
+      "correct_answer": "A",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": ["medicines"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Brass is an alloy of:",
+      "options": ["Cu and Sn", "Cu and Zn", "Fe and C", "Pb and Sn"],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": ["alloys"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Group 18 elements are called:",
+      "options": ["Alkali metals", "Halogens", "Noble gases", "Chalcogens"],
+      "correct_answer": "C",
+      "chapter": "p-Block",
+      "topic_tags": ["periodic_table"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of moles of H2 in 4 g of H2 is:",
+      "options": ["1", "2", "0.5", "4"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["moles"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Boiling point elevation depends on:",
+      "options": ["Nature of solute", "Molality of solute (non-volatile)", "Volume only", "Pressure"],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": ["colligative_property"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Strongest oxidising agent among halogens is:",
+      "options": ["F2", "Cl2", "Br2", "I2"],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": ["halogens", "oxidising"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Cell potential of a galvanic cell becomes zero when:",
+      "options": ["Reaction stops", "Equilibrium is reached", "Concentration is 1 M", "Temperature is 0 K"],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["cell_emf", "equilibrium"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which compound shows hydrogen bonding?",
+      "options": ["CH4", "HCl", "H2O", "CO2"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["hydrogen_bond"],
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

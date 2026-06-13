@@ -43,13 +43,17 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from dotenv import load_dotenv
+
 load_dotenv(ROOT / ".env", override=True)
 
 # Clear empty Anthropic env vars (see generate_concept_video.py for why)
 for _k in list(os.environ):
-    if _k.startswith("ANTHROPIC_") and _k != "ANTHROPIC_API_KEY":
-        if not os.environ[_k].strip():
-            del os.environ[_k]
+    if (
+        _k.startswith("ANTHROPIC_")
+        and _k != "ANTHROPIC_API_KEY"
+        and not os.environ[_k].strip()
+    ):
+        del os.environ[_k]
 
 
 MANIM_SYSTEM = """\

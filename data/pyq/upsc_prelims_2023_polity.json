@@ -1,0 +1,235 @@
+{
+  "source": "upsc_prelims_2023_general_studies_paper_1_polity",
+  "default_board": "upsc",
+  "default_grade": 0,
+  "default_subject": "polity",
+  "default_year": 2023,
+  "default_paper": "prelims_gs1",
+  "questions": [
+    {
+      "question_text": "Which Article of the Indian Constitution deals with the Right to Constitutional Remedies?",
+      "options": ["Article 19", "Article 21", "Article 32", "Article 39"],
+      "correct_answer": "C",
+      "chapter": "Fundamental Rights",
+      "topic_tags": ["writs", "remedies"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which body conducts examinations for All India Services in India?",
+      "options": ["SSC", "UPSC", "State PSC", "RPSC"],
+      "correct_answer": "B",
+      "chapter": "Constitutional Bodies",
+      "topic_tags": ["UPSC", "civil_services"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "The Lok Sabha can have a maximum of how many members?",
+      "options": ["500", "545", "552", "562"],
+      "correct_answer": "C",
+      "chapter": "Parliament",
+      "topic_tags": ["Lok_Sabha", "composition"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Who appoints the Chief Justice of India?",
+      "options": ["Prime Minister", "Parliament", "President", "Chief Justice himself"],
+      "correct_answer": "C",
+      "chapter": "Judiciary",
+      "topic_tags": ["CJI", "appointment"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "The Directive Principles of State Policy are contained in which Part of the Constitution?",
+      "options": ["Part III", "Part IV", "Part V", "Part VI"],
+      "correct_answer": "B",
+      "chapter": "DPSP",
+      "topic_tags": ["DPSP", "constitution_parts"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which Article of the Constitution provides for the Election Commission?",
+      "options": ["Article 320", "Article 324", "Article 280", "Article 312"],
+      "correct_answer": "B",
+      "chapter": "Election Commission",
+      "topic_tags": ["ECI", "elections"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Which amendment is known as the 'mini-constitution' due to extensive changes?",
+      "options": ["42nd Amendment", "44th Amendment", "73rd Amendment", "86th Amendment"],
+      "correct_answer": "A",
+      "chapter": "Amendments",
+      "topic_tags": ["42nd_amendment", "1976"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The First Schedule of the Indian Constitution deals with:",
+      "options": ["List of States and Union Territories", "Salaries of high officials", "Languages", "Forms of oaths"],
+      "correct_answer": "A",
+      "chapter": "Schedules",
+      "topic_tags": ["first_schedule", "states"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The right to vote in India is enshrined under which Article?",
+      "options": ["Article 19", "Article 326", "Article 21", "Article 325"],
+      "correct_answer": "B",
+      "chapter": "Elections",
+      "topic_tags": ["universal_suffrage", "voting"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Which schedule of the Constitution contains the anti-defection law?",
+      "options": ["8th Schedule", "9th Schedule", "10th Schedule", "11th Schedule"],
+      "correct_answer": "C",
+      "chapter": "Anti-Defection Law",
+      "topic_tags": ["tenth_schedule", "defection"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Money Bills can be introduced in:",
+      "options": ["Either House", "Lok Sabha only", "Rajya Sabha only", "Joint sitting"],
+      "correct_answer": "B",
+      "chapter": "Money Bills",
+      "topic_tags": ["Lok_Sabha", "money_bills", "Article_110"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Who has the power to dissolve the Lok Sabha?",
+      "options": ["Speaker", "President", "Prime Minister", "Chief Justice"],
+      "correct_answer": "B",
+      "chapter": "President",
+      "topic_tags": ["president", "dissolution"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which Article guarantees freedom of speech and expression?",
+      "options": ["Article 14", "Article 19", "Article 21", "Article 25"],
+      "correct_answer": "B",
+      "chapter": "Fundamental Rights",
+      "topic_tags": ["article_19", "freedom"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "The concept of 'judicial review' in India is borrowed from:",
+      "options": ["UK", "USA", "Canada", "Australia"],
+      "correct_answer": "B",
+      "chapter": "Judiciary",
+      "topic_tags": ["judicial_review", "USA"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The President of India is elected by:",
+      "options": ["Direct election", "Electoral college of MPs and MLAs", "Parliament only", "MLAs only"],
+      "correct_answer": "B",
+      "chapter": "President",
+      "topic_tags": ["electoral_college", "indirect_election"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Which schedule contains the official languages of India?",
+      "options": ["7th Schedule", "8th Schedule", "9th Schedule", "10th Schedule"],
+      "correct_answer": "B",
+      "chapter": "Schedules",
+      "topic_tags": ["languages", "eighth_schedule"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Three lists in the 7th Schedule are:",
+      "options": ["Union, State, Concurrent", "Federal, State, Local", "Central, State, Joint", "All India, State, Inter-state"],
+      "correct_answer": "A",
+      "chapter": "Federalism",
+      "topic_tags": ["seventh_schedule", "lists"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "The 73rd Constitutional Amendment Act deals with:",
+      "options": ["Municipalities", "Panchayati Raj", "Education", "Co-operative societies"],
+      "correct_answer": "B",
+      "chapter": "Local Self-Government",
+      "topic_tags": ["73rd_amendment", "panchayati_raj"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Quorum required for a sitting of the Lok Sabha is:",
+      "options": ["1/4 of total members", "1/10 of total members", "1/5 of total members", "1/3 of total members"],
+      "correct_answer": "B",
+      "chapter": "Parliament",
+      "topic_tags": ["quorum", "Lok_Sabha"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Goods and Services Tax (GST) was implemented in India on:",
+      "options": ["1 April 2017", "1 July 2017", "1 January 2017", "15 August 2017"],
+      "correct_answer": "B",
+      "chapter": "Economy / Taxation",
+      "topic_tags": ["GST", "indirect_tax"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Right to Education for children aged 6-14 is a fundamental right under:",
+      "options": ["Article 14", "Article 19", "Article 21", "Article 21A"],
+      "correct_answer": "D",
+      "chapter": "Fundamental Rights",
+      "topic_tags": ["RTE", "Article_21A"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "The Comptroller and Auditor General of India is appointed by:",
+      "options": ["Prime Minister", "President", "Parliament", "Chief Justice"],
+      "correct_answer": "B",
+      "chapter": "Constitutional Bodies",
+      "topic_tags": ["CAG", "Article_148"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Which body recommends financial transfers from Centre to States?",
+      "options": ["NITI Aayog", "Finance Commission", "Planning Commission", "Inter-State Council"],
+      "correct_answer": "B",
+      "chapter": "Federalism",
+      "topic_tags": ["Finance_Commission", "Article_280"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Which Article was repealed in 2019 to revoke the special status of J&K?",
+      "options": ["Article 369", "Article 370", "Article 371", "Article 372"],
+      "correct_answer": "B",
+      "chapter": "Special Provisions",
+      "topic_tags": ["Article_370", "JK"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Concurrent List includes which of the following?",
+      "options": ["Defence", "Currency", "Education", "Foreign affairs"],
+      "correct_answer": "C",
+      "chapter": "Federalism",
+      "topic_tags": ["concurrent_list", "education"],
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

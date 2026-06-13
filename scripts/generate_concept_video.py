@@ -35,6 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from dotenv import load_dotenv
+
 load_dotenv(ROOT / ".env", override=True)
 
 # Clear EMPTY Anthropic-prefix env vars — the anthropic SDK 0.96 reads
@@ -42,9 +43,12 @@ load_dotenv(ROOT / ".env", override=True)
 # the former is unset. An *empty* AUTH_TOKEN makes it send
 # `Authorization: Bearer ` which httpx rejects as LocalProtocolError.
 for _k in list(os.environ):
-    if _k.startswith("ANTHROPIC_") and _k != "ANTHROPIC_API_KEY":
-        if not os.environ[_k].strip():
-            del os.environ[_k]
+    if (
+        _k.startswith("ANTHROPIC_")
+        and _k != "ANTHROPIC_API_KEY"
+        and not os.environ[_k].strip()
+    ):
+        del os.environ[_k]
 
 # Language code → gTTS code (a couple need remapping)
 GTTS_LANG = {

@@ -1,0 +1,235 @@
+{
+  "source": "neet_2022_chemistry",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2022,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Bond angle in NH3 is approximately:",
+      "options": ["90°", "104.5°", "107°", "120°"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["NH3_geometry"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Hybridisation of C in CO2:",
+      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "correct_answer": "A",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["sp_hybrid"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of d-electrons in Mn²⁺ (Z=25):",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": ["d_electrons"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Maximum number of electrons in subshell f:",
+      "options": ["2", "6", "10", "14"],
+      "correct_answer": "D",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["f_subshell"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Acidic strength order: HF, HCl, HBr, HI",
+      "options": ["HF > HCl > HBr > HI", "HI > HBr > HCl > HF", "HF = HI", "Random"],
+      "correct_answer": "B",
+      "chapter": "p-Block",
+      "topic_tags": ["acidity_halides"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Reagent for Cannizzaro reaction:",
+      "options": ["Acid", "NaOH (strong base)", "Water", "Heat"],
+      "correct_answer": "B",
+      "chapter": "Aldehydes and Ketones",
+      "topic_tags": ["Cannizzaro"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Aldehyde + Tollens' reagent gives:",
+      "options": ["Silver mirror", "White precipitate", "Yellow colour", "No reaction"],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": ["Tollens"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Pauli exclusion principle states:",
+      "options": ["Max 2 electrons per orbital with opposite spin", "No 2 electrons in same atom", "All electrons spin same way", "Electrons can be in same place"],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["Pauli"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Strongest acid in given set: H2SO4, HClO4, HNO3, H3PO4",
+      "options": ["H2SO4", "HClO4", "HNO3", "H3PO4"],
+      "correct_answer": "B",
+      "chapter": "Acid-Base",
+      "topic_tags": ["acid_strength"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "First ionization energy is highest among:",
+      "options": ["Li", "Na", "K", "Rb"],
+      "correct_answer": "A",
+      "chapter": "Periodic Properties",
+      "topic_tags": ["IE_alkali"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Glucose contains how many chiral centres?",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "D",
+      "chapter": "Biomolecules",
+      "topic_tags": ["chirality"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Reduction of carbonyl with NaBH4 gives:",
+      "options": ["Alcohol", "Acid", "Ester", "Aldehyde"],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": ["NaBH4"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of σ bonds in propane:",
+      "options": ["8", "9", "10", "11"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["sigma_bonds"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Order of basicity: NH3, PH3, AsH3, SbH3",
+      "options": ["NH3 > PH3 > AsH3 > SbH3", "Reverse", "Equal", "NH3 < PH3"],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": ["basicity_group15"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Le Chatelier: increase pressure → equilibrium shifts to:",
+      "options": ["Side with fewer moles of gas", "Side with more moles of gas", "Random", "Reactants always"],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": ["Le_Chatelier"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Kohlrausch's law deals with:",
+      "options": ["Conductance", "Acidity", "Equilibrium", "Reaction rate"],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["Kohlrausch"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Half-life of first-order reaction is:",
+      "options": ["ln 2 / k", "k / ln 2", "k", "1/k"],
+      "correct_answer": "A",
+      "chapter": "Kinetics",
+      "topic_tags": ["first_order"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of moles of H2 in 4 g of H2:",
+      "options": ["1", "2", "0.5", "4"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["moles"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Acid rain pH is approximately:",
+      "options": ["4-5", "5-6", "6-7", "7-8"],
+      "correct_answer": "A",
+      "chapter": "Environmental Chemistry",
+      "topic_tags": ["acid_rain"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Geometry of XeF4:",
+      "options": ["Tetrahedral", "Square planar", "Trigonal bipyramidal", "Octahedral"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["XeF4"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Type of bonding in NaCl:",
+      "options": ["Covalent", "Ionic", "Metallic", "Hydrogen"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["ionic"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "DNA contains the sugar:",
+      "options": ["Glucose", "Ribose", "Deoxyribose", "Sucrose"],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": ["DNA"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Common name of methanol:",
+      "options": ["Wood spirit", "Grain alcohol", "Rectified spirit", "Glycerol"],
+      "correct_answer": "A",
+      "chapter": "Organic Chemistry",
+      "topic_tags": ["methanol"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Compound used as antifreeze in car radiators:",
+      "options": ["Methanol", "Ethanol", "Ethylene glycol", "Glycerol"],
+      "correct_answer": "C",
+      "chapter": "Alcohols",
+      "topic_tags": ["antifreeze"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Bond energy is maximum in:",
+      "options": ["F-F", "Cl-Cl", "Br-Br", "I-I"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["bond_energy_halogens"],
+      "difficulty": "medium",
+      "marks": 4
+    }
+  ]
+}

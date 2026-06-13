@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class10_2025_science_board",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "science",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Which of the following is a balanced chemical equation?",
+      "options": ["H2 + O2 → H2O", "2H2 + O2 → 2H2O", "H2 + 2O → H2O", "H + O → H2O"],
+      "correct_answer": "B",
+      "chapter": "Chemical Reactions and Equations",
+      "topic_tags": ["balancing", "combustion"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The pH of a neutral solution is:",
+      "options": ["0", "7", "14", "Greater than 7"],
+      "correct_answer": "B",
+      "chapter": "Acids, Bases and Salts",
+      "topic_tags": ["pH_scale", "neutral"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which metal is liquid at room temperature?",
+      "options": ["Iron", "Copper", "Mercury", "Gold"],
+      "correct_answer": "C",
+      "chapter": "Metals and Non-Metals",
+      "topic_tags": ["physical_properties", "mercury"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The molecular formula of methane is:",
+      "options": ["CH4", "C2H6", "C2H4", "C2H2"],
+      "correct_answer": "A",
+      "chapter": "Carbon and its Compounds",
+      "topic_tags": ["alkanes", "molecular_formula"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "In the periodic table, elements in the same group have similar:",
+      "options": ["Atomic number", "Atomic mass", "Number of valence electrons", "Number of neutrons"],
+      "correct_answer": "C",
+      "chapter": "Periodic Classification of Elements",
+      "topic_tags": ["valence_electrons", "groups"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Photosynthesis takes place in:",
+      "options": ["Mitochondria", "Chloroplast", "Nucleus", "Ribosome"],
+      "correct_answer": "B",
+      "chapter": "Life Processes",
+      "topic_tags": ["photosynthesis", "chloroplast"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which part of the brain controls balance?",
+      "options": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+      "correct_answer": "B",
+      "chapter": "Control and Coordination",
+      "topic_tags": ["brain", "cerebellum"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Insulin is produced by:",
+      "options": ["Liver", "Pancreas", "Kidney", "Spleen"],
+      "correct_answer": "B",
+      "chapter": "Control and Coordination",
+      "topic_tags": ["hormones", "pancreas"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The process of converting a tadpole to a frog is an example of:",
+      "options": ["Pollination", "Regeneration", "Metamorphosis", "Budding"],
+      "correct_answer": "C",
+      "chapter": "How do Organisms Reproduce?",
+      "topic_tags": ["development", "metamorphosis"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mendel performed his experiments on:",
+      "options": ["Rose plant", "Pea plant", "Mango plant", "Sunflower"],
+      "correct_answer": "B",
+      "chapter": "Heredity and Evolution",
+      "topic_tags": ["mendel", "heredity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "A concave mirror always forms a real image when the object is placed:",
+      "options": ["Between F and P", "At F", "Beyond F", "Behind the mirror"],
+      "correct_answer": "C",
+      "chapter": "Light - Reflection and Refraction",
+      "topic_tags": ["concave_mirror", "real_image"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "The SI unit of electric current is:",
+      "options": ["Volt", "Ampere", "Ohm", "Watt"],
+      "correct_answer": "B",
+      "chapter": "Electricity",
+      "topic_tags": ["SI_units", "current"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Ohm's law states that V equals:",
+      "options": ["I + R", "I - R", "I × R", "I / R"],
+      "correct_answer": "C",
+      "chapter": "Electricity",
+      "topic_tags": ["ohms_law", "resistance"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which lens is used to correct hypermetropia (long-sightedness)?",
+      "options": ["Concave lens", "Convex lens", "Cylindrical lens", "Bifocal lens"],
+      "correct_answer": "B",
+      "chapter": "The Human Eye and the Colourful World",
+      "topic_tags": ["eye_defects", "lenses"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The natural source of energy that does not pollute is:",
+      "options": ["Coal", "Petroleum", "Nuclear", "Solar"],
+      "correct_answer": "D",
+      "chapter": "Sources of Energy",
+      "topic_tags": ["renewable", "solar"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which gas is responsible for global warming?",
+      "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"],
+      "correct_answer": "C",
+      "chapter": "Our Environment",
+      "topic_tags": ["greenhouse_gases", "climate"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The chemical formula of washing soda is:",
+      "options": ["NaCl", "Na2CO3·10H2O", "NaHCO3", "Na2SO4"],
+      "correct_answer": "B",
+      "chapter": "Acids, Bases and Salts",
+      "topic_tags": ["sodium_compounds", "formulas"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Reactivity series: Which is most reactive?",
+      "options": ["Iron", "Sodium", "Copper", "Gold"],
+      "correct_answer": "B",
+      "chapter": "Metals and Non-Metals",
+      "topic_tags": ["reactivity_series"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnification of a mirror = -2 means:",
+      "options": ["Image is virtual and twice the size", "Image is real and twice the size, inverted", "Image is half the size", "Object is twice as far"],
+      "correct_answer": "B",
+      "chapter": "Light - Reflection and Refraction",
+      "topic_tags": ["magnification", "mirrors"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which of these has the longest wavelength in the visible spectrum?",
+      "options": ["Violet", "Green", "Yellow", "Red"],
+      "correct_answer": "D",
+      "chapter": "The Human Eye and the Colourful World",
+      "topic_tags": ["spectrum", "wavelength"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The unit of resistance is:",
+      "options": ["Volt", "Watt", "Ohm", "Coulomb"],
+      "correct_answer": "C",
+      "chapter": "Electricity",
+      "topic_tags": ["SI_units", "resistance"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which is NOT a fossil fuel?",
+      "options": ["Coal", "Petroleum", "Natural gas", "Biogas"],
+      "correct_answer": "D",
+      "chapter": "Sources of Energy",
+      "topic_tags": ["fossil_fuels", "renewable"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Anode of an electrolytic cell is:",
+      "options": ["Positive electrode", "Negative electrode", "Neutral", "None"],
+      "correct_answer": "A",
+      "chapter": "Metals and Non-Metals",
+      "topic_tags": ["electrolysis", "anode"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "An organism that prepares its own food is called:",
+      "options": ["Heterotroph", "Autotroph", "Saprotroph", "Parasite"],
+      "correct_answer": "B",
+      "chapter": "Life Processes",
+      "topic_tags": ["nutrition", "autotrophs"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of chromosomes in a human gamete (egg or sperm):",
+      "options": ["23", "46", "44", "22"],
+      "correct_answer": "A",
+      "chapter": "Heredity and Evolution",
+      "topic_tags": ["chromosomes", "gametes", "meiosis"],
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

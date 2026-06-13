@@ -15,9 +15,8 @@ import re
 import subprocess
 import sys
 import urllib.parse
-from pathlib import Path
-
 import urllib.request
+from pathlib import Path
 
 BASE = "http://127.0.0.1:8000"
 EMAIL = "adapke@gmail.com"

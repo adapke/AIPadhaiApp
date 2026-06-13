@@ -1,0 +1,235 @@
+{
+  "source": "icse_class12_2024_physics_isc",
+  "default_board": "icse",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2024,
+  "default_paper": "isc_board",
+  "questions": [
+    {
+      "question_text": "Coulomb's law constant k = 1/(4πε₀) is approximately:",
+      "options": ["9×10⁹ N·m²/C²", "9×10⁻⁹", "9×10⁶", "9×10¹²"],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": ["Coulomb_constant"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Capacitance with dielectric (constant K) becomes:",
+      "options": ["C/K", "C × K", "C - K", "C + K"],
+      "correct_answer": "B",
+      "chapter": "Electrostatic Potential",
+      "topic_tags": ["dielectric"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Resistance varies with temperature for a conductor as:",
+      "options": ["Increases", "Decreases", "Stays constant", "Random"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["resistance_temperature"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Right-hand thumb rule gives direction of:",
+      "options": ["Force on charge", "Magnetic field around current", "Velocity", "Acceleration"],
+      "correct_answer": "B",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["right_hand_rule"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Lenz's law gives the direction of:",
+      "options": ["Force", "Induced current", "Acceleration", "Voltage source"],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["Lenz"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "AC frequency in India is:",
+      "options": ["50 Hz", "60 Hz", "100 Hz", "120 Hz"],
+      "correct_answer": "A",
+      "chapter": "Alternating Current",
+      "topic_tags": ["AC"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Speed of light in vacuum is approximately:",
+      "options": ["3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s", "Infinity"],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": ["c"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Total internal reflection occurs when:",
+      "options": ["Light goes from denser to rarer beyond critical angle", "From rarer to denser", "Perpendicular incidence", "Reflection from rough surface"],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": ["TIR"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Young's double slit experiment demonstrates:",
+      "options": ["Reflection", "Refraction", "Interference of light", "Polarisation only"],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": ["YDSE"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Photoelectric effect requires light of frequency ≥:",
+      "options": ["Any frequency", "Threshold frequency", "Visible only", "UV only"],
+      "correct_answer": "B",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["photoelectric"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Bohr model explains spectrum of:",
+      "options": ["All atoms", "Hydrogen-like atoms only", "All molecules", "Solids"],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": ["Bohr"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Nuclear binding energy per nucleon is maximum for:",
+      "options": ["Hydrogen", "Iron-56", "Uranium", "Helium"],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": ["binding_energy", "iron"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Semiconductor with extra electrons due to dopant:",
+      "options": ["p-type", "n-type", "Intrinsic", "Compensated"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["n_type"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Forward bias of pn junction means:",
+      "options": ["p connected to negative", "p connected to positive", "Both ends positive", "Both ends negative"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["forward_bias"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Logic gate that outputs 1 only if both inputs are 1:",
+      "options": ["OR", "AND", "NAND", "XOR"],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": ["AND_gate"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Electron volt (eV) is unit of:",
+      "options": ["Voltage", "Energy", "Charge", "Power"],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": ["eV"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Half-life of radioactive isotope is:",
+      "options": ["Constant", "Decreases with time", "Increases with time", "Depends on amount"],
+      "correct_answer": "A",
+      "chapter": "Nuclei",
+      "topic_tags": ["half_life"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Solar cell converts:",
+      "options": ["Heat to electricity", "Light to electricity", "Sound to electricity", "Magnetic to electricity"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["solar_cell"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnetic flux unit is:",
+      "options": ["Tesla", "Weber", "Henry", "Coulomb"],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["units", "Weber"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Power dissipated in resistor R with current I:",
+      "options": ["IR", "I²R", "I/R", "R/I"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["power"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnification of telescope in normal adjustment is:",
+      "options": ["f_e/f_o", "f_o/f_e", "f_o + f_e", "f_o × f_e"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["telescope"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Photon energy E = hν depends on:",
+      "options": ["Only Planck's constant", "Only frequency", "Both h and ν", "Wavelength only"],
+      "correct_answer": "C",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["E_h_nu"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Equipotential surfaces are perpendicular to:",
+      "options": ["Magnetic field", "Electric field", "Gravity", "Velocity"],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": ["equipotential"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Ampere's law relates magnetic field to:",
+      "options": ["Charge", "Current enclosed", "Voltage", "Time"],
+      "correct_answer": "B",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["Ampere"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of electrons in 1 coulomb is approximately:",
+      "options": ["6.25×10¹⁸", "1.6×10⁻¹⁹", "1.6×10¹⁹", "6.022×10²³"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["coulomb_electrons"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

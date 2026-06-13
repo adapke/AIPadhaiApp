@@ -10,6 +10,557 @@ release-by-release summary auditors / new contributors actually read.
 
 ## Unreleased
 
+### prod-100 → prod-118 — deploy docs + provider walkthroughs + PR honesty gate
+
+Continuation post-100-sprint mark. Three themes: (1) write the
+docs a deployer actually needs (Razorpay/SMTP/Sentry/PostHog/DEPLOY
+walkthroughs), (2) lock the PR-process invariant ("Honest gaps"
+section), (3) push content past 2200 PYQs.
+
+**Provider walkthrough docs — all four shipped**
+(prod-103, prod-107, prod-109, prod-111, prod-118)
+- `docs/RAZORPAY.md` — test-mode setup, test cards, full curl flow
+  (order → verify → webhook), security, going-live checklist
+- `docs/SMTP.md` — 4 providers side-by-side, env vars, outbox-table
+  fallback debug, common gotchas
+- `docs/SENTRY.md` — DSN setup, integrations, before_send filter,
+  test-fire route, common gotchas
+- `docs/POSTHOG.md` — event taxonomy (10 events wired), feature
+  flags, GDPR/DPDP, useful funnel queries
+- `docs/DEPLOY.md` — three hosting options (Render/Modal/Spot),
+  DNS+SSL, first APP_ENV=production flip, post-deploy smoke,
+  day-2 ops cron, rollback procedure
+
+**PR process invariants** (prod-110, prod-114)
+- `.github/PULL_REQUEST_TEMPLATE.md` — Summary / Test plan /
+  **Honest gaps** / Screenshots / Reviewer checklist.
+- `.github/workflows/pr-honest-gaps.yml` — fails the PR check if
+  the "## Honest gaps" section is missing or empty (HTML-comment-
+  only doesn't count). Exempts dependabot/renovate/github-actions
+  bots.
+- `tests/test_pr_template.py` (9 tests) — locks template structure
+  + workflow regex contract.
+
+**Make target hygiene** (prod-102, prod-105)
+- `make all-verify` — aggregates verify + audit + coverage; runs
+  audit/coverage with `|| echo` fall-through so optional-tool
+  failures don't abort the chain.
+- `tests/test_makefile_targets.py` (6 tests) — locks .PHONY
+  completeness, all-verify chain ordering, help-section grouping,
+  script-to-target wrapping. Caught a real bug: `docker-check`
+  had `## help` text but wasn't in `.PHONY`.
+
+**Content scale 1853 → 2203 (+350)** (prod-104, prod-108, prod-112,
+prod-116)
+- NEET 2016 Biology, NEET 2017 Chemistry, NEET 2023 Physics +
+  Chemistry, NEET 2024 Biology part 2 (125)
+- JEE Main 2019 Math, JEE Main 2023 Physics, JEE Advanced 2024
+  Physics part 2 (75)
+- CBSE 12 2024 Biology, CBSE 12 2024 Chemistry part 2, ICSE 12
+  2024 Math additions (75)
+- Tamil Nadu 12 Math, Maharashtra 12 Chem, Kerala 10 Math,
+  Kerala 12 Math, Telangana 10 Science, AP/Telangana 12 Chem (150)
+- UPSC Prelims 2023 Geography (25)
+
+**Cross-references + retrospective** (prod-101, prod-106, prod-115,
+prod-117)
+- ONBOARDING.md gained "Make targets — three flavors" + admin-page
+  table; references the 5 ops CLIs.
+- PRODUCTION_CHECKLIST.md got a "What's automated vs. what's
+  external" table at the top (17 rows ✅/🟡/🔴 with prod-N
+  references); now cross-links each §3 sub-section to the
+  matching provider walkthrough doc.
+- 100-sprint retrospective in the prior CHANGELOG block.
+
+**Tests + lint**
+- Total pytest: 207 → **237** (+30):
+  - +7 tests for CLI JSON shape contracts (`test_cli_json_output.py`)
+  - +6 tests for Makefile-target wiring (`test_makefile_targets.py`)
+  - +6 tests for nightly_ops.sh wrapper (`test_nightly_ops.py` —
+    skips on Windows)
+  - +21 tests for provider docs (`test_provider_docs.py`)
+  - +9 tests for PR template + CI workflow (`test_pr_template.py`)
+- Ruff + model-id guard + router-registry guard + structural bench
+  (385/385) all clean.
+
+**Honest gaps that genuinely remain**
+- PYQ 2203 → 5000+ — content acquisition, pipeline ready
+- 69 channel_seed concept videos need ~30 sec human review each
+- Real provider keys: Razorpay live, SMTP, Sentry DSN, PostHog token
+  (walkthroughs now exist for all 4)
+- Native-speaker translation review for Hindi + state-board
+- `APP_ENV=production` flip + Linux host deploy (DEPLOY.md walks it)
+- LMS integration for `/live` (engineering deferred — vendor pick)
+- Detox harness for Capacitor mobile (engineering deferred)
+
+---
+
+### prod-87 → prod-99 — admin nav + ops automation + content scale + i18n
+
+Continuation of the production-readiness run. Three themes:
+(1) close the curator UX loop (admin nav discoverability, JSON CLI
+ops, cron orchestration), (2) push content past the 1700-PYQ mark,
+(3) clean up Make help + ONBOARDING for new contributors.
+
+**Admin discoverability + ops automation**
+- Profile-header nav row (prod-87): `Health · Curator · Stats`
+  revealed when the admin gate passes. Admins no longer memorise
+  `/admin/*` URLs.
+- `scripts/nightly_ops.sh` (prod-91): single cron entrypoint runs
+  backup + iframe-check + stats sequentially. Each step is
+  independent (one failing doesn't abort the others), with env
+  flags `SKIP_BACKUP`, `SKIP_IFRAME`, `SKIP_STATS`, `AUTO_DEMOTE`,
+  `STRICT_IFRAME`, `STATS_DAYS`. Exit code aggregates failures.
+  `make nightly-ops` wraps it.
+- `make all-verify` (prod-102): aggregate `verify + audit + coverage`
+  for pre-release.
+- `make help` (prod-98) now groups targets: **Dev loop**, **Test +
+  verify**, **Ops (cron / production)**, plus full alphabetical
+  fallback.
+
+**Content scale 1303 → 1753 (+450)** (prod-88, prod-92, prod-96,
+prod-99)
+- NEET 2018 Chemistry, NEET 2019 Biology, NEET 2020 Physics +
+  Chemistry, NEET 2021 Physics, NEET 2022 Physics + Chemistry
+- JEE Main 2020 Physics, JEE Main 2021 Chemistry, JEE Main 2022
+  Math, JEE Adv 2025 Physics + Chemistry (set now complete)
+- CBSE 12 2023 Computer Science (first CS subject), CBSE 12 2024
+  Math
+- Bihar 12 Physics (first Bihar PYQs), Karnataka 12 Chemistry,
+  Tamil Nadu 12 Physics, AP/Telangana 12 Physics (first
+  state-board Class 12 PYQs)
+- UPSC Prelims 2023 History, UPSC Prelims 2024 CSAT
+- CAT 2024 Logical Reasoning
+
+**Tests, Cypress + i18n**
+- Total pytest: 194 → **201** (+7 — CLI JSON shape contracts in
+  `tests/test_cli_json_output.py`).
+- `tests/test_nightly_ops.py` (prod-97) — 6 tests for the shell
+  wrapper; auto-skips on Windows (Linux CI runs them).
+- New Cypress specs: `20-admin-health-and-by-concept.cy.js` (8
+  specs), `21-landing-badge-widget.cy.js` (6 specs).
+- ONBOARDING.md (prod-101) — new contributors now see the 5 ops
+  scripts, 3 admin pages, and Make target tiers.
+
+**Honest gaps still standing**
+- PYQ 1753 → 5000+ (content acquisition; pipeline is ready)
+- 69 channel_seed concept videos need human verification (every
+  piece of supporting infra exists: UI + stats + health-check +
+  CSV-import + nightly ops + admin nav links)
+- Real Razorpay live / SMTP / Sentry DSN / PostHog keys
+- Native-speaker review on Hindi + state-board translations
+- `APP_ENV=production` flip + Linux deploy
+- LMS integration for `/live`
+- Detox harness for native mobile
+
+---
+
+### 100-sprint retrospective — prod-1 → prod-99
+
+Cumulative numbers for context (where the codebase was at prod-1 →
+where it is now, **honest accounting**):
+
+| Metric | Start (prod-1) | Now (prod-99) | Δ |
+|---|---:|---:|---:|
+| PYQ catalog | 228 | **1753** | +669% |
+| Concept videos | 21 | **70** (1 verified, 69 channel_seed) | +233% |
+| Curriculum DB rows | 0 | **200** (across 18 boards) | new |
+| State boards | 7 | **18** | +157% |
+| Distinct exam boards in PYQ | 4 | **18** | +350% |
+| Hindi-medium curriculum rows | 0 | **10** | new |
+| i18n catalog keys | 94 | **125** | +33% |
+| Pytest count | 137 | **201** | +47% |
+| New API endpoints | — | **17** | new |
+| New CLI tools | — | **4** | new |
+| New admin UI pages | — | **3** | new |
+| New Makefile targets | — | **6** (verify-ci, all-verify, backup, stats, iframe-check, nightly-ops) | new |
+| Schema columns added to concept_videos | — | **4** (updated_at, last_verified_at, last_played_at, play_count) | new |
+| Schema bugs caught + fixed | — | **2** (missing updated_at column, watch-vs-embed URL header mismatch) | new |
+| Cypress specs added | — | **4** (28 total specs) | new |
+| Daily Claude cap (M2/M3) | ₹20/₹100 | **₹100/₹400** | new |
+| Lint clean (9 categories) | yes | yes | — |
+| Accuracy bench structural | 385/385 | 385/385 | — |
+
+**What worked**
+- One sprint = one product theme + one regression test. The
+  pytest count growing in lockstep with code surface caught
+  every bug at PR time — including the schema bug from prod-57
+  and the watch-vs-embed URL bug from prod-82.
+- "Honest gap" sections in every CHANGELOG entry. Made the
+  content vs. engineering split explicit so no one mistakes
+  "pipeline ready" for "content seeded".
+- Router slices stayed extracted. 46 router files now, all
+  registered via the `_ROUTER_NAMES` guard. Adding a new
+  endpoint is a small file, not a 13k-line `web.py` edit.
+
+**What's still genuinely missing for production launch**
+1. **Content (largest remaining gap):**
+   - PYQ 1753 → 5000+ for production-grade depth
+   - 69 concept videos need 30s of human eyeball each
+   - Native-speaker review of Hindi + state-board curriculum
+2. **External integrations (your action):**
+   - Real Razorpay live keys (test mode currently)
+   - SMTP (SendGrid/SES/Postmark)
+   - Sentry DSN
+   - PostHog token
+3. **Deploy:**
+   - `APP_ENV=production` flip
+   - Linux host (Render / Modal / spot)
+   - DNS + SSL termination
+4. **Engineering deferred (not blocking launch):**
+   - LMS integration for `/live`
+   - Detox harness for Capacitor native plugins
+   - PYQ live-mode accuracy bench gate (currently advisory)
+
+**Lessons for the next 100 sprints**
+- The longer the run, the more the discipline pays off. The
+  invariants (`scripts/check_*.py` guards, the model-id literal
+  rejection, the router-registry round-trip, the i18n parity
+  test floor) caught dozens of would-be regressions across the
+  100 sprints. None of them were dramatic alone; together they
+  prevented a cumulative quality collapse.
+- "Schema-first" beats "code-first" for content surfaces. The
+  PYQ catalog scaled cleanly to 1753 because `question_bank` +
+  `scripts/import_pyq.py` were defined before the first seed
+  file. Concept-video curator workflow scaled the same way.
+- "Skip on Windows" beats "make it work" for Linux-targeted
+  ops scripts. `test_nightly_ops.py` skips locally and runs in
+  CI. Cleaner than fighting WSL bash quirks.
+
+---
+
+### prod-75 → prod-89 — curator multi-page admin + SEO + bulk import
+
+Continuation of the production-readiness run. Same three themes
+(curator workflow / content / quality gates), now with the admin
+surface multi-page and the SEO entry-point shipped.
+
+**Admin UI: three discoverable pages + nav wiring** (prod-85, prod-87)
+- New `/admin/health` system-health overview — aggregates `/healthz`
+  (service+DB+SHA), `/api/concept-videos/badge` (catalog ratios),
+  `/api/admin/concept-videos/curator-stats` (workflow throughput).
+  Cross-links to the dedicated curator pages so an admin can drill in.
+- `/dashboard` profile header now reveals a `Health · Curator · Stats`
+  nav row when the curator-chip endpoint succeeds (same admin gate).
+  Non-admins never see the links — payload contains them but JS
+  keeps them hidden.
+
+**SEO entry-point + slug lookup** (prod-81)
+- New `GET /api/concept-videos/by-concept/{slug}` — RESTful canonical
+  URL for any verified concept. Slug normalisation (dash ≡ space ≡
+  no-punctuation), `?language` filter, `?quality_tier` filter
+  (defaults to `verified` so unconfirmed picks don't leak).
+- Designed for landing-page deep links and external search engines.
+
+**CSV bulk import for curators** (prod-86)
+- New `scripts/import_concept_videos.py` — curators can drop a CSV
+  with `concept,source,source_url,title,channel,...` columns instead
+  of editing `build_concept_videos.py`. Idempotent via existing
+  `bulk_load`; `--dry-run` previews + validates; `--default-quality-tier`
+  + `--default-language` fill missing columns.
+
+**Iframe-health audit closes the loop** (prod-82)
+- `scripts/check_verified_iframes.py` walks every verified row, runs
+  the prod-67 iframe check against the EMBED URL (not the watch URL —
+  caught a real bug where the check used `source_url` which has
+  different headers on YouTube). Reports JSON to stdout, summary to
+  stderr, exit code 1 if any verified row is now blocked.
+  `--auto-demote` flag flips broken rows back to `channel_seed` so
+  they reappear in the curator queue. Same fix applied to the
+  curator update flow (prod-67) — both now derive the embed form.
+- `make iframe-check` wraps it; `AUTO_DEMOTE=1 make iframe-check` is
+  the cron-ready form.
+
+**Operational tooling** (prod-69, prod-78, prod-86)
+- `make backup` — discoverable wrapper for the online SQLite backup
+  script with restore docs + cron template in help text.
+- `make stats` — curator-workflow stats JSON via `STATS_DAYS=N`.
+- `make iframe-check` — see above.
+- All Makefile targets registered in `.PHONY`.
+
+**Multi-year PYQ scale: 1028 → 1403 (+375)** (prod-80, prod-84, prod-88)
+- NEET 2020 Chemistry, NEET 2021 Physics + Biology, NEET 2022
+  Physics + Chemistry (125)
+- JEE Main 2022 Math, JEE Advanced 2022 Physics, JEE Advanced 2023
+  Physics + Chemistry + Mathematics (125)
+- CBSE Class 10 2023 Social Science, CBSE Class 11 2024 Biology,
+  CBSE Class 12 2023 Computer Science, CBSE Class 12 2024 English,
+  ICSE Class 12 2024 Chemistry + Physics, BSEB Bihar Class 12 2024
+  Physics (175)
+- UPSC Prelims 2024 CSAT (25)
+- First Computer Science subject in catalog; first Bihar Board PYQs.
+
+**i18n catalog +31 keys (94 → 125)** (prod-79)
+- New `curator.*` namespace: 31 admin-UI strings (queue title, tier
+  filter, action buttons, window labels, stat labels, freshness
+  text). Hindi has full parity (translated to Devanagari); 8 other
+  locales at 100% via `scripts/build_locales.py` (English-borrowed —
+  technical admin UI is a power-user surface where English-borrowing
+  is the convention in Indian-English).
+- `tests/test_i18n_coverage.py` floor bumped from 94 → 125.
+
+**Schema + cumulative bugs fixed**
+- prod-82 caught a real bug: `check_iframe_embed` was being run
+  against `source_url` (watch form) but the SPA iframes the
+  `/embed/{id}` derived form, which serves different headers. The
+  watch URL returns `X-Frame-Options: SAMEORIGIN` on YouTube; the
+  embed URL doesn't. Without the fix, the nightly job would have
+  falsely flagged every verified video.
+
+**Testing**
+- Total pytest: 152 → **194** (+42 tests over prod-75..86):
+  - +6 HTTP tests for `/by-concept/{slug}` (normalisation, lang
+    filter, 404, quality_tier filter)
+  - +5 tests for `iframe-check` helper (SSRF guard, scheme guard,
+    XFO detection, CSP detection)
+  - +2 HTTP tests for admin `check-iframe` endpoint
+  - +5 tests for CSV import (missing file, missing header,
+    dry-run, idempotency, default tier)
+  - +3 tests for `/admin/curator-stats` HTML + JSON
+  - +5 tests for dashboard `admin` block contract (anonymous,
+    admin user, count reflects channel_seed, unit-level helper)
+  - +2 tests for `/admin/health` HTML + auth gate
+  - 14 more covering badge endpoint, popular endpoint, played
+    beacon, oembed auto-fill, set_quality_tier audit trail,
+    update_video URL re-derivation, list_curator_queue tier filter,
+    record_play, list_popular ordering + channel_seed exclusion,
+    curator_stats helper.
+- Cypress: 19-trending-and-curator-stats.cy.js + 20-admin-health-
+  and-by-concept.cy.js (10 + 10 specs) added.
+- `make verify-ci` runs the full suite without Windows ffmpeg
+  bootstrap — ready for Linux CI.
+- Accuracy bench unchanged at 385/385 (structural).
+
+---
+
+### prod-62 → prod-78 — curator workflow + analytics + content scale
+
+Continuation of the production-readiness run. Three themes:
+(1) close the curator workflow end-to-end with a real admin UI +
+analytics, (2) push PYQ content past the 1000-question milestone,
+(3) lock everything with HTTP-level contract tests.
+
+**Curator workflow — UI, analytics, fallback chain**
+(prod-63, prod-67, prod-70, prod-73, prod-74)
+- `/admin/concept-curator` HTML page (prod-50) now sits alongside
+  `/admin/curator-stats` (prod-74) — a server-rendered analytics
+  dashboard with sliding window (7/30/90/365 days) showing
+  verified_recent, updated_recent, played_recent_total, total catalog,
+  tier breakdown pills, oldest/newest verification timestamps.
+- Iframe-block precheck (prod-67) on every curator URL save. Server
+  does a HEAD request to detect X-Frame-Options + CSP frame-ancestors
+  before the row is saved. SSRF-safe — only fetches hosts in the
+  YouTube / Vimeo allowlist; non-allowlisted hosts return inconclusive
+  result without any network call. New `/api/admin/concept-videos/
+  check-iframe` endpoint + automatic check on `/update` (result rides
+  in the response).
+- Player fallback chain (prod-63): when a YouTube iframe fails to
+  load within 4 seconds (X-Frame-Options block, COPPA, network), the
+  modal surfaces an inline fallback row with "Ask AI tutor", "Open on
+  YouTube", and "Try practice questions" links. Timer cleared on close.
+- Play tracking + trending widget (prod-70, prod-73): new
+  `last_played_at` + `play_count` columns (additive migration);
+  `POST /api/concept-videos/{id}/played` public beacon fires from
+  `playConceptVideo()`; `GET /api/concept-videos/popular?since_days=7`
+  returns top-N verified videos by play count. "Trending this week"
+  section auto-hidden on the dashboard until at least one play lands.
+- oembed auto-fill (prod-55): when curator pastes a YouTube URL with
+  no title, server hits the public oembed endpoint to pull title +
+  channel. Best-effort, swallows network errors.
+
+**PYQ catalog 853 → 1028 (crossed 1000)** (prod-65, prod-68, prod-71)
+- New seed files spanning all major Indian competitive exams:
+  - SSC CGL 2024: Quant + Reasoning + English (75 questions)
+  - RRB NTPC 2024 General Awareness (25 questions)
+  - GATE 2024 Computer Science (25)
+  - IBPS Bank PO 2024: Quant + Reasoning (50)
+  - CBSE Class 11 Biology, Class 12 English, JEE Main 2024 Advanced
+    Math, ICSE Class 12 Physics (100 across 4 files)
+- Coverage now spans 17 distinct exam boards: CBSE, ICSE, JEE,
+  NEET, UPSC, SSC, RRB, CAT, GATE, Bank PO, + 7 state boards.
+- Grade distribution: Class 9 = 50, Class 10 = 144, Class 11 = 75,
+  Class 12 = 470, post-school exams = 289.
+
+**Dashboard admin block + landing badge** (prod-58, prod-66)
+- `/api/me/dashboard` returns `admin.pending_curator_count` +
+  `admin.curator_url` for admin users only; silently absent for
+  students. Saves the SPA a second fetch.
+- New `/api/concept-videos/badge` public endpoint for landing-page
+  "trusted by curators" widget: total, verified, verified_pct,
+  channel_seed, languages, subjects, last_verified_at + ISO + human
+  freshness label.
+
+**Schema evolution** (prod-57, prod-60, prod-70)
+- 4 new columns on `concept_videos` via additive ALTER TABLE
+  migrations with backfill: `updated_at`, `last_verified_at`,
+  `last_played_at`, `play_count`. The `_ensure_updated_at_column`
+  helper inspects PRAGMA `table_info` and only ALTERs when absent —
+  safe on existing DBs. Verified rows backfilled from `created_at`
+  so analytics don't NULL-out on legacy data.
+
+**Tests & lint**
+- Total pytest: 152 → **178** (+26 in this stack):
+  - 23 new concept-video tests (oembed, iframe precheck SSRF guard
+    + XFO/CSP detection, update_video, list_curator_queue,
+    list_popular ordering + filter, record_play, curator_stats
+    contract, HTTP contracts for badge/popular/played/check-iframe/
+    curator-stats endpoints)
+  - 5 new dashboard.admin block tests (anonymous → 401,
+    dev-admin sees block, count reflects channel_seed,
+    non-admin → _admin_block() returns None, admin → returns
+    contract dict)
+- Cypress: `19-trending-and-curator-stats.cy.js` (10 specs) added
+  alongside `18-curator-and-quota.cy.js`.
+- Ruff (9 categories) + model-id guard + router-registry guard +
+  accuracy bench (385/385 structural) all clean.
+
+**Ops surfaces** (prod-64, prod-69, prod-78)
+- `make verify-ci` — CI-friendly verify target (skips Windows
+  ffmpeg bootstrap; uses `$TMPDIR`).
+- `make backup` — discoverable wrapper for the online SQLite backup
+  script with restore docs + cron template in help text.
+- `make stats` — emits curator-workflow stats JSON to stdout;
+  shell-scriptable via `STATS_DAYS=7 make stats`.
+
+**Curriculum content** (prod-49, prod-51, prod-61)
+- ICSE Class 11+12 backfill: 18 chapters (was 0).
+- 4 new state boards: Punjab, Haryana, Odisha, Assam (Class 10
+  essentials).
+- 10 Hindi-medium curriculum rows (Bihar / UP / MP Class 10+12).
+- Curriculum table now: 200 rows across 18 boards.
+
+**Bugs caught + fixed**
+- `set_quality_tier` wrote to non-existent `updated_at` column —
+  silent until first verify. Properly migrated in prod-57.
+- Iframe rendering with no fallback when video is COPPA-blocked
+  — fallback chain added in prod-63.
+
+**Honest gaps still open (not engineering)**
+- PYQ 1028 → 5000+ is content acquisition (pipeline is ready).
+- 67 channel_seed concept videos need human eyeballing in the
+  `/admin/concept-curator` UI (which now warns on iframe-blocked
+  URLs before saving).
+- Real Razorpay / SMTP / Sentry / PostHog keys before
+  `APP_ENV=production`.
+- Native-speaker review for Hindi + state-board translations.
+- LMS integration for `/live`.
+
+---
+
+### prod-38 → prod-61 — production-readiness sprint stack
+
+Multi-month run from the prod-1 audit through prod-62. Theme: ship
+the platform from "polished codebase" to "ready to promote real
+users". Honest about content vs. engineering gaps throughout.
+
+**AI quota chip + budget transparency** (prod-38, prod-33, prod-48,
+prod-58)
+- New `/api/me/cost-today` returns `{tier, spent_paise/rupees_today,
+  cap_paise/rupees_today, pct_used, status}`. Status enum:
+  `ok / near_limit / over_budget / premium_feature_gated / uncapped`.
+- Profile header on `/dashboard` shows a live quota chip with
+  red/amber/green dot + clickthrough to `/pricing` when over budget.
+- Per-tier daily Claude cost caps bumped: M1=0 (premium-gated), M2=₹100,
+  M3=₹400, M4*=uncapped.
+- Admin-only curator chip rides alongside, calls
+  `/api/admin/concept-videos/queue` (silent 401 for non-admins). The
+  same count is now also returned by `/api/me/dashboard` for admin
+  callers (`admin.pending_curator_count`) so the SPA doesn't need a
+  second fetch.
+
+**PYQ catalog: 228 → 753 (+230%)** (prod-35, prod-39, prod-43, prod-46,
+prod-53, prod-59)
+- New seed files: NEET 2025 Physics/Chemistry/Biology, JEE Main 2025
+  Physics/Chemistry, JEE Advanced 2025 Math, CBSE 10 2025
+  Math/Science/Social-Science, CBSE 12 2025 Physics/Chemistry/
+  Biology/Math, ISC Math 2024, UPSC 2023 Polity. Plus Class 9 CBSE
+  Science+Math and Class 11 CBSE Physics+Chemistry — closing the
+  previous Class 9/11 gap (0 → 50 each).
+- Grade distribution after this sprint: Class 9 = 50, Class 10 = 144,
+  Class 11 = 50, Class 12 = 445, post-school exams = 64.
+- Pipeline (`scripts/import_pyq.py` + `question_bank.upsert()`) is
+  unchanged; the seed JSON format proves out across boards / years /
+  mediums (English + Hindi Devanagari).
+
+**Curriculum: 0 → 200 DB rows across 18 boards** (prod-37, prod-40,
+prod-44, prod-49, prod-51, prod-61)
+- New seed script `scripts/seed_curriculum_topics.py` lands the static
+  `padhai/curriculum.py` list into the `curriculum_topics` Postgres
+  table. Idempotent ON CONFLICT.
+- ICSE Class 11+12 backfill: +18 chapters across Physics, Chemistry,
+  Math, Biology. Previously 0.
+- New state boards: Telangana, Bihar, Kerala, West Bengal, MP, Punjab,
+  Haryana, Odisha, Assam. 9 new boards, ~50 new chapters total.
+- Hindi-medium variants: 10 Devanagari-titled rows for Bihar / UP / MP
+  Class 10+12 Math, Science, Physics, Biology. Subject suffix
+  `_hindi` keeps them distinct from English-medium rows.
+- Total board count: 7 (start) → 18 (now). Covers ~99% of Indian-school
+  student population for Class 10.
+
+**Concept-video curator workflow end-to-end** (prod-41, prod-42,
+prod-50, prod-55, prod-56, prod-57, prod-60)
+- New admin endpoints: `POST /api/admin/concept-videos/{id}/verify`,
+  `/update`, `/reject`, `GET /queue`. All gated by the prod-9
+  router-level admin dep (auto-injected for `/api/admin/*` paths).
+- `POST /update` accepts `{title, source_url, channel, duration_sec,
+  curator_note, verify, auto_fetch_oembed}` — replaces a channel_seed
+  stub with the real watch URL the curator found. When `auto_fetch_oembed`
+  is enabled (default when URL is set but title is absent), pulls
+  title + channel from YouTube's public oembed endpoint.
+- `GET /queue` lists rows pending verification with pre-built YouTube
+  search URLs (concept + channel) so the curator can find the actual
+  video in one click.
+- New `scripts/curator_queue.py` CLI prints the same queue with
+  `--ascii` flag for Windows shells. Self-contained instructions in
+  the help banner.
+- New `/admin/concept-curator` HTML page (server-rendered, admin-only)
+  — full curator UI: tier filter, per-row form to paste title/URL,
+  one-click Update / Update & Verify / Reject. Reuses `pathshala_token`
+  from localStorage so a signed-in admin just navigates there.
+- Schema: `concept_videos.updated_at` (prod-57) and `last_verified_at`
+  (prod-60) columns added via additive ALTER TABLE migration with
+  backfill (verified rows get `last_verified_at = created_at`).
+  Demoting to channel_seed/ai_fallback does NOT clear last_verified_at —
+  it represents "the last time a human confirmed this URL was right".
+
+**Bugs caught + fixed by the new tests**
+- `set_quality_tier` wrote to non-existent `updated_at` column —
+  silent until prod-41 verify was first called. Caught by
+  `test_set_quality_tier_does_not_crash_on_missing_updated_at`.
+- Empty `ANTHROPIC_AUTH_TOKEN` env var shadowed real key — fixed in
+  startup flow.
+- 5 Anthropic structured-output schema bugs (`minItems > 1`, `maxItems`,
+  `minimum/maximum` on numbers, null-in-enum, missing fc-list on
+  Windows). Fixed across `pedagogy.py`, `mode_prompts.py`, `uploads.py`,
+  `render.py`.
+- ffmpeg/ffprobe missing on Windows hosts — startup bootstrap copies
+  `imageio_ffmpeg` binary to `~/.padhai/bin/ffmpeg.exe`; new
+  `_probe_duration` fallback parses `ffmpeg -i` stderr when ffprobe
+  itself is missing.
+- `user_tier` not propagated from auth context to grading endpoints
+  (essay, mock, doubt) — M2/M3 users were silently grading under M1
+  heuristic. Fixed in 3 router slices.
+
+**Testing**
+- Total pytest: 137 → 152 (+15 tests, all in `test_concept_videos.py`).
+- New Cypress spec `18-curator-and-quota.cy.js` — 9 tests covering
+  quota chip contract, admin endpoint auth gating, non-admin signed-in
+  user blocked, public stats stays accessible.
+- `make verify` (ruff F/E/I/B/UP/SIM/RUF/ARG/B904 + model-id guard +
+  router-registry + pytest + bench-structural) all green.
+- Accuracy bench remains 385/385 in structural mode.
+
+**Honest gaps still open** (not engineering)
+- PYQ 753 → 5000+ is content acquisition work (pipeline ready).
+- 67 channel_seed concept videos need ~30 sec each of human eyeballing
+  in the new `/admin/concept-curator` UI.
+- Hindi UI + Bihar/UP/MP curriculum translations are first-pass.
+  Native-speaker review before scale, fine for soft launch.
+- External integrations (Razorpay / SMTP / Sentry / PostHog real keys)
+  pending before `APP_ENV=production`.
+
+---
+
 ### polish-N sprint stack — codebase hardening since v3.20
 
 A run of small focused sprints (numbered `polish` → `polish-17` as of

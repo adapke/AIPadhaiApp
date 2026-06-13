@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sqlite3
 import time
 import uuid
@@ -54,6 +55,17 @@ CREATE INDEX IF NOT EXISTS idx_qb_chapter ON question_bank(board, grade, subject
 CREATE INDEX IF NOT EXISTS idx_qb_year    ON question_bank(board, grade, subject, year DESC);
 """
 
+
+# prod-138 — NCERT standards correlation column. ALTER TABLE is
+# idempotent via duplicate-column-name try/except. Code format:
+#   <BOARD>.<GRADE>.<SUBJECT_CODE>.<CHAPTER>[.<LO>]
+# e.g. CBSE.10.SCI.CH06         — Class 10 Science, Chapter 6
+#      CBSE.10.SCI.CH06.LO03    — same chapter, Learning Outcome 3
+#      ICSE.12.PHY.CH02         — ICSE Class 12 Physics, Chapter 2
+_NCERT_CODE_MIGRATION = """
+ALTER TABLE question_bank ADD COLUMN ncert_code TEXT;
+"""
+
 VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 
 
@@ -67,6 +79,16 @@ def _conn() -> sqlite3.Connection:
     path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(path), timeout=10.0)
     conn.executescript(SCHEMA)
+    # prod-138 — idempotent column add for the NCERT code.
+    try:
+        conn.execute(_NCERT_CODE_MIGRATION)
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_qb_ncert "
+            "ON question_bank(ncert_code)"
+        )
+    except sqlite3.OperationalError:
+        # Column already exists — expected on every boot after the first.
+        pass
     return conn
 
 
@@ -206,6 +228,118 @@ def search(
     params.extend([limit, offset])
     with _conn() as conn:
         rows = conn.execute(sql, params).fetchall()
+    return [_row_to_question(r) for r in rows]
+
+
+# ---------- prod-138 — NCERT standards correlation ----------
+
+
+# Hierarchical NCERT-code regex. Accepts:
+#   CBSE.10.SCI.CH06
+#   CBSE.10.SCI.CH06.LO03
+#   ICSE.12.PHY.CH02.LO05
+#   STATE_MH.9.MATH.CH04
+# Prefix any of these to filter at any depth.
+_NCERT_CODE_RE = re.compile(
+    r"^[A-Z][A-Z0-9_]*\.\d{1,2}\.[A-Z]{2,6}(?:\.[A-Z]{2,4}\d{1,3}){1,2}$"
+)
+
+
+def is_valid_ncert_code(code: str) -> bool:
+    """prod-138 — Validate NCERT code shape. Cheap regex; the actual
+    chapter existence join is the curriculum_objectives table."""
+    if not code or not isinstance(code, str):
+        return False
+    return bool(_NCERT_CODE_RE.match(code.strip()))
+
+
+def set_ncert_code(qid: str, code: str | None) -> bool:
+    """prod-138 — Set the NCERT code on a single question.
+
+    `code=None` clears the tag.
+    Returns True if a row was updated, False if qid not found.
+    Code is validated (or None) — invalid shapes raise ValueError so the
+    batch tagger can detect a bad Claude output without inserting garbage.
+    """
+    if code is not None and not is_valid_ncert_code(code):
+        raise ValueError(f"invalid NCERT code shape: {code!r}")
+    with _conn() as conn:
+        cursor = conn.execute(
+            "UPDATE question_bank SET ncert_code = ? WHERE id = ?",
+            (code, qid),
+        )
+        return cursor.rowcount > 0
+
+
+def list_by_standard(
+    code_prefix: str, *, limit: int = 50, offset: int = 0,
+) -> list[Question]:
+    """prod-138 — Filter questions by NCERT code (prefix match).
+
+    A search for `CBSE.10.SCI` matches CBSE.10.SCI.CH01,
+    CBSE.10.SCI.CH06.LO03, etc. — useful for "all Class 10
+    Science questions". A search for the full LO code returns
+    exactly the tagged subset.
+
+    Empty / invalid prefix → empty list (not an error).
+    """
+    code = (code_prefix or "").strip().upper()
+    if not code:
+        return []
+    pattern = f"{code}%"
+    with _conn() as conn:
+        rows = conn.execute(
+            f"SELECT {_SEL} FROM question_bank "
+            "WHERE ncert_code LIKE ? "
+            "ORDER BY board, grade, subject, year DESC "
+            "LIMIT ? OFFSET ?",
+            (pattern, limit, offset),
+        ).fetchall()
+    return [_row_to_question(r) for r in rows]
+
+
+def count_by_standard(code_prefix: str) -> int:
+    """prod-138 — Count of questions matching the code prefix."""
+    code = (code_prefix or "").strip().upper()
+    if not code:
+        return 0
+    pattern = f"{code}%"
+    with _conn() as conn:
+        row = conn.execute(
+            "SELECT COUNT(*) FROM question_bank WHERE ncert_code LIKE ?",
+            (pattern,),
+        ).fetchone()
+    return int(row[0] if row else 0)
+
+
+def ncert_coverage_stats() -> dict:
+    """prod-138 — How many of our 2500+ PYQs are tagged?
+    Surfaces in admin curator-stats page."""
+    with _conn() as conn:
+        total = conn.execute(
+            "SELECT COUNT(*) FROM question_bank"
+        ).fetchone()[0]
+        tagged = conn.execute(
+            "SELECT COUNT(*) FROM question_bank WHERE ncert_code IS NOT NULL"
+        ).fetchone()[0]
+    return {
+        "total": int(total),
+        "tagged": int(tagged),
+        "untagged": int(total - tagged),
+        "coverage_pct": round((tagged / total) * 100, 2) if total else 0.0,
+    }
+
+
+def list_untagged(*, limit: int = 50) -> list[Question]:
+    """prod-138 — Batch tagger reads this to find work to do."""
+    with _conn() as conn:
+        rows = conn.execute(
+            f"SELECT {_SEL} FROM question_bank "
+            "WHERE ncert_code IS NULL "
+            "ORDER BY board, grade, subject, year DESC "
+            "LIMIT ?",
+            (limit,),
+        ).fetchall()
     return [_row_to_question(r) for r in rows]
 
 

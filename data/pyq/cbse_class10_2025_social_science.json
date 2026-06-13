@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class10_2025_social_science_board",
+  "default_board": "cbse",
+  "default_grade": 10,
+  "default_subject": "social_science",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Who was the leader of Italian unification?",
+      "options": ["Garibaldi", "Bismarck", "Napoleon", "Hitler"],
+      "correct_answer": "A",
+      "chapter": "Rise of Nationalism in Europe",
+      "topic_tags": ["Italy", "Garibaldi"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Khilafat Movement was launched in:",
+      "options": ["1919", "1920", "1922", "1930"],
+      "correct_answer": "B",
+      "chapter": "Nationalism in India",
+      "topic_tags": ["Khilafat", "1920"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Salt Satyagraha was led by:",
+      "options": ["Subhash Chandra Bose", "Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel"],
+      "correct_answer": "B",
+      "chapter": "Nationalism in India",
+      "topic_tags": ["Gandhi", "Salt_March"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The Indian National Congress was founded in:",
+      "options": ["1882", "1885", "1905", "1919"],
+      "correct_answer": "B",
+      "chapter": "Nationalism in India",
+      "topic_tags": ["INC", "founding"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Print culture in Europe was revolutionised by:",
+      "options": ["Marco Polo", "Johannes Gutenberg", "Newton", "Galileo"],
+      "correct_answer": "B",
+      "chapter": "Print Culture",
+      "topic_tags": ["Gutenberg", "printing_press"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "The Indian Constitution adopted on:",
+      "options": ["15 August 1947", "26 January 1950", "26 November 1949", "26 January 1947"],
+      "correct_answer": "C",
+      "chapter": "Indian Constitution",
+      "topic_tags": ["Constitution", "adoption_date"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Right to Information Act was passed in:",
+      "options": ["2002", "2005", "2010", "2012"],
+      "correct_answer": "B",
+      "chapter": "Democratic Rights",
+      "topic_tags": ["RTI", "2005"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which is the longest river of India?",
+      "options": ["Yamuna", "Ganga", "Brahmaputra", "Krishna"],
+      "correct_answer": "B",
+      "chapter": "Drainage",
+      "topic_tags": ["rivers", "Ganga"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sundarbans is famous for:",
+      "options": ["Sandalwood", "Mangroves and Royal Bengal Tigers", "Tea", "Coffee"],
+      "correct_answer": "B",
+      "chapter": "Forests and Wildlife",
+      "topic_tags": ["Sundarbans"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Indian Standard Time is based on longitude:",
+      "options": ["75°E", "82.5°E", "90°E", "78°E"],
+      "correct_answer": "B",
+      "chapter": "Resources and Development",
+      "topic_tags": ["IST"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Black soil is most suitable for:",
+      "options": ["Rice", "Wheat", "Cotton", "Tea"],
+      "correct_answer": "C",
+      "chapter": "Agriculture",
+      "topic_tags": ["soil", "cotton"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Tertiary sector includes:",
+      "options": ["Mining", "Manufacturing", "Services", "Agriculture"],
+      "correct_answer": "C",
+      "chapter": "Sectors of Indian Economy",
+      "topic_tags": ["tertiary", "services"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "RBI is the central bank of India established in:",
+      "options": ["1935", "1947", "1950", "1969"],
+      "correct_answer": "A",
+      "chapter": "Money and Credit",
+      "topic_tags": ["RBI", "1935"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Money supplied by the Reserve Bank of India is called:",
+      "options": ["High-powered money", "Demand deposits", "Time deposits", "Cheques"],
+      "correct_answer": "A",
+      "chapter": "Money and Credit",
+      "topic_tags": ["money_supply"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "MNCs are companies that operate in:",
+      "options": ["One country only", "Two countries only", "More than one country", "Only India"],
+      "correct_answer": "C",
+      "chapter": "Globalisation",
+      "topic_tags": ["MNC"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "ISO 9000 is a:",
+      "options": ["Quality certification", "Sales target", "Tax mark", "Currency code"],
+      "correct_answer": "A",
+      "chapter": "Consumer Rights",
+      "topic_tags": ["ISO", "quality"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "First Battle of Panipat was fought in:",
+      "options": ["1526", "1556", "1761", "1857"],
+      "correct_answer": "A",
+      "chapter": "Indian History",
+      "topic_tags": ["Panipat", "Babur"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Who built the Taj Mahal?",
+      "options": ["Akbar", "Babur", "Shah Jahan", "Aurangzeb"],
+      "correct_answer": "C",
+      "chapter": "Indian History",
+      "topic_tags": ["Taj_Mahal", "Mughal"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Founder of Mauryan empire was:",
+      "options": ["Ashoka", "Chandragupta Maurya", "Bindusara", "Akbar"],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "topic_tags": ["Maurya"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Capital of Andhra Pradesh is:",
+      "options": ["Hyderabad", "Amaravati", "Vijayawada", "Visakhapatnam"],
+      "correct_answer": "B",
+      "chapter": "Political Geography",
+      "topic_tags": ["AP", "capital"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Tropic of Cancer passes through how many Indian states?",
+      "options": ["6", "7", "8", "9"],
+      "correct_answer": "C",
+      "chapter": "Geographical Basics",
+      "topic_tags": ["Tropic_of_Cancer"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Sahyadri mountain range is located in:",
+      "options": ["North India", "Eastern India", "Western India", "Central India"],
+      "correct_answer": "C",
+      "chapter": "Physical Features",
+      "topic_tags": ["Sahyadri"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "PRWD (Public Right to Welfare and Development) Schemes include:",
+      "options": ["NREGA", "Right to Education", "Right to Food", "All of these"],
+      "correct_answer": "D",
+      "chapter": "Democratic Rights",
+      "topic_tags": ["welfare_schemes"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Independence Day of India is celebrated on:",
+      "options": ["26 January", "15 August", "2 October", "14 November"],
+      "correct_answer": "B",
+      "chapter": "Indian History",
+      "topic_tags": ["Independence_Day"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Civil Disobedience Movement was launched in:",
+      "options": ["1920", "1930", "1942", "1947"],
+      "correct_answer": "B",
+      "chapter": "Nationalism in India",
+      "topic_tags": ["civil_disobedience"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

@@ -51,7 +51,10 @@ def doubt_ai_answer(
         except Exception:
             raise HTTPException(403, "not your doubt") from None
     try:
-        d = dc.answer_via_ai_vision(doubt_id=did, force=force)
+        d = dc.answer_via_ai_vision(
+            doubt_id=did, force=force,
+            user_tier=getattr(user, "subscription_tier", None),
+        )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e
     return {
@@ -92,7 +95,9 @@ def doubt_submit_instant(
         raise HTTPException(400, str(e)) from e
     # Immediately call Claude Vision
     try:
-        d = dc.answer_via_ai_vision(doubt_id=d.id)
+        d = dc.answer_via_ai_vision(
+            doubt_id=d.id, user_tier=getattr(user, "subscription_tier", None),
+        )
     except Exception as e:
         # Don't fail the submission — student still has a row + a
         # human can pick it up. Surface the error to the caller.

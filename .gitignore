@@ -36,3 +36,7 @@ cypress/screenshots/
 cypress/downloads/
 node_modules/
 .coverage
+
+# Local dev server runtime state
+.padhai_server.pid
+padhai_server.log

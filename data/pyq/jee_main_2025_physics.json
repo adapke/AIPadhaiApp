@@ -1,0 +1,235 @@
+{
+  "source": "jee_main_2025_january_session_physics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2025,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "A particle moves with constant acceleration of 2 m/s² from rest. Distance covered in 5 s is:",
+      "options": ["10 m", "25 m", "50 m", "100 m"],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": ["uniform_acceleration", "displacement"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "A body of mass 2 kg falls freely from a height of 20 m. Kinetic energy just before hitting ground is (g=10 m/s²):",
+      "options": ["100 J", "200 J", "400 J", "800 J"],
+      "correct_answer": "C",
+      "chapter": "Work-Energy",
+      "topic_tags": ["free_fall", "kinetic_energy"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The frequency of a simple pendulum with length 1 m on Earth is (g=π² m/s²):",
+      "options": ["0.5 Hz", "1 Hz", "2 Hz", "4 Hz"],
+      "correct_answer": "A",
+      "chapter": "Oscillations",
+      "topic_tags": ["pendulum", "frequency"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Two resistors 4Ω and 6Ω are connected in parallel. Equivalent resistance is:",
+      "options": ["2.4 Ω", "5 Ω", "10 Ω", "1.5 Ω"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["parallel_resistance"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The work function of a metal is 2 eV. Threshold frequency for photoelectric emission is approximately:",
+      "options": ["5×10¹⁴ Hz", "5×10¹³ Hz", "5×10¹⁵ Hz", "5×10¹² Hz"],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": ["photoelectric_effect", "work_function"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "A 5μF and a 10μF capacitor in series. Equivalent capacitance is:",
+      "options": ["15 μF", "3.33 μF", "7.5 μF", "5 μF"],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": ["series_capacitors"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Light of wavelength 600 nm passes through a slit of width 0.1 mm. First minimum is at angle:",
+      "options": ["6×10⁻³ rad", "0.6 rad", "0.06 rad", "60 rad"],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": ["diffraction", "single_slit"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "A wave on a string has equation y = 5 sin(20πx - 100πt). Speed of the wave is:",
+      "options": ["5 m/s", "20 m/s", "5π m/s", "100 m/s"],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": ["wave_equation", "speed"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Force on a 1 C charge moving at 10 m/s perpendicular to B = 2 T is:",
+      "options": ["10 N", "20 N", "5 N", "0 N"],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": ["Lorentz_force", "F=qvB"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Half-life of a radioactive isotope is 10 years. After 30 years, fraction remaining is:",
+      "options": ["1/2", "1/4", "1/8", "1/16"],
+      "correct_answer": "C",
+      "chapter": "Nuclear Physics",
+      "topic_tags": ["radioactive_decay", "half_life"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Period of revolution of a satellite at radius r around Earth (mass M):",
+      "options": ["T = 2π√(r³/GM)", "T = 2π√(GM/r³)", "T = 2π·r/v", "T = 2π·r²"],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": ["satellite", "Kepler_third_law"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The heat required to raise temperature of 2 kg water from 20°C to 100°C is (c=4200 J/kg·K):",
+      "options": ["336 kJ", "672 kJ", "168 kJ", "84 kJ"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["specific_heat", "calorimetry"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An EM wave in vacuum has E = 100 V/m. Magnitude of B is:",
+      "options": ["3.33×10⁻⁷ T", "3×10¹⁰ T", "10 T", "1 T"],
+      "correct_answer": "A",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": ["E_to_B_ratio", "speed_of_light"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "A converging lens of focal length 20 cm forms an image at 30 cm. Object distance is:",
+      "options": ["60 cm", "12 cm", "10 cm", "50 cm"],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": ["lens_formula"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Moment of inertia of a thin rod (length L, mass M) about its centre is:",
+      "options": ["ML²/2", "ML²/3", "ML²/12", "ML²"],
+      "correct_answer": "C",
+      "chapter": "Rotational Motion",
+      "topic_tags": ["moment_of_inertia", "rod"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Drift velocity of electrons in a conductor depends on:",
+      "options": ["Only voltage", "Only current", "Voltage and length", "Cross-sectional area only"],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": ["drift_velocity", "Ohm_microscopic"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Coefficient of restitution e=1 means:",
+      "options": ["Perfectly inelastic", "Perfectly elastic", "Partially elastic", "No collision"],
+      "correct_answer": "B",
+      "chapter": "Collisions",
+      "topic_tags": ["restitution", "elastic"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An ideal gas expands isothermally to twice its volume. Work done is:",
+      "options": ["nRT", "nRT ln 2", "0", "2nRT"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["isothermal", "work"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Resistivity of a conductor depends on:",
+      "options": ["Length", "Cross-section", "Temperature", "Voltage"],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": ["resistivity", "temperature"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Pressure exerted by a column of mercury of height 76 cm at sea level is approximately:",
+      "options": ["1 atm", "2 atm", "0.5 atm", "10 atm"],
+      "correct_answer": "A",
+      "chapter": "Fluid Mechanics",
+      "topic_tags": ["pressure", "barometer"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An AC source 220 V supplies 5 A current to a pure resistor. Power dissipated is:",
+      "options": ["110 W", "1100 W", "44 W", "550 W"],
+      "correct_answer": "B",
+      "chapter": "AC Circuits",
+      "topic_tags": ["RMS_power"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Light wave goes from glass (n=1.5) to vacuum (n=1). Critical angle is:",
+      "options": ["30°", "45°", "sin⁻¹(2/3)", "60°"],
+      "correct_answer": "C",
+      "chapter": "Ray Optics",
+      "topic_tags": ["total_internal_reflection", "critical_angle"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "A 1 kg ball is thrown vertically up with 20 m/s. Maximum height (g=10):",
+      "options": ["10 m", "20 m", "30 m", "40 m"],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": ["projectile", "max_height"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The dimensional formula of Planck's constant is:",
+      "options": ["[ML²T⁻¹]", "[MLT⁻¹]", "[ML²T⁻²]", "[ML⁰T⁻¹]"],
+      "correct_answer": "A",
+      "chapter": "Units and Measurements",
+      "topic_tags": ["dimensions", "Planck"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of electrons in 1 coulomb is approximately:",
+      "options": ["6.25×10¹⁸", "1.6×10⁻¹⁹", "6.022×10²³", "1.6×10¹⁹"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["charge", "electron"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

@@ -161,13 +161,15 @@ async function loadRubrics() {
   try {
     var r = await fetch('/api/essay/rubrics', { headers: authH() });
     var data = await r.json();
-    var rubrics = data.rubrics || data;
+    // Response shape: {rows: [...]} (sometimes legacy: array or {rubrics: [...]}).
+    var rubrics = data.rows || data.rubrics || (Array.isArray(data) ? data : []);
     var sel = document.getElementById('rubricSel');
     sel.innerHTML = '<option value="">— pick a rubric —</option>' +
       rubrics.map(function(rb) {
-        return '<option value="' + escapeHtml(rb.id || rb.rubric_id) +
-          '">' + escapeHtml(rb.exam_key || rb.name || rb.id) + ' — ' +
-          escapeHtml(rb.title || '') + '</option>';
+        var label = (rb.exam || rb.exam_key || '') + (rb.paper ? ' · ' + rb.paper : '') +
+          (rb.topic ? ' — ' + rb.topic : '');
+        return '<option value="' + escapeHtml(rb.id || rb.rubric_id) + '">' +
+          escapeHtml(label || rb.id) + '</option>';
       }).join('');
   } catch(e) {
     document.getElementById('rubricSel').innerHTML =
@@ -176,20 +178,19 @@ async function loadRubrics() {
 }
 window.grade = async function() {
   var rb = document.getElementById('rubricSel').value;
-  var prompt = document.getElementById('essayPrompt').value.trim();
   var text = document.getElementById('essayText').value.trim();
   var out = document.getElementById('gradeOut');
   var btn = document.getElementById('gradeBtn');
   out.innerHTML = '';
   if (!rb) { out.innerHTML = '<div class="err">Pick a rubric first.</div>'; return; }
-  if (text.length < 30) { out.innerHTML = '<div class="err">Write at least 30 characters of answer text.</div>'; return; }
+  if (text.length < 50) { out.innerHTML = '<div class="err">Write at least 50 characters — the grader needs enough content to score.</div>'; return; }
   btn.disabled = true;
   document.getElementById('gradeStatus').innerHTML = '<span class="spinner"></span> Grading…';
   try {
     var fd = new URLSearchParams();
     fd.set('rubric_id', rb);
-    fd.set('answer_text', text);
-    if (prompt) fd.set('question_text', prompt);
+    fd.set('text', text);  // backend field name is `text`, not `answer_text`
+    fd.set('grade_now', 'true');
     var r = await fetch('/api/essay/submissions', {
       method:'POST',
       headers: Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
@@ -207,20 +208,27 @@ window.grade = async function() {
 };
 function renderGrade(j) {
   var out = document.getElementById('gradeOut');
-  var score = j.ai_score != null ? j.ai_score : (j.score || '—');
-  var byC = j.by_criterion || {};
+  // Response shape: { submission_id, ai_grade: { score, by_criterion, summary, suggestions, method } }
+  var g = j.ai_grade || j;
+  if (g.error) { out.innerHTML = '<div class="err">Grader error: ' + escapeHtml(g.error) + '</div>'; return; }
+  var score = g.score != null ? g.score : '—';
+  var byC = g.by_criterion || {};
   var criteria = Array.isArray(byC) ? byC
     : Object.entries(byC).map(function(kv) { return Object.assign({name:kv[0]}, kv[1]); });
+  var sugg = g.suggestions || [];
   out.innerHTML =
-    '<div class="ok"><strong>Overall AI score:</strong> ' + escapeHtml(String(score)) + '</div>' +
-    (j.feedback ? '<div class="result"><strong>Feedback</strong>\\n\\n' + escapeHtml(j.feedback) + '</div>' : '') +
+    '<div class="ok"><strong>Overall AI score:</strong> ' + escapeHtml(String(score)) + '/100' +
+    (g.method ? '  <span class="chip">' + escapeHtml(g.method) + '</span>' : '') + '</div>' +
+    (g.summary ? '<div class="result"><strong>Summary</strong>\\n\\n' + escapeHtml(g.summary) + '</div>' : '') +
     (criteria.length ? '<div style="margin-top:14px"><strong>Per-criterion breakdown</strong>' +
       criteria.map(function(c) {
         return '<div class="result"><strong>' + escapeHtml(c.name || 'Criterion') +
-          '</strong> — score: ' + escapeHtml(String(c.score || '—')) +
+          '</strong> — score: ' + escapeHtml(String(c.score != null ? c.score : '—')) +
           (c.weight ? ' (weight ' + escapeHtml(String(c.weight)) + ')' : '') +
           (c.feedback ? '\\n\\n' + escapeHtml(c.feedback) : '') + '</div>';
-      }).join('') + '</div>' : '');
+      }).join('') + '</div>' : '') +
+    (sugg.length ? '<div style="margin-top:14px"><strong>Top suggestions</strong><ul>' +
+      sugg.map(function(s){ return '<li>' + escapeHtml(s) + '</li>'; }).join('') + '</ul></div>' : '');
 }
 if (TOK) loadRubrics();
 """
@@ -262,6 +270,7 @@ _INTERVIEW_BODY = """
 
 _INTERVIEW_SCRIPT = """
 var CURRENT_INTERVIEW = null;
+var CURRENT_TURN = 0;
 window.startInterview = async function() {
   var track = document.getElementById('trackSel').value;
   try {
@@ -271,12 +280,14 @@ window.startInterview = async function() {
       headers: Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
       body: fd.toString(),
     });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
+    if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + (await r.text()).slice(0,200));
     var j = await r.json();
-    CURRENT_INTERVIEW = j.id;
+    CURRENT_INTERVIEW = j.interview_id || j.id;
+    CURRENT_TURN = (j.opener && j.opener.turn_index != null) ? j.opener.turn_index : 0;
     document.getElementById('startBox').style.display = 'none';
     document.getElementById('convBox').style.display = '';
-    appendBubble('interviewer', j.opening_question || j.next_question || 'Tell me about yourself.');
+    var firstQ = (j.opener && j.opener.question_text) || 'Tell me about yourself.';
+    appendBubble('interviewer', firstQ);
   } catch(e) {
     alert('Could not start: ' + e.message);
   }
@@ -294,16 +305,22 @@ window.sendTurn = async function() {
   appendBubble('me', ans);
   document.getElementById('ansBox').value = '';
   try {
-    var fd = new URLSearchParams(); fd.set('answer', ans);
-    var r = await fetch('/api/mock-interviews/' + encodeURIComponent(CURRENT_INTERVIEW) + '/turn', {
+    var fd = new URLSearchParams();
+    fd.set('turn_index', String(CURRENT_TURN));
+    fd.set('answer_text', ans);
+    var r = await fetch('/api/mock-interviews/' + encodeURIComponent(CURRENT_INTERVIEW) + '/answer', {
       method:'POST',
       headers: Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
       body: fd.toString(),
     });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
+    if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + (await r.text()).slice(0,200));
     var j = await r.json();
-    if (j.next_question) appendBubble('interviewer', j.next_question);
-    if (j.finished || j.is_final) endInterview();
+    if (j.feedback) appendBubble('interviewer', '(Feedback) ' + j.feedback);
+    if (j.next && j.next.question_text) {
+      CURRENT_TURN = j.next.turn_index;
+      appendBubble('interviewer', j.next.question_text);
+    }
+    if (j.interview_ended) endInterview();
   } catch(e) {
     alert('Turn failed: ' + e.message);
   }
@@ -473,27 +490,48 @@ async function loadAdaptive() {
   if (!TOK) return;
   var out = document.getElementById('adaptiveOut');
   try {
-    var r = await fetch('/api/adaptive/topics/me', { headers: authH() });
+    var r = await fetch('/api/adaptive-packs/me', { headers: authH() });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     var d = await r.json();
-    var topics = d.topics || d.rows || [];
-    if (!topics.length) {
-      out.innerHTML = '<div class="empty">No topic signals yet. Take a practice test or generate a few lessons; come back once we have data on what you find tough.</div>' +
-        '<div style="margin-top:14px"><a class="btn" href="/practice">Take a practice test →</a></div>';
+    var packs = d.packs || d.rows || (Array.isArray(d) ? d : []);
+    if (!packs.length) {
+      out.innerHTML = '<div class="empty">No adaptive packs yet. They appear after you enrol in an exam pack and complete a practice test.</div>' +
+        '<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">' +
+          '<a class="btn" href="/dashboard#browse-packs">Browse exam packs →</a>' +
+          '<a class="btn ghost" href="/practice">Take a practice test →</a>' +
+        '</div>';
       return;
     }
-    out.innerHTML = '<div class="grid-2">' + topics.map(function(t) {
-      var w = t.adjusted_weightage != null ? t.adjusted_weightage : (t.base_weightage || 0);
-      var label = (w * 100).toFixed(0) + '%';
-      var cls = w >= 0.7 ? 'chip red' : w >= 0.4 ? 'chip amber' : 'chip ok';
-      return '<div class="result"><strong>' + escapeHtml(t.title || t.topic_code) + '</strong>' +
-        ' <span class="' + cls + '">' + label + '</span>' +
-        '<div class="sub" style="margin-top:6px">' + escapeHtml(t.rationale || 'Adjusted weighting based on recent performance.') + '</div></div>';
+    out.innerHTML = '<div class="grid-2">' + packs.map(function(p) {
+      return '<div class="result"><strong>' + escapeHtml(p.base_pack_title || p.title || p.base_pack_code) + '</strong>' +
+        '<div class="sub" style="margin-top:6px">Adjusted: ' + escapeHtml(p.rationale || 'Personalised topic weights based on your signals.') + '</div>' +
+        '<div style="margin-top:10px"><a class="btn ghost" data-code="' + escapeHtml(p.base_pack_code) +
+          '" onclick="loadAdaptiveTopics(this.dataset.code)">View topics →</a></div>' +
+        '<div id="adt-' + escapeHtml(p.base_pack_code) + '"></div></div>';
     }).join('') + '</div>';
   } catch(e) {
     out.innerHTML = '<div class="err">Could not load: ' + escapeHtml(e.message) + '</div>';
   }
 }
+window.loadAdaptiveTopics = async function(packCode) {
+  var box = document.getElementById('adt-' + packCode);
+  if (!box) return;
+  box.innerHTML = '<div class="sub" style="margin-top:8px"><span class="spinner"></span> Loading topics...</div>';
+  try {
+    var r = await fetch('/api/adaptive-packs/' + encodeURIComponent(packCode) + '/topics', { headers: authH() });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    var d = await r.json();
+    var topics = d.topics || d.rows || [];
+    box.innerHTML = '<ul class="list" style="margin-top:8px">' + topics.slice(0, 8).map(function(t) {
+      var w = t.adjusted_weightage != null ? t.adjusted_weightage : (t.base_weightage || 0);
+      var pct = Math.round(w * 100);
+      var cls = pct >= 70 ? 'pill red' : pct >= 40 ? 'pill warn' : 'pill ok';
+      return '<li><span>' + escapeHtml(t.title || t.topic_code) + '</span><span class="' + cls + '">' + pct + '%</span></li>';
+    }).join('') + '</ul>';
+  } catch(e) {
+    box.innerHTML = '<div class="err">' + escapeHtml(e.message) + '</div>';
+  }
+};
 if (TOK) loadAdaptive();
 """
 
@@ -505,12 +543,21 @@ _ADAPTIVE_HTML = _page("Adaptive practice", _ADAPTIVE_BODY, _ADAPTIVE_SCRIPT)
 _MATH_BODY = """
 <section class="section">
   <div class="card">
-    <h2>Math Vision</h2>
-    <p class="sub">Snap or upload a math problem and get a step-by-step solve.</p>
-    <label for="mathFile">Problem image (PNG / JPG)</label>
+    <h2>Math Vision (Doubt clearing)</h2>
+    <p class="sub">Snap or upload a math / science problem, or type it. We use Claude Vision to give a step-by-step solve.</p>
+    <label for="mathFile">Problem image (PNG / JPG, optional)</label>
     <input id="mathFile" type="file" accept="image/*" />
+    <label for="mathText" style="margin-top:14px">Or type the question</label>
+    <textarea id="mathText" placeholder="e.g. Solve x^2 + 5x + 6 = 0" style="min-height:80px"></textarea>
+    <label for="mathSubject" style="margin-top:14px">Subject</label>
+    <select id="mathSubject">
+      <option value="mathematics">Mathematics</option>
+      <option value="physics">Physics</option>
+      <option value="chemistry">Chemistry</option>
+      <option value="biology">Biology</option>
+    </select>
     <div style="margin-top:14px">
-      <button class="btn" id="mvBtn" onclick="solveMath()">Solve</button>
+      <button class="btn" id="mvBtn" onclick="solveMath()">Get AI solution</button>
       <span id="mvStatus" style="margin-left:10px;color:#94a3b8;font-size:13px"></span>
     </div>
     <div id="mvOut"></div>
@@ -521,23 +568,54 @@ _MATH_BODY = """
 _MATH_SCRIPT = """
 window.solveMath = async function() {
   var file = document.getElementById('mathFile').files[0];
+  var text = document.getElementById('mathText').value.trim();
+  var subject = document.getElementById('mathSubject').value;
   var out = document.getElementById('mvOut');
   var btn = document.getElementById('mvBtn');
   out.innerHTML = '';
-  if (!file) { out.innerHTML = '<div class="err">Choose an image first.</div>'; return; }
+  if (!file && !text) {
+    out.innerHTML = '<div class="err">Either upload an image or type the question.</div>';
+    return;
+  }
   btn.disabled = true;
-  document.getElementById('mvStatus').innerHTML = '<span class="spinner"></span> Solving…';
+  document.getElementById('mvStatus').innerHTML = '<span class="spinner"></span> Solving (Claude Vision)…';
   try {
-    var fd = new FormData();
-    fd.append('file', file);
-    var r = await fetch('/api/math-vision/solve', { method:'POST', headers: authH(), body: fd });
+    // Step 1: if there's a file, upload it first to get a URL
+    var imageUrl = null;
+    if (file) {
+      var ufd = new FormData();
+      ufd.append('file', file);
+      var ur = await fetch('/api/uploads', { method:'POST', headers: authH(), body: ufd });
+      if (!ur.ok) throw new Error('Upload failed: HTTP ' + ur.status);
+      var u = await ur.json();
+      imageUrl = u.public_url || u.image_url || u.url || ('/uploads/' + u.id);
+    }
+    // Step 2: submit instant doubt
+    // Backend requires question_text >= 5 chars even when image is provided.
+    // If user only uploaded an image, fill a sensible default so they don't
+    // have to type anything.
+    var effectiveText = text;
+    if (!effectiveText && imageUrl) {
+      effectiveText = 'Please solve the problem shown in this image. Show full steps.';
+    }
+    var fd = new URLSearchParams();
+    if (imageUrl) fd.set('image_url', imageUrl);
+    fd.set('question_text', effectiveText);
+    if (subject) fd.set('subject', subject);
+    var r = await fetch('/api/doubts/submit-instant', {
+      method:'POST',
+      headers: Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
+      body: fd.toString(),
+    });
     if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + (await r.text()).slice(0,200));
     var j = await r.json();
-    out.innerHTML = '<div class="ok"><strong>Solved</strong></div>' +
-      '<div class="result"><strong>Answer:</strong>\\n\\n' + escapeHtml(j.answer || j.final_answer || '—') + '</div>' +
-      (j.steps ? '<div class="result"><strong>Steps</strong>\\n\\n' +
-        (Array.isArray(j.steps) ? j.steps.map(function(s,i){return (i+1)+'. '+escapeHtml(s);}).join('\\n')
-          : escapeHtml(j.steps)) + '</div>' : '');
+    var ans = j.response_text || '';
+    if (!ans && j.ai_error) {
+      out.innerHTML = '<div class="err">AI error: ' + escapeHtml(j.ai_error) + '</div>';
+      return;
+    }
+    out.innerHTML = '<div class="ok"><strong>Solved</strong> · status: ' + escapeHtml(j.status || '?') + '</div>' +
+      '<div class="result"><strong>AI solution</strong>\\n\\n' + escapeHtml(ans || '(no answer returned)') + '</div>';
   } catch(e) {
     out.innerHTML = '<div class="err">Could not solve: ' + escapeHtml(e.message) + '</div>';
   } finally {
@@ -811,9 +889,9 @@ _CURRICULUM_BODY = """
     <h2>Curriculum</h2>
     <p class="sub">Browse NCERT / CBSE / state board chapter coverage by class and subject.</p>
     <div class="row">
-      <select id="curBoard"><option value="">All boards</option><option value="cbse">CBSE</option><option value="icse">ICSE</option><option value="state_maharashtra">Maharashtra</option><option value="state_tamilnadu">Tamil Nadu</option><option value="state_karnataka">Karnataka</option></select>
+      <select id="curBoard"><option value="">All boards</option><option value="CBSE">CBSE</option><option value="ICSE">ICSE</option><option value="Maharashtra">Maharashtra</option><option value="TamilNadu">Tamil Nadu</option><option value="Karnataka">Karnataka</option><option value="AP_Telangana">AP / Telangana</option><option value="UP">UP</option><option value="JEE">JEE</option><option value="NEET">NEET</option></select>
       <select id="curGrade"><option value="">All classes</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
-      <select id="curSubject"><option value="">All subjects</option><option value="mathematics">Math</option><option value="physics">Physics</option><option value="chemistry">Chemistry</option><option value="biology">Biology</option><option value="science">Science</option><option value="history">History</option><option value="geography">Geography</option></select>
+      <select id="curSubject"><option value="">All subjects</option><option value="Maths">Maths</option><option value="Physics">Physics</option><option value="Chemistry">Chemistry</option><option value="Biology">Biology</option><option value="Science">Science</option><option value="Physical Science">Physical Science</option></select>
       <button class="btn" onclick="loadCurriculum()">Filter</button>
     </div>
     <div id="curOut" style="margin-top:14px"><div class="empty"><span class="spinner"></span> Loading…</div></div>
@@ -827,18 +905,29 @@ window.loadCurriculum = async function() {
   out.innerHTML = '<div class="empty"><span class="spinner"></span> Loading…</div>';
   var qs = [];
   var b = document.getElementById('curBoard').value; if (b) qs.push('board=' + b);
-  var g = document.getElementById('curGrade').value; if (g) qs.push('grade=' + g);
+  var g = document.getElementById('curGrade').value; if (g) qs.push('cls=' + g);
   var s = document.getElementById('curSubject').value; if (s) qs.push('subject=' + s);
   try {
     var r = await fetch('/curriculum/index' + (qs.length ? '?' + qs.join('&') : ''));
     if (!r.ok) throw new Error('HTTP ' + r.status);
     var d = await r.json();
-    var rows = d.curriculum || d.rows || d;
+    var rows = d.entries || d.curriculum || d.rows || (Array.isArray(d) ? d : []);
     if (!rows || !rows.length) { out.innerHTML = '<div class="empty">No chapters matched. Loosen filters.</div>'; return; }
     out.innerHTML = rows.slice(0, 80).map(function(c) {
-      return '<div class="result"><strong>' + escapeHtml(c.chapter_title || c.title) + '</strong>' +
-        '<div class="sub">' + escapeHtml(c.board || '?') + ' · Class ' + escapeHtml(String(c.grade || '?')) +
-        ' · ' + escapeHtml(c.subject || '?') + (c.unit ? ' · ' + escapeHtml(c.unit) : '') + '</div></div>';
+      // Backend rows use `class` (reserved word in JS — bracket-access)
+      var cls = c['class'] != null ? c['class'] : (c.grade != null ? c.grade : '?');
+      var summary = c.summary ? '<div class="sub" style="margin-top:6px">' + escapeHtml(c.summary) + '</div>' : '';
+      var topics = (c.topics || []).length
+        ? '<div style="margin-top:6px">' + c.topics.slice(0, 6).map(function(t) {
+            return '<span class="chip">' + escapeHtml(t) + '</span>';
+          }).join('') + '</div>'
+        : '';
+      return '<div class="result"><strong>' +
+        (c.chapter_no ? c.chapter_no + '. ' : '') +
+        escapeHtml(c.chapter_title || c.title || '(untitled)') + '</strong>' +
+        '<div class="sub">' + escapeHtml(c.board || '?') + ' · Class ' + escapeHtml(String(cls)) +
+        ' · ' + escapeHtml(c.subject || '?') + (c.level ? ' · ' + escapeHtml(c.level) : '') + '</div>' +
+        summary + topics + '</div>';
     }).join('');
   } catch(e) {
     out.innerHTML = '<div class="err">Could not load: ' + escapeHtml(e.message) + '</div>';
@@ -856,33 +945,89 @@ _PATH_BODY = """
 <section class="section">
   <div class="card">
     <h2>Learning paths</h2>
-    <p class="sub">Generate a multi-week study plan aligned to your target exam. Built from your active enrolment, readiness gauge, and your daily-minute goal.</p>
-    <button class="btn" id="pathBtn" onclick="genPath()">Generate my learning path</button>
-    <span id="pathStatus" style="margin-left:10px;color:#94a3b8;font-size:13px"></span>
+    <p class="sub">Generate a multi-week study plan with Claude. Cached deterministically — same inputs come back instantly.</p>
+    <div class="grid-3">
+      <div>
+        <label>Class (1-12)</label>
+        <select id="pathClass">
+          <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
+          <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
+          <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
+          <option value="10" selected>Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option>
+        </select>
+      </div>
+      <div>
+        <label>Subjects (comma-separated)</label>
+        <input id="pathSubjects" value="Mathematics, Science" />
+      </div>
+      <div>
+        <label>Weeks</label>
+        <select id="pathWeeks">
+          <option value="2">2 weeks</option>
+          <option value="4" selected>4 weeks</option>
+          <option value="8">8 weeks</option>
+          <option value="12">12 weeks (3 months)</option>
+        </select>
+      </div>
+    </div>
+    <label style="margin-top:14px">Daily minutes</label>
+    <select id="pathMin" style="max-width:200px">
+      <option value="15">15 min/day</option>
+      <option value="30" selected>30 min/day</option>
+      <option value="60">1 hr/day</option>
+      <option value="120">2 hrs/day</option>
+    </select>
+    <div style="margin-top:14px">
+      <button class="btn" id="pathBtn" onclick="genPath()">Generate my learning path</button>
+      <span id="pathStatus" style="margin-left:10px;color:#94a3b8;font-size:13px"></span>
+    </div>
     <div id="pathOut"></div>
   </div>
 </section>
 """
 
 _PATH_SCRIPT = """
+// Pre-fill defaults from the user's onboarding when available
+fetch('/api/me/dashboard', { headers: authH() }).then(function(r){ return r.json(); }).then(function(d) {
+  var onb = (d && d.onboarding) || {};
+  var cg = onb.class_grade || '';
+  var m = cg.match(/class_(\\d+)/);
+  if (m && m[1] >= 1 && m[1] <= 12) document.getElementById('pathClass').value = m[1];
+  if (onb.goal_minutes_daily) {
+    var minSel = document.getElementById('pathMin');
+    [15,30,60,120].forEach(function(v){
+      if (Math.abs(v - onb.goal_minutes_daily) < 8) minSel.value = v;
+    });
+  }
+}).catch(function(){});
+
 window.genPath = async function() {
   var btn = document.getElementById('pathBtn');
+  var cls = document.getElementById('pathClass').value;
+  var subjects = document.getElementById('pathSubjects').value.trim();
+  var weeks = document.getElementById('pathWeeks').value;
+  var minutes = document.getElementById('pathMin').value;
+  if (!subjects) {
+    document.getElementById('pathOut').innerHTML = '<div class="err">Enter at least one subject (e.g. Mathematics).</div>';
+    return;
+  }
   btn.disabled = true;
-  document.getElementById('pathStatus').innerHTML = '<span class="spinner"></span> Building plan with Claude…';
+  document.getElementById('pathStatus').innerHTML = '<span class="spinner"></span> Building plan with Claude (this can take ~30s)…';
+  document.getElementById('pathOut').innerHTML = '';
   try {
-    var r = await fetch('/learning-path', { method:'POST', headers: authH() });
-    if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + (await r.text()).slice(0,200));
+    var fd = new URLSearchParams();
+    fd.set('student_class', cls);
+    fd.set('subjects', subjects);
+    fd.set('weeks', weeks);
+    fd.set('daily_minutes', minutes);
+    var r = await fetch('/learning-path', {
+      method:'POST',
+      headers: Object.assign({'Content-Type':'application/x-www-form-urlencoded'}, authH()),
+      body: fd.toString(),
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + (await r.text()).slice(0,300));
     var j = await r.json();
-    document.getElementById('pathOut').innerHTML =
-      '<div class="ok" style="margin-top:14px"><strong>Plan ready</strong> · cached so re-runs are free</div>' +
-      (j.weeks ? '<div style="margin-top:14px">' + j.weeks.map(function(w, i) {
-        return '<div class="result"><strong>Week ' + (i+1) + ': ' + escapeHtml(w.theme || '') + '</strong>' +
-          (w.summary ? '<div class="sub" style="margin-top:6px">' + escapeHtml(w.summary) + '</div>' : '') +
-          (w.daily ? '<ul style="margin:8px 0 0 0">' + w.daily.map(function(d){
-            return '<li>' + escapeHtml(d) + '</li>';
-          }).join('') + '</ul>' : '') + '</div>';
-      }).join('') + '</div>' :
-      '<div class="result" style="margin-top:14px">' + escapeHtml(JSON.stringify(j, null, 2)) + '</div>');
+    renderPath(j);
   } catch(e) {
     document.getElementById('pathOut').innerHTML = '<div class="err">Could not generate: ' + escapeHtml(e.message) + '</div>';
   } finally {
@@ -890,6 +1035,25 @@ window.genPath = async function() {
     document.getElementById('pathStatus').textContent = '';
   }
 };
+function renderPath(j) {
+  var weeks = j.weeks || (j.plan && j.plan.weeks) || [];
+  var out = document.getElementById('pathOut');
+  if (!weeks.length) {
+    out.innerHTML = '<div class="ok"><strong>Plan returned</strong></div>' +
+      '<div class="result"><pre style="white-space:pre-wrap;font-size:12px">' +
+      escapeHtml(JSON.stringify(j, null, 2)) + '</pre></div>';
+    return;
+  }
+  out.innerHTML = '<div class="ok" style="margin-top:14px"><strong>' + weeks.length + '-week plan ready</strong>' +
+    (j.cached ? '  <span class="chip">cached</span>' : '  <span class="chip ok">fresh</span>') + '</div>' +
+    '<div style="margin-top:14px">' + weeks.map(function(w, i) {
+      return '<div class="result"><strong>Week ' + (w.week_number || (i+1)) + ': ' + escapeHtml(w.theme || w.title || '') + '</strong>' +
+        (w.summary || w.description ? '<div class="sub" style="margin-top:6px">' + escapeHtml(w.summary || w.description) + '</div>' : '') +
+        (w.daily_tasks || w.daily ? '<ul style="margin:8px 0 0 0">' + (w.daily_tasks || w.daily).map(function(d){
+          return '<li>' + escapeHtml(typeof d === 'string' ? d : (d.task || JSON.stringify(d))) + '</li>';
+        }).join('') + '</ul>' : '') + '</div>';
+    }).join('') + '</div>';
+}
 """
 
 _PATH_HTML = _page("Learning paths", _PATH_BODY, _PATH_SCRIPT)

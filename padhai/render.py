@@ -107,28 +107,83 @@ def _find_font(language_code: str, theme: Theme = DARK_ACADEMIC) -> tuple[str, s
         )
         body_pref = title_pref
 
-    found = subprocess.run(
-        ["fc-list", ":lang=" + language_code if language_code != "en" else ""],
-        capture_output=True, text=True,
-    ).stdout
+    # `fc-list` only exists on Linux / macOS (fontconfig). On Windows
+    # (and any host without fontconfig) we fall through to the bundled
+    # font discovery below.
+    found = ""
+    fc_list_available = shutil.which("fc-list") is not None
+    if fc_list_available:
+        try:
+            found = subprocess.run(
+                ["fc-list",
+                 ":lang=" + language_code if language_code != "en" else ""],
+                capture_output=True, text=True, timeout=10,
+            ).stdout
+        except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
+            found = ""
+            fc_list_available = False
 
     def pick(keywords: list[str]) -> str:
         for kw in keywords:
             for line in found.splitlines() or []:
                 if kw.lower() in line.lower() and ".ttf" in line.lower():
                     return line.split(":")[0].strip()
-        # broad fallback
-        for kw in keywords:
-            for line in subprocess.run(
-                ["fc-list"], capture_output=True, text=True
-            ).stdout.splitlines():
-                if kw.lower() in line.lower() and ".ttf" in line.lower():
-                    return line.split(":")[0].strip()
+        # broad fallback — also gated on fc-list availability.
+        if fc_list_available:
+            try:
+                broad = subprocess.run(
+                    ["fc-list"], capture_output=True, text=True, timeout=10,
+                ).stdout
+            except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
+                broad = ""
+            for kw in keywords:
+                for line in broad.splitlines():
+                    if kw.lower() in line.lower() and ".ttf" in line.lower():
+                        return line.split(":")[0].strip()
         return ""
 
-    title_path = pick(title_pref) or "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-    body_path = pick(body_pref) or "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    title_path = pick(title_pref)
+    body_path = pick(body_pref)
+    # Per-OS hard-coded fallbacks when fontconfig isn't available
+    # (Windows / Docker slim base / barebones runners).
+    if not title_path or not body_path:
+        os_fallback_title, os_fallback_body = _os_font_fallback()
+        title_path = title_path or os_fallback_title
+        body_path = body_path or os_fallback_body
     return title_path, body_path
+
+
+def _os_font_fallback() -> tuple[str, str]:
+    """Pick a reasonable system font when fontconfig isn't available.
+
+    Returns (title_path, body_path). Falls back to PIL's default font
+    name "" which PIL resolves at draw time if the path is unusable.
+    """
+    import os as _os
+    if _os.name == "nt":
+        # Windows ships Arial in every install + Mangal for Devanagari.
+        # Prefer Arial Bold for titles, Arial for body.
+        win_fonts = Path("C:/Windows/Fonts")
+        for title_name in ("arialbd.ttf", "segoeuib.ttf", "calibrib.ttf"):
+            p = win_fonts / title_name
+            if p.exists():
+                title = str(p)
+                break
+        else:
+            title = ""
+        for body_name in ("arial.ttf", "segoeui.ttf", "calibri.ttf"):
+            p = win_fonts / body_name
+            if p.exists():
+                body = str(p)
+                break
+        else:
+            body = ""
+        return title, body
+    # Linux / macOS default — DejaVu is on most distros.
+    return (
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    )
 
 
 def _wrap(text: str, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
@@ -687,15 +742,40 @@ def _make_animated_clip(
 
 
 def _probe_duration(audio_path: Path) -> float:
-    probe = subprocess.run(
-        [
-            "ffprobe", "-v", "error", "-show_entries",
-            "format=duration", "-of",
-            "default=noprint_wrappers=1:nokey=1", str(audio_path),
-        ],
-        capture_output=True, text=True, check=True,
+    """Return the duration of an audio file in seconds.
+
+    Prefers `ffprobe` when on PATH. Falls back to running `ffmpeg -i`
+    and parsing stderr for `Duration:` — useful on Windows hosts where
+    only the bundled `imageio-ffmpeg` ffmpeg.exe is available (no
+    ffprobe sibling) and on stripped-down Docker bases."""
+    if shutil.which("ffprobe"):
+        probe = subprocess.run(
+            [
+                "ffprobe", "-v", "error", "-show_entries",
+                "format=duration", "-of",
+                "default=noprint_wrappers=1:nokey=1", str(audio_path),
+            ],
+            capture_output=True, text=True, check=True,
+        )
+        return float(probe.stdout.strip())
+    # Fallback: parse ffmpeg's stderr "Duration: 00:00:12.34, ..." line.
+    # ffmpeg with no output target exits 1 — we don't care; we only
+    # need the metadata it prints first.
+    res = subprocess.run(
+        ["ffmpeg", "-i", str(audio_path)],
+        capture_output=True, text=True,
     )
-    return float(probe.stdout.strip())
+    import re
+    m = re.search(
+        r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", res.stderr,
+    )
+    if not m:
+        raise RuntimeError(
+            f"could not determine audio duration for {audio_path} "
+            "(install ffprobe or check audio file)",
+        )
+    hours, minutes, seconds = m.groups()
+    return int(hours) * 3600 + int(minutes) * 60 + float(seconds)
 
 
 def _make_clip(

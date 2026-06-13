@@ -1,0 +1,235 @@
+{
+  "source": "ibps_po_2024_reasoning",
+  "default_board": "bank_po",
+  "default_grade": 0,
+  "default_subject": "reasoning",
+  "default_year": 2024,
+  "default_paper": "ibps_prelims",
+  "questions": [
+    {
+      "question_text": "Statement: A > B = C > D ≥ E. Conclusion: A > E.",
+      "options": ["True", "False", "Cannot say", "Either"],
+      "correct_answer": "A",
+      "chapter": "Inequalities",
+      "topic_tags": ["coded_inequalities"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Sit arrangement: 5 people A,B,C,D,E in row facing north. If C is left of A and B is right of A, ordering left-to-right with C leftmost:",
+      "options": ["C-D-A-B-E", "C-A-B-D-E", "Indeterminate without more", "B-A-C-D-E"],
+      "correct_answer": "C",
+      "chapter": "Seating Arrangement",
+      "topic_tags": ["arrangement"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "If KETTLE is coded as 1+5+20+20+12+5 (letter values summed), code of TEAM is:",
+      "options": ["20+5+1+13 = 39", "20+1+5+13 = 39", "Same as A", "Both A and C"],
+      "correct_answer": "D",
+      "chapter": "Coding-Decoding",
+      "topic_tags": ["letter_sum"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Direction: facing east, P turns 90° anticlockwise, then 180°. Facing now:",
+      "options": ["North", "East", "South", "West"],
+      "correct_answer": "C",
+      "chapter": "Directions",
+      "topic_tags": ["direction"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Blood relation: A's brother B has only one sister C. C is sister of:",
+      "options": ["A", "B", "Both A and B", "Neither"],
+      "correct_answer": "C",
+      "chapter": "Blood Relations",
+      "topic_tags": ["relations"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Series: 3, 5, 9, 17, 33, ?",
+      "options": ["49", "57", "65", "67"],
+      "correct_answer": "C",
+      "chapter": "Number Series",
+      "topic_tags": ["geometric_difference"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Odd one out: Sparrow, Eagle, Dove, Penguin",
+      "options": ["Sparrow", "Eagle", "Dove", "Penguin"],
+      "correct_answer": "D",
+      "chapter": "Classification",
+      "topic_tags": ["flightless"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Syllogism: Some flowers are roses. All roses are red. Conclusion: Some flowers are red.",
+      "options": ["Definitely true", "Definitely false", "Cannot determine", "True only sometimes"],
+      "correct_answer": "A",
+      "chapter": "Syllogism",
+      "topic_tags": ["syllogism"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Alphanumeric: BCDF G HJ KLM N. Number of consonants between vowels = ?",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "B",
+      "chapter": "Alphanumeric Series",
+      "topic_tags": ["letter_position"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "If P+Q = '10 hours' and Q+R = '20 hours' and P+R = '15 hours', total P+Q+R:",
+      "options": ["22.5", "25", "30", "45"],
+      "correct_answer": "A",
+      "chapter": "Puzzles",
+      "topic_tags": ["sum_problem"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Statement: All cats are dogs. No dog is a fish. Conclusion: No cat is a fish.",
+      "options": ["True", "False", "Cannot determine", "Sometimes true"],
+      "correct_answer": "A",
+      "chapter": "Syllogism",
+      "topic_tags": ["syllogism"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Choose analogous pair: Doctor : Hospital :: Lawyer : ?",
+      "options": ["Office", "Court", "Client", "Books"],
+      "correct_answer": "B",
+      "chapter": "Analogy",
+      "topic_tags": ["workplace"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Calendar: 2024 is a leap year. 1 Jan 2024 is Monday. 1 Mar 2024 is:",
+      "options": ["Thursday", "Friday", "Saturday", "Sunday"],
+      "correct_answer": "B",
+      "chapter": "Calendar",
+      "topic_tags": ["leap_year"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Reflect 'WORLD' through a vertical mirror:",
+      "options": ["WORLD", "DLROW", "Same", "Reversed"],
+      "correct_answer": "D",
+      "chapter": "Mirror Images",
+      "topic_tags": ["mirror"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Clock shows 4:20. Angle between hour and minute hand:",
+      "options": ["10°", "12°", "10° approx", "0°"],
+      "correct_answer": "A",
+      "chapter": "Clock",
+      "topic_tags": ["clock_angle"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Sequence: A1, C3, E5, G7, ?",
+      "options": ["I9", "H8", "J9", "I8"],
+      "correct_answer": "A",
+      "chapter": "Mixed Series",
+      "topic_tags": ["alternating"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Family tree: A is B's mother, B is C's father. A is C's:",
+      "options": ["Grandmother", "Sister", "Aunt", "Mother"],
+      "correct_answer": "A",
+      "chapter": "Blood Relations",
+      "topic_tags": ["family"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sit arrangement: P, Q, R, S, T in circle facing centre. P is between Q and R. T is opposite Q. S sits beside whom?",
+      "options": ["P only", "T only", "P and T", "R and S"],
+      "correct_answer": "C",
+      "chapter": "Circular Arrangement",
+      "topic_tags": ["circular"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Coded language: ROAD = 2030, ROUTE = 20305. Code of ROUND:",
+      "options": ["20302", "20310", "20305", "23010"],
+      "correct_answer": "A",
+      "chapter": "Coding-Decoding",
+      "topic_tags": ["letter_count"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Floors puzzle: 5 floors, M is above N. If M is on 3rd, N is on:",
+      "options": ["1st or 2nd", "2nd", "1st", "5th"],
+      "correct_answer": "A",
+      "chapter": "Puzzles",
+      "topic_tags": ["floors"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Word formation from MASTER: how many distinct words with 3 letters from M-A-S-T-E-R?",
+      "options": ["60", "120", "20", "240"],
+      "correct_answer": "B",
+      "chapter": "Permutations",
+      "topic_tags": ["permutations"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Statement: If it rains, school is closed. Today school is closed. Hence:",
+      "options": ["It rained", "It might or might not have rained", "It did not rain", "Cannot determine"],
+      "correct_answer": "B",
+      "chapter": "Logical Reasoning",
+      "topic_tags": ["affirming_consequent"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Day-after-tomorrow if today is Saturday:",
+      "options": ["Monday", "Tuesday", "Sunday", "Wednesday"],
+      "correct_answer": "A",
+      "chapter": "Calendar",
+      "topic_tags": ["days"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Choose the antonym of 'arid':",
+      "options": ["Dry", "Lush", "Hot", "Sandy"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["antonyms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Statement: Two cars start from same point at same time. A drives east at 40km/h, B drives north at 30km/h. After 1 hour distance apart:",
+      "options": ["50 km", "70 km", "30 km", "40 km"],
+      "correct_answer": "A",
+      "chapter": "Directions",
+      "topic_tags": ["pythagoras_direction"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

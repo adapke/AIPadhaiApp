@@ -205,6 +205,7 @@ def send_message(
     user_tier: str = "M2",
     upload_ids: list[str] | None = None,
     auto_ground: bool = False,
+    mode: str | None = None,
 ) -> TutorReply:
     """Append a user message + get an assistant reply. Side effects:
     - Updates tutor_sessions.messages_json + token/cost rollups
@@ -276,7 +277,9 @@ def send_message(
             query=user_text, upload_ids=resolved_upload_ids,
         )
 
-    return _claude_reply(session, user_text, retrieved_hits=retrieved_hits)
+    return _claude_reply(
+        session, user_text, retrieved_hits=retrieved_hits, mode=mode,
+    )
 
 
 def _recent_indexed_uploads_for_user(user_id: str, *, limit: int = 3) -> list[str]:
@@ -320,6 +323,7 @@ def _claude_reply(
     user_text: str,
     *,
     retrieved_hits: list | None = None,
+    mode: str | None = None,
 ) -> TutorReply:
     """Real Claude call path. Lazy imports the SDK so this module
     loads without anthropic installed.
@@ -327,10 +331,22 @@ def _claude_reply(
     `retrieved_hits` (optional) — list of retrieval.RetrievalHit. When
     present, each chunk is injected into the system prompt as cached
     context, and the citations are returned on the TutorReply so the
-    UI can render them inline."""
+    UI can render them inline.
+
+    `mode` (prod-136) — optional tutor mode key from `tutor_modes.MODES`
+    (quick_explain / jee_advanced_drill / neet_one_liner /
+    cbse_board_answer / desi_analogy / rural_simple). When set, the
+    mode's system_addendum is appended to the base prompt. Unknown
+    or None → no override."""
     started = time.time()
     model = os.environ.get("PADHAI_TUTOR_MODEL", _models.HAIKU_MODEL)
     system_prompt = _build_system_prompt(session)
+
+    # prod-136 — apply tutor mode override BEFORE injecting source
+    # grounding so the mode addendum can be cached separately.
+    if mode:
+        from . import tutor_modes
+        system_prompt = tutor_modes.apply_mode(system_prompt, mode)
 
     # Source grounding — inject retrieved chunks into the system prompt
     # (cacheable: same chunks for the same session won't re-tokenise).

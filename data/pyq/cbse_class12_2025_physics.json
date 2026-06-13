@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class12_2025_physics_board",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Two point charges +q and -q are placed distance d apart. Electric field at midpoint is:",
+      "options": ["0", "kq/d²", "2kq/d²", "8kq/d²"],
+      "correct_answer": "D",
+      "chapter": "Electric Charges and Fields",
+      "topic_tags": ["electric_field", "dipole"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Capacitance of a parallel plate capacitor with vacuum, plate area A and separation d is:",
+      "options": ["ε₀A/d", "ε₀d/A", "ε₀Ad", "Ad/ε₀"],
+      "correct_answer": "A",
+      "chapter": "Electrostatic Potential and Capacitance",
+      "topic_tags": ["capacitance", "formula"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Current through a resistor is 2 A. Power dissipated in a 5 Ω resistor is:",
+      "options": ["10 W", "20 W", "5 W", "2.5 W"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["power", "I²R"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "An electron enters a magnetic field perpendicular to velocity. Its path is:",
+      "options": ["Straight line", "Parabola", "Circle", "Ellipse"],
+      "correct_answer": "C",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["circular_motion", "magnetic_force"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Lenz's law follows from conservation of:",
+      "options": ["Charge", "Momentum", "Energy", "Mass"],
+      "correct_answer": "C",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["Lenz_law", "energy_conservation"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "RMS value of AC current with peak Io is:",
+      "options": ["Io", "Io/√2", "Io/2", "2Io"],
+      "correct_answer": "B",
+      "chapter": "Alternating Current",
+      "topic_tags": ["RMS"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Speed of EM waves in vacuum is:",
+      "options": ["3×10⁸ m/s", "3×10⁶ m/s", "1.5×10⁸ m/s", "3×10¹⁰ m/s"],
+      "correct_answer": "A",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": ["c", "speed_of_light"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Focal length of a concave lens is:",
+      "options": ["Positive", "Negative", "Zero", "Infinity"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["sign_convention", "concave_lens"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Young's double slit experiment demonstrates:",
+      "options": ["Reflection", "Refraction", "Interference", "Polarisation"],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": ["interference", "YDSE"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Energy E of a photon with frequency ν is:",
+      "options": ["hν", "h/ν", "ν/h", "h+ν"],
+      "correct_answer": "A",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["photon", "Planck"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bohr's first orbit radius for hydrogen is approximately:",
+      "options": ["0.529 Å", "5.29 Å", "0.529 nm", "5.29 m"],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": ["Bohr_radius"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Stable nucleus has:",
+      "options": ["N=Z always", "N>Z for heavy nuclei", "N<Z always", "N=A"],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": ["stability", "neutron_proton"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "In a p-n junction diode, depletion region is formed due to:",
+      "options": ["Holes only", "Electrons only", "Diffusion of carriers", "Photons"],
+      "correct_answer": "C",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["depletion_region", "diode"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnetic field at center of a circular coil of radius r with current I has magnitude:",
+      "options": ["μ₀I/2r", "μ₀I/r", "2μ₀I/r", "μ₀I/(4πr)"],
+      "correct_answer": "A",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["Biot_Savart", "circular_coil"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Self-inductance of a coil depends on:",
+      "options": ["Current through it", "Voltage across it", "Geometry and turns", "Resistance"],
+      "correct_answer": "C",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["self_inductance"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Power factor of a pure inductive AC circuit is:",
+      "options": ["0", "0.5", "1", "-1"],
+      "correct_answer": "A",
+      "chapter": "Alternating Current",
+      "topic_tags": ["power_factor", "inductor"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Resistivity of a semiconductor with temperature:",
+      "options": ["Increases", "Decreases", "Remains constant", "First increases then decreases"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["resistivity", "temperature_dependence"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of free electrons per atom in copper is approximately:",
+      "options": ["0", "1", "2", "4"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["copper", "free_electrons"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A wave with frequency 500 Hz and wavelength 0.5 m has speed:",
+      "options": ["100 m/s", "250 m/s", "500 m/s", "1000 m/s"],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": ["wave_speed", "v=fλ"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Total internal reflection occurs when light goes from:",
+      "options": ["Denser to rarer", "Rarer to denser", "Same medium", "Any angle"],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": ["TIR", "refractive_index"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Drift velocity is:",
+      "options": ["Random thermal velocity", "Average velocity in direction of field", "Speed of light", "Same as Fermi velocity"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["drift_velocity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Wavelength of de Broglie wave depends on:",
+      "options": ["Mass only", "Velocity only", "Momentum", "Charge"],
+      "correct_answer": "C",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["de_Broglie"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Forbidden energy gap in a semiconductor lies between:",
+      "options": ["Two conduction bands", "Conduction and valence bands", "Two valence bands", "Outside both"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["band_gap"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnetic flux unit is:",
+      "options": ["Tesla", "Weber", "Henry", "Coulomb"],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["units", "Weber"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Eddy currents are used in:",
+      "options": ["Induction furnace", "Battery", "Resistor", "Switch"],
+      "correct_answer": "A",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["eddy_currents", "applications"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

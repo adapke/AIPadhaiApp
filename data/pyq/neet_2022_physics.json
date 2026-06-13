@@ -1,0 +1,235 @@
+{
+  "source": "neet_2022_physics",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2022,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Two stones thrown vertically up with different velocities. The ratio of their max heights is equal to ratio of:",
+      "options": ["Velocities", "Squares of velocities", "Cubes of velocities", "Inverse of velocities"],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": ["max_height"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Acceleration of body in uniform circular motion of radius r and speed v:",
+      "options": ["v/r", "v²/r", "vr", "v²r"],
+      "correct_answer": "B",
+      "chapter": "Motion in a Plane",
+      "topic_tags": ["centripetal"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Object of mass 5 kg moves with velocity 10 m/s. Momentum:",
+      "options": ["25 kg·m/s", "50 kg·m/s", "75 kg·m/s", "100 kg·m/s"],
+      "correct_answer": "B",
+      "chapter": "Laws of Motion",
+      "topic_tags": ["momentum"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Spring constant of a spring stretched by 0.1 m under 10 N force:",
+      "options": ["1 N/m", "10 N/m", "100 N/m", "1000 N/m"],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": ["Hooke", "spring"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Internal energy of ideal gas depends only on:",
+      "options": ["Pressure", "Volume", "Temperature", "Density"],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["internal_energy"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Brewster's angle for n=√3 is:",
+      "options": ["30°", "45°", "60°", "90°"],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": ["Brewster"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Magnetic moment of current loop with N turns, area A, current I:",
+      "options": ["NIA", "NI/A", "I/(NA)", "N²IA"],
+      "correct_answer": "A",
+      "chapter": "Moving Charges and Magnetism",
+      "topic_tags": ["magnetic_moment"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Equivalent resistance of two 6Ω resistors in parallel:",
+      "options": ["3Ω", "6Ω", "12Ω", "24Ω"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["parallel_resistance"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "RC circuit time constant τ:",
+      "options": ["R/C", "RC", "R+C", "C/R"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["time_constant"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Refractive index relation: n₁ sin θ₁ = ___",
+      "options": ["n₂ cos θ₂", "n₂ sin θ₂", "n₂ tan θ₂", "n₂"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["Snell"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Stefan-Boltzmann law: P ∝ ?",
+      "options": ["T", "T²", "T⁴", "T⁻¹"],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["Stefan"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Polarisation of light proves:",
+      "options": ["Particle nature", "Wave nature with transverse waves", "Quantum nature", "Reflection"],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": ["polarisation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Capacitor with capacitance C charged to voltage V stores energy:",
+      "options": ["CV", "CV²/2", "C/V", "V/C"],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": ["energy_capacitor"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Wein's displacement: hot star peaks at:",
+      "options": ["Longer wavelength", "Shorter wavelength", "Equal wavelength", "Random"],
+      "correct_answer": "B",
+      "chapter": "Heat",
+      "topic_tags": ["Wein"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Force between two parallel wires with same direction currents:",
+      "options": ["Repulsive", "Attractive", "Zero", "Perpendicular"],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": ["parallel_wires"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An ideal transformer has 100 primary turns, 1000 secondary turns. If primary is 220V, secondary is:",
+      "options": ["22V", "220V", "2200V", "22000V"],
+      "correct_answer": "C",
+      "chapter": "Alternating Current",
+      "topic_tags": ["transformer"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Compton scattering provides evidence for:",
+      "options": ["Wave nature", "Particle nature of light", "Polarisation", "Diffraction"],
+      "correct_answer": "B",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["Compton"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Mass defect in nucleus is converted to:",
+      "options": ["Volume", "Binding energy", "Charge", "Spin"],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": ["mass_defect"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Diode in reverse bias acts as:",
+      "options": ["Conductor", "Insulator (high resistance)", "Capacitor", "Inductor"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["diode"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Logic gate that outputs 1 only when both inputs are 0:",
+      "options": ["AND", "OR", "NOR", "XOR"],
+      "correct_answer": "C",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["NOR"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Velocity of EM wave in vacuum equals:",
+      "options": ["1/√(μ₀ε₀)", "μ₀ε₀", "√(μ₀ε₀)", "μ₀/ε₀"],
+      "correct_answer": "A",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": ["EM_speed"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Optical fibre uses principle of:",
+      "options": ["Refraction", "Total internal reflection", "Diffraction", "Polarisation"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["TIR_fibre"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Doppler effect (sound): source approaches you, observed frequency:",
+      "options": ["Higher", "Lower", "Same", "Zero"],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": ["Doppler_sound"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Resistance of a wire is doubled when its length is doubled and area is:",
+      "options": ["Same", "Doubled", "Halved", "Quadrupled"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["resistance_length"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Charge oscillating in LC circuit gives:",
+      "options": ["DC voltage", "AC sinusoidal current", "Linear current", "Square wave"],
+      "correct_answer": "B",
+      "chapter": "Alternating Current",
+      "topic_tags": ["LC_oscillator"],
+      "difficulty": "medium",
+      "marks": 4
+    }
+  ]
+}

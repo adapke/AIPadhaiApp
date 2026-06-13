@@ -21,6 +21,24 @@ router = APIRouter()
 
 # ---------- L1: AI tutor sessions ----------
 
+
+@router.get("/api/tutor/modes")
+def list_tutor_modes() -> dict:
+    """prod-136 — public catalog of tutor modes (CK-12 Flexi pattern).
+
+    The SPA fetches this on tutor-page load to render mode chips
+    (Quick explain, JEE Advanced drill, NEET one-liner, CBSE board
+    answer, Desi analogy, Rural simple). Public — no auth required;
+    chips render before sign-in.
+
+    Returns:
+        {"modes": [{"key", "label_en", "label_hi", "one_line_en",
+                    "one_line_hi", "icon"}, ...]}
+    """
+    from .. import tutor_modes
+    return {"modes": tutor_modes.list_modes()}
+
+
 @router.post("/api/tutor/sessions", status_code=201)
 def tutor_start(user=Depends(current_user)):
     """Start a new tutor session. Hydrates context_summary from the
@@ -62,6 +80,15 @@ def tutor_message(
             "without forcing the student to pick files."
         ),
     ),
+    mode: str | None = Form(
+        None,
+        description=(
+            "prod-136 — optional tutor mode: quick_explain / "
+            "jee_advanced_drill / neet_one_liner / cbse_board_answer / "
+            "desi_analogy / rural_simple. Unknown → ignored. "
+            "See GET /api/tutor/modes for the live catalog."
+        ),
+    ),
     user=Depends(current_user),
 ):
     """Send a user message + get an assistant reply.
@@ -69,6 +96,11 @@ def tutor_message(
     Source grounding (v3.x): pass upload_ids (comma-separated) or
     auto_ground=true to RAG over the student's indexed uploads. The
     response will include a `citations` array.
+
+    Tutor modes (prod-136): pass `mode=quick_explain` (or any key from
+    GET /api/tutor/modes) to apply a per-turn CK-12-Flexi-style lens
+    (board-exam recall, JEE drill, NEET MCQ elimination, CBSE 5-mark
+    structured, desi analogy, rural-simple language).
     """
     from .. import tutor
     user = require_user(user)
@@ -97,6 +129,7 @@ def tutor_message(
             user_tier=getattr(user, "subscription_tier", "M2") or "M2",
             upload_ids=parsed_upload_ids or None,
             auto_ground=auto_ground,
+            mode=mode,
         )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e
@@ -368,7 +401,9 @@ def submit_essay(
     grade = None
     if grade_now:
         try:
-            r = essay_grader.grade(sub.id)
+            r = essay_grader.grade(
+                sub.id, user_tier=user.subscription_tier,
+            )
             grade = {
                 "score": r.score,
                 "by_criterion": r.by_criterion,
@@ -1128,6 +1163,7 @@ def submit_mock_interview_answer(
             interview_id=iid, turn_index=turn_index,
             answer_text=answer_text,
             answer_audio_url=answer_audio_url,
+            user_tier=user.subscription_tier,
         )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e

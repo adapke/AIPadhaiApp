@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class9_2024_mathematics_sample",
+  "default_board": "cbse",
+  "default_grade": 9,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "sample_qp",
+  "questions": [
+    {
+      "question_text": "√2 is a:",
+      "options": ["Rational number", "Irrational number", "Whole number", "Natural number"],
+      "correct_answer": "B",
+      "chapter": "Number Systems",
+      "topic_tags": ["irrational", "real_numbers"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Degree of polynomial 4x³ + 2x² - 7x + 1 is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "C",
+      "chapter": "Polynomials",
+      "topic_tags": ["degree", "polynomial"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Linear equation in two variables has how many solutions?",
+      "options": ["1", "2", "Infinite", "0"],
+      "correct_answer": "C",
+      "chapter": "Linear Equations in Two Variables",
+      "topic_tags": ["linear_equations"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Two angles whose sum is 180° are called:",
+      "options": ["Complementary", "Supplementary", "Adjacent", "Vertical"],
+      "correct_answer": "B",
+      "chapter": "Lines and Angles",
+      "topic_tags": ["angles", "supplementary"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sum of angles of a triangle is:",
+      "options": ["90°", "180°", "270°", "360°"],
+      "correct_answer": "B",
+      "chapter": "Triangles",
+      "topic_tags": ["triangle", "angle_sum"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Each angle of an equilateral triangle is:",
+      "options": ["60°", "90°", "45°", "30°"],
+      "correct_answer": "A",
+      "chapter": "Triangles",
+      "topic_tags": ["equilateral"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Diagonals of a rhombus:",
+      "options": ["Are equal", "Bisect each other at right angles", "Are parallel", "None"],
+      "correct_answer": "B",
+      "chapter": "Quadrilaterals",
+      "topic_tags": ["rhombus"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Area of triangle with base 10 cm and height 8 cm is:",
+      "options": ["40 cm²", "80 cm²", "20 cm²", "100 cm²"],
+      "correct_answer": "A",
+      "chapter": "Areas of Parallelograms and Triangles",
+      "topic_tags": ["area", "triangle"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Volume of cube with side 5 cm is:",
+      "options": ["25 cm³", "125 cm³", "250 cm³", "100 cm³"],
+      "correct_answer": "B",
+      "chapter": "Surface Areas and Volumes",
+      "topic_tags": ["cube", "volume"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Surface area of sphere with radius r is:",
+      "options": ["4πr²", "(4/3)πr³", "πr²", "2πr"],
+      "correct_answer": "A",
+      "chapter": "Surface Areas and Volumes",
+      "topic_tags": ["sphere", "surface_area"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mean of 5 numbers 2, 4, 6, 8, 10 is:",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "C",
+      "chapter": "Statistics",
+      "topic_tags": ["mean"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Probability of impossible event is:",
+      "options": ["0", "0.5", "1", "Undefined"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["impossible_event"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If x=2 is a zero of p(x)=x²-5x+k, value of k is:",
+      "options": ["2", "4", "6", "8"],
+      "correct_answer": "C",
+      "chapter": "Polynomials",
+      "topic_tags": ["zero_polynomial"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Coordinates of a point on x-axis are of form:",
+      "options": ["(x, 0)", "(0, y)", "(x, y)", "(y, x)"],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["x_axis"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Pythagoras theorem: for right triangle with sides a, b, c (c hypotenuse):",
+      "options": ["a + b = c", "a² + b² = c²", "a × b = c²", "a² - b² = c²"],
+      "correct_answer": "B",
+      "chapter": "Triangles",
+      "topic_tags": ["Pythagoras"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sum of interior angles of a quadrilateral is:",
+      "options": ["180°", "360°", "540°", "720°"],
+      "correct_answer": "B",
+      "chapter": "Quadrilaterals",
+      "topic_tags": ["interior_angles"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If angles of triangle are in ratio 1:2:3, largest angle is:",
+      "options": ["30°", "60°", "90°", "120°"],
+      "correct_answer": "C",
+      "chapter": "Triangles",
+      "topic_tags": ["ratio", "angles"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "HCF of 12 and 18 is:",
+      "options": ["2", "3", "6", "12"],
+      "correct_answer": "C",
+      "chapter": "Number Systems",
+      "topic_tags": ["HCF"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Median of 3, 1, 5, 2, 4 is:",
+      "options": ["1", "3", "4", "5"],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": ["median"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mode of 2, 3, 3, 4, 3, 5 is:",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": ["mode"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Circumference of circle with radius 7 (π=22/7) is:",
+      "options": ["22", "44", "14", "49"],
+      "correct_answer": "B",
+      "chapter": "Circles",
+      "topic_tags": ["circumference"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Three points are collinear if:",
+      "options": ["Same plane", "Same line", "Form a triangle", "Equal distance"],
+      "correct_answer": "B",
+      "chapter": "Lines and Angles",
+      "topic_tags": ["collinear"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Surface area of cube with edge a is:",
+      "options": ["a²", "4a²", "6a²", "a³"],
+      "correct_answer": "C",
+      "chapter": "Surface Areas and Volumes",
+      "topic_tags": ["cube", "surface"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Two figures are congruent if they have:",
+      "options": ["Same area", "Same shape and size", "Same perimeter", "Same volume"],
+      "correct_answer": "B",
+      "chapter": "Triangles",
+      "topic_tags": ["congruent"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Discriminant of x²+2x+1=0 is:",
+      "options": ["-2", "0", "2", "4"],
+      "correct_answer": "B",
+      "chapter": "Polynomials",
+      "topic_tags": ["discriminant"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

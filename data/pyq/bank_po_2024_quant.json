@@ -1,0 +1,235 @@
+{
+  "source": "ibps_po_2024_quantitative",
+  "default_board": "bank_po",
+  "default_grade": 0,
+  "default_subject": "quantitative_aptitude",
+  "default_year": 2024,
+  "default_paper": "ibps_prelims",
+  "questions": [
+    {
+      "question_text": "If a sum doubles in 8 years at simple interest, it triples in:",
+      "options": ["12 years", "16 years", "20 years", "24 years"],
+      "correct_answer": "B",
+      "chapter": "Simple Interest",
+      "topic_tags": ["SI", "doubling"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Two pipes fill a tank in 6 and 12 hours. Together they fill it in:",
+      "options": ["3 hr", "4 hr", "6 hr", "9 hr"],
+      "correct_answer": "B",
+      "chapter": "Pipes and Cisterns",
+      "topic_tags": ["pipes"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Average of 20 numbers is 15. If we exclude the largest (50), new average:",
+      "options": ["13.16", "14", "14.5", "12.5"],
+      "correct_answer": "A",
+      "chapter": "Averages",
+      "topic_tags": ["averages"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Speed of a boat in still water is 12 km/h. Stream speed is 3 km/h. Downstream speed:",
+      "options": ["9 km/h", "12 km/h", "15 km/h", "18 km/h"],
+      "correct_answer": "C",
+      "chapter": "Boats and Streams",
+      "topic_tags": ["boat_speed"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "20% of 250 is:",
+      "options": ["25", "50", "75", "100"],
+      "correct_answer": "B",
+      "chapter": "Percentages",
+      "topic_tags": ["percentage"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If selling price = 1.2 × cost price, profit % is:",
+      "options": ["10%", "15%", "20%", "25%"],
+      "correct_answer": "C",
+      "chapter": "Profit and Loss",
+      "topic_tags": ["profit"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Ratio of ages of A and B is 3:5. If A is 18, B is:",
+      "options": ["25", "30", "35", "40"],
+      "correct_answer": "B",
+      "chapter": "Ratio and Proportion",
+      "topic_tags": ["ratio"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Compound interest on Rs 1000 at 10% per annum for 2 years:",
+      "options": ["Rs 200", "Rs 210", "Rs 220", "Rs 100"],
+      "correct_answer": "B",
+      "chapter": "Compound Interest",
+      "topic_tags": ["CI"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number divisible by both 6 and 8 is also divisible by:",
+      "options": ["10", "12", "24", "48"],
+      "correct_answer": "C",
+      "chapter": "Number System",
+      "topic_tags": ["LCM"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If x:y = 2:3 and y:z = 4:5, then x:z is:",
+      "options": ["8:15", "10:12", "2:5", "1:2"],
+      "correct_answer": "A",
+      "chapter": "Ratio and Proportion",
+      "topic_tags": ["combined_ratio"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Mean of first 5 odd numbers:",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "B",
+      "chapter": "Averages",
+      "topic_tags": ["odd_numbers", "mean"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "After 20% discount and 10% tax, price of Rs 500 article becomes:",
+      "options": ["Rs 440", "Rs 450", "Rs 460", "Rs 470"],
+      "correct_answer": "A",
+      "chapter": "Percentages",
+      "topic_tags": ["successive_percentage"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Area of square with diagonal 10 cm:",
+      "options": ["25 cm²", "50 cm²", "75 cm²", "100 cm²"],
+      "correct_answer": "B",
+      "chapter": "Mensuration",
+      "topic_tags": ["square", "diagonal"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Time taken by train of 200 m to cross a pole at 36 km/h:",
+      "options": ["10 s", "20 s", "30 s", "40 s"],
+      "correct_answer": "B",
+      "chapter": "Time, Speed and Distance",
+      "topic_tags": ["train"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "A and B together earn Rs 800 in 4 days. A alone earns Rs 600 in 6 days. B's daily wage:",
+      "options": ["Rs 80", "Rs 100", "Rs 90", "Rs 110"],
+      "correct_answer": "B",
+      "chapter": "Time and Work",
+      "topic_tags": ["wages"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "If 2x + 3 = 11, x equals:",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "C",
+      "chapter": "Algebra",
+      "topic_tags": ["linear_equation"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Simplification: 25% of 80 + 50% of 40:",
+      "options": ["35", "40", "45", "50"],
+      "correct_answer": "B",
+      "chapter": "Percentages",
+      "topic_tags": ["simplification"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Volume of cylinder radius 7, height 14 (π=22/7):",
+      "options": ["2156", "1078", "3234", "440"],
+      "correct_answer": "A",
+      "chapter": "Mensuration",
+      "topic_tags": ["cylinder"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Successive discount of 10% and 20% is equivalent to single discount of:",
+      "options": ["28%", "30%", "25%", "32%"],
+      "correct_answer": "A",
+      "chapter": "Percentages",
+      "topic_tags": ["successive_discount"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Ratio of milk to water in a mixture is 5:2. If 5L water added to 7L, new ratio:",
+      "options": ["5:7", "1:2", "5:3", "5:4"],
+      "correct_answer": "A",
+      "chapter": "Mixtures",
+      "topic_tags": ["alligation"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Probability of drawing a king from 52 cards:",
+      "options": ["1/13", "1/4", "1/52", "4/13"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["cards"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Largest 3-digit number divisible by 7:",
+      "options": ["994", "999", "987", "777"],
+      "correct_answer": "A",
+      "chapter": "Number System",
+      "topic_tags": ["divisibility"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of zeros at end of 25!:",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "C",
+      "chapter": "Number System",
+      "topic_tags": ["factorial", "trailing_zeros"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "If 5x = 2y + 8 and x - y = 1, then x:",
+      "options": ["1", "2", "3", "5"],
+      "correct_answer": "B",
+      "chapter": "Algebra",
+      "topic_tags": ["linear_system"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Sum of all 2-digit numbers divisible by 5:",
+      "options": ["945", "990", "950", "920"],
+      "correct_answer": "A",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["AP_sum"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

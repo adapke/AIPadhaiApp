@@ -1,0 +1,235 @@
+{
+  "source": "jee_main_2024_advanced_mathematics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2024,
+  "default_paper": "main_advanced",
+  "questions": [
+    {
+      "question_text": "lim x→0 (eˣ-1)/x equals:",
+      "options": ["0", "1", "e", "Infinity"],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": ["standard_limit"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Derivative of ln(x) is:",
+      "options": ["1/x", "x", "ln(x)", "x ln(x)"],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": ["log"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "∫sin(x) dx equals:",
+      "options": ["cos(x) + C", "-cos(x) + C", "tan(x) + C", "sec(x) + C"],
+      "correct_answer": "B",
+      "chapter": "Integration",
+      "topic_tags": ["trig_integral"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If A is 3×3 matrix with det(A) = 5, det(A²):",
+      "options": ["10", "25", "5", "125"],
+      "correct_answer": "B",
+      "chapter": "Determinants",
+      "topic_tags": ["determinant_power"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of permutations of letters in 'BANANA':",
+      "options": ["60", "120", "360", "720"],
+      "correct_answer": "A",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": ["repetition"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Coefficient of x^5 in (1+x)^10:",
+      "options": ["252", "210", "120", "90"],
+      "correct_answer": "A",
+      "chapter": "Binomial Theorem",
+      "topic_tags": ["binomial_coef"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Modulus of complex z = 3 + 4i:",
+      "options": ["3", "4", "5", "7"],
+      "correct_answer": "C",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["modulus"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Argument of z = i is:",
+      "options": ["0", "π/2", "π", "3π/2"],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["argument"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Sum of n terms of GP with first term 'a' and ratio 'r' (r≠1):",
+      "options": ["na", "a(rⁿ-1)/(r-1)", "n(a+r)", "ar"],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": ["GP_sum"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Slope of line perpendicular to y = 2x + 3:",
+      "options": ["2", "-2", "1/2", "-1/2"],
+      "correct_answer": "D",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["perpendicular_slope"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Distance from origin to (3,4) is:",
+      "options": ["5", "7", "12", "25"],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["distance"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Eccentricity of parabola y² = 4x:",
+      "options": ["0", "1", "2", "1/2"],
+      "correct_answer": "B",
+      "chapter": "Conic Sections",
+      "topic_tags": ["parabola"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of ways to arrange 5 books on a shelf:",
+      "options": ["24", "60", "120", "720"],
+      "correct_answer": "C",
+      "chapter": "Permutations",
+      "topic_tags": ["factorial"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If sec θ = 2, then cos θ:",
+      "options": ["1/2", "2", "√3/2", "1"],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "topic_tags": ["reciprocal_trig"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Range of sin x is:",
+      "options": ["[-1, 1]", "(-∞, ∞)", "[0, 1]", "[-π, π]"],
+      "correct_answer": "A",
+      "chapter": "Functions",
+      "topic_tags": ["range"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "∫₀^π/2 cos(x) dx equals:",
+      "options": ["0", "1", "-1", "π"],
+      "correct_answer": "B",
+      "chapter": "Definite Integration",
+      "topic_tags": ["definite_cos"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If x² + y² = 25, the point closest to (5,5) on the curve:",
+      "options": ["(3, 4)", "(5, 0)", "(0, 5)", "(5/√2, 5/√2)"],
+      "correct_answer": "D",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["minima"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Vector i + j + k has magnitude:",
+      "options": ["1", "√2", "√3", "3"],
+      "correct_answer": "C",
+      "chapter": "Vectors",
+      "topic_tags": ["magnitude"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Solution of dy/dx = y/x:",
+      "options": ["y = Cx", "y = Ce^x", "y = x²", "y = C/x"],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": ["homogeneous"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "P(A) = 0.6, P(B) = 0.4, A and B independent. P(A∩B):",
+      "options": ["0.1", "0.24", "0.4", "0.6"],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": ["independence"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Mean of binomial distribution np with n=20, p=0.5:",
+      "options": ["5", "10", "20", "0.5"],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": ["binomial_mean"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If f(x) = x³, then f'(2):",
+      "options": ["8", "12", "6", "16"],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": ["power_rule"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Maximum value of f(x) = x(1-x) on [0,1]:",
+      "options": ["1/2", "1/4", "1", "0"],
+      "correct_answer": "B",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["maxima"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "lim x→∞ x/(x+1):",
+      "options": ["0", "1", "∞", "Does not exist"],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": ["rational_limit"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If a vector A makes 60° with x-axis with magnitude 4, x-component:",
+      "options": ["2", "2√3", "4", "0"],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": ["component"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

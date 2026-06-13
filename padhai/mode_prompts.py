@@ -195,19 +195,18 @@ def mode_schema(mode: str, level: str) -> dict[str, Any]:
         "narration": {"type": "string"},
         "bullets": {
             "type": "array",
-            "minItems": bullets_min,
-            "maxItems": bullets_max,
+            "minItems": 1,
+
             "items": {"type": "string"},
         },
         "diagram": {
+            # Anthropic structured output rejects null-in-enum; keep allow-list
+            # in the description and validate downstream.
             "type": ["string", "null"],
-            "enum": [
-                None, "solar_system", "photosynthesis", "water_cycle",
-                "atom", "addition_dots",
-            ],
             "description": (
-                "Optional diagram template name. Use only when the "
-                "scene's content matches one of the supported templates."
+                "Optional diagram template name. Must be one of: "
+                "solar_system, photosynthesis, water_cycle, atom, "
+                "addition_dots. Use null otherwise."
             ),
         },
         # v0.14 C7: source page provenance. Optional — modes that
@@ -217,7 +216,8 @@ def mode_schema(mode: str, level: str) -> dict[str, Any]:
         # scene's content.
         "source_pages": {
             "type": ["array", "null"],
-            "items": {"type": "integer", "minimum": 1},
+            # Anthropic rejects minimum on numbers; description tells the model.
+            "items": {"type": "integer", "description": "1-indexed page number (>= 1)"},
             "description": (
                 "1-indexed page numbers of the source upload that "
                 "back the content in this scene. Cite at least one "
@@ -232,8 +232,8 @@ def mode_schema(mode: str, level: str) -> dict[str, Any]:
             "title": {"type": "string"},
             "scenes": {
                 "type": "array",
-                "minItems": scene_min,
-                "maxItems": scene_max,
+                "minItems": 1,
+
                 "items": {
                     "type": "object",
                     "properties": scene_props,
@@ -251,8 +251,8 @@ def mode_schema(mode: str, level: str) -> dict[str, Any]:
     if quiz_min > 0:
         schema["properties"]["quiz"] = {
             "type": "array",
-            "minItems": quiz_min,
-            "maxItems": quiz_max,
+            "minItems": 1,
+
             "items": {
                 "type": "object",
                 "properties": {

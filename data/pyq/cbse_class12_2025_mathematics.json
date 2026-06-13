@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class12_2025_mathematics_board",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Relation R = {(1,1), (2,2), (3,3)} on set {1,2,3} is:",
+      "options": ["Reflexive only", "Symmetric only", "Equivalence", "None"],
+      "correct_answer": "C",
+      "chapter": "Relations and Functions",
+      "topic_tags": ["equivalence_relation"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Principal value of sin⁻¹(1/√2) is:",
+      "options": ["π/4", "π/3", "π/6", "π/2"],
+      "correct_answer": "A",
+      "chapter": "Inverse Trigonometric Functions",
+      "topic_tags": ["arcsin"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If A is a 3×3 matrix and |A| = 5, then |3A| equals:",
+      "options": ["15", "45", "135", "5"],
+      "correct_answer": "C",
+      "chapter": "Matrices",
+      "topic_tags": ["determinant_scalar"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "If A and B are 2×2 matrices, then (AB)ᵀ equals:",
+      "options": ["AᵀBᵀ", "BᵀAᵀ", "AB", "BA"],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": ["transpose"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "d/dx (sin x cos x) equals:",
+      "options": ["cos 2x", "cos²x", "-sin²x", "sin 2x"],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": ["product_rule"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "∫1/(1+x²) dx equals:",
+      "options": ["tan⁻¹x + C", "sec⁻¹x + C", "ln(1+x²) + C", "x/(1+x²) + C"],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": ["arctan_integral"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Order of differential equation y'' + 2y' + y = 0 is:",
+      "options": ["1", "2", "3", "0"],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": ["order"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Solution of dy/dx = y is:",
+      "options": ["y = Cx", "y = Ce^x", "y = C + x", "y = e^(Cx)"],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": ["first_order"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If a vector has magnitude 5 and makes angle 60° with positive x-axis, x-component is:",
+      "options": ["2.5", "5", "5/2", "10"],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": ["components"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Dot product of (i + 2j) and (3i + 4j) is:",
+      "options": ["3", "8", "11", "5"],
+      "correct_answer": "C",
+      "chapter": "Vectors",
+      "topic_tags": ["dot_product"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Direction cosines of vector (3, 4, 0) are:",
+      "options": ["(3/5, 4/5, 0)", "(3, 4, 0)/5", "Same as (a) or (b)", "(1, 1, 0)"],
+      "correct_answer": "C",
+      "chapter": "Three-Dimensional Geometry",
+      "topic_tags": ["direction_cosines"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Plane 2x + 3y + 4z = 12 cuts z-axis at:",
+      "options": ["(0,0,3)", "(0,0,4)", "(0,0,6)", "(0,0,12)"],
+      "correct_answer": "A",
+      "chapter": "Three-Dimensional Geometry",
+      "topic_tags": ["plane", "intercept"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If P(A) = 0.6, P(B) = 0.4, P(A∩B) = 0.2, then P(A∪B) is:",
+      "options": ["0.6", "0.8", "1.0", "0.2"],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": ["union_probability"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mean of binomial distribution with n=10, p=0.4 is:",
+      "options": ["4", "0.4", "6", "10"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["binomial", "mean"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Function f(x) = x³ is:",
+      "options": ["Always increasing", "Always decreasing", "Has local max and min", "Constant"],
+      "correct_answer": "A",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["monotonic"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Maximum value of f(x) = x²(1-x) on [0,1] is at:",
+      "options": ["x = 0", "x = 1", "x = 1/3", "x = 2/3"],
+      "correct_answer": "D",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["maxima", "critical_points"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "∫₀^(π/2) cos x dx equals:",
+      "options": ["0", "1", "-1", "π/2"],
+      "correct_answer": "B",
+      "chapter": "Definite Integration",
+      "topic_tags": ["definite_integral"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Area enclosed by y = x², x-axis, and lines x=0, x=2 is:",
+      "options": ["4/3", "8/3", "2", "4"],
+      "correct_answer": "B",
+      "chapter": "Application of Integrals",
+      "topic_tags": ["area_under_curve"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "If A and B are independent with P(A)=0.5, P(B)=0.4, P(A∩B) is:",
+      "options": ["0.2", "0.9", "0.5", "0.4"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["independent_events"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "tan⁻¹(1) + tan⁻¹(2) + tan⁻¹(3) equals:",
+      "options": ["π/2", "π", "3π/4", "π/3"],
+      "correct_answer": "B",
+      "chapter": "Inverse Trigonometric Functions",
+      "topic_tags": ["identity"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "If f(x) = x² + 2x + 1, then f'(0) is:",
+      "options": ["0", "1", "2", "3"],
+      "correct_answer": "C",
+      "chapter": "Differentiation",
+      "topic_tags": ["polynomial_derivative"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Continuity of f(x) = 1/x at x=0:",
+      "options": ["Continuous", "Discontinuous", "Removable discontinuity", "Removable"],
+      "correct_answer": "B",
+      "chapter": "Continuity",
+      "topic_tags": ["discontinuity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Direction ratios of line joining (1,2,3) and (4,5,6) are:",
+      "options": ["(1,1,1)", "(3,3,3)", "(5,7,9)", "(4,10,18)"],
+      "correct_answer": "B",
+      "chapter": "Three-Dimensional Geometry",
+      "topic_tags": ["direction_ratios"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of one-to-one functions from set {1,2} to {1,2,3} is:",
+      "options": ["3", "6", "9", "8"],
+      "correct_answer": "B",
+      "chapter": "Relations and Functions",
+      "topic_tags": ["injective_count"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Find the integrating factor of dy/dx + y = e^x:",
+      "options": ["e^x", "e^(-x)", "x", "e^(x²)"],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": ["integrating_factor"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

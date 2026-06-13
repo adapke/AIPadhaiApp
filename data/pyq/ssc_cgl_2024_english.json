@@ -1,0 +1,235 @@
+{
+  "source": "ssc_cgl_2024_english",
+  "default_board": "ssc",
+  "default_grade": 0,
+  "default_subject": "english_comprehension",
+  "default_year": 2024,
+  "default_paper": "cgl_tier1",
+  "questions": [
+    {
+      "question_text": "Synonym of 'Abundant':",
+      "options": ["Scarce", "Plentiful", "Empty", "Limited"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary - Synonyms",
+      "topic_tags": ["synonyms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Antonym of 'Brave':",
+      "options": ["Cowardly", "Strong", "Bold", "Fierce"],
+      "correct_answer": "A",
+      "chapter": "Vocabulary - Antonyms",
+      "topic_tags": ["antonyms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose correct spelling:",
+      "options": ["Accomodate", "Accommodate", "Acommodate", "Accommadate"],
+      "correct_answer": "B",
+      "chapter": "Spellings",
+      "topic_tags": ["spelling"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Fill in the blank: She has been working ___ this project for two weeks.",
+      "options": ["in", "at", "on", "of"],
+      "correct_answer": "C",
+      "chapter": "Prepositions",
+      "topic_tags": ["prepositions"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Idiom 'A piece of cake' means:",
+      "options": ["Delicious food", "Very easy", "Very difficult", "Sweet thing"],
+      "correct_answer": "B",
+      "chapter": "Idioms and Phrases",
+      "topic_tags": ["idioms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose correctly punctuated sentence:",
+      "options": ["I told him 'come here'", "I told him, come here.", "I told him, 'come here.'", "I told him come here"],
+      "correct_answer": "C",
+      "chapter": "Punctuation",
+      "topic_tags": ["punctuation"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Active to passive: 'She wrote a letter.' becomes:",
+      "options": ["A letter was written by her", "A letter is written by her", "She is writing a letter", "A letter has been written"],
+      "correct_answer": "A",
+      "chapter": "Voice",
+      "topic_tags": ["passive_voice"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Direct to indirect: He said, 'I am happy.' becomes:",
+      "options": ["He said that he is happy", "He said that he was happy", "He says that he is happy", "He told he is happy"],
+      "correct_answer": "B",
+      "chapter": "Narration",
+      "topic_tags": ["reported_speech"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Plural of 'Mouse':",
+      "options": ["Mouses", "Mice", "Moose", "Mices"],
+      "correct_answer": "B",
+      "chapter": "Number",
+      "topic_tags": ["plural"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Fill: Either he or his brothers ___ responsible.",
+      "options": ["is", "are", "was", "be"],
+      "correct_answer": "B",
+      "chapter": "Subject-Verb Agreement",
+      "topic_tags": ["agreement"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Synonym of 'Reluctant':",
+      "options": ["Eager", "Unwilling", "Quick", "Lazy"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["synonyms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Antonym of 'Optimistic':",
+      "options": ["Hopeful", "Pessimistic", "Positive", "Cheerful"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["antonyms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose grammatically correct: 'Neither of the two ___ available.'",
+      "options": ["is", "are", "were", "have"],
+      "correct_answer": "A",
+      "chapter": "Subject-Verb Agreement",
+      "topic_tags": ["neither_nor"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Word with same meaning as 'verbose':",
+      "options": ["Concise", "Wordy", "Quiet", "Brief"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["synonyms"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Tense of 'I had been working': ",
+      "options": ["Past perfect continuous", "Past perfect", "Present perfect", "Past simple"],
+      "correct_answer": "A",
+      "chapter": "Tenses",
+      "topic_tags": ["tense"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "'Hit the books' idiom means:",
+      "options": ["Read intensely", "Be angry", "Destroy books", "Avoid studying"],
+      "correct_answer": "A",
+      "chapter": "Idioms",
+      "topic_tags": ["idioms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Pronoun in 'He is my friend':",
+      "options": ["He", "my", "friend", "is"],
+      "correct_answer": "A",
+      "chapter": "Parts of Speech",
+      "topic_tags": ["pronoun"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Article: She has ___ honest opinion.",
+      "options": ["a", "an", "the", "no article"],
+      "correct_answer": "B",
+      "chapter": "Articles",
+      "topic_tags": ["articles", "vowel_sound"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose correct: 'He is taller than ___'",
+      "options": ["me", "I", "myself", "mine"],
+      "correct_answer": "B",
+      "chapter": "Pronouns",
+      "topic_tags": ["comparative"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Antonym of 'Generous':",
+      "options": ["Kind", "Stingy", "Greedy", "Both B and C"],
+      "correct_answer": "D",
+      "chapter": "Vocabulary",
+      "topic_tags": ["antonyms"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Sentence type: 'How beautiful the flower is!'",
+      "options": ["Assertive", "Interrogative", "Imperative", "Exclamatory"],
+      "correct_answer": "D",
+      "chapter": "Sentence Types",
+      "topic_tags": ["exclamatory"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose correct verb: 'The team ___ doing well.'",
+      "options": ["is", "are", "be", "were"],
+      "correct_answer": "A",
+      "chapter": "Subject-Verb Agreement",
+      "topic_tags": ["collective_noun"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Conjunction in 'She studies hard but fails':",
+      "options": ["she", "hard", "but", "fails"],
+      "correct_answer": "C",
+      "chapter": "Parts of Speech",
+      "topic_tags": ["conjunction"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Synonym of 'Lethargic':",
+      "options": ["Active", "Sluggish", "Energetic", "Quick"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["synonyms"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Correct sentence: 'He hardly never comes' should be:",
+      "options": ["He hardly ever comes", "He hardly often comes", "He rarely never comes", "Original is correct"],
+      "correct_answer": "A",
+      "chapter": "Common Errors",
+      "topic_tags": ["double_negative"],
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

@@ -61,4 +61,25 @@ describe('Mobile shell entry points', () => {
       expect(res.body.status).to.eq('ok');
     });
   });
+
+  // prod-133 — student shell now defaults to /?home=math.
+  // The home page returns HTML with an inline redirect script;
+  // a real browser bounces to /math, but cy.request() doesn't run
+  // <script>, so we just verify the redirect string is in the HTML.
+  it('student shell URL (/?home=math) returns HTML with math-vision redirect', () => {
+    cy.request('/?home=math').then((res) => {
+      expect(res.status).to.eq(200);
+      expect(res.headers['content-type']).to.match(/text\/html/);
+      // The redirect must be present (CK-12-inspired scan-and-solve entry).
+      expect(res.body).to.match(/window\.location\.replace\('\/math'/);
+    });
+  });
+
+  // prod-133 — the /math destination page must exist (prod-28 new_ui_pages).
+  it('/math destination page exists for the mobile redirect target', () => {
+    cy.request('/math').then((res) => {
+      expect(res.status).to.eq(200);
+      expect(res.headers['content-type']).to.match(/text\/html/);
+    });
+  });
 });

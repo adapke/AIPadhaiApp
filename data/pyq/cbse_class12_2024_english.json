@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class12_2024_english_core",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "english",
+  "default_year": 2024,
+  "default_paper": "board_core",
+  "questions": [
+    {
+      "question_text": "Author of 'The Last Lesson' is:",
+      "options": ["Alphonse Daudet", "Anees Jung", "Khushwant Singh", "Bama"],
+      "correct_answer": "A",
+      "chapter": "Flamingo - The Last Lesson",
+      "topic_tags": ["Daudet", "Alsace"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "'Lost Spring' is written by:",
+      "options": ["Anees Jung", "Selma Lagerlof", "Pearl S. Buck", "Louis Fischer"],
+      "correct_answer": "A",
+      "chapter": "Flamingo - Lost Spring",
+      "topic_tags": ["Anees_Jung", "child_labour"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Theme of 'Deep Water':",
+      "options": ["Friendship", "Fear and overcoming it", "Travel", "War"],
+      "correct_answer": "B",
+      "chapter": "Flamingo - Deep Water",
+      "topic_tags": ["Douglas", "fear"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Word meaning 'Strong dislike':",
+      "options": ["Affinity", "Aversion", "Empathy", "Reverence"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["synonyms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Antonym of 'Vivid':",
+      "options": ["Bright", "Vague", "Clear", "Bold"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["antonyms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Letter of complaint should begin with:",
+      "options": ["Yours sincerely", "Sir/Madam", "Dear friend", "Hi"],
+      "correct_answer": "B",
+      "chapter": "Writing Skills",
+      "topic_tags": ["letter_writing"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Active to passive: 'She wrote a letter.'",
+      "options": ["A letter is written by her", "A letter was written by her", "She is writing", "Letter written by her"],
+      "correct_answer": "B",
+      "chapter": "Grammar - Voice",
+      "topic_tags": ["passive"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Indirect speech: He said, 'I am tired.'",
+      "options": ["He said he was tired", "He said he is tired", "He said he had been tired", "He says he is tired"],
+      "correct_answer": "A",
+      "chapter": "Grammar - Reported Speech",
+      "topic_tags": ["indirect_speech"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Author of 'My Mother at Sixty-Six':",
+      "options": ["Pablo Neruda", "Kamala Das", "Sylvia Plath", "Adrienne Rich"],
+      "correct_answer": "B",
+      "chapter": "Poetry - Kamala Das",
+      "topic_tags": ["Kamala_Das"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "'An Elementary School Classroom in a Slum' is by:",
+      "options": ["W.B. Yeats", "Stephen Spender", "Robert Frost", "T.S. Eliot"],
+      "correct_answer": "B",
+      "chapter": "Poetry - Stephen Spender",
+      "topic_tags": ["Spender"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Robert Frost's 'A Roadside Stand' deals with:",
+      "options": ["Urban migration", "Poverty of rural folk", "Industrial revolution", "Friendship"],
+      "correct_answer": "B",
+      "chapter": "Poetry - Robert Frost",
+      "topic_tags": ["Frost"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Notice writing must include:",
+      "options": ["Date, time, venue, subject", "Only date", "Only signature", "Only subject"],
+      "correct_answer": "A",
+      "chapter": "Writing Skills",
+      "topic_tags": ["notice"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Idiom 'A blessing in disguise' means:",
+      "options": ["Hidden curse", "Good thing that seemed bad initially", "Disguised friend", "Hidden gift"],
+      "correct_answer": "B",
+      "chapter": "Idioms",
+      "topic_tags": ["idioms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Article: 'I want ___ apple.'",
+      "options": ["a", "an", "the", "no article"],
+      "correct_answer": "B",
+      "chapter": "Grammar - Articles",
+      "topic_tags": ["articles"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Preposition: 'She is angry ___ me.'",
+      "options": ["on", "with", "at", "of"],
+      "correct_answer": "B",
+      "chapter": "Grammar - Prepositions",
+      "topic_tags": ["prepositions"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Subject-verb: 'The committee ___ split.'",
+      "options": ["is", "are", "be", "were"],
+      "correct_answer": "B",
+      "chapter": "Grammar - Agreement",
+      "topic_tags": ["collective_noun"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Speaker in 'My Mother at Sixty-Six':",
+      "options": ["The mother", "The daughter (poet)", "Father", "Brother"],
+      "correct_answer": "B",
+      "chapter": "Poetry - Kamala Das",
+      "topic_tags": ["narrator"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "'Going Places' tells the story of:",
+      "options": ["Anil and Sophie", "Sophie's dreams", "Sophie's father", "Sophie and Jansie"],
+      "correct_answer": "B",
+      "chapter": "Flamingo - Going Places",
+      "topic_tags": ["A.R._Barton"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Choose correct spelling:",
+      "options": ["Recieve", "Receive", "Reciept", "Reciver"],
+      "correct_answer": "B",
+      "chapter": "Spelling",
+      "topic_tags": ["spelling"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Synonym of 'Concise':",
+      "options": ["Verbose", "Brief", "Lengthy", "Vague"],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": ["synonyms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Tense: 'I have been studying for hours' is:",
+      "options": ["Present continuous", "Present perfect continuous", "Past perfect", "Future"],
+      "correct_answer": "B",
+      "chapter": "Grammar - Tenses",
+      "topic_tags": ["tense"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Bama's 'Memories of Childhood' theme:",
+      "options": ["Caste discrimination", "Friendship", "Travel", "War"],
+      "correct_answer": "A",
+      "chapter": "Vistas - Memories of Childhood",
+      "topic_tags": ["caste", "Bama"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Author of 'On the Face of It':",
+      "options": ["Susan Hill", "Bama", "Anees Jung", "Pearl Buck"],
+      "correct_answer": "A",
+      "chapter": "Vistas - On the Face of It",
+      "topic_tags": ["Susan_Hill"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Article writing word limit (CBSE Class 12):",
+      "options": ["50-80", "100-120", "120-150", "Up to 200"],
+      "correct_answer": "C",
+      "chapter": "Writing Skills",
+      "topic_tags": ["article_writing"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "'The Tiger King' is a satire by:",
+      "options": ["Kalki", "R.K. Narayan", "Khushwant Singh", "Mulk Raj Anand"],
+      "correct_answer": "A",
+      "chapter": "Vistas - The Tiger King",
+      "topic_tags": ["Kalki", "satire"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

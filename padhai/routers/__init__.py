@@ -70,6 +70,15 @@ _ROUTER_NAMES = (
     "dpdp_rights",       # v3.x — /api/me/data/export + DELETE /api/me/account (DPDP §11/§12)
     "concept_videos",    # prod-14 — curated YouTube/Khan/etc concept-video catalog
     "new_ui_pages",      # prod-28 — dedicated /essay /interview /practice /adaptive /math /voice /live /recap /notes /curriculum /path /library /school pages
+    "teacher_tools",     # prod-131/132 — CK-12-inspired teacher AI tools (assignment gen + reading-level adjuster)
+    "concept_seo",       # prod-134 — public /concept/{slug} SEO page (Open Graph, Schema.org, hreflang)
+    "mastery_map",       # prod-135 — CK-12-inspired Concept Mastery Map (color-coded per-topic state)
+    "concept_examples_routes",  # prod-137 — Real-World Examples catalog (curator queue + public read)
+    "questions_by_standard",    # prod-138 — NCERT standards filter + tagger
+    "memory_boost_routes",      # prod-139 — Memory Boost daily 3-item drill + streak
+    "class_heat_map",           # prod-140 — Class Heat Map for teacher dashboards (students × topics)
+    "mastery_page",             # prod-141 — server-rendered /mastery page (color-coded grid)
+    "ck12_ui_pages",            # prod-142..145 — /tutor-modes, /memory-boost, /teacher/.../heat-map, /admin/examples-queue
 )
 
 

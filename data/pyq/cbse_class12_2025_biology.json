@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class12_2025_biology_board",
+  "default_board": "cbse",
+  "default_grade": 12,
+  "default_subject": "biology",
+  "default_year": 2025,
+  "default_paper": "board",
+  "questions": [
+    {
+      "question_text": "Reproduction in Amoeba occurs by:",
+      "options": ["Budding", "Binary fission", "Sporulation", "Fragmentation"],
+      "correct_answer": "B",
+      "chapter": "Reproduction in Organisms",
+      "topic_tags": ["binary_fission", "Amoeba"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Pollination by wind is called:",
+      "options": ["Entomophily", "Ornithophily", "Anemophily", "Hydrophily"],
+      "correct_answer": "C",
+      "chapter": "Sexual Reproduction in Flowering Plants",
+      "topic_tags": ["pollination"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Implantation of embryo takes place in:",
+      "options": ["Ovary", "Fallopian tube", "Uterus", "Vagina"],
+      "correct_answer": "C",
+      "chapter": "Human Reproduction",
+      "topic_tags": ["implantation"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Father of genetics is:",
+      "options": ["Darwin", "Mendel", "Hugo de Vries", "Morgan"],
+      "correct_answer": "B",
+      "chapter": "Principles of Inheritance",
+      "topic_tags": ["Mendel"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of chromosomes in human somatic cell is:",
+      "options": ["23", "44", "46", "48"],
+      "correct_answer": "C",
+      "chapter": "Cell Cycle",
+      "topic_tags": ["chromosomes", "human"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "DNA fingerprinting was developed by:",
+      "options": ["Watson", "Crick", "Alec Jeffreys", "Mendel"],
+      "correct_answer": "C",
+      "chapter": "Molecular Basis of Inheritance",
+      "topic_tags": ["DNA_fingerprinting"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "DNA replication is which type?",
+      "options": ["Conservative", "Semi-conservative", "Dispersive", "Random"],
+      "correct_answer": "B",
+      "chapter": "Molecular Basis of Inheritance",
+      "topic_tags": ["replication"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Translation occurs at:",
+      "options": ["Nucleus", "Mitochondria", "Ribosome", "Lysosome"],
+      "correct_answer": "C",
+      "chapter": "Molecular Basis of Inheritance",
+      "topic_tags": ["translation"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Lamarckism is also called:",
+      "options": ["Theory of inheritance of acquired characters", "Natural selection", "Mutation theory", "Use and disuse"],
+      "correct_answer": "A",
+      "chapter": "Evolution",
+      "topic_tags": ["Lamarck"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Most common ABO blood group in India is:",
+      "options": ["A", "B", "O", "AB"],
+      "correct_answer": "C",
+      "chapter": "Human Health",
+      "topic_tags": ["blood_groups"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "AIDS is caused by:",
+      "options": ["Bacteria", "HIV virus", "Fungus", "Protozoa"],
+      "correct_answer": "B",
+      "chapter": "Human Health and Disease",
+      "topic_tags": ["AIDS", "HIV"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Penicillin was discovered by:",
+      "options": ["Pasteur", "Fleming", "Koch", "Watson"],
+      "correct_answer": "B",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": ["antibiotics"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mycorrhiza is association between:",
+      "options": ["Algae + fungi", "Fungi + roots of plants", "Bacteria + roots", "Two plants"],
+      "correct_answer": "B",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": ["mycorrhiza", "symbiosis"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Restriction endonuclease is used for:",
+      "options": ["Joining DNA", "Cutting DNA at specific sites", "Replication", "Translation"],
+      "correct_answer": "B",
+      "chapter": "Biotechnology Principles",
+      "topic_tags": ["restriction_enzyme"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "PCR stands for:",
+      "options": ["Polymerase Chain Reaction", "Plasmid Cell Replication", "Protein Cell Reaction", "Primer Chain Reaction"],
+      "correct_answer": "A",
+      "chapter": "Biotechnology Principles",
+      "topic_tags": ["PCR"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bt cotton is genetically modified for:",
+      "options": ["Drought tolerance", "Pest resistance", "Higher yield", "Frost tolerance"],
+      "correct_answer": "B",
+      "chapter": "Biotechnology Applications",
+      "topic_tags": ["Bt", "GM_crops"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Eutrophication results in:",
+      "options": ["Increased fish population", "Oxygen depletion in water bodies", "Cleaner water", "Higher pH"],
+      "correct_answer": "B",
+      "chapter": "Environmental Issues",
+      "topic_tags": ["eutrophication", "pollution"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Greenhouse gases include:",
+      "options": ["Only CO2", "CO2, CH4, N2O", "Only water vapour", "Only O3"],
+      "correct_answer": "B",
+      "chapter": "Environmental Issues",
+      "topic_tags": ["greenhouse"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "10% energy law is given by:",
+      "options": ["Tansley", "Lindeman", "Odum", "Darwin"],
+      "correct_answer": "B",
+      "chapter": "Ecosystem",
+      "topic_tags": ["energy_pyramid", "Lindeman"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Apiculture is rearing of:",
+      "options": ["Fish", "Honeybees", "Silkworm", "Cattle"],
+      "correct_answer": "B",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": ["apiculture"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of layers in human ovum is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "C",
+      "chapter": "Human Reproduction",
+      "topic_tags": ["ovum"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Test cross is performed to:",
+      "options": ["Determine genotype", "Determine phenotype", "Cross two strains", "Find mutation"],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": ["test_cross"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hemophilia is a:",
+      "options": ["Autosomal dominant", "X-linked recessive", "Y-linked", "Autosomal recessive"],
+      "correct_answer": "B",
+      "chapter": "Genetic Disorders",
+      "topic_tags": ["hemophilia", "X_linked"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Energy currency of cell is:",
+      "options": ["NADH", "FADH2", "ATP", "GTP"],
+      "correct_answer": "C",
+      "chapter": "Cell Biology",
+      "topic_tags": ["ATP"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of base pairs in human genome is approximately:",
+      "options": ["3 billion", "3 million", "3 thousand", "3 trillion"],
+      "correct_answer": "A",
+      "chapter": "Molecular Biology",
+      "topic_tags": ["genome_size"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

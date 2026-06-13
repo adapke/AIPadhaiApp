@@ -38,13 +38,40 @@ _log = logging.getLogger("padhai.dashboard")
 # Student dashboard
 # ============================================================================
 
+def _admin_block(user) -> dict | None:
+    """prod-58 — admin-only block: counts for the curator queue + any
+    other admin housekeeping. None when caller isn't an admin so the
+    block doesn't even appear in non-admin responses (saves bytes +
+    avoids leaking that admin tools exist)."""
+    try:
+        from .. import api_deps
+        # Re-use the same gate that backs /admin endpoints. Raises
+        # HTTPException(401/403) for non-admins — we swallow it to
+        # return None instead of 500-ing the dashboard.
+        api_deps.require_admin_role(user)
+    except Exception:
+        return None
+    try:
+        from .. import concept_videos as _cv
+        # Cheap COUNT — uses the idx_cv_quality index.
+        pending = len(_cv.list_curator_queue(
+            quality_tier="channel_seed", limit=10000,
+        ))
+        return {
+            "pending_curator_count": pending,
+            "curator_url": "/admin/concept-curator",
+        }
+    except Exception:
+        return None
+
+
 @router.get("/api/me/dashboard")
 def my_dashboard(user=Depends(current_user)):
     """Composite dashboard for the authenticated student. Every
     sub-section is best-effort — missing data degrades silently."""
     user = require_user(user)
 
-    return {
+    out = {
         "user_id": user.id,
         "computed_at": time.time(),
         "profile": _profile_block(user),
@@ -59,6 +86,10 @@ def my_dashboard(user=Depends(current_user)):
         "live_classes": _live_block(user.id),
         "tutor_sessions": _tutor_block(user.id),
     }
+    admin = _admin_block(user)
+    if admin is not None:
+        out["admin"] = admin
+    return out
 
 
 @router.get("/api/me/dashboard/weak-topics")

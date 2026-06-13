@@ -3,9 +3,9 @@
   "appName": "AI Pathshala",
   "webDir": "../padhai/static",
   "server": {
-    "url": "https://app.aipathshala.in",
-    "cleartext": false,
-    "androidScheme": "https"
+    "url": "http://10.0.2.2:8000/?home=math",
+    "cleartext": true,
+    "androidScheme": "http"
   },
   "plugins": {
     "SplashScreen": {

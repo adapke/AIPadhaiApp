@@ -18,9 +18,9 @@ from padhai import i18n
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-# Floors set in prod-3 (i18n audit sprint), raised at prod-10.
+# Floors set in prod-3 (i18n audit sprint), raised at prod-10, prod-79.
 # Bump these when you catalogue more strings; never lower.
-MIN_EN_KEYS = 94
+MIN_EN_KEYS = 125
 HI_PARITY_REQUIRED = True
 
 # prod-10 — every supported locale must be at least 90% of the EN

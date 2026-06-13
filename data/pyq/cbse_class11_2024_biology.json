@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class11_2024_biology_sample",
+  "default_board": "cbse",
+  "default_grade": 11,
+  "default_subject": "biology",
+  "default_year": 2024,
+  "default_paper": "sample_qp",
+  "questions": [
+    {
+      "question_text": "Five-kingdom classification was proposed by:",
+      "options": ["Linnaeus", "Whittaker", "Hutchinson", "Bentham and Hooker"],
+      "correct_answer": "B",
+      "chapter": "Diversity in the Living World",
+      "topic_tags": ["classification", "Whittaker"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mycelium is composed of:",
+      "options": ["Bacteria", "Hyphae of fungi", "Algal filaments", "Protozoa"],
+      "correct_answer": "B",
+      "chapter": "Biological Classification",
+      "topic_tags": ["fungi", "mycelium"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bryophytes lack:",
+      "options": ["Roots", "Vascular tissue", "Both A and B", "Chlorophyll"],
+      "correct_answer": "C",
+      "chapter": "Plant Kingdom",
+      "topic_tags": ["bryophyte"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Closed circulatory system is found in:",
+      "options": ["Insects", "Earthworms", "Cockroach", "Snail"],
+      "correct_answer": "B",
+      "chapter": "Animal Kingdom",
+      "topic_tags": ["circulation", "earthworm"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Cell organelle that makes ATP is:",
+      "options": ["Nucleus", "Mitochondria", "Lysosome", "Ribosome"],
+      "correct_answer": "B",
+      "chapter": "Cell - The Unit of Life",
+      "topic_tags": ["ATP", "mitochondria"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of chromosomes in human gametes:",
+      "options": ["46", "23", "44", "22"],
+      "correct_answer": "B",
+      "chapter": "Cell Cycle",
+      "topic_tags": ["chromosomes"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Meiosis produces:",
+      "options": ["2 identical cells", "4 genetically different haploid cells", "2 haploid cells", "4 identical cells"],
+      "correct_answer": "B",
+      "chapter": "Cell Cycle",
+      "topic_tags": ["meiosis"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Photolysis of water occurs in:",
+      "options": ["Mitochondria", "Chloroplast (PS-II)", "Cytoplasm", "Nucleus"],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": ["photolysis"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "End product of glycolysis in aerobic respiration:",
+      "options": ["Lactic acid", "Pyruvate", "Ethanol", "Glucose"],
+      "correct_answer": "B",
+      "chapter": "Respiration in Plants",
+      "topic_tags": ["glycolysis"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hormone that opens stomata:",
+      "options": ["Auxin", "Cytokinin", "Gibberellin", "ABA closes them"],
+      "correct_answer": "B",
+      "chapter": "Plant Growth",
+      "topic_tags": ["stomata", "cytokinin"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Site of urea formation in human body:",
+      "options": ["Kidney", "Liver", "Spleen", "Stomach"],
+      "correct_answer": "B",
+      "chapter": "Excretory System",
+      "topic_tags": ["urea", "liver"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Nephron is the functional unit of:",
+      "options": ["Liver", "Lung", "Kidney", "Heart"],
+      "correct_answer": "C",
+      "chapter": "Excretory System",
+      "topic_tags": ["nephron"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bones connected by joints with synovial fluid:",
+      "options": ["Skull", "Vertebrae", "Knee", "All of skull"],
+      "correct_answer": "C",
+      "chapter": "Locomotion and Movement",
+      "topic_tags": ["synovial", "knee"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hormone produced by pancreas to lower blood sugar:",
+      "options": ["Insulin", "Glucagon", "Adrenaline", "Thyroxine"],
+      "correct_answer": "A",
+      "chapter": "Chemical Coordination",
+      "topic_tags": ["insulin", "pancreas"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Master gland of human body:",
+      "options": ["Thyroid", "Pituitary", "Adrenal", "Pancreas"],
+      "correct_answer": "B",
+      "chapter": "Chemical Coordination",
+      "topic_tags": ["pituitary"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Smallest taxonomic unit:",
+      "options": ["Genus", "Family", "Species", "Order"],
+      "correct_answer": "C",
+      "chapter": "Diversity in the Living World",
+      "topic_tags": ["taxonomy"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Binomial nomenclature uses:",
+      "options": ["Only genus", "Genus and species", "Family and order", "Common and Latin name"],
+      "correct_answer": "B",
+      "chapter": "Diversity in the Living World",
+      "topic_tags": ["binomial"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Edible part of cauliflower is:",
+      "options": ["Stem", "Inflorescence", "Leaves", "Root"],
+      "correct_answer": "B",
+      "chapter": "Morphology of Flowering Plants",
+      "topic_tags": ["cauliflower"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Phloem transports:",
+      "options": ["Water", "Sugars and food", "Minerals only", "Oxygen"],
+      "correct_answer": "B",
+      "chapter": "Transport in Plants",
+      "topic_tags": ["phloem"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Hemoglobin contains which metal:",
+      "options": ["Calcium", "Iron", "Magnesium", "Copper"],
+      "correct_answer": "B",
+      "chapter": "Body Fluids and Circulation",
+      "topic_tags": ["hemoglobin", "iron"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of pairs of cranial nerves in humans:",
+      "options": ["8", "10", "12", "14"],
+      "correct_answer": "C",
+      "chapter": "Neural Control",
+      "topic_tags": ["cranial_nerves"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Cardiac muscles are:",
+      "options": ["Voluntary", "Involuntary", "Striated and involuntary", "Smooth"],
+      "correct_answer": "C",
+      "chapter": "Locomotion and Movement",
+      "topic_tags": ["cardiac_muscle"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Cellulose is made up of:",
+      "options": ["Amino acids", "Glucose units", "Fatty acids", "Nucleotides"],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": ["cellulose"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Enzymes are biologically:",
+      "options": ["Lipids", "Proteins", "Carbohydrates", "Nucleic acids"],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": ["enzymes"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Gas exchange in alveoli is via:",
+      "options": ["Active transport", "Diffusion", "Osmosis", "Pinocytosis"],
+      "correct_answer": "B",
+      "chapter": "Breathing and Exchange of Gases",
+      "topic_tags": ["alveoli", "diffusion"],
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

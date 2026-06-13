@@ -1,0 +1,235 @@
+{
+  "source": "jee_advanced_2023_physics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2023,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "A satellite orbits Earth at radius r. Its orbital speed depends on:",
+      "options": ["r only", "Earth's mass only", "Both r and Earth's mass", "Satellite mass"],
+      "correct_answer": "C",
+      "chapter": "Gravitation",
+      "topic_tags": ["orbital_velocity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Carnot engine efficiency η = 1 - T_cold/T_hot. If T_cold=300K, T_hot=600K:",
+      "options": ["25%", "50%", "75%", "100%"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["Carnot"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Young's modulus units:",
+      "options": ["N/m", "N/m²", "N·m", "J/m³"],
+      "correct_answer": "B",
+      "chapter": "Mechanical Properties of Solids",
+      "topic_tags": ["Young_modulus"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Coefficient of viscosity has SI units of:",
+      "options": ["N·s/m²", "N/m²", "m/s²", "kg/s"],
+      "correct_answer": "A",
+      "chapter": "Fluids",
+      "topic_tags": ["viscosity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Surface tension causes water droplet to be:",
+      "options": ["Square", "Spherical", "Random", "Flat"],
+      "correct_answer": "B",
+      "chapter": "Fluids",
+      "topic_tags": ["surface_tension"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Bohr radius is approximately:",
+      "options": ["0.529 nm", "0.529 Å", "5.29 m", "0.529 mm"],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": ["Bohr_radius"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Magnetic field at center of circular coil radius r, current I (using Biot-Savart):",
+      "options": ["μ₀I/(2r)", "μ₀I/(4πr)", "μ₀I·r", "2μ₀I/r"],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": ["circular_coil"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Energy of photon with wavelength λ:",
+      "options": ["hc/λ", "h/(cλ)", "λ/(hc)", "hcλ"],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": ["photon_energy"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Drift velocity v_d depends on:",
+      "options": ["Electric field E", "Mobility μ", "Both", "Neither"],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": ["drift_velocity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Acceleration of ball thrown straight up at peak:",
+      "options": ["0", "g downward", "g upward", "Indeterminate"],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": ["projectile_peak"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Work done by friction on body in circular motion at constant speed:",
+      "options": ["Zero", "Positive", "Negative", "Maximum"],
+      "correct_answer": "A",
+      "chapter": "Circular Motion",
+      "topic_tags": ["work_circular"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Conservation of angular momentum: when spinning skater pulls arms in, ω:",
+      "options": ["Decreases", "Increases", "Same", "Zero"],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": ["angular_momentum"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Two pendulums of length L₁ and L₂. T₁/T₂ equals:",
+      "options": ["L₁/L₂", "√(L₁/L₂)", "(L₁/L₂)²", "L₂/L₁"],
+      "correct_answer": "B",
+      "chapter": "Oscillations",
+      "topic_tags": ["pendulum_period"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Diffraction grating with N slits gives main maxima of width:",
+      "options": ["Same as single slit", "Narrower with more N", "Wider with more N", "Independent of N"],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": ["diffraction"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Magnetic flux Φ through a loop changing at rate dΦ/dt induces EMF of:",
+      "options": ["+dΦ/dt", "-dΦ/dt (Faraday)", "0", "constant"],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": ["Faraday"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Reverberation time depends on (Sabine):",
+      "options": ["Volume of room only", "Absorption coefficient only", "Both", "Frequency"],
+      "correct_answer": "C",
+      "chapter": "Waves",
+      "topic_tags": ["Sabine"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Wavelength of de Broglie wave for electron with momentum p:",
+      "options": ["h/p", "p/h", "hp", "1/(hp)"],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": ["de_Broglie"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Heisenberg uncertainty: Δx · Δp ≥",
+      "options": ["h/(4π)", "h", "h/2", "ℏ/2"],
+      "correct_answer": "D",
+      "chapter": "Modern Physics",
+      "topic_tags": ["uncertainty"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "p-n junction in unbiased state has potential barrier:",
+      "options": ["0", "About 0.7 V for Si", "About 5 V", "About 220 V"],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": ["barrier_potential"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Power consumed by bulb 60 W at 220 V. Current drawn:",
+      "options": ["0.27 A", "1.27 A", "2.7 A", "27 A"],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": ["P=VI"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Critical angle for water (n=4/3):",
+      "options": ["30°", "37°", "49°", "60°"],
+      "correct_answer": "C",
+      "chapter": "Ray Optics",
+      "topic_tags": ["critical_angle"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Quantum number for orbital shape:",
+      "options": ["n", "l", "m", "s"],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["azimuthal"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "EMF of Daniell cell is approximately:",
+      "options": ["0.5 V", "1.1 V", "2.0 V", "12 V"],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["Daniell_cell"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Decay constant relates to half-life as:",
+      "options": ["λ = T", "λ = ln 2 / T", "λ = T / ln 2", "λ = 1/T"],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": ["decay_constant"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Power factor in pure capacitive AC circuit:",
+      "options": ["0", "0.5", "1", "Undefined"],
+      "correct_answer": "A",
+      "chapter": "AC Circuits",
+      "topic_tags": ["power_factor"],
+      "difficulty": "medium",
+      "marks": 4
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class9_2024_science_sample",
+  "default_board": "cbse",
+  "default_grade": 9,
+  "default_subject": "science",
+  "default_year": 2024,
+  "default_paper": "sample_qp",
+  "questions": [
+    {
+      "question_text": "Matter is made up of:",
+      "options": ["Only atoms", "Only molecules", "Atoms and molecules", "Only ions"],
+      "correct_answer": "C",
+      "chapter": "Matter in Our Surroundings",
+      "topic_tags": ["matter", "atoms"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "States of matter are:",
+      "options": ["Two", "Three", "Four", "Five"],
+      "correct_answer": "B",
+      "chapter": "Matter in Our Surroundings",
+      "topic_tags": ["states_of_matter"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "SI unit of force is:",
+      "options": ["dyne", "newton", "kg", "joule"],
+      "correct_answer": "B",
+      "chapter": "Force and Laws of Motion",
+      "topic_tags": ["units", "force"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Gravitational force between two objects depends on:",
+      "options": ["Their masses only", "Distance only", "Both masses and distance", "Nothing"],
+      "correct_answer": "C",
+      "chapter": "Gravitation",
+      "topic_tags": ["gravity", "Newton's law"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Sound cannot travel through:",
+      "options": ["Solids", "Liquids", "Gases", "Vacuum"],
+      "correct_answer": "D",
+      "chapter": "Sound",
+      "topic_tags": ["sound", "medium"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Basic unit of life is:",
+      "options": ["Atom", "Molecule", "Cell", "Tissue"],
+      "correct_answer": "C",
+      "chapter": "The Fundamental Unit of Life",
+      "topic_tags": ["cell"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Plant tissue that transports water from roots to leaves is:",
+      "options": ["Phloem", "Xylem", "Cortex", "Pith"],
+      "correct_answer": "B",
+      "chapter": "Tissues",
+      "topic_tags": ["xylem", "transport"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of protons in oxygen atom (Z=8) is:",
+      "options": ["6", "7", "8", "16"],
+      "correct_answer": "C",
+      "chapter": "Structure of the Atom",
+      "topic_tags": ["atomic_number", "oxygen"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Mass number = number of:",
+      "options": ["Protons only", "Neutrons only", "Protons + electrons", "Protons + neutrons"],
+      "correct_answer": "D",
+      "chapter": "Structure of the Atom",
+      "topic_tags": ["mass_number"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Speed of sound in air at 20°C is approximately:",
+      "options": ["343 m/s", "1500 m/s", "10 m/s", "3×10⁸ m/s"],
+      "correct_answer": "A",
+      "chapter": "Sound",
+      "topic_tags": ["speed_of_sound"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Acceleration due to gravity on the surface of moon is approximately:",
+      "options": ["g/6", "g/3", "g", "6g"],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": ["moon", "gravity"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of moles in 36 g of water is:",
+      "options": ["1", "2", "3", "0.5"],
+      "correct_answer": "B",
+      "chapter": "Atoms and Molecules",
+      "topic_tags": ["mole"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Tissue that connects bones is:",
+      "options": ["Muscle", "Cartilage", "Ligament", "Tendon"],
+      "correct_answer": "C",
+      "chapter": "Tissues",
+      "topic_tags": ["ligament"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Centre of mass of a uniform sphere is at:",
+      "options": ["Surface", "Centre", "One edge", "Top"],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": ["centre_of_mass"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Law of conservation of mass states that mass:",
+      "options": ["Increases", "Decreases", "Neither created nor destroyed", "Equals energy"],
+      "correct_answer": "C",
+      "chapter": "Atoms and Molecules",
+      "topic_tags": ["conservation"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Tsunami is associated with:",
+      "options": ["Wind", "Earthquakes under sea", "Volcano on land", "Heavy rain"],
+      "correct_answer": "B",
+      "chapter": "Natural Phenomena",
+      "topic_tags": ["tsunami"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Atom of helium contains how many electrons?",
+      "options": ["1", "2", "4", "8"],
+      "correct_answer": "B",
+      "chapter": "Structure of the Atom",
+      "topic_tags": ["helium", "electrons"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Plant tissue that gives mechanical strength is:",
+      "options": ["Parenchyma", "Collenchyma", "Sclerenchyma", "All of these"],
+      "correct_answer": "C",
+      "chapter": "Tissues",
+      "topic_tags": ["sclerenchyma"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Free fall is motion under influence of:",
+      "options": ["Friction", "Gravity only", "Air resistance", "Applied force"],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": ["free_fall"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Molecular formula of water is:",
+      "options": ["H2", "O2", "H2O", "H2O2"],
+      "correct_answer": "C",
+      "chapter": "Atoms and Molecules",
+      "topic_tags": ["formula", "water"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Newton's first law of motion is also called:",
+      "options": ["Law of force", "Law of inertia", "Law of action-reaction", "Law of gravity"],
+      "correct_answer": "B",
+      "chapter": "Force and Laws of Motion",
+      "topic_tags": ["Newton", "inertia"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Ultrasonic frequency is above:",
+      "options": ["20 Hz", "200 Hz", "2000 Hz", "20000 Hz"],
+      "correct_answer": "D",
+      "chapter": "Sound",
+      "topic_tags": ["ultrasonic"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of bones in adult human body is:",
+      "options": ["180", "206", "250", "300"],
+      "correct_answer": "B",
+      "chapter": "Why Do We Fall Ill",
+      "topic_tags": ["bones", "human_body"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Common cold is caused by:",
+      "options": ["Bacteria", "Virus", "Fungus", "Protozoa"],
+      "correct_answer": "B",
+      "chapter": "Why Do We Fall Ill",
+      "topic_tags": ["cold", "virus"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Stable structure of an atom has octet of electrons in:",
+      "options": ["Innermost shell", "Outermost shell (valence)", "Nucleus", "Anywhere"],
+      "correct_answer": "B",
+      "chapter": "Structure of the Atom",
+      "topic_tags": ["octet"],
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "source": "ssc_cgl_2024_reasoning",
+  "default_board": "ssc",
+  "default_grade": 0,
+  "default_subject": "general_intelligence_reasoning",
+  "default_year": 2024,
+  "default_paper": "cgl_tier1",
+  "questions": [
+    {
+      "question_text": "Find the missing term: 2, 6, 12, 20, 30, ?",
+      "options": ["40", "42", "44", "48"],
+      "correct_answer": "B",
+      "chapter": "Number Series",
+      "topic_tags": ["series"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "A:Z, B:Y, C:?",
+      "options": ["W", "X", "V", "U"],
+      "correct_answer": "B",
+      "chapter": "Letter Series",
+      "topic_tags": ["coding", "alphabets"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "If MONDAY is coded as 123456 and FRIDAY is coded as 789456, FRY = ?",
+      "options": ["789", "987", "456", "456"],
+      "correct_answer": "A",
+      "chapter": "Coding-Decoding",
+      "topic_tags": ["coding"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "South-East is between which two directions?",
+      "options": ["S and E", "S and W", "N and E", "N and W"],
+      "correct_answer": "A",
+      "chapter": "Directions",
+      "topic_tags": ["direction"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "If today is Monday, day after 50 days is:",
+      "options": ["Friday", "Saturday", "Sunday", "Wednesday"],
+      "correct_answer": "C",
+      "chapter": "Calendar",
+      "topic_tags": ["calendar"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "What time will the hour and minute hand make a right angle if it's 3:00 now?",
+      "options": ["Already at 3:00", "3:30", "3:15", "3:45"],
+      "correct_answer": "A",
+      "chapter": "Clock",
+      "topic_tags": ["clock", "angles"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Odd one out: Apple, Mango, Grape, Carrot:",
+      "options": ["Apple", "Mango", "Grape", "Carrot"],
+      "correct_answer": "D",
+      "chapter": "Classification",
+      "topic_tags": ["classification"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose the analogous pair: Pen : Write :: Knife : ?",
+      "options": ["Cut", "Sharp", "Cook", "Eat"],
+      "correct_answer": "A",
+      "chapter": "Analogy",
+      "topic_tags": ["analogy"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Statement: All cats are dogs. Some dogs are mice. Conclusion: Some cats are mice.",
+      "options": ["Definitely true", "Definitely false", "Cannot be determined", "Always false"],
+      "correct_answer": "C",
+      "chapter": "Syllogism",
+      "topic_tags": ["syllogism"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "How many triangles in a hexagram (six-pointed star)?",
+      "options": ["6", "8", "10", "12"],
+      "correct_answer": "C",
+      "chapter": "Figure Counting",
+      "topic_tags": ["figures"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Looking south, P turned 90° left, then 180°, then 45° right. Final direction:",
+      "options": ["North", "North-East", "South-West", "East"],
+      "correct_answer": "B",
+      "chapter": "Directions",
+      "topic_tags": ["direction_rotation"],
+      "difficulty": "hard",
+      "marks": 2
+    },
+    {
+      "question_text": "Number sequence: 1, 4, 9, 16, 25, ? (square numbers)",
+      "options": ["32", "36", "40", "49"],
+      "correct_answer": "B",
+      "chapter": "Number Series",
+      "topic_tags": ["squares"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "If CAT = 24, DOG = 26, BIRD = ?",
+      "options": ["33", "28", "34", "37"],
+      "correct_answer": "B",
+      "chapter": "Coding-Decoding",
+      "topic_tags": ["letter_value"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "In a row of 30 boys, A is 7th from left. His position from right:",
+      "options": ["24th", "23rd", "25th", "22nd"],
+      "correct_answer": "A",
+      "chapter": "Ranking",
+      "topic_tags": ["positions"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Father's age is 4 times son's age. 5 years ago, father was 7 times son's age. Find son's age now:",
+      "options": ["10", "12", "15", "20"],
+      "correct_answer": "A",
+      "chapter": "Age Problems",
+      "topic_tags": ["age"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Find the wrong number: 2, 5, 10, 17, 27, 37",
+      "options": ["5", "10", "17", "27"],
+      "correct_answer": "D",
+      "chapter": "Number Series",
+      "topic_tags": ["series_wrong_number"],
+      "difficulty": "hard",
+      "marks": 2
+    },
+    {
+      "question_text": "Statement: I < J = K > L. Conclusion: I < K. ",
+      "options": ["True", "False", "Cannot determine", "Both A and C"],
+      "correct_answer": "A",
+      "chapter": "Inequalities",
+      "topic_tags": ["coded_inequalities"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose word that matches: ___ : Honey :: Cow : Milk",
+      "options": ["Bee", "Insect", "Ant", "Spider"],
+      "correct_answer": "A",
+      "chapter": "Analogy",
+      "topic_tags": ["analogy"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Cube has how many edges?",
+      "options": ["6", "8", "12", "24"],
+      "correct_answer": "C",
+      "chapter": "3D Figures",
+      "topic_tags": ["cube"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Series: AZ, BY, CX, ?",
+      "options": ["DW", "DV", "EW", "DU"],
+      "correct_answer": "A",
+      "chapter": "Letter Series",
+      "topic_tags": ["alternating"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "1, 8, 27, 64, ? (cubes)",
+      "options": ["100", "125", "144", "216"],
+      "correct_answer": "B",
+      "chapter": "Number Series",
+      "topic_tags": ["cubes"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Days from Tuesday to Sunday (exclusive of Tuesday):",
+      "options": ["4", "5", "6", "7"],
+      "correct_answer": "B",
+      "chapter": "Calendar",
+      "topic_tags": ["days"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Pointing to a man, Reena says 'He is my mother's brother's son'. Relation to Reena:",
+      "options": ["Brother", "Cousin", "Uncle", "Father"],
+      "correct_answer": "B",
+      "chapter": "Blood Relations",
+      "topic_tags": ["relations"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "If 1 = 3, 2 = 6, 3 = 9, then 7 = ?",
+      "options": ["18", "21", "20", "25"],
+      "correct_answer": "B",
+      "chapter": "Coding-Decoding",
+      "topic_tags": ["coding"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Choose the next figure in pattern: square, triangle, circle, square, triangle, ?",
+      "options": ["square", "triangle", "circle", "pentagon"],
+      "correct_answer": "C",
+      "chapter": "Pattern Completion",
+      "topic_tags": ["pattern"],
+      "difficulty": "easy",
+      "marks": 2
+    }
+  ]
+}

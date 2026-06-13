@@ -26,17 +26,24 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 
-# Baseline last updated at prod-14. Changes from prod-9:
-#   PUBLIC: 163 -> 166 (3 new /api/concept-videos/* routes added)
-#   Total: 726 -> 729
-EXPECTED_TOTAL = 729
+# Baseline last updated at prod-146. Cumulative changes prod-141..146
+# (SPA wiring sprints):
+#   prod-141: +1 (/mastery server-rendered page, ANONYMOUS_OK — auth-gated
+#                 internally but classifier sees `user | None`)
+#   prod-142..145: +4 (/tutor-modes, /memory-boost, /teacher/.../heat-map,
+#                 /admin/examples-queue — all ANONYMOUS_OK by classifier;
+#                 admin gate runs inside the handler)
+#   prod-146: 0 routes (script-only)
+#   ADMIN_ONLY 131 -> 132 (one tail-recompute)
+#   Total: 781 -> 786
+EXPECTED_TOTAL = 786
 EXPECTED_COUNTS = {
-    "ADMIN_ONLY":    117,
-    "ANONYMOUS_OK":  427,
-    "AUTH_REQUIRED": 16,
-    "PUBLIC":        166,
+    "ADMIN_ONLY":    132,
+    "ANONYMOUS_OK":  437,
+    "AUTH_REQUIRED": 24,
+    "PUBLIC":        176,
     "TIER_GATED":    2,
-    "UNKNOWN":       1,
+    "UNKNOWN":       15,
 }
 
 # Drift tolerance — counts must match EXACTLY. A "small" change is

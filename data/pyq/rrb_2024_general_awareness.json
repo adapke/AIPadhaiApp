@@ -1,0 +1,235 @@
+{
+  "source": "rrb_ntpc_2024_general_awareness",
+  "default_board": "rrb",
+  "default_grade": 0,
+  "default_subject": "general_awareness",
+  "default_year": 2024,
+  "default_paper": "ntpc_stage1",
+  "questions": [
+    {
+      "question_text": "Headquarters of Indian Railways is in:",
+      "options": ["Delhi", "Mumbai", "Kolkata", "Chennai"],
+      "correct_answer": "A",
+      "chapter": "Static GK",
+      "topic_tags": ["railways"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "First Railway in India ran between:",
+      "options": ["Bombay-Thane", "Bombay-Pune", "Delhi-Agra", "Howrah-Sealdah"],
+      "correct_answer": "A",
+      "chapter": "Indian History",
+      "topic_tags": ["railway_history", "1853"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Currency of Japan is:",
+      "options": ["Yuan", "Won", "Yen", "Rupee"],
+      "correct_answer": "C",
+      "chapter": "World Geography",
+      "topic_tags": ["currency"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Largest desert in world is:",
+      "options": ["Sahara", "Gobi", "Antarctic Desert", "Arabian"],
+      "correct_answer": "C",
+      "chapter": "World Geography",
+      "topic_tags": ["deserts"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "First woman President of India:",
+      "options": ["Indira Gandhi", "Pratibha Patil", "Sonia Gandhi", "Sushma Swaraj"],
+      "correct_answer": "B",
+      "chapter": "Indian Polity",
+      "topic_tags": ["president", "Patil"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Constitution of India came into effect on:",
+      "options": ["15 Aug 1947", "26 Nov 1949", "26 Jan 1950", "26 Jan 1949"],
+      "correct_answer": "C",
+      "chapter": "Indian Polity",
+      "topic_tags": ["constitution", "republic_day"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Author of 'Discovery of India':",
+      "options": ["Gandhi", "Tagore", "Nehru", "Patel"],
+      "correct_answer": "C",
+      "chapter": "Books and Authors",
+      "topic_tags": ["Nehru", "books"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "National flower of India:",
+      "options": ["Rose", "Lotus", "Marigold", "Sunflower"],
+      "correct_answer": "B",
+      "chapter": "Static GK",
+      "topic_tags": ["national_symbols"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "ISRO headquarters is in:",
+      "options": ["Bengaluru", "Chennai", "Hyderabad", "Delhi"],
+      "correct_answer": "A",
+      "chapter": "Science and Technology",
+      "topic_tags": ["ISRO"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Father of Indian Constitution:",
+      "options": ["Gandhi", "Nehru", "Ambedkar", "Patel"],
+      "correct_answer": "C",
+      "chapter": "Indian Polity",
+      "topic_tags": ["Ambedkar"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Highest mountain peak in India:",
+      "options": ["Kanchenjunga", "Nanda Devi", "Everest", "K2"],
+      "correct_answer": "A",
+      "chapter": "Indian Geography",
+      "topic_tags": ["mountains"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Speed of light is approximately:",
+      "options": ["3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s", "3×10¹⁰ m/s"],
+      "correct_answer": "B",
+      "chapter": "Physics",
+      "topic_tags": ["speed_of_light"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Father of Indian Cinema:",
+      "options": ["Raj Kapoor", "Dadasaheb Phalke", "Satyajit Ray", "Bimal Roy"],
+      "correct_answer": "B",
+      "chapter": "Awards",
+      "topic_tags": ["cinema"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Bhakra-Nangal Dam is on river:",
+      "options": ["Yamuna", "Ganga", "Sutlej", "Beas"],
+      "correct_answer": "C",
+      "chapter": "Indian Geography",
+      "topic_tags": ["dams"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Number of states in India:",
+      "options": ["28", "29", "30", "27"],
+      "correct_answer": "A",
+      "chapter": "Indian Geography",
+      "topic_tags": ["states"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "World Environment Day is observed on:",
+      "options": ["5 June", "22 April", "16 September", "10 December"],
+      "correct_answer": "A",
+      "chapter": "Important Days",
+      "topic_tags": ["days"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Capital of Australia:",
+      "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "correct_answer": "C",
+      "chapter": "World Geography",
+      "topic_tags": ["capitals"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Light Year is a unit of:",
+      "options": ["Time", "Distance", "Brightness", "Energy"],
+      "correct_answer": "B",
+      "chapter": "Physics",
+      "topic_tags": ["units"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Diamond is allotrope of:",
+      "options": ["Carbon", "Silicon", "Boron", "Aluminium"],
+      "correct_answer": "A",
+      "chapter": "Chemistry",
+      "topic_tags": ["allotropes"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Brain is part of which system?",
+      "options": ["Digestive", "Nervous", "Circulatory", "Respiratory"],
+      "correct_answer": "B",
+      "chapter": "Biology",
+      "topic_tags": ["nervous_system"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "PM CARES Fund was set up in:",
+      "options": ["2018", "2019", "2020", "2021"],
+      "correct_answer": "C",
+      "chapter": "Current Affairs",
+      "topic_tags": ["PM_CARES"],
+      "difficulty": "medium",
+      "marks": 2
+    },
+    {
+      "question_text": "Highest civilian award of India:",
+      "options": ["Padma Shri", "Padma Bhushan", "Bharat Ratna", "Padma Vibhushan"],
+      "correct_answer": "C",
+      "chapter": "Awards",
+      "topic_tags": ["Bharat_Ratna"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Ozone layer protects Earth from:",
+      "options": ["X-rays", "UV rays", "Cosmic rays", "Infrared"],
+      "correct_answer": "B",
+      "chapter": "Environment",
+      "topic_tags": ["ozone", "UV"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "Common cold is caused by:",
+      "options": ["Bacteria", "Virus", "Fungus", "Protozoa"],
+      "correct_answer": "B",
+      "chapter": "Biology",
+      "topic_tags": ["cold", "virus"],
+      "difficulty": "easy",
+      "marks": 2
+    },
+    {
+      "question_text": "First Indian woman in space:",
+      "options": ["Sunita Williams", "Kalpana Chawla", "Indira Gandhi", "Sneha Yadav"],
+      "correct_answer": "B",
+      "chapter": "Science and Technology",
+      "topic_tags": ["space", "ISRO"],
+      "difficulty": "medium",
+      "marks": 2
+    }
+  ]
+}

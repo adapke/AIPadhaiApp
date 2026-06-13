@@ -458,6 +458,35 @@ HOME_HTML = """<!doctype html>
 </style>
 </head>
 <body>
+<!-- prod-133 — Math-vision as mobile shell home screen.
+     The Capacitor student shell launches at `/?home=math` (set by
+     mobile/scripts/configure-server.cjs). When that query is present,
+     redirect immediately to the /math page so the photo-OCR
+     "scan a textbook problem" flow is the first thing the mobile user
+     sees. Inspired by CK-12's scan-and-solve mobile entry — the highest-
+     conversion engagement loop for mobile users.
+
+     Implementation note: kept as a synchronous inline redirect (not
+     after DOMContentLoaded) so the browser never paints HOME_HTML
+     before redirecting. Users who land via deep link or PWA
+     installation can still reach the home dashboard at `/` without
+     the query. -->
+<script>
+  (function () {
+    try {
+      var q = window.location.search || '';
+      // Accept "?home=math" or "&home=math". Cheap match — no
+      // URLSearchParams to keep this synchronous on old browsers.
+      if (/[?&]home=math(\\b|&|$)/.test(q)) {
+        // Preserve any other query params except `home` itself.
+        var stripped = q.replace(/(^\\?|&)home=math/, '').replace(/^&/, '?');
+        window.location.replace('/math' + (stripped.length > 1 ? stripped : ''));
+      }
+    } catch (e) {
+      // If anything fails, render the home as normal — no user-visible error.
+    }
+  })();
+</script>
 <!-- WCAG SC 2.4.1: skip directly to main content. Hidden until focused. -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <div class="app">
@@ -559,7 +588,42 @@ HOME_HTML = """<!doctype html>
         <span class="ic green" aria-hidden="true">₹</span>
         <span><b>UPI / Razorpay</b><small>Cancel anytime</small></span>
       </div>
+      <!-- prod-94: curator-verified concept videos badge.
+           Hidden until /api/concept-videos/badge returns count > 0. -->
+      <div class="trust-pill" id="curatorBadgePill" style="display:none">
+        <span class="ic green" aria-hidden="true">▶</span>
+        <span><b id="curatorBadgeText">Curated concept videos</b><small id="curatorBadgeSub">Verified by educators</small></span>
+      </div>
     </section>
+
+    <script>
+    /* prod-94 — Public landing-page badge widget.
+       Calls /api/concept-videos/badge (no auth, cacheable) and reveals
+       the trust pill when at least one verified video exists. */
+    (function() {
+      function loadCuratorBadge() {
+        var pill = document.getElementById('curatorBadgePill');
+        var txt = document.getElementById('curatorBadgeText');
+        var sub = document.getElementById('curatorBadgeSub');
+        if (!pill || !txt || !sub) return;
+        fetch('/api/concept-videos/badge')
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(d) {
+            if (!d || !d.verified) return;  // nothing to show
+            txt.textContent = d.verified + ' curated video' + (d.verified === 1 ? '' : 's');
+            sub.textContent = 'last verified ' + (d.freshness_label || 'recently');
+            pill.style.display = 'flex';
+          })
+          .catch(function() { /* silent */ });
+      }
+      // Defer slightly so it doesn't block initial paint.
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadCuratorBadge);
+      } else {
+        setTimeout(loadCuratorBadge, 50);
+      }
+    })();
+    </script>
 
     <section class="hero" id="hero">
       <div>

@@ -1,0 +1,235 @@
+{
+  "source": "jee_main_2023_january_session_mathematics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2023,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "If A = {1, 2, 3, 4, 5}, the number of subsets of A containing exactly 3 elements is:",
+      "options": ["6", "8", "10", "12"],
+      "correct_answer": "C",
+      "chapter": "Sets and Functions",
+      "topic_tags": ["combinations", "subsets"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of ways to arrange the letters of the word 'MATHEMATICS' is:",
+      "options": ["4989600", "4989500", "4989700", "4989800"],
+      "correct_answer": "A",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": ["permutations", "repetition"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If sin θ + cos θ = √2, then sin 2θ equals:",
+      "options": ["0", "1", "-1", "1/2"],
+      "correct_answer": "B",
+      "chapter": "Trigonometric Functions",
+      "topic_tags": ["double_angle", "identities"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The slope of the tangent to the curve y = x³ - 3x at x = 2 is:",
+      "options": ["3", "6", "9", "12"],
+      "correct_answer": "C",
+      "chapter": "Differential Calculus",
+      "topic_tags": ["derivatives", "tangent"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The value of lim x→0 (sin x)/x is:",
+      "options": ["0", "1", "∞", "Undefined"],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": ["standard_limits", "trigonometry"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The integral ∫(1/(1+x²)) dx equals:",
+      "options": ["arctan(x) + C", "arcsin(x) + C", "ln|1+x²| + C", "1/(1+x²) + C"],
+      "correct_answer": "A",
+      "chapter": "Integral Calculus",
+      "topic_tags": ["standard_integrals", "inverse_trig"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The eccentricity of the ellipse x²/9 + y²/16 = 1 is:",
+      "options": ["√7/4", "3/4", "√7/3", "1/2"],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": ["ellipse", "eccentricity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If P(A) = 0.4, P(B) = 0.5, and P(A∩B) = 0.2, then P(A∪B) is:",
+      "options": ["0.6", "0.7", "0.8", "0.9"],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": ["addition_rule", "events"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of real roots of x⁴ - 3x² + 2 = 0 is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "D",
+      "chapter": "Quadratic Equations",
+      "topic_tags": ["biquadratic", "roots"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If the sum of n terms of an AP is n² + 2n, the first term and common difference are:",
+      "options": ["3 and 2", "2 and 2", "3 and 3", "1 and 2"],
+      "correct_answer": "A",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["AP", "nth_term"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The coefficient of x⁵ in (1+x)¹⁰ is:",
+      "options": ["210", "252", "120", "180"],
+      "correct_answer": "B",
+      "chapter": "Binomial Theorem",
+      "topic_tags": ["coefficients", "binomial_expansion"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If A is a 3×3 matrix and |A| = 5, then |2A| equals:",
+      "options": ["10", "20", "40", "60"],
+      "correct_answer": "C",
+      "chapter": "Matrices and Determinants",
+      "topic_tags": ["determinant_properties", "scalar_multiplication"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Vector a = i + j + k. The unit vector along a is:",
+      "options": ["(i+j+k)/3", "(i+j+k)/√3", "(i+j+k)/√2", "i+j+k"],
+      "correct_answer": "B",
+      "chapter": "Vector Algebra",
+      "topic_tags": ["unit_vector", "magnitude"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The number of solutions of sin x = 1/2 in [0, 2π] is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "B",
+      "chapter": "Trigonometric Equations",
+      "topic_tags": ["solutions", "interval"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If z = 3 + 4i, then |z| equals:",
+      "options": ["5", "7", "25", "√7"],
+      "correct_answer": "A",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["modulus", "absolute_value"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The area enclosed by y = x², x = 0, x = 2 and the x-axis is:",
+      "options": ["4/3", "8/3", "2", "4"],
+      "correct_answer": "B",
+      "chapter": "Application of Integrals",
+      "topic_tags": ["area_under_curve", "definite_integral"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The maximum value of f(x) = -x² + 4x + 5 is:",
+      "options": ["5", "7", "9", "11"],
+      "correct_answer": "C",
+      "chapter": "Application of Derivatives",
+      "topic_tags": ["maxima_minima", "quadratic"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Solution of dy/dx = y/x is:",
+      "options": ["y = Cx", "y = C+x", "y = Cx²", "y = C/x"],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": ["separable", "first_order"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The equation of the line passing through (1, 2) with slope 3 is:",
+      "options": ["3x - y - 1 = 0", "3x + y - 1 = 0", "x - 3y + 5 = 0", "x + 3y - 7 = 0"],
+      "correct_answer": "A",
+      "chapter": "Straight Lines",
+      "topic_tags": ["point_slope_form"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If 5 fair coins are tossed, P(exactly 3 heads) equals:",
+      "options": ["5/16", "10/32", "1/2", "3/16"],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": ["binomial_distribution", "coin_toss"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The angle between vectors a = i + 2j and b = 2i + j is:",
+      "options": ["30°", "45°", "60°", "cos⁻¹(4/5)"],
+      "correct_answer": "D",
+      "chapter": "Vector Algebra",
+      "topic_tags": ["dot_product", "angle"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If log₂ x + log₂ 4 = 3, then x equals:",
+      "options": ["2", "4", "8", "16"],
+      "correct_answer": "A",
+      "chapter": "Logarithms",
+      "topic_tags": ["properties", "equations"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The distance of the point (3, 4) from the origin is:",
+      "options": ["3", "4", "5", "7"],
+      "correct_answer": "C",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["distance_formula"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of ways to choose 4 books from 8 distinct books is:",
+      "options": ["32", "56", "70", "1680"],
+      "correct_answer": "C",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": ["combinations"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The sum of the infinite series 1 + 1/2 + 1/4 + 1/8 + ... is:",
+      "options": ["1", "3/2", "2", "∞"],
+      "correct_answer": "C",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["GP", "infinite_sum"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

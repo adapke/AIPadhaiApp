@@ -14,7 +14,6 @@ from __future__ import annotations
 
 from typing import Any
 
-
 # Each deck: title, description, language, list of (front, back, hint?) cards.
 # Title kept under 200 chars (SRS validates that).
 STARTER_DECKS: list[dict[str, Any]] = [

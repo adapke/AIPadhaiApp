@@ -1,0 +1,235 @@
+{
+  "source": "jee_advanced_2025_mathematics",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "mathematics",
+  "default_year": 2025,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "Value of lim x→0 (sin x)/x is:",
+      "options": ["0", "1", "∞", "Does not exist"],
+      "correct_answer": "B",
+      "chapter": "Limits and Continuity",
+      "topic_tags": ["limits", "standard_limit"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Derivative of sin(x²) with respect to x is:",
+      "options": ["cos(x²)", "2x·cos(x²)", "2x·sin(x²)", "-cos(x²)"],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": ["chain_rule"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "∫ x² dx equals:",
+      "options": ["x³/3 + C", "2x + C", "x³ + C", "x²/2 + C"],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": ["basic_integral"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If |z|=1, then z·z̄ equals:",
+      "options": ["0", "1", "i", "2"],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["modulus", "conjugate"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of solutions of sin x = 1/2 in [0, 2π) is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "B",
+      "chapter": "Trigonometric Equations",
+      "topic_tags": ["sin", "equation"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Equation of line through (2,3) with slope 2 is:",
+      "options": ["y = 2x + 1", "y = 2x - 1", "y = 2x + 3", "y - 3 = 2(x - 2)"],
+      "correct_answer": "D",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["line_equation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Eccentricity of ellipse x²/25 + y²/16 = 1 is:",
+      "options": ["3/5", "4/5", "5/4", "1"],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": ["ellipse", "eccentricity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If A and B are independent events with P(A)=0.5, P(B)=0.4, then P(A∩B) is:",
+      "options": ["0.1", "0.2", "0.5", "0.9"],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": ["independent_events"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Coefficient of x² in (1+x)⁵ is:",
+      "options": ["5", "10", "20", "25"],
+      "correct_answer": "B",
+      "chapter": "Binomial Theorem",
+      "topic_tags": ["binomial_coefficient"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If A = [[1, 2], [3, 4]], then det(A) is:",
+      "options": ["-2", "2", "-10", "10"],
+      "correct_answer": "A",
+      "chapter": "Matrices and Determinants",
+      "topic_tags": ["determinant_2x2"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of arrangements of letters in 'MATH' is:",
+      "options": ["12", "16", "24", "48"],
+      "correct_answer": "C",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": ["permutations"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Sum of first 100 natural numbers is:",
+      "options": ["5050", "5000", "10100", "1000"],
+      "correct_answer": "A",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["sum_AP"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Maximum value of 3sin θ + 4cos θ is:",
+      "options": ["3", "4", "5", "7"],
+      "correct_answer": "C",
+      "chapter": "Trigonometric Functions",
+      "topic_tags": ["max_min", "a_sin_b_cos"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "If f(x) = x³ - 3x + 2, then f'(1) is:",
+      "options": ["-3", "0", "3", "6"],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": ["polynomial_derivative"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "∫₀^π sin x dx equals:",
+      "options": ["0", "1", "2", "π"],
+      "correct_answer": "C",
+      "chapter": "Definite Integration",
+      "topic_tags": ["definite_integral", "sin"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Distance from origin to line 3x + 4y - 5 = 0 is:",
+      "options": ["1", "2", "3", "5"],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": ["distance_from_line"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Domain of f(x) = √(x-2) is:",
+      "options": ["x > 0", "x ≥ 0", "x ≥ 2", "x > 2"],
+      "correct_answer": "C",
+      "chapter": "Functions",
+      "topic_tags": ["domain"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "tan(π/4) equals:",
+      "options": ["0", "1/2", "1", "√3"],
+      "correct_answer": "C",
+      "chapter": "Trigonometric Functions",
+      "topic_tags": ["standard_value"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If the line y = mx + c is tangent to y² = 4x, then c equals:",
+      "options": ["1/m", "m", "-1/m", "0"],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": ["parabola_tangent"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Value of i⁴ is:",
+      "options": ["i", "-i", "1", "-1"],
+      "correct_answer": "C",
+      "chapter": "Complex Numbers",
+      "topic_tags": ["powers_of_i"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Sum to infinity of GP 1 + 1/2 + 1/4 + ... is:",
+      "options": ["1", "2", "3", "Infinity"],
+      "correct_answer": "B",
+      "chapter": "Sequences and Series",
+      "topic_tags": ["GP_sum_infinity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Vector cross product i×j equals:",
+      "options": ["k", "-k", "0", "1"],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": ["cross_product"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If sin⁻¹(x) = π/6, then x is:",
+      "options": ["1/2", "√3/2", "1", "0"],
+      "correct_answer": "A",
+      "chapter": "Inverse Trig",
+      "topic_tags": ["arcsin"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "If A is a 3×3 matrix with det(A)=2, then det(2A) is:",
+      "options": ["4", "8", "16", "32"],
+      "correct_answer": "C",
+      "chapter": "Determinants",
+      "topic_tags": ["determinant_scalar"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Probability of getting at least one head in 2 coin tosses is:",
+      "options": ["1/4", "1/2", "3/4", "1"],
+      "correct_answer": "C",
+      "chapter": "Probability",
+      "topic_tags": ["coin_toss", "at_least"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

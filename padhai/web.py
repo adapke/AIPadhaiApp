@@ -631,6 +631,60 @@ _PROVIDER_KEY_SPECS = {
 }
 
 
+def _bootstrap_ffmpeg_on_path() -> None:
+    """Make `ffmpeg` resolvable from PATH for all `shutil.which("ffmpeg")`
+    and `subprocess.run(["ffmpeg", ...])` call sites.
+
+    The codebase has ~15 call sites that assume ffmpeg is on PATH. On
+    hosts where it isn't (most Windows dev machines), every video / audio
+    operation fails with "ffmpeg not found on PATH" even though the
+    `imageio-ffmpeg` package ships a fully-functional bundled binary.
+
+    Strategy: copy the bundled binary to `~/.padhai/bin/ffmpeg(.exe)`
+    once, then prepend that directory to PATH. Idempotent — skipped if
+    a system ffmpeg is already resolvable.
+    """
+    import shutil
+    if shutil.which("ffmpeg"):
+        return  # system ffmpeg already on PATH; nothing to do.
+    try:
+        import imageio_ffmpeg
+    except ImportError:
+        _log.warning(
+            "[startup] no system ffmpeg and imageio-ffmpeg not installed — "
+            "video / audio render will fail. `pip install imageio-ffmpeg`.",
+        )
+        return
+    try:
+        src = Path(imageio_ffmpeg.get_ffmpeg_exe())
+    except Exception as e:
+        _log.warning(
+            "[startup] imageio-ffmpeg get_ffmpeg_exe() failed: %s", e,
+        )
+        return
+    if not src.exists():
+        _log.warning("[startup] bundled ffmpeg not at %s", src)
+        return
+    bin_dir = Path.home() / ".padhai" / "bin"
+    bin_dir.mkdir(parents=True, exist_ok=True)
+    exe_name = "ffmpeg.exe" if os.name == "nt" else "ffmpeg"
+    target = bin_dir / exe_name
+    if not target.exists():
+        try:
+            shutil.copy2(src, target)
+        except Exception as e:
+            _log.warning(
+                "[startup] could not copy bundled ffmpeg to %s: %s",
+                target, e,
+            )
+            return
+    # Prepend so our copy beats any later-added system ffmpeg of unknown vintage.
+    current = os.environ.get("PATH", "")
+    if str(bin_dir) not in current.split(os.pathsep):
+        os.environ["PATH"] = str(bin_dir) + os.pathsep + current
+    _log.info("[startup] ffmpeg bootstrapped at %s", target)
+
+
 def _validate_provider_keys() -> None:
     """Check each configured provider key has the expected prefix + length.
     In production (APP_ENV=production) we raise RuntimeError to fail-fast.
@@ -1083,6 +1137,7 @@ async def _lifespan(app: FastAPI):  # noqa: ARG001
     # so we don't run with a misconfigured deployment. In dev we just
     # warn so local work isn't blocked.
     _validate_provider_keys()
+    _bootstrap_ffmpeg_on_path()
     # Production-only admin-gate sanity check — refuse to start when
     # neither DATABASE_URL nor PADHAI_SUPERUSER_EMAILS is set, since
     # that combination silently grants admin to every authenticated
@@ -10437,6 +10492,45 @@ def me(user: AuthUser | None = Depends(current_user)) -> JSONResponse:
     })
 
 
+@app.get("/api/me/cost-today")
+def me_cost_today(
+    user: AuthUser | None = Depends(current_user),
+) -> JSONResponse:
+    """Today's AI-spend status for the current user — so the SPA can
+    show a "X% of daily AI quota used" indicator and prompt for upgrade
+    when the user is close to the cap. Quota resets at UTC midnight."""
+    if user is None:
+        raise HTTPException(401, "authentication required")
+    from . import llm_obs as _llm
+    spent_paise = _llm.user_cost_today_paise(user.id)
+    cap_paise = _llm.daily_cap_paise(user.subscription_tier)
+    if cap_paise is None:
+        # Enterprise / uncapped — surface zero "blocked" so the UI hides the warning.
+        pct = 0.0
+        status = "uncapped"
+    elif cap_paise == 0:
+        pct = 100.0  # M1 — every premium call gets heuristic fallback
+        status = "premium_feature_gated"
+    else:
+        pct = min(100.0, round(spent_paise / cap_paise * 100, 1))
+        if pct >= 100:
+            status = "over_budget"
+        elif pct >= 80:
+            status = "near_limit"
+        else:
+            status = "ok"
+    return JSONResponse({
+        "tier": user.subscription_tier,
+        "spent_paise_today": spent_paise,
+        "spent_rupees_today": round(spent_paise / 100, 2),
+        "cap_paise_today": cap_paise,
+        "cap_rupees_today": None if cap_paise is None else round(cap_paise / 100, 2),
+        "pct_used": pct,
+        "status": status,  # ok | near_limit | over_budget | premium_feature_gated | uncapped
+        "resets_at_utc_midnight": True,
+    })
+
+
 @app.get("/tiers")
 def tiers() -> JSONResponse:
     return JSONResponse(
@@ -12843,11 +12937,87 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
               '</div>' +
             '</div>' +
             '<div style="text-align:right">' +
+              '<div id="aiQuotaChip" style="margin-bottom:8px;font-size:12px;color:#94a3b8">' +
+                '<span class="spinner" style="vertical-align:middle"></span> Loading quota...' +
+              '</div>' +
+              '<div id="curatorChip" style="margin-bottom:8px;font-size:12px;color:#94a3b8;display:none"></div>' +
+              '<div id="adminNavLinks" style="margin-bottom:8px;font-size:12px;display:none">' +
+                '<a href="/admin/health" style="color:#fbbf24;text-decoration:none;margin-right:10px">Health</a>' +
+                '<a href="/admin/concept-curator" style="color:#fbbf24;text-decoration:none;margin-right:10px">Curator</a>' +
+                '<a href="/admin/curator-stats" style="color:#fbbf24;text-decoration:none">Stats</a>' +
+              '</div>' +
               '<a class="btn ghost" href="/onboarding">Edit goals</a>' +
             '</div>' +
           '</div>' +
         '</div>'
       );
+    }
+
+    // Fetched once after first paint. Updates the AI-quota chip in the
+    // profile header so the student knows how close they are to the
+    // daily Claude budget (prod-33 + prod-38).
+    async function loadAiQuota() {
+      var chip = document.getElementById('aiQuotaChip');
+      if (!chip) return;
+      try {
+        var r = await fetch('/api/me/cost-today', { headers: authH() });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        var d = await r.json();
+        var color, label;
+        if (d.status === 'uncapped') {
+          color = '#10b981'; label = 'Unlimited AI · enterprise tier';
+        } else if (d.status === 'premium_feature_gated') {
+          color = '#f59e0b';
+          label = 'Premium AI gated · <a href="/pricing" style="color:#fbbf24">upgrade</a>';
+        } else if (d.status === 'over_budget') {
+          color = '#ef4444';
+          label = '₹' + d.spent_rupees_today + ' / ₹' + d.cap_rupees_today +
+            ' — daily cap hit · <a href="/pricing" style="color:#fbbf24">upgrade</a>';
+        } else if (d.status === 'near_limit') {
+          color = '#f59e0b';
+          label = '₹' + d.spent_rupees_today + ' / ₹' + d.cap_rupees_today +
+            ' (' + d.pct_used + '%) — near daily limit';
+        } else {
+          color = '#10b981';
+          label = '₹' + d.spent_rupees_today + ' / ₹' + d.cap_rupees_today +
+            ' AI used today (' + d.pct_used + '%)';
+        }
+        chip.innerHTML = '<span style="color:' + color + '">●</span> ' + label;
+        chip.title = 'AI cost reset at UTC midnight. Tier: ' + d.tier;
+      } catch (e) {
+        chip.innerHTML = '<span style="color:#64748b">●</span> AI quota unavailable';
+      }
+    }
+
+    // prod-48 — admin-only curator chip. Calls the admin queue endpoint.
+    // For non-admins (or anonymous), the response is 401/403 and the chip
+    // stays hidden — there's no PII risk because the chip just shows a count.
+    // prod-87 — also reveals the admin nav links (Health/Curator/Stats) when
+    // the same gate passes.
+    async function loadCuratorChip() {
+      var chip = document.getElementById('curatorChip');
+      var nav = document.getElementById('adminNavLinks');
+      if (!chip) return;
+      try {
+        var r = await fetch(
+          '/api/admin/concept-videos/queue?limit=200',
+          { headers: authH() },
+        );
+        if (!r.ok) return; // non-admin → leave hidden
+        var d = await r.json();
+        var n = d.count || 0;
+        chip.style.display = 'block';
+        if (nav) nav.style.display = 'block';
+        if (n === 0) {
+          chip.innerHTML = '<span style="color:#10b981">●</span> Curator queue clear';
+        } else {
+          chip.innerHTML =
+            '<span style="color:#f59e0b">●</span> Curator queue: ' + n +
+            ' pending <a href="/admin/concept-curator" style="color:#fbbf24">open curator</a>';
+        }
+      } catch (e) {
+        // silent — non-admin or network glitch
+      }
     }
 
     function studyProgress() {
@@ -13513,6 +13683,76 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       );
     }
 
+    // prod-73 — Trending-this-week widget. Hidden until /popular returns
+    // at least one row (which requires at least one /played beacon to
+    // have fired on a verified video).
+    function trendingVideosSection() {
+      return (
+        '<section class="section anchor" id="trending-videos" style="display:none">' +
+          '<div class="section-header">' +
+            '<div>' +
+              '<h2 class="section-title">Trending this week</h2>' +
+              '<p class="section-sub">Most-watched curator-verified videos in the last 7 days.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div id="trendingResults" class="grid-3"></div>' +
+        '</section>'
+      );
+    }
+
+    async function loadTrendingVideos() {
+      var box = document.getElementById('trendingResults');
+      var sect = document.getElementById('trending-videos');
+      if (!box || !sect) return;
+      try {
+        var r = await fetch('/api/concept-videos/popular?limit=6&since_days=7');
+        if (!r.ok) return;
+        var d = await r.json();
+        var rows = (d.rows || []);
+        if (rows.length === 0) {
+          // No plays yet this week — keep widget hidden.
+          sect.style.display = 'none';
+          return;
+        }
+        sect.style.display = 'block';
+        // Reuse the same renderer to keep the look consistent. We slot
+        // these rows into _cvRows under different indexes (offset 1000)
+        // so click handlers don't collide with the regular concept-videos
+        // section above.
+        window._cvRows = window._cvRows || [];
+        box.innerHTML = rows.map(function(v, i) {
+          var idx = 1000 + i;
+          window._cvRows[idx] = v;
+          var vid = ytIdFromEmbed(v.embed_url);
+          var thumb = vid ? videoThumb(vid) : '';
+          var plays = v.play_count || 0;
+          return (
+            '<div class="card" style="padding:0;overflow:hidden">' +
+              (thumb
+                ? '<div onclick="playConceptVideo(' + idx + ')" style="display:block;background:#0f172a;cursor:pointer;position:relative">' +
+                  '<img src="' + thumb + '" alt="" style="width:100%;height:140px;object-fit:cover;display:block">' +
+                  '<span style="position:absolute;top:6px;right:6px;background:rgba(239,68,68,0.92);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:10px">' +
+                    plays + (plays === 1 ? ' play' : ' plays') +
+                  '</span>' +
+                  '</div>'
+                : '') +
+              '<div style="padding:14px">' +
+                '<div style="font-weight:800;font-size:14px;margin-bottom:4px;line-height:1.4">' +
+                  escapeHtml(v.title || v.concept) + '</div>' +
+                '<div class="meta">' + escapeHtml(v.channel || '') + '</div>' +
+                '<div style="margin-top:8px">' +
+                  '<button class="btn" onclick="playConceptVideo(' + idx + ')">Watch</button>' +
+                '</div>' +
+              '</div>' +
+            '</div>'
+          );
+        }).join('');
+      } catch(e) {
+        // Silent — trending is a nice-to-have, never block the dashboard.
+        sect.style.display = 'none';
+      }
+    }
+
     function conceptVideosSection() {
       // Container only — populated by loadConceptVideos() after first paint
       // so the dashboard renders fast without waiting on YouTube.
@@ -13587,43 +13827,70 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       }).join('');
     }
 
-    // Inline modal player — no redirect to YouTube. We use YouTube's
-    // privacy-enhanced /embed/ URL (loaded only when the user clicks),
-    // so playback happens on this page.
+    // prod-63 — player with fallback chain:
+    //   1. self-hosted MP4 for verified videos with a local copy
+    //   2. youtube-nocookie iframe for verified YouTube URLs
+    //   3. delayed AI-tutor fallback link if iframe stalls (some videos
+    //      have X-Frame-Options: SAMEORIGIN or COPPA blocks)
+    //   4. immediate AI fallback when no specific URL is curated yet
     window.playConceptVideo = function(idx) {
       var v = (window._cvRows || [])[idx];
       if (!v) return;
+      // prod-70 — fire-and-forget play beacon so trending stats update.
+      if (v.id) {
+        try {
+          fetch('/api/concept-videos/' + v.id + '/played', { method: 'POST' });
+        } catch (e) { /* never block playback on analytics */ }
+      }
       var vid = ytIdFromEmbed(v.embed_url);
-      // Self-hosted fallback for the verified Newton demo (the Peekaboo
-      // Kidz iframe is COPPA-blocked).
+      // Self-hosted match for the verified Newton demo (Peekaboo Kidz
+      // iframe is COPPA-blocked — we shipped the MP4 with the app).
       var selfHosted = (v.concept || '').toLowerCase().indexOf('newton') >= 0 &&
                         (v.channel || '').toLowerCase().indexOf('peekaboo') >= 0;
+      var conceptEnc = encodeURIComponent(v.concept || '');
+      // Fallback row that lives below the player. Stays hidden for the
+      // first 4 seconds — most iframes either load in <2s or never load
+      // at all. When the iframe.onload fires we hide it for good.
+      var fallbackRow =
+        '<div id="cvFallback" style="display:none;margin-top:10px;padding:10px;background:#1e293b;border:1px solid #f59e0b;border-radius:8px">' +
+          '<div style="font-size:13px;color:#fbbf24;margin-bottom:6px">' +
+            'Cant see the video? It may be blocked by the publisher.' +
+          '</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            '<a class="btn" href="/chat?topic=' + conceptEnc + '">Ask AI tutor instead</a>' +
+            (vid ? '<a class="btn ghost" href="https://www.youtube.com/watch?v=' + vid + '" target="_blank" rel="noopener">Open on YouTube</a>' : '') +
+            '<a class="btn ghost" href="/practice?topic=' + conceptEnc + '">Try practice questions</a>' +
+          '</div>' +
+        '</div>';
       var inner;
       if (selfHosted) {
+        // MP4 element — onerror swaps to AI fallback if the file is missing.
         inner =
-          '<video controls autoplay style="width:100%;max-height:70vh;background:#000">' +
+          '<video controls autoplay style="width:100%;max-height:70vh;background:#000" ' +
+            'onerror="document.getElementById(\\'cvFallback\\').style.display=\\'block\\'">' +
             '<source src="/static/landing-demo.mp4" type="video/mp4">' +
-          '</video>';
+          '</video>' + fallbackRow;
       } else if (vid) {
-        // youtube-nocookie embed: same-origin iframe, no redirect.
+        // YouTube embed via nocookie privacy domain.
+        // - Show fallback row after 4s if onload hasn't fired
+        // - onload fires once — we use that to know the iframe is OK
         inner =
-          '<iframe src="https://www.youtube-nocookie.com/embed/' + vid +
+          '<iframe id="cvIframe" src="https://www.youtube-nocookie.com/embed/' + vid +
             '?autoplay=1&modestbranding=1&rel=0" ' +
             'style="width:100%;aspect-ratio:16/9;border:0" ' +
-            'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+            'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen ' +
+            'onload="window._cvIframeLoaded=true"></iframe>' + fallbackRow;
       } else {
-        // No specific video URL curated yet — give the student real
-        // in-app alternatives instead of dumping them to YouTube.
-        var concept = encodeURIComponent(v.concept || '');
+        // No specific URL curated — go straight to AI alternatives.
         inner =
           '<div class="card" style="background:#0f172a;border-color:#fbbf24">' +
             '<div style="font-weight:800;font-size:15px;margin-bottom:8px;color:#fbbf24">No specific video curated for this concept yet</div>' +
-            '<p class="sub" style="margin-bottom:14px">We have a channel pick but not a verified specific URL. While we sort that out, here is what works in-app right now:</p>' +
+            '<p class="sub" style="margin-bottom:14px">A channel pick is registered but not a verified URL. Here is what works right now in-app:</p>' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">' +
-              '<a class="btn" href="/chat?topic=' + concept + '">💬 Ask AI tutor</a>' +
-              '<a class="btn" href="/syllabus">📚 Read the syllabus</a>' +
-              '<a class="btn" href="/flashcards">🃏 Practise flashcards</a>' +
-              '<a class="btn" href="/practice">📝 Take a practice test</a>' +
+              '<a class="btn" href="/chat?topic=' + conceptEnc + '">Ask AI tutor</a>' +
+              '<a class="btn" href="/syllabus">Read the syllabus</a>' +
+              '<a class="btn" href="/flashcards">Practise flashcards</a>' +
+              '<a class="btn" href="/practice">Take a practice test</a>' +
             '</div>' +
           '</div>';
       }
@@ -13635,6 +13902,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         modal.onclick = function(e) { if (e.target === modal) closeVideoModal(); };
         document.body.appendChild(modal);
       }
+      window._cvIframeLoaded = false;
       modal.innerHTML =
         '<div class="modal" style="max-width:880px;width:100%;padding:16px">' +
           '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px">' +
@@ -13642,15 +13910,30 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
               '<div style="font-weight:800;font-size:15px">' + escapeHtml(v.title || v.concept) + '</div>' +
               '<div class="meta">' + escapeHtml(v.channel || '') + '</div>' +
             '</div>' +
-            '<button class="btn ghost" onclick="closeVideoModal()">Close ✕</button>' +
+            '<button class="btn ghost" onclick="closeVideoModal()">Close</button>' +
           '</div>' +
           inner +
         '</div>';
       modal.classList.add('open');
+      // After 4 seconds, if onload never fired (iframe blocked), show
+      // the fallback row. Cleared when the user closes the modal.
+      if (vid) {
+        window._cvFallbackTimer = setTimeout(function() {
+          if (!window._cvIframeLoaded) {
+            var fb = document.getElementById('cvFallback');
+            if (fb) fb.style.display = 'block';
+          }
+        }, 4000);
+      }
     };
     window.closeVideoModal = function() {
       var modal = document.getElementById('videoModal');
       if (modal) { modal.innerHTML = ''; modal.classList.remove('open'); }
+      if (window._cvFallbackTimer) {
+        clearTimeout(window._cvFallbackTimer);
+        window._cvFallbackTimer = null;
+      }
+      window._cvIframeLoaded = false;
     };
 
     async function loadConceptVideos(query) {
@@ -13685,11 +13968,15 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         browsePacksSection() +
         studyMaterialsSection() +
         sampleFlashcardsSection() +
+        trendingVideosSection() +
         conceptVideosSection() +
         moreModulesSection();
       document.getElementById('dashRoot').innerHTML = html;
       // Populate the dynamic pieces after the rest is rendered.
       loadConceptVideos('');
+      loadAiQuota();
+      loadCuratorChip();
+      loadTrendingVideos();
       if (window.flashRender) window.flashRender();
       // Hash navigation — if the user came from a chip with a #section anchor
       if (location.hash) {

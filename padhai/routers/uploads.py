@@ -87,11 +87,20 @@ def create_upload_route(
         raise HTTPException(429, "too many uploads — slow down")
     _UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     suffix = Path(file.filename or "page.jpg").suffix.lower() or ".jpg"
+    # Keep this allow-list in sync with padhai.ingest.ingest() — that
+    # function does the actual dispatch and rejects anything else.
+    # Adding more types here without adding ingest support causes a
+    # 400 buried inside ingest with a misleading "outer accepted" UX.
     if suffix not in (
-        ".jpg", ".jpeg", ".png", ".gif", ".webp", ".pdf",
-        ".pptx", ".docx", ".heic", ".heif",
+        ".jpg", ".jpeg", ".png", ".webp",        # raster images
+        ".pdf",                                   # multi-page PDF
+        ".pptx", ".docx",                         # office docs (LibreOffice required)
     ):
-        raise HTTPException(400, "unsupported file type")
+        raise HTTPException(
+            400,
+            f"unsupported file type {suffix!r}. Allowed: "
+            ".jpg .jpeg .png .webp .pdf .pptx .docx",
+        )
     raw_path = _UPLOAD_DIR / f"{uuid.uuid4().hex}{suffix}"
     body = file.file.read()
     if len(body) > 25 * 1024 * 1024:

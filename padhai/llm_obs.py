@@ -404,10 +404,18 @@ def user_cost_today_paise(user_id: str) -> int:
 # all AI surfaces — tutor + lesson + essay + doubt + practice all
 # subtract from the same daily budget. Sentinel `0` means "no AI access
 # at this tier"; `None` (from daily_cap_paise) means uncapped.
+# Caps were tuned at v0.7 when a Claude lesson cost ~₹5 and we wanted
+# free tier to be zero. After v0.14 the SPA does many more Claude calls
+# per session (essay grading + tutor follow-ups + interview turns) and
+# a ₹20/day cap on M2 burns out in ~6 essay grades. prod-33 bumped:
+#   • M1 stays at 0 (premium-feature gate stays clean)
+#   • M2 to ₹100/day so a real student can use the premium features
+#   • M3 to ₹400/day for the lip-sync tier
+# M4* enterprise tiers continue to be uncapped (handled below).
 DAILY_COST_CAPS_BY_TIER: dict[str, int] = {
-    "M1": 0,         # free tier — no premium AI features
-    "M2": 2000,      # ₹20 / day  (premium-voice tier)
-    "M3": 10000,     # ₹100 / day (lip-sync video tier)
+    "M1": 0,         # free tier — premium AI gated, heuristic fallback
+    "M2": 10000,     # ₹100 / day  (premium-voice tier; ~30 essay grades)
+    "M3": 40000,     # ₹400 / day  (lip-sync video tier)
     # M4* (enterprise tiers) inherit uncapped via daily_cap_paise() below.
 }
 

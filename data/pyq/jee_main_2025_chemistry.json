@@ -1,0 +1,235 @@
+{
+  "source": "jee_main_2025_chemistry",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2025,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Number of moles of NaOH required to neutralise 100 mL of 0.1 M H2SO4 is:",
+      "options": ["0.01", "0.02", "0.1", "0.2"],
+      "correct_answer": "B",
+      "chapter": "Acid-Base",
+      "topic_tags": ["neutralisation", "stoichiometry"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Molarity of solution containing 4 g NaOH in 250 mL water is:",
+      "options": ["0.4 M", "0.1 M", "1 M", "4 M"],
+      "correct_answer": "A",
+      "chapter": "Solutions",
+      "topic_tags": ["molarity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Electronic configuration of Cr (Z=24) is:",
+      "options": ["[Ar]3d⁴4s²", "[Ar]3d⁵4s¹", "[Ar]3d⁶4s⁰", "[Ar]4s²4p⁴"],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["chromium", "exception"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "First ionisation energy is highest among:",
+      "options": ["Na", "Mg", "Al", "Si"],
+      "correct_answer": "D",
+      "chapter": "Periodic Properties",
+      "topic_tags": ["ionisation_energy"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Bond order of N2 is:",
+      "options": ["1", "2", "3", "0"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["bond_order", "MO"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "At equilibrium, Kc for H2 + I2 ⇌ 2HI is 50. If [H2]=[I2]=0.1 M, [HI] is:",
+      "options": ["0.5 M", "0.707 M", "0.1 M", "5 M"],
+      "correct_answer": "B",
+      "chapter": "Chemical Equilibrium",
+      "topic_tags": ["Kc"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "pH of buffer with pKa = 4.74 and [salt]/[acid] = 1 is:",
+      "options": ["1", "4.74", "7", "9.26"],
+      "correct_answer": "B",
+      "chapter": "Ionic Equilibrium",
+      "topic_tags": ["buffer", "Henderson"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Rate law of zero-order reaction is:",
+      "options": ["rate = k", "rate = k[A]", "rate = k[A]²", "rate = k[A][B]"],
+      "correct_answer": "A",
+      "chapter": "Kinetics",
+      "topic_tags": ["zero_order"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "EMF of cell Cu | Cu2+ || Zn2+ | Zn (E°(Cu)=+0.34, E°(Zn)=-0.76) is:",
+      "options": ["+0.42 V", "-0.42 V", "+1.10 V", "-1.10 V"],
+      "correct_answer": "D",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["cell_potential", "galvanic"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which is the most acidic?",
+      "options": ["CH3OH", "C6H5OH (phenol)", "CH3COOH", "HCl"],
+      "correct_answer": "D",
+      "chapter": "Acids and Bases",
+      "topic_tags": ["acidity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Most stable carbocation is:",
+      "options": ["CH3+", "C2H5+", "(CH3)2CH+", "(CH3)3C+"],
+      "correct_answer": "D",
+      "chapter": "Organic Reactions",
+      "topic_tags": ["carbocation", "stability"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Major product of CH2=CH2 + HBr is:",
+      "options": ["CH3CHBr2", "BrCH2CH2Br", "CH3CH2Br", "CH2=CHBr"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["addition", "Markovnikov"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which is an aromatic compound?",
+      "options": ["Cyclohexane", "Benzene", "Cyclohexene", "n-Hexane"],
+      "correct_answer": "B",
+      "chapter": "Aromatics",
+      "topic_tags": ["aromatic", "benzene"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Aspirin is converted from salicylic acid by reaction with:",
+      "options": ["NaOH", "Acetic anhydride", "HCl", "H2O"],
+      "correct_answer": "B",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": ["aspirin", "acetylation"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of σ-bonds in benzene is:",
+      "options": ["3", "6", "12", "9"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["sigma_bonds"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Lassaigne's test detects:",
+      "options": ["N, S, X in organic compounds", "C and H only", "Oxygen only", "Phosphorus only"],
+      "correct_answer": "A",
+      "chapter": "Organic Analysis",
+      "topic_tags": ["Lassaigne"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of moles in 18 g of water is:",
+      "options": ["0.5", "1", "1.5", "18"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["mole"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "1 amu equals:",
+      "options": ["1.66×10⁻²⁷ kg", "9.1×10⁻³¹ kg", "1.6×10⁻¹⁹ C", "6.022×10²³"],
+      "correct_answer": "A",
+      "chapter": "Mole Concept",
+      "topic_tags": ["amu"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Quantum number that determines orbital orientation is:",
+      "options": ["n", "l", "m", "s"],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["quantum_numbers"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Aufbau principle deals with:",
+      "options": ["Filling of orbitals by increasing energy", "Pauli exclusion", "Hund's rule", "Heisenberg"],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["aufbau"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Common oxidation state of zinc is:",
+      "options": ["+1", "+2", "+3", "+4"],
+      "correct_answer": "B",
+      "chapter": "d-Block",
+      "topic_tags": ["zinc", "oxidation_state"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of unpaired electrons in O2 molecule is:",
+      "options": ["0", "1", "2", "4"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["paramagnetism", "MO_theory"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Maximum number of electrons in d subshell is:",
+      "options": ["2", "6", "10", "14"],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["subshells"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Strongest reducing agent in periodic table is:",
+      "options": ["F", "Cl", "Li (in solution)", "Na"],
+      "correct_answer": "C",
+      "chapter": "Periodic Properties",
+      "topic_tags": ["reducing_agent"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Faraday's first law of electrolysis: mass deposited is proportional to:",
+      "options": ["Time only", "Current only", "Charge passed", "Voltage"],
+      "correct_answer": "C",
+      "chapter": "Electrochemistry",
+      "topic_tags": ["Faraday_law"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

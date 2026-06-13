@@ -1,0 +1,235 @@
+{
+  "source": "neet_2025_biology",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "biology",
+  "default_year": 2025,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "Powerhouse of the cell is:",
+      "options": ["Ribosome", "Mitochondria", "Lysosome", "Golgi body"],
+      "correct_answer": "B",
+      "chapter": "Cell Biology",
+      "topic_tags": ["mitochondria", "organelles"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "DNA replication is:",
+      "options": ["Conservative", "Dispersive", "Semi-conservative", "Random"],
+      "correct_answer": "C",
+      "chapter": "Molecular Biology",
+      "topic_tags": ["DNA_replication"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of chromosomes in human gametes is:",
+      "options": ["23", "46", "44", "22"],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": ["chromosomes", "gametes"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Krebs cycle takes place in:",
+      "options": ["Cytoplasm", "Mitochondrial matrix", "Chloroplast", "Ribosome"],
+      "correct_answer": "B",
+      "chapter": "Cellular Respiration",
+      "topic_tags": ["Krebs", "mitochondria"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Largest gland in human body is:",
+      "options": ["Pancreas", "Liver", "Thyroid", "Adrenal"],
+      "correct_answer": "B",
+      "chapter": "Human Anatomy",
+      "topic_tags": ["liver", "glands"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Insulin is secreted by:",
+      "options": ["Alpha cells", "Beta cells of pancreas", "Liver cells", "Kidney cells"],
+      "correct_answer": "B",
+      "chapter": "Endocrine System",
+      "topic_tags": ["insulin", "pancreas"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Hardy-Weinberg principle relates to:",
+      "options": ["Cell division", "Genetic equilibrium in population", "Photosynthesis", "Respiration"],
+      "correct_answer": "B",
+      "chapter": "Evolution",
+      "topic_tags": ["Hardy_Weinberg", "population_genetics"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Most abundant protein in human body is:",
+      "options": ["Hemoglobin", "Collagen", "Albumin", "Insulin"],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": ["collagen", "proteins"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Process by which plants make food is:",
+      "options": ["Respiration", "Photosynthesis", "Transpiration", "Excretion"],
+      "correct_answer": "B",
+      "chapter": "Plant Physiology",
+      "topic_tags": ["photosynthesis"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Chlorophyll is found in:",
+      "options": ["Mitochondria", "Chloroplast", "Nucleus", "Ribosome"],
+      "correct_answer": "B",
+      "chapter": "Plant Physiology",
+      "topic_tags": ["chlorophyll", "chloroplast"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Universal blood donor group is:",
+      "options": ["A+", "B+", "O-", "AB+"],
+      "correct_answer": "C",
+      "chapter": "Body Fluids and Circulation",
+      "topic_tags": ["blood_groups", "donor"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Pacemaker of heart is:",
+      "options": ["SA node", "AV node", "Bundle of His", "Purkinje fibers"],
+      "correct_answer": "A",
+      "chapter": "Circulation",
+      "topic_tags": ["SA_node", "pacemaker"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Functional unit of kidney is:",
+      "options": ["Neuron", "Nephron", "Hepatocyte", "Alveolus"],
+      "correct_answer": "B",
+      "chapter": "Excretory System",
+      "topic_tags": ["nephron", "kidney"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Photolysis of water occurs in:",
+      "options": ["Mitochondria", "PS-II (chloroplast)", "Stroma", "Cytoplasm"],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": ["photolysis", "PS_II"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Gibberellins are involved in:",
+      "options": ["Cell wall formation", "Stem elongation and seed germination", "Photosynthesis", "Respiration"],
+      "correct_answer": "B",
+      "chapter": "Plant Growth",
+      "topic_tags": ["hormones", "gibberellin"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of valves in human heart is:",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "C",
+      "chapter": "Circulation",
+      "topic_tags": ["heart", "valves"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Site of fertilization in human female is:",
+      "options": ["Ovary", "Uterus", "Fallopian tube", "Cervix"],
+      "correct_answer": "C",
+      "chapter": "Reproduction",
+      "topic_tags": ["fertilization", "fallopian"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "DNA polymerase requires:",
+      "options": ["RNA primer", "DNA primer", "No primer", "Both A and B"],
+      "correct_answer": "A",
+      "chapter": "Molecular Biology",
+      "topic_tags": ["DNA_polymerase", "primer"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Sex of human child is determined by:",
+      "options": ["Mother's chromosomes", "Father's sperm chromosome", "Both equally", "Random"],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": ["sex_determination"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Vector for transmitting malaria is:",
+      "options": ["Female Aedes mosquito", "Female Anopheles mosquito", "Male Culex", "Tsetse fly"],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": ["malaria", "Anopheles"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Test tube baby technique is called:",
+      "options": ["GIFT", "IVF", "ICSI", "ZIFT"],
+      "correct_answer": "B",
+      "chapter": "Reproductive Health",
+      "topic_tags": ["IVF", "ART"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Bryophytes are also called:",
+      "options": ["Amphibians of plants", "Vascular plants", "Seed plants", "Flowering plants"],
+      "correct_answer": "A",
+      "chapter": "Plant Diversity",
+      "topic_tags": ["bryophyte", "amphibians_of_plants"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Apomixis in plants is:",
+      "options": ["Sexual reproduction", "Asexual reproduction producing seeds without fertilization", "Vegetative propagation", "Parthenocarpy"],
+      "correct_answer": "B",
+      "chapter": "Reproduction in Plants",
+      "topic_tags": ["apomixis"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Term 'Ecosystem' was coined by:",
+      "options": ["Darwin", "Tansley", "Odum", "Linnaeus"],
+      "correct_answer": "B",
+      "chapter": "Ecology",
+      "topic_tags": ["ecosystem", "Tansley"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Tropical rainforests show:",
+      "options": ["Low biodiversity", "High biodiversity", "No diversity", "Only animals"],
+      "correct_answer": "B",
+      "chapter": "Biodiversity",
+      "topic_tags": ["biodiversity", "rainforest"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

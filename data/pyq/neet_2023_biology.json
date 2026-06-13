@@ -1,0 +1,235 @@
+{
+  "source": "neet_2023_biology",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "biology",
+  "default_year": 2023,
+  "default_paper": "ug",
+  "questions": [
+    {
+      "question_text": "The number of ATP molecules produced by complete oxidation of one glucose molecule is approximately:",
+      "options": ["30-32", "36-38", "24-26", "40-42"],
+      "correct_answer": "A",
+      "chapter": "Respiration in Plants",
+      "topic_tags": ["cellular_respiration", "ATP_yield"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is the powerhouse of the cell?",
+      "options": ["Ribosome", "Mitochondria", "Golgi apparatus", "Endoplasmic reticulum"],
+      "correct_answer": "B",
+      "chapter": "Cell - The Unit of Life",
+      "topic_tags": ["organelles", "energy"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "In humans, which chromosome carries the gene for haemophilia?",
+      "options": ["Autosome 7", "Y chromosome", "X chromosome", "Chromosome 21"],
+      "correct_answer": "C",
+      "chapter": "Principles of Inheritance and Variation",
+      "topic_tags": ["sex_linked", "genetic_disorders"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which hormone is responsible for lowering blood glucose levels?",
+      "options": ["Glucagon", "Adrenaline", "Insulin", "Thyroxine"],
+      "correct_answer": "C",
+      "chapter": "Chemical Coordination and Integration",
+      "topic_tags": ["pancreas", "endocrine"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The Calvin cycle takes place in which part of the chloroplast?",
+      "options": ["Thylakoid lumen", "Stroma", "Grana", "Outer membrane"],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis in Higher Plants",
+      "topic_tags": ["dark_reaction", "chloroplast"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is NOT a function of the liver?",
+      "options": ["Bile production", "Glycogen storage", "Insulin secretion", "Detoxification"],
+      "correct_answer": "C",
+      "chapter": "Digestion and Absorption",
+      "topic_tags": ["liver", "function"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The functional unit of kidney is:",
+      "options": ["Neuron", "Nephron", "Hepatocyte", "Glomerulus"],
+      "correct_answer": "B",
+      "chapter": "Excretory Products and their Elimination",
+      "topic_tags": ["kidney", "anatomy"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Mendel's law of independent assortment is based on:",
+      "options": ["Monohybrid cross", "Dihybrid cross", "Test cross", "Back cross"],
+      "correct_answer": "B",
+      "chapter": "Principles of Inheritance and Variation",
+      "topic_tags": ["mendel", "dihybrid"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which biomolecule is the major component of cell membrane?",
+      "options": ["Carbohydrate", "Phospholipid", "Protein", "Nucleic acid"],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": ["membrane", "lipids"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The site of protein synthesis in a cell is:",
+      "options": ["Mitochondria", "Ribosome", "Nucleus", "Lysosome"],
+      "correct_answer": "B",
+      "chapter": "Cell - The Unit of Life",
+      "topic_tags": ["ribosome", "translation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is a viral disease?",
+      "options": ["Cholera", "Typhoid", "Influenza", "Tuberculosis"],
+      "correct_answer": "C",
+      "chapter": "Human Health and Disease",
+      "topic_tags": ["viral_diseases", "pathogens"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Auxin is primarily produced in which part of the plant?",
+      "options": ["Root tip", "Mature leaves", "Apical meristem", "Xylem"],
+      "correct_answer": "C",
+      "chapter": "Plant Growth and Development",
+      "topic_tags": ["hormones", "auxin"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The respiratory pigment in human blood is:",
+      "options": ["Chlorophyll", "Haemoglobin", "Melanin", "Myoglobin"],
+      "correct_answer": "B",
+      "chapter": "Breathing and Exchange of Gases",
+      "topic_tags": ["respiratory_pigments", "RBC"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which gland is known as the master gland of the body?",
+      "options": ["Thyroid", "Pituitary", "Adrenal", "Pancreas"],
+      "correct_answer": "B",
+      "chapter": "Chemical Coordination and Integration",
+      "topic_tags": ["pituitary", "endocrine"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Which type of nutrition is found in fungi?",
+      "options": ["Autotrophic", "Saprotrophic", "Photosynthetic", "Chemosynthetic"],
+      "correct_answer": "B",
+      "chapter": "Biological Classification",
+      "topic_tags": ["fungi", "nutrition"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The genetic material of HIV is:",
+      "options": ["DNA", "RNA", "Both DNA and RNA", "Protein"],
+      "correct_answer": "B",
+      "chapter": "Human Health and Disease",
+      "topic_tags": ["HIV", "retrovirus"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The phenomenon by which water moves from a region of higher water concentration to lower is called:",
+      "options": ["Diffusion", "Osmosis", "Active transport", "Plasmolysis"],
+      "correct_answer": "B",
+      "chapter": "Transport in Plants",
+      "topic_tags": ["osmosis", "water_movement"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Restriction enzymes are produced by:",
+      "options": ["Eukaryotes", "Bacteria", "Plants", "Fungi"],
+      "correct_answer": "B",
+      "chapter": "Biotechnology: Principles and Processes",
+      "topic_tags": ["restriction_enzymes", "molecular_biology"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is a non-renewable resource?",
+      "options": ["Solar energy", "Wind energy", "Coal", "Biomass"],
+      "correct_answer": "C",
+      "chapter": "Environmental Issues",
+      "topic_tags": ["resources", "fossil_fuels"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Cells that secrete insulin in pancreas are:",
+      "options": ["Alpha cells", "Beta cells", "Delta cells", "Gamma cells"],
+      "correct_answer": "B",
+      "chapter": "Chemical Coordination and Integration",
+      "topic_tags": ["pancreas", "beta_cells", "islets"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which is the longest cell in the human body?",
+      "options": ["RBC", "Neuron", "Muscle cell", "Epithelial cell"],
+      "correct_answer": "B",
+      "chapter": "Neural Control and Coordination",
+      "topic_tags": ["neuron", "cell_size"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The basic unit of classification is:",
+      "options": ["Genus", "Species", "Family", "Order"],
+      "correct_answer": "B",
+      "chapter": "The Living World",
+      "topic_tags": ["taxonomy", "classification"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Photosynthesis in C4 plants is more efficient because:",
+      "options": ["They have more chlorophyll", "Lower photorespiration", "Larger leaves", "More stomata"],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis in Higher Plants",
+      "topic_tags": ["C4_pathway", "photorespiration"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Which of the following is the powerhouse of pollination by wind?",
+      "options": ["Heavy pollen", "Colourful flowers", "Light dry pollen", "Scented flowers"],
+      "correct_answer": "C",
+      "chapter": "Sexual Reproduction in Flowering Plants",
+      "topic_tags": ["anemophily", "pollination"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Hardy-Weinberg principle applies to:",
+      "options": ["A small population", "An isolated population", "A large random-mating population in equilibrium", "Only sexually reproducing species"],
+      "correct_answer": "C",
+      "chapter": "Evolution",
+      "topic_tags": ["population_genetics", "equilibrium"],
+      "difficulty": "medium",
+      "marks": 4
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class11_2024_physics_sample",
+  "default_board": "cbse",
+  "default_grade": 11,
+  "default_subject": "physics",
+  "default_year": 2024,
+  "default_paper": "sample_qp",
+  "questions": [
+    {
+      "question_text": "SI unit of luminous intensity is:",
+      "options": ["lumen", "candela", "lux", "watt"],
+      "correct_answer": "B",
+      "chapter": "Physical World and Measurement",
+      "topic_tags": ["units", "candela"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Dimensions of velocity are:",
+      "options": ["[LT]", "[LT⁻¹]", "[L²T⁻²]", "[MLT⁻¹]"],
+      "correct_answer": "B",
+      "chapter": "Physical World and Measurement",
+      "topic_tags": ["dimensions"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "A car moves with constant velocity. Net force on it is:",
+      "options": ["Zero", "Equal to weight", "Equal to thrust", "Cannot say"],
+      "correct_answer": "A",
+      "chapter": "Laws of Motion",
+      "topic_tags": ["Newton's_first_law"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Maximum height reached by a projectile launched at 45° with speed u (g=g):",
+      "options": ["u²/g", "u²/(2g)", "u²/(4g)", "2u²/g"],
+      "correct_answer": "C",
+      "chapter": "Motion in a Plane",
+      "topic_tags": ["projectile"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Centripetal force on a body in circular motion is directed:",
+      "options": ["Outward", "Toward centre", "Tangentially", "Vertically"],
+      "correct_answer": "B",
+      "chapter": "Motion in a Plane",
+      "topic_tags": ["centripetal"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Work done by a force perpendicular to displacement is:",
+      "options": ["Maximum", "Zero", "Negative", "Cannot say"],
+      "correct_answer": "B",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": ["work_done"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Moment of inertia depends on:",
+      "options": ["Mass only", "Mass and axis of rotation", "Velocity", "Force"],
+      "correct_answer": "B",
+      "chapter": "System of Particles and Rotational Motion",
+      "topic_tags": ["moment_of_inertia"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Universal gravitational constant G has units:",
+      "options": ["N·m²/kg²", "N·m/kg", "N/kg", "N·kg/m²"],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": ["G", "units"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Escape velocity from Earth is approximately:",
+      "options": ["7.9 km/s", "11.2 km/s", "100 km/s", "1000 km/s"],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": ["escape_velocity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bulk modulus measures resistance to:",
+      "options": ["Length change", "Volume change", "Shape change", "Angle change"],
+      "correct_answer": "B",
+      "chapter": "Mechanical Properties of Solids",
+      "topic_tags": ["bulk_modulus"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bernoulli's equation applies to:",
+      "options": ["All fluids", "Streamlined incompressible fluids", "Compressible flow only", "Solids"],
+      "correct_answer": "B",
+      "chapter": "Mechanical Properties of Fluids",
+      "topic_tags": ["Bernoulli"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "First law of thermodynamics: ΔU = ?",
+      "options": ["Q - W", "Q + W", "W - Q", "Q × W"],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["first_law"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Efficiency of a Carnot engine depends on:",
+      "options": ["Working substance", "Temperatures of source and sink", "Volume only", "Pressure only"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["Carnot"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "RMS speed of gas molecules depends on:",
+      "options": ["Mass only", "Temperature only", "Both mass and temperature", "Pressure only"],
+      "correct_answer": "C",
+      "chapter": "Kinetic Theory",
+      "topic_tags": ["RMS_speed"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "For SHM, time period of simple pendulum depends on:",
+      "options": ["Mass", "Amplitude", "Length and g", "Material"],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": ["pendulum"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Frequency of fundamental note in a stretched string of length L (v=speed of wave):",
+      "options": ["v/2L", "v/L", "v/(4L)", "2v/L"],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": ["fundamental_frequency"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Coefficient of friction is:",
+      "options": ["Has units of N", "Has units of kg", "Dimensionless", "Has units of m/s"],
+      "correct_answer": "C",
+      "chapter": "Laws of Motion",
+      "topic_tags": ["friction"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Kinetic energy of a body depends on:",
+      "options": ["Only mass", "Only velocity", "Both mass and velocity", "Position"],
+      "correct_answer": "C",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": ["KE"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Doppler effect causes change in:",
+      "options": ["Amplitude", "Frequency", "Speed", "Wavelength only"],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": ["Doppler"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Magnitude of vector A = 3i + 4j is:",
+      "options": ["3", "4", "5", "7"],
+      "correct_answer": "C",
+      "chapter": "Motion in a Plane",
+      "topic_tags": ["vector_magnitude"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Centre of gravity of a uniform circular disc is at:",
+      "options": ["Periphery", "Centre", "Top", "Bottom"],
+      "correct_answer": "B",
+      "chapter": "System of Particles and Rotational Motion",
+      "topic_tags": ["centre_of_gravity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Reynold's number determines:",
+      "options": ["Pressure", "Viscosity", "Type of flow (laminar/turbulent)", "Density"],
+      "correct_answer": "C",
+      "chapter": "Mechanical Properties of Fluids",
+      "topic_tags": ["Reynold"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "For adiabatic process, ΔQ equals:",
+      "options": ["W", "ΔU", "0", "Cannot say"],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["adiabatic"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of degrees of freedom for a diatomic gas at moderate temperature:",
+      "options": ["3", "5", "7", "9"],
+      "correct_answer": "B",
+      "chapter": "Kinetic Theory",
+      "topic_tags": ["degrees_of_freedom"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Phase difference between displacement and acceleration in SHM is:",
+      "options": ["0", "π/2", "π", "2π"],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": ["SHM_phase"],
+      "difficulty": "medium",
+      "marks": 1
+    }
+  ]
+}

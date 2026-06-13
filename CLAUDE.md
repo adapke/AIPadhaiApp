@@ -678,6 +678,410 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-141..146 — SPA wiring + hand-curated content seed.**
+  CK-12 patterns from prod-135..140 were API-only at ship; this
+  sprint surfaces them as actual user-visible pages and seeds the
+  Real-World Examples catalog so `/concept/{slug}` SEO pages have
+  real content from day 1.
+
+  - **prod-141** — `/mastery` page in `padhai/routers/mastery_page.py`.
+    Server-rendered color-coded grid of the student's mastery (green
+    ≥0.7 + fresh / yellow ≥0.4 or stale / red <0.4 or decayed /
+    untouched). Subject-filter chips. Defaults to CBSE Class 10
+    when no enrollment exists. Anonymous → friendly sign-in landing
+    (no 401 ugly response).
+
+  - **prod-142..145** — Four small server-rendered pages in
+    `padhai/routers/ck12_ui_pages.py` (one router slice covering
+    the related views):
+    - `/tutor-modes` — 6 colored chips for the prod-136 modes,
+      with bilingual labels. JS opens a tutor session + POSTs the
+      test message with `mode=<key>`.
+    - `/memory-boost` — daily 3-question pack with streak card.
+      Each question shows the bucket (critical / warmup / fresh),
+      subject, chapter, options. ✓/✗ buttons POST to the
+      /answer endpoint + show the updated streak.
+    - `/teacher/class/{class_id}/heat-map` — students × topics
+      grid with color-coded mastery cells (% per cell). Reuses
+      the prod-140 endpoint internally. Graceful 503 when org
+      tables aren't migrated yet (instead of 500).
+    - `/admin/examples-queue` — curator inbox showing pending
+      `concept_examples` with ✓/✗ inline approve/reject buttons.
+      Admin-gated via `require_admin_role`.
+
+  - **prod-146** — `scripts/seed_real_world_examples.py` inserts
+    **15 hand-written India-rooted examples** directly as
+    `approved` across 11 concepts (Newton's First Law, Photosynthesis,
+    Gravity, Acids & Bases, Ohm's Law, Pythagoras, Light Reflection,
+    Work-Energy-Power, Cell Structure, Real Numbers, Quadratic
+    Equations, Simple Interest). Each example is 300-900 chars,
+    references at least one Indian-context token (Mumbai locals,
+    kabaddi, monsoon, kirana shops, mid-day meal, autorickshaw,
+    ₹, NCERT). Western-context tokens (baseball, Thanksgiving,
+    freeway) are explicitly tested-against to defend the contract.
+    Idempotent — re-running skips duplicates by body match.
+    **No Claude budget burnt** — pre-written human content.
+
+  Tests: 24 new across 3 files (`test_mastery_page.py` ×5,
+  `test_ck12_ui_pages.py` ×9, `test_seed_real_world_examples.py` ×6).
+  Coverage: anonymous landing pages render, authed pages return
+  expected content, error pages degrade gracefully (no 500s),
+  Indian-context tokens enforced.
+
+  Total endpoints: 781 → 786 (+5 server-rendered pages — `/mastery`,
+  `/tutor-modes`, `/memory-boost`, `/teacher/class/{cid}/heat-map`,
+  `/admin/examples-queue`).
+
+  Honest gaps:
+  - **Memory Boost daily push notifications** still not wired.
+    The cron + FCM fanout is the missing piece — the UI is ready
+    to consume but engagement-nudge automation is the lever.
+  - **15 hand-curated examples cover 11 concepts** — only a small
+    fraction of the ~70 concept_videos catalog. Curator could
+    write ~50 more in a day to fully cover the verified-tier
+    videos.
+  - **No mobile-shell deep links** into the new pages yet —
+    Capacitor shells still launch at `/?home=math`. A follow-up
+    sprint could add `aipathshala://memory-boost` and
+    `aipathshala://mastery` schemes.
+  - **/tutor-modes is a standalone demo**, not wired into the
+    existing /tutor SPA. The legacy SPA tutor surface needs a
+    separate refactor pass to host the chips inline.
+
+- **prod-140 — Class Heat Map (CK-12 Teacher Assistant pattern).**
+  New router `padhai/routers/class_heat_map.py` exposes two
+  teacher-only endpoints under the existing org role gate:
+  - `GET /api/orgs/{org_id}/classes/{class_id}/heat-map?board=CBSE&grade=10[&subject=Math]`
+    returns a students × topics matrix with mastery cells.
+    Each cell carries `{mastery, color_state, decay_state}`.
+    Class roll-up summary included.
+  - `GET /api/orgs/{org_id}/classes/{class_id}/heat-map/weak-topics`
+    returns top-N topics ranked by class weakness score
+    `(red*2 + yellow + untouched*0.5) / (n_students*2)` — the
+    "what should I re-teach tomorrow?" feed.
+
+  Auth: caller must be a member of `org_id` with role `admin` or
+  `teacher`. Reuses prod-135 mastery aggregator + existing
+  `orgs.list_members()`. **No new tables.** Pure read-side join.
+
+  Tests: `tests/test_class_heat_map.py` (6 tests) — anonymous
+  rejection, router registration, teacher happy-path with seeded
+  class roster, unknown class → 404, empty class returns empty
+  matrix, weak-topics endpoint auth-gated.
+
+  Honest gaps:
+  - **N+1 reads** — the aggregator runs once per student in the
+    class. For a 60-student class, ~60 SQLite reads (~50ms total
+    locally; would scale to ~200ms on Postgres). Caching the
+    per-student mastery vector keyed on (user_id, board, grade,
+    digest_of_recent_attempts) is a follow-up if the latency
+    becomes user-visible.
+  - **No SPA render yet** — the API is live; the teacher
+    Capacitor shell still needs the colored-grid component.
+  - **Class summary double-counts** topics that exist for
+    multiple students — that's the desired behaviour for
+    intensity scaling, but if/when we add a "total unique topics"
+    field, it should be derived from the topics axis length.
+
+- **prod-139 — Memory Boost Daily Drill (CK-12 SM-2-daily-3 pattern).**
+  New `padhai/memory_boost.py` module + router. Daily 3-item pack
+  surfaces:
+  - **critical** — a topic in the user's red/yellow zone
+  - **warmup** — a green topic (freshness check)
+  - **fresh** — an untouched topic (new material)
+
+  Sources: PYQs from `question_bank` filtered by board+grade,
+  ranked against the prod-135 mastery map. New tables:
+  `memory_boost_picks` (one row per pick, indexed by user_id +
+  pack_date for idempotent same-day re-fetch), `memory_boost_answers`
+  (responses), `memory_boost_streaks` (current/longest/last_active).
+
+  Endpoints (all auth-required):
+  - `GET /api/me/memory-boost?board=CBSE&grade=10` — today's pack
+    (idempotent — same picks if called twice same day)
+  - `POST /api/me/memory-boost/answer` — record response + bump streak
+  - `GET /api/me/memory-boost/streak` — read-only streak feed
+
+  Streak logic: same-day re-answer doesn't double-bump. Gap of 1
+  day = streak continues. Gap of >1 day = streak resets to 1.
+  IST timezone for daily reset (UTC+05:30).
+
+  Tests: `tests/test_memory_boost.py` (13 tests) — pack creation,
+  same-day idempotency, record_answer permission gate (can't
+  answer someone else's pick), unknown pick_id → ValueError,
+  no double-bump same day, new-user zero streak, hydrate_picks
+  inflates question text, all 3 HTTP endpoints auth-gated, router
+  registered, migrate() idempotent.
+
+  Honest gaps:
+  - **No flashcard / essay source** yet — only PYQs. Adding
+    flashcards is a follow-up join.
+  - **Pack regenerates if all PYQs deleted** between fetch and
+    answer — not a real risk, but worth a guard for prod.
+  - **Streak reset doesn't fire push notifications.** Daily 7am
+    IST cron + FCM push to nudge users would be the engagement
+    lever; out of scope for this sprint.
+
+- **prod-138 — NCERT Standards-aligned Question Tagging (CK-12
+  standards correlation).** Add `ncert_code` column to
+  `question_bank` via idempotent `ALTER TABLE` migration. Code
+  format: `<BOARD>.<GRADE>.<SUBJECT>.<CHAPTER>[.LO<NUM>]` —
+  e.g. `CBSE.10.SCI.CH06`, `CBSE.10.SCI.CH06.LO03`.
+
+  New helpers in `padhai/question_bank.py`:
+  - `is_valid_ncert_code(code)` — regex validator
+  - `set_ncert_code(qid, code)` — persist with shape check
+  - `list_by_standard(prefix)` — prefix-match search
+  - `count_by_standard(prefix)`
+  - `ncert_coverage_stats()` — tagged/untagged/coverage_pct rollup
+  - `list_untagged(limit)` — batch tagger reads from here
+
+  New `padhai/ncert_tagger.py` — Claude Sonnet batch tagger.
+  System prompt covers all 16 boards + 5 entrance exams + 17
+  subject codes. Confidence threshold ('medium' or 'high'); 'low'
+  → skipped (returned as null, not guessed). Per-question cost
+  ~₹0.02-0.05; full 2500-PYQ tagging ~₹100.
+
+  Endpoints:
+  - `GET /api/questions/by-standard?code=CBSE.10.SCI` — public
+    prefix-filter
+  - `GET /api/admin/teacher-tools/ncert-coverage` — admin coverage
+    stats
+  - `POST /api/admin/teacher-tools/tag-questions` — admin batch
+    tagger
+
+  Tests: `tests/test_ncert_tagging.py` (12 tests) — validator
+  shapes, set+get roundtrip, invalid code rejection, prefix-match
+  semantics, stats arithmetic, list_untagged, HTTP public + admin
+  endpoints, router registered, ALTER TABLE idempotent across
+  reload.
+
+  Honest gaps:
+  - **Tagger not run on the existing 2500 PYQs yet** — that's an
+    ops task with a real ANTHROPIC_API_KEY (~₹100 spend); the
+    pipeline is ready.
+  - **No SPA filter chip** for "filter by chapter" — needs the
+    new-UI sprint to surface.
+  - **NCERT-code → curriculum_objectives join** isn't enforced
+    yet; tagger could output `CBSE.10.SCI.CH99` even if Class 10
+    Science only has 16 chapters. A foreign-key-style validation
+    pass is a follow-up.
+
+- **prod-137 — Real-World Examples Catalog (CK-12 concept-page pattern).**
+  New `concept_examples` table + curator workflow:
+  - `padhai/concept_examples.py` — schema + CRUD (insert as
+    pending → curator approve/reject → published)
+  - `padhai/concept_examples_generator.py` — Claude Sonnet
+    generates 3 India-rooted examples per concept (Mumbai locals,
+    kabaddi, mid-day meal — Western contexts explicitly forbidden
+    in the system prompt)
+  - `padhai/routers/concept_examples_routes.py` — admin: generate
+    + queue + approve + reject; public: list approved
+
+  Wired into **prod-134's `/concept/{slug}` SEO page** — approved
+  examples render as a "Real-world examples" section between the
+  video and the related-concept links. Falls back from
+  locale-specific to English when the locale-specific row isn't
+  approved yet. Includes `_md_to_safe_html` with bold/italic +
+  inline-image (with `rel=nofollow`) support.
+
+  Endpoints:
+  - `POST /api/admin/teacher-tools/generate-examples`
+  - `GET /api/admin/teacher-tools/examples-queue`
+  - `POST /api/admin/teacher-tools/examples/{id}/approve`
+  - `POST /api/admin/teacher-tools/examples/{id}/reject`
+  - `GET /api/concept-examples?slug=...&locale=en` (public)
+
+  Tests: `tests/test_concept_examples.py` (13 tests) — full CRUD
+  roundtrip, status workflow (pending → approved/rejected),
+  list_for_slug never leaks non-approved to public, stats rollup,
+  slug normalisation, HTTP admin gate, public list filtering,
+  router registered, and end-to-end `/concept/{slug}` SEO page
+  embeds the approved example markdown ("Mumbai local train"
+  appears in the response body).
+
+  Honest gaps:
+  - **Catalog is empty at ship time.** A curator needs to run the
+    generator on top-30 concepts and approve the best output. ~3
+    minutes of curator time per concept; ~90 min for 30 concepts.
+  - **No curator-UI page yet** — the queue is API-accessible but
+    teachers will want a list-view + 1-click approve/reject. Next
+    sprint.
+  - **No image generation** — students can embed images via
+    `![alt](url)` if they have a hosted URL, but the generator
+    won't produce DALL-E-style images. Out of scope.
+
+- **prod-136 — Tutor Mode Switcher (CK-12 Flexi pattern).**
+  CK-12's Flexi exposes 10-12 mode-as-product chips (quiz-me,
+  real-world-analogy, etc.) as system-prompt skins over the same
+  model. Pathshala ships **6 India-tuned modes** in new module
+  `padhai/tutor_modes.py`:
+
+  - `quick_explain` — 90-second board-exam recall, ≤120 words
+  - `jee_advanced_drill` — multi-step solutions with every line shown
+  - `neet_one_liner` — MCQ-style ✓/✗ elimination
+  - `cbse_board_answer` — 5-mark structured answer in marking format
+  - `desi_analogy` — cricket / kabaddi / Mumbai locals / Diwali / dosa
+    (Western analogies explicitly forbidden in the addendum)
+  - `rural_simple` — Class 6-8 vocab for first-gen learners, Hindi-mix
+    encouraged ('dhakka' instead of 'force')
+
+  Each mode has bilingual EN/HI labels + one-line description for
+  the SPA chip render. The system-prompt addendum is appended to
+  the base tutor prompt via `apply_mode()` — no model swap, no
+  rerun, ~free at runtime.
+
+  Wiring:
+  - `tutor.send_message(mode=...)` accepts the optional kwarg.
+    Threaded through `_claude_reply` so cap pre-flight + RAG
+    grounding still apply.
+  - `POST /api/tutor/sessions/{sid}/message` accepts `mode` Form
+    field (defaults to None — backward compat).
+  - **New** `GET /api/tutor/modes` — public catalog endpoint so
+    chips render before sign-in (returns the 6 modes + bilingual
+    labels + icons).
+
+  Tests: `tests/test_tutor_modes.py` (11 tests) — catalog
+  completeness, addendum non-triviality (≥100 chars each),
+  apply_mode contract (unknown / None / empty all pass through),
+  case-insensitive lookup, distinct prompt outputs across modes
+  (no two modes produce the same final system prompt), HTTP
+  catalog endpoint shape, `tutor.send_message` signature
+  inspection (mode kwarg present + default None), `desi_analogy`
+  prompt actually references Indian-context tokens (≥3 of
+  Mumbai/cricket/kabaddi/Diwali/monsoon/rupee/etc).
+
+  Honest gaps:
+  - **No SPA chip UI yet.** The catalog endpoint is live; the
+    student-facing chips that POST `mode=...` need to be added
+    to `/tutor` page in a follow-up sprint.
+  - **No per-session mode persistence.** Each turn passes mode
+    explicitly; if the SPA wants "sticky" mode across the session
+    it should remember user selection client-side. A future sprint
+    could persist on `tutor_sessions.preferred_mode`.
+  - **No A/B measurement.** We hypothesise these modes lift
+    engagement (NEET aspirants prefer one-liner, JEE prefers
+    drill) but have no telemetry comparing default-mode vs
+    mode-selected reply ratings. PostHog event "tutor.mode.selected"
+    would close that loop.
+
+- **prod-135 — Concept Mastery Map (CK-12 BrainFlex pattern).**
+  New `padhai/mastery_aggregate.py` is a pure read-side aggregator
+  that joins existing per-attempt rows (`user_topic_mastery`,
+  `essay_submissions`, `practice_tests`, `flashcard_reviews`)
+  against `curriculum_objectives` to return one row per curriculum
+  topic with `mastery: 0-1`, `decay_state: fresh|stale|decayed|untouched`,
+  `color_state: green|yellow|red|untouched`, and `source_attempts: {module: count}`
+  provenance. New endpoints `GET /api/me/mastery-map?board=CBSE&grade=10[&subject=Math]`
+  + `GET /api/me/mastery-map/summary` (cheap counts-only feed for
+  dashboard widgets).
+
+  Mastery formula: weighted average of cross-module signals
+  (flashcard SM-2 grades weighted 1.0, practice-test percentages
+  weighted 0.7 — subject-level only, essay scores weighted 0.5 —
+  rubric/exam fuzzy-matched). Time-decay: half-life of 14 days
+  starts after a 14-day "fresh window" — a topic at 0.85 mastery
+  untouched for 28 days drops to ~0.42. Color thresholds:
+  green ≥0.7 AND not-decayed, yellow ≥0.4, red below, untouched
+  when no signal at all.
+
+  No new tables. No new Claude calls. Robust to missing source
+  tables (graceful empty-result fallback). The foundation for
+  prod-139 (Memory Boost daily drill) + prod-140 (Class Heat Map).
+
+  Tests: `tests/test_mastery_map.py` (12 tests) covering aggregator
+  unit logic (untouched user, decayed mastery, subject filter,
+  normalisation, color thresholds, decay function half-life,
+  summarise rollup), HTTP contract (anonymous → 401, happy-path
+  shape, summary-only endpoint, router registration), and router
+  registry presence.
+
+  Honest gaps:
+  - **Untouched is currently the default state** for >95% of
+    Pathshala users because `user_topic_mastery` is only written
+    by the practice flow today. Wiring essay + mock + flashcard
+    flows to also `mastery.update()` is part of prod-136..139 —
+    they each handle a different signal source.
+  - **Topic-key fuzzy match isn't semantic** — `_normalise_topic_key`
+    collapses punctuation + case but doesn't handle synonyms
+    ("Acids and Bases" vs "Acids, Bases & Salts"). prod-138's
+    NCERT-code tagging gives us a canonical join key when it
+    lands; until then, ~10-15% of cross-module signals may
+    not match the curriculum chapter they belong to.
+  - **No SPA wiring yet.** The API is live; the dashboard widget
+    that consumes it is the next session.
+
+- **prod-131..134 — CK-12-inspired feature sprint.** Researched CK-12
+  Foundation's product (US-based K-12 EdTech with 200M+ users) and
+  identified 4 borrowable patterns. Implemented end-to-end:
+
+  - **prod-131 — AI-Resistant Assignment Generator.** New module
+    `padhai/ai_resistant_assignments.py` and admin endpoint `POST
+    /api/admin/teacher-tools/ai-resistant-assignment` that produces
+    homework Claude can't trivially solve, by leaning on 5 distinct
+    patterns: (1) student's own context (their kitchen, photo,
+    neighbourhood), (2) process-showing rubric (final-answer-only
+    forfeits credit), (3) hyper-local Indian framing (NCERT, ₹, km),
+    (4) multi-modal asks (hand-drawn diagram, audio, photograph),
+    (5) open-ended reflection ("Why do YOU think…"). Sonnet-backed
+    via `llm_call.call_claude` with `PADHAI_AI_RESIST_MODEL` env
+    override. Cost-cap aware (BudgetExceeded → 429 with /pricing
+    upgrade link).
+
+  - **prod-132 — Reading-Level Adjuster.** `POST /api/admin/teacher-
+    tools/adjust-reading-level` rewrites text for a target grade
+    (Class 1-12) with three style modes (simplify / translate / esl).
+    Hyper-local board terminology hint when supplied. Haiku-backed
+    for speed; max 8000 chars input (413 on oversize) so accidental
+    whole-document submissions don't burn budget.
+
+  - **prod-133 — Math-vision as mobile shell home screen.** Capacitor
+    student-shell now launches at `/?home=math` (set by
+    `mobile/scripts/configure-server.cjs`). `HOME_HTML` carries an
+    inline `<body>`-top redirect that bounces to `/math` (the
+    math-vision page from prod-28). CK-12-inspired "scan-and-solve"
+    mobile entry; preserves the dashboard at `/` for web. Per-role
+    env overrides: `CAPACITOR_HOME_PATH_STUDENT` / `_PARENT` /
+    `_TEACHER`. Doc: `mobile/MOBILE_HOME.md`.
+
+  - **prod-134 — Public `/concept/{slug}` SEO surface.** New router
+    `padhai/routers/concept_seo.py` serves server-rendered concept
+    pages with **Schema.org `VideoObject` JSON-LD** (Google video
+    carousel), **Open Graph** metadata (WhatsApp / Facebook rich
+    previews — major Indian sharing channel), **hreflang** for all
+    9 supported locales + x-default, **YouTube iframe embed**, plus
+    related-concept crawl links and a sign-up CTA. `GET /concept`
+    indexes the catalog. Public — search-engine crawlers and link
+    unfurlers can hit without auth. Falls back from `verified` →
+    `channel_seed` tier so any curated concept renders.
+
+  Total test growth: 262 → 295 (+33). New tests:
+  `tests/test_teacher_tools.py` (12), `tests/test_mobile_home.py`
+  (7), `tests/test_concept_seo.py` (10), plus 2 updated test files
+  (`test_endpoint_tier_map.py` re-baselined for the new
+  765-endpoint count, `cypress/e2e/15-mobile-shell.cy.js` extended
+  for the `/?home=math` redirect check). All ruff categories
+  continue to pass; model-id guard, router-registry guard, and
+  bench-structural (385/385) green.
+
+  Honest gaps:
+  - The teacher-tool endpoints are admin-gated by the prod-9
+    router-level injection — that's correct positioning for a
+    teacher-only feature, but the *org-admin* gate path needs the
+    school-portal UI to surface the buttons before this lands in
+    front of real teachers. The endpoint contract is solid; the
+    SPA wiring is the next sprint.
+  - prod-133 ships a JS redirect; the *first paint* on iOS WebView
+    still shows the home page for ~50ms before bouncing. A
+    server-side 302 specifically for the shell user-agent would
+    be tighter but adds back-end coupling. Will measure on real
+    devices once ops has a test phone.
+  - prod-134's `/concept` SEO surface helps but is only as good as
+    the curated catalogue (~70 concepts at time of writing). The
+    auto-curator from prod-42 + the channel_seed → verified queue
+    are the levers; a sustained content-curation sprint to push
+    past 200 verified concepts would 3× the SEO surface area.
+
 - **prod-3 — Hindi UI audit (single-focus sprint).** Measured the
   real i18n gap: 285 hardcoded English UI strings in `_INDEX_HTML`
   / `HOME_HTML` / `LANDING_HTML` versus 39 i18n keys = **2.5% UI

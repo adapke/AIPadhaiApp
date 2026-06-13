@@ -245,8 +245,10 @@ def build_schema(level: str) -> dict:
             "title": {"type": "string"},
             "scenes": {
                 "type": "array",
-                "minItems": scene_min,
-                "maxItems": scene_max,
+                # Anthropic structured output only allows minItems 0 or 1.
+                # Target count communicated via system prompt instead.
+                "minItems": 1,
+
                 "items": {
                     "type": "object",
                     "properties": {
@@ -254,24 +256,20 @@ def build_schema(level: str) -> dict:
                         "narration": {"type": "string"},
                         "bullets": {
                             "type": "array",
-                            "minItems": 2,
-                            "maxItems": 4,
+                            "minItems": 1,  # Anthropic constraint; ask for 2-4 in prompt
+
                             "items": {"type": "string"},
                         },
                         "diagram": {
+                            # Anthropic structured output rejects enums that
+                            # mix null with strings; keep the allow-list in
+                            # the description and validate downstream.
                             "type": ["string", "null"],
-                            "enum": [
-                                None,
-                                "solar_system",
-                                "photosynthesis",
-                                "water_cycle",
-                                "atom",
-                                "addition_dots",
-                            ],
                             "description": (
-                                "Optional diagram template name. Use only when "
-                                "the scene's content matches one of the supported "
-                                "templates; otherwise null."
+                                "Optional diagram template name. Must be one of: "
+                                "solar_system, photosynthesis, water_cycle, atom, "
+                                "addition_dots. Use null when the scene's content "
+                                "does not match a supported template."
                             ),
                         },
                     },
@@ -281,8 +279,9 @@ def build_schema(level: str) -> dict:
             },
             "quiz": {
                 "type": "array",
-                "minItems": quiz_min,
-                "maxItems": quiz_max,
+                # Anthropic structured output only allows minItems 0 or 1.
+                "minItems": 1,
+
                 "items": {
                     "type": "object",
                     "properties": {
@@ -470,7 +469,7 @@ def match_curriculum(
         "properties": {
             "matches": {
                 "type": "array",
-                "maxItems": 3,
+
                 "items": {
                     "type": "object",
                     "properties": {
@@ -598,8 +597,10 @@ def generate_learning_path(
             "total_weeks": {"type": "integer"},
             "weeks": {
                 "type": "array",
-                "minItems": weeks,
-                "maxItems": weeks,
+                # Anthropic structured output only allows minItems 0 or 1.
+                # Target count enforced via prompt instead.
+                "minItems": 1,
+
                 "items": {
                     "type": "object",
                     "properties": {
@@ -607,8 +608,8 @@ def generate_learning_path(
                         "theme": {"type": "string"},
                         "daily_tasks": {
                             "type": "array",
-                            "minItems": 4,
-                            "maxItems": 6,
+                            "minItems": 1,  # Anthropic constraint; ask for 4-6 in prompt
+
                             "items": {
                                 "type": "object",
                                 "properties": {
@@ -694,8 +695,9 @@ def generate_flashcards(
         "properties": {
             "cards": {
                 "type": "array",
-                "minItems": max(3, count - 2),
-                "maxItems": count + 2,
+                # Anthropic structured output only allows minItems 0 or 1.
+                "minItems": 1,
+
                 "items": {
                     "type": "object",
                     "properties": {
@@ -715,7 +717,7 @@ def generate_flashcards(
                             "type": "array",
                             "items": {"type": "string"},
                             "minItems": 1,
-                            "maxItems": 3,
+
                         },
                     },
                     "required": ["front", "back", "hint", "tags"],
@@ -829,12 +831,13 @@ def generate_explainer(
             "one_liner": {"type": "string"},
             "explanation": {"type": "string"},
             "key_points": {
-                "type": "array", "minItems": 3, "maxItems": 6,
+                # Anthropic constraint: minItems must be 0 or 1.
+                "type": "array", "minItems": 1,
                 "items": {"type": "string"},
             },
             "worked_example": {"type": "string"},
             "common_mistakes": {
-                "type": "array", "minItems": 0, "maxItems": 4,
+                "type": "array", "minItems": 0,
                 "items": {"type": "string"},
             },
             "analogy": {"type": "string"},

@@ -1,0 +1,235 @@
+{
+  "source": "jee_advanced_2023_chemistry",
+  "default_board": "jee",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2023,
+  "default_paper": "advanced",
+  "questions": [
+    {
+      "question_text": "Atomic radius decreases across a period because:",
+      "options": ["Effective nuclear charge increases", "Number of shells decreases", "Mass decreases", "Atomic number stays"],
+      "correct_answer": "A",
+      "chapter": "Periodic Properties",
+      "topic_tags": ["atomic_radius"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Most polar bond:",
+      "options": ["H-F", "H-Cl", "H-Br", "H-I"],
+      "correct_answer": "A",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["polarity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Henry's law deals with:",
+      "options": ["Solubility of gas in liquid", "Boiling point", "Vapor pressure of pure liquid", "Reaction rate"],
+      "correct_answer": "A",
+      "chapter": "Solutions",
+      "topic_tags": ["Henry_law"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Vapor pressure of solution containing non-volatile solute:",
+      "options": ["Higher than pure solvent", "Lower than pure solvent", "Equal", "Random"],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": ["Raoult"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "ΔS° (entropy) for spontaneous reaction at high T:",
+      "options": ["Always positive", "Always negative", "Can be either", "Zero"],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["entropy"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Hund's rule says:",
+      "options": ["Fill orbitals one electron each before pairing", "Always pair first", "Fill highest orbital first", "Random"],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["Hund"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Conjugate base of HCO3⁻:",
+      "options": ["H2CO3", "CO3²⁻", "CO2", "OH⁻"],
+      "correct_answer": "B",
+      "chapter": "Acid-Base",
+      "topic_tags": ["conjugate_base"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Most thermodynamically stable alkane isomer of C8H18:",
+      "options": ["n-octane", "iso-octane", "Most branched form (often 2,2,3,3-tetramethylbutane)", "All equal"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["isomer_stability"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Friedel-Crafts alkylation cannot use:",
+      "options": ["Primary alkyl halides", "Secondary halides", "Aryl halides", "Tertiary halides"],
+      "correct_answer": "C",
+      "chapter": "Aromatic Chemistry",
+      "topic_tags": ["Friedel_Crafts"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Williamson ether synthesis uses:",
+      "options": ["Alcohol + acid", "Alkoxide + alkyl halide", "Two alcohols", "Acid + base"],
+      "correct_answer": "B",
+      "chapter": "Ethers",
+      "topic_tags": ["Williamson"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Most common ore of aluminium:",
+      "options": ["Hematite", "Bauxite", "Galena", "Pyrolusite"],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": ["bauxite"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of ions produced by 1 mol AlCl3:",
+      "options": ["2", "3", "4", "6"],
+      "correct_answer": "C",
+      "chapter": "Solutions",
+      "topic_tags": ["van_t_Hoff"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Werner's coordination theory: primary valence:",
+      "options": ["Ionizable", "Non-ionizable", "Both", "Variable"],
+      "correct_answer": "A",
+      "chapter": "Coordination Compounds",
+      "topic_tags": ["Werner"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "EAN of [Fe(CN)6]³⁻ (Fe³⁺, Z=26):",
+      "options": ["35", "36", "37", "38"],
+      "correct_answer": "A",
+      "chapter": "Coordination Compounds",
+      "topic_tags": ["EAN"],
+      "difficulty": "hard",
+      "marks": 4
+    },
+    {
+      "question_text": "Common name of formaldehyde:",
+      "options": ["Methanal", "Methyl alcohol", "Methane", "Methanoic acid"],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": ["IUPAC"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Lewis structure of CH2O (formaldehyde):",
+      "options": ["C with 4 single bonds", "C double bond O, two C-H", "C triple bond O", "Linear C"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["Lewis_formaldehyde"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Acid strength: HOCl, HOBr, HOI",
+      "options": ["HOCl > HOBr > HOI", "Reverse", "Equal", "HOBr > HOI > HOCl"],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": ["acid_strength"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Hybridisation of S in SF6:",
+      "options": ["sp3", "sp3d", "sp3d2", "sp"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["SF6"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Reagent for SN2 reaction:",
+      "options": ["t-BuO⁻ in t-BuOH", "Strong nucleophile + polar aprotic solvent", "Acid", "Heat"],
+      "correct_answer": "B",
+      "chapter": "Haloalkanes",
+      "topic_tags": ["SN2"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Geometrical isomerism shown by:",
+      "options": ["1-butene", "2-butene", "Methane", "Ethane"],
+      "correct_answer": "B",
+      "chapter": "Stereochemistry",
+      "topic_tags": ["cis_trans"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Strongest base:",
+      "options": ["NH3", "OH⁻", "NH2⁻ (amide ion)", "F⁻"],
+      "correct_answer": "C",
+      "chapter": "Acid-Base",
+      "topic_tags": ["basicity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Most stable conformation of ethane:",
+      "options": ["Eclipsed", "Staggered", "Skew", "Cis"],
+      "correct_answer": "B",
+      "chapter": "Stereochemistry",
+      "topic_tags": ["conformation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Slope of Arrhenius plot (ln k vs 1/T):",
+      "options": ["+Ea/R", "-Ea/R", "Ea", "R"],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": ["Arrhenius"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Buffer of weak acid HA: max buffering at pH:",
+      "options": ["pKa - 1", "pKa", "pKa + 1", "pH = 7"],
+      "correct_answer": "B",
+      "chapter": "Equilibrium",
+      "topic_tags": ["buffer"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Empirical formula of glucose C6H12O6:",
+      "options": ["CHO", "CH2O", "C2H4O2", "C3H6O3"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["empirical"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

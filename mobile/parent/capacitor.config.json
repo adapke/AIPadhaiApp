@@ -3,9 +3,9 @@
   "appName": "AI Pathshala — Parent",
   "webDir": "../../padhai/static",
   "server": {
-    "url": "https://app.aipathshala.in/ui?mode=parent",
-    "cleartext": false,
-    "androidScheme": "https"
+    "url": "http://10.0.2.2:8000/ui?mode=parent",
+    "cleartext": true,
+    "androidScheme": "http"
   },
   "plugins": {
     "SplashScreen": {

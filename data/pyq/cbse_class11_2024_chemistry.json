@@ -1,0 +1,235 @@
+{
+  "source": "cbse_class11_2024_chemistry_sample",
+  "default_board": "cbse",
+  "default_grade": 11,
+  "default_subject": "chemistry",
+  "default_year": 2024,
+  "default_paper": "sample_qp",
+  "questions": [
+    {
+      "question_text": "Avogadro's number is:",
+      "options": ["6.022×10²³", "9.1×10⁻³¹", "1.66×10⁻²⁷", "3×10⁸"],
+      "correct_answer": "A",
+      "chapter": "Some Basic Concepts of Chemistry",
+      "topic_tags": ["Avogadro"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Most stable electronic configuration of carbon (Z=6) is:",
+      "options": ["1s² 2s² 2p²", "1s² 2s³ 2p¹", "1s² 2p⁴", "2s² 2p⁴"],
+      "correct_answer": "A",
+      "chapter": "Structure of Atom",
+      "topic_tags": ["configuration", "carbon"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "First periodic table was given by:",
+      "options": ["Dalton", "Bohr", "Mendeleev", "Newton"],
+      "correct_answer": "C",
+      "chapter": "Classification of Elements",
+      "topic_tags": ["Mendeleev"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Bond type in NaCl is:",
+      "options": ["Covalent", "Ionic", "Metallic", "Hydrogen"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["ionic"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Geometry of methane (CH4) is:",
+      "options": ["Trigonal", "Tetrahedral", "Linear", "Octahedral"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["VSEPR", "tetrahedral"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "At constant temperature, pressure of gas is inversely proportional to volume — this is:",
+      "options": ["Charles' law", "Boyle's law", "Avogadro's law", "Gay-Lussac's law"],
+      "correct_answer": "B",
+      "chapter": "States of Matter",
+      "topic_tags": ["Boyle"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Enthalpy change for exothermic reaction is:",
+      "options": ["Positive", "Negative", "Zero", "Infinite"],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["exothermic"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "pH of pure water at 25°C is:",
+      "options": ["0", "1", "7", "14"],
+      "correct_answer": "C",
+      "chapter": "Equilibrium",
+      "topic_tags": ["pH"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Oxidation state of Cl in HCl is:",
+      "options": ["+1", "-1", "0", "+7"],
+      "correct_answer": "B",
+      "chapter": "Redox Reactions",
+      "topic_tags": ["oxidation_state"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Hardest naturally-occurring substance is:",
+      "options": ["Iron", "Diamond", "Graphite", "Quartz"],
+      "correct_answer": "B",
+      "chapter": "The s-Block and p-Block",
+      "topic_tags": ["diamond"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Element with highest electronegativity is:",
+      "options": ["O", "F", "Cl", "N"],
+      "correct_answer": "B",
+      "chapter": "Classification of Elements",
+      "topic_tags": ["electronegativity"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of sigma bonds in propane (C3H8):",
+      "options": ["8", "9", "10", "11"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["sigma_bonds"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hund's rule deals with filling of:",
+      "options": ["Shells", "Subshells", "Orbitals of same energy", "Nucleus"],
+      "correct_answer": "C",
+      "chapter": "Structure of Atom",
+      "topic_tags": ["Hund"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Hybridisation of carbon in ethyne (C2H2) is:",
+      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "correct_answer": "A",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["sp_hybridisation"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Standard temperature and pressure (STP) is:",
+      "options": ["0°C and 1 atm", "25°C and 1 atm", "0°C and 760 atm", "100°C and 1 atm"],
+      "correct_answer": "A",
+      "chapter": "States of Matter",
+      "topic_tags": ["STP"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Molar volume of an ideal gas at STP is:",
+      "options": ["22.4 L", "11.2 L", "44.8 L", "1 L"],
+      "correct_answer": "A",
+      "chapter": "States of Matter",
+      "topic_tags": ["molar_volume"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Lewis structure of carbon dioxide (CO2) has how many lone pairs on O:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["Lewis", "CO2"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Common name of methanol is:",
+      "options": ["Methyl alcohol", "Wood spirit", "Both A and B", "Ethanol"],
+      "correct_answer": "C",
+      "chapter": "Organic Chemistry Basics",
+      "topic_tags": ["methanol"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Order of nucleophilic strength: F⁻, Cl⁻, Br⁻, I⁻ (in polar protic solvent) is:",
+      "options": ["F > Cl > Br > I", "I > Br > Cl > F", "Cl > F > Br > I", "All equal"],
+      "correct_answer": "B",
+      "chapter": "Organic Chemistry Basics",
+      "topic_tags": ["nucleophile"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Empirical formula of glucose (C6H12O6) is:",
+      "options": ["CH2O", "C2H4O2", "C3H6O3", "CHO"],
+      "correct_answer": "A",
+      "chapter": "Some Basic Concepts of Chemistry",
+      "topic_tags": ["empirical_formula"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Calcium (Z=20) has electronic configuration ending in:",
+      "options": ["3p⁶", "4s²", "3d²", "4p²"],
+      "correct_answer": "B",
+      "chapter": "Structure of Atom",
+      "topic_tags": ["calcium"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Number of moles in 56 g of N2:",
+      "options": ["1", "2", "0.5", "4"],
+      "correct_answer": "B",
+      "chapter": "Some Basic Concepts of Chemistry",
+      "topic_tags": ["moles"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Reaction with rate constant in mol/L·s is:",
+      "options": ["Zero order", "First order", "Second order", "Third order"],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": ["rate_constant"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Compound with maximum acidic strength among HCl, H2O, NH3, CH4 is:",
+      "options": ["HCl", "H2O", "NH3", "CH4"],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": ["acid_strength"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Maximum number of electrons in p subshell is:",
+      "options": ["2", "6", "10", "14"],
+      "correct_answer": "B",
+      "chapter": "Structure of Atom",
+      "topic_tags": ["subshell"],
+      "difficulty": "easy",
+      "marks": 1
+    }
+  ]
+}

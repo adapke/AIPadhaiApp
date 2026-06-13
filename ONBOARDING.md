@@ -111,6 +111,38 @@ Plus the older slices wired before the polish-N sprints: `catalog`,
 | `make verify` | One-command pre-PR gate | Bundles lint + 2 guards + pytest + structural bench (~20s) |
 | `make security` | Pre-deploy gate | Codified SECURITY.md hardening checks |
 | `scripts/run_accuracy_bench.py` | Lesson-generation regression bench | 385 items across 9 boards/exams |
+| `scripts/curator_queue.py` | List pending concept-video curator tasks | Pairs with `/admin/concept-curator` UI |
+| `scripts/import_concept_videos.py` | Bulk-load concept videos from CSV | Idempotent via natural key |
+| `scripts/check_verified_iframes.py` | Nightly iframe-health check | HEADs embed URLs, optional auto-demote |
+| `scripts/print_curator_stats.py` | Stats JSON to stdout | Shell-scriptable, `make stats` wraps |
+| `scripts/nightly_ops.sh` | Cron entrypoint: backup + iframe-check + stats | `make nightly-ops` wraps it |
+
+### Make targets — three flavors
+
+`make help` groups them. Three things to remember:
+
+| Target | When to run |
+|---|---|
+| `make verify` | Before every PR — quick (~20s on warm cache) |
+| `make all-verify` | Before a release — adds `audit` + `coverage` on top of `verify` |
+| `make nightly-ops` | From cron in production — backup + iframe-health + stats |
+
+The full `make help` lists everything else (Docker compose, e2e
+harness, lint variants, security/coverage/i18n audits, ops scripts).
+
+### Admin pages (curator + ops)
+
+Three server-rendered admin pages, all gated by `api_deps.make_admin_dep()`:
+
+| Path | Purpose |
+|---|---|
+| `/admin/concept-curator` | Verify channel_seed → verified concept videos. Iframe-block precheck warns on save. |
+| `/admin/curator-stats` | 7d/30d/90d/365d windows of throughput. Cross-links to curator page. |
+| `/admin/health` | System overview: `/healthz` + badge + curator stats. Cross-links to the dedicated pages. |
+
+The `/dashboard` profile header reveals an `Health · Curator · Stats`
+nav row when the same admin gate passes — so admins don't need to
+memorise URLs.
 
 ---
 

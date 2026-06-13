@@ -266,7 +266,12 @@ def analyze_via_claude(image_path: Path, *, content_kind: str = "image") -> dict
                 "description": "Class 1-12, College, NEET/JEE, General",
             },
             "detected_language": {"type": "string"},
-            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+            # Anthropic structured output rejects minimum/maximum on number
+            # types. Range communicated to model in description instead.
+            "confidence": {
+                "type": "number",
+                "description": "confidence score from 0.0 (no idea) to 1.0 (very confident)",
+            },
         },
         "required": [
             "detected_topic", "detected_subject", "detected_grade",

@@ -1,0 +1,235 @@
+{
+  "source": "neet_2025_physics",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "physics",
+  "default_year": 2025,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "A body of mass 2 kg moves with velocity 4 m/s. Its kinetic energy is:",
+      "options": ["8 J", "16 J", "32 J", "4 J"],
+      "correct_answer": "B",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": ["KE", "kinetic_energy"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Acceleration due to gravity at Earth's surface is approximately:",
+      "options": ["9.8 m/s²", "98 m/s²", "0.98 m/s²", "980 m/s²"],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": ["g", "gravity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Unit of magnetic flux is:",
+      "options": ["Tesla", "Weber", "Henry", "Gauss"],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Induction",
+      "topic_tags": ["units", "flux"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Refractive index of water is approximately:",
+      "options": ["1.0", "1.33", "1.5", "2.0"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["refractive_index", "water"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Power of a lens in dioptres for focal length 50 cm is:",
+      "options": ["0.5 D", "2 D", "1 D", "5 D"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["power_of_lens"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "First law of thermodynamics is conservation of:",
+      "options": ["Mass", "Momentum", "Energy", "Charge"],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["first_law", "conservation"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Sound is which type of wave?",
+      "options": ["Transverse", "Longitudinal", "Electromagnetic", "Standing only"],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": ["sound", "longitudinal"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Echo is produced due to:",
+      "options": ["Reflection of sound", "Refraction of sound", "Absorption", "Diffraction"],
+      "correct_answer": "A",
+      "chapter": "Sound",
+      "topic_tags": ["echo", "reflection"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Resistance of an ideal voltmeter is:",
+      "options": ["Zero", "Very low", "Infinite", "Equal to circuit"],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": ["voltmeter", "resistance"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The SI unit of electric potential is:",
+      "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
+      "correct_answer": "B",
+      "chapter": "Electrostatic Potential",
+      "topic_tags": ["units", "volt"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Time period of a pendulum depends on:",
+      "options": ["Mass", "Amplitude only", "Length and g", "Material"],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": ["pendulum", "period"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Bohr's quantization condition: angular momentum L equals:",
+      "options": ["nh", "nh/2π", "h/n", "h·n²"],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": ["Bohr", "quantization"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Photon has rest mass:",
+      "options": ["Equal to electron", "Zero", "Half of electron", "Twice of electron"],
+      "correct_answer": "B",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["photon", "rest_mass"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Drift velocity is directly proportional to:",
+      "options": ["Resistivity", "Electric field", "Length squared", "Area"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["drift_velocity"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "An emf source of 12 V with internal resistance 2 Ω is connected to 4 Ω. Current is:",
+      "options": ["1 A", "2 A", "3 A", "4 A"],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": ["internal_resistance"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of nodes in third harmonic of stationary wave in open pipe is:",
+      "options": ["2", "3", "4", "5"],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": ["stationary_waves", "harmonics"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Critical angle for total internal reflection in glass (n=1.5) is:",
+      "options": ["30°", "42°", "60°", "90°"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["TIR", "critical_angle"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Capacitance increases when dielectric is inserted because:",
+      "options": ["Charge decreases", "Voltage decreases at same charge", "Distance increases", "Area decreases"],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": ["dielectric", "capacitance"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Wein's displacement law: λ_max × T equals approximately:",
+      "options": ["2.9×10⁻³ m·K", "2.9 m·K", "5.67×10⁻⁸ W/m²K⁴", "1 m·K"],
+      "correct_answer": "A",
+      "chapter": "Heat Transfer",
+      "topic_tags": ["Wein", "blackbody"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "An object 5 cm tall is placed 30 cm from a concave mirror of focal length 15 cm. Image distance is:",
+      "options": ["-30 cm", "-15 cm", "+30 cm", "+10 cm"],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": ["mirror_formula"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Doppler effect is observed in:",
+      "options": ["Only sound", "Only light", "Both sound and light", "Neither"],
+      "correct_answer": "C",
+      "chapter": "Waves",
+      "topic_tags": ["Doppler"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "An electron in n=2 hydrogen orbital has energy:",
+      "options": ["-13.6 eV", "-3.4 eV", "-1.5 eV", "0 eV"],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": ["hydrogen", "energy_levels"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Specific heat capacity of water at 25°C is approximately:",
+      "options": ["1 cal/g·K", "2 cal/g·K", "0.5 cal/g·K", "10 cal/g·K"],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": ["specific_heat", "water"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Momentum p of a photon of energy E in vacuum is:",
+      "options": ["E/c", "Ec", "E·c²", "c/E"],
+      "correct_answer": "A",
+      "chapter": "Dual Nature of Matter",
+      "topic_tags": ["photon_momentum"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Image formed by a plane mirror is:",
+      "options": ["Real, inverted", "Virtual, erect, same size", "Virtual, magnified", "Real, magnified"],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": ["plane_mirror"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

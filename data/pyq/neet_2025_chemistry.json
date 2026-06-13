@@ -1,0 +1,235 @@
+{
+  "source": "neet_2025_chemistry",
+  "default_board": "neet",
+  "default_grade": 12,
+  "default_subject": "chemistry",
+  "default_year": 2025,
+  "default_paper": "main",
+  "questions": [
+    {
+      "question_text": "The number of moles in 22 g of CO2 is:",
+      "options": ["0.25", "0.5", "1", "2"],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": ["mole", "molar_mass"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Hybridisation of carbon in methane (CH4) is:",
+      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["hybridisation", "methane"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The IUPAC name of CH3-CH(OH)-CH3 is:",
+      "options": ["1-propanol", "2-propanol", "propan-1-ol", "propanone"],
+      "correct_answer": "B",
+      "chapter": "Organic Nomenclature",
+      "topic_tags": ["IUPAC", "alcohols"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "pH of 0.001 M HCl solution is:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "C",
+      "chapter": "Ionic Equilibrium",
+      "topic_tags": ["pH", "strong_acid"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Aldehydes give a positive test with:",
+      "options": ["Fehling's solution", "NaOH", "HCl", "KMnO4 cold dilute"],
+      "correct_answer": "A",
+      "chapter": "Aldehydes and Ketones",
+      "topic_tags": ["Fehlings", "aldehyde_test"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The oxidation state of Mn in KMnO4 is:",
+      "options": ["+5", "+6", "+7", "+4"],
+      "correct_answer": "C",
+      "chapter": "Redox",
+      "topic_tags": ["oxidation_state", "permanganate"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Equilibrium constant Kc depends on:",
+      "options": ["Concentration", "Pressure", "Temperature", "Volume"],
+      "correct_answer": "C",
+      "chapter": "Chemical Equilibrium",
+      "topic_tags": ["Kc", "temperature_dependence"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of unpaired electrons in Fe3+ (Z=26) is:",
+      "options": ["3", "4", "5", "6"],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": ["d_electrons", "spin"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Benzene undergoes which reaction more readily?",
+      "options": ["Addition", "Substitution", "Polymerisation", "Combustion"],
+      "correct_answer": "B",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["aromatic", "substitution"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Markovnikov's rule applies to:",
+      "options": ["Symmetrical alkenes", "Unsymmetrical alkenes", "Alkanes", "Aromatics"],
+      "correct_answer": "B",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["Markovnikov", "addition"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Catalyst used in Haber's process for ammonia synthesis is:",
+      "options": ["Fe", "Pt", "Ni", "V2O5"],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": ["Haber_process", "catalyst"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Among CH3F, CH3Cl, CH3Br, CH3I, the most reactive in SN2 reaction is:",
+      "options": ["CH3F", "CH3Cl", "CH3Br", "CH3I"],
+      "correct_answer": "D",
+      "chapter": "Haloalkanes",
+      "topic_tags": ["SN2", "leaving_group"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The most acidic among the following is:",
+      "options": ["Ethanol", "Phenol", "Methanol", "Water"],
+      "correct_answer": "B",
+      "chapter": "Phenols",
+      "topic_tags": ["acidity", "phenol"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Avogadro's number value (per mole) is approximately:",
+      "options": ["6.022×10²³", "6.022×10²²", "6.022×10²⁴", "6.022×10²¹"],
+      "correct_answer": "A",
+      "chapter": "Mole Concept",
+      "topic_tags": ["Avogadro_number"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Reducing agent in the reaction Zn + CuSO4 -> ZnSO4 + Cu is:",
+      "options": ["Zn", "Cu", "CuSO4", "ZnSO4"],
+      "correct_answer": "A",
+      "chapter": "Redox",
+      "topic_tags": ["reducing_agent", "displacement"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Functional group of carboxylic acid is:",
+      "options": ["-OH", "-CHO", "-COOH", "-NH2"],
+      "correct_answer": "C",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": ["functional_group"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Saponification is the alkaline hydrolysis of:",
+      "options": ["Esters", "Ethers", "Alcohols", "Amines"],
+      "correct_answer": "A",
+      "chapter": "Esters",
+      "topic_tags": ["saponification", "ester"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Atomic number of element with electronic configuration [Ar]3d⁵4s¹ is:",
+      "options": ["24", "25", "26", "23"],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["configuration", "chromium"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "The strongest reducing agent among alkali metals is:",
+      "options": ["Li", "Na", "K", "Cs"],
+      "correct_answer": "A",
+      "chapter": "s-Block",
+      "topic_tags": ["reducing", "alkali_metals"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Number of pi bonds in benzene is:",
+      "options": ["1", "2", "3", "6"],
+      "correct_answer": "C",
+      "chapter": "Hydrocarbons",
+      "topic_tags": ["pi_bonds", "benzene"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "The geometry of SF6 molecule is:",
+      "options": ["Tetrahedral", "Trigonal bipyramidal", "Octahedral", "Square planar"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["VSEPR", "octahedral"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Among the following, the molecule with permanent dipole moment is:",
+      "options": ["CO2", "CCl4", "H2O", "BF3"],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": ["dipole_moment", "polarity"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Glucose on reduction with H2/Ni gives:",
+      "options": ["Sorbitol", "Gluconic acid", "Fructose", "Mannose"],
+      "correct_answer": "A",
+      "chapter": "Biomolecules",
+      "topic_tags": ["glucose", "reduction"],
+      "difficulty": "medium",
+      "marks": 4
+    },
+    {
+      "question_text": "Maximum number of electrons in an orbital is:",
+      "options": ["1", "2", "4", "8"],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": ["Pauli", "orbital"],
+      "difficulty": "easy",
+      "marks": 4
+    },
+    {
+      "question_text": "Common name of HCOOH is:",
+      "options": ["Acetic acid", "Formic acid", "Propionic acid", "Butyric acid"],
+      "correct_answer": "B",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": ["common_names"],
+      "difficulty": "easy",
+      "marks": 4
+    }
+  ]
+}

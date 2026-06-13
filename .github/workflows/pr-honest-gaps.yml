@@ -1,0 +1,87 @@
+# prod-114 — Enforce the "Honest gaps" section in PR bodies.
+#
+# The PR template (`.github/PULL_REQUEST_TEMPLATE.md`) asks contributors
+# to enumerate what they considered and deferred. This workflow makes
+# that section mandatory: the check fails if the body is missing
+# `## Honest gaps` OR the section is empty.
+#
+# Why: deferred work that goes unwritten becomes invisible technical
+# debt. Saying "nothing identified" out loud forces a moment of
+# reflection.
+
+name: PR — Honest gaps check
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  honest-gaps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR body for Honest gaps section
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = (context.payload.pull_request.body || '').trim();
+
+            // Dependabot / Renovate PRs are exempt — they're machine-generated
+            // and have no "considered and deferred" reflection.
+            const actor = context.payload.pull_request.user.login;
+            const exemptActors = [
+              'dependabot[bot]', 'dependabot',
+              'renovate[bot]', 'renovate',
+              'github-actions[bot]',
+            ];
+            if (exemptActors.includes(actor)) {
+              core.info(`PR by ${actor} is exempt (bot).`);
+              return;
+            }
+
+            // Body must contain the heading
+            const headingRe = /^## Honest gaps\s*$/m;
+            if (!headingRe.test(body)) {
+              core.setFailed(
+                'PR body is missing the `## Honest gaps` section. ' +
+                'Update your PR description to include it — even if the ' +
+                'content is "nothing identified". See ' +
+                '.github/PULL_REQUEST_TEMPLATE.md for the template.'
+              );
+              return;
+            }
+
+            // Extract the section content — everything from "## Honest gaps"
+            // until the next ## heading or end of body.
+            const sectionRe =
+              /## Honest gaps\s*\n([\s\S]*?)(?=^## |^---|\Z)/m;
+            const match = sectionRe.exec(body);
+            if (!match) {
+              core.setFailed(
+                'Found `## Honest gaps` heading but could not parse the ' +
+                'section body. Make sure the next section starts with ## ' +
+                'or a markdown separator (---).'
+              );
+              return;
+            }
+
+            // Strip HTML comments (the template ships with <!-- guidance -->)
+            // and check that something meaningful remains.
+            const sectionRaw = match[1];
+            const content = sectionRaw
+              .replace(/<!--[\s\S]*?-->/g, '')  // strip HTML comments
+              .replace(/^\s*$/gm, '')            // strip blank lines
+              .trim();
+
+            if (content.length < 5) {
+              core.setFailed(
+                'The `## Honest gaps` section is empty. Write at least one ' +
+                'sentence. If you genuinely identified nothing, write ' +
+                '"nothing identified" — that is an acceptable answer ' +
+                'but the moment of reflection is the point.'
+              );
+              return;
+            }
+
+            core.info(
+              `Honest gaps section OK (${content.length} chars of content).`
+            );

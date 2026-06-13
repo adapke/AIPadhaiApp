@@ -327,6 +327,16 @@ class JobRunner:
             result = self.worker_fn(job)
             self.store.update(job_id, status="succeeded", result=result)
         except Exception as e:
+            # Surface the full traceback to stderr so operators can
+            # diagnose why a job died — the stored `error` only carries
+            # str(e) for the client-facing payload.
+            import sys
+            import traceback
+            print(
+                f"[job {job_id}] worker_fn failed: {type(e).__name__}: {e}",
+                file=sys.stderr,
+            )
+            traceback.print_exc(file=sys.stderr)
             self.store.update(job_id, status="failed", error=str(e))
             return
         if self.post_succeed_hook is not None:

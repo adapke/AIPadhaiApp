@@ -559,6 +559,24 @@ Key v3 milestones shipped:
 
 ## Other documentation
 
+### Production-readiness walkthroughs (`docs/`)
+
+These are the docs a deployer follows in order:
+
+| File | Purpose |
+|---|---|
+| [`docs/DEPLOY.md`](docs/DEPLOY.md) | End-to-end deploy walkthrough — Render / Modal / Spot decision tree, DNS, SSL, first `APP_ENV=production` flip |
+| [`docs/RAZORPAY.md`](docs/RAZORPAY.md) | Razorpay test-mode signup → live-mode flip, full curl flow (order → verify → webhook), security |
+| [`docs/SMTP.md`](docs/SMTP.md) | 4 providers compared (SendGrid / SES / Postmark / Mailgun); env vars, test commands, outbox-table fallback |
+| [`docs/SENTRY.md`](docs/SENTRY.md) | DSN setup, integrations registered, before_send filter, test-fire route |
+| [`docs/POSTHOG.md`](docs/POSTHOG.md) | Event taxonomy (10 events wired), feature flags, GDPR/DPDP note |
+| [`docs/MONITORING.md`](docs/MONITORING.md) | Day-2 ops watchlist — daily 10-min checklist, Sentry alerts, PostHog dashboards |
+| [`docs/INCIDENT.md`](docs/INCIDENT.md) | On-fire playbook — 5xx burst, payment fraud, DPDP §11 request, AI cost overrun |
+| [`docs/incidents/`](docs/incidents/) | Post-mortem archive (`YYYY-MM-DD-<slug>.md`) |
+| `PRODUCTION_CHECKLIST.md` | Step-by-step pre-deploy gates with cross-refs to all of the above |
+
+### Other documentation
+
 | File | Purpose |
 |---|---|
 | `CHANGELOG.md` | Curated per-release history |
