@@ -36,6 +36,15 @@ import sys
 import time
 from pathlib import Path
 
+# Reconfigure stdout to UTF-8 on Windows so emoji-bearing push titles
+# (📚 🔥) don't crash the cron with a cp1252 codec error.
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
@@ -191,9 +200,10 @@ def run(
             )
 
             if dry_run:
+                # Use ASCII arrow — Windows cp1252 console can't render U+2192.
                 print(
                     f"[dry-run] {user_id}: {len(picks)} picks, "
-                    f"streak={streak.get('current_streak', 0)} → "
+                    f"streak={streak.get('current_streak', 0)} -> "
                     f"would send: {title!r}"
                 )
                 sent += 1
