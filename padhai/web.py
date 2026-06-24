@@ -175,6 +175,7 @@ from .auth import (
     hash_password,
     issue_token,
     make_current_user_dependency,
+    make_optional_user_dependency,
     resolve_provider_for_tier,
     verify_password,
 )
@@ -289,6 +290,12 @@ def _get_user_repo():
 
 
 current_user = make_current_user_dependency(_get_user_repo)
+# prod-160 — Optional variant that never raises on missing token, used
+# by server-rendered pages (/mastery, /memory-boost, /tutor-modes,
+# /admin/examples-queue, /teacher/.../heat-map) that have their own
+# friendly "sign in to continue" landings. Strict API endpoints still
+# use `current_user`.
+current_user_optional = make_optional_user_dependency(_get_user_repo)
 
 
 def _video_storage_key(image_bytes: bytes, language: str, level: str,
@@ -765,6 +772,96 @@ def _validate_admin_gate() -> None:
     )
 
 
+def _validate_launch_readiness() -> None:
+    """prod-172 — Boot-time check for the soft launch gates.
+
+    Unlike `_validate_provider_keys` (fail-fast on malformed values) +
+    `_validate_admin_gate` (fail-fast on privilege escalation), this
+    check WARNS instead of failing. The launch gates here are real
+    blockers operationally, but a missing SMTP host shouldn't crash
+    a service that's otherwise healthy — DPDP consent emails just
+    queue to the outbox instead.
+
+    Each gap printed at WARNING level so it surfaces in log aggregation
+    (Sentry breadcrumb / Render log shipping) without paging on-call.
+    Production deploys should run `make launch-check` to convert these
+    warnings into a hard pass/fail at deploy time.
+    """
+    is_prod = (os.environ.get("APP_ENV") or "").strip().lower() == "production"
+    if not is_prod:
+        # In dev these checks are noise — only emit in prod.
+        return
+
+    gaps: list[str] = []
+
+    # SMTP — without this, DPDP §9 parent-consent emails queue into
+    # parent_consent_outbox and require manual admin processing. Real
+    # blocker for under-18 student onboarding.
+    if not (os.environ.get("SMTP_HOST") or "").strip():
+        gaps.append(
+            "SMTP_HOST unset — parent-consent emails will stall in "
+            "parent_consent_outbox table. DPDP §9 compliance "
+            "depends on this. Set SMTP_HOST + SMTP_USER + SMTP_PASS."
+        )
+
+    # Razorpay — without keys, payment flow returns 503. Tier upgrades
+    # for paying customers won't work. Fine for free-tier-only launch
+    # (M1 + M2 default).
+    if not (os.environ.get("RAZORPAY_KEY_ID") or "").strip():
+        gaps.append(
+            "RAZORPAY_KEY_ID unset — payment endpoints return 503. "
+            "OK for free-tier-only launch; required for paid tiers."
+        )
+    elif not (os.environ.get("RAZORPAY_WEBHOOK_SECRET") or "").strip():
+        gaps.append(
+            "RAZORPAY_KEY_ID is set but RAZORPAY_WEBHOOK_SECRET is not. "
+            "Tier upgrades won't propagate from successful webhooks."
+        )
+
+    # Sentry — without DSN, prod errors are invisible.
+    if not (os.environ.get("SENTRY_DSN") or "").strip():
+        gaps.append(
+            "SENTRY_DSN unset — production errors are invisible. "
+            "Strongly recommended for any prod deploy."
+        )
+
+    # PostHog (optional — analytics only). Not a blocker, skip.
+
+    # Object storage — without S3/R2, the local-disk cache is used,
+    # which breaks multi-instance deployments (each replica caches
+    # to its own disk).
+    if not (os.environ.get("S3_BUCKET") or "").strip():
+        gaps.append(
+            "S3_BUCKET unset — local-disk cache fallback in use. "
+            "OK for single-instance deploys; required for >1 replica."
+        )
+
+    # Backup target — without one, SQLite data is one disk failure
+    # away from total loss. Postgres deploys use the provider's PITR.
+    # SQLite mode in production is unusual but allowed (low-traffic
+    # single-server). Make the backup path visible.
+    if (
+        not os.environ.get("DATABASE_URL")
+        and not (os.environ.get("PADHAI_BACKUP_DIR") or "").strip()
+    ):
+        gaps.append(
+            "SQLite mode in production with no PADHAI_BACKUP_DIR. "
+            "Wire scripts/backup_sqlite.sh into cron — one disk "
+            "failure away from total data loss otherwise."
+        )
+
+    if not gaps:
+        _log.info("[startup] launch-readiness: all soft gates green")
+        return
+    _log.warning(
+        "[startup] launch-readiness gaps (%d): operational risks for "
+        "this deploy. Run `make launch-check` to verify before promoting.",
+        len(gaps),
+    )
+    for gap in gaps:
+        _log.warning("[startup]   - %s", gap)
+
+
 @asynccontextmanager
 async def _lifespan(app: FastAPI):  # noqa: ARG001
     # Initialise Postgres store + user repo here (not at import time) so
@@ -1143,6 +1240,10 @@ async def _lifespan(app: FastAPI):  # noqa: ARG001
     # that combination silently grants admin to every authenticated
     # user via require_admin_role's dev fallback.
     _validate_admin_gate()
+    # prod-172 — Warn (not fail) on soft launch-readiness gaps:
+    # missing SMTP / Razorpay / Sentry / S3 / backup. Surfaces in
+    # the log shipper so ops sees them without paging on-call.
+    _validate_launch_readiness()
 
     resumed = runner.resume_pending()
     if resumed:
@@ -13756,6 +13857,8 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
     function conceptVideosSection() {
       // Container only — populated by loadConceptVideos() after first paint
       // so the dashboard renders fast without waiting on YouTube.
+      // prod-155 — header now exposes a "Browse all" link to /concept so
+      // users can see the full 70+ catalog, not just the dashboard strip.
       return (
         '<section class="section anchor" id="concept-videos">' +
           '<div class="section-header">' +
@@ -13763,6 +13866,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
               '<h2 class="section-title">Concept videos</h2>' +
               '<p class="section-sub">Curated explanations from trusted channels (Peekaboo Kidz, Khan Academy, CrashCourse, …). Click a card to watch.</p>' +
             '</div>' +
+            '<a href="/concept" class="btn" style="padding:6px 12px;font-size:13px;text-decoration:none" id="cvBrowseAll">Browse all →</a>' +
           '</div>' +
           '<div class="card" style="margin-bottom:12px">' +
             '<form id="cvForm" onsubmit="searchConceptVideos(event)" style="display:flex;gap:8px;flex-wrap:wrap">' +
@@ -13772,6 +13876,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
             '</form>' +
           '</div>' +
           '<div id="cvResults" class="grid-3"></div>' +
+          '<div id="cvCount" style="margin-top:8px;text-align:center;color:#94a3b8;font-size:13px"></div>' +
         '</section>'
       );
     }
@@ -13938,17 +14043,32 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
 
     async function loadConceptVideos(query) {
       var out = document.getElementById('cvResults');
+      var cnt = document.getElementById('cvCount');
       if (!out) return;
       out.innerHTML = '<div class="card"><div class="spinner"></div><span style="margin-left:10px">Loading…</span></div>';
-      // Default seed query — try the user's preferred subject first
-      var url = '/api/concept-videos?limit=6';
+      // prod-155 — Default limit raised from 6 → 24 so users see a meaningful
+      // slice of the catalog (was: 6, which made the catalog feel empty when
+      // the DB had 70+ curated videos). Full catalog browse is one click
+      // away on the new "Browse all" link in the section header.
+      var url = '/api/concept-videos?limit=24';
       if (query) url += '&concept=' + encodeURIComponent(query);
       try {
         var r = await fetch(url);
         var d = await r.json();
-        renderConceptVideoCards(d.rows || []);
+        var rows = d.rows || [];
+        renderConceptVideoCards(rows);
+        // Surface a count + "browse all" link so users know there's more.
+        if (cnt) {
+          if (rows.length > 0) {
+            cnt.innerHTML = 'Showing ' + rows.length + ' video' + (rows.length === 1 ? '' : 's') +
+              ' · <a href="/concept" style="color:#fbbf24">Browse the full library →</a>';
+          } else {
+            cnt.innerHTML = '';
+          }
+        }
       } catch(e) {
         out.innerHTML = '<div class="card"><p class="empty">Could not load videos: ' + escapeHtml(e.message) + '</p></div>';
+        if (cnt) cnt.innerHTML = '';
       }
     }
 

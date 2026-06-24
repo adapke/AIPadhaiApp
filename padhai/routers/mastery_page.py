@@ -26,7 +26,7 @@ from fastapi.responses import HTMLResponse
 
 from .. import mastery_aggregate
 from ..auth import AuthUser
-from ..web import current_user
+from ..web import current_user_optional as current_user
 
 router = APIRouter()
 
@@ -40,25 +40,69 @@ _COLOR_PALETTE = {
 
 
 def _anon_page() -> HTMLResponse:
+    # prod-160 — Anonymous landing now shares the AI Pathshala SPA chrome
+    # (top nav, breadcrumb, footer) instead of looking like a different
+    # site. Matches /memory-boost / /tutor-modes / /concept design.
     body = (
         "<!doctype html><html lang='en'><head>"
         "<meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width, initial-scale=1'>"
         "<title>Mastery Map — AI Pathshala</title>"
-        "<style>body{font-family:Inter,system-ui,sans-serif;max-width:640px;"
-        "margin:60px auto;padding:0 16px;color:#101828;text-align:center}"
-        "h1{font-size:24px}a{color:#1565d8}</style>"
-        "</head><body>"
+        "<style>"
+        "body{font-family:Inter,system-ui,sans-serif;margin:0;padding:0;"
+        "color:#101828;background:#f5f7fb;line-height:1.55}"
+        ".topnav{background:#fff;border-bottom:1px solid #e3e6ec;"
+        "padding:12px 20px;display:flex;align-items:center;"
+        "justify-content:space-between;flex-wrap:wrap;gap:8px}"
+        ".brand{font-weight:700;font-size:17px;color:#0b3a8a;"
+        "text-decoration:none;letter-spacing:-0.01em}"
+        ".brand span{color:#1565d8}"
+        ".nav-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}"
+        ".nav-links a{color:#445;text-decoration:none;font-size:14px;font-weight:500}"
+        ".nav-cta{background:#1565d8;color:#fff !important;padding:7px 14px;"
+        "border-radius:6px;font-weight:600 !important}"
+        ".crumb{max-width:1100px;margin:14px auto 0;padding:0 20px;"
+        "font-size:13px;color:#5a6470}"
+        ".crumb a{color:#1565d8;text-decoration:none}"
+        ".page{max-width:1100px;margin:0 auto;padding:18px 20px 40px}"
+        ".card{background:white;padding:24px;border-radius:8px;border:1px solid #d9e0ea}"
+        ".btn{display:inline-block;background:#1565d8;color:white;padding:9px 18px;"
+        "border-radius:6px;text-decoration:none;font-weight:600;font-size:14px}"
+        "h1{font-size:26px;margin:6px 0 12px;color:#0b3a8a}"
+        ".sub{color:#5a6470;font-size:14px;margin:0 0 16px}"
+        "</style></head><body>"
+        '<nav class="topnav" role="navigation">'
+        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
+        '<div class="nav-links">'
+        '<a href="/concept">Concepts</a>'
+        '<a href="/syllabus">Syllabus</a>'
+        '<a href="/mastery">Mastery</a>'
+        '<a href="/memory-boost">Memory Boost</a>'
+        '<a class="nav-cta" href="/home">Sign in</a>'
+        '</div></nav>'
+        '<div class="crumb">'
+        '<a href="/home">Home</a> &nbsp;›&nbsp; <span>Mastery Map</span>'
+        '</div>'
+        '<main class="page">'
+        '<div class="card">'
         "<h1>Mastery Map</h1>"
-        "<p>Sign in to see your color-coded mastery across every chapter "
-        "in your enrolled board.</p>"
-        "<p><a href='/home'>← AI Pathshala home</a></p>"
+        "<p class='sub'>Sign in to see your color-coded mastery across every chapter "
+        "in your enrolled board. Each tile shows your % mastery, when you last "
+        "practised, and quick links to start a practice / drill / tutor session.</p>"
+        "<p><a class='btn' href='/home'>Sign in to AI Pathshala</a></p>"
+        "</div></main>"
         "</body></html>"
     )
     return HTMLResponse(body)
 
 
 def _render_cell(row: mastery_aggregate.ConceptMastery) -> str:
+    """prod-156 — Render a single mastery tile with per-topic detail:
+    color-coded mastery %, last-practised relative time, source-attempt
+    breakdown (which modules contributed to the mastery score), and
+    four quick-action links (Practice / Flashcards / Tutor / Memory
+    Boost) that pass the topic context as query params.
+    """
     fg, bg, label = _COLOR_PALETTE.get(row.color_state, _COLOR_PALETTE["untouched"])
     pct = round(row.mastery * 100)
     last_practised = row.last_practised
@@ -75,16 +119,50 @@ def _render_cell(row: mastery_aggregate.ConceptMastery) -> str:
         else:
             sub = f"Practised {days}d ago"
 
-    slug = quote(row.topic_key.replace(" ", "-"))
+    # Source-attempt breakdown ("flashcards: 3, practice: 2") so users
+    # understand *why* this topic has the score it does. Empty when no
+    # signal at all.
+    src = row.source_attempts or {}
+    breakdown_parts = []
+    for module, count in sorted(src.items()):
+        if count > 0:
+            breakdown_parts.append(f"{module}: {count}")
+    breakdown = " · ".join(breakdown_parts) if breakdown_parts else "no attempts yet"
+
+    topic_q = quote(row.title)
     title = html.escape(row.title)
     subject = html.escape(row.subject)
+    decay = row.decay_state or "fresh"
+    decay_chip = ""
+    if decay == "decayed":
+        decay_chip = '<span class="decay">⏰ Decayed — review now</span>'
+    elif decay == "stale":
+        decay_chip = '<span class="decay">⏳ Stale</span>'
+
+    # Quick-action links. Each one passes the topic name + (subject)
+    # context so the destination page can pre-filter to the topic
+    # rather than reset to the generic catalog. /chat additionally
+    # gets a `q=` prompt so the tutor opens with the topic already
+    # in conversation context.
+    chat_q = quote(f"Teach me {row.title} ({row.subject})")
+    actions = (
+        f'<div class="actions">'
+        f'<a class="act-btn" href="/practice?topic={topic_q}" title="Practice this topic">📝 Practice</a>'
+        f'<a class="act-btn" href="/flashcards?topic={topic_q}" title="Review flashcards">📚 Flashcards</a>'
+        f'<a class="act-btn" href="/chat?topic={topic_q}&q={chat_q}" title="Ask the AI tutor">💬 Tutor</a>'
+        f'<a class="act-btn" href="/memory-boost" title="Daily 3-question drill">🔥 Drill</a>'
+        f'</div>'
+    )
+
     return (
-        f'<a class="tile" href="/tutor?topic={slug}" '
-        f'style="background:{bg};border-left:4px solid {fg}">'
+        f'<div class="tile" style="background:{bg};border-left:4px solid {fg}">'
         f'<div class="title">{title}</div>'
         f'<div class="sub">{subject} · {sub}</div>'
         f'<div class="pill" style="color:{fg}">{label} · {pct}%</div>'
-        f'</a>'
+        f'{decay_chip}'
+        f'<div class="breakdown">Signals: {html.escape(breakdown)}</div>'
+        f'{actions}'
+        f'</div>'
     )
 
 
@@ -151,15 +229,38 @@ def mastery_page(
     else:
         tiles_html = "".join(_render_cell(r) for r in rows)
 
+    # prod-160 — Shared AI Pathshala SPA chrome (top nav + breadcrumb +
+    # footer) so /mastery matches /concept's visual style.
     body = (
         "<!doctype html><html lang='en'><head>"
         "<meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width, initial-scale=1'>"
         f"<title>Mastery Map · {html.escape(board)} Class {grade} — AI Pathshala</title>"
         "<style>"
-        "body{font-family:Inter,system-ui,sans-serif;max-width:1100px;"
-        "margin:0 auto;padding:18px 16px;color:#101828;background:#f5f7fb}"
-        "h1{font-size:26px;margin:6px 0 4px}"
+        "body{font-family:Inter,system-ui,sans-serif;margin:0;padding:0;"
+        "color:#101828;background:#f5f7fb;line-height:1.55}"
+        # Top nav
+        ".topnav{background:#fff;border-bottom:1px solid #e3e6ec;"
+        "padding:12px 20px;display:flex;align-items:center;"
+        "justify-content:space-between;flex-wrap:wrap;gap:8px}"
+        ".brand{font-weight:700;font-size:17px;color:#0b3a8a;"
+        "text-decoration:none;letter-spacing:-0.01em}"
+        ".brand span{color:#1565d8}"
+        ".nav-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}"
+        ".nav-links a{color:#445;text-decoration:none;font-size:14px;font-weight:500}"
+        ".nav-links a:hover{color:#1565d8}"
+        ".nav-cta{background:#1565d8;color:#fff !important;padding:7px 14px;"
+        "border-radius:6px;font-weight:600 !important}"
+        ".crumb{max-width:1100px;margin:14px auto 0;padding:0 20px;"
+        "font-size:13px;color:#5a6470}"
+        ".crumb a{color:#1565d8;text-decoration:none}"
+        ".page{max-width:1100px;margin:0 auto;padding:18px 20px 40px}"
+        ".pageftr{max-width:1100px;margin:32px auto 0;padding:24px 20px;"
+        "border-top:1px solid #e3e6ec;color:#5a6470;font-size:13px;"
+        "display:flex;flex-wrap:wrap;gap:18px}"
+        ".pageftr a{color:#1565d8;text-decoration:none}"
+        # Body
+        "h1{font-size:26px;margin:6px 0 4px;color:#0b3a8a}"
         ".sub{color:#5a6470;font-size:14px;margin:0 0 16px}"
         ".summary{display:flex;gap:12px;margin:12px 0 20px;flex-wrap:wrap}"
         ".summary-pill{background:white;border:1px solid #d9e0ea;padding:8px 14px;"
@@ -169,22 +270,46 @@ def mastery_page(
         ".chip{background:white;border:1px solid #d9e0ea;color:#101828;"
         "padding:6px 12px;border-radius:999px;text-decoration:none;font-size:13px}"
         ".chip.active{background:#1565d8;color:white;border-color:#1565d8}"
-        ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));"
-        "gap:10px}"
-        ".tile{display:block;background:white;padding:12px;border-radius:8px;"
-        "text-decoration:none;color:#101828;border-left:4px solid #d9e0ea;"
-        "transition:transform 0.1s}"
-        ".tile:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,0.06)}"
-        ".tile .title{font-weight:600;font-size:14px;line-height:1.3}"
-        ".tile .sub{color:#5a6470;font-size:12px;margin:4px 0 6px}"
+        ".grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));"
+        "gap:12px}"
+        # prod-156 tile redesign — now a full mini-card with actions
+        ".tile{background:white;padding:14px;border-radius:8px;"
+        "border-left:4px solid #d9e0ea;display:flex;flex-direction:column;gap:4px}"
+        ".tile .title{font-weight:600;font-size:15px;line-height:1.3;color:#101828}"
+        ".tile .sub{color:#5a6470;font-size:12px;margin:0}"
         ".tile .pill{font-size:11px;font-weight:600;text-transform:uppercase;"
-        "letter-spacing:0.3px}"
+        "letter-spacing:0.3px;margin:4px 0}"
+        ".tile .decay{display:inline-block;background:#fef3f2;color:#b42318;"
+        "padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;"
+        "margin:2px 0}"
+        ".tile .breakdown{color:#5a6470;font-size:11px;margin:6px 0 8px;"
+        "font-style:italic}"
+        ".tile .actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;"
+        "padding-top:8px;border-top:1px solid #f0f2f7}"
+        ".tile .act-btn{background:#eef3fc;color:#0b3a8a;padding:6px 10px;"
+        "border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;"
+        "transition:background 0.15s}"
+        ".tile .act-btn:hover{background:#1565d8;color:white}"
         ".empty{background:white;padding:32px;border-radius:8px;text-align:center;"
         "color:#5a6470}"
         ".empty a{color:#1565d8}"
-        ".foot{margin-top:24px;color:#5a6470;font-size:13px;text-align:center}"
-        ".foot a{color:#1565d8;margin:0 8px}"
         "</style></head><body>"
+        # Top nav
+        '<nav class="topnav" role="navigation">'
+        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
+        '<div class="nav-links">'
+        '<a href="/concept">Concepts</a>'
+        '<a href="/syllabus">Syllabus</a>'
+        '<a href="/mastery">Mastery</a>'
+        '<a href="/memory-boost">Memory Boost</a>'
+        '<a class="nav-cta" href="/home">Home</a>'
+        '</div></nav>'
+        # Breadcrumb
+        '<div class="crumb">'
+        '<a href="/home">Home</a> &nbsp;›&nbsp; <span>Mastery Map</span>'
+        '</div>'
+        # Main page
+        '<main class="page">'
         f"<h1>Mastery Map</h1>"
         f"<p class='sub'>{html.escape(board)} · Class {grade}"
         f"{' · ' + html.escape(subject) if subject else ''}</p>"
@@ -203,10 +328,15 @@ def mastery_page(
         f"<div class='chips'>{''.join(subject_chips)}</div>"
         # Tile grid
         f"<div class='grid'>{tiles_html}</div>"
-        "<div class='foot'>"
-        "<a href='/memory-boost'>📚 Today's 3-question drill</a> · "
-        "<a href='/home'>← Home</a>"
-        "</div>"
+        '</main>'
+        # Footer
+        '<footer class="pageftr">'
+        '<a href="/memory-boost">🔥 Today\'s 3-question drill</a>'
+        '<a href="/syllabus">Syllabus</a>'
+        '<a href="/practice">Practice tests</a>'
+        '<a href="/concept">Concept videos</a>'
+        '<span style="margin-left:auto">Made for Indian students</span>'
+        '</footer>'
         "</body></html>"
     )
     return HTMLResponse(body)

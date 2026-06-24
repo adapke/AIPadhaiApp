@@ -392,3 +392,48 @@ def make_current_user_dependency(repo_or_getter):
         return None
 
     return current_user
+
+
+def make_optional_user_dependency(repo_or_getter):
+    """Like `make_current_user_dependency` but NEVER raises 401 for the
+    missing-token case — returns None instead. Pages like /mastery,
+    /memory-boost, /tutor-modes use this so they can render a friendly
+    "sign in" landing for anonymous visitors even when
+    PADHAI_REQUIRE_AUTH=1 (which is the production default).
+
+    Invalid / expired tokens still 401 (those reveal a real client bug);
+    locked accounts still 403. Only the genuinely-anonymous case is
+    softened. Use this dep ONLY for pages that have an explicit anonymous
+    landing — API endpoints should keep the strict `current_user` dep so
+    they never silently fall through to no-auth code paths."""
+    from fastapi import Cookie, Header, HTTPException
+
+    async def current_user_optional(
+        authorization: str | None = Header(default=None),
+        pathshala_token: str | None = Cookie(default=None),
+    ) -> AuthUser | None:
+        repo = repo_or_getter() if callable(repo_or_getter) else repo_or_getter
+        if repo is None:
+            return None
+
+        token = None
+        if authorization and authorization.lower().startswith("bearer "):
+            token = authorization[len("bearer "):].strip()
+        elif pathshala_token:
+            token = pathshala_token.strip()
+
+        if not token:
+            # The only difference from the strict dep — anonymous OK.
+            return None
+
+        user_id = decode_token(token)
+        if user_id is None:
+            raise HTTPException(401, "invalid or expired token")
+        user = repo.find_by_id(user_id)
+        if user is None:
+            raise HTTPException(401, "user not found")
+        if user.account_locked:
+            raise HTTPException(403, "account suspended — contact support")
+        return user
+
+    return current_user_optional

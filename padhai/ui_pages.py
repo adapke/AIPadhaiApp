@@ -619,17 +619,53 @@ def get_lesson_new_html() -> str:
     progressSection.scrollIntoView({behavior:'smooth'});
 
     var fd = new FormData();
-    fd.append('file', fileInput.files[0]);
+    // prod-153 — POST /lessons expects field name `image`, not `file`.
+    // Sending the wrong name produced a FastAPI 422 with detail=
+    // [{loc,msg,type}, ...] which the catch block then stringified to
+    // `[object Object]`. Field name fixed AND error rendering hardened
+    // below so future server-side error shapes degrade gracefully.
+    fd.append('image', fileInput.files[0]);
     fd.append('language', document.getElementById('selLang').value);
     fd.append('level', document.getElementById('selLevel').value);
-    fd.append('mode', document.getElementById('selMode').value);
-    fd.append('include_quiz', document.getElementById('chkQuiz').checked ? '1' : '0');
+    // The endpoint accepts `render_mode` (animated|...), not `mode`.
+    // Map "explainer/teaching/etc" to the closest render_mode the
+    // server understands; default to "animated" for everything else
+    // so the request still validates.
+    var modeVal = document.getElementById('selMode').value;
+    fd.append('render_mode',
+      modeVal === 'reel' ? 'reel' :
+      modeVal === 'explainer' ? 'narrated' :
+      'animated');
+    fd.append('include_quiz', document.getElementById('chkQuiz').checked ? 'true' : 'false');
+
+    function formatServerError(d, status) {
+      // FastAPI returns detail as either a string OR an array of
+      // {loc, msg, type} validation entries. Stringify the latter
+      // into human-readable bullet points so users see what's wrong
+      // instead of `[object Object]`.
+      if (!d) return 'Upload failed (HTTP ' + status + ')';
+      if (typeof d.detail === 'string') return d.detail;
+      if (Array.isArray(d.detail)) {
+        return d.detail.map(function(e) {
+          if (!e || typeof e !== 'object') return String(e);
+          var loc = Array.isArray(e.loc) ? e.loc.slice(-1)[0] : (e.loc || '');
+          return (loc ? loc + ': ' : '') + (e.msg || JSON.stringify(e));
+        }).join(' · ');
+      }
+      if (typeof d.error === 'string') return d.error;
+      if (typeof d.message === 'string') return d.message;
+      // Last resort — print the serialised JSON so the user can copy
+      // it to a bug report (still readable, never [object Object]).
+      try { return JSON.stringify(d); }
+      catch (_) { return 'Upload failed (HTTP ' + status + ')'; }
+    }
 
     try {
       var r = await apiFetch('/lessons', {method:'POST', body:fd});
-      var d = await r.json();
+      var d = null;
+      try { d = await r.json(); } catch(_) { d = null; }
       if (!r.ok) {
-        throw new Error(d.detail || d.error || 'Upload failed (HTTP ' + r.status + ')');
+        throw new Error(formatServerError(d, r.status));
       }
 
       // Cache hit — direct video URL

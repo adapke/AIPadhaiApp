@@ -1125,29 +1125,63 @@ HOME_HTML = """<!doctype html>
              revise:'teal', current_affairs:'amber'})[kind] || 'green';
   }
 
+  // prod-159 — Map each daily-flow block to a concrete destination page
+  // so clicking a step actually starts the study activity. Was: visual-
+  // only steps with no onclick. Now: each step navigates to the right
+  // surface AND passes the topic/chapter context as a query param so
+  // the destination page can pre-filter.
+  function destFor(block){
+    var kind = (block.kind || '').toLowerCase();
+    var t = encodeURIComponent(block.topic || block.title || '');
+    var c = encodeURIComponent(block.chapter || '');
+    // The daily-plan generator passes a `route` hint when one is
+    // available — honour it before falling back to kind→route mapping.
+    if(block.route) return block.route;
+    if(kind === 'practice') return '/practice?topic=' + t;
+    if(kind === 'read' || kind === 'revise')
+      return '/chat?topic=' + t + '&q='
+             + encodeURIComponent('Teach me ' + (block.title || '') +
+               ' from the syllabus');
+    if(kind === 'mock') return '/practice?mode=mock&topic=' + t;
+    if(kind === 'current_affairs') return '/chat?q='
+             + encodeURIComponent('Brief me on today\'s current affairs for '
+               + (block.title || 'general awareness'));
+    if(kind === 'flashcards') return '/flashcards?topic=' + t;
+    if(kind === 'memory_boost') return '/memory-boost';
+    // Default: open the AI tutor with the title as the question seed.
+    return '/chat?q=' + encodeURIComponent('Teach me ' +
+           (block.title || 'today\'s study topic'));
+  }
+
   function renderPlan(dash){
     const wrap = $('planBlocks');
     const meta = $('planMeta');
     if(!dash || !dash.daily_flow || !dash.daily_flow.blocks
               || !dash.daily_flow.blocks.length){
-      meta.textContent =
-        'No active Exam Pack yet — enroll in one to get a daily plan.';
+      meta.innerHTML =
+        'No active Exam Pack yet — '
+        + '<a href="/syllabus" style="color:#fbbf24">browse the syllabus</a> '
+        + 'or <a href="/dashboard" style="color:#fbbf24">enroll in a pack</a> '
+        + 'to get a daily plan.';
       wrap.innerHTML = '';
       return;
     }
     const f = dash.daily_flow;
     meta.textContent = (f.total_minutes || 0) + ' min target · '
                      + (f.completion_pct || 0).toFixed(0) + '% complete';
-    wrap.innerHTML = f.blocks.map(b => (
-      '<div class="study-step' + (b.completed ? ' done' : '') + '">'
-      + '<div class="step-dot">' + b.position + '</div>'
-      + '<div><div class="step-title">' + escapeHtml(b.title) + '</div>'
-      + '<div class="step-meta">' + escapeHtml(b.kind) + ' · '
-      + (b.estimated_min || 0) + ' min</div></div>'
-      + '<div class="tag ' + kindTagClass(b.kind) + '">'
-      + escapeHtml(b.kind) + '</div>'
-      + '</div>'
-    )).join('');
+    wrap.innerHTML = f.blocks.map(function(b){
+      var url = destFor(b);
+      return '<a class="study-step' + (b.completed ? ' done' : '')
+        + '" href="' + url + '" style="text-decoration:none;color:inherit;cursor:pointer">'
+        + '<div class="step-dot">' + b.position + '</div>'
+        + '<div><div class="step-title">' + escapeHtml(b.title) + '</div>'
+        + '<div class="step-meta">' + escapeHtml(b.kind) + ' · '
+        + (b.estimated_min || 0) + ' min · '
+        + (b.completed ? '✓ done' : 'Tap to start →') + '</div></div>'
+        + '<div class="tag ' + kindTagClass(b.kind) + '">'
+        + escapeHtml(b.kind) + '</div>'
+        + '</a>';
+    }).join('');
   }
 
   function renderNext(dash){

@@ -117,21 +117,178 @@ def _absolute_url(request: Request, path: str) -> str:
     return f"{base}{path}"
 
 
+# ---------------------------------------------------------------------------
+# prod-151 — Shared AI Pathshala SPA chrome for /concept + /concept/{slug}
+# pages. Top nav (brand + sign-in link), breadcrumb, search box, footer.
+# Match the visual style of /home / /mastery / /memory-boost so the
+# /concept pages don't look like a different app.
+# ---------------------------------------------------------------------------
+
+_SPA_CHROME_CSS = (
+    'body{font-family:Inter,system-ui,sans-serif;margin:0;padding:0;'
+    'color:#101828;background:#f5f7fb;line-height:1.55}'
+    '.topnav{background:#fff;border-bottom:1px solid #e3e6ec;'
+    'padding:12px 20px;display:flex;align-items:center;'
+    'justify-content:space-between;flex-wrap:wrap;gap:8px}'
+    '.brand{font-weight:700;font-size:17px;color:#0b3a8a;'
+    'text-decoration:none;letter-spacing:-0.01em}'
+    '.brand span{color:#1565d8}'
+    '.nav-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}'
+    '.nav-links a{color:#445;text-decoration:none;font-size:14px;font-weight:500}'
+    '.nav-links a:hover{color:#1565d8}'
+    '.nav-cta{background:#1565d8;color:#fff !important;padding:7px 14px;'
+    'border-radius:6px;font-weight:600 !important}'
+    '.nav-cta:hover{background:#0e4eb6;color:#fff !important}'
+    '.crumb{max-width:1080px;margin:14px auto 0;padding:0 20px;'
+    'font-size:13px;color:#5a6470}'
+    '.crumb a{color:#1565d8;text-decoration:none}'
+    '.crumb a:hover{text-decoration:underline}'
+    '.page{max-width:1080px;margin:0 auto;padding:18px 20px 40px}'
+    '.foot{max-width:1080px;margin:32px auto 0;padding:24px 20px;'
+    'border-top:1px solid #e3e6ec;color:#5a6470;font-size:13px;'
+    'display:flex;flex-wrap:wrap;gap:18px}'
+    '.foot a{color:#1565d8;text-decoration:none}'
+    '.foot a:hover{text-decoration:underline}'
+)
+
+
+def _top_nav() -> str:
+    """Render the AI Pathshala top navigation. Same shape as /home so
+    a visitor landing from Google sees a consistent app."""
+    return (
+        '<nav class="topnav" role="navigation">'
+        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
+        '<div class="nav-links">'
+        '<a href="/concept">Concepts</a>'
+        '<a href="/syllabus">Syllabus</a>'
+        '<a href="/practice">Practice</a>'
+        '<a href="/tutor">Tutor</a>'
+        '<a class="nav-cta" href="/home">Sign in</a>'
+        '</div>'
+        '</nav>'
+    )
+
+
+def _footer() -> str:
+    return (
+        '<footer class="foot">'
+        '<a href="/concept">All concepts</a>'
+        '<a href="/home">Home</a>'
+        '<a href="/syllabus">Syllabus</a>'
+        '<a href="/pricing">Pricing</a>'
+        '<a href="/privacy">Privacy</a>'
+        '<span style="margin-left:auto">'
+        'Made for Indian students · CBSE / ICSE / NEET / JEE / UPSC'
+        '</span>'
+        '</footer>'
+    )
+
+
+def _categorise(name: str) -> str:
+    """Best-effort topic → subject bucket for the index-page chips.
+    Pure string heuristics so it works at zero cost for any concept."""
+    n = name.lower()
+    if any(k in n for k in [
+        "newton", "force", "motion", "gravity", "energy", "work",
+        "power", "wave", "light", "sound", "ohm", "current", "magnet",
+        "circuit", "pressure", "friction", "velocity", "acceleration",
+        "kinemat", "thermo", "optics", "mechanic",
+    ]):
+        return "Physics"
+    if any(k in n for k in [
+        "acid", "base", "molecule", "atom", "reaction", "metal",
+        "non-metal", "carbon", "compound", "periodic", "element",
+        "salt", "solution",
+    ]):
+        return "Chemistry"
+    if any(k in n for k in [
+        "cell", "tissue", "organ", "photosynth", "respir", "circulat",
+        "digest", "nervous", "reproduct", "evolution", "genet",
+        "ecosystem", "plant", "animal", "human body", "dna", "biology",
+    ]):
+        return "Biology"
+    if any(k in n for k in [
+        "equation", "number", "algebra", "geometry", "triangle",
+        "circle", "ratio", "fraction", "decimal", "percent", "interest",
+        "quadratic", "pythagoras", "trigonometry", "calculus",
+        "polynomial", "statistic", "probability", "real number",
+    ]):
+        return "Mathematics"
+    if any(k in n for k in [
+        "constitution", "fundamental right", "directive principle",
+        "parliament", "judiciary", "executive", "polity",
+    ]):
+        return "Polity / Civics"
+    if any(k in n for k in [
+        "river", "mountain", "climate", "monsoon", "geography",
+        "soil", "agriculture", "industry", "population",
+    ]):
+        return "Geography"
+    if any(k in n for k in [
+        "freedom", "mughal", "british", "gandhi", "nehru", "1857",
+        "independence", "history",
+    ]):
+        return "History"
+    return "Other"
+
+
 @router.get("/concept", response_class=HTMLResponse)
 def concept_index(request: Request) -> HTMLResponse:
     """Index page — lists every concept linked to its /concept/{slug}.
-    Cheap server-rendered list, no JS required, fast for crawlers."""
+    prod-151 — Now wrapped in the AI Pathshala SPA shell (top nav,
+    breadcrumb, search box, category chips, grouped grid). Still
+    server-rendered + no-build-step + crawler-friendly."""
     try:
         names = _cv.list_concepts(language="en") or []
     except Exception:
         names = []
-    lines = []
-    for n in sorted(names):
-        slug = _safe_slug(n.replace(" ", "-"))
-        lines.append(
-            f'<li><a href="/concept/{quote(slug)}">{html.escape(n)}</a></li>'
-        )
+
+    # Group by subject for chip-filterable grid
+    grouped: dict[str, list[str]] = {}
+    for n in names:
+        grouped.setdefault(_categorise(n), []).append(n)
+    # Stable order: Mathematics first (broadest appeal), then sciences,
+    # then humanities, then Other last
+    subject_order = [
+        "Mathematics", "Physics", "Chemistry", "Biology",
+        "History", "Geography", "Polity / Civics", "Other",
+    ]
+    grouped_sorted = [
+        (s, sorted(grouped[s])) for s in subject_order if s in grouped
+    ]
+
     base = str(request.base_url).rstrip("/")
+
+    # Build category chips
+    chips_html = "".join(
+        f'<button class="chip" data-cat="{html.escape(subject)}" '
+        f'onclick="filterCat(this)">{html.escape(subject)} '
+        f'<span class="chip-n">{len(items)}</span></button>'
+        for subject, items in grouped_sorted
+    )
+
+    # Build the grid — one card per concept, grouped by subject
+    grid_sections = []
+    for subject, items in grouped_sorted:
+        cards = "".join(
+            f'<a class="ccard" href="/concept/{quote(_safe_slug(n.replace(" ", "-")))}">'
+            f'<div class="ccard-title">{html.escape(n)}</div>'
+            f'<div class="ccard-meta">▶ Watch explainer</div>'
+            '</a>'
+            for n in items
+        )
+        grid_sections.append(
+            f'<section class="grp" data-cat="{html.escape(subject)}">'
+            f'<h2>{html.escape(subject)} <span class="grp-n">'
+            f'({len(items)})</span></h2>'
+            f'<div class="grid">{cards}</div>'
+            '</section>'
+        )
+    grid_html = "".join(grid_sections) or (
+        '<p class="empty">No curated concepts yet — '
+        '<a href="/home">check back soon</a>.</p>'
+    )
+
     body = (
         '<!doctype html><html lang="en"><head>'
         '<meta charset="utf-8">'
@@ -141,17 +298,92 @@ def concept_index(request: Request) -> HTMLResponse:
         'explainer in AI Pathshala\'s catalog. Covers CBSE / ICSE / state '
         'boards / NEET / JEE / UPSC.">'
         f'<link rel="canonical" href="{base}/concept">'
-        '<style>body{font-family:Inter,system-ui,sans-serif;max-width:760px;'
-        'margin:24px auto;padding:0 16px;color:#101828}'
-        'h1{font-size:24px}ul{padding-left:18px;line-height:1.8}'
-        'a{color:#1565d8;text-decoration:none}a:hover{text-decoration:underline}'
-        '.foot{margin-top:32px;color:#5a6470;font-size:13px}</style>'
-        '</head><body>'
+        '<style>' + _SPA_CHROME_CSS +
+        '.hero{padding:18px 0 8px}'
+        '.hero h1{font-size:28px;margin:0 0 8px;line-height:1.2}'
+        '.hero p{color:#5a6470;margin:0 0 14px;max-width:720px}'
+        '.search{display:flex;gap:8px;margin:12px 0 18px;max-width:520px}'
+        '.search input{flex:1;padding:10px 14px;border:1px solid #d0d6de;'
+        'border-radius:8px;font-size:14px;outline:none;background:#fff}'
+        '.search input:focus{border-color:#1565d8;'
+        'box-shadow:0 0 0 3px rgba(21,101,216,0.10)}'
+        '.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}'
+        '.chip{background:#fff;border:1px solid #d0d6de;color:#101828;'
+        'padding:7px 14px;border-radius:999px;font-size:13px;'
+        'cursor:pointer;display:inline-flex;align-items:center;gap:6px;'
+        'font-family:inherit;font-weight:500}'
+        '.chip:hover{border-color:#1565d8;color:#1565d8}'
+        '.chip.active{background:#1565d8;color:#fff;border-color:#1565d8}'
+        '.chip-n{background:rgba(0,0,0,0.08);padding:1px 7px;'
+        'border-radius:10px;font-size:11px;font-weight:600}'
+        '.chip.active .chip-n{background:rgba(255,255,255,0.22)}'
+        '.grp{margin:24px 0}'
+        '.grp h2{font-size:17px;color:#0b3a8a;margin:0 0 12px;'
+        'display:flex;align-items:baseline;gap:8px}'
+        '.grp-n{color:#9aa3b0;font-size:13px;font-weight:500}'
+        '.grid{display:grid;grid-template-columns:repeat(auto-fill,'
+        'minmax(220px,1fr));gap:12px}'
+        '.ccard{background:#fff;border:1px solid #e3e6ec;border-radius:8px;'
+        'padding:14px 16px;text-decoration:none;color:#101828;display:block;'
+        'transition:border-color 0.15s,box-shadow 0.15s;min-height:60px}'
+        '.ccard:hover{border-color:#1565d8;'
+        'box-shadow:0 2px 8px rgba(21,101,216,0.08)}'
+        '.ccard-title{font-weight:600;font-size:14px;margin-bottom:4px;'
+        'line-height:1.3}'
+        '.ccard-meta{font-size:12px;color:#5a6470}'
+        '.empty{color:#5a6470;padding:40px 0;text-align:center}'
+        '.empty a{color:#1565d8}'
+        '.hidden{display:none !important}'
+        '</style></head><body>'
+        + _top_nav()
+        + '<div class="crumb">'
+        '<a href="/home">Home</a> &nbsp;›&nbsp; <span>Concepts</span>'
+        '</div>'
+        '<main class="page">'
+        '<section class="hero">'
         '<h1>Concept library</h1>'
-        f'<p>{len(names)} curated concepts across CBSE, ICSE, state boards, '
-        'NEET, JEE and UPSC.</p>'
-        f'<ul>{"".join(lines)}</ul>'
-        '<div class="foot"><a href="/home">← AI Pathshala home</a></div>'
+        f'<p>{len(names)} curated explainer videos across CBSE, ICSE, '
+        'state boards, NEET, JEE and UPSC. Hand-picked by AI Pathshala '
+        'educators for Indian students.</p>'
+        '<div class="search">'
+        '<input type="search" id="q" placeholder="Search concepts… '
+        '(e.g. Newton, photosynthesis, quadratic)" oninput="filterText()">'
+        '</div>'
+        f'<div class="chips"><button class="chip active" data-cat="__all" '
+        f'onclick="filterCat(this)">All <span class="chip-n">'
+        f'{len(names)}</span></button>{chips_html}</div>'
+        '</section>'
+        + grid_html +
+        '</main>'
+        + _footer() +
+        '<script>'
+        'var activeCat="__all";'
+        'function filterCat(btn){'
+        ' document.querySelectorAll(".chip").forEach(function(c){'
+        '   c.classList.remove("active");'
+        ' });'
+        ' btn.classList.add("active");'
+        ' activeCat=btn.getAttribute("data-cat");'
+        ' applyFilters();'
+        '}'
+        'function filterText(){applyFilters();}'
+        'function applyFilters(){'
+        ' var q=(document.getElementById("q").value||"").toLowerCase().trim();'
+        ' document.querySelectorAll(".grp").forEach(function(g){'
+        '   var cat=g.getAttribute("data-cat");'
+        '   var catMatch=(activeCat==="__all"||activeCat===cat);'
+        '   var anyVis=false;'
+        '   g.querySelectorAll(".ccard").forEach(function(c){'
+        '     var t=c.textContent.toLowerCase();'
+        '     var txtMatch=(!q||t.indexOf(q)>=0);'
+        '     var vis=catMatch&&txtMatch;'
+        '     c.classList.toggle("hidden",!vis);'
+        '     if(vis)anyVis=true;'
+        '   });'
+        '   g.classList.toggle("hidden",!anyVis);'
+        ' });'
+        '}'
+        '</script>'
         '</body></html>'
     )
     return HTMLResponse(body)
@@ -272,9 +504,25 @@ def concept_page(
         # is missing or the read errors out.
         examples_html = ""
 
-    # Related concept crawl-links
+    # Related concept crawl-links (used both for the sidebar rail and
+    # for crawler-visible <a> links).
     related = _related_concepts(video.concept, limit=6)
-    related_html = ""
+
+    # prod-151 — Body now wrapped in the AI Pathshala SPA shell:
+    # top nav, breadcrumb (Home › Concepts › <Concept name>), main
+    # column with video + meta + examples, related-concept sidebar
+    # rail on desktop. Mobile collapses to a single column.
+    crumb_html = (
+        '<div class="crumb">'
+        '<a href="/home">Home</a> &nbsp;›&nbsp; '
+        '<a href="/concept">Concepts</a> &nbsp;›&nbsp; '
+        f'<span>{concept_name}</span>'
+        '</div>'
+    )
+
+    # Build the related-concept sidebar (desktop) / footer section
+    # (mobile). Same data, different styling per breakpoint.
+    related_aside_html = ""
     if related:
         items = []
         for name in related:
@@ -282,12 +530,15 @@ def concept_page(
             items.append(
                 f'<li><a href="/concept/{r_slug}">{html.escape(name)}</a></li>'
             )
-        related_html = (
-            '<section class="related"><h2>Related concepts</h2>'
-            f'<ul>{"".join(items)}</ul></section>'
+        related_aside_html = (
+            '<aside class="rail"><h3>Related concepts</h3>'
+            f'<ul class="rail-list">{"".join(items)}</ul>'
+            '<div class="rail-cta">'
+            '<a class="cta-sm" href="/concept">Browse all →</a>'
+            '</div>'
+            '</aside>'
         )
 
-    # Body
     body = (
         '<!doctype html>'
         f'<html lang="{lang}"><head>'
@@ -299,45 +550,82 @@ def concept_page(
         + hreflang_tags + "\n"
         + og_tags
         + schema_org
-        + '<style>'
-        'body{font-family:Inter,system-ui,sans-serif;max-width:840px;'
-        'margin:0 auto;padding:18px 16px;color:#101828;background:#f5f7fb}'
-        'h1{font-size:28px;margin:6px 0 14px;line-height:1.25}'
-        'h2{font-size:18px;margin:24px 0 8px}'
+        + '<style>' + _SPA_CHROME_CSS +
+        '.layout{display:grid;grid-template-columns:1fr 280px;gap:28px;'
+        'margin-top:8px}'
+        '@media (max-width:880px){.layout{grid-template-columns:1fr}}'
+        '.main h1{font-size:26px;margin:6px 0 10px;line-height:1.25;'
+        'color:#0b3a8a}'
+        '.main h2{font-size:18px;margin:28px 0 10px;color:#0b3a8a}'
         '.embed{position:relative;width:100%;padding-bottom:56.25%;'
-        'background:#000;border-radius:8px;overflow:hidden}'
+        'background:#000;border-radius:10px;overflow:hidden;'
+        'margin:14px 0 12px;'
+        'box-shadow:0 2px 10px rgba(11,58,138,0.08)}'
         '.embed iframe{position:absolute;inset:0;width:100%;height:100%;'
         'border:0}'
-        '.meta{color:#5a6470;font-size:14px;margin:8px 0}'
+        '.meta{color:#5a6470;font-size:13px;margin:6px 0;line-height:1.5}'
+        '.meta-pill{background:#eef3fc;color:#0b3a8a;padding:3px 10px;'
+        'border-radius:999px;font-size:12px;font-weight:600;'
+        'display:inline-block;margin-right:6px}'
         '.cta{display:inline-block;background:#1565d8;color:#fff;'
-        'padding:10px 18px;border-radius:8px;text-decoration:none;'
-        'margin:18px 0}'
-        '.related ul{padding-left:18px;line-height:1.8}'
-        '.foot{margin-top:24px;color:#5a6470;font-size:13px}'
-        'a{color:#1565d8}'
+        'padding:11px 20px;border-radius:8px;text-decoration:none;'
+        'margin:14px 0 4px;font-weight:600;font-size:14px}'
+        '.cta:hover{background:#0e4eb6}'
+        '.real-world{background:#fff;border:1px solid #e3e6ec;'
+        'border-radius:10px;padding:16px 18px;margin:22px 0}'
+        '.real-world h2{margin-top:0;color:#0b3a8a;font-size:16px}'
+        '.real-world ul{padding-left:18px;line-height:1.7;color:#101828}'
+        '.real-world li{margin:8px 0}'
+        '.real-world .meta{margin-top:10px;font-size:12px;color:#9aa3b0}'
+        '.rail{background:#fff;border:1px solid #e3e6ec;border-radius:10px;'
+        'padding:16px 18px;position:sticky;top:16px;height:fit-content}'
+        '.rail h3{margin:0 0 10px;font-size:14px;color:#0b3a8a;'
+        'text-transform:uppercase;letter-spacing:0.04em}'
+        '.rail-list{padding-left:0;list-style:none;margin:0;'
+        'line-height:1.7;font-size:14px}'
+        '.rail-list li{margin:5px 0;padding:4px 0;'
+        'border-bottom:1px solid #f0f2f7}'
+        '.rail-list li:last-child{border-bottom:0}'
+        '.rail-list a{color:#1565d8;text-decoration:none}'
+        '.rail-list a:hover{text-decoration:underline}'
+        '.rail-cta{margin-top:14px;padding-top:12px;'
+        'border-top:1px solid #e3e6ec}'
+        '.cta-sm{color:#1565d8;font-size:13px;text-decoration:none;'
+        'font-weight:600}'
+        '.cta-sm:hover{text-decoration:underline}'
+        '.src{font-size:12px;color:#5a6470;margin-top:14px;'
+        'background:#f0f2f7;padding:10px 14px;border-radius:6px;'
+        'line-height:1.5}'
+        '.src a{color:#1565d8}'
         '</style>'
         '</head><body>'
+        + _top_nav()
+        + crumb_html
+        + '<main class="page">'
+        '<div class="layout">'
+        '<article class="main">'
         f'<h1>{concept_name}</h1>'
-        f'<div class="meta">Curated explainer by <b>{channel}</b> · '
-        f'language: {video.language} · '
-        f'quality: {video.quality_tier}</div>'
+        f'<div class="meta">'
+        f'<span class="meta-pill">{html.escape(video.quality_tier)}</span>'
+        f'<span class="meta-pill">{html.escape(video.language)}</span>'
+        f' Curated explainer by <b>{channel}</b>'
+        '</div>'
         f'<div class="embed">'
         f'<iframe src="{embed_url}" allowfullscreen '
         f'allow="accelerometer; clipboard-write; encrypted-media; '
         f'gyroscope; picture-in-picture" '
-        f'title="{title}"></iframe></div>'
+        f'title="{title}" loading="lazy"></iframe></div>'
         '<a class="cta" href="/home">Sign up to track your progress →</a>'
-        f'<p class="meta">Source: <a href="{src_url}" rel="noopener" '
-        f'target="_blank">{video.source}</a> · '
-        f'AI Pathshala does not host or own this video. '
-        f'It is embedded under the educator\'s public YouTube terms.</p>'
         + examples_html
-        + related_html
-        + '<div class="foot">'
-        '<a href="/concept">All concepts</a> · '
-        '<a href="/home">AI Pathshala home</a> · '
-        '<a href="/pricing">Pricing</a>'
+        + f'<div class="src">Source: <a href="{src_url}" rel="noopener" '
+        f'target="_blank">{video.source}</a> · AI Pathshala does not '
+        'host or own this video. It is embedded under the educator\'s '
+        'public YouTube terms.</div>'
+        '</article>'
+        + related_aside_html +
         '</div>'
+        '</main>'
+        + _footer() +
         '</body></html>'
     )
     return HTMLResponse(body)

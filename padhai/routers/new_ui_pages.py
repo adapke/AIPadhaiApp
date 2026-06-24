@@ -732,7 +732,8 @@ async function loadLive() {
     var d = await r.json();
     var rows = d.upcoming || d.rows || d;
     if (!rows || !rows.length) {
-      out.innerHTML = '<div class="empty">No upcoming live lectures scheduled. Browse on <a href="/ui-legacy#live" style="color:#fbbf24">v1</a> for the booking calendar.</div>';
+      // prod-154 — V1 reference dropped; empty state directs to /dashboard for the daily plan instead.
+      out.innerHTML = '<div class="empty">No upcoming live lectures scheduled. <a href="/dashboard" style="color:#fbbf24">Open your daily plan →</a></div>';
       return;
     }
     out.innerHTML = rows.map(function(lc) {
@@ -744,8 +745,10 @@ async function loadLive() {
         '</div>';
     }).join('');
   } catch(e) {
+    // prod-154 — V1 reference dropped; offer retry button + dashboard fallback.
     out.innerHTML = '<div class="err">Could not load: ' + escapeHtml(e.message) +
-      ' — try <a href="/ui-legacy#live" style="color:#fbbf24">v1</a>.</div>';
+      '<div style="margin-top:8px"><button class="btn ghost" onclick="loadLive()">Retry</button> ' +
+      '<a class="btn ghost" href="/dashboard">Open dashboard</a></div></div>';
   }
 }
 if (TOK) loadLive();
@@ -1112,38 +1115,161 @@ _LIBRARY_HTML = _page("Upload library", _LIBRARY_BODY, _LIBRARY_SCRIPT)
 
 # ---------- 13. School admin ----------
 
+# prod-154 — single-design /school page. The V1 ("/ui-legacy#school")
+# reference is dropped — every action the user can take from here is
+# available via V2 endpoints we already ship (classes via
+# /api/orgs/{id}/classes, attendance via /api/orgs/{id}/classes/{cid}/
+# attendance, fees via /api/orgs/{id}/fees, timetable via
+# /api/orgs/{id}/timetable, exams via /api/orgs/{id}/exams). Each org
+# row now exposes a Members/Classes/Attendance/Fees/Timetable action
+# grid that hits those V2 endpoints in modal dialogs — no redirects.
 _SCHOOL_BODY = """
 <section class="section">
   <div class="card">
     <h2>School & orgs</h2>
-    <p class="sub">Orgs (schools, coaching centres) you are a member of. Manage classes, attendance, fees and timetables from the v1 interface for now.</p>
+    <p class="sub">Schools and coaching centres you're a member of. Tap a tile to manage classes, attendance, fees and timetables.</p>
     <div id="schoolOut"><div class="empty"><span class="spinner"></span> Loading…</div></div>
+  </div>
+
+  <!-- prod-154 — inline modal that shows whatever the user clicked
+       (classes, members, attendance, etc.) without leaving the page -->
+  <div id="orgModal" style="display:none;position:fixed;inset:0;
+       background:rgba(0,0,0,0.55);z-index:1000;align-items:center;
+       justify-content:center;padding:20px">
+    <div style="background:#1f2937;color:#e5e7eb;border-radius:10px;
+         max-width:760px;width:100%;max-height:85vh;overflow:auto;
+         padding:18px 20px;border:1px solid #374151">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <h3 id="orgModalTitle" style="margin:0;font-size:18px">Loading…</h3>
+        <button id="orgModalClose" class="btn ghost" style="padding:4px 10px">✕</button>
+      </div>
+      <div id="orgModalBody"><div class="empty"><span class="spinner"></span> Loading…</div></div>
+    </div>
   </div>
 </section>
 """
 
-_SCHOOL_SCRIPT = """
+_SCHOOL_SCRIPT = r"""
+function openOrgModal(title) {
+  document.getElementById('orgModalTitle').textContent = title;
+  document.getElementById('orgModalBody').innerHTML =
+    '<div class="empty"><span class="spinner"></span> Loading…</div>';
+  document.getElementById('orgModal').style.display = 'flex';
+}
+function closeOrgModal() {
+  document.getElementById('orgModal').style.display = 'none';
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var c = document.getElementById('orgModalClose');
+  if (c) c.addEventListener('click', closeOrgModal);
+  var m = document.getElementById('orgModal');
+  if (m) m.addEventListener('click', function(e) {
+    if (e.target === m) closeOrgModal();
+  });
+});
+
+async function showSection(orgId, kind, title) {
+  openOrgModal(title);
+  var endpoints = {
+    members:    '/api/orgs/' + encodeURIComponent(orgId) + '/members',
+    classes:    '/api/orgs/' + encodeURIComponent(orgId) + '/classes',
+    timetable:  '/api/orgs/' + encodeURIComponent(orgId) + '/timetable',
+    assignments:'/api/orgs/' + encodeURIComponent(orgId) + '/assignments',
+    fees:       '/api/orgs/' + encodeURIComponent(orgId) + '/fees/structures',
+    exams:      '/api/orgs/' + encodeURIComponent(orgId) + '/exams'
+  };
+  var url = endpoints[kind];
+  var body = document.getElementById('orgModalBody');
+  try {
+    var r = await fetch(url, { headers: authH() });
+    if (!r.ok) {
+      var detail = '';
+      try { var ej = await r.json(); detail = ej.detail || ej.error || ''; } catch(_) {}
+      throw new Error('HTTP ' + r.status + (detail ? ' — ' + detail : ''));
+    }
+    var d = await r.json();
+    var rows = d.rows || d.items || d.classes || d.members || d.structures ||
+               d.invoices || d.exams || d.assignments || d.slots || d;
+    if (!Array.isArray(rows)) { rows = [rows]; }
+    if (!rows.length) {
+      body.innerHTML = '<div class="empty">No ' + kind + ' found.</div>';
+      return;
+    }
+    var html = '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+    // Header row uses the keys of the first object
+    var keys = Object.keys(rows[0]).filter(function(k){
+      return ['id','created_at','updated_at','org_id'].indexOf(k) < 0;
+    }).slice(0, 6);
+    html += '<thead><tr>' + keys.map(function(k){
+      return '<th style="text-align:left;padding:6px 8px;background:#374151;'+
+             'border-bottom:1px solid #4b5563">' + escapeHtml(k) + '</th>';
+    }).join('') + '</tr></thead><tbody>';
+    rows.forEach(function(row){
+      html += '<tr>' + keys.map(function(k){
+        var v = row[k];
+        if (v === null || v === undefined) v = '';
+        if (typeof v === 'object') { try { v = JSON.stringify(v); } catch(_) { v = String(v); } }
+        return '<td style="padding:6px 8px;border-bottom:1px solid #374151;vertical-align:top">'+
+               escapeHtml(String(v).slice(0,200)) + '</td>';
+      }).join('') + '</tr>';
+    });
+    html += '</tbody></table>';
+    body.innerHTML = html;
+  } catch(e) {
+    body.innerHTML = '<div class="err">Could not load ' + kind + ': ' +
+      escapeHtml(e.message) + '</div>';
+  }
+}
+
 async function loadSchool() {
   if (!TOK) return;
   var out = document.getElementById('schoolOut');
   try {
     var r = await fetch('/api/orgs/me', { headers: authH() });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
+    if (!r.ok) {
+      var detail = '';
+      try { var ej = await r.json(); detail = ej.detail || ej.error || ''; } catch(_) {}
+      throw new Error('HTTP ' + r.status + (detail ? ' — ' + detail : ''));
+    }
     var d = await r.json();
-    var orgs = d.orgs || d.rows || d;
+    var orgs = d.orgs || d.rows || (Array.isArray(d) ? d : []);
     if (!orgs || !orgs.length) {
-      out.innerHTML = '<div class="empty">You are not a member of any org yet. Ask your school admin to invite you, or <a href="/ui-legacy#school" style="color:#fbbf24">create an org in v1</a>.</div>';
+      out.innerHTML =
+        '<div class="empty">' +
+        '<p>You are not a member of any school or org yet.</p>' +
+        '<p style="margin-top:8px">Ask your school admin to send you an invite, or '+
+        '<a href="/api/orgs" style="color:#fbbf24" onclick="alert(\'Org creation is currently invite-only — contact admin@aipathshala.in to onboard a new school.\');return false;">request a new org</a>.</p>' +
+        '</div>';
       return;
     }
     out.innerHTML = orgs.map(function(o) {
-      return '<div class="result"><strong>' + escapeHtml(o.org_name || o.name || o.id) + '</strong>' +
-        '<div class="sub" style="margin-top:6px">Role: <span class="chip">' + escapeHtml(o.role || 'member') + '</span>' +
-        (o.org_type ? ' · ' + escapeHtml(o.org_type) : '') + '</div>' +
-        '<div style="margin-top:10px"><a class="btn ghost" href="/ui-legacy#school">Open in v1 →</a></div></div>';
+      var orgId = o.id || o.org_id || '';
+      var role  = o.role || 'member';
+      var isStaff = role === 'admin' || role === 'teacher';
+      var actions = [
+        { kind: 'members',     label: 'Members',     icon: '👥' },
+        { kind: 'classes',     label: 'Classes',     icon: '🏫' },
+        { kind: 'timetable',   label: 'Timetable',   icon: '🗓' },
+        { kind: 'assignments', label: 'Assignments', icon: '📝' },
+        { kind: 'fees',        label: 'Fees',        icon: '💳' },
+        { kind: 'exams',       label: 'Exams',       icon: '📋' }
+      ];
+      var tiles = actions.map(function(a){
+        return '<button class="btn ghost" style="padding:8px 12px;flex:1;min-width:110px;text-align:left" '+
+          'onclick="showSection(\'' + orgId + '\',\'' + a.kind + '\',\'' + a.label + ' — ' + escapeHtml(o.org_name || o.name || orgId).replace(/'/g, "\\'") + '\')">'+
+          a.icon + ' ' + a.label + '</button>';
+      }).join('');
+      return '<div class="result"><strong>' + escapeHtml(o.org_name || o.name || orgId) + '</strong>' +
+        '<div class="sub" style="margin-top:6px">Role: <span class="chip">' + escapeHtml(role) + '</span>' +
+        (o.org_type ? ' · ' + escapeHtml(o.org_type) : '') +
+        (isStaff ? ' · <span class="chip" style="background:#16855f;color:#fff">Staff access</span>' : '') +
+        '</div>' +
+        '<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">' + tiles + '</div>' +
+        '</div>';
     }).join('');
   } catch(e) {
-    out.innerHTML = '<div class="err">Could not load: ' + escapeHtml(e.message) +
-      ' — try <a href="/ui-legacy#school" style="color:#fbbf24">v1</a>.</div>';
+    out.innerHTML = '<div class="err">Could not load your orgs: ' + escapeHtml(e.message) +
+      '<div style="margin-top:8px"><button class="btn ghost" onclick="loadSchool()">Retry</button></div></div>';
   }
 }
 if (TOK) loadSchool();
@@ -1197,7 +1323,7 @@ _SYLLABUS_DATA = """const SYLLABUS = {
     },
   },
   primary: {
-    label: 'Primary school (Class 1–5, age 6–10)',
+    label: 'Primary (Class 1–5, age 6–10)',
     classes: {
       'Class 1 (age 6)': [
         'English — phonics, blending sounds, simple sentences, naming words (nouns)',
@@ -1749,10 +1875,16 @@ _SYLLABUS_DATA = """const SYLLABUS = {
       ],
     },
   },
-  state: {
-    label: 'State boards (Maharashtra / TN / Karnataka / etc.)',
+  // prod-150 — Per-state syllabus buckets (was a single squashed "state" bucket).
+  // Each state board now gets its own dropdown entry, so the user can pick
+  // their specific state board and see its NCERT-aligned chapter list. All
+  // 13 major Indian state boards covered: Maharashtra, Tamil Nadu, Karnataka,
+  // Andhra Pradesh, Telangana, Gujarat, Kerala, Punjab, West Bengal, Uttar
+  // Pradesh, Haryana, Odisha, Assam, Bihar.
+  state_mh: {
+    label: 'Maharashtra Board (MSBSHSE)',
     classes: {
-      'Maharashtra Board Class 10': [
+      'Class 10 (SSC)': [
         'Marathi — Padhya, Gadya, Vyakaran (grammar), letter writing',
         'English — Communicative, comprehension, writing skills',
         'Mathematics Part I — Linear equations, quadratic equations, AP, financial planning, probability',
@@ -1761,25 +1893,226 @@ _SYLLABUS_DATA = """const SYLLABUS = {
         'Science Part II — School of elements, life processes in plants, control & coordination, environmental management, disaster management',
         'Social Sciences — History (Indian National Movement), Political Science (Constitution + Government), Geography (Physical + Economic geography of India)',
       ],
-      'Tamil Nadu Class 10 — STAR': [
+      'Class 12 (HSC)': [
+        'English — Yuvakbharati (prose, poetry, drama, writing skills)',
+        'Mathematics & Statistics — Mathematical logic, matrices, trigonometric functions, vectors, 3D geometry, line and plane, continuity, differentiation, applications of derivatives, integration, applications, differential equations',
+        'Physics — Rotational dynamics, mechanical properties of fluids, kinetic theory of gases and radiation, thermodynamics, oscillations, superposition of waves, wave optics, electrostatics, current electricity, magnetic fields, electromagnetic induction, AC circuits, dual nature of matter, structure of atom, semiconductors, communication systems',
+        'Chemistry — Solid state, solutions, ionic equilibria, chemical thermodynamics, electrochemistry, chemical kinetics, elements of groups 16/17/18, transition and inner transition elements, coordination compounds, halogen derivatives, alcohols/phenols/ethers, aldehydes/ketones/carboxylic acids, amines, biomolecules, polymers, green chemistry',
+        'Biology — Reproduction in lower and higher plants, human reproduction, principles of inheritance, evolution, human health and disease, microbes in human welfare, biotechnology, organisms and populations, ecosystems, biodiversity, environmental issues',
+      ],
+    },
+  },
+  state_tn: {
+    label: 'Tamil Nadu Board (Samacheer Kalvi)',
+    classes: {
+      'Class 10 (SSLC)': [
         'Tamil and English — Prose, poetry, supplementary, grammar',
         'Mathematics — Relations and functions, numbers and sequences, algebra, geometry, coordinate geometry, trigonometry, mensuration, statistics & probability',
         'Science — Physics: Laws of motion, optics, thermal physics, electricity, atoms and molecules; Chemistry: periodic classification, types of chemical reactions, solutions, atoms and molecules, carbon and its compounds; Biology: human physiology, nervous system, plant physiology, reproduction, transportation in plants and circulation in animals, conservation of plants and animals',
         'Social Science — History (rise of nationalism, freedom struggle, Tamil Nadu in post-independence), Geography (India: agriculture, industries, population), Civics (democracy, Indian Constitution), Economics (national income, consumer rights)',
       ],
-      'Karnataka SSLC (Class 10)': [
+      'Class 12 (HSC)': [
+        'Tamil & English — Literature, prose, grammar, composition',
+        'Mathematics — Applications of matrices and determinants, complex numbers, theory of equations, inverse trigonometric functions, two-dimensional analytical geometry, applications of vector algebra, applications of differential calculus, differentials and partial derivatives, applications of integration, ordinary differential equations, probability distributions, discrete mathematics',
+        'Physics — Electrostatics, current electricity, magnetism, electromagnetic induction, electromagnetic waves, ray optics, wave optics, dual nature of radiation, atomic and nuclear physics, semiconductor electronics, communication systems, recent developments',
+        'Chemistry — Metallurgy, p-block elements (groups 13-18), transition and inner transition elements, coordination chemistry, solid state, solutions, electrochemistry, chemical kinetics, surface chemistry, hydroxy compounds, ethers, carbonyl compounds, carboxylic acids, organic nitrogen compounds, biomolecules, chemistry in everyday life',
+        'Biology — Reproduction (plants and humans), genetics, molecular basis of inheritance, evolution, human health and disease, biotechnology, microbes in human welfare, organisms and populations, ecosystems, biodiversity, environmental issues',
+      ],
+    },
+  },
+  state_ka: {
+    label: 'Karnataka State Board (KSEEB)',
+    classes: {
+      'Class 10 (SSLC)': [
         'Mathematics — Arithmetic progressions, triangles, pair of linear equations, circles, area related to circles, constructions, coordinate geometry, real numbers, polynomials, quadratic equations, introduction to trigonometry, applications of trigonometry, statistics, surface areas and volumes, probability',
         'Science — Light: reflection and refraction, human eye, electricity, magnetic effects of electric current, sources of energy, life processes, control & coordination, heredity & evolution, chemical reactions, acids/bases/salts, metals & non-metals, carbon and its compounds, periodic classification, our environment, sustainable management of natural resources',
         'Social Science — History (advent of Europeans, freedom struggle, post-independence India), Geography (Karnataka: physical, agricultural, industrial), Political Science (Indian Constitution), Economics (development, government and taxes), Business Studies, Sociology',
       ],
-      'AP / Telangana SSC (Class 10)': [
+      'Class 12 (PUC)': [
+        'Kannada / English — Prescribed textbooks',
+        'Mathematics — Relations and functions, inverse trigonometric functions, matrices, determinants, continuity and differentiability, application of derivatives, integrals, application of integrals, differential equations, vector algebra, three-dimensional geometry, linear programming, probability',
+        'Physics — Electric charges and fields, electrostatic potential, current electricity, moving charges, magnetism, electromagnetic induction, AC, EM waves, ray optics, wave optics, dual nature, atoms, nuclei, semiconductor electronics, communication systems',
+        'Chemistry — Solid state, solutions, electrochemistry, chemical kinetics, surface chemistry, general metallurgy, p-block elements, d and f block, coordination compounds, haloalkanes and haloarenes, alcohols/phenols/ethers, aldehydes/ketones/carboxylic acids, amines, biomolecules, polymers, chemistry in everyday life',
+        'Biology — Reproduction in flowering plants and humans, principles of inheritance, molecular basis of inheritance, evolution, human health, microbes in human welfare, biotechnology, organisms and populations, ecosystems, biodiversity, environmental issues',
+      ],
+    },
+  },
+  state_ap: {
+    label: 'Andhra Pradesh Board (BIEAP / BSEAP)',
+    classes: {
+      'Class 10 (SSC)': [
         'Telugu — Padyalu, Gadyalu, vyakaranam, upavachakam',
         'Hindi — composition, grammar, prose and poetry',
         'English — passages, poetry, drama, writing tasks',
         'Mathematics — Real numbers, sets, polynomials, pair of linear equations, quadratic equations, progressions, coordinate geometry, similar triangles, tangents and secants, mensuration, trigonometry, applications of trigonometry, probability, statistics',
         'General Science (Physics) — Reflection of light at curved surfaces, refraction of light at plane and curved surfaces, human eye, electric current, electromagnetism, principles of metallurgy',
         'General Science (Biology) — Nutrition, respiration, transportation, excretion, coordination, reproduction, heredity, our environment, natural resources',
-        'Social Studies — India: Relief features, monsoon climate, production sectors, food security, sustainable development, biodiversity, migration, urbanisation; Modern World: Industrial revolution, world between wars; National movement and post-independence India',
+        'Social Studies — India: relief features, monsoon climate, production sectors, food security, sustainable development, biodiversity, migration, urbanisation; Modern World: industrial revolution, world between wars; National movement and post-independence India',
+      ],
+      'Class 12 (Intermediate)': [
+        'English & Sanskrit/Telugu — prescribed textbooks',
+        'Mathematics IIA & IIB — Complex numbers, de Moivre, quadratic expressions, theory of equations, permutations and combinations, binomial theorem, partial fractions, probability, random variables; circle, system of circles, parabola, ellipse, hyperbola, integration, definite integrals, differential equations',
+        'Physics — Waves, ray optics, wave optics, electric charges, current electricity, magnetism, EM induction, AC, EM waves, dual nature, atoms, nuclei, semiconductor devices, communication systems',
+        'Chemistry — Solid state, solutions, electrochemistry, chemical kinetics, surface chemistry, general metallurgy, p-block elements (13-18), d and f block, coordination, haloalkanes and haloarenes, alcohols, phenols, ethers, aldehydes and ketones, carboxylic acids, organic nitrogen compounds, biomolecules, chemistry in everyday life, polymers',
+        'Botany & Zoology — Plant physiology, reproduction in plants, microbiology, genetics, ecology; human anatomy and physiology, reproduction, evolution, human health, animal husbandry, biotechnology, ecosystems',
+      ],
+    },
+  },
+  state_ts: {
+    label: 'Telangana Board (TSBIE / SCERT-TS)',
+    classes: {
+      'Class 10 (SSC)': [
+        'Telugu — Padyalu, Gadyalu, vyakaranam',
+        'Hindi — Prose, poetry, grammar, composition',
+        'English — Reading, writing, grammar, literature',
+        'Mathematics — Real numbers, sets, polynomials, pair of linear equations, quadratic equations, progressions, coordinate geometry, similar triangles, tangents and secants to a circle, mensuration, trigonometry, applications of trigonometry, probability, statistics',
+        'Physical Science — Reflection of light at curved surfaces, refraction of light at plane and curved surfaces, human eye, electric current, electromagnetism, principles of metallurgy',
+        'Biological Science — Nutrition, respiration, transportation, excretion, coordination, reproduction, heredity, our environment, natural resources',
+        'Social Studies — Telangana state, India, world geography & history, political science, economics, disaster management, contemporary world',
+      ],
+      'Class 12 (Intermediate)': [
+        'Mathematics, Physics, Chemistry, Biology (Botany + Zoology) — same NCERT-aligned syllabus as Andhra Pradesh BIEAP (shared textbook framework)',
+      ],
+    },
+  },
+  state_gj: {
+    label: 'Gujarat Board (GSEB)',
+    classes: {
+      'Class 10 (SSC)': [
+        'Gujarati / Hindi / English — Prose, poetry, grammar, composition',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, introduction to trigonometry, applications of trigonometry, circles, constructions, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Chemical reactions, acids/bases/salts, metals and non-metals, carbon and its compounds, periodic classification, life processes, control and coordination, reproduction, heredity and evolution, light: reflection and refraction, human eye, electricity, magnetic effects, sources of energy, our environment, management of natural resources',
+        'Social Science — Indian Heritage, freedom struggle, post-independence India, Indian Constitution, democracy, economic development, agriculture and industry, transport and trade, India: physical, climate, natural vegetation, manufacturing, planning',
+      ],
+      'Class 12 (HSC)': [
+        'Gujarati / English — Literature, composition',
+        'Mathematics — Same as CBSE Class 12 NCERT syllabus (relations and functions, matrices, determinants, calculus, vectors, 3D geometry, linear programming, probability)',
+        'Physics, Chemistry, Biology — Same as CBSE Class 12 NCERT (electric charges through communication systems; solid state through everyday-life chemistry; reproduction through environmental issues)',
+      ],
+    },
+  },
+  state_kl: {
+    label: 'Kerala Board (SCERT-KL / DHSE)',
+    classes: {
+      'Class 10 (SSLC)': [
+        'Malayalam — Padyalu, gadyalu, vyakaranam',
+        'English — Reading, writing, grammar, literature',
+        'Hindi — Prose, poetry, grammar',
+        'Mathematics — Arithmetic sequences, circles, mathematics of chance, second-degree equations, trigonometry, coordinates, tangents, solids, statistics, polynomials',
+        'Physics — Electromagnetic induction, electric current, refraction, wave motion, energy management',
+        'Chemistry — Periodic table, mole concept, metallurgy, carbon and its compounds (organic chemistry)',
+        'Biology — Plant biology, sensory inputs, nervous system, reproduction, heredity and evolution, life on earth',
+        'Social Science — Geography (India: physical, climate, agriculture), History (India under Britishers, freedom struggle, modern India), Civics (Indian Constitution), Economics (development, public finance)',
+      ],
+      'Class 12 (Plus Two / DHSE)': [
+        'Malayalam / English — prescribed textbooks',
+        'Mathematics, Physics, Chemistry, Biology — Same NCERT-aligned syllabus as CBSE Class 12',
+      ],
+    },
+  },
+  state_pb: {
+    label: 'Punjab Board (PSEB)',
+    classes: {
+      'Class 10': [
+        'Punjabi — Prescribed textbook, grammar, composition',
+        'English — Reading, writing, grammar, prose and poetry',
+        'Hindi — Prose, poetry, grammar',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, constructions, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Chemical reactions, acids/bases/salts, metals and non-metals, carbon and its compounds, periodic classification, life processes, control and coordination, reproduction, heredity and evolution, light, electricity, magnetic effects, sources of energy, environment, natural resources',
+        'Social Science — History (modern India), Geography (India: physical, resources, agriculture), Political Science (Indian Constitution), Economics (development, sectors of economy)',
+      ],
+      'Class 12': [
+        'Mathematics, Physics, Chemistry, Biology — Same NCERT-aligned syllabus as CBSE Class 12',
+      ],
+    },
+  },
+  state_wb: {
+    label: 'West Bengal Board (WBBSE / WBCHSE)',
+    classes: {
+      'Class 10 (Madhyamik)': [
+        'Bengali / English — Prose, poetry, grammar, composition',
+        'Mathematics — Real numbers, polynomials, quadratic equations, ratio and proportion, AP, simple and compound interest, similarity, theorems on circles, coordinate geometry, trigonometry, mensuration, statistics and probability',
+        'Physical Science — Concerns about environment, behaviour of gases, thermal phenomena, light, current electricity, electromagnetism, atomic nucleus, periodic table, chemical calculations, ionic and covalent bonding, metallurgy, atomic structure, inorganic chemistry, organic chemistry',
+        'Life Science — Control and coordination in living organisms, continuity of life, heredity and evolution, environment and its resources',
+        'History — Modern India: nationalism, freedom struggle, post-independence India',
+        'Geography — Earth processes, atmospheric phenomena, India: physical setting, agriculture, industries, transport and communication',
+      ],
+      'Class 12 (HS)': [
+        'Bengali / English — Literature, composition',
+        'Mathematics, Physics, Chemistry, Biology — WBCHSE syllabus aligned with NCERT, with regional emphasis on industrial geography and Bengal-rooted case studies',
+      ],
+    },
+  },
+  state_up: {
+    label: 'UP Board (UPMSP)',
+    classes: {
+      'Class 10 (High School)': [
+        'Hindi — Prose, poetry, grammar',
+        'English — Prose, poetry, supplementary, grammar',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Chemical reactions, acids/bases/salts, metals and non-metals, carbon and its compounds, periodic classification, life processes, control and coordination, reproduction, heredity and evolution, light, electricity, magnetic effects, sources of energy, environment',
+        'Social Science — History (modern India, freedom struggle), Geography (India: physical, resources, agriculture, industry), Civics (Indian Constitution), Economics (sectors of economy, money and credit)',
+      ],
+      'Class 12 (Intermediate)': [
+        'Hindi / English — Literature, composition',
+        'Mathematics, Physics, Chemistry, Biology — NCERT-aligned (same chapter list as CBSE Class 12)',
+      ],
+    },
+  },
+  state_hr: {
+    label: 'Haryana Board (BSEH)',
+    classes: {
+      'Class 10': [
+        'Hindi / English — Literature, grammar, composition',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Same NCERT-aligned content as CBSE Class 10',
+        'Social Science — History, Geography, Political Science, Economics — Haryana-specific case studies plus national NCERT chapters',
+      ],
+      'Class 12': [
+        'Mathematics, Physics, Chemistry, Biology — NCERT-aligned (same chapter list as CBSE Class 12)',
+      ],
+    },
+  },
+  state_od: {
+    label: 'Odisha Board (BSE Odisha / CHSE)',
+    classes: {
+      'Class 10 (HSC)': [
+        'Odia — Prose, poetry, grammar',
+        'English — Reading, writing, grammar, literature',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, constructions, areas, surface areas and volumes, statistics, probability',
+        'General Science — Chemical reactions, acids/bases/salts, metals and non-metals, periodic classification, life processes, control and coordination, reproduction, heredity and evolution, light, electricity, magnetic effects, sources of energy, environment',
+        'Social Science — History (modern India), Geography (India: physical, resources, agriculture), Political Science (Indian Constitution), Economics (development, sectors)',
+      ],
+      'Class 12 (+2)': [
+        'Mathematics, Physics, Chemistry, Biology — NCERT-aligned (same as CBSE Class 12)',
+      ],
+    },
+  },
+  state_as: {
+    label: 'Assam Board (SEBA / AHSEC)',
+    classes: {
+      'Class 10 (HSLC)': [
+        'Assamese / English — Prose, poetry, grammar, composition',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Chemical reactions, acids/bases/salts, metals and non-metals, carbon and its compounds, periodic classification, life processes, control and coordination, reproduction, heredity and evolution, light, electricity, magnetic effects, sources of energy, environment',
+        'Social Science — History (modern India), Geography (India: physical, resources, agriculture; Assam: regional geography), Political Science (Constitution), Economics (sectors, money and credit)',
+      ],
+      'Class 12 (HS / +2)': [
+        'Mathematics, Physics, Chemistry, Biology — NCERT-aligned (same as CBSE Class 12)',
+      ],
+    },
+  },
+  state_br: {
+    label: 'Bihar Board (BSEB)',
+    classes: {
+      'Class 10 (Matric)': [
+        'Hindi / English / Sanskrit — Literature, grammar, composition',
+        'Mathematics — Real numbers, polynomials, pair of linear equations, quadratic equations, AP, triangles, coordinate geometry, trigonometry, circles, areas related to circles, surface areas and volumes, statistics, probability',
+        'Science — Same NCERT-aligned content as CBSE Class 10',
+        'Social Science — History (modern India, freedom struggle), Geography (India: physical, resources, agriculture; Bihar: regional emphasis), Political Science (Constitution), Economics (sectors of economy, banking)',
+      ],
+      'Class 12 (Intermediate)': [
+        'Mathematics, Physics, Chemistry, Biology — NCERT-aligned (same as CBSE Class 12)',
       ],
     },
   },
@@ -2006,12 +2339,22 @@ window.switchClass = function(c) {
   var out = document.getElementById('syChapters');
   if (!chapters.length) { out.innerHTML = '<div class="empty">No chapters in this section yet.</div>'; return; }
   out.innerHTML = chapters.map(function(ch, i) {
-    return '<div class="result"><strong>' + (i+1) + '. ' + escapeHtml(ch.split(' — ')[0]) + '</strong>' +
+    // prod-149 — pass selected board/class/chapter as query params so the
+    // destination pages can pre-filter to the student's chosen scope
+    // instead of resetting to the generic catalog.
+    var chapterTitle = ch.split(' — ')[0];
+    var qs = '?board=' + encodeURIComponent(CURRENT_BOARD) +
+             '&class=' + encodeURIComponent(c) +
+             '&chapter=' + encodeURIComponent(chapterTitle);
+    var chatQs = qs + '&q=' + encodeURIComponent(
+      'Teach me ' + chapterTitle + ' (' + c + ', ' + CURRENT_BOARD + ')'
+    );
+    return '<div class="result"><strong>' + (i+1) + '. ' + escapeHtml(chapterTitle) + '</strong>' +
       (ch.indexOf(' — ') > 0 ? '<div class="sub" style="margin-top:6px">' + escapeHtml(ch.split(' — ').slice(1).join(' — ')) + '</div>' : '') +
       '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">' +
-        '<a class="btn ghost" href="/practice">Practice this →</a>' +
-        '<a class="btn ghost" href="/flashcards">Flashcards →</a>' +
-        '<a class="btn ghost" href="/chat">Ask AI tutor →</a>' +
+        '<a class="btn ghost" href="/practice' + qs + '">Practice this →</a>' +
+        '<a class="btn ghost" href="/flashcards' + qs + '">Flashcards →</a>' +
+        '<a class="btn ghost" href="/chat' + chatQs + '">Ask AI tutor →</a>' +
       '</div></div>';
   }).join('');
 };
@@ -2022,7 +2365,13 @@ fetch('/api/me/dashboard', { headers: authH() }).then(function(r){ return r.json
   var defaultKey = 'cbse_9_10';
   var cg = onb.class_grade || '';
   if (onb.board === 'icse') defaultKey = 'icse';
-  else if (onb.board && onb.board.indexOf('state_') === 0) defaultKey = 'state';
+  // prod-150 — Each state board is its own bucket now; pass the onboarding
+  // board key straight through when it's a recognised state_* key, else
+  // fall back to Maharashtra (the first state board we documented).
+  else if (onb.board && onb.board.indexOf('state_') === 0) {
+    if (SYLLABUS[onb.board]) defaultKey = onb.board;
+    else defaultKey = 'state_mh';
+  }
   else if (onb.target_exam === 'jee_main' || onb.target_exam === 'jee_advanced') defaultKey = 'jee';
   else if (onb.target_exam === 'neet_ug' || onb.target_exam === 'neet') defaultKey = 'neet';
   else if (onb.target_exam === 'upsc_cse' || onb.target_exam === 'upsc') defaultKey = 'upsc';
