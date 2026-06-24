@@ -36,6 +36,78 @@ services:
           name: padhai-db
           property: connectionString
 
+      # ── Critical boot config (prod-179) ───────────────────────────
+      # APP_ENV=production turns ON the strict secret validation, the
+      # admin-gate safeguard, and the launch-readiness warnings in the
+      # FastAPI lifespan. Without it the server runs in permissive dev
+      # mode even in prod.
+      - key: APP_ENV
+        value: production
+      - key: PADHAI_REQUIRE_AUTH
+        value: "1"
+
+      # JWT signing secrets. generateValue makes Render mint a strong
+      # random value once at first deploy — no manual paste, no
+      # placeholder that the prod-mode validator would reject. Rotating
+      # logs everyone out, so leave these stable.
+      - key: PADHAI_JWT_SECRET
+        generateValue: true
+
+      # CRITICAL: the SQLite module DB (concept_videos, question_bank,
+      # mastery, memory-boost, examples + ~50 other module tables) must
+      # live on the persistent disk, NOT the default ~/.padhai/jobs.db
+      # on the ephemeral container FS. Without this line, EVERY redeploy
+      # wipes all content + per-user module state. The disk is mounted
+      # at /var/padhai/cache below.
+      - key: PADHAI_DB_PATH
+        value: /var/padhai/cache/padhai.db
+
+      # Public base URL — used for OG tags, hreflang, parent-consent
+      # links, SSO redirect URIs. Set to your Render service URL (or
+      # custom domain) in the dashboard.
+      - key: APP_BASE_URL
+        sync: false   # e.g. https://padhai.onrender.com
+
+      # Admin gate: comma-separated superuser emails. DATABASE_URL is
+      # set above so the org-membership admin path works regardless,
+      # but this gives a non-DB admin list too. Set in dashboard.
+      - key: PADHAI_SUPERUSER_EMAILS
+        sync: false   # e.g. ops@yourdomain.com
+
+      # ── SMTP (DPDP §9 parent-consent emails) ──────────────────────
+      # Without these, under-18 consent emails queue to the outbox for
+      # manual admin processing. Verify with scripts/check_smtp.py.
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false   # 587 (STARTTLS) or 465 (implicit TLS)
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+
+      # ── Payments (Razorpay) ───────────────────────────────────────
+      # Start with rzp_test_ keys; flip to rzp_live_ after one verified
+      # roundtrip (scripts/check_razorpay.py --create-order). The
+      # webhook secret is set on the Razorpay dashboard webhook page.
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+
+      # ── Observability (Sentry) ────────────────────────────────────
+      # Without a DSN, production errors are invisible. Free tier is
+      # plenty for the first 1000 users. Verify with
+      # scripts/check_sentry.py --fire.
+      - key: SENTRY_DSN
+        sync: false
+      - key: PADHAI_SENTRY_TEST_TOKEN
+        generateValue: true   # gates /__sentry_test in prod
+
       # Cloudflare R2 for video storage. Set in dashboard:
       #   account: <your account id>
       #   bucket:  padhai-videos
@@ -95,5 +167,6 @@ services:
       # and drop the mount line in padhai/web.py. The admin app code
       # already runs standalone — see admin/Dockerfile.
       - key: ADMIN_JWT_SECRET
-        sync: false   # Separate from PADHAI_JWT_SECRET so admin keys
-                      # can be rotated independently of student-app keys.
+        generateValue: true   # Separate from PADHAI_JWT_SECRET so admin
+                      # keys rotate independently of student-app keys.
+                      # generateValue = Render mints it; no manual paste.

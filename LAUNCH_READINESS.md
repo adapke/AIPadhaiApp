@@ -1,10 +1,59 @@
 # Launch Readiness — AI Pathshala
 
-Last updated: 2026-06-14 (after prod-171..178 — hard-blocker engineering complete).
+Last updated: 2026-06-15 (prod-179 — Render deploy runbook + one-command
+content seeder + render.yaml deploy-bug fixes).
 
 This document is your **one-page checklist** between "code is ready" and
 "paying customers in production". It splits cleanly into **DONE
 (engineering)** and **YOU (ops + content + legal)**.
+
+---
+
+## 0. Render deploy runbook (prod-179) — the exact sequence
+
+`render.yaml` is now deploy-ready. The three bugs that would have broken
+a first deploy are fixed:
+  - `PADHAI_JWT_SECRET` + `ADMIN_JWT_SECRET` use `generateValue: true`
+    (Render mints strong secrets — no manual paste, no placeholder the
+    prod validator rejects).
+  - `PADHAI_DB_PATH=/var/padhai/cache/padhai.db` puts the SQLite module
+    DB on the **persistent disk** — without this, every redeploy wiped
+    all content + per-user module state.
+  - `APP_ENV=production` turns on the strict secret + admin-gate +
+    launch-readiness checks.
+
+**Architecture note (important):** the app runs a *hybrid* DB:
+  - **Postgres** (DATABASE_URL): users, jobs, lessons (core auth + queue).
+  - **SQLite on the persistent disk** (PADHAI_DB_PATH): the ~55 module
+    tables — concept videos, PYQs, examples, mastery, memory-boost, etc.
+
+This is the supported single-instance mode. It is correct for a soft
+launch. It does NOT shard across multiple web replicas (the SQLite
+module DB is per-disk), so keep the Render service at **1 instance**
+until the module tables are migrated to Postgres. The Liquibase
+changeset 002 already carries the Postgres schema for that future
+migration.
+
+**Deploy steps:**
+
+1. Push to GitHub, then in Render: **Blueprint → point at this repo**.
+   Render reads `render.yaml`, provisions Postgres + the web service +
+   the 5GB disk, and auto-generates the JWT secrets.
+2. In the Render dashboard, fill the `sync: false` secrets:
+   `ANTHROPIC_API_KEY`, `APP_BASE_URL`, `PADHAI_SUPERUSER_EMAILS`,
+   and (when ready) SMTP_*, RAZORPAY_*, SENTRY_DSN, S3_*.
+3. First deploy runs `preDeployCommand: python -m scripts.migrate`
+   (core Postgres schema, idempotent).
+4. **Seed content once** (fresh disk is empty). Open a Render shell:
+   ```bash
+   python -m scripts.seed_all_content
+   ```
+   This imports ~2,478 PYQs, 90 concept videos (45 auto-promoted to
+   verified), and 48 real-world examples — all from repo data files,
+   idempotent. Use `--skip-curate` if outbound network is restricted.
+5. Bootstrap the first admin (see §2.A.6).
+6. Verify: `PADHAI_BASE=https://your.app python scripts/launch_smoke.py --full`
+   should report 21/21.
 
 ---
 
