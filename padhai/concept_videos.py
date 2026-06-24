@@ -745,14 +745,26 @@ def list_curator_queue(
         return [_row(r) for r in cur.fetchall()]
 
 
-def list_concepts(*, language: str = "en") -> list[str]:
-    """Distinct concept names currently in the catalog."""
+def list_concepts(
+    *, language: str = "en", quality_tier: str | None = "verified",
+) -> list[str]:
+    """Distinct concept names currently in the catalog.
+
+    prod-180 — defaults to `quality_tier='verified'` so public surfaces
+    (the /concept SEO index, the dashboard) never list a concept whose
+    only video is an unconfirmed `channel_seed` stub (those carry
+    placeholder URLs that 404 / show "video unavailable"). Pass
+    `quality_tier=None` to list every tier (admin / curator views)."""
+    sql = (
+        "SELECT DISTINCT concept FROM concept_videos WHERE language = ?"
+    )
+    params: list = [language]
+    if quality_tier:
+        sql += " AND quality_tier = ?"
+        params.append(quality_tier)
+    sql += " ORDER BY concept"
     with _conn() as conn:
-        rows = conn.execute(
-            "SELECT DISTINCT concept FROM concept_videos "
-            "WHERE language = ? ORDER BY concept",
-            (language,),
-        ).fetchall()
+        rows = conn.execute(sql, params).fetchall()
     return [r[0] for r in rows]
 
 

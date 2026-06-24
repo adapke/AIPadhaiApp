@@ -36,18 +36,26 @@ def list_videos(
     language: str = Query("en"),
     subject: str | None = None,
     grade: int | None = None,
-    quality_tier: str | None = Query(
-        None,
-        description="verified | channel_seed | ai_fallback",
+    quality_tier: str = Query(
+        "verified",
+        description=(
+            "verified (default — only human/auto-confirmed playable "
+            "videos) | channel_seed | ai_fallback | all"
+        ),
     ),
     limit: int = Query(10, ge=1, le=50),
 ) -> dict:
+    # prod-180 — This is a PUBLIC endpoint (dashboard strip + /concept).
+    # Default to verified-only so students never get a card that opens
+    # a "video unavailable" page from an unconfirmed channel_seed stub.
+    # `quality_tier=all` opts back into every tier for admin tooling.
+    tier = None if quality_tier == "all" else quality_tier
     rows = _cv.search(
         concept=concept,
         language=language,
         subject=subject,
         grade=grade,
-        quality_tier=quality_tier,
+        quality_tier=tier,
         limit=limit,
     )
     return {

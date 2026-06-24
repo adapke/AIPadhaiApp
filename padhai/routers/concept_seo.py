@@ -87,13 +87,19 @@ def _md_to_safe_html(md: str) -> str:
 
 def _video_for_slug(slug: str, language: str) -> _cv.ConceptVideo | None:
     """Look up a concept video by slug, preferring the requested
-    language. Falls back to English when the locale-specific row
-    doesn't exist. Tries `verified` first, then `channel_seed`."""
+    language, falling back to English.
+
+    prod-180 — verified-only. Previously this fell back to
+    `channel_seed`, but those carry unconfirmed/placeholder URLs that
+    can 404 ("video unavailable"). A public SEO page must never embed
+    a broken video, so we only serve `verified`. A concept whose only
+    video is still channel_seed simply 404s here until a curator
+    confirms a real URL (better a 404 than a dead embed in Google's
+    index)."""
     for lang in (language, "en"):
-        for tier in ("verified", "channel_seed"):
-            v = _cv.get_by_concept_slug(slug, language=lang, quality_tier=tier)
-            if v is not None:
-                return v
+        v = _cv.get_by_concept_slug(slug, language=lang, quality_tier="verified")
+        if v is not None:
+            return v
     return None
 
 
