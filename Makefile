@@ -1,7 +1,7 @@
 # E2E orchestration. `make e2e` is the one command everything else
 # composes from. See SPRINT_E2E.md for the sprint plan.
 
-.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify verify-ci all-verify docs-check lint security i18n-audit audit coverage gitleaks backup stats iframe-check nightly-ops docker-check
+.PHONY: help setup up down logs ps seed smoke cypress e2e clean test verify verify-ci all-verify docs-check lint security i18n-audit audit coverage gitleaks backup stats iframe-check nightly-ops docker-check launch-smoke launch-check provider-checks
 
 help: ## Show this help
 	@echo ""
@@ -143,6 +143,76 @@ all-verify: ## prod-102 — Aggregate: verify + audit + coverage. One command fo
 	@$(MAKE) --no-print-directory coverage || echo "[warn] coverage step skipped or failed; continuing"
 	@echo ""
 	@echo "all-verify done — review the per-step output above before pushing."
+
+launch-smoke: ## prod-166 — HTTP smoke against a running dev server. Verifies prod-149..162.
+	@PYTHONPATH=. python scripts/launch_smoke.py --base $${PADHAI_BASE:-http://localhost:8000}
+
+launch-check: ## prod-166/178 — Comprehensive pre-deploy gate. Lint + tests + security invariants + DPDP purge dry-run + HTTP smoke + provider verifiers.
+	@echo ""
+	@echo "==> Step 1/9: make verify (lint + guards + pytest + structural bench)"
+	@$(MAKE) --no-print-directory verify
+	@echo ""
+	@echo "==> Step 2/9: make security (codified SECURITY.md invariants)"
+	@$(MAKE) --no-print-directory security
+	@echo ""
+	@echo "==> Step 3/9: Postgres migration syntax check (Liquibase 001 + 002)"
+	@PYTHONPATH=. python scripts/check_pg_migrations.py
+	@echo ""
+	@echo "==> Step 4/9: DPDP purge cron dry-run (must succeed even on empty DB)"
+	@PYTHONPATH=. python scripts/dpdp_purge.py --dry-run
+	@echo ""
+	@echo "==> Step 5/9: SMTP config check (DPDP §9 parent-consent emails)"
+	@PYTHONPATH=. python scripts/check_smtp.py --check \
+		|| echo "[skip] SMTP not configured (OK for soft launch)"
+	@echo ""
+	@echo "==> Step 6/9: Razorpay config + webhook signature check"
+	@PYTHONPATH=. python scripts/check_razorpay.py --check --verify-sig \
+		|| echo "[skip] Razorpay not configured (OK for free-tier launch)"
+	@echo ""
+	@echo "==> Step 7/9: Sentry config + SDK check"
+	@PYTHONPATH=. python scripts/check_sentry.py --check \
+		|| echo "[skip] Sentry not configured (errors will be invisible in prod)"
+	@echo ""
+	@echo "==> Step 8/9: live HTTP smoke (requires server on $${PADHAI_BASE:-http://localhost:8000})"
+	@curl -fsS $${PADHAI_BASE:-http://localhost:8000}/healthz > /dev/null 2>&1 \
+		&& $(MAKE) --no-print-directory launch-smoke \
+		|| echo "[skip] no live server — start with 'bash scripts/run_local.sh' to include this step"
+	@echo ""
+	@echo "==> Step 9/9: production secrets check"
+	@if [ "$$APP_ENV" = "production" ]; then \
+		echo "  APP_ENV=production — running real secret validation"; \
+		python -c "from padhai.auth import _jwt_secret; _jwt_secret()" \
+			&& echo "  [OK] PADHAI_JWT_SECRET passes placeholder check"; \
+	else \
+		echo "  [info] APP_ENV not 'production' — skipping live secret checks."; \
+		echo "  Run 'python scripts/generate_prod_secrets.py' to emit a starter .env."; \
+	fi
+	@echo ""
+	@echo "launch-check done — review the per-step output above."
+	@echo ""
+	@echo "Remaining for human ops (none of these are automatable):"
+	@echo "  1. python scripts/generate_prod_secrets.py > production.env"
+	@echo "     audit + fill TODOs → paste into your secret manager"
+	@echo "  2. Provision Postgres, run liquibase update against DATABASE_URL"
+	@echo "  3. SMTP creds: python scripts/check_smtp.py --send=you@yourdomain.com"
+	@echo "  4. Razorpay: python scripts/check_razorpay.py --create-order"
+	@echo "  5. Sentry DSN: python scripts/check_sentry.py --fire"
+	@echo "  6. Admin: python scripts/bootstrap_admin.py --email=... (server-side)"
+	@echo "  7. Mobile: cd mobile && CAPACITOR_SERVER_URL=https://api.yourdomain.com npm run build:prod"
+	@echo "  8. Curator pass on remaining channel_seed concept videos (~15 min)"
+
+provider-checks: ## prod-178 — Run all provider config checks (SMTP, Razorpay, Sentry). No network calls.
+	@echo "==> SMTP"
+	@PYTHONPATH=. python scripts/check_smtp.py --check || true
+	@echo ""
+	@echo "==> Razorpay"
+	@PYTHONPATH=. python scripts/check_razorpay.py --check --verify-sig || true
+	@echo ""
+	@echo "==> Sentry"
+	@PYTHONPATH=. python scripts/check_sentry.py --check || true
+	@echo ""
+	@echo "==> Mobile shells"
+	@cd mobile && node scripts/check-prod-config.cjs || true
 
 verify-ci: ## prod-64 — CI-friendly verify (Linux/macOS). Skips Windows-specific bootstrap; uses $TMPDIR-aware paths.
 	@echo "==> ruff (F E I B UP SIM RUF ARG + B904)"

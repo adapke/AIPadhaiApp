@@ -255,3 +255,124 @@ CREATE INDEX IF NOT EXISTS idx_doubt_status_age
 CREATE INDEX IF NOT EXISTS idx_doubt_tutor
     ON doubt_requests(assigned_tutor_id, status);
 --rollback DROP TABLE IF EXISTS doubt_requests CASCADE;
+
+--changeset padhai:002-concept-videos
+-- prod-171 — Concept-video catalog. Owns the prod-14/41/42 curator
+-- workflow + the /concept SEO surface. SPA's /dashboard reads the
+-- "trending" widget straight from here. ~70 rows seeded on dev,
+-- expected to grow to several hundred.
+CREATE TABLE IF NOT EXISTS concept_videos (
+    id              TEXT PRIMARY KEY,
+    concept         TEXT NOT NULL,
+    concept_norm    TEXT NOT NULL,
+    source          TEXT NOT NULL,
+    source_url      TEXT NOT NULL,
+    embed_url       TEXT NOT NULL,
+    title           TEXT NOT NULL,
+    channel         TEXT,
+    duration_sec    INTEGER,
+    language        TEXT NOT NULL DEFAULT 'en',
+    board           TEXT,
+    grade_min       INTEGER,
+    grade_max       INTEGER,
+    subject         TEXT,
+    quality_tier    TEXT NOT NULL DEFAULT 'verified',
+    curator_note    TEXT,
+    created_at      DOUBLE PRECISION NOT NULL,
+    updated_at      DOUBLE PRECISION,
+    last_verified_at DOUBLE PRECISION,
+    last_played_at  DOUBLE PRECISION,
+    play_count      INTEGER NOT NULL DEFAULT 0,
+    UNIQUE (concept_norm, source_url, language)
+);
+CREATE INDEX IF NOT EXISTS idx_cv_lookup
+    ON concept_videos(concept_norm, language);
+CREATE INDEX IF NOT EXISTS idx_cv_subject
+    ON concept_videos(subject, grade_min, grade_max);
+CREATE INDEX IF NOT EXISTS idx_cv_quality
+    ON concept_videos(quality_tier);
+CREATE INDEX IF NOT EXISTS idx_cv_played
+    ON concept_videos(last_played_at DESC);
+--rollback DROP TABLE IF EXISTS concept_videos CASCADE;
+
+--changeset padhai:002-audit-log
+-- prod-171 — Audit log. Required for DPDP §12 (right-to-erasure
+-- traceability) + admin-action accountability + security investigation.
+-- Rows are append-only; the prod-164 DPDP purge job scrubs
+-- actor_user_id to 'ANONYMIZED' but keeps the row.
+CREATE TABLE IF NOT EXISTS audit_log (
+    id              TEXT PRIMARY KEY,
+    org_id          TEXT,
+    actor_user_id   TEXT,
+    actor_ip        TEXT,
+    actor_ua        TEXT,
+    action          TEXT NOT NULL,
+    target_type     TEXT,
+    target_id       TEXT,
+    before_json     TEXT,
+    after_json      TEXT,
+    request_id      TEXT,
+    note            TEXT,
+    created_at      DOUBLE PRECISION NOT NULL,
+    archived_at     DOUBLE PRECISION
+);
+CREATE INDEX IF NOT EXISTS idx_audit_org_time
+    ON audit_log(org_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_audit_actor_time
+    ON audit_log(actor_user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_audit_action_time
+    ON audit_log(action, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_audit_target
+    ON audit_log(target_type, target_id);
+--rollback DROP TABLE IF EXISTS audit_log CASCADE;
+
+--changeset padhai:002-concept-examples
+-- prod-171 — Real-world examples surface (prod-137). Curator-approved
+-- examples render on /concept/{slug}. 48 hand-curated rows shipped
+-- in prod-146 + prod-148.
+CREATE TABLE IF NOT EXISTS concept_examples (
+    id              TEXT PRIMARY KEY,
+    concept_slug    TEXT NOT NULL,
+    locale          TEXT NOT NULL DEFAULT 'en',
+    example_md      TEXT NOT NULL,
+    status          TEXT NOT NULL DEFAULT 'pending',
+    source          TEXT NOT NULL DEFAULT 'ai',
+    curator_note    TEXT,
+    created_at      DOUBLE PRECISION NOT NULL,
+    reviewed_at     DOUBLE PRECISION,
+    reviewer_id     TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_ex_slug_status
+    ON concept_examples(concept_slug, locale, status);
+CREATE INDEX IF NOT EXISTS idx_ex_status_time
+    ON concept_examples(status, created_at DESC);
+--rollback DROP TABLE IF EXISTS concept_examples CASCADE;
+
+--changeset padhai:002-question-bank
+-- prod-171 — Past-year-question (PYQ) bank. ~2500 rows seeded across
+-- 16 boards + 5 entrance exams (prod-4 / prod-35 / prod-39 ...).
+-- Memory Boost daily drill (prod-139) draws from here. NCERT-code
+-- column added in prod-138.
+CREATE TABLE IF NOT EXISTS question_bank (
+    id              TEXT PRIMARY KEY,
+    board           TEXT NOT NULL,
+    grade           INTEGER NOT NULL,
+    subject         TEXT NOT NULL,
+    chapter         TEXT,
+    year            INTEGER NOT NULL,
+    paper           TEXT NOT NULL,
+    question_text   TEXT NOT NULL,
+    options         TEXT,
+    correct_answer  TEXT,
+    difficulty      TEXT,
+    marks           INTEGER,
+    explanation     TEXT,
+    ncert_code      TEXT,
+    created_at      DOUBLE PRECISION NOT NULL,
+    UNIQUE (board, grade, subject, year, paper, question_text)
+);
+CREATE INDEX IF NOT EXISTS idx_qb_board_grade
+    ON question_bank(board, grade, subject);
+CREATE INDEX IF NOT EXISTS idx_qb_ncert
+    ON question_bank(ncert_code);
+--rollback DROP TABLE IF EXISTS question_bank CASCADE;

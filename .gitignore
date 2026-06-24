@@ -40,3 +40,4 @@ node_modules/
 # Local dev server runtime state
 .padhai_server.pid
 padhai_server.log
+padhai_server.err.log
