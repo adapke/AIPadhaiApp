@@ -350,6 +350,20 @@
     "title": "An Overview of Aldehydes and Ketones: Crash Course Organic Chemistry #27"
   },
   {
+    "board": "CBSE",
+    "channel": "PW Class 11 Science",
+    "concept": "Atomic Structure",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=rf6p4q5chdE",
+    "subject": "chemistry",
+    "title": "Atomic Structure | Full Chapter in ONE SHOT | Chapter 2 | Class 11 Chemistry 🔥"
+  },
+  {
     "board": null,
     "channel": "FuseSchool",
     "concept": "Atoms and Molecules",
@@ -390,6 +404,20 @@
     "source_url": "https://www.youtube.com/watch?v=Nfa-B2Bcm8E",
     "subject": "chemistry",
     "title": "Chemical Equilibrium | Full Chapter in ONE SHOT | Chapter 6 | Class 11 Chemistry🔥"
+  },
+  {
+    "board": "CBSE",
+    "channel": "NCERT Wallah",
+    "concept": "Chemical Kinetics",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=TJrnf7Woh9k",
+    "subject": "chemistry",
+    "title": "Chemical Kinetics Class 12 One Shot 🔥| All Concepts + NCERT + PYQs | Chemistry Chapter 3"
   },
   {
     "board": null,
@@ -488,6 +516,20 @@
     "source_url": "https://www.youtube.com/watch?v=lQ6FBA1HM3s",
     "subject": "chemistry",
     "title": "Redox Reactions: Crash Course Chemistry #10"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Arjuna JEE",
+    "concept": "States of Matter",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=q_0r4jHwnHs",
+    "subject": "chemistry",
+    "title": "States of Matter FULL CHAPTER | Class 11th Physical Chemistry | Chapter 3 | Arjuna JEE"
   },
   {
     "board": null,
@@ -770,6 +812,90 @@
     "title": "Vectors and Vector Operations"
   },
   {
+    "board": "CBSE",
+    "channel": "Manocha Academy",
+    "concept": "Arithmetic Progression",
+    "duration_sec": null,
+    "grade_max": 10,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=YqP5TuwtEdg",
+    "subject": "mathematics",
+    "title": "Arithmetic Progression Class 10"
+  },
+  {
+    "board": "CBSE",
+    "channel": "CBSE NCERT Solutions by Vedantu",
+    "concept": "Binomial Theorem",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=7xM7manHDKM",
+    "subject": "mathematics",
+    "title": "Binomial Theorem | Class 11 Maths | NCERT Solutions"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE Made Ejee",
+    "concept": "Complex Numbers",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=2kKl16-7lE4",
+    "subject": "mathematics",
+    "title": "Complex Numbers L-1 | Introduction to Complex Numbers | Class 11 | JEE Main Maths | Vedantu"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Physics Wallah Foundation",
+    "concept": "Coordinate Geometry",
+    "duration_sec": null,
+    "grade_max": 10,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=9Us5-Q0V_C4",
+    "subject": "mathematics",
+    "title": "Complete Coordinate Geometry in One Video by Ritik Sir || Chapter - 7 || Class 10 Maths"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE Made Ejee",
+    "concept": "Determinants",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=ugMoE9pAE0c",
+    "subject": "mathematics",
+    "title": "Determinants One Shot in 36 Minutes⏳ | Class 12 Maths Chapter 4 | Harsh sir @VedantuMath"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE Made Ejee",
+    "concept": "Differentiation",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=SMk7tNmnsSg",
+    "subject": "mathematics",
+    "title": "Differentiation Class 12 | Differentiation Formulas | Differentiation Questions | Vedantu Math"
+  },
+  {
     "board": null,
     "channel": "3Blue1Brown",
     "concept": "Essence of Calculus",
@@ -782,6 +908,48 @@
     "source_url": "https://www.youtube.com/watch?v=WUvTyaaNkzM",
     "subject": "mathematics",
     "title": "[Curator: find 3Blue1Brown 'essence of calculus' chapter 1]"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE",
+    "concept": "Integration",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=JQm3yxvMYj0",
+    "subject": "mathematics",
+    "title": "Integrals #1 L-13 | Integration | CBSE Class 12 Maths | Class 12 Board Sprint | Arvind Sir | Vedantu"
+  },
+  {
+    "board": "CBSE",
+    "channel": "ANS ACADEMY",
+    "concept": "Limits and Continuity",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=htlKqnQ4F5Q",
+    "subject": "mathematics",
+    "title": "Introduction to Limits & Continuity for Beginners - Calculus I"
+  },
+  {
+    "board": "CBSE",
+    "channel": "12th Hackers",
+    "concept": "Matrices",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=2zHpum8F5RA",
+    "subject": "mathematics",
+    "title": "MATRICES in ONE SHOT || Full Chapter || Class 12 BOARDS || PW"
   },
   {
     "board": null,
@@ -826,6 +994,20 @@
     "title": "[Curator: find Khan India Quadratic Equations video]"
   },
   {
+    "board": "CBSE",
+    "channel": "Vedantu CBSE 10th",
+    "concept": "Statistics (Mean, Median, Mode)",
+    "duration_sec": null,
+    "grade_max": 10,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=HiCpqGjbBPc",
+    "subject": "mathematics",
+    "title": "STATISTICS | Mean Median and Mode Class 10 | CBSE Maths | NCERT Solutions | Vedantu 9 and 10"
+  },
+  {
     "board": null,
     "channel": "Khan Academy",
     "concept": "Trigonometry Basics",
@@ -838,6 +1020,20 @@
     "source_url": "https://www.youtube.com/watch?v=Jsiy4TxgIME",
     "subject": "mathematics",
     "title": "[Curator: find 3Blue1Brown trigonometry video]"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE",
+    "concept": "Vectors",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=Kl60x08YTZc",
+    "subject": "mathematics",
+    "title": "Vectors - L1 | Introduction & Basic Concepts | Class 12 Maths | JEE Mains & Advanced | Vedantu"
   },
   {
     "board": null,
@@ -1051,6 +1247,20 @@
   },
   {
     "board": "CBSE",
+    "channel": "Abhishek Sahu",
+    "concept": "Projectile Motion",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=g1kvgN4LAL0",
+    "subject": "physics",
+    "title": "Projectile motion Physics Class 11 | Projectile motion One shot | What is Projectile motion JEE NEET"
+  },
+  {
+    "board": "CBSE",
     "channel": "Free Education ",
     "concept": "Refraction of Light",
     "duration_sec": null,
@@ -1132,6 +1342,20 @@
     "source_url": "https://www.youtube.com/watch?v=Iuv6hY6zsd0",
     "subject": "physics",
     "title": "Wave-Particle Duality"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Science and Fun Education ",
+    "concept": "Waves and Sound",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=IWtaEtuOLzM",
+    "subject": "physics",
+    "title": "Class 11th Physics Waves One Shot NCERT Based on New syllabus with Ashu sir"
   },
   {
     "board": "CBSE",

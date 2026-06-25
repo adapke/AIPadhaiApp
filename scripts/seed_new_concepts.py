@@ -54,6 +54,24 @@ NEW_CONCEPTS = [
     ("Cell Organelles", "biology", "CBSE", 9, 11, "8IlzKri08kk"),
     ("Human Excretory System", "biology", "CBSE", 10, 10, "VAzAnGeszl8"),
     ("Transport in Plants", "biology", "CBSE", 10, 11, "jtuX7H05tmQ"),
+    # --- prod-187 batch: brand-new maths ---
+    ("Differentiation", "mathematics", "CBSE", 11, 12, "SMk7tNmnsSg"),
+    ("Integration", "mathematics", "CBSE", 12, 12, "JQm3yxvMYj0"),
+    ("Coordinate Geometry", "mathematics", "CBSE", 10, 10, "9Us5-Q0V_C4"),
+    ("Vectors", "mathematics", "CBSE", 12, 12, "Kl60x08YTZc"),
+    ("Matrices", "mathematics", "CBSE", 12, 12, "2zHpum8F5RA"),
+    ("Determinants", "mathematics", "CBSE", 12, 12, "ugMoE9pAE0c"),
+    ("Limits and Continuity", "mathematics", "CBSE", 11, 12, "htlKqnQ4F5Q"),
+    ("Arithmetic Progression", "mathematics", "CBSE", 10, 10, "YqP5TuwtEdg"),
+    # --- prod-187 batch: brand-new physics + chemistry ---
+    ("Projectile Motion", "physics", "CBSE", 11, 11, "g1kvgN4LAL0"),
+    ("Waves and Sound", "physics", "CBSE", 11, 11, "IWtaEtuOLzM"),
+    ("Atomic Structure", "chemistry", "CBSE", 11, 11, "rf6p4q5chdE"),
+    ("States of Matter", "chemistry", "CBSE", 11, 11, "q_0r4jHwnHs"),
+    ("Chemical Kinetics", "chemistry", "CBSE", 12, 12, "TJrnf7Woh9k"),
+    ("Complex Numbers", "mathematics", "CBSE", 11, 11, "2kKl16-7lE4"),
+    ("Binomial Theorem", "mathematics", "CBSE", 11, 11, "7xM7manHDKM"),
+    ("Statistics (Mean, Median, Mode)", "mathematics", "CBSE", 10, 10, "HiCpqGjbBPc"),
 ]
 
 
