@@ -308,6 +308,20 @@
     "title": "Electrochemistry"
   },
   {
+    "board": "CBSE",
+    "channel": "NCERT Wallah",
+    "concept": "Electrochemistry",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=PC1u_KkEEL4",
+    "subject": "chemistry",
+    "title": "Electrochemistry Class 12 One Shot🔥 | All Concepts + NCERT + PYQs | Chemistry Chapter 2"
+  },
+  {
     "board": null,
     "channel": "The Organic Chemistry Tutor",
     "concept": "Hybridization (sp, sp2, sp3)",
@@ -362,6 +376,20 @@
     "source_url": "https://www.youtube.com/watch?v=0RRVV4Diomg",
     "subject": "chemistry",
     "title": "[Curator: find Crash Course Chemistry Periodic Table video]"
+  },
+  {
+    "board": "CBSE",
+    "channel": "CrashCourse",
+    "concept": "Redox Reactions",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 9,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=lQ6FBA1HM3s",
+    "subject": "chemistry",
+    "title": "Redox Reactions: Crash Course Chemistry #10"
   },
   {
     "board": null,
@@ -756,6 +784,20 @@
     "title": "Centripetal Force"
   },
   {
+    "board": "CBSE",
+    "channel": "Shridhar Jagtap",
+    "concept": "Coulomb's Law",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=mUQqzhOYnDU",
+    "subject": "physics",
+    "title": "Coulomb’s Law Explained Simply | The Force Between Charges"
+  },
+  {
     "board": null,
     "channel": "ScienceClic English",
     "concept": "Doppler Effect",
@@ -782,6 +824,20 @@
     "source_url": "https://www.youtube.com/watch?v=vwIdZjjd8fo",
     "subject": "physics",
     "title": "Electromagnetic Induction"
+  },
+  {
+    "board": "CBSE",
+    "channel": "LearnoHub - Class 11, 12",
+    "concept": "Electromagnetic Induction",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=-l1rq5z62w0",
+    "subject": "physics",
+    "title": "Electromagnetic Induction Class 12 Physics Chapter 6 One Shot | New NCERT 2026-27 CBSE JEE NEET"
   },
   {
     "board": null,
@@ -896,6 +952,34 @@
     "title": "[Curator: find Peekaboo's Newton's Third Law explainer]"
   },
   {
+    "board": "CBSE",
+    "channel": "Free Education ",
+    "concept": "Refraction of Light",
+    "duration_sec": null,
+    "grade_max": 10,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=19xlGU6QuEA",
+    "subject": "physics",
+    "title": "Refraction of light: CBSE Class 10 Science (Physics) | Toppr Study"
+  },
+  {
+    "board": "CBSE",
+    "channel": "CrashCourse",
+    "concept": "Simple Harmonic Motion",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=jxstE6A_CYQ",
+    "subject": "physics",
+    "title": "Simple Harmonic Motion: Crash Course Physics #16"
+  },
+  {
     "board": null,
     "channel": "Khan Academy",
     "concept": "Simple Harmonic Motion (SHM)",
@@ -924,6 +1008,20 @@
     "title": "Snell's Law of Refraction"
   },
   {
+    "board": "CBSE",
+    "channel": "PW Class 11 Science",
+    "concept": "Thermodynamics",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=IECrvO3wjP0",
+    "subject": "physics",
+    "title": "Thermodynamics Physics Class 11 One Shot 🔥 | NCERT + PYQs + Derivations | Physics Chapter 12"
+  },
+  {
     "board": null,
     "channel": "Veritasium",
     "concept": "Wave-Particle Duality",
@@ -936,6 +1034,20 @@
     "source_url": "https://www.youtube.com/watch?v=Iuv6hY6zsd0",
     "subject": "physics",
     "title": "Wave-Particle Duality"
+  },
+  {
+    "board": "CBSE",
+    "channel": "LearnoHub - Class 11, 12",
+    "concept": "Work, Energy and Power",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=qBtNdn7j5pg",
+    "subject": "physics",
+    "title": "Work Energy and Power class 11 Physics - One Shot | CBSE NCERT JEE NEET"
   },
   {
     "board": null,
