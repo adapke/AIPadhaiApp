@@ -553,6 +553,30 @@ Custom commands (`cypress/support/commands.js`):
 9. **Signup `terms_accepted`** — Auth form must include an explicit
    `terms_accepted` checkbox. Hidden auto-accept is bad UX and was reverted.
 
+10. **`output_config.effort` rejected by Haiku** — The structured-output
+    surfaces (explainer / KG-lesson / flashcards / recap) set a reasoning
+    `effort` knob inside `output_config`, but route to different tier
+    models. Haiku 4.5 returns 400 "This model does not support the effort
+    parameter." — which surfaced as a 500 on `POST /explain`
+    (`EXPLAINER_MODEL = HAIKU_MODEL`). Fixed centrally in
+    `llm_call._create_with_effort_fallback`: on that specific 400, strip
+    `effort` and retry once (a 400 bills no tokens, so the retry is free).
+    Model-agnostic — no capability table to drift. Don't re-add a raise on
+    the first failure. Guard: `tests/test_llm_call_effort_fallback.py`.
+
+11. **Capped AI routes must thread `user_tier`** — `daily_cap_paise(None)
+    == 0` (same as free-tier M1), so any route that calls a capped module
+    (`essay_grader.grade`, `mock_interview.submit_answer`,
+    `practice_test.generate`) WITHOUT passing `user_tier=user.subscription_tier`
+    makes `check_daily_cap` treat EVERY user — even uncapped M4a — as free
+    tier, raising `BudgetExceeded('premium_feature')` and silently
+    degrading to the heuristic (essay scored a flat 0.0, mock used the
+    keyword heuristic, practice skipped synthesis). The `routers/learning.py`
+    slice dropped the kwarg during extraction from web.py; the `v3.py`
+    copies kept it. Always pass the real tier. `practice_test.generate`
+    grew a `user_tier` param so the route can forward it. Guard:
+    `tests/test_tier_threading.py`.
+
 ---
 
 ## 15. Dev Server Scripts

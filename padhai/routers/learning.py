@@ -85,7 +85,10 @@ def essay_submit(
     grade_result = None
     if auto_grade:
         try:
-            grade_result = eg.grade(sub.id)
+            # Pass the caller's real tier so the daily-cap pre-flight
+            # gates correctly. Dropping it defaults to None -> free tier
+            # (cap 0) -> every user, even paid, gets the heuristic.
+            grade_result = eg.grade(sub.id, user_tier=user.subscription_tier)
         except ValueError as e:
             raise HTTPException(500, f"grading failed: {e}") from e
     return {
@@ -107,7 +110,7 @@ def essay_regrade(sid: str, user=Depends(current_user)):
     if sub.user_id != user.id:
         raise HTTPException(403, "not your submission")
     try:
-        result = eg.grade(sid)
+        result = eg.grade(sid, user_tier=user.subscription_tier)
     except ValueError as e:
         raise HTTPException(400, str(e)) from e
     return {"submission_id": sid, "grade": _grade_to_dict(result)}
@@ -342,6 +345,7 @@ def mock_submit_turn(
         result = mi.submit_answer(
             interview_id=iid, turn_index=turn_index,
             answer_text=answer_text, answer_audio_url=answer_audio_url,
+            user_tier=user.subscription_tier,
         )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e
@@ -553,6 +557,7 @@ def practice_generate(
             user_id=user.id, exam=exam, subject=subject,
             target_minutes=target_minutes,
             target_questions=target_questions,
+            user_tier=user.subscription_tier,
         )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e

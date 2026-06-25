@@ -57,6 +57,39 @@ class ClaudeCallResult:
     model: str
 
 
+def _create_with_effort_fallback(client: Any, kwargs: dict[str, Any]) -> Any:
+    """Call messages.create, transparently dropping the reasoning-`effort`
+    knob when the target model rejects it.
+
+    Cheaper models (Haiku 4.5) don't support the `effort` field inside
+    `output_config`; sending it returns a 400 "This model does not support
+    the effort parameter." The lesson/explainer/flashcard/recap surfaces
+    set `effort` uniformly regardless of which tier model they route to,
+    so the Haiku-tier ones used to 500.
+
+    A 400 is rejected before inference, so no tokens are billed — retrying
+    without `effort` is free. The match is on the API's own error text, so
+    this stays correct if a future model gains or loses effort support
+    (no hand-maintained capability table to drift). Any other error
+    re-raises unchanged."""
+    try:
+        return client.messages.create(**kwargs)
+    except Exception as e:
+        oc = kwargs.get("output_config")
+        if not (isinstance(oc, dict) and "effort" in oc
+                and "effort parameter" in str(e)):
+            raise
+        retry = dict(kwargs)
+        stripped = {k: v for k, v in oc.items() if k != "effort"}
+        # output_config={"effort": ...} alone → drop the now-empty dict
+        # rather than send output_config={} (which some models reject).
+        if stripped:
+            retry["output_config"] = stripped
+        else:
+            retry.pop("output_config", None)
+        return client.messages.create(**retry)
+
+
 def call_claude(
     *,
     module: str,
@@ -117,7 +150,7 @@ def call_claude(
 
     started = time.time()
     try:
-        resp = client.messages.create(**messages_create_kwargs)
+        resp = _create_with_effort_fallback(client, messages_create_kwargs)
     except Exception as e:
         raise RuntimeError(f"Claude call failed: {e}") from e
     latency_ms = int((time.time() - started) * 1000)

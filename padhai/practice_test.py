@@ -126,6 +126,7 @@ def generate(
     target_minutes: int = 30,
     target_questions: int | None = None,
     difficulty_mix: dict[str, float] | None = None,
+    user_tier: str | None = None,
 ) -> PracticeTest:
     """Create a new practice test for this user. Reads J5 mastery to
     pick weak topics, J6 question bank for existing questions,
@@ -182,6 +183,7 @@ def generate(
         synthesised = _synthesise(
             exam=exam, subject=subject, count=missing,
             weak_topics=weak_topics, user_id=user_id,
+            user_tier=user_tier,
         )
         questions.extend(synthesised)
         method_marker = "mixed" if questions else "synthetic"
