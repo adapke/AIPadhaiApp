@@ -604,10 +604,15 @@ Reviewed 2026-06-03. Re-audit before changing.
   + placeholder detection. `_validate_provider_keys()` runs in the
   FastAPI lifespan at line 940. Fails hard in `APP_ENV=production`,
   warns in dev.
-- **Payments (Razorpay)** — `razorpay_client.py` wired in `web.py`:
-  `POST /api/payments` creates orders + verifies signatures (lines
-  13008-13038), `POST /api/webhooks/razorpay` (line 13049) handles
-  webhook events. Subscription tier upgrades flow through `auth.py`.
+- **Payments (Razorpay)** — `razorpay_client.py` is surfaced by the
+  pricing router: `POST /api/pricing/checkout`
+  (`padhai/routers/pricing.py`) creates a Razorpay order for a tier and
+  degrades gracefully when keys are absent; `GET /api/pricing/plans`
+  exposes the tier ladder + `razorpay_configured`. `POST
+  /api/webhooks/razorpay` (`web.py`) handles webhook events (both fee +
+  subscription). Subscription tier upgrades flow through `auth.py`.
+  (There is no `/api/payments` route — that was a stale reference;
+  checkout lives at `/api/pricing/checkout`.)
 - **RAG citations — tutor + lesson** — `padhai/tutor.py` records
   provenance via `tutor_grounding.send_grounded_message()` →
   `citations.record_answer()`. `padhai/pedagogy.py:generate_lesson()`

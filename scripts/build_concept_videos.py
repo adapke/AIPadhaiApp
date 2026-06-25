@@ -324,6 +324,23 @@ CATALOG.append({
 # =============================================================================
 
 
+def _load_verified_seed() -> list[dict]:
+    """prod-184 — the curated `verified` catalog, exported from the dev
+    DB by scripts/export_concept_seed.py (each URL oembed-reverified).
+    This is what makes the real catalog ship to production; the inline
+    CATALOG above is mostly placeholder channel_seed rows. Returns [] if
+    the file isn't present (older checkouts)."""
+    import json
+    from pathlib import Path
+    p = Path(__file__).resolve().parent.parent / "data" / "concept_videos_seed.json"
+    if not p.exists():
+        return []
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true",
@@ -332,17 +349,21 @@ def main() -> int:
 
     from padhai import concept_videos as cv
 
+    verified_seed = _load_verified_seed()
+
     if args.check:
         # Dry-run — just count
         verified = sum(1 for r in CATALOG if r.get("quality_tier") == "verified")
         seeded = sum(1 for r in CATALOG if r.get("quality_tier") == "channel_seed")
-        print(f"  total rows: {len(CATALOG)}")
+        print(f"  inline CATALOG rows: {len(CATALOG)}")
         print(f"    verified:     {verified}")
         print(f"    channel_seed: {seeded}")
+        print(f"  data/concept_videos_seed.json verified rows: {len(verified_seed)}")
         return 0
 
-    print(f"[seed] {len(CATALOG)} concept-video rows…")
-    loaded, errors = cv.bulk_load(CATALOG)
+    print(f"[seed] {len(CATALOG)} inline rows + {len(verified_seed)} "
+          "verified-seed rows…")
+    loaded, errors = cv.bulk_load(CATALOG + verified_seed)
     if errors:
         for e in errors:
             print(f"  ! {e}", file=sys.stderr)
