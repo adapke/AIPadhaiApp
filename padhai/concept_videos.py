@@ -330,7 +330,11 @@ def search(
     on normalised concept name (so 'newton first law' finds
     'Newton's First Law of Motion'). If grade is given, returns only
     videos whose [grade_min, grade_max] range includes it."""
-    limit = max(1, min(limit, 100))
+    # prod-189: internal ceiling raised 100 -> 250 so the public
+    # /api/concept-videos endpoint (le=200, prod-186) can actually return
+    # the full verified catalog now that it exceeds 100. 250 stays a
+    # sane abuse bound on an unbounded caller.
+    limit = max(1, min(limit, 250))
     where: list[str] = ["language = ?"]
     params: list = [language]
     if concept:
