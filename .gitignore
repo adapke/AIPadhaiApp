@@ -41,3 +41,8 @@ node_modules/
 .padhai_server.pid
 padhai_server.log
 padhai_server.err.log
+
+# Local-only docker overrides + transient compose logs (machine-specific,
+# e.g. host-port-conflict workarounds — never committed).
+docker-compose.override.yml
+compose_up*.log

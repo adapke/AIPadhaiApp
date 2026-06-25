@@ -67,7 +67,11 @@ services:
       "
 
   liquibase:
-    image: liquibase/liquibase:4-alpine
+    # prod-182: was liquibase/liquibase:4-alpine — that floating tag was
+    # removed from Docker Hub and broke `docker compose up` (image not
+    # found -> the app waits on liquibase and never starts). Pinned to a
+    # real, current alpine release for reproducible local + CI runs.
+    image: liquibase/liquibase:4.31-alpine
     depends_on:
       postgres:
         condition: service_healthy
@@ -76,7 +80,13 @@ services:
     # master.xml composes every formatted-SQL file in order so adding
     # a new changeset only needs one <include> entry, not a compose
     # edit. See db/changesets/master.xml.
+    #
+    # prod-182: liquibase 4.31 no longer auto-adds the working dir to
+    # its changelog search path (the old 4-alpine did), so master.xml
+    # was "not found". --searchPath points it at the mounted changelog
+    # volume explicitly.
     command: >
+      --searchPath=/liquibase/changelog
       --url=jdbc:postgresql://postgres:5432/padhai
       --username=padhai
       --password=padhai
@@ -105,12 +115,16 @@ services:
       # (citations, llm_calls, exam_pack_enrollments, etc.). Without
       # this, the modules would default to /root/.padhai/jobs.db
       # which lives in ephemeral container scratch space.
-      PADHAI_DB_PATH: /app/data/jobs.db
+      # prod-182: SQLite module DB lives in /app/dbstore (named volume),
+      # NOT /app/data — because /app/data is now a read-only bind mount
+      # of the repo's static seed content (data/pyq/*.json etc.) so the
+      # in-container seeder (scripts.seed_all_content) can import PYQs.
+      PADHAI_DB_PATH: /app/dbstore/jobs.db
       # JWT + admin
       PADHAI_JWT_SECRET: ${PADHAI_JWT_SECRET:-dev-jwt-secret-not-for-prod-change-me-please-32chars-at-least}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-dev-admin-secret-not-for-prod-change-me-please-32chars}
       ADMIN_BOOTSTRAP_TOKEN: ${ADMIN_BOOTSTRAP_TOKEN:-dev-bootstrap-token-replace-me}
-      ADMIN_DB_PATH: /app/data/admin.db
+      ADMIN_DB_PATH: /app/dbstore/admin.db
       # Dev affordances
       PADHAI_REQUIRE_AUTH: "0"
       APP_ENV: development
@@ -134,9 +148,15 @@ services:
       - ./scripts:/app/scripts
       - ./tests:/app/tests
       - ./cypress:/app/cypress
+      # prod-182: repo static seed content (PYQ JSONs, concept-video
+      # seeds, golden answers) mounted read-only so the in-container
+      # seeder can import them. Read-only — the container never mutates
+      # the host repo's data/.
+      - ./data:/app/data:ro
       # Persistent SQLite + admin DB + output cache so module tables
-      # (citations, llm_calls, etc.) survive container rebuilds.
-      - padhai_app_data:/app/data
+      # (citations, llm_calls, etc.) survive container rebuilds. Moved
+      # off /app/data (now the read-only repo bind above) to /app/dbstore.
+      - padhai_app_data:/app/dbstore
       - padhai_output:/var/padhai/cache
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/healthz"]
