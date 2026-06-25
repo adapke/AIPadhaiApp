@@ -70,6 +70,20 @@
     "title": "Human digestive system | Life processes | Class 10 Biology | Khan Academy"
   },
   {
+    "board": "CBSE",
+    "channel": "NCERT Wallah",
+    "concept": "Ecosystem",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=042LD-Xnt3A",
+    "subject": "biology",
+    "title": "Ecosystem Class 12 One Shot 🔥 | NCERT + PYQs | Biology Chapter 12 by By Aarushi Ma'am"
+  },
+  {
     "board": null,
     "channel": "CrashCourse",
     "concept": "Evolution by Natural Selection",
@@ -180,6 +194,20 @@
     "source_url": "https://www.youtube.com/watch?v=4zfKhChoIus",
     "subject": "biology",
     "title": "The Nervous System Explained Simply | Brain, Neurons & Signals"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Grade booster",
+    "concept": "Human Reproduction",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=VuX9aoAd0ak",
+    "subject": "biology",
+    "title": "Human Reproduction Class 12 Biology | Full Chapter Explained | NCERT Term-2 @Gradebooster"
   },
   {
     "board": null,
@@ -378,6 +406,20 @@
     "title": "[Curator: find Peekaboo's Atoms & Molecules video]"
   },
   {
+    "board": "CBSE",
+    "channel": "Nerdy Side",
+    "concept": "Biomolecules",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=SrA_UikdQJE",
+    "subject": "chemistry",
+    "title": "🔥 Biomolecules | Class 12 Chemistry One Shot"
+  },
+  {
     "board": null,
     "channel": "Manocha Academy",
     "concept": "Chemical Bonding",
@@ -505,6 +547,20 @@
   },
   {
     "board": "CBSE",
+    "channel": "LearnoHub - Class 11, 12",
+    "concept": "Periodicity (Periodic Trends)",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=wXtQXh03GYE",
+    "subject": "chemistry",
+    "title": "Classification of Elements and Periodicity in Properties Class 11 Chemistry Chapter 3 | 2026-27"
+  },
+  {
+    "board": "CBSE",
     "channel": "CrashCourse",
     "concept": "Redox Reactions",
     "duration_sec": null,
@@ -516,6 +572,20 @@
     "source_url": "https://www.youtube.com/watch?v=lQ6FBA1HM3s",
     "subject": "chemistry",
     "title": "Redox Reactions: Crash Course Chemistry #10"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Magnet Brains",
+    "concept": "Solutions",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=9NzjZ2QqAns",
+    "subject": "chemistry",
+    "title": "Types of Solutions & Concentration (Part 1) - Solutions | Class 12 Chemistry Ch 1 | CBSE 2025-26"
   },
   {
     "board": "CBSE",
@@ -852,6 +922,20 @@
     "source_url": "https://www.youtube.com/watch?v=2kKl16-7lE4",
     "subject": "mathematics",
     "title": "Complex Numbers L-1 | Introduction to Complex Numbers | Class 11 | JEE Main Maths | Vedantu"
+  },
+  {
+    "board": "CBSE",
+    "channel": "School Pro Kid",
+    "concept": "Conic Sections",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=BTxROHvOPJc",
+    "subject": "mathematics",
+    "title": "🔴 Class 11 Maths – Conic Sections | Parabola, Ellipse, Hyperbola & Circle | CBSE 2025"
   },
   {
     "board": "CBSE",
@@ -1247,6 +1331,20 @@
   },
   {
     "board": "CBSE",
+    "channel": "Visual Learning (English)",
+    "concept": "Photoelectric Effect",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=LYgIh5qfTn8",
+    "subject": "physics",
+    "title": "Photoelectric Effect || 3D animated explanation || class 12th physics || Dual nature of matter ||"
+  },
+  {
+    "board": "CBSE",
     "channel": "Abhishek Sahu",
     "concept": "Projectile Motion",
     "duration_sec": null,
@@ -1261,6 +1359,20 @@
   },
   {
     "board": "CBSE",
+    "channel": "Physics Wallah - Alakh Pandey",
+    "concept": "Ray Optics",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 12,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=_nGZGo4gHGo",
+    "subject": "physics",
+    "title": "12th Chapter 9 : Ray Optics 01 : Introduction & Reflection in a Plane Mirror  JEE /NEET"
+  },
+  {
+    "board": "CBSE",
     "channel": "Free Education ",
     "concept": "Refraction of Light",
     "duration_sec": null,
@@ -1272,6 +1384,20 @@
     "source_url": "https://www.youtube.com/watch?v=19xlGU6QuEA",
     "subject": "physics",
     "title": "Refraction of light: CBSE Class 10 Science (Physics) | Toppr Study"
+  },
+  {
+    "board": "CBSE",
+    "channel": "PW Class 11 Science",
+    "concept": "Rotational Motion",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=ouflTrm6EtU",
+    "subject": "physics",
+    "title": "Rotational Motion | Full Chapter in ONE SHOT | Class 11 Physics 🔥"
   },
   {
     "board": "CBSE",
@@ -1328,6 +1454,20 @@
     "source_url": "https://www.youtube.com/watch?v=IECrvO3wjP0",
     "subject": "physics",
     "title": "Thermodynamics Physics Class 11 One Shot 🔥 | NCERT + PYQs + Derivations | Physics Chapter 12"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Vedantu JEE Made Ejee",
+    "concept": "Units and Measurements",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=6pNZDj51SdI",
+    "subject": "physics",
+    "title": "Master Units & Measurements in Just 60 Minutes! ⏳ | Class 11 Physics | Anupam Sir@VedantuMath​"
   },
   {
     "board": null,

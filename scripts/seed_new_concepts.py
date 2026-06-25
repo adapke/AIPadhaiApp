@@ -72,6 +72,17 @@ NEW_CONCEPTS = [
     ("Complex Numbers", "mathematics", "CBSE", 11, 11, "2kKl16-7lE4"),
     ("Binomial Theorem", "mathematics", "CBSE", 11, 11, "7xM7manHDKM"),
     ("Statistics (Mean, Median, Mode)", "mathematics", "CBSE", 10, 10, "HiCpqGjbBPc"),
+    # --- prod-188 batch: push past 100 ---
+    ("Units and Measurements", "physics", "CBSE", 11, 11, "6pNZDj51SdI"),
+    ("Rotational Motion", "physics", "CBSE", 11, 11, "ouflTrm6EtU"),
+    ("Ray Optics", "physics", "CBSE", 12, 12, "_nGZGo4gHGo"),
+    ("Photoelectric Effect", "physics", "CBSE", 12, 12, "LYgIh5qfTn8"),
+    ("Periodicity (Periodic Trends)", "chemistry", "CBSE", 11, 11, "wXtQXh03GYE"),
+    ("Solutions", "chemistry", "CBSE", 12, 12, "9NzjZ2QqAns"),
+    ("Biomolecules", "chemistry", "CBSE", 12, 12, "SrA_UikdQJE"),
+    ("Human Reproduction", "biology", "CBSE", 12, 12, "VuX9aoAd0ak"),
+    ("Ecosystem", "biology", "CBSE", 12, 12, "042LD-Xnt3A"),
+    ("Conic Sections", "mathematics", "CBSE", 11, 11, "BTxROHvOPJc"),
 ]
 
 
