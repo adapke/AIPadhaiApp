@@ -14,6 +14,20 @@
     "title": "[Curator: find FuseSchool's Mitosis / Cell Division video]"
   },
   {
+    "board": "CBSE",
+    "channel": "Amoeba Sisters",
+    "concept": "Cell Organelles",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 9,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=8IlzKri08kk",
+    "subject": "biology",
+    "title": "Introduction to Cells: The Grand Cell Tour"
+  },
+  {
     "board": null,
     "channel": "FuseSchool",
     "concept": "DNA Replication",
@@ -26,6 +40,20 @@
     "source_url": "https://www.youtube.com/watch?v=TNKWgcFPHqw",
     "subject": "biology",
     "title": "DNA Replication"
+  },
+  {
+    "board": "CBSE",
+    "channel": "VidFactory",
+    "concept": "DNA Structure",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 11,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=s_aVwXtboTU",
+    "subject": "biology",
+    "title": "DNA Structure Explained: The Double Helix for Beginners"
   },
   {
     "board": null,
@@ -56,6 +84,20 @@
     "title": "Evolution by Natural Selection"
   },
   {
+    "board": "CBSE",
+    "channel": "CrashCourse",
+    "concept": "Evolution by Natural Selection",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=aTftyFboC_M",
+    "subject": "biology",
+    "title": "Natural Selection - Crash Course Biology #14"
+  },
+  {
     "board": null,
     "channel": "CrashCourse",
     "concept": "Glycolysis",
@@ -82,6 +124,20 @@
     "source_url": "https://www.youtube.com/watch?v=-AsNt_hro2A",
     "subject": "biology",
     "title": "Endocrine System Explained: Hormone Production & Glands | Human Biology for Beginners"
+  },
+  {
+    "board": "CBSE",
+    "channel": "Infinite Study",
+    "concept": "Human Excretory System",
+    "duration_sec": null,
+    "grade_max": 10,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=VAzAnGeszl8",
+    "subject": "biology",
+    "title": "Human Excretory System with Animation | Kidney, Nephron Explained | Class 10 Biology Life Processes"
   },
   {
     "board": null,
@@ -112,6 +168,20 @@
     "title": "Human Nervous System"
   },
   {
+    "board": "CBSE",
+    "channel": "Vital Codes",
+    "concept": "Human Nervous System",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=4zfKhChoIus",
+    "subject": "biology",
+    "title": "The Nervous System Explained Simply | Brain, Neurons & Signals"
+  },
+  {
     "board": null,
     "channel": "Khan Academy",
     "concept": "Krebs Cycle (Citric Acid Cycle)",
@@ -124,6 +194,20 @@
     "source_url": "https://www.youtube.com/watch?v=juM2ROSLWfw",
     "subject": "biology",
     "title": "Krebs / citric acid cycle | Cellular respiration | Biology | Khan Academy"
+  },
+  {
+    "board": "CBSE",
+    "channel": "ConnectEd",
+    "concept": "Mendel's Laws of Inheritance",
+    "duration_sec": null,
+    "grade_max": 12,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=Y8oJaqZ0nN8",
+    "subject": "biology",
+    "title": "Mendel's Laws of Inheritance Explained"
   },
   {
     "board": null,
@@ -194,6 +278,20 @@
     "source_url": "https://www.youtube.com/watch?v=hc1YtXc_84A",
     "subject": "biology",
     "title": "[Curator: find Peekaboo's Respiratory System video]"
+  },
+  {
+    "board": "CBSE",
+    "channel": "FuseSchool - Global Education",
+    "concept": "Transport in Plants",
+    "duration_sec": null,
+    "grade_max": 11,
+    "grade_min": 10,
+    "language": "en",
+    "quality_tier": "verified",
+    "source": "youtube",
+    "source_url": "https://www.youtube.com/watch?v=jtuX7H05tmQ",
+    "subject": "biology",
+    "title": "Xylem and Phloem - Transport in Plants | Biology | FuseSchool"
   },
   {
     "board": "CBSE",

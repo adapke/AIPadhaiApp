@@ -43,8 +43,12 @@ def list_videos(
             "videos) | channel_seed | ai_fallback | all"
         ),
     ),
-    limit: int = Query(10, ge=1, le=50),
+    limit: int = Query(10, ge=1, le=200),
 ) -> dict:
+    # prod-186 — cap raised 50 -> 200 so a caller can fetch the full
+    # verified catalog in one request as it grows past 50 (the /concept
+    # SEO index already lists all via list_concepts; this aligns the
+    # JSON API used by SPA embed surfaces). Default stays 10.
     # prod-180 — This is a PUBLIC endpoint (dashboard strip + /concept).
     # Default to verified-only so students never get a card that opens
     # a "video unavailable" page from an unconfirmed channel_seed stub.

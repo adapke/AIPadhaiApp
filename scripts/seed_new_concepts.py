@@ -46,6 +46,14 @@ NEW_CONCEPTS = [
     ("Coulomb's Law", "physics", "CBSE", 12, 12, "mUQqzhOYnDU"),
     ("Electrochemistry", "chemistry", "CBSE", 12, 12, "PC1u_KkEEL4"),
     ("Redox Reactions", "chemistry", "CBSE", 9, 11, "lQ6FBA1HM3s"),
+    # --- prod-186 batch: brand-new biology ---
+    ("Mendel's Laws of Inheritance", "biology", "CBSE", 10, 12, "Y8oJaqZ0nN8"),
+    ("DNA Structure", "biology", "CBSE", 11, 12, "s_aVwXtboTU"),
+    ("Human Nervous System", "biology", "CBSE", 10, 11, "4zfKhChoIus"),
+    ("Evolution by Natural Selection", "biology", "CBSE", 10, 12, "aTftyFboC_M"),
+    ("Cell Organelles", "biology", "CBSE", 9, 11, "8IlzKri08kk"),
+    ("Human Excretory System", "biology", "CBSE", 10, 10, "VAzAnGeszl8"),
+    ("Transport in Plants", "biology", "CBSE", 10, 11, "jtuX7H05tmQ"),
 ]
 
 
