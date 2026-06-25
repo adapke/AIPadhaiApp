@@ -79,6 +79,7 @@ _ROUTER_NAMES = (
     "class_heat_map",           # prod-140 — Class Heat Map for teacher dashboards (students × topics)
     "mastery_page",             # prod-141 — server-rendered /mastery page (color-coded grid)
     "ck12_ui_pages",            # prod-142..145 — /tutor-modes, /memory-boost, /teacher/.../heat-map, /admin/examples-queue
+    "search",                   # prod-181 — unified search (/api/search + /search) over videos + PYQs + examples
 )
 
 

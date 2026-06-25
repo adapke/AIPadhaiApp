@@ -36,12 +36,14 @@ sys.path.insert(0, str(REPO_ROOT))
 #   prod-146: 0 routes (script-only)
 #   ADMIN_ONLY 131 -> 132 (one tail-recompute)
 #   Total: 781 -> 786
-EXPECTED_TOTAL = 786
+#   prod-181: +2 PUBLIC (GET /api/search + GET /search — unified search,
+#             no auth, public discovery surface). Total 786 -> 788.
+EXPECTED_TOTAL = 788
 EXPECTED_COUNTS = {
     "ADMIN_ONLY":    132,
     "ANONYMOUS_OK":  437,
     "AUTH_REQUIRED": 24,
-    "PUBLIC":        176,
+    "PUBLIC":        178,
     "TIER_GATED":    2,
     "UNKNOWN":       15,
 }
