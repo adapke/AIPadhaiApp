@@ -84,6 +84,14 @@ This is the missing piece today. Commit the generated `android/` (and
 `ios/` from the Mac) so builds are reproducible. Re-run `cap sync` after
 any config or plugin change.
 
+> **webDir is ready (prod-191).** `webDir` resolves to `padhai/static/`,
+> which was missing — `cap add`/`cap sync` would have failed. A minimal
+> offline-fallback `padhai/static/index.html` now exists (the shells load
+> the live site via `server.url`; this is just the required local bundle
+> Capacitor copies in). Verified: `npx cap add android` scaffolds cleanly
+> (8 plugins detected, webDir copied). So step 3 is unblocked — run it on
+> a machine with the Android SDK (and a Mac for `cap add ios`).
+
 > The three apps share `capacitor.config.json` but have distinct
 > `appId`s. The simplest path is **three separate Capacitor projects**
 > (one per role) OR scripting the appId swap before each `cap add`.

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI Pathshala</title>
+  <!--
+    Capacitor webDir fallback.
+
+    The native shells (student / parent / teacher) load the live site via
+    `server.url` in capacitor.config.json, so this file is NOT the running
+    app — it is the local bundle Capacitor requires `webDir` to contain
+    (cap add / cap sync fail if webDir is missing). It only renders when
+    the device can't reach the server (cold start / offline), then retries
+    and bounces to the live app.
+
+    All three configs resolve webDir to this directory:
+      mobile/capacitor.config.json          ->  ../padhai/static
+      mobile/parent/capacitor.config.json   ->  ../../padhai/static
+      mobile/teacher/capacitor.config.json  ->  ../../padhai/static
+  -->
+  <style>
+    html,body{height:100%;margin:0}
+    body{display:flex;flex-direction:column;align-items:center;justify-content:center;
+      font-family:Inter,system-ui,-apple-system,sans-serif;background:#5E60CE;color:#fff;
+      text-align:center;padding:24px;box-sizing:border-box}
+    .logo{font-size:26px;font-weight:700;letter-spacing:.3px}
+    .sub{margin-top:10px;font-size:15px;opacity:.85;line-height:1.5;max-width:300px}
+    .spin{margin-top:28px;width:34px;height:34px;border:3px solid rgba(255,255,255,.3);
+      border-top-color:#fff;border-radius:50%;animation:r 0.9s linear infinite}
+    @keyframes r{to{transform:rotate(360deg)}}
+    a{color:#fff;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="logo">AI Pathshala</div>
+  <div class="sub" id="msg">Loading your learning home…</div>
+  <div class="spin" id="spin"></div>
+  <script>
+    // The shells normally load server.url directly; this fallback only
+    // shows when that hasn't loaded. Retry the live app, and surface an
+    // offline message if it stays unreachable.
+    var LIVE = "https://app.aipathshala.in/";
+    var tries = 0;
+    function go(){
+      tries++;
+      try { window.location.replace(LIVE); } catch (e) {}
+      if (tries >= 3) {
+        document.getElementById("spin").style.display = "none";
+        document.getElementById("msg").innerHTML =
+          "You appear to be offline.<br>Please check your connection — " +
+          '<a href="' + LIVE + '">tap to retry</a>.';
+      }
+    }
+    window.addEventListener("online", go);
+    setTimeout(go, 1200);
+  </script>
+</body>
+</html>
