@@ -1,0 +1,123 @@
+{
+  "source": "sat_2024_reading_writing_2",
+  "default_board": "sat",
+  "default_grade": 0,
+  "default_subject": "sat_reading_writing",
+  "default_year": 2024,
+  "default_paper": "practice2",
+  "questions": [
+    {
+      "question_text": "Which word best completes the sentence? 'The team ____ winning every match this season.'",
+      "options": ["are", "is", "were", "be"],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["subject_verb_agreement"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'The instructions were ____, so we finished the task quickly.'",
+      "options": ["clear", "confusing", "lengthy", "vague"],
+      "correct_answer": "A",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which sentence is punctuated correctly?",
+      "options": [
+        "After dinner, we watched a movie.",
+        "After dinner we watched, a movie.",
+        "After, dinner we watched a movie.",
+        "After dinner we, watched a movie."
+      ],
+      "correct_answer": "A",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["punctuation", "commas"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which transition best completes the sentence? 'She practiced daily. ____, she improved quickly.'",
+      "options": ["Therefore", "However", "Although", "Instead"],
+      "correct_answer": "A",
+      "chapter": "Expression of Ideas",
+      "topic_tags": ["transitions"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best completes the sentence? 'Each of the students ____ a textbook.'",
+      "options": ["have", "has", "were", "are"],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["subject_verb_agreement"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'The CEO gave a ____ speech that inspired everyone in the room.'",
+      "options": ["dull", "rousing", "brief", "technical"],
+      "correct_answer": "B",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best completes the sentence? 'Maria and ____ went to the store together.'",
+      "options": ["me", "I", "myself", "her"],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["pronouns"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which transition best completes the sentence? 'The plan was inexpensive. ____, it was risky.'",
+      "options": ["Moreover", "However", "Therefore", "Likewise"],
+      "correct_answer": "B",
+      "chapter": "Expression of Ideas",
+      "topic_tags": ["transitions"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Choose the correct possessive: 'That is ____ book.' (the book belongs to James)",
+      "options": ["James", "James'", "James's", "Jameses"],
+      "correct_answer": "C",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["apostrophes", "possessives"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A study found a city's recycling rose 40% after free bins were provided. This best supports the claim that free bins ____ recycling.",
+      "options": ["increased", "reduced", "replaced", "measured"],
+      "correct_answer": "A",
+      "chapter": "Information and Ideas",
+      "topic_tags": ["command_of_evidence"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Which choice keeps the sentence parallel? 'To improve, she read daily, practiced often, and ____.'",
+      "options": ["joined a class", "a class was joined", "joining a class", "joins a class"],
+      "correct_answer": "A",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["parallel_structure"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'His ____ remarks, though polite, subtly criticized the plan.'",
+      "options": ["effusive", "veiled", "blunt", "sincere"],
+      "correct_answer": "B",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context", "nuance"],
+      "difficulty": "hard",
+      "marks": 1
+    }
+  ]
+}

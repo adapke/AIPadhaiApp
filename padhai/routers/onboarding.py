@@ -127,6 +127,7 @@ TARGET_EXAMS = [
     {"code": "cbse_board_10", "label": "CBSE Class 10 Board"},
     {"code": "cbse_board_12", "label": "CBSE Class 12 Board"},
     {"code": "state_board", "label": "State Board exam"},
+    {"code": "sat", "label": "SAT (US College Admissions)"},
     {"code": "none", "label": "No exam right now — just learning"},
 ]
 

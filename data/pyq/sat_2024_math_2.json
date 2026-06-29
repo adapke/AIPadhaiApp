@@ -1,0 +1,118 @@
+{
+  "source": "sat_2024_math_2",
+  "default_board": "sat",
+  "default_grade": 0,
+  "default_subject": "sat_math",
+  "default_year": 2024,
+  "default_paper": "practice2",
+  "questions": [
+    {
+      "question_text": "If x / 4 = 9, what is the value of x?",
+      "options": ["13", "32", "36", "45"],
+      "correct_answer": "C",
+      "chapter": "Algebra",
+      "topic_tags": ["linear_equations"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "15 is what percent of 60?",
+      "options": ["15%", "20%", "25%", "40%"],
+      "correct_answer": "C",
+      "chapter": "Problem-Solving and Data Analysis",
+      "topic_tags": ["percentages"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If 5x - 3 = 2x + 9, what is the value of x?",
+      "options": ["2", "3", "4", "6"],
+      "correct_answer": "C",
+      "chapter": "Algebra",
+      "topic_tags": ["linear_equations"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "If f(x) = x squared + 1, what is f(3)?",
+      "options": ["7", "9", "10", "16"],
+      "correct_answer": "C",
+      "chapter": "Advanced Math",
+      "topic_tags": ["functions"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A line passes through (0, 1) with slope 2. What is its y-value when x = 3?",
+      "options": ["5", "6", "7", "8"],
+      "correct_answer": "C",
+      "chapter": "Algebra",
+      "topic_tags": ["linear_functions", "slope"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A recipe uses 3 cups of flour for 12 cookies. How many cups are needed for 20 cookies?",
+      "options": ["4", "5", "6", "8"],
+      "correct_answer": "B",
+      "chapter": "Problem-Solving and Data Analysis",
+      "topic_tags": ["ratios_rates", "proportions"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A rectangle has length 8 and width 5. What is its area?",
+      "options": ["13", "26", "40", "80"],
+      "correct_answer": "C",
+      "chapter": "Geometry and Trigonometry",
+      "topic_tags": ["area"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Simplify: x cubed times x squared.",
+      "options": ["x", "x to the 5th", "x to the 6th", "x to the 9th"],
+      "correct_answer": "B",
+      "chapter": "Advanced Math",
+      "topic_tags": ["exponents"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "The mean of 4, 8, 10 and a is 8. What is the value of a?",
+      "options": ["6", "8", "10", "12"],
+      "correct_answer": "C",
+      "chapter": "Problem-Solving and Data Analysis",
+      "topic_tags": ["statistics", "mean"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "What is the vertex of the parabola y = (x - 2) squared + 3?",
+      "options": ["(2, 3)", "(-2, 3)", "(2, -3)", "(3, 2)"],
+      "correct_answer": "A",
+      "chapter": "Advanced Math",
+      "topic_tags": ["quadratics", "vertex_form"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "If 3x + 2y = 12 and x = 2, what is the value of y?",
+      "options": ["2", "3", "4", "6"],
+      "correct_answer": "B",
+      "chapter": "Algebra",
+      "topic_tags": ["systems_of_equations"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "In a right triangle, the side opposite angle theta is 3 and the hypotenuse is 5. What is sin(theta)?",
+      "options": ["0.6", "0.75", "0.8", "1.25"],
+      "correct_answer": "A",
+      "chapter": "Geometry and Trigonometry",
+      "topic_tags": ["trigonometry", "sine"],
+      "difficulty": "hard",
+      "marks": 1
+    }
+  ]
+}

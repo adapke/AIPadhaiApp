@@ -707,6 +707,50 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-192 — SAT (US Digital SAT) exam section.** First non-India exam.
+  Full vertical: new `padhai/routers/sat.py` serves a public `/sat` hub
+  (accurate Digital-SAT details, 13 oembed-verified prep videos in
+  topic tabs, 24 interactive flip-flashcards, and an inline practice
+  test wired to `POST /api/practice/generate` (exam="sat") + `/submit`
+  with an **estimated 200–800 section score** on results). Backend
+  wiring: `"sat"` in `practice_test.VALID_EXAMS`; College Board body +
+  `sat` exam + 8 official content-domain topics + `_EXAM_TO_BOARD_HINT`
+  in `exam_taxonomy`; 64 hand-written SAT-style questions seeded into
+  `question_bank` (board="sat", subjects `sat_math` / `sat_reading_writing`,
+  grade=0) via `data/pyq/sat_2024_{math,reading_writing}.json` — so the
+  practice test fills from the bank and works for **free (M1) users**
+  (no Claude synthesis needed); 14 SAT videos seeded into `concept_videos`
+  (board="SAT") + exported to `data/concept_videos_seed.json`
+  (110 → 124 verified). **Cross-surface mapping** (SAT now appears
+  everywhere boards/exams do, like CBSE/JEE/NEET): `/syllabus` browser
+  (Math + R&W topic tree), onboarding target-exam picker, home
+  `EXAM_DATES`/`EXAM_LABELS` countdown, SPA goal picker (new
+  "International" optgroup) + `_goalMeta`, and a landing exam chip
+  linking to `/sat`. Deliberately skipped the `/curriculum` board
+  dropdown (grade 6–12 + no `curriculum_topics` rows → would be empty
+  for a grade-0 exam). **US-market content current to 2026–27:** 98 q ·
+  2 h 14 m, 400–1600 scoring + percentile context (1050/1300/1500),
+  test dates Aug–Dec 2026 + Mar/May/Jun 2027, fee $68/$111/+$38 + waivers,
+  Bluebook (timer-pause-on-exit), Desmos scientific↔graphing toggle,
+  Spring-2026 Math TTS/screen-reader, superscore/Score Choice/SSD,
+  PSAT/NMSQT, official Khan Academy + Bluebook full-length pointers; no
+  essay (discontinued 2021 — correctly not added). **Also fixed an
+  app-wide latent bug:** the CSP had no `frame-src`, so it fell back to
+  `default-src 'self'` and the browser blocked *all* YouTube embeds
+  (the existing `/concept` videos too) — added
+  `frame-src https://www.youtube.com https://www.youtube-nocookie.com`.
+  Tests: new `tests/test_sat.py` (7) — hub renders + US-market markers,
+  `sat` in VALID_EXAMS, taxonomy seeded, PYQ import (40), bank-backed
+  practice generate+submit scores, SAT videos ship in seed. Endpoint
+  map 788 → 789 (+1 PUBLIC `/sat`). **In-app full-length mock** (two
+  timed sections, R&W then Math → combined 400–1600 estimate, both
+  drawn from the bank) + the **full College Board syllabus** now render
+  on the hub itself — no redirect to College Board; the official
+  Bluebook full-lengths are only a mentioned option, not a link-out.
+  Honest gaps: the in-app mock is ~49 q (27 R&W + 22 Math) vs the
+  official 98 (the bank keeps growing); per-question answer
+  explanations are the next enhancement.
+
 - **prod-141..146 — SPA wiring + hand-curated content seed.**
   CK-12 patterns from prod-135..140 were API-only at ship; this
   sprint surfaces them as actual user-visible pages and seeds the

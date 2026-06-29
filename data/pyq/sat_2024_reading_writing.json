@@ -1,0 +1,215 @@
+{
+  "source": "sat_2024_reading_writing",
+  "default_board": "sat",
+  "default_grade": 0,
+  "default_subject": "sat_reading_writing",
+  "default_year": 2024,
+  "default_paper": "practice",
+  "questions": [
+    {
+      "question_text": "Which word best completes the sentence? 'The list of required items ____ on the front desk.'",
+      "options": ["are", "were", "is", "be"],
+      "correct_answer": "C",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["subject_verb_agreement"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best completes the sentence? 'Neither of the boys ____ finished his homework.'",
+      "options": ["have", "has", "were", "are"],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["subject_verb_agreement"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which sentence is punctuated correctly?",
+      "options": [
+        "We visited Paris, France, in July.",
+        "We visited Paris France, in July.",
+        "We visited, Paris France in July.",
+        "We visited Paris France in July,"
+      ],
+      "correct_answer": "A",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["punctuation", "commas"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'The scientist's explanation was so ____ that even beginners understood it.'",
+      "options": ["obscure", "lucid", "verbose", "tedious"],
+      "correct_answer": "B",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Choose the correct possessive form: 'The ____ toys were scattered across the floor.' (more than one dog)",
+      "options": ["dogs", "dog's", "dogs'", "dogs's"],
+      "correct_answer": "C",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["apostrophes", "possessives"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which transition best completes the sentence? 'It rained heavily all day. ____, the cricket match was postponed.'",
+      "options": ["However", "Therefore", "Nevertheless", "Meanwhile"],
+      "correct_answer": "B",
+      "chapter": "Expression of Ideas",
+      "topic_tags": ["transitions"],
+      "difficulty": "easy",
+      "marks": 1
+    },
+    {
+      "question_text": "Which choice best corrects the comma splice 'She studied hard, she passed the exam.'?",
+      "options": [
+        "She studied hard she passed the exam.",
+        "She studied hard, so she passed the exam.",
+        "She studied hard, passed the exam.",
+        "She studied hard she passed, the exam."
+      ],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["comma_splice", "sentence_boundaries"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best completes the sentence? 'By the time we arrived, the movie ____.'",
+      "options": ["had already started", "has already started", "already starts", "starting"],
+      "correct_answer": "A",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["verb_tense"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'The ____ evidence left no doubt about the defendant's guilt.'",
+      "options": ["compelling", "circumstantial", "flimsy", "conflicting"],
+      "correct_answer": "A",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which sentence has no dangling or misplaced modifier?",
+      "options": [
+        "Walking to school, the rain soaked Maria.",
+        "Walking to school, Maria was soaked by the rain.",
+        "The rain, walking to school, soaked Maria.",
+        "Soaked by the rain walking to school."
+      ],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["modifiers"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which transition best completes the sentence? 'The new policy reduced costs. ____, it improved employee morale.'",
+      "options": ["In addition", "However", "In contrast", "Otherwise"],
+      "correct_answer": "A",
+      "chapter": "Expression of Ideas",
+      "topic_tags": ["transitions"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which choice keeps the list parallel? 'She likes hiking, swimming, and ____.'",
+      "options": ["to bike", "biking", "bikes", "she bikes"],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["parallel_structure"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which sentence uses the semicolon correctly?",
+      "options": [
+        "I have a test tomorrow; so I must study.",
+        "I have a test tomorrow; therefore, I must study.",
+        "I have a test; tomorrow I must study; tonight.",
+        "I have; a test tomorrow."
+      ],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["punctuation", "semicolons"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'The committee's decision was ____; no one could change it.'",
+      "options": ["tentative", "final", "arbitrary", "hasty"],
+      "correct_answer": "B",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "A graph shows that a product's sales rose every quarter for two years. This best supports the claim that the product became increasingly ____.",
+      "options": ["popular", "obsolete", "expensive", "scarce"],
+      "correct_answer": "A",
+      "chapter": "Information and Ideas",
+      "topic_tags": ["command_of_evidence", "data_interpretation"],
+      "difficulty": "medium",
+      "marks": 1
+    },
+    {
+      "question_text": "Which sentence uses a colon correctly?",
+      "options": [
+        "She bought: apples, pears, and grapes.",
+        "She bought three fruits: apples, pears, and grapes.",
+        "She bought three fruits, apples: pears, and grapes.",
+        "She: bought three fruits apples, pears, and grapes."
+      ],
+      "correct_answer": "B",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["punctuation", "colons"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best completes the sentence? 'The author, ____ won the national prize, will speak tonight.'",
+      "options": ["who", "whom", "whose", "which"],
+      "correct_answer": "A",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["pronouns", "who_whom"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Which word best fits the context? 'Her tone was not openly rude but quietly ____, hinting at disapproval beneath her politeness.'",
+      "options": ["condescending", "cordial", "enthusiastic", "candid"],
+      "correct_answer": "A",
+      "chapter": "Craft and Structure",
+      "topic_tags": ["words_in_context", "nuance"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "A writer wants to emphasize the surprising speed of the change. Which choice best accomplishes this? 'The town's population ____ from 5,000 to 50,000 in just two years.'",
+      "options": ["grew", "skyrocketed", "changed", "moved"],
+      "correct_answer": "B",
+      "chapter": "Expression of Ideas",
+      "topic_tags": ["rhetorical_synthesis", "word_choice"],
+      "difficulty": "hard",
+      "marks": 1
+    },
+    {
+      "question_text": "Which choice completes the sentence with the correct words? 'The company announced ____ plans to expand, and ____ clear that the board approves.'",
+      "options": ["its ... its", "it's ... its", "its ... it's", "it's ... it's"],
+      "correct_answer": "C",
+      "chapter": "Standard English Conventions",
+      "topic_tags": ["its_its", "homophones"],
+      "difficulty": "hard",
+      "marks": 1
+    }
+  ]
+}

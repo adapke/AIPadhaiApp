@@ -1444,13 +1444,14 @@ if ('serviceWorker' in navigator) {
     'cbse_board_10':   '2026-02-15',
     'cbse_board_12':   '2026-02-15',
     'state_board':     '2026-03-01',
+    'sat':             '2026-08-22',  // US Digital SAT (projected; multiple sittings/yr)
   };
   var EXAM_LABELS = {
     'neet_ug':'NEET UG','jee_main':'JEE Main','jee_advanced':'JEE Advanced',
     'cuet_ug':'CUET','upsc_cse':'UPSC CSE','ssc_cgl':'SSC CGL',
     'ibps_po':'IBPS PO','cat':'CAT','gate':'GATE','neet_pg':'NEET PG',
     'cbse_board_10':'CBSE Class 10','cbse_board_12':'CBSE Class 12',
-    'state_board':'State Board',
+    'state_board':'State Board','sat':'SAT',
   };
   function renderExamCountdown(targetExam){
     var el = document.getElementById('examCountdown');

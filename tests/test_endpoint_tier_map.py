@@ -38,12 +38,14 @@ sys.path.insert(0, str(REPO_ROOT))
 #   Total: 781 -> 786
 #   prod-181: +2 PUBLIC (GET /api/search + GET /search — unified search,
 #             no auth, public discovery surface). Total 786 -> 788.
-EXPECTED_TOTAL = 788
+#   prod-192: +1 PUBLIC (GET /sat — US Digital SAT exam hub: details +
+#             videos + flashcards + practice test CTA). Total 788 -> 789.
+EXPECTED_TOTAL = 789
 EXPECTED_COUNTS = {
     "ADMIN_ONLY":    132,
     "ANONYMOUS_OK":  437,
     "AUTH_REQUIRED": 24,
-    "PUBLIC":        178,
+    "PUBLIC":        179,
     "TIER_GATED":    2,
     "UNKNOWN":       15,
 }

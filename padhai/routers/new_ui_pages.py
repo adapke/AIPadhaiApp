@@ -1820,6 +1820,25 @@ _SYLLABUS_DATA = """const SYLLABUS = {
       ],
     },
   },
+  sat: {
+    label: 'SAT — US College Admissions (Digital)',
+    classes: {
+      'SAT Math': [
+        'Algebra — linear equations & inequalities, systems of linear equations, linear functions and word problems',
+        'Advanced Math — quadratics, polynomials, exponents & radicals, rational and nonlinear equations, function notation',
+        'Problem-Solving & Data Analysis — ratios, rates, proportions, percentages, units, mean/median/mode, scatterplots, probability',
+        'Geometry & Trigonometry — lines & angles, triangles, circles, area & volume, right-triangle trigonometry, the Pythagorean theorem',
+        'Calculator allowed across the whole Math section (built-in Desmos graphing calculator)',
+      ],
+      'SAT Reading & Writing': [
+        'Craft & Structure — words in context (vocabulary), text structure and purpose, cross-text connections',
+        'Information & Ideas — central ideas & details, command of evidence (textual and quantitative), inferences',
+        'Standard English Conventions — sentence boundaries, subject-verb agreement, pronouns, punctuation, modifiers, verb tense, parallelism',
+        'Expression of Ideas — rhetorical synthesis, transitions and logical flow, word choice and concision',
+        'Format — short passages, one question each, two section-adaptive modules',
+      ],
+    },
+  },
   icse: {
     label: 'ICSE / ISC (CISCE)',
     classes: {

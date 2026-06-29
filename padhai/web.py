@@ -1299,6 +1299,11 @@ class _CSPMiddleware(BaseHTTPMiddleware):
                 "font-src 'self' https://fonts.gstatic.com; "
                 "img-src 'self' data: blob: https:; "
                 "media-src 'self' blob: https:; "
+                # frame-src must be explicit: without it, embedded iframes
+                # fall back to default-src 'self' and the browser blocks
+                # YouTube embeds (concept videos + the /sat hub). Scope it
+                # tightly to YouTube's embed origins.
+                "frame-src https://www.youtube.com https://www.youtube-nocookie.com; "
                 "connect-src 'self'; "
                 "frame-ancestors 'none';"
             )
@@ -3392,6 +3397,9 @@ _INDEX_HTML = r"""<!DOCTYPE html>
                   <option value="cat">CAT</option>
                   <option value="clat">CLAT</option>
                 </optgroup>
+                <optgroup label="International">
+                  <option value="sat">SAT (US College)</option>
+                </optgroup>
                 <optgroup label="Career">
                   <option value="placement">Campus Placements</option>
                   <option value="ugc_net">UGC NET / CSIR NET</option>
@@ -3558,6 +3566,12 @@ _INDEX_HTML = r"""<!DOCTYPE html>
               <div class="sh-chips">
                 <span class="sh-chip">JEE</span><span class="sh-chip">NEET</span><span class="sh-chip">CUET</span>
                 <span class="sh-chip">GATE</span><span class="sh-chip">CLAT</span><span class="sh-chip">CAT</span>
+              </div>
+            </div>
+            <div class="sh-exam-item">
+              <b>International</b>
+              <div class="sh-chips">
+                <a class="sh-chip" href="/sat" style="text-decoration:none">SAT</a>
               </div>
             </div>
             <div class="sh-exam-item">
@@ -5524,6 +5538,7 @@ const _goalMeta = {
   gate:       { name:'GATE', sub:'Your engineering branch', readiness:0 },
   cat:        { name:'CAT', sub:'QA + DILR + VARC', readiness:0 },
   clat:       { name:'CLAT', sub:'English + Legal + Reasoning', readiness:0 },
+  sat:        { name:'SAT', sub:'Math + Reading & Writing · US college admissions', readiness:0 },
   placement:  { name:'Campus Placements', sub:'Aptitude + Coding + HR', readiness:0 },
   ugc_net:    { name:'UGC NET / CSIR NET', sub:'Paper I + Paper II', readiness:0 },
   phd:        { name:'PhD / Research', sub:'Research methodology + thesis', readiness:0 },

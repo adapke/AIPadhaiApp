@@ -80,6 +80,7 @@ _ROUTER_NAMES = (
     "mastery_page",             # prod-141 — server-rendered /mastery page (color-coded grid)
     "ck12_ui_pages",            # prod-142..145 — /tutor-modes, /memory-boost, /teacher/.../heat-map, /admin/examples-queue
     "search",                   # prod-181 — unified search (/api/search + /search) over videos + PYQs + examples
+    "sat",                      # prod-192 — US Digital SAT exam hub (/sat: details + videos + flashcards + practice)
 )
 
 

@@ -152,6 +152,7 @@ _BODY_SEED = [
     ("ctet", "Central Teacher Eligibility Test", "IN"),
     ("icai", "Institute of Chartered Accountants of India", "IN"),
     ("aibe", "All India Bar Examination", "IN"),
+    ("collegeboard", "College Board (USA)", "US"),  # prod-192 — SAT
 ]
 
 # Top exams per body — the 5 deep packs from review §Phase 2 are the
@@ -204,6 +205,10 @@ _EXAM_SEED = [
     ("aibe", "aibe", "professional",
      "All India Bar Examination", "AIBE",
      "law_graduate", ["en", "hi"]),
+    # prod-192 — US Digital SAT (College Board). NRI / US-bound students.
+    ("collegeboard", "sat", "competitive",
+     "SAT — US College Admissions (Digital)", "SAT",
+     "class_12", ["en"]),
 ]
 
 # Topic trees — review §5 requires per-exam taxonomy. We seed the
@@ -211,6 +216,18 @@ _EXAM_SEED = [
 # get ingested via the J6 worker pipeline + expert review. Wider
 # coverage is content work, not engineering.
 _TOPIC_SEED = {
+    # prod-192 — US Digital SAT: the 8 official College Board content
+    # domains (4 Reading & Writing, 4 Math) with approximate weightings.
+    "sat": [
+        ("sat_craft_structure", "R&W: Craft and Structure", 28.0),
+        ("sat_info_ideas", "R&W: Information and Ideas", 26.0),
+        ("sat_english_conventions", "R&W: Standard English Conventions", 26.0),
+        ("sat_expression_ideas", "R&W: Expression of Ideas", 20.0),
+        ("sat_algebra", "Math: Algebra", 35.0),
+        ("sat_advanced_math", "Math: Advanced Math", 35.0),
+        ("sat_data_analysis", "Math: Problem-Solving and Data Analysis", 15.0),
+        ("sat_geometry_trig", "Math: Geometry and Trigonometry", 15.0),
+    ],
     # CBSE Class 10 — Mathematics chapters (NCERT 2025-26)
     "cbse_class_10": [
         ("real_numbers", "Real Numbers", 6.0),
@@ -851,6 +868,7 @@ _EXAM_TO_BOARD_HINT: dict[str, str] = {
     "upsc_cse": "UPSC",
     "ssc_cgl": "SSC",
     "ssc_chsl": "SSC",
+    "sat": "SAT",  # prod-192 — US Digital SAT
 }
 
 

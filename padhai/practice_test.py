@@ -60,6 +60,7 @@ VALID_EXAMS = frozenset({
     "upsc", "upsc_pre", "upsc_mains",
     "jee_main", "jee_advanced",
     "neet", "cat", "gate", "generic",
+    "sat",  # prod-192 — US Digital SAT (subjects: sat_math, sat_reading_writing)
 })
 
 
