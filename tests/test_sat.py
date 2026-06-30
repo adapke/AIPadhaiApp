@@ -70,6 +70,8 @@ def test_sat_hub_renders():
         "/sat should not redirect to College Board's Bluebook practice tests — "
         "the full-length mock is in-app now"
     )
+    # prod-193 — per-question answer explanations render after scoring.
+    assert "<b>Why:</b>" in body, "/sat should render per-question answer explanations"
 
 
 def test_sat_router_registered():
@@ -138,6 +140,7 @@ def test_sat_pyq_files_import_clean(temp_db):  # noqa: ARG001
         assert q.options and len(q.options) == 4, q
         assert q.correct_answer in {"A", "B", "C", "D"}, q
         assert q.difficulty in {"easy", "medium", "hard"}, q
+        assert q.explanation, f"SAT question missing explanation: {q.question_text[:50]}"
 
 
 def test_sat_practice_generates_and_scores_from_bank(temp_db):  # noqa: ARG001
@@ -165,6 +168,8 @@ def test_sat_practice_generates_and_scores_from_bank(temp_db):  # noqa: ARG001
     score = pt.submit(test_id=test.id, answers=answers)
     assert score["total"] == score["max"] > 0, score
     assert score["pct"] == 1.0, score
+    # prod-193 — submit surfaces per-question explanations for review.
+    assert any(pq.get("explanation") for pq in score["per_question"]), score["per_question"][:2]
 
 
 # ---------- shipped video catalog ----------

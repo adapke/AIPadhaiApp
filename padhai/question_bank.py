@@ -22,6 +22,7 @@ lands in v1.7.x.
 
 from __future__ import annotations
 
+import contextlib
 import json
 import os
 import re
@@ -66,6 +67,12 @@ _NCERT_CODE_MIGRATION = """
 ALTER TABLE question_bank ADD COLUMN ncert_code TEXT;
 """
 
+# prod-193 — per-question answer explanation ("why this answer is right"),
+# shown after a practice submit. Idempotent ALTER like ncert_code above.
+_EXPLANATION_MIGRATION = """
+ALTER TABLE question_bank ADD COLUMN explanation TEXT;
+"""
+
 VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 
 
@@ -89,6 +96,9 @@ def _conn() -> sqlite3.Connection:
     except sqlite3.OperationalError:
         # Column already exists — expected on every boot after the first.
         pass
+    # prod-193 — per-question explanation column (idempotent add).
+    with contextlib.suppress(sqlite3.OperationalError):
+        conn.execute(_EXPLANATION_MIGRATION)
     return conn
 
 
@@ -114,6 +124,7 @@ class Question:
     topic_tags: list[str]
     source: str | None
     created_at: float
+    explanation: str | None = None  # prod-193 — shown after a practice submit
 
 
 def _row_to_question(r) -> Question:
@@ -124,13 +135,14 @@ def _row_to_question(r) -> Question:
         correct_answer=r[9], marks=r[10], difficulty=r[11],
         topic_tags=json.loads(r[12]) if r[12] else [],
         source=r[13], created_at=r[14],
+        explanation=r[15] if len(r) > 15 else None,
     )
 
 
 _SEL = (
     "id, board, grade, subject, chapter, year, paper, question_text, "
     "options_json, correct_answer, marks, difficulty, topic_tags, "
-    "source, created_at"
+    "source, created_at, explanation"
 )
 
 
@@ -146,6 +158,7 @@ def upsert(
     difficulty: str | None = None,
     topic_tags: list[str] | None = None,
     source: str | None = None,
+    explanation: str | None = None,
 ) -> Question:
     """Insert or replace one question. Idempotent on the natural key
     (board+grade+subject+year+paper+question_text). Ingest workers
@@ -161,28 +174,30 @@ def upsert(
                 "INSERT INTO question_bank "
                 "(id, board, grade, subject, chapter, year, paper, "
                 " question_text, options_json, correct_answer, "
-                " marks, difficulty, topic_tags, source, created_at) "
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                " marks, difficulty, topic_tags, source, created_at, "
+                " explanation) "
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 (qid, board, grade, subject, chapter, year, paper,
                  question_text,
                  json.dumps(options) if options else None,
                  correct_answer, marks, difficulty,
                  json.dumps(topic_tags) if topic_tags else None,
-                 source, time.time()),
+                 source, time.time(), explanation),
             )
         except sqlite3.IntegrityError:
             # Already exists — update everything except the natural key
             conn.execute(
                 "UPDATE question_bank SET "
                 " chapter = ?, options_json = ?, correct_answer = ?, "
-                " marks = ?, difficulty = ?, topic_tags = ?, source = ? "
+                " marks = ?, difficulty = ?, topic_tags = ?, source = ?, "
+                " explanation = ? "
                 "WHERE board = ? AND grade = ? AND subject = ? "
                 "AND year IS ? AND paper IS ? AND question_text = ?",
                 (chapter,
                  json.dumps(options) if options else None,
                  correct_answer, marks, difficulty,
                  json.dumps(topic_tags) if topic_tags else None,
-                 source,
+                 source, explanation,
                  board, grade, subject, year, paper, question_text),
             )
         r = conn.execute(

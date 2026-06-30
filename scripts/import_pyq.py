@@ -82,6 +82,7 @@ def merge_defaults(q: dict, defaults: dict) -> dict:
         "difficulty":     q.get("difficulty"),
         "topic_tags":     q.get("topic_tags") or [],
         "source":         defaults.get("source"),
+        "explanation":    q.get("explanation"),  # prod-193 — optional per-question
     }
 
 

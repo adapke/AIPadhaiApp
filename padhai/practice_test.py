@@ -289,6 +289,7 @@ def _q_to_dict(q) -> dict:
         "options": q.options, "correct_answer": q.correct_answer,
         "marks": q.marks or 1, "difficulty": q.difficulty,
         "topic_tags": q.topic_tags or [],
+        "explanation": getattr(q, "explanation", None),  # prod-193
     }
 
 
@@ -471,6 +472,7 @@ def submit(
             "is_correct": is_correct,
             "marks": q.get("marks", 1),
             "topic_tags": q.get("topic_tags") or [],
+            "explanation": q.get("explanation"),  # prod-193 — shown post-submit
         })
     score = {
         "total": total, "max": max_total,

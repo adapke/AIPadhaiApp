@@ -13,7 +13,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["subject_verb_agreement"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The subject is 'list' (singular); 'of required items' is just a modifier, so use 'is'."
     },
     {
       "question_text": "Which word best completes the sentence? 'Neither of the boys ____ finished his homework.'",
@@ -22,7 +23,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["subject_verb_agreement"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'Neither' is singular, so it takes the singular verb 'has'."
     },
     {
       "question_text": "Which sentence is punctuated correctly?",
@@ -36,7 +38,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["punctuation", "commas"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A city and its country are separated by commas, with a comma after the place name."
     },
     {
       "question_text": "Which word best fits the context? 'The scientist's explanation was so ____ that even beginners understood it.'",
@@ -45,7 +48,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "If beginners understood it, the explanation was clear, i.e. 'lucid'."
     },
     {
       "question_text": "Choose the correct possessive form: 'The ____ toys were scattered across the floor.' (more than one dog)",
@@ -54,7 +58,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["apostrophes", "possessives"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A plural noun ending in s takes the apostrophe after the s: 'dogs''."
     },
     {
       "question_text": "Which transition best completes the sentence? 'It rained heavily all day. ____, the cricket match was postponed.'",
@@ -63,7 +68,8 @@
       "chapter": "Expression of Ideas",
       "topic_tags": ["transitions"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The rain caused the postponement, so a cause-effect transition fits: 'Therefore'."
     },
     {
       "question_text": "Which choice best corrects the comma splice 'She studied hard, she passed the exam.'?",
@@ -77,7 +83,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["comma_splice", "sentence_boundaries"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Two independent clauses need a comma plus a conjunction ('so')."
     },
     {
       "question_text": "Which word best completes the sentence? 'By the time we arrived, the movie ____.'",
@@ -86,7 +93,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["verb_tense"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The action happened before another past event, so use the past perfect 'had already started'."
     },
     {
       "question_text": "Which word best fits the context? 'The ____ evidence left no doubt about the defendant's guilt.'",
@@ -95,7 +103,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Evidence that leaves no doubt is strong, i.e. 'compelling'."
     },
     {
       "question_text": "Which sentence has no dangling or misplaced modifier?",
@@ -109,7 +118,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["modifiers"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The opening modifier must describe the subject right after the comma; only Maria can be 'walking to school'."
     },
     {
       "question_text": "Which transition best completes the sentence? 'The new policy reduced costs. ____, it improved employee morale.'",
@@ -118,7 +128,8 @@
       "chapter": "Expression of Ideas",
       "topic_tags": ["transitions"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A second benefit is being added, so use 'In addition'."
     },
     {
       "question_text": "Which choice keeps the list parallel? 'She likes hiking, swimming, and ____.'",
@@ -127,7 +138,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["parallel_structure"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Match the -ing form of the other items: hiking, swimming, biking."
     },
     {
       "question_text": "Which sentence uses the semicolon correctly?",
@@ -141,7 +153,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["punctuation", "semicolons"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A semicolon joins two independent clauses; with 'therefore' it is correct, but not with the conjunction 'so'."
     },
     {
       "question_text": "Which word best fits the context? 'The committee's decision was ____; no one could change it.'",
@@ -150,7 +163,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A decision no one could change is 'final'."
     },
     {
       "question_text": "A graph shows that a product's sales rose every quarter for two years. This best supports the claim that the product became increasingly ____.",
@@ -159,7 +173,8 @@
       "chapter": "Information and Ideas",
       "topic_tags": ["command_of_evidence", "data_interpretation"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Steadily rising sales indicate growing popularity."
     },
     {
       "question_text": "Which sentence uses a colon correctly?",
@@ -173,7 +188,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["punctuation", "colons"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A colon follows a complete sentence to introduce a list."
     },
     {
       "question_text": "Which word best completes the sentence? 'The author, ____ won the national prize, will speak tonight.'",
@@ -182,7 +198,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["pronouns", "who_whom"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The pronoun is the subject of 'won', so use 'who' (not 'whom')."
     },
     {
       "question_text": "Which word best fits the context? 'Her tone was not openly rude but quietly ____, hinting at disapproval beneath her politeness.'",
@@ -191,7 +208,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context", "nuance"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Quiet disapproval beneath politeness describes a 'condescending' tone."
     },
     {
       "question_text": "A writer wants to emphasize the surprising speed of the change. Which choice best accomplishes this? 'The town's population ____ from 5,000 to 50,000 in just two years.'",
@@ -200,7 +218,8 @@
       "chapter": "Expression of Ideas",
       "topic_tags": ["rhetorical_synthesis", "word_choice"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'Skyrocketed' conveys surprising speed; 'grew' and 'changed' are neutral."
     },
     {
       "question_text": "Which choice completes the sentence with the correct words? 'The company announced ____ plans to expand, and ____ clear that the board approves.'",
@@ -209,7 +228,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["its_its", "homophones"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'its plans' is possessive; 'it's clear' means 'it is clear'."
     }
   ]
 }

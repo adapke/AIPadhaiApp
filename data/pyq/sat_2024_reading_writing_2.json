@@ -13,7 +13,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["subject_verb_agreement"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'Team' is a singular collective noun here, so it takes 'is'."
     },
     {
       "question_text": "Which word best fits the context? 'The instructions were ____, so we finished the task quickly.'",
@@ -22,7 +23,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Finishing quickly implies the instructions were easy to follow: 'clear'."
     },
     {
       "question_text": "Which sentence is punctuated correctly?",
@@ -36,7 +38,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["punctuation", "commas"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An introductory phrase is followed by a comma: 'After dinner, we...'."
     },
     {
       "question_text": "Which transition best completes the sentence? 'She practiced daily. ____, she improved quickly.'",
@@ -45,7 +48,8 @@
       "chapter": "Expression of Ideas",
       "topic_tags": ["transitions"],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Practice causes improvement, so a cause-effect transition fits: 'Therefore'."
     },
     {
       "question_text": "Which word best completes the sentence? 'Each of the students ____ a textbook.'",
@@ -54,7 +58,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["subject_verb_agreement"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'Each' is singular, so the verb is 'has' (not 'have')."
     },
     {
       "question_text": "Which word best fits the context? 'The CEO gave a ____ speech that inspired everyone in the room.'",
@@ -63,7 +68,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A speech that inspires is 'rousing'; 'dull' is the opposite."
     },
     {
       "question_text": "Which word best completes the sentence? 'Maria and ____ went to the store together.'",
@@ -72,7 +78,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["pronouns"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "It is the subject of 'went', so use the subject pronoun 'I'."
     },
     {
       "question_text": "Which transition best completes the sentence? 'The plan was inexpensive. ____, it was risky.'",
@@ -81,7 +88,8 @@
       "chapter": "Expression of Ideas",
       "topic_tags": ["transitions"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Cheap but risky is a contrast, so use 'However'."
     },
     {
       "question_text": "Choose the correct possessive: 'That is ____ book.' (the book belongs to James)",
@@ -90,7 +98,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["apostrophes", "possessives"],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A singular name takes apostrophe + s: 'James's'."
     },
     {
       "question_text": "A study found a city's recycling rose 40% after free bins were provided. This best supports the claim that free bins ____ recycling.",
@@ -99,7 +108,8 @@
       "chapter": "Information and Ideas",
       "topic_tags": ["command_of_evidence"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Recycling rose after the bins, so the bins 'increased' it."
     },
     {
       "question_text": "Which choice keeps the sentence parallel? 'To improve, she read daily, practiced often, and ____.'",
@@ -108,7 +118,8 @@
       "chapter": "Standard English Conventions",
       "topic_tags": ["parallel_structure"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Match the past-tense list (read, practiced): 'joined a class'."
     },
     {
       "question_text": "Which word best fits the context? 'His ____ remarks, though polite, subtly criticized the plan.'",
@@ -117,7 +128,8 @@
       "chapter": "Craft and Structure",
       "topic_tags": ["words_in_context", "nuance"],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Criticism that is subtle and hidden under politeness is 'veiled'."
     }
   ]
 }

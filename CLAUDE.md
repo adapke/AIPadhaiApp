@@ -707,6 +707,25 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-193 — Per-question answer explanations (practice tests).** The
+  "why was I wrong?" feature every US SAT-prep tool has. Added an
+  `explanation` column to `question_bank` (idempotent ALTER mirroring the
+  prod-138 ncert_code pattern; `contextlib.suppress` on the dup-column
+  error), threaded through `upsert()`, the `Question` dataclass, and
+  `scripts/import_pyq.py`. `practice_test._q_to_dict` carries it and
+  `submit()` surfaces it in each `per_question` entry — **post-submit
+  only**, so the hide-answers `generate` response stays spoiler-free.
+  The `/sat` results render a "Why:" box under each question after
+  scoring, in both the quick diagnostic and the full-length mock (shared
+  `annotate()`). Wrote concise worked-solution explanations for **all 64
+  SAT questions** (re-imported via the upsert UPDATE path). Generic
+  across exams — any PYQ carrying an `explanation` now shows it; existing
+  non-SAT PYQs stay null (graceful). Tests: `test_sat.py` extended (bank
+  rows have explanations, submit `per_question` carries them, `/sat`
+  renders "Why:"). Honest next steps: backfill explanations onto the
+  Indian PYQ bank, and an AI-explain fallback for questions without a
+  curated one.
+
 - **prod-192 — SAT (US Digital SAT) exam section.** First non-India exam.
   Full vertical: new `padhai/routers/sat.py` serves a public `/sat` hub
   (accurate Digital-SAT details, 13 oembed-verified prep videos in

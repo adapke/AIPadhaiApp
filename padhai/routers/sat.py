@@ -233,6 +233,7 @@ _PROLOGUE = """<!doctype html>
   .opt.sel{border-color:#0077c8;background:#e8f3fc}
   .opt.correct{border-color:#1a9c5b;background:#e7f7ee}
   .opt.wrong{border-color:#d23b3b;background:#fcebeb}
+  .expl{margin-top:8px;padding:8px 11px;background:#eef6ff;border-left:3px solid #0077c8;border-radius:6px;font-size:13px;color:#0f2540;line-height:1.5}
   .pill{display:inline-block;background:#e6eef7;border-radius:999px;padding:2px 9px;
     font-size:11px;font-weight:700;color:#0a2a52;margin-left:6px}
   .scorebox{background:#0a2a52;color:#fff;border-radius:12px;padding:18px;text-align:center;margin-bottom:14px}
@@ -557,6 +558,7 @@ _SCRIPT = """
       var tag = pq.is_correct ? '<span class="pill" style="background:#e7f7ee;color:#1a7a48">Correct</span>'
                               : '<span class="pill" style="background:#fcebeb;color:#9c2b2b">Review</span>';
       var qt=qel.querySelector('.qt'); if(qt) qt.insertAdjacentHTML('beforeend', tag);
+      if(pq.explanation){ qel.insertAdjacentHTML('beforeend', '<div class="expl"><b>Why:</b> '+esc(pq.explanation)+'</div>'); }
     });
     var sb=document.getElementById('submitBtn'); if(sb) sb.remove();
   }
