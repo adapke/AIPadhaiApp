@@ -12623,10 +12623,15 @@ def onboarding_page() -> HTMLResponse:
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
-def student_dashboard_page() -> HTMLResponse:
-    """Student dashboard — pulls /api/me/dashboard and renders blocks."""
+def student_dashboard_page(request: Request) -> HTMLResponse:
+    """Student dashboard — pulls /api/me/dashboard and renders blocks.
+    prod-200: localized server-side from ?lang= / padhai_lang cookie so the
+    language switcher (which sets the cookie + reloads) actually takes effect
+    here, not just on /home."""
+    from . import i18n
+    locale = _locale_from_request(request)
     return HTMLResponse(
-        _STUDENT_DASHBOARD_HTML,
+        i18n.localize_template(_STUDENT_DASHBOARD_HTML, locale),
         headers={"Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"},
     )
 

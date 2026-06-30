@@ -1402,30 +1402,64 @@ if ('serviceWorker' in navigator) {
     return rest.replace(/(\\d)(?=(\\d\\d)+$)/g, '$1,') + ',' + last3;
   };
 
-  // --- 2. Language switcher: load saved choice, persist on change ---
+  // --- 2. Language switcher (prod-200) ---
+  // The server localizes the page from the `padhai_lang` COOKIE (or ?lang=);
+  // localStorage alone is invisible to the server, so changing language must
+  // set the cookie AND reload — otherwise nothing visibly changes.
+  function _padhaiCookie(name){
+    return (document.cookie.match('(?:^|; )' + name + '=([^;]*)') || [])[1];
+  }
+  function _padhaiSetLangCookie(lang){
+    try { document.cookie = 'padhai_lang=' + encodeURIComponent(lang) +
+      ';path=/;max-age=31536000;samesite=lax'; } catch(_) {}
+  }
+  // The locale the server actually rendered this page in.
+  function _padhaiRenderedLang(){
+    var q = new URLSearchParams(location.search).get('lang');
+    return q || _padhaiCookie('padhai_lang') || 'en';
+  }
+  // Switch language now: persist (cookie + localStorage + profile) and reload
+  // so the server re-renders every string it knows in the chosen language.
+  window.padhaiApplyLang = function(lang){
+    if (!lang) return;
+    try { localStorage.setItem('padhai_lang', lang); } catch(_) {}
+    _padhaiSetLangCookie(lang);
+    var token = localStorage.getItem('pathshala_token');
+    if (token) {
+      fetch('/api/me/profile', {
+        method: 'PUT',
+        headers: { 'Authorization': 'Bearer ' + token,
+                   'Content-Type': 'application/json' },
+        body: JSON.stringify({ preferred_language: lang }),
+        keepalive: true,
+      }).catch(function(){});
+    }
+    var u = new URL(location.href);
+    u.searchParams.set('lang', lang);
+    location.assign(u.toString());
+  };
+  // Apply a saved/profile language if the server rendered a different one.
+  // Guarded so it reloads at most once per language per tab (never loops).
+  window.padhaiMaybeAutoApply = function(lang){
+    if (!lang || lang === _padhaiRenderedLang()) return;
+    var k = 'padhaiLangApplied:' + lang;
+    try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch(_) {}
+    _padhaiSetLangCookie(lang);
+    var u = new URL(location.href);
+    u.searchParams.set('lang', lang);
+    location.replace(u.toString());
+  };
   var sel = document.getElementById('langSwitch');
   if (sel) {
-    var saved = localStorage.getItem('padhai_lang') || 'en';
-    sel.value = saved;
-    sel.addEventListener('change', function(){
-      var lang = sel.value;
-      localStorage.setItem('padhai_lang', lang);
-      // Persist to server profile when authenticated
-      var token = localStorage.getItem('pathshala_token');
-      if (token) {
-        var fd = new FormData();
-        fd.append('preferred_language', lang);
-        fetch('/api/me/profile', {
-          method: 'PUT',
-          headers: { 'Authorization': 'Bearer ' + token,
-                     'Content-Type': 'application/json' },
-          body: JSON.stringify({ preferred_language: lang }),
-        }).catch(function(){});
-      }
-      // Friendly toast — does nothing yet but signals intent
-      document.documentElement.setAttribute('data-lang', lang);
-    });
+    sel.value = _padhaiRenderedLang();
+    sel.addEventListener('change', function(){ window.padhaiApplyLang(sel.value); });
   }
+  // Anonymous persistence: a previously-saved choice should re-apply on a
+  // fresh visit that has no ?lang / cookie yet.
+  try {
+    var _savedLang = localStorage.getItem('padhai_lang');
+    if (_savedLang) window.padhaiMaybeAutoApply(_savedLang);
+  } catch(_) {}
 
   // --- 3. Exam countdown: load /api/me/dashboard → onboarding.target_exam
   //         + a per-exam date map. Defaults to "no countdown" silently. ---
@@ -1502,7 +1536,9 @@ if ('serviceWorker' in navigator) {
         // from localStorage, prefer the server value (cross-device sync).
         if (onb.preferred_language && sel) {
           sel.value = onb.preferred_language;
-          localStorage.setItem('padhai_lang', onb.preferred_language);
+          try { localStorage.setItem('padhai_lang', onb.preferred_language); } catch(_) {}
+          // prod-200 — render in the user's saved language (cookie + 1 reload, guarded).
+          if (window.padhaiMaybeAutoApply) window.padhaiMaybeAutoApply(onb.preferred_language);
         }
       }).catch(function(){});
   }
@@ -1592,7 +1628,9 @@ if ('serviceWorker' in navigator) {
         if (onb.target_exam) renderExamCountdown(onb.target_exam);
         if (onb.preferred_language && sel) {
           sel.value = onb.preferred_language;
-          localStorage.setItem('padhai_lang', onb.preferred_language);
+          try { localStorage.setItem('padhai_lang', onb.preferred_language); } catch(_) {}
+          // prod-200 — render in the user's saved language (cookie + 1 reload, guarded).
+          if (window.padhaiMaybeAutoApply) window.padhaiMaybeAutoApply(onb.preferred_language);
         }
         // Compute days-to-exam for the promo rail
         var dte = null;

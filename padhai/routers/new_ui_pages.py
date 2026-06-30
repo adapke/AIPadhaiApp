@@ -27,7 +27,7 @@ trap from prod-20 does not re-bite us.
 
 from __future__ import annotations
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 
 router = APIRouter()
@@ -2432,9 +2432,29 @@ _PAGES = [
 ]
 
 
+def _page_locale(request: Request) -> str:
+    """prod-200 — resolve locale the same way web.py does for /home:
+    ?lang= query -> padhai_lang cookie -> Accept-Language -> en."""
+    from ..i18n import normalise_locale
+    qp = request.query_params.get("lang")
+    if qp:
+        return normalise_locale(qp)
+    cookie = request.cookies.get("padhai_lang")
+    if cookie:
+        return normalise_locale(cookie)
+    return normalise_locale(request.headers.get("accept-language", ""))
+
+
 def _make_handler(html_body: str):
-    def handler():
-        return HTMLResponse(html_body, headers=_NO_CACHE)
+    # prod-200 — localize the module page server-side from the resolved locale,
+    # so the language switcher (cookie + reload) applies app-wide, not just /home.
+    from ..i18n import localize_template
+
+    def handler(request: Request):
+        return HTMLResponse(
+            localize_template(html_body, _page_locale(request)),
+            headers=_NO_CACHE,
+        )
     return handler
 
 
