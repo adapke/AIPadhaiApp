@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "advanced_part2",
   "questions": [
-    {"question_text": "Two masses m and 2m attached by light string over pulley. Acceleration:", "options": ["g/3 (lighter side rises)", "2g/3", "g/2", "g"], "correct_answer": "A", "chapter": "Laws of Motion", "topic_tags": ["Atwood"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Torque on body in equilibrium about any axis:", "options": ["Maximum", "Zero", "Equal to weight × distance", "Variable"], "correct_answer": "B", "chapter": "Rotational Motion", "topic_tags": ["torque_equilibrium"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Moment of inertia of solid cylinder about axis:", "options": ["MR²/2", "MR²/3", "MR²", "(2/5)MR²"], "correct_answer": "A", "chapter": "Rotational Motion", "topic_tags": ["MI_cylinder"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Geostationary satellite orbital period:", "options": ["12 hr", "24 hr", "48 hr", "Variable"], "correct_answer": "B", "chapter": "Gravitation", "topic_tags": ["geostationary"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Bulk modulus B = ?", "options": ["-V(dP/dV)", "V/P", "P/V", "ρ·g·h"], "correct_answer": "A", "chapter": "Mechanical Properties of Solids", "topic_tags": ["bulk_modulus_def"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Surface tension acts to minimize:", "options": ["Volume", "Surface area", "Pressure", "Density"], "correct_answer": "B", "chapter": "Fluids", "topic_tags": ["surface_tension"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Capillary rise height h ∝", "options": ["Radius r", "1/r", "r²", "1/r²"], "correct_answer": "B", "chapter": "Fluids", "topic_tags": ["capillary"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Heat engine 2nd law: efficiency η ≤ ?", "options": ["1 (100%)", "1 - T_cold/T_hot (Carnot)", "T_hot - T_cold", "0"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["Carnot_limit"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Entropy ΔS for reversible process at temperature T (heat dQ):", "options": ["dQ/T", "dQ·T", "T/dQ", "dQ"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["entropy_def"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of modes of vibration in string fixed at both ends:", "options": ["1 (fundamental only)", "Many discrete (harmonics)", "Infinite continuous", "Zero"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["string_modes"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Beats are heard when:", "options": ["Same frequency interfere", "Two close-frequency waves interfere", "Standing waves form", "Reflection only"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["beats"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Electric field inside conductor in electrostatic equilibrium:", "options": ["High", "Equal to outside", "Zero", "Variable"], "correct_answer": "C", "chapter": "Electrostatics", "topic_tags": ["E_inside_conductor"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Gauss's law: ∮E·dA = ?", "options": ["q/ε₀", "qε₀", "ε₀/q", "q²"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Gauss"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Capacitor with N identical plates: equivalent capacitance:", "options": ["NC", "(N-1)C parallel", "C/N", "C·N²"], "correct_answer": "B", "chapter": "Capacitance", "topic_tags": ["N_plate"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wheatstone bridge null condition: P/Q = ?", "options": ["R/S", "S/R", "PR/QS", "PQ/RS"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["Wheatstone"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Current sensitivity of galvanometer increases with:", "options": ["More turns", "Stronger magnet", "Both", "Smaller area"], "correct_answer": "C", "chapter": "Magnetism", "topic_tags": ["galvanometer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cyclotron frequency depends on:", "options": ["B and m/q ratio", "B only", "Velocity", "Radius only"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["cyclotron"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Self-inductance L of solenoid n turns/length, area A:", "options": ["μ₀n²A·l", "μ₀nA/l", "μ₀nl/A", "μ₀n/A"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["solenoid_L"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reactance of capacitor X_C:", "options": ["ωC", "1/(ωC)", "C/ω", "ωC²"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["capacitive_reactance"], "difficulty": "easy", "marks": 4},
-    {"question_text": "RMS voltage of 220 V (AC supply Indian) means peak voltage:", "options": ["220 V", "311 V", "440 V", "156 V"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["RMS_peak"], "difficulty": "medium", "marks": 4},
-    {"question_text": "EM wave transverse: E and B are:", "options": ["Parallel to propagation", "Perpendicular to each other and to propagation", "Same direction", "Random"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["transverse_EB"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Concave mirror with object at center of curvature gives:", "options": ["No image", "Real, same size, inverted at C", "Virtual magnified", "Real diminished"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["concave_C"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resolving power of microscope improves with:", "options": ["Larger wavelength", "Larger numerical aperture and smaller wavelength", "Smaller aperture", "Higher temperature"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["microscope_RP"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Photoelectric effect threshold frequency depends on:", "options": ["Light intensity", "Metal's work function", "Photon momentum", "Photon energy alone"], "correct_answer": "B", "chapter": "Dual Nature", "topic_tags": ["threshold_freq"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hydrogen Balmer series visible to:", "options": ["Naked eye (visible region)", "Only UV detectors", "Only IR detectors", "Radio"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Balmer_visible"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Two masses m and 2m attached by light string over pulley. Acceleration:",
+      "options": [
+        "g/3 (lighter side rises)",
+        "2g/3",
+        "g/2",
+        "g"
+      ],
+      "correct_answer": "A",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "Atwood"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The heavier mass (2m) accelerates downward while the lighter mass (m) accelerates upward with the same magnitude. Using Newton's second law for both masses and solving simultaneously: 2mg - T = 2ma and T - mg = ma. Adding these equations gives mg = 3ma, so a = g/3."
+    },
+    {
+      "question_text": "Torque on body in equilibrium about any axis:",
+      "options": [
+        "Maximum",
+        "Zero",
+        "Equal to weight × distance",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "torque_equilibrium"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When a body is in equilibrium, the net force and net torque acting on it must both be zero. This is a fundamental condition of rotational equilibrium—if torque were non-zero about any axis, the body would undergo angular acceleration, contradicting the equilibrium state."
+    },
+    {
+      "question_text": "Moment of inertia of solid cylinder about axis:",
+      "options": [
+        "MR²/2",
+        "MR²/3",
+        "MR²",
+        "(2/5)MR²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "MI_cylinder"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a solid cylinder rotating about its central axis, integrate the moment of inertia using dm = ρ(2πr dr)h. The calculation yields I = (1/2)MR², where M is mass and R is radius. This differs from spheres or disks rotating about perpendicular axes."
+    },
+    {
+      "question_text": "Geostationary satellite orbital period:",
+      "options": [
+        "12 hr",
+        "24 hr",
+        "48 hr",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "geostationary"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A geostationary satellite must remain fixed above one point on Earth's surface, which requires its orbital period to match Earth's rotation period of 24 hours."
+    },
+    {
+      "question_text": "Bulk modulus B = ?",
+      "options": [
+        "-V(dP/dV)",
+        "V/P",
+        "P/V",
+        "ρ·g·h"
+      ],
+      "correct_answer": "A",
+      "chapter": "Mechanical Properties of Solids",
+      "topic_tags": [
+        "bulk_modulus_def"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The bulk modulus measures resistance to volume compression under pressure. It's defined as the negative ratio of pressure change to fractional volume change: B = -dP/(dV/V) = -V(dP/dV). The negative sign accounts for volume decreasing when pressure increases."
+    },
+    {
+      "question_text": "Surface tension acts to minimize:",
+      "options": [
+        "Volume",
+        "Surface area",
+        "Pressure",
+        "Density"
+      ],
+      "correct_answer": "B",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "surface_tension"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Surface tension is caused by cohesive forces between liquid molecules at the surface, which create a net inward force that pulls the surface taut. This inward pull naturally reduces the surface area to its minimum possible value for a given volume, which is why liquids form spherical droplets—the shape with minimum surface area."
+    },
+    {
+      "question_text": "Capillary rise height h ∝",
+      "options": [
+        "Radius r",
+        "1/r",
+        "r²",
+        "1/r²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "capillary"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Capillary rise occurs when surface tension pulls liquid up a tube against gravity. The upward surface tension force is proportional to the perimeter (2πr), while the weight of the column resisting it is proportional to r². Therefore, h ∝ 2πr/r² = 1/r."
+    },
+    {
+      "question_text": "Heat engine 2nd law: efficiency η ≤ ?",
+      "options": [
+        "1 (100%)",
+        "1 - T_cold/T_hot (Carnot)",
+        "T_hot - T_cold",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Carnot_limit"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The second law of thermodynamics limits heat engine efficiency to the Carnot efficiency, which equals 1 - T_cold/T_hot. This represents the theoretical maximum when operating between two temperature reservoirs; all real engines are less efficient due to irreversibilities."
+    },
+    {
+      "question_text": "Entropy ΔS for reversible process at temperature T (heat dQ):",
+      "options": [
+        "dQ/T",
+        "dQ·T",
+        "T/dQ",
+        "dQ"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "entropy_def"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a reversible process, entropy change is defined as the heat absorbed divided by the absolute temperature at which the process occurs. This fundamental thermodynamic relation, ΔS = dQ/T, ensures entropy changes are path-independent and relates microscopic disorder to macroscopic heat flow."
+    },
+    {
+      "question_text": "Number of modes of vibration in string fixed at both ends:",
+      "options": [
+        "1 (fundamental only)",
+        "Many discrete (harmonics)",
+        "Infinite continuous",
+        "Zero"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "string_modes"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A string fixed at both ends must have nodes at both boundaries. This constraint allows only specific wavelengths to fit within the string length, creating discrete standing wave patterns at the fundamental frequency and all integer multiples thereof (harmonics)."
+    },
+    {
+      "question_text": "Beats are heard when:",
+      "options": [
+        "Same frequency interfere",
+        "Two close-frequency waves interfere",
+        "Standing waves form",
+        "Reflection only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "beats"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Beats occur when two waves with slightly different frequencies interfere constructively and destructively in an alternating pattern, creating periodic variations in amplitude. Same frequencies produce constant interference without the characteristic waxing and waning sound."
+    },
+    {
+      "question_text": "Electric field inside conductor in electrostatic equilibrium:",
+      "options": [
+        "High",
+        "Equal to outside",
+        "Zero",
+        "Variable"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "E_inside_conductor"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In electrostatic equilibrium, free charges within a conductor redistribute until the electric field inside becomes zero. If any field existed, charges would continue moving, contradicting equilibrium. This occurs because charges accumulate on the surface, creating an internal field that exactly cancels any external field."
+    },
+    {
+      "question_text": "Gauss's law: ∮E·dA = ?",
+      "options": [
+        "q/ε₀",
+        "qε₀",
+        "ε₀/q",
+        "q²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Gauss"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Gauss's law states that the electric flux through a closed surface equals the enclosed charge divided by the permittivity of free space. The proportionality constant ε₀ appears in the denominator because it relates electric field strength to charge in SI units."
+    },
+    {
+      "question_text": "Capacitor with N identical plates: equivalent capacitance:",
+      "options": [
+        "NC",
+        "(N-1)C parallel",
+        "C/N",
+        "C·N²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "N_plate"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "With N identical plates arranged alternately and connected to opposite terminals, adjacent plate pairs form capacitors in series, but the configuration creates (N-1) capacitive gaps total. These gaps act as capacitors in parallel between the two terminals, giving total capacitance (N-1)C."
+    },
+    {
+      "question_text": "Wheatstone bridge null condition: P/Q = ?",
+      "options": [
+        "R/S",
+        "S/R",
+        "PR/QS",
+        "PQ/RS"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Wheatstone"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At null condition, no current flows through the galvanometer (middle arm), meaning the potential differences across the two branches are equal. This yields: P/Q = R/S, where P and R are opposite resistances, as are Q and S."
+    },
+    {
+      "question_text": "Current sensitivity of galvanometer increases with:",
+      "options": [
+        "More turns",
+        "Stronger magnet",
+        "Both",
+        "Smaller area"
+      ],
+      "correct_answer": "C",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "galvanometer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The deflecting torque on a galvanometer coil depends on τ = nBIA, where n is the number of turns, B is magnetic field strength, I is current, and A is coil area. Both increasing turns and strengthening the magnet directly increase torque for the same current, thus improving current sensitivity."
+    },
+    {
+      "question_text": "Cyclotron frequency depends on:",
+      "options": [
+        "B and m/q ratio",
+        "B only",
+        "Velocity",
+        "Radius only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "cyclotron"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The cyclotron frequency (ω = qB/m) is the angular frequency at which a charged particle orbits in a magnetic field. It depends directly on the magnetic field strength B and inversely on the mass-to-charge ratio m/q, but is independent of the particle's velocity or orbital radius."
+    },
+    {
+      "question_text": "Self-inductance L of solenoid n turns/length, area A:",
+      "options": [
+        "μ₀n²A·l",
+        "μ₀nA/l",
+        "μ₀nl/A",
+        "μ₀n/A"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "solenoid_L"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Self-inductance L = μ₀N²A/l, where N is total turns. Since n is turns per unit length, N = nl, so L = μ₀(nl)²A/l = μ₀n²A·l, accounting for both the squared turn density and solenoid length."
+    },
+    {
+      "question_text": "Reactance of capacitor X_C:",
+      "options": [
+        "ωC",
+        "1/(ωC)",
+        "C/ω",
+        "ωC²"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "capacitive_reactance"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Capacitive reactance opposes current flow in AC circuits and is inversely proportional to both frequency and capacitance. The formula X_C = 1/(ωC) shows that higher frequencies and larger capacitances result in lower reactance, allowing easier current flow."
+    },
+    {
+      "question_text": "RMS voltage of 220 V (AC supply Indian) means peak voltage:",
+      "options": [
+        "220 V",
+        "311 V",
+        "440 V",
+        "156 V"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "RMS_peak"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The RMS voltage is related to peak voltage by the formula: V_RMS = V_peak/√2. Therefore, V_peak = V_RMS × √2 = 220 × 1.414 ≈ 311 V."
+    },
+    {
+      "question_text": "EM wave transverse: E and B are:",
+      "options": [
+        "Parallel to propagation",
+        "Perpendicular to each other and to propagation",
+        "Same direction",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "transverse_EB"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In electromagnetic waves, both E and B fields oscillate perpendicular to the direction of wave propagation, and they are also perpendicular to each other, forming a mutually orthogonal system (E ⊥ B ⊥ direction of propagation)."
+    },
+    {
+      "question_text": "Concave mirror with object at center of curvature gives:",
+      "options": [
+        "No image",
+        "Real, same size, inverted at C",
+        "Virtual magnified",
+        "Real diminished"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "concave_C"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When an object is placed at the center of curvature (C) of a concave mirror, it coincides with the center of curvature of the reflected rays. By the mirror equation and ray diagrams, the image forms at C itself, is real (forms in front of the mirror), inverted, and equal in size to the object."
+    },
+    {
+      "question_text": "Resolving power of microscope improves with:",
+      "options": [
+        "Larger wavelength",
+        "Larger numerical aperture and smaller wavelength",
+        "Smaller aperture",
+        "Higher temperature"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "microscope_RP"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The resolving power of a microscope is inversely proportional to wavelength and directly proportional to numerical aperture, as shown in the Rayleigh criterion (resolution ≈ λ/2NA). Therefore, smaller wavelengths and larger numerical apertures both improve resolving power."
+    },
+    {
+      "question_text": "Photoelectric effect threshold frequency depends on:",
+      "options": [
+        "Light intensity",
+        "Metal's work function",
+        "Photon momentum",
+        "Photon energy alone"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "threshold_freq"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The threshold frequency is the minimum frequency needed to eject electrons from a metal's surface, determined by Einstein's photoelectric equation: hf₀ = W, where W is the work function. Since different metals have different work functions, the threshold frequency depends on the specific metal being used, not on light intensity, photon momentum, or photon energy alone."
+    },
+    {
+      "question_text": "Hydrogen Balmer series visible to:",
+      "options": [
+        "Naked eye (visible region)",
+        "Only UV detectors",
+        "Only IR detectors",
+        "Radio"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Balmer_visible"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Balmer series involves electron transitions to n=2, producing wavelengths in the visible region (roughly 410-656 nm). The most prominent line, Hα at 656 nm (red), is easily visible to the naked eye, making the entire series observable without instruments."
+    }
   ]
 }

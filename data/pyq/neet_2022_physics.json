@@ -8,228 +8,429 @@
   "questions": [
     {
       "question_text": "Two stones thrown vertically up with different velocities. The ratio of their max heights is equal to ratio of:",
-      "options": ["Velocities", "Squares of velocities", "Cubes of velocities", "Inverse of velocities"],
+      "options": [
+        "Velocities",
+        "Squares of velocities",
+        "Cubes of velocities",
+        "Inverse of velocities"
+      ],
       "correct_answer": "B",
       "chapter": "Kinematics",
-      "topic_tags": ["max_height"],
+      "topic_tags": [
+        "max_height"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the kinematic equation v² = u² - 2gh, at maximum height v = 0, so h = u²/(2g). Since g is constant, the height is directly proportional to the square of the initial velocity. Therefore, the ratio of maximum heights equals the ratio of squares of velocities."
     },
     {
       "question_text": "Acceleration of body in uniform circular motion of radius r and speed v:",
-      "options": ["v/r", "v²/r", "vr", "v²r"],
+      "options": [
+        "v/r",
+        "v²/r",
+        "vr",
+        "v²r"
+      ],
       "correct_answer": "B",
       "chapter": "Motion in a Plane",
-      "topic_tags": ["centripetal"],
+      "topic_tags": [
+        "centripetal"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In uniform circular motion, the velocity constantly changes direction toward the center. The centripetal acceleration required to maintain this circular path equals the change in velocity direction per unit time, which is derived from the equation a = v²/r, where the velocity squared term reflects the rate of directional change and r is the radius."
     },
     {
       "question_text": "Object of mass 5 kg moves with velocity 10 m/s. Momentum:",
-      "options": ["25 kg·m/s", "50 kg·m/s", "75 kg·m/s", "100 kg·m/s"],
+      "options": [
+        "25 kg·m/s",
+        "50 kg·m/s",
+        "75 kg·m/s",
+        "100 kg·m/s"
+      ],
       "correct_answer": "B",
       "chapter": "Laws of Motion",
-      "topic_tags": ["momentum"],
+      "topic_tags": [
+        "momentum"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Momentum is calculated using p = mv, where m is mass and v is velocity. With m = 5 kg and v = 10 m/s, p = 5 × 10 = 50 kg·m/s."
     },
     {
       "question_text": "Spring constant of a spring stretched by 0.1 m under 10 N force:",
-      "options": ["1 N/m", "10 N/m", "100 N/m", "1000 N/m"],
+      "options": [
+        "1 N/m",
+        "10 N/m",
+        "100 N/m",
+        "1000 N/m"
+      ],
       "correct_answer": "C",
       "chapter": "Oscillations",
-      "topic_tags": ["Hooke", "spring"],
+      "topic_tags": [
+        "Hooke",
+        "spring"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using Hooke's Law: F = kx, where F is force, k is spring constant, and x is extension. Rearranging: k = F/x = 10 N / 0.1 m = 100 N/m."
     },
     {
       "question_text": "Internal energy of ideal gas depends only on:",
-      "options": ["Pressure", "Volume", "Temperature", "Density"],
+      "options": [
+        "Pressure",
+        "Volume",
+        "Temperature",
+        "Density"
+      ],
       "correct_answer": "C",
       "chapter": "Thermodynamics",
-      "topic_tags": ["internal_energy"],
+      "topic_tags": [
+        "internal_energy"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For an ideal gas, internal energy depends only on the kinetic energy of gas molecules, which is directly proportional to absolute temperature. Pressure, volume, and density are related through the ideal gas law and can vary independently while temperature remains constant."
     },
     {
       "question_text": "Brewster's angle for n=√3 is:",
-      "options": ["30°", "45°", "60°", "90°"],
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
       "correct_answer": "C",
       "chapter": "Wave Optics",
-      "topic_tags": ["Brewster"],
+      "topic_tags": [
+        "Brewster"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At Brewster's angle, tan(θ_B) = n, where n is the refractive index. With n = √3, we have tan(θ_B) = √3, which corresponds to θ_B = 60°."
     },
     {
       "question_text": "Magnetic moment of current loop with N turns, area A, current I:",
-      "options": ["NIA", "NI/A", "I/(NA)", "N²IA"],
+      "options": [
+        "NIA",
+        "NI/A",
+        "I/(NA)",
+        "N²IA"
+      ],
       "correct_answer": "A",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["magnetic_moment"],
+      "topic_tags": [
+        "magnetic_moment"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The magnetic moment of a current loop is defined as the product of current, area, and number of turns. Each turn contributes equally to the magnetic field, so with N turns carrying current I through area A, the total magnetic moment is μ = NIA."
     },
     {
       "question_text": "Equivalent resistance of two 6Ω resistors in parallel:",
-      "options": ["3Ω", "6Ω", "12Ω", "24Ω"],
+      "options": [
+        "3Ω",
+        "6Ω",
+        "12Ω",
+        "24Ω"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["parallel_resistance"],
+      "topic_tags": [
+        "parallel_resistance"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For resistors in parallel, use 1/R_eq = 1/R₁ + 1/R₂. With two equal 6Ω resistors: 1/R_eq = 1/6 + 1/6 = 2/6, so R_eq = 3Ω. Alternatively, for identical resistors in parallel, divide by the number of resistors: 6Ω ÷ 2 = 3Ω."
     },
     {
       "question_text": "RC circuit time constant τ:",
-      "options": ["R/C", "RC", "R+C", "C/R"],
+      "options": [
+        "R/C",
+        "RC",
+        "R+C",
+        "C/R"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["time_constant"],
+      "topic_tags": [
+        "time_constant"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The time constant τ represents how quickly a capacitor charges or discharges through a resistor. It equals the product of resistance and capacitance (RC) because the charging time is proportional to both how much the resistor restricts current flow and how much charge the capacitor can store."
     },
     {
       "question_text": "Refractive index relation: n₁ sin θ₁ = ___",
-      "options": ["n₂ cos θ₂", "n₂ sin θ₂", "n₂ tan θ₂", "n₂"],
+      "options": [
+        "n₂ cos θ₂",
+        "n₂ sin θ₂",
+        "n₂ tan θ₂",
+        "n₂"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["Snell"],
+      "topic_tags": [
+        "Snell"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Snell's law of refraction states that the product of refractive index and sine of the angle of incidence equals the product of refractive index and sine of the angle of refraction: n₁ sin θ₁ = n₂ sin θ₂. The sine function (not cosine or tangent) applies to both angles measured from the normal."
     },
     {
       "question_text": "Stefan-Boltzmann law: P ∝ ?",
-      "options": ["T", "T²", "T⁴", "T⁻¹"],
+      "options": [
+        "T",
+        "T²",
+        "T⁴",
+        "T⁻¹"
+      ],
       "correct_answer": "C",
       "chapter": "Thermodynamics",
-      "topic_tags": ["Stefan"],
+      "topic_tags": [
+        "Stefan"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Stefan-Boltzmann law states that radiated power is proportional to the fourth power of absolute temperature (P = σAT⁴), derived from integrating Planck's radiation formula across all wavelengths. This T⁴ dependence means small temperature increases dramatically increase radiant power output."
     },
     {
       "question_text": "Polarisation of light proves:",
-      "options": ["Particle nature", "Wave nature with transverse waves", "Quantum nature", "Reflection"],
+      "options": [
+        "Particle nature",
+        "Wave nature with transverse waves",
+        "Quantum nature",
+        "Reflection"
+      ],
       "correct_answer": "B",
       "chapter": "Wave Optics",
-      "topic_tags": ["polarisation"],
+      "topic_tags": [
+        "polarisation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Polarization occurs because light waves oscillate perpendicular to their direction of propagation—a characteristic exclusively of transverse waves. Longitudinal waves cannot be polarized, so this phenomenon directly demonstrates light's wave nature, specifically as transverse waves."
     },
     {
       "question_text": "Capacitor with capacitance C charged to voltage V stores energy:",
-      "options": ["CV", "CV²/2", "C/V", "V/C"],
+      "options": [
+        "CV",
+        "CV²/2",
+        "C/V",
+        "V/C"
+      ],
       "correct_answer": "B",
       "chapter": "Capacitance",
-      "topic_tags": ["energy_capacitor"],
+      "topic_tags": [
+        "energy_capacitor"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The energy stored in a capacitor is derived from the work done charging it: W = ∫V dq. Since q = CV, this integral yields U = ½CV². The factor of ½ appears because voltage increases linearly from 0 to V as the capacitor charges."
     },
     {
       "question_text": "Wein's displacement: hot star peaks at:",
-      "options": ["Longer wavelength", "Shorter wavelength", "Equal wavelength", "Random"],
+      "options": [
+        "Longer wavelength",
+        "Shorter wavelength",
+        "Equal wavelength",
+        "Random"
+      ],
       "correct_answer": "B",
       "chapter": "Heat",
-      "topic_tags": ["Wein"],
+      "topic_tags": [
+        "Wein"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Wien's displacement law states that the peak wavelength of blackbody radiation is inversely proportional to temperature: λ_peak = b/T. A hotter star has higher temperature, so it produces a shorter peak wavelength, shifting toward the blue end of the spectrum."
     },
     {
       "question_text": "Force between two parallel wires with same direction currents:",
-      "options": ["Repulsive", "Attractive", "Zero", "Perpendicular"],
+      "options": [
+        "Repulsive",
+        "Attractive",
+        "Zero",
+        "Perpendicular"
+      ],
       "correct_answer": "B",
       "chapter": "Magnetism",
-      "topic_tags": ["parallel_wires"],
+      "topic_tags": [
+        "parallel_wires"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When currents flow in the same direction through parallel wires, each wire creates a magnetic field that circles around it. Using the right-hand rule, the magnetic field from one wire passes through the other wire in a direction perpendicular to both the current and the line between them, producing an attractive force according to F = IL × B."
     },
     {
       "question_text": "An ideal transformer has 100 primary turns, 1000 secondary turns. If primary is 220V, secondary is:",
-      "options": ["22V", "220V", "2200V", "22000V"],
+      "options": [
+        "22V",
+        "220V",
+        "2200V",
+        "22000V"
+      ],
       "correct_answer": "C",
       "chapter": "Alternating Current",
-      "topic_tags": ["transformer"],
+      "topic_tags": [
+        "transformer"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For an ideal transformer, voltage ratio equals the turns ratio: Vs/Vp = Ns/Np. With 1000 secondary turns and 100 primary turns, the voltage step-up factor is 1000/100 = 10. Therefore, secondary voltage = 220V × 10 = 2200V."
     },
     {
       "question_text": "Compton scattering provides evidence for:",
-      "options": ["Wave nature", "Particle nature of light", "Polarisation", "Diffraction"],
+      "options": [
+        "Wave nature",
+        "Particle nature of light",
+        "Polarisation",
+        "Diffraction"
+      ],
       "correct_answer": "B",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["Compton"],
+      "topic_tags": [
+        "Compton"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Compton scattering demonstrates that photons behave as particles with momentum and energy. When a photon collides with an electron, the momentum and energy transfer follow particle collision laws, which cannot be explained by treating light as a pure wave."
     },
     {
       "question_text": "Mass defect in nucleus is converted to:",
-      "options": ["Volume", "Binding energy", "Charge", "Spin"],
+      "options": [
+        "Volume",
+        "Binding energy",
+        "Charge",
+        "Spin"
+      ],
       "correct_answer": "B",
       "chapter": "Nuclei",
-      "topic_tags": ["mass_defect"],
+      "topic_tags": [
+        "mass_defect"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When nucleons bind together to form a nucleus, the actual mass of the nucleus is slightly less than the sum of its individual parts. This mass difference (mass defect) is converted directly into binding energy according to Einstein's mass-energy equivalence equation E=mc², which explains why nuclei are stable."
     },
     {
       "question_text": "Diode in reverse bias acts as:",
-      "options": ["Conductor", "Insulator (high resistance)", "Capacitor", "Inductor"],
+      "options": [
+        "Conductor",
+        "Insulator (high resistance)",
+        "Capacitor",
+        "Inductor"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["diode"],
+      "topic_tags": [
+        "diode"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In reverse bias, the depletion region widens significantly, blocking charge carrier flow across the junction. This creates a high resistance barrier that prevents current from flowing, making the diode behave like an insulator."
     },
     {
       "question_text": "Logic gate that outputs 1 only when both inputs are 0:",
-      "options": ["AND", "OR", "NOR", "XOR"],
+      "options": [
+        "AND",
+        "OR",
+        "NOR",
+        "XOR"
+      ],
       "correct_answer": "C",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["NOR"],
+      "topic_tags": [
+        "NOR"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The NOR gate is a NOT-OR gate that outputs 1 only when both inputs are 0 (i.e., when OR produces 0). All other gates output 1 for at least one combination where an input is 1."
     },
     {
       "question_text": "Velocity of EM wave in vacuum equals:",
-      "options": ["1/√(μ₀ε₀)", "μ₀ε₀", "√(μ₀ε₀)", "μ₀/ε₀"],
+      "options": [
+        "1/√(μ₀ε₀)",
+        "μ₀ε₀",
+        "√(μ₀ε₀)",
+        "μ₀/ε₀"
+      ],
       "correct_answer": "A",
       "chapter": "Electromagnetic Waves",
-      "topic_tags": ["EM_speed"],
+      "topic_tags": [
+        "EM_speed"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The speed of an electromagnetic wave in vacuum is derived from Maxwell's equations as c = 1/√(μ₀ε₀), where μ₀ is permeability and ε₀ is permittivity of free space. This fundamental relationship directly connects the electromagnetic properties of vacuum to the speed of light."
     },
     {
       "question_text": "Optical fibre uses principle of:",
-      "options": ["Refraction", "Total internal reflection", "Diffraction", "Polarisation"],
+      "options": [
+        "Refraction",
+        "Total internal reflection",
+        "Diffraction",
+        "Polarisation"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["TIR_fibre"],
+      "topic_tags": [
+        "TIR_fibre"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Light entering an optical fiber travels at a steep angle to the fiber's axis, hitting the cylindrical boundary at angles greater than the critical angle. This causes total internal reflection, trapping light within the fiber and allowing it to propagate long distances with minimal loss."
     },
     {
       "question_text": "Doppler effect (sound): source approaches you, observed frequency:",
-      "options": ["Higher", "Lower", "Same", "Zero"],
+      "options": [
+        "Higher",
+        "Lower",
+        "Same",
+        "Zero"
+      ],
       "correct_answer": "A",
       "chapter": "Waves",
-      "topic_tags": ["Doppler_sound"],
+      "topic_tags": [
+        "Doppler_sound"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When a sound source moves toward you, the sound waves get compressed—the wavelength decreases while the wave speed remains constant. Since frequency is inversely proportional to wavelength, the observed frequency increases, resulting in a higher pitch."
     },
     {
       "question_text": "Resistance of a wire is doubled when its length is doubled and area is:",
-      "options": ["Same", "Doubled", "Halved", "Quadrupled"],
+      "options": [
+        "Same",
+        "Doubled",
+        "Halved",
+        "Quadrupled"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["resistance_length"],
+      "topic_tags": [
+        "resistance_length"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Resistance is given by R = ρL/A, where ρ is resistivity, L is length, and A is area. If length doubles and resistance doubles, then 2R = ρ(2L)/A', solving for A' gives A' = A, meaning the cross-sectional area must remain the same."
     },
     {
       "question_text": "Charge oscillating in LC circuit gives:",
-      "options": ["DC voltage", "AC sinusoidal current", "Linear current", "Square wave"],
+      "options": [
+        "DC voltage",
+        "AC sinusoidal current",
+        "Linear current",
+        "Square wave"
+      ],
       "correct_answer": "B",
       "chapter": "Alternating Current",
-      "topic_tags": ["LC_oscillator"],
+      "topic_tags": [
+        "LC_oscillator"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In an LC circuit, energy oscillates between the electric field in the capacitor and the magnetic field in the inductor. This periodic energy exchange causes the charge to oscillate sinusoidally, producing an AC sinusoidal current that continuously reverses direction at a frequency determined by the inductance and capacitance values."
     }
   ]
 }

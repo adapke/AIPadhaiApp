@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "intermediate_board",
   "questions": [
-    {"question_text": "Number of atoms per FCC unit cell:", "options": ["1", "2", "4", "8"], "correct_answer": "C", "chapter": "Solid State", "topic_tags": ["FCC"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Solid with no definite shape:", "options": ["Crystalline", "Amorphous", "Ionic", "Metallic"], "correct_answer": "B", "chapter": "Solid State", "topic_tags": ["amorphous"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Boiling point elevation: ΔTb = ?", "options": ["Kb·m", "Kf·m", "RT", "P·V"], "correct_answer": "A", "chapter": "Solutions", "topic_tags": ["Kb_m"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Freezing point depression: ΔTf = ?", "options": ["Kb·m", "Kf·m", "iKf·m for electrolyte", "Both B and C"], "correct_answer": "D", "chapter": "Solutions", "topic_tags": ["Kf_m"], "difficulty": "medium", "marks": 1},
-    {"question_text": "EMF of galvanic cell Zn|Zn2+||Cu2+|Cu at standard conditions:", "options": ["0", "1.10 V", "0.34 V", "0.76 V"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["Daniell_EMF"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Strongest reducing agent (E° most negative):", "options": ["Li", "Na", "K", "Cs"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["Li_reducing"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Order of reaction is determined by:", "options": ["Stoichiometric coefficients", "Experiment (sum of exponents in rate law)", "Atomic mass", "Catalyst"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["order_definition"], "difficulty": "medium", "marks": 1},
-    {"question_text": "First-order half-life depends on:", "options": ["Initial concentration", "Only rate constant k", "Both", "Time"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["first_order_half_life"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Adsorption of gas on solid (physisorption) decreases with:", "options": ["Temperature increase", "Pressure increase", "Surface area", "All factors"], "correct_answer": "A", "chapter": "Surface Chemistry", "topic_tags": ["physisorption"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Type of catalyst in enzymatic reactions:", "options": ["Homogeneous", "Heterogeneous", "Bio (enzyme)", "Negative"], "correct_answer": "C", "chapter": "Surface Chemistry", "topic_tags": ["enzyme"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Calcination is heating in:", "options": ["Air (oxidation)", "Absence of air (decomposition)", "Hydrogen", "Vacuum"], "correct_answer": "B", "chapter": "Metallurgy", "topic_tags": ["calcination"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Smelting reduces ore using:", "options": ["Water", "Reducing agent (carbon usually)", "Acid", "Heat only"], "correct_answer": "B", "chapter": "Metallurgy", "topic_tags": ["smelting"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Most abundant element in Earth's crust:", "options": ["Si", "O", "Al", "Fe"], "correct_answer": "B", "chapter": "p-Block", "topic_tags": ["O_abundance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "SF6 has hybridization:", "options": ["sp3", "sp3d", "sp3d²", "sp"], "correct_answer": "C", "chapter": "p-Block", "topic_tags": ["SF6"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Strongest acid: HF, HCl, HBr, HI:", "options": ["HF", "HCl", "HBr", "HI"], "correct_answer": "D", "chapter": "p-Block", "topic_tags": ["acid_HX"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Color of KMnO4 solution:", "options": ["Yellow", "Green", "Purple/pink", "Colorless"], "correct_answer": "C", "chapter": "d-Block", "topic_tags": ["KMnO4_color"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of unpaired electrons in Fe²⁺ (d⁶, weak field):", "options": ["2", "4", "5", "6"], "correct_answer": "B", "chapter": "d-Block", "topic_tags": ["Fe2_unpaired"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Ligand donating one electron pair:", "options": ["Monodentate", "Bidentate", "Tridentate", "Hexadentate"], "correct_answer": "A", "chapter": "Coordination Compounds", "topic_tags": ["monodentate"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Cisplatin's geometry:", "options": ["Octahedral", "Tetrahedral", "Square planar", "Linear"], "correct_answer": "C", "chapter": "Coordination Compounds", "topic_tags": ["cisplatin"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Order of leaving group ability (haloalkanes):", "options": ["F > Cl > Br > I", "I > Br > Cl > F", "Equal", "Cl > F > I > Br"], "correct_answer": "B", "chapter": "Haloalkanes", "topic_tags": ["leaving_group"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Phenols are more acidic than alcohols because:", "options": ["Aromatic ring", "Resonance stabilization of phenoxide", "Higher MW", "More polar"], "correct_answer": "B", "chapter": "Phenols", "topic_tags": ["phenol_acidity"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Carbonyl group in:", "options": ["Alcohols", "Aldehydes and ketones", "Acids only", "Amines"], "correct_answer": "B", "chapter": "Aldehydes/Ketones", "topic_tags": ["carbonyl"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Most basic amine (in aqueous solution):", "options": ["Primary", "Secondary", "Tertiary", "Ammonia"], "correct_answer": "B", "chapter": "Amines", "topic_tags": ["basicity_aq"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Glucose has chiral centers:", "options": ["2", "3", "4", "5"], "correct_answer": "C", "chapter": "Biomolecules", "topic_tags": ["glucose_chiral"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Aspirin functional groups:", "options": ["Alcohol + ester", "Carboxylic acid + ester (acetoxy)", "Amine + ester", "Ketone only"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["aspirin"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Number of atoms per FCC unit cell:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "FCC"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In FCC (face-centered cubic), there are 8 corner atoms (each shared by 8 unit cells, contributing 1/8 each) plus 6 face atoms (each shared by 2 unit cells, contributing 1/2 each). Total: 8(1/8) + 6(1/2) = 1 + 3 = 4 atoms per unit cell."
+    },
+    {
+      "question_text": "Solid with no definite shape:",
+      "options": [
+        "Crystalline",
+        "Amorphous",
+        "Ionic",
+        "Metallic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "amorphous"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Amorphous solids lack a regular, repeating atomic structure and therefore have no definite geometric shape, unlike crystalline solids which possess ordered atomic arrangements that create characteristic shapes."
+    },
+    {
+      "question_text": "Boiling point elevation: ΔTb = ?",
+      "options": [
+        "Kb·m",
+        "Kf·m",
+        "RT",
+        "P·V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "Kb_m"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Boiling point elevation is defined as ΔTb = Kb·m, where Kb is the ebullioscopic constant (specific to each solvent) and m is the molality of the solute. This is the fundamental colligative property equation for boiling point elevation."
+    },
+    {
+      "question_text": "Freezing point depression: ΔTf = ?",
+      "options": [
+        "Kb·m",
+        "Kf·m",
+        "iKf·m for electrolyte",
+        "Both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "Kf_m"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Freezing point depression uses the freezing point depression constant (Kf), not the boiling point constant (Kb). For non-electrolytes, ΔTf = Kf·m; for electrolytes, the van 't Hoff factor (i) accounts for dissociation, giving ΔTf = iKf·m. Both B and C are correct formulas for different solute types."
+    },
+    {
+      "question_text": "EMF of galvanic cell Zn|Zn2+||Cu2+|Cu at standard conditions:",
+      "options": [
+        "0",
+        "1.10 V",
+        "0.34 V",
+        "0.76 V"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Daniell_EMF"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "At the cathode (Cu), Cu²⁺ + 2e⁻ → Cu (E° = +0.34 V). At the anode (Zn), Zn → Zn²⁺ + 2e⁻ (E° = -0.76 V). Cell EMF = E°cathode - E°anode = 0.34 - (-0.76) = 1.10 V."
+    },
+    {
+      "question_text": "Strongest reducing agent (E° most negative):",
+      "options": [
+        "Li",
+        "Na",
+        "K",
+        "Cs"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Li_reducing"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "As you move down Group 1, atomic size increases and ionization energy decreases, making it easier to lose electrons. However, the standard reduction potential E° also becomes more negative down the group. The strongest reducing agent has the most negative E°, which corresponds to lithium (Li) due to its high ionization energy being offset by favorable hydration energy in aqueous solution."
+    },
+    {
+      "question_text": "Order of reaction is determined by:",
+      "options": [
+        "Stoichiometric coefficients",
+        "Experiment (sum of exponents in rate law)",
+        "Atomic mass",
+        "Catalyst"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "order_definition"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Order of reaction is determined experimentally from the rate law equation, where it equals the sum of the exponents of concentration terms. The stoichiometric coefficients don't necessarily match the exponents, making experimentally-derived rate laws essential for determining reaction order."
+    },
+    {
+      "question_text": "First-order half-life depends on:",
+      "options": [
+        "Initial concentration",
+        "Only rate constant k",
+        "Both",
+        "Time"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "first_order_half_life"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For first-order reactions, the half-life formula is t₁/₂ = ln(2)/k = 0.693/k, which depends solely on the rate constant k and not on initial concentration. This is a defining characteristic that distinguishes first-order kinetics from zero-order kinetics, where half-life does depend on initial concentration."
+    },
+    {
+      "question_text": "Adsorption of gas on solid (physisorption) decreases with:",
+      "options": [
+        "Temperature increase",
+        "Pressure increase",
+        "Surface area",
+        "All factors"
+      ],
+      "correct_answer": "A",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "physisorption"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Physisorption is an exothermic process driven by weak van der Waals forces. Increasing temperature provides kinetic energy that overcomes these weak attractions, causing adsorbed molecules to desorb from the surface. Higher pressure and larger surface area both favor physisorption, not decrease it."
+    },
+    {
+      "question_text": "Type of catalyst in enzymatic reactions:",
+      "options": [
+        "Homogeneous",
+        "Heterogeneous",
+        "Bio (enzyme)",
+        "Negative"
+      ],
+      "correct_answer": "C",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "enzyme"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Enzymes are biological catalysts made of proteins that function in solution with substrates, making them a distinct category from inorganic homogeneous or heterogeneous catalysts. \"Bio\" or \"enzyme\" catalyst specifically describes the nature of catalysts in enzymatic reactions."
+    },
+    {
+      "question_text": "Calcination is heating in:",
+      "options": [
+        "Air (oxidation)",
+        "Absence of air (decomposition)",
+        "Hydrogen",
+        "Vacuum"
+      ],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": [
+        "calcination"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Calcination is a thermal decomposition process that occurs in the absence of air, preventing oxidation and allowing compounds (like carbonates or hydroxides) to break down into simpler oxides and volatile products like CO₂ or H₂O."
+    },
+    {
+      "question_text": "Smelting reduces ore using:",
+      "options": [
+        "Water",
+        "Reducing agent (carbon usually)",
+        "Acid",
+        "Heat only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": [
+        "smelting"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Smelting requires a reducing agent (typically carbon or carbon monoxide) to chemically remove oxygen from metal oxides in ore. Heat alone cannot achieve this reduction; a substance must donate electrons to reduce the metal ions to their elemental form."
+    },
+    {
+      "question_text": "Most abundant element in Earth's crust:",
+      "options": [
+        "Si",
+        "O",
+        "Al",
+        "Fe"
+      ],
+      "correct_answer": "B",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "O_abundance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Oxygen is the most abundant element in Earth's crust by mass (approximately 46%), primarily because it comprises water and silicate minerals that dominate crustal composition."
+    },
+    {
+      "question_text": "SF6 has hybridization:",
+      "options": [
+        "sp3",
+        "sp3d",
+        "sp3d²",
+        "sp"
+      ],
+      "correct_answer": "C",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "SF6"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Sulfur in SF6 has 6 bonding pairs with fluorine atoms and no lone pairs, requiring 6 electron domains. This necessitates sp³d² hybridization to accommodate 6 orbitals for bonding and adopt an octahedral geometry."
+    },
+    {
+      "question_text": "Strongest acid: HF, HCl, HBr, HI:",
+      "options": [
+        "HF",
+        "HCl",
+        "HBr",
+        "HI"
+      ],
+      "correct_answer": "D",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "acid_HX"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "HI is the strongest acid because acid strength in hydrogen halides increases down the group as bond dissociation energy decreases. HI has the weakest H-X bond, making it easiest to donate a proton, despite HF being polar; bond strength dominates over electronegativity here."
+    },
+    {
+      "question_text": "Color of KMnO4 solution:",
+      "options": [
+        "Yellow",
+        "Green",
+        "Purple/pink",
+        "Colorless"
+      ],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "KMnO4_color"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "KMnO4 contains the permanganate ion (MnO4⁻), which has a deep purple/pink color due to charge transfer transitions involving the d-electrons of manganese. This intense color is characteristic of permanganate solutions regardless of concentration."
+    },
+    {
+      "question_text": "Number of unpaired electrons in Fe²⁺ (d⁶, weak field):",
+      "options": [
+        "2",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "Fe2_unpaired"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In weak field (high spin) complexes, electrons fill d orbitals singly before pairing. Fe²⁺ has a d⁶ configuration, so electrons occupy all five d orbitals singly first (5 unpaired), then the 6th electron pairs in one orbital, leaving 4 unpaired electrons."
+    },
+    {
+      "question_text": "Ligand donating one electron pair:",
+      "options": [
+        "Monodentate",
+        "Bidentate",
+        "Tridentate",
+        "Hexadentate"
+      ],
+      "correct_answer": "A",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "monodentate"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A monodentate ligand has only one donor atom, so it can donate exactly one electron pair to the metal center. The prefixes bi-, tri-, and hexa- indicate ligands with two, three, and six donor atoms respectively."
+    },
+    {
+      "question_text": "Cisplatin's geometry:",
+      "options": [
+        "Octahedral",
+        "Tetrahedral",
+        "Square planar",
+        "Linear"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "cisplatin"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Cisplatin contains a central Pt(II) ion with four ligands (two chloride ions and two ammonia molecules) and no additional ligands in the coordination sphere. Pt(II) with d8 electron configuration and 4 ligands adopts square planar geometry due to crystal field effects that strongly stabilize this arrangement over tetrahedral."
+    },
+    {
+      "question_text": "Order of leaving group ability (haloalkanes):",
+      "options": [
+        "F > Cl > Br > I",
+        "I > Br > Cl > F",
+        "Equal",
+        "Cl > F > I > Br"
+      ],
+      "correct_answer": "B",
+      "chapter": "Haloalkanes",
+      "topic_tags": [
+        "leaving_group"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Halide leaving group ability correlates with stability of the resulting halide anion. Iodide (I⁻) is the largest and most polarizable halide, best stabilizing negative charge through electron density distribution, making it the best leaving group. Fluoride (F⁻) is smallest and least polarizable, making it the poorest leaving group, giving the order I > Br > Cl > F."
+    },
+    {
+      "question_text": "Phenols are more acidic than alcohols because:",
+      "options": [
+        "Aromatic ring",
+        "Resonance stabilization of phenoxide",
+        "Higher MW",
+        "More polar"
+      ],
+      "correct_answer": "B",
+      "chapter": "Phenols",
+      "topic_tags": [
+        "phenol_acidity"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The phenoxide anion (formed when a phenol loses H⁺) is stabilized by resonance delocalization of negative charge across the aromatic ring, lowering the energy of the conjugate base. This increased stability makes it easier for phenols to donate protons compared to alcohols, whose alkoxide anions lack this resonance stabilization."
+    },
+    {
+      "question_text": "Carbonyl group in:",
+      "options": [
+        "Alcohols",
+        "Aldehydes and ketones",
+        "Acids only",
+        "Amines"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes/Ketones",
+      "topic_tags": [
+        "carbonyl"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A carbonyl group is a C=O double bond. Aldehydes contain carbonyl groups bonded to at least one hydrogen, while ketones have the carbonyl carbon bonded to two alkyl groups. Alcohols, acids, and amines contain different functional groups (hydroxyl, carboxyl, and amino respectively)."
+    },
+    {
+      "question_text": "Most basic amine (in aqueous solution):",
+      "options": [
+        "Primary",
+        "Secondary",
+        "Tertiary",
+        "Ammonia"
+      ],
+      "correct_answer": "B",
+      "chapter": "Amines",
+      "topic_tags": [
+        "basicity_aq"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Secondary amines are most basic in aqueous solution because they have an optimal balance: one N-H bond for hydrogen bonding with water while retaining sufficient electron density on nitrogen for protonation. Primary amines are less basic due to greater solvation of NH₃⁺ product, while tertiary amines lack N-H for hydrogen bonding."
+    },
+    {
+      "question_text": "Glucose has chiral centers:",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "glucose_chiral"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "A chiral center is a carbon atom bonded to four different groups. In glucose's open-chain form, carbons 2, 3, 4, and 5 each have four distinct substituents (different atoms/groups attached), giving 4 chiral centers. Carbon 1 is aldehyde carbon and carbon 6 is primary alcohol, neither of which qualifies as chiral centers."
+    },
+    {
+      "question_text": "Aspirin functional groups:",
+      "options": [
+        "Alcohol + ester",
+        "Carboxylic acid + ester (acetoxy)",
+        "Amine + ester",
+        "Ketone only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "aspirin"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Aspirin contains a carboxylic acid group (-COOH) attached to the benzene ring and an acetoxy ester group (-O-CO-CH3) on the ring. The ester is specifically formed from acetic anhydride during synthesis, making it an acetoxy ester."
+    }
   ]
 }

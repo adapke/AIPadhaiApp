@@ -1,4 +1,4 @@
-"""prod-195 — write AI answer-explanations back into the PYQ seed JSON.
+"""prod-195/196 — write AI answer-explanations back into the PYQ seed JSON.
 
 Unlike `scripts/backfill_explanations.py` (which caches explanations into
 the DB of a running/deployed server), this writes the `explanation` field
@@ -6,22 +6,28 @@ directly into the `data/pyq/*.json` source files — so the explanations
 are version-controlled and re-imported into every environment on deploy,
 exactly like the hand-curated SAT explanations.
 
-Use it to ship explanations for the flagship Indian exams; the long tail
-of files can be run later (same command, more globs). Idempotent: a
-question that already has a non-empty `explanation` is skipped, so
-re-running only fills gaps. Reformats touched files with json.dump
-(indent=2) — the import re-reads regardless.
+Idempotent: a question that already has a non-empty `explanation` is
+skipped, so re-running only fills gaps (also makes it resumable after a
+rate-limit blip). Each touched file is rewritten with json.dump(indent=2)
+and the import re-reads it regardless of formatting.
+
+Concurrency: `--workers N` generates a file's missing explanations in
+parallel against one shared (thread-safe) Anthropic client — ~6 workers
+turns a ~1-hour whole-bank sweep into ~10 minutes. Files are still
+written one at a time, after their batch completes, so progress is saved
+per file.
 
 Usage:
     python scripts/explain_seed_files.py data/pyq/jee_main_2024_*.json
-    python scripts/explain_seed_files.py --dry-run data/pyq/neet_2024_*.json
-    python scripts/explain_seed_files.py "data/pyq/*.json"   # whole seed
+    python scripts/explain_seed_files.py --dry-run "data/pyq/*.json"
+    python scripts/explain_seed_files.py --workers 6 "data/pyq/*.json"
 
 Needs ANTHROPIC_API_KEY in env / .env. ~Rs 0.01 / question on Haiku.
 """
 from __future__ import annotations
 
 import argparse
+import concurrent.futures as cf
 import contextlib
 import glob
 import json
@@ -41,11 +47,22 @@ def main() -> int:
     ap.add_argument("paths", nargs="+", help="JSON file(s) or globs")
     ap.add_argument("--dry-run", action="store_true",
                     help="count gaps, write nothing, make no Claude calls")
+    ap.add_argument("--workers", type=int, default=6,
+                    help="parallel generations per file (default 6)")
     args = ap.parse_args()
 
     from dotenv import load_dotenv
     load_dotenv(dotenv_path=os.path.join(_REPO, ".env"))
     from padhai import explain
+
+    # One shared, thread-safe Anthropic client for the whole run (avoids
+    # constructing thousands of clients). Best-effort — generate_explanation
+    # falls back to its own if this is None.
+    shared_client = None
+    if not args.dry_run:
+        with contextlib.suppress(Exception):
+            from anthropic import Anthropic
+            shared_client = Anthropic()
 
     files: list[str] = []
     for p in args.paths:
@@ -61,34 +78,49 @@ def main() -> int:
             print(f"  [skip] {path}: {e}")
             continue
         default_subject = data.get("default_subject")
-        added = 0
-        for q in data.get("questions", []):
-            if (q.get("explanation") or "").strip():
-                continue
-            if args.dry_run:
-                added += 1
-                continue
+        questions = data.get("questions", [])
+        missing = [
+            (i, q) for i, q in enumerate(questions)
+            if not (q.get("explanation") or "").strip()
+        ]
+        if args.dry_run:
+            print(f"  would add {len(missing):3d}  {os.path.basename(path)}")
+            total_added += len(missing)
+            continue
+        if not missing:
+            continue
+
+        def _gen(item, subj=default_subject):
+            i, q = item
             try:
                 text = explain.generate_explanation(
                     question_text=q.get("question_text", ""),
                     options=q.get("options"),
                     correct_answer=q.get("correct_answer"),
-                    subject=q.get("subject") or default_subject,
+                    subject=q.get("subject") or subj,
+                    client=shared_client,
                 )
-            except Exception as e:
-                total_fail += 1
-                print(f"  [fail] {os.path.basename(path)}: {str(e)[:70]}")
-                continue
-            if text:
-                q["explanation"] = text
-                added += 1
-        if added and not args.dry_run:
+                return i, text, None
+            except Exception as e:  # collect failures, don't abort the sweep
+                return i, None, str(e)[:70]
+
+        added, fail = 0, 0
+        with cf.ThreadPoolExecutor(max_workers=max(1, args.workers)) as ex:
+            for i, text, err in ex.map(_gen, missing):
+                if text:
+                    questions[i]["explanation"] = text
+                    added += 1
+                else:
+                    fail += 1
+                    if err:
+                        print(f"  [fail] {os.path.basename(path)}[{i}]: {err}")
+        if added:
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
                 f.write("\n")
-        verb = "would add" if args.dry_run else "added"
-        print(f"  {verb:>9} {added:3d}  {os.path.basename(path)}")
+        print(f"  added {added:3d}  ({fail} failed)  {os.path.basename(path)}")
         total_added += added
+        total_fail += fail
 
     print("=" * 56)
     print(f"total {'would add' if args.dry_run else 'added'}: {total_added}"

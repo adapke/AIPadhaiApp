@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Banking",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Reserve Bank of India was nationalized on January 26, 1949, when the Indian government took full ownership and control of the bank from its private shareholders, establishing it as a state-owned institution under the RBI Act of 1934 (as amended)."
     },
     {
       "question_text": "GST is a:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Taxation",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "GST (Goods and Services Tax) is an indirect tax because it's levied on the supply of goods and services, collected by intermediaries (sellers/service providers), and ultimately borne by the end consumer through the price of products. The taxpayer and tax payer are different entities."
     },
     {
       "question_text": "Repo rate is the rate at which:",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Monetary Policy",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The repo rate is the interest rate at which the central bank (RBI) provides short-term liquidity loans to commercial banks by purchasing their securities with an agreement to sell them back. It's a monetary policy tool used to control money supply in the economy."
     },
     {
       "question_text": "First five-year plan focused on:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Planning",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The First Five-Year Plan (1951-1956) in India prioritized agriculture because the nation faced severe food shortages and needed to achieve self-sufficiency in food production to support its growing population and industrial development."
     },
     {
       "question_text": "Inflation measured by Wholesale Price Index is called:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Inflation",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "WPI (Wholesale Price Index) inflation is the term used when measuring price changes at the wholesale level before goods reach consumers. CPI measures retail prices, core inflation excludes volatile items, and stagflation refers to simultaneous high inflation and stagnation."
     },
     {
       "question_text": "Fiscal deficit is:",
@@ -82,7 +87,8 @@
       "correct_answer": "A",
       "chapter": "Public Finance",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A fiscal deficit occurs when a government spends more money than it collects in revenue. Option A correctly defines this as total expenditure minus total revenue, representing the shortfall that must be financed through borrowing or other means."
     }
   ]
 }

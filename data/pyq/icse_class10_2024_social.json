@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "council_board",
   "questions": [
-    {"question_text": "First Governor-General of India:", "options": ["Lord Curzon", "Lord Mountbatten", "Warren Hastings", "Lord Dalhousie"], "correct_answer": "C", "chapter": "Modern History", "topic_tags": ["Hastings"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Sepoy Mutiny year:", "options": ["1757", "1857", "1947", "1900"], "correct_answer": "B", "chapter": "Indian History", "topic_tags": ["1857"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Indian National Congress founded by:", "options": ["Gandhi", "A.O. Hume", "Nehru", "Tilak"], "correct_answer": "B", "chapter": "Indian History", "topic_tags": ["INC_founder"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Year of Quit India Movement:", "options": ["1920", "1942", "1947", "1857"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Quit_India"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Father of Indian Constitution:", "options": ["Gandhi", "B.R. Ambedkar", "Nehru", "Patel"], "correct_answer": "B", "chapter": "Indian Polity", "topic_tags": ["Ambedkar"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of fundamental rights in Indian Constitution:", "options": ["5", "6", "7", "10"], "correct_answer": "B", "chapter": "Indian Polity", "topic_tags": ["rights"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Supreme Court of India is located in:", "options": ["Mumbai", "Delhi", "Bengaluru", "Chennai"], "correct_answer": "B", "chapter": "Indian Polity", "topic_tags": ["judiciary"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Indian Standard Time meridian:", "options": ["75°E", "82.5°E", "90°E", "78°E"], "correct_answer": "B", "chapter": "Geography Basics", "topic_tags": ["IST"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Highest peak in India:", "options": ["K2", "Kanchenjunga", "Nanda Devi", "Everest"], "correct_answer": "B", "chapter": "Indian Geography", "topic_tags": ["peaks"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Tropic of Cancer passes through how many Indian states:", "options": ["6", "7", "8", "9"], "correct_answer": "C", "chapter": "Geography Basics", "topic_tags": ["Tropic_Cancer"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Sundarbans is famous for:", "options": ["Mangroves and Royal Bengal Tigers", "Sandalwood", "Tea", "Apples"], "correct_answer": "A", "chapter": "Forests", "topic_tags": ["Sundarbans"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Black soil is best for:", "options": ["Cotton", "Rice", "Tea", "Wheat"], "correct_answer": "A", "chapter": "Agriculture", "topic_tags": ["soil"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Author of 'Discovery of India':", "options": ["Gandhi", "Nehru", "Tagore", "Patel"], "correct_answer": "B", "chapter": "Indian History", "topic_tags": ["Nehru_books"], "difficulty": "easy", "marks": 1},
-    {"question_text": "First president of India:", "options": ["Rajendra Prasad", "Nehru", "Patel", "Radhakrishnan"], "correct_answer": "A", "chapter": "Indian History", "topic_tags": ["first_President"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Indian Republic Day:", "options": ["15 August", "26 January", "2 October", "14 November"], "correct_answer": "B", "chapter": "Indian Civics", "topic_tags": ["Republic_Day"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sarvodaya movement was led by:", "options": ["Gandhi", "Vinoba Bhave", "Nehru", "Bose"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Sarvodaya"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Khilafat Movement was launched in:", "options": ["1920", "1925", "1930", "1942"], "correct_answer": "A", "chapter": "Modern India", "topic_tags": ["Khilafat"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Indian Independence Act of:", "options": ["1947 (British Parliament)", "1942", "1945", "1948"], "correct_answer": "A", "chapter": "Modern India", "topic_tags": ["1947_Act"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Sino-Indian War year:", "options": ["1948", "1962", "1965", "1971"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["1962_war"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Indo-Pak War of 1971 led to creation of:", "options": ["Pakistan", "Bangladesh", "Sri Lanka", "Nepal"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Bangladesh"], "difficulty": "easy", "marks": 1},
-    {"question_text": "UN Headquarters in:", "options": ["Geneva", "New York", "London", "Vienna"], "correct_answer": "B", "chapter": "World Affairs", "topic_tags": ["UN"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Currency of Japan:", "options": ["Yuan", "Yen", "Won", "Rupee"], "correct_answer": "B", "chapter": "World Geography", "topic_tags": ["currency"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Wheat is the staple crop of:", "options": ["South India", "North India (Punjab, UP)", "Coastal areas", "Mountains only"], "correct_answer": "B", "chapter": "Agriculture", "topic_tags": ["wheat"], "difficulty": "easy", "marks": 1},
-    {"question_text": "First five-year plan adopted in India:", "options": ["1947", "1951", "1955", "1961"], "correct_answer": "B", "chapter": "Economy", "topic_tags": ["FYP"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Pin code starts with which number for Delhi region:", "options": ["1", "2", "3", "11"], "correct_answer": "D", "chapter": "Geography", "topic_tags": ["PIN"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "First Governor-General of India:",
+      "options": [
+        "Lord Curzon",
+        "Lord Mountbatten",
+        "Warren Hastings",
+        "Lord Dalhousie"
+      ],
+      "correct_answer": "C",
+      "chapter": "Modern History",
+      "topic_tags": [
+        "Hastings"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Warren Hastings served as the first Governor-General of India (1773-1785), establishing the position's administrative authority. Lord Mountbatten was the last Viceroy before independence, while Curzon and Dalhousie were later Viceroys during the British Raj period."
+    },
+    {
+      "question_text": "Sepoy Mutiny year:",
+      "options": [
+        "1757",
+        "1857",
+        "1947",
+        "1900"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian History",
+      "topic_tags": [
+        "1857"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Sepoy Mutiny occurred in 1857 when Indian soldiers (sepoys) in the British East India Company's army rebelled against British colonial rule, marking a major uprising against British control in India."
+    },
+    {
+      "question_text": "Indian National Congress founded by:",
+      "options": [
+        "Gandhi",
+        "A.O. Hume",
+        "Nehru",
+        "Tilak"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian History",
+      "topic_tags": [
+        "INC_founder"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A.O. Hume, a British civil servant, founded the Indian National Congress in 1885 as a platform for educated Indians to discuss political reforms. While Gandhi, Nehru, and Tilak were important Congress leaders later, Hume was the organization's founder."
+    },
+    {
+      "question_text": "Year of Quit India Movement:",
+      "options": [
+        "1920",
+        "1942",
+        "1947",
+        "1857"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Quit_India"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Quit India Movement was launched by Gandhi on August 9, 1942, demanding immediate British withdrawal from India. This mass civil disobedience campaign became one of the most significant movements in India's independence struggle."
+    },
+    {
+      "question_text": "Father of Indian Constitution:",
+      "options": [
+        "Gandhi",
+        "B.R. Ambedkar",
+        "Nehru",
+        "Patel"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "Ambedkar"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "B.R. Ambedkar is called the Father of the Indian Constitution because he chaired the Drafting Committee of the Constituent Assembly and played the pivotal role in formulating India's constitutional framework after independence."
+    },
+    {
+      "question_text": "Number of fundamental rights in Indian Constitution:",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "10"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "rights"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Indian Constitution originally granted 7 fundamental rights, but this was reduced to 6 in 1978 when the Right to Property was removed from Part III and made a constitutional right instead, leaving rights to equality, freedom of speech, freedom of religion, cultural and educational rights, and constitutional remedies."
+    },
+    {
+      "question_text": "Supreme Court of India is located in:",
+      "options": [
+        "Mumbai",
+        "Delhi",
+        "Bengaluru",
+        "Chennai"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "judiciary"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Supreme Court of India is the apex judicial body and is constitutionally established in New Delhi, the capital of India. Delhi houses the seat of the country's highest court and other major constitutional institutions."
+    },
+    {
+      "question_text": "Indian Standard Time meridian:",
+      "options": [
+        "75°E",
+        "82.5°E",
+        "90°E",
+        "78°E"
+      ],
+      "correct_answer": "B",
+      "chapter": "Geography Basics",
+      "topic_tags": [
+        "IST"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Indian Standard Time is based on the 82.5°E meridian, which passes through the middle of India and provides a single time zone for the entire country. This meridian is approximately 5.5 hours ahead of GMT."
+    },
+    {
+      "question_text": "Highest peak in India:",
+      "options": [
+        "K2",
+        "Kanchenjunga",
+        "Nanda Devi",
+        "Everest"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "peaks"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Kanchenjunga is the highest peak entirely within Indian territory at 8,586 meters. While K2 is higher, it lies on the India-Pakistan border, and Everest, though taller, is in Nepal. Nanda Devi is lower than Kanchenjunga."
+    },
+    {
+      "question_text": "Tropic of Cancer passes through how many Indian states:",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correct_answer": "C",
+      "chapter": "Geography Basics",
+      "topic_tags": [
+        "Tropic_Cancer"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Tropic of Cancer passes through 8 Indian states: Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram, running diagonally from west to east across India's central region."
+    },
+    {
+      "question_text": "Sundarbans is famous for:",
+      "options": [
+        "Mangroves and Royal Bengal Tigers",
+        "Sandalwood",
+        "Tea",
+        "Apples"
+      ],
+      "correct_answer": "A",
+      "chapter": "Forests",
+      "topic_tags": [
+        "Sundarbans"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Sundarbans, a vast delta region spanning India and Bangladesh, is the world's largest mangrove forest ecosystem and serves as the primary habitat for the endangered Royal Bengal Tiger, making these its defining features."
+    },
+    {
+      "question_text": "Black soil is best for:",
+      "options": [
+        "Cotton",
+        "Rice",
+        "Tea",
+        "Wheat"
+      ],
+      "correct_answer": "A",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "soil"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Black soil, rich in iron oxide and humus, retains moisture well and provides excellent drainage—ideal conditions for cotton cultivation. Cotton thrives in these nutrient-rich soils and the warm climates where black soil typically forms."
+    },
+    {
+      "question_text": "Author of 'Discovery of India':",
+      "options": [
+        "Gandhi",
+        "Nehru",
+        "Tagore",
+        "Patel"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian History",
+      "topic_tags": [
+        "Nehru_books"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Jawaharlal Nehru wrote 'Discovery of India' while imprisoned during the independence movement, presenting his philosophical and historical perspective on Indian civilization and its potential future."
+    },
+    {
+      "question_text": "First president of India:",
+      "options": [
+        "Rajendra Prasad",
+        "Nehru",
+        "Patel",
+        "Radhakrishnan"
+      ],
+      "correct_answer": "A",
+      "chapter": "Indian History",
+      "topic_tags": [
+        "first_President"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Rajendra Prasad was elected as India's first President after independence in 1950. He served two terms and is recognized as the founding head of state of the Indian Republic."
+    },
+    {
+      "question_text": "Indian Republic Day:",
+      "options": [
+        "15 August",
+        "26 January",
+        "2 October",
+        "14 November"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Civics",
+      "topic_tags": [
+        "Republic_Day"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "January 26 marks the date when India's Constitution came into effect in 1950, establishing India as a sovereign democratic republic, which is why it's celebrated as Republic Day."
+    },
+    {
+      "question_text": "Sarvodaya movement was led by:",
+      "options": [
+        "Gandhi",
+        "Vinoba Bhave",
+        "Nehru",
+        "Bose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Sarvodaya"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Vinoba Bhave founded and led the Sarvodaya movement, which promoted the concept of \"Sarvodaya\" (welfare of all) through nonviolent means, particularly through his Bhoodan (land gift) campaign that aimed to redistribute land to landless peasants."
+    },
+    {
+      "question_text": "Khilafat Movement was launched in:",
+      "options": [
+        "1920",
+        "1925",
+        "1930",
+        "1942"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Khilafat"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Khilafat Movement was launched in 1920 in India as a protest against the dissolution of the Ottoman Caliphate following World War I. It was primarily led by Muslim leaders and supported by Gandhi and the Indian National Congress."
+    },
+    {
+      "question_text": "Indian Independence Act of:",
+      "options": [
+        "1947 (British Parliament)",
+        "1942",
+        "1945",
+        "1948"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "1947_Act"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Indian Independence Act was passed by the British Parliament in 1947 and came into effect on August 15, 1947, officially granting India independence and partitioning it into India and Pakistan."
+    },
+    {
+      "question_text": "Sino-Indian War year:",
+      "options": [
+        "1948",
+        "1962",
+        "1965",
+        "1971"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "1962_war"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Sino-Indian War occurred in 1962 when border disputes between China and India over territory in the Himalayas erupted into armed conflict. This was a brief but significant military engagement that lasted about a month and resulted in Chinese territorial gains."
+    },
+    {
+      "question_text": "Indo-Pak War of 1971 led to creation of:",
+      "options": [
+        "Pakistan",
+        "Bangladesh",
+        "Sri Lanka",
+        "Nepal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Bangladesh"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The 1971 Indo-Pak War resulted from East Pakistan's independence movement. India's military intervention against West Pakistan led to East Pakistan's separation and establishment as the independent nation of Bangladesh."
+    },
+    {
+      "question_text": "UN Headquarters in:",
+      "options": [
+        "Geneva",
+        "New York",
+        "London",
+        "Vienna"
+      ],
+      "correct_answer": "B",
+      "chapter": "World Affairs",
+      "topic_tags": [
+        "UN"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The United Nations Headquarters is located in New York City, established there in 1952 on the East River. While UN agencies operate in Geneva, Vienna, and other cities, the main administrative center and General Assembly meet in New York."
+    },
+    {
+      "question_text": "Currency of Japan:",
+      "options": [
+        "Yuan",
+        "Yen",
+        "Won",
+        "Rupee"
+      ],
+      "correct_answer": "B",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "currency"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Japanese currency is the Yen (¥). The Yuan is Chinese, the Won is Korean, and the Rupee is Indian—each belonging to different countries in Asia."
+    },
+    {
+      "question_text": "Wheat is the staple crop of:",
+      "options": [
+        "South India",
+        "North India (Punjab, UP)",
+        "Coastal areas",
+        "Mountains only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "wheat"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Wheat requires cool winters and moderate rainfall, which are found in the Indo-Gangetic Plains of North India, particularly Punjab and Uttar Pradesh. These regions have ideal climate and soil conditions for large-scale wheat cultivation, making wheat their primary staple crop."
+    },
+    {
+      "question_text": "First five-year plan adopted in India:",
+      "options": [
+        "1947",
+        "1951",
+        "1955",
+        "1961"
+      ],
+      "correct_answer": "B",
+      "chapter": "Economy",
+      "topic_tags": [
+        "FYP"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "India adopted its First Five-Year Plan in 1951, two years after independence in 1947, following the Soviet model of centralized economic planning to accelerate industrialization and development."
+    },
+    {
+      "question_text": "Pin code starts with which number for Delhi region:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "11"
+      ],
+      "correct_answer": "D",
+      "chapter": "Geography",
+      "topic_tags": [
+        "PIN"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Delhi's pin codes begin with 11, representing the postal region code assigned to the National Capital Territory. The first two digits of Indian pin codes denote the postal circle/region."
+    }
   ]
 }

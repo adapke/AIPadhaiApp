@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "wbchse_board",
   "questions": [
-    {"question_text": "Coulomb's constant k = 1/(4πε₀) approximately:", "options": ["9×10⁹ N·m²/C²", "9×10⁻⁹", "9 × 10⁻¹²", "1"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Coulomb_k"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Electric dipole moment unit:", "options": ["C·m", "C/m", "N·m", "V"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["dipole_moment"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Capacitance of parallel plates with separation halved (other constant):", "options": ["Doubled", "Halved", "Same", "Quadrupled"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["d_halved"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Series combination of capacitors decreases capacitance because:", "options": ["1/C_eq = sum 1/Ci (smaller than smallest)", "Charges cancel", "Field decreases", "Random"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["series_explanation"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Resistivity ρ depends on:", "options": ["Length", "Material and temperature", "Voltage", "Current"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["resistivity"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Wheatstone bridge: in balanced condition, current through galvanometer is:", "options": ["Maximum", "Zero", "Random", "Equal to source"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["Wheatstone"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Force on current loop in non-uniform magnetic field:", "options": ["Always zero", "Non-zero translation force possible (torque also)", "Only torque", "Only friction"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["non_uniform"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Magnetic field on axis of solenoid (n turns/length, current I):", "options": ["μ₀nI", "μ₀nI/2 at ends", "Both A (center) and B (end)", "Zero"], "correct_answer": "C", "chapter": "Magnetism", "topic_tags": ["solenoid_axis"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Eddy currents are minimised by:", "options": ["Solid metal core", "Laminating the core", "Increasing area", "Increasing field"], "correct_answer": "B", "chapter": "EMI", "topic_tags": ["eddy_lamination"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Q factor of LCR circuit measures:", "options": ["Resonance sharpness", "Power consumption", "Frequency", "Voltage"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["Q_factor"], "difficulty": "medium", "marks": 1},
-    {"question_text": "RMS power dissipated in resistor with AC source:", "options": ["V_rms × I_rms × cos(φ)", "V_peak × I_peak", "V_avg × I_avg", "0"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["avg_power"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Maxwell's prediction: EM waves travel at:", "options": ["Speed of sound", "Speed of light c", "0", "Variable"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["c_prediction"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Visible light wavelength range approximately:", "options": ["400-700 nm", "10-100 nm", "1-10 μm", "1 cm"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["visible_range"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Concave lens focal length convention:", "options": ["Positive", "Negative", "Zero", "Variable"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["concave_lens"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Telescope magnifying power (normal adjustment):", "options": ["f_o/f_e", "f_e/f_o", "f_o × f_e", "1"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["telescope"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Young's double slit: distance between consecutive fringes (bright):", "options": ["λD/d", "λd/D", "λD·d", "1/(λD)"], "correct_answer": "A", "chapter": "Wave Optics", "topic_tags": ["YDSE"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Diffraction pattern: central maximum width vs others:", "options": ["Same width", "Twice wider", "Half width", "Random"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["central_maximum"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Polarising angle for medium with refractive index n: Brewster's law tan(i_p) = ?", "options": ["n", "1/n", "n²", "sin(n)"], "correct_answer": "A", "chapter": "Wave Optics", "topic_tags": ["Brewster"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Einstein's photoelectric equation: max KE = ?", "options": ["hν - φ", "hν + φ", "hν/φ", "φ - hν"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["photoelectric_eq"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Stopping potential vs frequency graph slope:", "options": ["h/e", "e/h", "hν", "0"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["V_s_freq_slope"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Wave-particle duality applies to:", "options": ["Light only", "Matter only", "Both light and matter", "Neither"], "correct_answer": "C", "chapter": "Dual Nature", "topic_tags": ["duality"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Bohr's frequency condition: hν = ?", "options": ["E_2 - E_1", "E_2 + E_1", "E_2 × E_1", "E_2 / E_1"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Bohr_frequency"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Half-life formula relating to decay constant: T₁/₂ = ?", "options": ["ln 2 / λ", "λ / ln 2", "1/λ", "λ²"], "correct_answer": "A", "chapter": "Nuclei", "topic_tags": ["half_life_formula"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mean free path of electron in metal at room T approximately:", "options": ["10⁻⁸ m", "10⁻⁴ m", "1 m", "10⁻²⁰ m"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["mean_free_path"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Number of valence electrons in germanium:", "options": ["2", "4", "6", "8"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["Ge_valence"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Coulomb's constant k = 1/(4πε₀) approximately:",
+      "options": [
+        "9×10⁹ N·m²/C²",
+        "9×10⁻⁹",
+        "9 × 10⁻¹²",
+        "1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Coulomb_k"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Coulomb's constant k is defined as 1/(4πε₀), where ε₀ ≈ 8.85×10⁻¹² F/m. Calculating: k = 1/(4π × 8.85×10⁻¹²) ≈ 9×10⁹ N·m²/C², which is the standard SI value used in electrostatics."
+    },
+    {
+      "question_text": "Electric dipole moment unit:",
+      "options": [
+        "C·m",
+        "C/m",
+        "N·m",
+        "V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "dipole_moment"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Electric dipole moment is defined as the product of charge (Q) and separation distance (d): p = Q × d. Since charge is measured in Coulombs (C) and distance in meters (m), the unit is C·m."
+    },
+    {
+      "question_text": "Capacitance of parallel plates with separation halved (other constant):",
+      "options": [
+        "Doubled",
+        "Halved",
+        "Same",
+        "Quadrupled"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "d_halved"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Capacitance of a parallel plate capacitor is inversely proportional to plate separation: C = ε₀A/d. When separation is halved (d → d/2), capacitance doubles since C is inversely related to d."
+    },
+    {
+      "question_text": "Series combination of capacitors decreases capacitance because:",
+      "options": [
+        "1/C_eq = sum 1/Ci (smaller than smallest)",
+        "Charges cancel",
+        "Field decreases",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "series_explanation"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In series, the reciprocals of individual capacitances add up, making 1/C_eq larger than any individual 1/Ci term. Therefore, C_eq becomes smaller than the smallest capacitor in the series."
+    },
+    {
+      "question_text": "Resistivity ρ depends on:",
+      "options": [
+        "Length",
+        "Material and temperature",
+        "Voltage",
+        "Current"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "resistivity"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Resistivity is an intrinsic property of a material that characterizes how strongly it opposes current flow. It depends only on the material's composition and temperature, not on external factors like length, voltage, or current, which affect resistance itself."
+    },
+    {
+      "question_text": "Wheatstone bridge: in balanced condition, current through galvanometer is:",
+      "options": [
+        "Maximum",
+        "Zero",
+        "Random",
+        "Equal to source"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Wheatstone"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In a balanced Wheatstone bridge, the potential difference across the galvanometer (bridge arm) is zero because the voltage at both its terminals becomes equal. With no potential difference, no current flows through it regardless of its resistance."
+    },
+    {
+      "question_text": "Force on current loop in non-uniform magnetic field:",
+      "options": [
+        "Always zero",
+        "Non-zero translation force possible (torque also)",
+        "Only torque",
+        "Only friction"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "non_uniform"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "A current loop in a non-uniform magnetic field experiences a net translational force because the magnetic field strength varies across the loop, creating unequal forces on different segments. Additionally, the loop experiences a torque due to its magnetic dipole moment interacting with the field gradient."
+    },
+    {
+      "question_text": "Magnetic field on axis of solenoid (n turns/length, current I):",
+      "options": [
+        "μ₀nI",
+        "μ₀nI/2 at ends",
+        "Both A (center) and B (end)",
+        "Zero"
+      ],
+      "correct_answer": "C",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "solenoid_axis"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "At the solenoid's center, the magnetic field is μ₀nI because magnetic field contributions from all turns add constructively along the axis. At the ends, the field is μ₀nI/2 because only turns on one side contribute, resulting in half the central value."
+    },
+    {
+      "question_text": "Eddy currents are minimised by:",
+      "options": [
+        "Solid metal core",
+        "Laminating the core",
+        "Increasing area",
+        "Increasing field"
+      ],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": [
+        "eddy_lamination"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Laminating the core breaks it into thin, electrically isolated layers separated by insulating material. This increases resistance to eddy current flow, dramatically reducing the circular currents that dissipate energy as heat."
+    },
+    {
+      "question_text": "Q factor of LCR circuit measures:",
+      "options": [
+        "Resonance sharpness",
+        "Power consumption",
+        "Frequency",
+        "Voltage"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "Q_factor"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Q factor (quality factor) measures how sharply the impedance and current peak at resonance frequency. A higher Q indicates a narrower resonance curve with steeper sides, meaning the circuit responds more selectively to frequencies near resonance."
+    },
+    {
+      "question_text": "RMS power dissipated in resistor with AC source:",
+      "options": [
+        "V_rms × I_rms × cos(φ)",
+        "V_peak × I_peak",
+        "V_avg × I_avg",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "avg_power"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The RMS power dissipated in a resistor accounts for the phase difference between voltage and current. The power factor cos(φ) represents this phase relationship, where φ is zero for purely resistive loads. The formula V_rms × I_rms × cos(φ) correctly gives the average power delivered to the load over a complete AC cycle."
+    },
+    {
+      "question_text": "Maxwell's prediction: EM waves travel at:",
+      "options": [
+        "Speed of sound",
+        "Speed of light c",
+        "0",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "c_prediction"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Maxwell's equations show that the speed of electromagnetic waves depends only on the electric permittivity and magnetic permeability of the medium: v = 1/√(με). In vacuum, this yields c ≈ 3×10⁸ m/s, which matched the known speed of light, leading Maxwell to predict that light itself is an electromagnetic wave."
+    },
+    {
+      "question_text": "Visible light wavelength range approximately:",
+      "options": [
+        "400-700 nm",
+        "10-100 nm",
+        "1-10 μm",
+        "1 cm"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "visible_range"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The visible light spectrum spans from violet light at approximately 400 nm to red light at approximately 700 nm. Options B, C, and D represent ultraviolet, infrared, and microwave/radio wavelengths respectively, which are outside the range detectable by human eyes."
+    },
+    {
+      "question_text": "Concave lens focal length convention:",
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "concave_lens"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Concave lenses are diverging lenses that spread light rays outward. By sign convention, diverging lenses have negative focal lengths to distinguish them from converging lenses, which have positive focal lengths."
+    },
+    {
+      "question_text": "Telescope magnifying power (normal adjustment):",
+      "options": [
+        "f_o/f_e",
+        "f_e/f_o",
+        "f_o × f_e",
+        "1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "telescope"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In normal adjustment, the telescope's magnifying power equals the ratio of the objective focal length to the eyepiece focal length. A longer focal length objective and shorter focal length eyepiece produce greater magnification, making f_o/f_e the correct expression."
+    },
+    {
+      "question_text": "Young's double slit: distance between consecutive fringes (bright):",
+      "options": [
+        "λD/d",
+        "λd/D",
+        "λD·d",
+        "1/(λD)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "YDSE"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The fringe spacing in Young's double slit experiment equals the wavelength times the distance to the screen, divided by the slit separation. This ratio λD/d gives the distance between consecutive bright fringes, where D is the screen distance and d is the slit separation."
+    },
+    {
+      "question_text": "Diffraction pattern: central maximum width vs others:",
+      "options": [
+        "Same width",
+        "Twice wider",
+        "Half width",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "central_maximum"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In single-slit diffraction, the central maximum extends from the first minimum on one side to the first minimum on the other side, spanning twice the angular distance of secondary maxima. Each secondary maximum is bounded by minima that are closer together, making them narrower than the central maximum, which is twice as wide."
+    },
+    {
+      "question_text": "Polarising angle for medium with refractive index n: Brewster's law tan(i_p) = ?",
+      "options": [
+        "n",
+        "1/n",
+        "n²",
+        "sin(n)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "Brewster"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "At Brewster's angle, reflected light is completely polarized when the reflected and refracted rays are perpendicular to each other. Applying Snell's law and the perpendicularity condition yields tan(i_p) = n, where n is the refractive index of the medium and i_p is measured from the normal in air."
+    },
+    {
+      "question_text": "Einstein's photoelectric equation: max KE = ?",
+      "options": [
+        "hν - φ",
+        "hν + φ",
+        "hν/φ",
+        "φ - hν"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "photoelectric_eq"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The photon energy (hν) must first overcome the work function (φ) to release electrons. Any excess energy becomes the maximum kinetic energy of the ejected electron, making the equation hν - φ."
+    },
+    {
+      "question_text": "Stopping potential vs frequency graph slope:",
+      "options": [
+        "h/e",
+        "e/h",
+        "hν",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "V_s_freq_slope"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The stopping potential is related to frequency by Einstein's photoelectric equation: eV_s = hν - φ, which rearranges to V_s = (h/e)ν - φ/e. The slope of a V_s versus ν graph is the coefficient of ν, which is h/e (Planck's constant divided by electron charge)."
+    },
+    {
+      "question_text": "Wave-particle duality applies to:",
+      "options": [
+        "Light only",
+        "Matter only",
+        "Both light and matter",
+        "Neither"
+      ],
+      "correct_answer": "C",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "duality"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "All entities exhibit both wave and particle properties depending on the experimental context. Light demonstrates this through the photoelectric effect (particle behavior) and diffraction (wave behavior), while matter exhibits particle properties normally but shows wave characteristics in electron diffraction experiments, confirming de Broglie's hypothesis."
+    },
+    {
+      "question_text": "Bohr's frequency condition: hν = ?",
+      "options": [
+        "E_2 - E_1",
+        "E_2 + E_1",
+        "E_2 × E_1",
+        "E_2 / E_1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_frequency"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Bohr's frequency condition states that the energy of a photon emitted or absorbed during an electron transition equals the difference between two energy levels. Therefore, hν equals the energy difference E₂ - E₁ between the final and initial states."
+    },
+    {
+      "question_text": "Half-life formula relating to decay constant: T₁/₂ = ?",
+      "options": [
+        "ln 2 / λ",
+        "λ / ln 2",
+        "1/λ",
+        "λ²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "half_life_formula"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The decay of a radioactive sample follows N(t) = N₀e^(-λt). When N(t) = N₀/2, solving for t gives t = ln 2 / λ, which is the half-life. This comes directly from the exponential decay equation and the definition of half-life as the time for activity to reduce to half."
+    },
+    {
+      "question_text": "Mean free path of electron in metal at room T approximately:",
+      "options": [
+        "10⁻⁸ m",
+        "10⁻⁴ m",
+        "1 m",
+        "10⁻²⁰ m"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "mean_free_path"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The mean free path is calculated from λ = v_th × τ, where the thermal velocity of electrons is ~10⁵ m/s and the relaxation time τ is ~10⁻¹⁴ s at room temperature, giving λ ≈ 10⁻⁹ to 10⁻⁸ m, consistent with atomic scales in metals."
+    },
+    {
+      "question_text": "Number of valence electrons in germanium:",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "Ge_valence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Germanium has atomic number 32 with electron configuration ending in 4s²4p². Since valence electrons are those in the outermost shell (n=4), germanium has 2 + 2 = 4 valence electrons."
+    }
   ]
 }

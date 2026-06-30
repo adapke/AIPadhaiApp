@@ -8,228 +8,432 @@
   "questions": [
     {
       "question_text": "If a sum doubles in 8 years at simple interest, it triples in:",
-      "options": ["12 years", "16 years", "20 years", "24 years"],
+      "options": [
+        "12 years",
+        "16 years",
+        "20 years",
+        "24 years"
+      ],
       "correct_answer": "B",
       "chapter": "Simple Interest",
-      "topic_tags": ["SI", "doubling"],
+      "topic_tags": [
+        "SI",
+        "doubling"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At simple interest, if a sum doubles in 8 years, the interest earned equals the principal. Since SI = PRT/100, the rate is constant, so tripling requires earning 2P interest (double the principal). This takes 2 × 8 = 16 years."
     },
     {
       "question_text": "Two pipes fill a tank in 6 and 12 hours. Together they fill it in:",
-      "options": ["3 hr", "4 hr", "6 hr", "9 hr"],
+      "options": [
+        "3 hr",
+        "4 hr",
+        "6 hr",
+        "9 hr"
+      ],
       "correct_answer": "B",
       "chapter": "Pipes and Cisterns",
-      "topic_tags": ["pipes"],
+      "topic_tags": [
+        "pipes"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Pipe 1 fills 1/6 of the tank per hour, Pipe 2 fills 1/12 per hour. Combined rate: 1/6 + 1/12 = 2/12 + 1/12 = 3/12 = 1/4 per hour. Therefore, together they fill the tank in 4 hours."
     },
     {
       "question_text": "Average of 20 numbers is 15. If we exclude the largest (50), new average:",
-      "options": ["13.16", "14", "14.5", "12.5"],
+      "options": [
+        "13.16",
+        "14",
+        "14.5",
+        "12.5"
+      ],
       "correct_answer": "A",
       "chapter": "Averages",
-      "topic_tags": ["averages"],
+      "topic_tags": [
+        "averages"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sum of 20 numbers = 20 × 15 = 300. After excluding the largest number (50), sum of remaining 19 numbers = 300 - 50 = 250. New average = 250 ÷ 19 ≈ 13.16."
     },
     {
       "question_text": "Speed of a boat in still water is 12 km/h. Stream speed is 3 km/h. Downstream speed:",
-      "options": ["9 km/h", "12 km/h", "15 km/h", "18 km/h"],
+      "options": [
+        "9 km/h",
+        "12 km/h",
+        "15 km/h",
+        "18 km/h"
+      ],
       "correct_answer": "C",
       "chapter": "Boats and Streams",
-      "topic_tags": ["boat_speed"],
+      "topic_tags": [
+        "boat_speed"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Downstream speed is calculated by adding the boat's speed in still water to the stream speed: 12 + 3 = 15 km/h. When moving downstream, the current assists the boat's motion."
     },
     {
       "question_text": "20% of 250 is:",
-      "options": ["25", "50", "75", "100"],
+      "options": [
+        "25",
+        "50",
+        "75",
+        "100"
+      ],
       "correct_answer": "B",
       "chapter": "Percentages",
-      "topic_tags": ["percentage"],
+      "topic_tags": [
+        "percentage"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "To find 20% of 250, multiply 250 by 0.20: 250 × 0.20 = 50. Alternatively, 20% equals one-fifth, and 250 ÷ 5 = 50."
     },
     {
       "question_text": "If selling price = 1.2 × cost price, profit % is:",
-      "options": ["10%", "15%", "20%", "25%"],
+      "options": [
+        "10%",
+        "15%",
+        "20%",
+        "25%"
+      ],
       "correct_answer": "C",
       "chapter": "Profit and Loss",
-      "topic_tags": ["profit"],
+      "topic_tags": [
+        "profit"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Profit % is calculated as (Selling Price - Cost Price) / Cost Price × 100. Since SP = 1.2 × CP, the profit is 0.2 × CP, giving (0.2 × CP) / CP × 100 = 20%."
     },
     {
       "question_text": "Ratio of ages of A and B is 3:5. If A is 18, B is:",
-      "options": ["25", "30", "35", "40"],
+      "options": [
+        "25",
+        "30",
+        "35",
+        "40"
+      ],
       "correct_answer": "B",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["ratio"],
+      "topic_tags": [
+        "ratio"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since A and B are in ratio 3:5, and A is 18, we can set up the proportion: 3/5 = 18/B. Solving gives B = (18 × 5)/3 = 90/3 = 30."
     },
     {
       "question_text": "Compound interest on Rs 1000 at 10% per annum for 2 years:",
-      "options": ["Rs 200", "Rs 210", "Rs 220", "Rs 100"],
+      "options": [
+        "Rs 200",
+        "Rs 210",
+        "Rs 220",
+        "Rs 100"
+      ],
       "correct_answer": "B",
       "chapter": "Compound Interest",
-      "topic_tags": ["CI"],
+      "topic_tags": [
+        "CI"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the compound interest formula A = P(1 + r/100)^n, we get A = 1000(1.1)² = 1000 × 1.21 = Rs 1210. The compound interest earned is 1210 - 1000 = Rs 210."
     },
     {
       "question_text": "Number divisible by both 6 and 8 is also divisible by:",
-      "options": ["10", "12", "24", "48"],
+      "options": [
+        "10",
+        "12",
+        "24",
+        "48"
+      ],
       "correct_answer": "C",
       "chapter": "Number System",
-      "topic_tags": ["LCM"],
+      "topic_tags": [
+        "LCM"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A number divisible by both 6 and 8 must be divisible by their least common multiple (LCM). Since 6 = 2×3 and 8 = 2³, the LCM is 2³×3 = 24. Therefore, any number divisible by both 6 and 8 is divisible by 24."
     },
     {
       "question_text": "If x:y = 2:3 and y:z = 4:5, then x:z is:",
-      "options": ["8:15", "10:12", "2:5", "1:2"],
+      "options": [
+        "8:15",
+        "10:12",
+        "2:5",
+        "1:2"
+      ],
       "correct_answer": "A",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["combined_ratio"],
+      "topic_tags": [
+        "combined_ratio"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "To find x:z, we need a common term (y) in both ratios. From x:y = 2:3, we get x = 2k and y = 3k. From y:z = 4:5, we get y = 4m and z = 5m. Since y is the same in both, 3k = 4m, so k = 4 and m = 3. Therefore x:z = 8:15."
     },
     {
       "question_text": "Mean of first 5 odd numbers:",
-      "options": ["4", "5", "6", "7"],
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "correct_answer": "B",
       "chapter": "Averages",
-      "topic_tags": ["odd_numbers", "mean"],
+      "topic_tags": [
+        "odd_numbers",
+        "mean"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The first 5 odd numbers are 1, 3, 5, 7, 9. Their sum is 25, and dividing by 5 gives a mean of 5. Alternatively, for consecutive odd numbers, the mean equals the middle value, which is the 3rd number: 5."
     },
     {
       "question_text": "After 20% discount and 10% tax, price of Rs 500 article becomes:",
-      "options": ["Rs 440", "Rs 450", "Rs 460", "Rs 470"],
+      "options": [
+        "Rs 440",
+        "Rs 450",
+        "Rs 460",
+        "Rs 470"
+      ],
       "correct_answer": "A",
       "chapter": "Percentages",
-      "topic_tags": ["successive_percentage"],
+      "topic_tags": [
+        "successive_percentage"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "After 20% discount on Rs 500, the price becomes Rs 500 × 0.80 = Rs 400. Adding 10% tax: Rs 400 × 1.10 = Rs 440."
     },
     {
       "question_text": "Area of square with diagonal 10 cm:",
-      "options": ["25 cm²", "50 cm²", "75 cm²", "100 cm²"],
+      "options": [
+        "25 cm²",
+        "50 cm²",
+        "75 cm²",
+        "100 cm²"
+      ],
       "correct_answer": "B",
       "chapter": "Mensuration",
-      "topic_tags": ["square", "diagonal"],
+      "topic_tags": [
+        "square",
+        "diagonal"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For a square with diagonal d, the relationship is d² = 2a² where a is the side length. With d = 10, we get 100 = 2a², so a² = 50 cm². Since area equals a², the area is 50 cm²."
     },
     {
       "question_text": "Time taken by train of 200 m to cross a pole at 36 km/h:",
-      "options": ["10 s", "20 s", "30 s", "40 s"],
+      "options": [
+        "10 s",
+        "20 s",
+        "30 s",
+        "40 s"
+      ],
       "correct_answer": "B",
       "chapter": "Time, Speed and Distance",
-      "topic_tags": ["train"],
+      "topic_tags": [
+        "train"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "To cross a pole, the train must travel its own length (200 m). Convert speed: 36 km/h = 36 × (5/18) = 10 m/s. Using time = distance/speed: time = 200/10 = 20 seconds."
     },
     {
       "question_text": "A and B together earn Rs 800 in 4 days. A alone earns Rs 600 in 6 days. B's daily wage:",
-      "options": ["Rs 80", "Rs 100", "Rs 90", "Rs 110"],
+      "options": [
+        "Rs 80",
+        "Rs 100",
+        "Rs 90",
+        "Rs 110"
+      ],
       "correct_answer": "B",
       "chapter": "Time and Work",
-      "topic_tags": ["wages"],
+      "topic_tags": [
+        "wages"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A's daily wage is Rs 600 ÷ 6 = Rs 100. Together they earn Rs 800 ÷ 4 = Rs 200 daily. Therefore, B's daily wage is Rs 200 - Rs 100 = Rs 100."
     },
     {
       "question_text": "If 2x + 3 = 11, x equals:",
-      "options": ["2", "3", "4", "5"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "C",
       "chapter": "Algebra",
-      "topic_tags": ["linear_equation"],
+      "topic_tags": [
+        "linear_equation"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Subtract 3 from both sides: 2x = 8. Divide both sides by 2: x = 4."
     },
     {
       "question_text": "Simplification: 25% of 80 + 50% of 40:",
-      "options": ["35", "40", "45", "50"],
+      "options": [
+        "35",
+        "40",
+        "45",
+        "50"
+      ],
       "correct_answer": "B",
       "chapter": "Percentages",
-      "topic_tags": ["simplification"],
+      "topic_tags": [
+        "simplification"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "25% of 80 equals 0.25 × 80 = 20, and 50% of 40 equals 0.5 × 40 = 20. Adding these together: 20 + 20 = 40."
     },
     {
       "question_text": "Volume of cylinder radius 7, height 14 (π=22/7):",
-      "options": ["2156", "1078", "3234", "440"],
+      "options": [
+        "2156",
+        "1078",
+        "3234",
+        "440"
+      ],
       "correct_answer": "A",
       "chapter": "Mensuration",
-      "topic_tags": ["cylinder"],
+      "topic_tags": [
+        "cylinder"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The volume of a cylinder is πr²h. Substituting: V = (22/7) × 7² × 14 = (22/7) × 49 × 14 = 22 × 7 × 14 = 2156."
     },
     {
       "question_text": "Successive discount of 10% and 20% is equivalent to single discount of:",
-      "options": ["28%", "30%", "25%", "32%"],
+      "options": [
+        "28%",
+        "30%",
+        "25%",
+        "32%"
+      ],
       "correct_answer": "A",
       "chapter": "Percentages",
-      "topic_tags": ["successive_discount"],
+      "topic_tags": [
+        "successive_discount"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When successive discounts are applied, they multiply rather than add. After a 10% discount, 90% of the original price remains. A 20% discount on that amount leaves 80% of it. Therefore: 0.90 × 0.80 = 0.72, meaning 28% is discounted overall."
     },
     {
       "question_text": "Ratio of milk to water in a mixture is 5:2. If 5L water added to 7L, new ratio:",
-      "options": ["5:7", "1:2", "5:3", "5:4"],
+      "options": [
+        "5:7",
+        "1:2",
+        "5:3",
+        "5:4"
+      ],
       "correct_answer": "A",
       "chapter": "Mixtures",
-      "topic_tags": ["alligation"],
+      "topic_tags": [
+        "alligation"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In the original 7L mixture with ratio 5:2, milk = 5L and water = 2L. Adding 5L water gives new water = 7L. The new ratio of milk to water = 5:7."
     },
     {
       "question_text": "Probability of drawing a king from 52 cards:",
-      "options": ["1/13", "1/4", "1/52", "4/13"],
+      "options": [
+        "1/13",
+        "1/4",
+        "1/52",
+        "4/13"
+      ],
       "correct_answer": "A",
       "chapter": "Probability",
-      "topic_tags": ["cards"],
+      "topic_tags": [
+        "cards"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "There are 4 kings in a standard 52-card deck. The probability is calculated as favorable outcomes divided by total outcomes: 4/52, which simplifies to 1/13."
     },
     {
       "question_text": "Largest 3-digit number divisible by 7:",
-      "options": ["994", "999", "987", "777"],
+      "options": [
+        "994",
+        "999",
+        "987",
+        "777"
+      ],
       "correct_answer": "A",
       "chapter": "Number System",
-      "topic_tags": ["divisibility"],
+      "topic_tags": [
+        "divisibility"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Divide the largest 3-digit number (999) by 7, which gives 142 remainder 5. Subtract the remainder from 999: 999 - 5 = 994, which is divisible by 7."
     },
     {
       "question_text": "Number of zeros at end of 25!:",
-      "options": ["4", "5", "6", "7"],
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Number System",
-      "topic_tags": ["factorial", "trailing_zeros"],
+      "topic_tags": [
+        "factorial",
+        "trailing_zeros"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Trailing zeros are created by factors of 10, which require pairs of 2 and 5. Since factors of 2 are abundant, count factors of 5: ⌊25/5⌋ + ⌊25/25⌋ = 5 + 1 = 6."
     },
     {
       "question_text": "If 5x = 2y + 8 and x - y = 1, then x:",
-      "options": ["1", "2", "3", "5"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Algebra",
-      "topic_tags": ["linear_system"],
+      "topic_tags": [
+        "linear_system"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "From x - y = 1, we get x = y + 1. Substituting into 5x = 2y + 8 gives 5(y + 1) = 2y + 8, which simplifies to 5y + 5 = 2y + 8, so 3y = 3, thus y = 1 and x = 2."
     },
     {
       "question_text": "Sum of all 2-digit numbers divisible by 5:",
-      "options": ["945", "990", "950", "920"],
+      "options": [
+        "945",
+        "990",
+        "950",
+        "920"
+      ],
       "correct_answer": "A",
       "chapter": "Sequences and Series",
-      "topic_tags": ["AP_sum"],
+      "topic_tags": [
+        "AP_sum"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The 2-digit numbers divisible by 5 are 10, 15, 20, ..., 95 (arithmetic sequence with first term a=10, last term l=95, common difference d=5). There are (95-10)/5 + 1 = 18 terms. Using the sum formula: S = n(a+l)/2 = 18(10+95)/2 = 18(105)/2 = 945."
     }
   ]
 }

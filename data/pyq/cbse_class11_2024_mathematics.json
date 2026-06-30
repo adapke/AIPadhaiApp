@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "sample_qp",
   "questions": [
-    {"question_text": "Cardinality of {1,2,3,4,5}:", "options": ["4", "5", "10", "25"], "correct_answer": "B", "chapter": "Sets", "topic_tags": ["cardinality"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Power set of {a,b} has how many elements?", "options": ["2", "3", "4", "8"], "correct_answer": "C", "chapter": "Sets", "topic_tags": ["power_set"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Range of f(x) = x²:", "options": ["All reals", "[0, ∞)", "(-∞, 0]", "(0, ∞)"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["range_square"], "difficulty": "easy", "marks": 1},
-    {"question_text": "sin(π/6):", "options": ["1/2", "√3/2", "1", "0"], "correct_answer": "A", "chapter": "Trigonometry", "topic_tags": ["sin_pi_6"], "difficulty": "easy", "marks": 1},
-    {"question_text": "cos(0):", "options": ["0", "1", "-1", "Undefined"], "correct_answer": "B", "chapter": "Trigonometry", "topic_tags": ["cos_0"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of degrees in 1 radian (approx):", "options": ["180°", "57.3°", "π°", "360°"], "correct_answer": "B", "chapter": "Trigonometry", "topic_tags": ["radian"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If x + 1/x = 5, then x² + 1/x²:", "options": ["23", "25", "27", "21"], "correct_answer": "A", "chapter": "Algebra", "topic_tags": ["algebraic_identity"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Quadratic with roots 3 and -4:", "options": ["x² + x - 12 = 0", "x² - x - 12 = 0", "x² + 7x - 12 = 0", "x² - 12 = 0"], "correct_answer": "A", "chapter": "Quadratic Equations", "topic_tags": ["roots_to_eq"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Complex (2+3i) + (1-i):", "options": ["3 + 2i", "1 + 4i", "3 + 4i", "1 + 2i"], "correct_answer": "A", "chapter": "Complex Numbers", "topic_tags": ["addition"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of ways to seat 5 people at round table:", "options": ["5!", "4!", "(5-1)!", "Both B and C"], "correct_answer": "D", "chapter": "Permutations", "topic_tags": ["circular"], "difficulty": "medium", "marks": 1},
-    {"question_text": "C(8,3):", "options": ["28", "56", "120", "336"], "correct_answer": "B", "chapter": "Combinations", "topic_tags": ["C_8_3"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Binomial coefficient C(n,r) = C(n, ?):", "options": ["n-r", "r", "n+r", "r-1"], "correct_answer": "A", "chapter": "Binomial Theorem", "topic_tags": ["symmetry"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sum of first 10 odd numbers:", "options": ["100", "90", "55", "45"], "correct_answer": "A", "chapter": "Sequences", "topic_tags": ["odd_sum"], "difficulty": "easy", "marks": 1},
-    {"question_text": "AP: 5, 9, 13, ..., 101. Number of terms:", "options": ["24", "25", "26", "27"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["AP_count"], "difficulty": "medium", "marks": 1},
-    {"question_text": "GP with first term 2, common ratio 3. 5th term:", "options": ["54", "162", "486", "108"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["GP_nth"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Slope of horizontal line:", "options": ["0", "Undefined", "1", "Infinity"], "correct_answer": "A", "chapter": "Coordinate Geometry", "topic_tags": ["horizontal"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Slope of vertical line:", "options": ["0", "Undefined", "1", "-1"], "correct_answer": "B", "chapter": "Coordinate Geometry", "topic_tags": ["vertical"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Distance between (1,2) and (4,6):", "options": ["3", "4", "5", "7"], "correct_answer": "C", "chapter": "Coordinate Geometry", "topic_tags": ["distance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Equation of circle radius 4, center (1,2):", "options": ["(x-1)² + (y-2)² = 16", "(x-1)² + (y-2)² = 4", "x² + y² = 4", "x² + y² = 16"], "correct_answer": "A", "chapter": "Conic Sections", "topic_tags": ["circle_general"], "difficulty": "easy", "marks": 1},
-    {"question_text": "lim x→2 (x²-4)/(x-2):", "options": ["0", "2", "4", "Undefined"], "correct_answer": "C", "chapter": "Limits", "topic_tags": ["factoring_limit"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Derivative of x⁵:", "options": ["5x⁴", "x⁴", "5x⁵", "x⁵/5"], "correct_answer": "A", "chapter": "Differentiation", "topic_tags": ["power_rule"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mean of 1, 2, 3, 4, 5, 6:", "options": ["3", "3.5", "4", "21"], "correct_answer": "B", "chapter": "Statistics", "topic_tags": ["mean"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Median of 1, 3, 5, 7, 9:", "options": ["3", "5", "7", "9"], "correct_answer": "B", "chapter": "Statistics", "topic_tags": ["median_odd"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Probability of rolling sum 7 with two dice:", "options": ["1/6", "1/9", "5/36", "7/36"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["dice_sum_7"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Two events A, B with P(A) = 0.3, P(B) = 0.4, P(A∪B) = 0.6. P(A∩B):", "options": ["0", "0.1", "0.12", "0.7"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["intersection_formula"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Cardinality of {1,2,3,4,5}:",
+      "options": [
+        "4",
+        "5",
+        "10",
+        "25"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sets",
+      "topic_tags": [
+        "cardinality"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The cardinality of a set is the number of distinct elements it contains. The set {1,2,3,4,5} has exactly 5 elements, so its cardinality is 5."
+    },
+    {
+      "question_text": "Power set of {a,b} has how many elements?",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Sets",
+      "topic_tags": [
+        "power_set"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The power set contains all possible subsets of {a,b}: the empty set ∅, {a}, {b}, and {a,b}. That's 4 subsets total. For any set with n elements, the power set has 2^n elements; here 2^2 = 4."
+    },
+    {
+      "question_text": "Range of f(x) = x²:",
+      "options": [
+        "All reals",
+        "[0, ∞)",
+        "(-∞, 0]",
+        "(0, ∞)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "range_square"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Since x² is always non-negative for any real number x, the minimum value is 0 (when x=0), and f(x) can reach any value greater than or equal to 0 by choosing appropriate x values."
+    },
+    {
+      "question_text": "sin(π/6):",
+      "options": [
+        "1/2",
+        "√3/2",
+        "1",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "sin_pi_6"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "π/6 radians equals 30°, which is a standard angle. In a 30-60-90 triangle, the side opposite the 30° angle is half the hypotenuse, making sin(30°) = 1/2."
+    },
+    {
+      "question_text": "cos(0):",
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "Undefined"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "cos_0"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The cosine function at 0 radians equals 1 because cos(θ) represents the x-coordinate of a point on the unit circle at angle θ, and at angle 0, this point is (1, 0)."
+    },
+    {
+      "question_text": "Number of degrees in 1 radian (approx):",
+      "options": [
+        "180°",
+        "57.3°",
+        "π°",
+        "360°"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "radian"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Since π radians = 180°, one radian equals 180°/π ≈ 180°/3.14159 ≈ 57.3°."
+    },
+    {
+      "question_text": "If x + 1/x = 5, then x² + 1/x²:",
+      "options": [
+        "23",
+        "25",
+        "27",
+        "21"
+      ],
+      "correct_answer": "A",
+      "chapter": "Algebra",
+      "topic_tags": [
+        "algebraic_identity"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Square both sides of the given equation: (x + 1/x)² = 25, which expands to x² + 2 + 1/x² = 25. Subtracting 2 from both sides gives x² + 1/x² = 23."
+    },
+    {
+      "question_text": "Quadratic with roots 3 and -4:",
+      "options": [
+        "x² + x - 12 = 0",
+        "x² - x - 12 = 0",
+        "x² + 7x - 12 = 0",
+        "x² - 12 = 0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "topic_tags": [
+        "roots_to_eq"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "If a quadratic has roots 3 and -4, then by Vieta's formulas, the sum of roots is 3 + (-4) = -1 and the product is 3 × (-4) = -12. The quadratic is x² - (sum)x + (product) = x² - (-1)x + (-12) = x² + x - 12."
+    },
+    {
+      "question_text": "Complex (2+3i) + (1-i):",
+      "options": [
+        "3 + 2i",
+        "1 + 4i",
+        "3 + 4i",
+        "1 + 2i"
+      ],
+      "correct_answer": "A",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "addition"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "To add complex numbers, combine real parts and imaginary parts separately: (2+1) + (3i-i) = 3 + 2i."
+    },
+    {
+      "question_text": "Number of ways to seat 5 people at round table:",
+      "options": [
+        "5!",
+        "4!",
+        "(5-1)!",
+        "Both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Permutations",
+      "topic_tags": [
+        "circular"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In circular arrangements, rotations of the same arrangement are considered identical. Fix one person's position to eliminate rotational duplicates, leaving 4 remaining people to arrange in 4! ways. Since 4! = (5-1)!, options B and C are equivalent expressions for the same answer."
+    },
+    {
+      "question_text": "C(8,3):",
+      "options": [
+        "28",
+        "56",
+        "120",
+        "336"
+      ],
+      "correct_answer": "B",
+      "chapter": "Combinations",
+      "topic_tags": [
+        "C_8_3"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "C(8,3) uses the combination formula: C(n,k) = n!/(k!(n-k)!). So C(8,3) = 8!/(3!×5!) = (8×7×6)/(3×2×1) = 336/6 = 56."
+    },
+    {
+      "question_text": "Binomial coefficient C(n,r) = C(n, ?):",
+      "options": [
+        "n-r",
+        "r",
+        "n+r",
+        "r-1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Binomial Theorem",
+      "topic_tags": [
+        "symmetry"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The binomial coefficient has the symmetry property C(n,r) = C(n, n-r), which follows from the fact that choosing r items from n is equivalent to choosing which n-r items to leave out."
+    },
+    {
+      "question_text": "Sum of first 10 odd numbers:",
+      "options": [
+        "100",
+        "90",
+        "55",
+        "45"
+      ],
+      "correct_answer": "A",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "odd_sum"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The first 10 odd numbers are 1, 3, 5, 7, 9, 11, 13, 15, 17, 19. Their sum equals 100. This follows the formula that the sum of the first n odd numbers always equals n², so 10² = 100."
+    },
+    {
+      "question_text": "AP: 5, 9, 13, ..., 101. Number of terms:",
+      "options": [
+        "24",
+        "25",
+        "26",
+        "27"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "AP_count"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The arithmetic progression has first term a = 5 and common difference d = 4. Using the formula aₙ = a + (n-1)d, we set 101 = 5 + (n-1)4, which gives 96 = 4(n-1), so n-1 = 24 and n = 25."
+    },
+    {
+      "question_text": "GP with first term 2, common ratio 3. 5th term:",
+      "options": [
+        "54",
+        "162",
+        "486",
+        "108"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "GP_nth"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In a geometric progression, the nth term is found using a = ar^(n-1). With a=2, r=3, and n=5: the 5th term = 2 × 3^4 = 2 × 81 = 162."
+    },
+    {
+      "question_text": "Slope of horizontal line:",
+      "options": [
+        "0",
+        "Undefined",
+        "1",
+        "Infinity"
+      ],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "horizontal"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A horizontal line has no vertical change (rise = 0) regardless of horizontal distance, so using slope = rise/run gives 0/run = 0."
+    },
+    {
+      "question_text": "Slope of vertical line:",
+      "options": [
+        "0",
+        "Undefined",
+        "1",
+        "-1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "vertical"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A vertical line has undefined slope because slope is calculated as rise/run (change in y over change in x). For any vertical line, the run is 0, making division by zero impossible, which is undefined in mathematics."
+    },
+    {
+      "question_text": "Distance between (1,2) and (4,6):",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "distance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the distance formula: d = √[(4-1)² + (6-2)²] = √[9 + 16] = √25 = 5."
+    },
+    {
+      "question_text": "Equation of circle radius 4, center (1,2):",
+      "options": [
+        "(x-1)² + (y-2)² = 16",
+        "(x-1)² + (y-2)² = 4",
+        "x² + y² = 4",
+        "x² + y² = 16"
+      ],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "circle_general"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The standard form of a circle is (x-h)² + (y-k)² = r², where (h,k) is the center and r is the radius. With center (1,2) and radius 4, we get (x-1)² + (y-2)² = 4² = 16."
+    },
+    {
+      "question_text": "lim x→2 (x²-4)/(x-2):",
+      "options": [
+        "0",
+        "2",
+        "4",
+        "Undefined"
+      ],
+      "correct_answer": "C",
+      "chapter": "Limits",
+      "topic_tags": [
+        "factoring_limit"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Factor the numerator as (x-2)(x+2), then cancel the common factor (x-2) with the denominator. This leaves x+2, which approaches 4 as x approaches 2."
+    },
+    {
+      "question_text": "Derivative of x⁵:",
+      "options": [
+        "5x⁴",
+        "x⁴",
+        "5x⁵",
+        "x⁵/5"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "power_rule"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the power rule for derivatives, bring down the exponent as a coefficient and reduce the exponent by one: d/dx(x⁵) = 5x⁵⁻¹ = 5x⁴."
+    },
+    {
+      "question_text": "Mean of 1, 2, 3, 4, 5, 6:",
+      "options": [
+        "3",
+        "3.5",
+        "4",
+        "21"
+      ],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "mean"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The mean is calculated by summing all values (1+2+3+4+5+6=21) and dividing by the count of values (6). Therefore, 21÷6=3.5."
+    },
+    {
+      "question_text": "Median of 1, 3, 5, 7, 9:",
+      "options": [
+        "3",
+        "5",
+        "7",
+        "9"
+      ],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "median_odd"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The median is the middle value when data is arranged in order. With 5 numbers (odd count), the median is the 3rd value: 1, 3, **5**, 7, 9."
+    },
+    {
+      "question_text": "Probability of rolling sum 7 with two dice:",
+      "options": [
+        "1/6",
+        "1/9",
+        "5/36",
+        "7/36"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "dice_sum_7"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "There are 6 ways to roll a sum of 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). With 36 total possible outcomes when rolling two dice, the probability is 6/36, which simplifies to 1/6."
+    },
+    {
+      "question_text": "Two events A, B with P(A) = 0.3, P(B) = 0.4, P(A∪B) = 0.6. P(A∩B):",
+      "options": [
+        "0",
+        "0.1",
+        "0.12",
+        "0.7"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "intersection_formula"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using the formula P(A∪B) = P(A) + P(B) - P(A∩B), we substitute: 0.6 = 0.3 + 0.4 - P(A∩B), which gives P(A∩B) = 0.7 - 0.6 = 0.1."
+    }
   ]
 }

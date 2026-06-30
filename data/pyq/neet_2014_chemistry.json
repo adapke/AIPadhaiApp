@@ -6,30 +6,430 @@
   "default_year": 2014,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Mole of NaOH in 80 g (M=40):", "options": ["1", "2", "0.5", "4"], "correct_answer": "B", "chapter": "Mole Concept", "topic_tags": ["moles"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Quantum numbers (n=3, l=1, m=0, s=+1/2) refer to:", "options": ["3s", "3p (one orbital)", "3d", "4s"], "correct_answer": "B", "chapter": "Atomic Structure", "topic_tags": ["qn"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Most electropositive element:", "options": ["F", "Cs", "Fr (in s-block)", "Li"], "correct_answer": "C", "chapter": "Periodic Properties", "topic_tags": ["electropositive"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Common name for K2Cr2O7:", "options": ["Potassium permanganate", "Potassium dichromate", "Potassium ferrate", "Potassium chlorate"], "correct_answer": "B", "chapter": "d-Block", "topic_tags": ["dichromate"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Oxidation state of Fe in K4[Fe(CN)6]:", "options": ["+1", "+2", "+3", "+4"], "correct_answer": "B", "chapter": "Coordination Compounds", "topic_tags": ["Fe_OS"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Type of bond between Na and Cl in NaCl:", "options": ["Covalent", "Ionic", "Metallic", "Coordinate"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["ionic"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most polar bond among H-X (X = halogen):", "options": ["H-F", "H-Cl", "H-Br", "H-I"], "correct_answer": "A", "chapter": "Chemical Bonding", "topic_tags": ["polarity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Lewis dot structure of BF3 has central B with:", "options": ["Complete octet", "Incomplete octet (6 electrons)", "10 electrons", "8 electrons with lone pair"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["BF3_octet"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of moles of electrons to deposit 1 mole of Cu²⁺ as Cu:", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["Cu_electrons"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Daniell cell anode:", "options": ["Cu (reduction)", "Zn (oxidation)", "Salt bridge", "Both"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["Daniell_anode"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Arrhenius equation: k = A·e^(-Ea/RT). Slope of ln k vs 1/T:", "options": ["+Ea/R", "-Ea/R", "Ea", "R"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["Arrhenius_slope"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Half-life of first-order reaction depends on:", "options": ["Initial concentration", "Rate constant k only", "Both", "T only"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["first_order_half_life"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reaction with positive ΔS° is favored at:", "options": ["Low T", "High T", "Same at all T", "Cannot say"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["entropy_T"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Le Chatelier: adding inert gas at constant V to gas-phase equilibrium:", "options": ["Shifts toward fewer moles", "No effect on equilibrium", "Shifts toward more moles", "Reverses reaction"], "correct_answer": "B", "chapter": "Equilibrium", "topic_tags": ["inert_gas"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Solubility of gases in liquid decreases with:", "options": ["Increase in temperature", "Decrease in pressure", "Both A and B", "Neither"], "correct_answer": "C", "chapter": "Solutions", "topic_tags": ["gas_solubility"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Tyndall effect distinguishes:", "options": ["True solution vs colloid", "Acid vs base", "Solid vs liquid", "Ion vs molecule"], "correct_answer": "A", "chapter": "Surface Chemistry", "topic_tags": ["Tyndall_use"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Aldehyde converted to alcohol by reagent:", "options": ["KMnO4", "NaBH4 / LiAlH4", "HCl", "Na2Cr2O7"], "correct_answer": "B", "chapter": "Aldehydes", "topic_tags": ["NaBH4"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Carboxylic acid + alcohol → ester. This is:", "options": ["Esterification", "Hydrolysis", "Saponification", "Cracking"], "correct_answer": "A", "chapter": "Esters", "topic_tags": ["esterification"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Primary amine functional group:", "options": ["-NH2", "-OH", "-CHO", "-COOH"], "correct_answer": "A", "chapter": "Amines", "topic_tags": ["primary_amine"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Reagent for Hofmann bromamide degradation:", "options": ["Br2 + KOH", "HBr", "H2/Ni", "PCC"], "correct_answer": "A", "chapter": "Amines", "topic_tags": ["Hofmann_reagent"], "difficulty": "medium", "marks": 4},
-    {"question_text": "DNA contains nitrogenous base:", "options": ["Uracil only", "Cytosine, thymine, adenine, guanine", "Only adenine", "RNA bases only"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["DNA_bases"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Type of bonding in protein α-helix:", "options": ["Disulfide only", "Hydrogen bond (between -C=O and -N-H)", "Ionic", "Van der Waals only"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["alpha_helix"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Vinyl chloride polymerizes to:", "options": ["Polythene", "PVC", "Polystyrene", "Teflon"], "correct_answer": "B", "chapter": "Polymers", "topic_tags": ["PVC"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Nylon-66 is:", "options": ["Addition polymer", "Condensation polymer of hexanedioic acid + hexamethylenediamine", "Natural fibre", "Co-polymer of one monomer"], "correct_answer": "B", "chapter": "Polymers", "topic_tags": ["Nylon66"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Paracetamol is a:", "options": ["Antibiotic", "Analgesic and antipyretic", "Antiseptic", "Antacid"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["paracetamol"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Mole of NaOH in 80 g (M=40):",
+      "options": [
+        "1",
+        "2",
+        "0.5",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "moles"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "To find moles, divide mass by molar mass: 80 g ÷ 40 g/mol = 2 moles of NaOH."
+    },
+    {
+      "question_text": "Quantum numbers (n=3, l=1, m=0, s=+1/2) refer to:",
+      "options": [
+        "3s",
+        "3p (one orbital)",
+        "3d",
+        "4s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "qn"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The principal quantum number n=3 indicates the third shell, and the angular momentum quantum number l=1 corresponds to a p orbital (l=0 is s, l=1 is p, l=2 is d). The magnetic quantum number m=0 specifies one particular p orbital out of the three available, while s describes electron spin."
+    },
+    {
+      "question_text": "Most electropositive element:",
+      "options": [
+        "F",
+        "Cs",
+        "Fr (in s-block)",
+        "Li"
+      ],
+      "correct_answer": "C",
+      "chapter": "Periodic Properties",
+      "topic_tags": [
+        "electropositive"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Electropositive elements readily lose electrons, increasing down a group and decreasing across a period. Francium (Fr) is in Group 1 (s-block) at the bottom of the periodic table, making it the most electropositive element due to its single valence electron furthest from the nucleus, requiring minimal ionization energy."
+    },
+    {
+      "question_text": "Common name for K2Cr2O7:",
+      "options": [
+        "Potassium permanganate",
+        "Potassium dichromate",
+        "Potassium ferrate",
+        "Potassium chlorate"
+      ],
+      "correct_answer": "B",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "dichromate"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "K2Cr2O7 contains potassium (K), chromium (Cr), and oxygen (O). The \"di-\" prefix indicates two chromium atoms, and \"-chromate\" refers to the chromium-containing anion. Therefore, this compound is potassium dichromate."
+    },
+    {
+      "question_text": "Oxidation state of Fe in K4[Fe(CN)6]:",
+      "options": [
+        "+1",
+        "+2",
+        "+3",
+        "+4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "Fe_OS"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In K4[Fe(CN)6], potassium is +1 and each cyanide ligand (CN⁻) is -1. Since there are 4 K atoms (+4 total) and 6 CN ligands (-6 total), Fe must be +2 to balance the overall neutral charge."
+    },
+    {
+      "question_text": "Type of bond between Na and Cl in NaCl:",
+      "options": [
+        "Covalent",
+        "Ionic",
+        "Metallic",
+        "Coordinate"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "ionic"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sodium is a metal that readily loses one electron, while chlorine is a nonmetal that readily gains one electron, forming Na⁺ and Cl⁻ ions held together by electrostatic attraction—the definition of an ionic bond."
+    },
+    {
+      "question_text": "Most polar bond among H-X (X = halogen):",
+      "options": [
+        "H-F",
+        "H-Cl",
+        "H-Br",
+        "H-I"
+      ],
+      "correct_answer": "A",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "polarity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Fluorine is the most electronegative element, creating the largest difference in electronegativity between H (2.1) and F (4.0), which directly determines bond polarity. As you move down the halogen group (Cl, Br, I), electronegativity decreases, reducing the polarity of the H-X bond."
+    },
+    {
+      "question_text": "Lewis dot structure of BF3 has central B with:",
+      "options": [
+        "Complete octet",
+        "Incomplete octet (6 electrons)",
+        "10 electrons",
+        "8 electrons with lone pair"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "BF3_octet"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Boron has 3 valence electrons and forms three single bonds with fluorine atoms, contributing 6 electrons around B. Boron doesn't have a lone pair and falls short of the 8-electron octet, making it electron-deficient with only 6 electrons."
+    },
+    {
+      "question_text": "Number of moles of electrons to deposit 1 mole of Cu²⁺ as Cu:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Cu_electrons"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Cu²⁺ has a charge of +2, meaning each copper ion needs to gain 2 electrons to be reduced to neutral Cu metal. Therefore, 1 mole of Cu²⁺ requires 2 moles of electrons."
+    },
+    {
+      "question_text": "Daniell cell anode:",
+      "options": [
+        "Cu (reduction)",
+        "Zn (oxidation)",
+        "Salt bridge",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Daniell_anode"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In a Daniell cell, the anode is where oxidation occurs. Zinc is oxidized (loses electrons: Zn → Zn²⁺ + 2e⁻), making it the anode, while copper is reduced at the cathode. The salt bridge is neither an electrode nor a site of redox reaction."
+    },
+    {
+      "question_text": "Arrhenius equation: k = A·e^(-Ea/RT). Slope of ln k vs 1/T:",
+      "options": [
+        "+Ea/R",
+        "-Ea/R",
+        "Ea",
+        "R"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "Arrhenius_slope"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Taking the natural log of the Arrhenius equation gives ln k = ln A - (Ea/R)(1/T). When plotting ln k versus 1/T, this is a linear equation where the slope equals -Ea/R."
+    },
+    {
+      "question_text": "Half-life of first-order reaction depends on:",
+      "options": [
+        "Initial concentration",
+        "Rate constant k only",
+        "Both",
+        "T only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "first_order_half_life"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For first-order reactions, the half-life formula is t₁/₂ = 0.693/k, which depends only on the rate constant k. Unlike zero-order reactions where half-life depends on initial concentration, the half-life of a first-order reaction is independent of how much reactant you start with."
+    },
+    {
+      "question_text": "Reaction with positive ΔS° is favored at:",
+      "options": [
+        "Low T",
+        "High T",
+        "Same at all T",
+        "Cannot say"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "entropy_T"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Gibbs free energy equation (ΔG° = ΔH° - TΔS°) shows that when ΔS° is positive, the -TΔS° term becomes more negative at higher temperatures, making ΔG° more negative and the reaction more spontaneous."
+    },
+    {
+      "question_text": "Le Chatelier: adding inert gas at constant V to gas-phase equilibrium:",
+      "options": [
+        "Shifts toward fewer moles",
+        "No effect on equilibrium",
+        "Shifts toward more moles",
+        "Reverses reaction"
+      ],
+      "correct_answer": "B",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "inert_gas"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Adding an inert gas at constant volume doesn't change the partial pressures of the reactants and products—it only increases total pressure. Since equilibrium position depends on partial pressures (not total pressure), the equilibrium constant and reaction quotient remain unchanged, so no shift occurs."
+    },
+    {
+      "question_text": "Solubility of gases in liquid decreases with:",
+      "options": [
+        "Increase in temperature",
+        "Decrease in pressure",
+        "Both A and B",
+        "Neither"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "gas_solubility"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Gas solubility decreases with increasing temperature because higher kinetic energy allows dissolved gas molecules to escape the liquid. Gas solubility also decreases with decreasing pressure because lower pressure provides less force to keep gas molecules dissolved in solution (Henry's Law)."
+    },
+    {
+      "question_text": "Tyndall effect distinguishes:",
+      "options": [
+        "True solution vs colloid",
+        "Acid vs base",
+        "Solid vs liquid",
+        "Ion vs molecule"
+      ],
+      "correct_answer": "A",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "Tyndall_use"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Tyndall effect is the scattering of light by colloidal particles suspended in a medium. True solutions have particles too small to scatter light, while colloids have particles large enough to make the light path visible, providing a direct way to distinguish between them."
+    },
+    {
+      "question_text": "Aldehyde converted to alcohol by reagent:",
+      "options": [
+        "KMnO4",
+        "NaBH4 / LiAlH4",
+        "HCl",
+        "Na2Cr2O7"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "NaBH4"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "NaBH4 and LiAlH4 are reducing agents that specifically reduce the carbonyl group (C=O) in aldehydes to primary alcohols (CH2OH). Options A and D are oxidizing agents that would oxidize aldehydes further, while HCl is not a reducing agent."
+    },
+    {
+      "question_text": "Carboxylic acid + alcohol → ester. This is:",
+      "options": [
+        "Esterification",
+        "Hydrolysis",
+        "Saponification",
+        "Cracking"
+      ],
+      "correct_answer": "A",
+      "chapter": "Esters",
+      "topic_tags": [
+        "esterification"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "This reaction is called esterification because it forms an ester through a condensation reaction between a carboxylic acid and an alcohol, releasing water as a byproduct. Hydrolysis breaks esters down, saponification uses base catalysts, and cracking breaks large hydrocarbons."
+    },
+    {
+      "question_text": "Primary amine functional group:",
+      "options": [
+        "-NH2",
+        "-OH",
+        "-CHO",
+        "-COOH"
+      ],
+      "correct_answer": "A",
+      "chapter": "Amines",
+      "topic_tags": [
+        "primary_amine"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A primary amine contains one alkyl or aryl group bonded to a nitrogen atom with two hydrogen atoms attached (-NH2). The other options represent hydroxyl, aldehyde, and carboxylic acid groups, respectively."
+    },
+    {
+      "question_text": "Reagent for Hofmann bromamide degradation:",
+      "options": [
+        "Br2 + KOH",
+        "HBr",
+        "H2/Ni",
+        "PCC"
+      ],
+      "correct_answer": "A",
+      "chapter": "Amines",
+      "topic_tags": [
+        "Hofmann_reagent"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In Hofmann bromamide degradation, a primary amide is converted to a primary amine with one fewer carbon atom. This reaction requires bromine to form an N-bromo intermediate, followed by base (KOH) to eliminate the bromide and rearrange the molecule through an isocyanate intermediate. Only Br2 + KOH provides both the brominating agent and necessary base."
+    },
+    {
+      "question_text": "DNA contains nitrogenous base:",
+      "options": [
+        "Uracil only",
+        "Cytosine, thymine, adenine, guanine",
+        "Only adenine",
+        "RNA bases only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "DNA_bases"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "DNA contains four nitrogenous bases: cytosine, thymine, adenine, and guanine. Uracil is found in RNA instead of thymine, which is unique to DNA."
+    },
+    {
+      "question_text": "Type of bonding in protein α-helix:",
+      "options": [
+        "Disulfide only",
+        "Hydrogen bond (between -C=O and -N-H)",
+        "Ionic",
+        "Van der Waals only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "alpha_helix"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The α-helix is stabilized by hydrogen bonds formed between the carbonyl oxygen (C=O) of one amino acid's backbone and the amide hydrogen (N-H) of the amino acid four residues ahead, creating the characteristic helical structure. Disulfide bonds occur between cysteine side chains (not the backbone), ionic bonds are between charged residues, and van der Waals forces alone are too weak to maintain the helix."
+    },
+    {
+      "question_text": "Vinyl chloride polymerizes to:",
+      "options": [
+        "Polythene",
+        "PVC",
+        "Polystyrene",
+        "Teflon"
+      ],
+      "correct_answer": "B",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "PVC"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Vinyl chloride (CH₂=CHCl) undergoes addition polymerization where the C=C double bonds break and monomers link through single bonds, forming polyvinyl chloride (PVC). This polymer retains the chlorine atoms from the monomer in its backbone structure."
+    },
+    {
+      "question_text": "Nylon-66 is:",
+      "options": [
+        "Addition polymer",
+        "Condensation polymer of hexanedioic acid + hexamethylenediamine",
+        "Natural fibre",
+        "Co-polymer of one monomer"
+      ],
+      "correct_answer": "B",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "Nylon66"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Nylon-66 forms through a condensation reaction between hexanedioic acid (adipic acid) and hexamethylenediamine, with water molecules released as the polymer chain grows. The \"66\" designation reflects six carbons from each monomer unit."
+    },
+    {
+      "question_text": "Paracetamol is a:",
+      "options": [
+        "Antibiotic",
+        "Analgesic and antipyretic",
+        "Antiseptic",
+        "Antacid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "paracetamol"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Paracetamol works by inhibiting prostaglandin synthesis in the central nervous system, reducing pain perception and lowering body temperature set point. It has no antibacterial, antimicrobial, or acid-neutralizing properties, making it an analgesic (pain reliever) and antipyretic (fever reducer)."
+    }
   ]
 }

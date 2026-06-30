@@ -17,7 +17,8 @@
       "correct_answer": "C",
       "chapter": "India Physical",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Tropic of Cancer passes through 8 Indian states: Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram, running roughly diagonally across India from west to east."
     },
     {
       "question_text": "Highest peak in India is:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "India Physical",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Kanchenjunga (8,586 m) is the highest peak entirely within Indian territory. While Everest is taller, it lies on the India-Nepal border with its summit in Nepal. K2 is in the disputed Kashmir region, and Nanda Devi is lower than Kanchenjunga."
     },
     {
       "question_text": "Which river is known as the Sorrow of Bihar?",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Rivers of India",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Kosi River is called the \"Sorrow of Bihar\" because it frequently causes devastating floods in the Bihar region due to its unpredictable course changes and lack of proper embankments, resulting in massive loss of life and property."
     },
     {
       "question_text": "Largest delta in India is formed by:",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Rivers of India",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Sundarbans delta, formed by the combined waters of the Ganga and Brahmaputra rivers, is the world's largest delta. It covers approximately 10,000 square kilometers and is significantly larger than the deltas formed by other Indian rivers like the Kaveri, Krishna, or Mahanadi."
     },
     {
       "question_text": "Which line separates India from China?",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Boundaries",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The McMahon Line, drawn in 1914, forms the border between India and China in the northeastern region (Arunachal Pradesh). The Radcliffe Line separates India and Pakistan, while Durand and Maginot Lines are in other regions."
     },
     {
       "question_text": "Maximum monsoon rainfall in India occurs in:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Climate",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The southwest monsoon arrives in India around June but builds intensity through July, when wind speeds peak and moisture-laden winds from the Arabian Sea reach maximum strength, delivering the heaviest precipitation before declining in August and September."
     },
     {
       "question_text": "The Western Ghats are also known as:",
@@ -95,7 +101,8 @@
       "correct_answer": "A",
       "chapter": "India Physical",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Western Ghats, a major mountain range along India's western coast, are traditionally called Sahyadri in Sanskrit, meaning \"benevolent mountains.\" This ancient name is specifically used for this mountain chain in geological and geographical contexts."
     }
   ]
 }

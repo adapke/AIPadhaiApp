@@ -8,228 +8,450 @@
   "questions": [
     {
       "question_text": "If A = {1, 2, 3, 4, 5}, the number of subsets of A containing exactly 3 elements is:",
-      "options": ["6", "8", "10", "12"],
+      "options": [
+        "6",
+        "8",
+        "10",
+        "12"
+      ],
       "correct_answer": "C",
       "chapter": "Sets and Functions",
-      "topic_tags": ["combinations", "subsets"],
+      "topic_tags": [
+        "combinations",
+        "subsets"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This requires calculating the number of combinations of 5 elements taken 3 at a time: C(5,3) = 5!/(3!×2!) = (5×4)/(2×1) = 10."
     },
     {
       "question_text": "The number of ways to arrange the letters of the word 'MATHEMATICS' is:",
-      "options": ["4989600", "4989500", "4989700", "4989800"],
+      "options": [
+        "4989600",
+        "4989500",
+        "4989700",
+        "4989800"
+      ],
       "correct_answer": "A",
       "chapter": "Permutations and Combinations",
-      "topic_tags": ["permutations", "repetition"],
+      "topic_tags": [
+        "permutations",
+        "repetition"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The word 'MATHEMATICS' has 11 letters with repetitions: M appears 2 times, A appears 2 times, T appears 2 times, and H, E, I, C, S each appear once. The number of arrangements is 11!/(2!×2!×2!) = 39,916,800/8 = 4,989,600."
     },
     {
       "question_text": "If sin θ + cos θ = √2, then sin 2θ equals:",
-      "options": ["0", "1", "-1", "1/2"],
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "1/2"
+      ],
       "correct_answer": "B",
       "chapter": "Trigonometric Functions",
-      "topic_tags": ["double_angle", "identities"],
+      "topic_tags": [
+        "double_angle",
+        "identities"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Square both sides: (sin θ + cos θ)² = 2, which expands to sin²θ + 2sin θ cos θ + cos²θ = 2. Since sin²θ + cos²θ = 1, we get 1 + 2sin θ cos θ = 2, so 2sin θ cos θ = 1. Therefore sin 2θ = 1."
     },
     {
       "question_text": "The slope of the tangent to the curve y = x³ - 3x at x = 2 is:",
-      "options": ["3", "6", "9", "12"],
+      "options": [
+        "3",
+        "6",
+        "9",
+        "12"
+      ],
       "correct_answer": "C",
       "chapter": "Differential Calculus",
-      "topic_tags": ["derivatives", "tangent"],
+      "topic_tags": [
+        "derivatives",
+        "tangent"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The slope of the tangent line equals the derivative evaluated at the point. Taking the derivative: dy/dx = 3x² - 3. At x = 2: dy/dx = 3(2)² - 3 = 12 - 3 = 9."
     },
     {
       "question_text": "The value of lim x→0 (sin x)/x is:",
-      "options": ["0", "1", "∞", "Undefined"],
+      "options": [
+        "0",
+        "1",
+        "∞",
+        "Undefined"
+      ],
       "correct_answer": "B",
       "chapter": "Limits",
-      "topic_tags": ["standard_limits", "trigonometry"],
+      "topic_tags": [
+        "standard_limits",
+        "trigonometry"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a fundamental limit in calculus. Using L'Hôpital's rule (since both numerator and denominator approach 0), we get lim x→0 (cos x)/1 = 1. Alternatively, this limit equals 1 by the standard Taylor series expansion of sin x ≈ x for small x."
     },
     {
       "question_text": "The integral ∫(1/(1+x²)) dx equals:",
-      "options": ["arctan(x) + C", "arcsin(x) + C", "ln|1+x²| + C", "1/(1+x²) + C"],
+      "options": [
+        "arctan(x) + C",
+        "arcsin(x) + C",
+        "ln|1+x²| + C",
+        "1/(1+x²) + C"
+      ],
       "correct_answer": "A",
       "chapter": "Integral Calculus",
-      "topic_tags": ["standard_integrals", "inverse_trig"],
+      "topic_tags": [
+        "standard_integrals",
+        "inverse_trig"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The derivative of arctan(x) is 1/(1+x²), so by the fundamental theorem of calculus, the antiderivative of 1/(1+x²) is arctan(x) + C."
     },
     {
       "question_text": "The eccentricity of the ellipse x²/9 + y²/16 = 1 is:",
-      "options": ["√7/4", "3/4", "√7/3", "1/2"],
+      "options": [
+        "√7/4",
+        "3/4",
+        "√7/3",
+        "1/2"
+      ],
       "correct_answer": "A",
       "chapter": "Conic Sections",
-      "topic_tags": ["ellipse", "eccentricity"],
+      "topic_tags": [
+        "ellipse",
+        "eccentricity"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For this ellipse, the larger denominator is 16, so b² = 16 and a² = 9, making b > a. When b > a, eccentricity is c/b where c² = b² - a² = 16 - 9 = 7, giving c = √7. Therefore e = √7/4."
     },
     {
       "question_text": "If P(A) = 0.4, P(B) = 0.5, and P(A∩B) = 0.2, then P(A∪B) is:",
-      "options": ["0.6", "0.7", "0.8", "0.9"],
+      "options": [
+        "0.6",
+        "0.7",
+        "0.8",
+        "0.9"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["addition_rule", "events"],
+      "topic_tags": [
+        "addition_rule",
+        "events"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the addition rule for probability: P(A∪B) = P(A) + P(B) - P(A∩B) = 0.4 + 0.5 - 0.2 = 0.7. We subtract the intersection to avoid double-counting the overlap."
     },
     {
       "question_text": "The number of real roots of x⁴ - 3x² + 2 = 0 is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "D",
       "chapter": "Quadratic Equations",
-      "topic_tags": ["biquadratic", "roots"],
+      "topic_tags": [
+        "biquadratic",
+        "roots"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Let y = x², transforming the equation to y² - 3y + 2 = 0. Factoring gives (y-1)(y-2) = 0, so y = 1 or y = 2. Since both values are positive, each yields two real values for x: x = ±1 and x = ±√2, giving 4 real roots total."
     },
     {
       "question_text": "If the sum of n terms of an AP is n² + 2n, the first term and common difference are:",
-      "options": ["3 and 2", "2 and 2", "3 and 3", "1 and 2"],
+      "options": [
+        "3 and 2",
+        "2 and 2",
+        "3 and 3",
+        "1 and 2"
+      ],
       "correct_answer": "A",
       "chapter": "Sequences and Series",
-      "topic_tags": ["AP", "nth_term"],
+      "topic_tags": [
+        "AP",
+        "nth_term"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When n=1, S₁ = 1+2 = 3, so the first term a=3. When n=2, S₂ = 4+4 = 8, so the second term is 8-3=5. Therefore, common difference d = 5-3 = 2."
     },
     {
       "question_text": "The coefficient of x⁵ in (1+x)¹⁰ is:",
-      "options": ["210", "252", "120", "180"],
+      "options": [
+        "210",
+        "252",
+        "120",
+        "180"
+      ],
       "correct_answer": "B",
       "chapter": "Binomial Theorem",
-      "topic_tags": ["coefficients", "binomial_expansion"],
+      "topic_tags": [
+        "coefficients",
+        "binomial_expansion"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the binomial theorem, the general term in (1+x)¹⁰ is C(10,r)x^r. For the x⁵ term, r=5, so the coefficient is C(10,5) = 10!/(5!×5!) = (10×9×8×7×6)/(5×4×3×2×1) = 252."
     },
     {
       "question_text": "If A is a 3×3 matrix and |A| = 5, then |2A| equals:",
-      "options": ["10", "20", "40", "60"],
+      "options": [
+        "10",
+        "20",
+        "40",
+        "60"
+      ],
       "correct_answer": "C",
       "chapter": "Matrices and Determinants",
-      "topic_tags": ["determinant_properties", "scalar_multiplication"],
+      "topic_tags": [
+        "determinant_properties",
+        "scalar_multiplication"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When scaling a matrix by scalar k, each row is multiplied by k. For a 3×3 matrix scaled by 2, the determinant is multiplied by 2³ = 8. Therefore, |2A| = 8|A| = 8(5) = 40."
     },
     {
       "question_text": "Vector a = i + j + k. The unit vector along a is:",
-      "options": ["(i+j+k)/3", "(i+j+k)/√3", "(i+j+k)/√2", "i+j+k"],
+      "options": [
+        "(i+j+k)/3",
+        "(i+j+k)/√3",
+        "(i+j+k)/√2",
+        "i+j+k"
+      ],
       "correct_answer": "B",
       "chapter": "Vector Algebra",
-      "topic_tags": ["unit_vector", "magnitude"],
+      "topic_tags": [
+        "unit_vector",
+        "magnitude"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The unit vector is found by dividing the vector by its magnitude. The magnitude of a = i + j + k is √(1² + 1² + 1²) = √3, so the unit vector is (i + j + k)/√3."
     },
     {
       "question_text": "The number of solutions of sin x = 1/2 in [0, 2π] is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Trigonometric Equations",
-      "topic_tags": ["solutions", "interval"],
+      "topic_tags": [
+        "solutions",
+        "interval"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In the interval [0, 2π], sin x = 1/2 has exactly two solutions: x = π/6 (in the first quadrant) and x = 5π/6 (in the second quadrant), where sine is positive."
     },
     {
       "question_text": "If z = 3 + 4i, then |z| equals:",
-      "options": ["5", "7", "25", "√7"],
+      "options": [
+        "5",
+        "7",
+        "25",
+        "√7"
+      ],
       "correct_answer": "A",
       "chapter": "Complex Numbers",
-      "topic_tags": ["modulus", "absolute_value"],
+      "topic_tags": [
+        "modulus",
+        "absolute_value"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The modulus of a complex number z = a + bi is calculated using |z| = √(a² + b²). For z = 3 + 4i, we have |z| = √(3² + 4²) = √(9 + 16) = √25 = 5."
     },
     {
       "question_text": "The area enclosed by y = x², x = 0, x = 2 and the x-axis is:",
-      "options": ["4/3", "8/3", "2", "4"],
+      "options": [
+        "4/3",
+        "8/3",
+        "2",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Application of Integrals",
-      "topic_tags": ["area_under_curve", "definite_integral"],
+      "topic_tags": [
+        "area_under_curve",
+        "definite_integral"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The area is found by integrating the function between the bounds: ∫₀² x² dx = [x³/3]₀² = 8/3 - 0 = 8/3."
     },
     {
       "question_text": "The maximum value of f(x) = -x² + 4x + 5 is:",
-      "options": ["5", "7", "9", "11"],
+      "options": [
+        "5",
+        "7",
+        "9",
+        "11"
+      ],
       "correct_answer": "C",
       "chapter": "Application of Derivatives",
-      "topic_tags": ["maxima_minima", "quadratic"],
+      "topic_tags": [
+        "maxima_minima",
+        "quadratic"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a downward-opening parabola (negative leading coefficient), so its maximum occurs at the vertex. Using x = -b/(2a) = -4/(2·(-1)) = 2, then f(2) = -(2)² + 4(2) + 5 = -4 + 8 + 5 = 9."
     },
     {
       "question_text": "Solution of dy/dx = y/x is:",
-      "options": ["y = Cx", "y = C+x", "y = Cx²", "y = C/x"],
+      "options": [
+        "y = Cx",
+        "y = C+x",
+        "y = Cx²",
+        "y = C/x"
+      ],
       "correct_answer": "A",
       "chapter": "Differential Equations",
-      "topic_tags": ["separable", "first_order"],
+      "topic_tags": [
+        "separable",
+        "first_order"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a separable differential equation. Separating variables: dy/y = dx/x. Integrating both sides gives ln|y| = ln|x| + C, which simplifies to y = Cx after exponentiating and absorbing constants."
     },
     {
       "question_text": "The equation of the line passing through (1, 2) with slope 3 is:",
-      "options": ["3x - y - 1 = 0", "3x + y - 1 = 0", "x - 3y + 5 = 0", "x + 3y - 7 = 0"],
+      "options": [
+        "3x - y - 1 = 0",
+        "3x + y - 1 = 0",
+        "x - 3y + 5 = 0",
+        "x + 3y - 7 = 0"
+      ],
       "correct_answer": "A",
       "chapter": "Straight Lines",
-      "topic_tags": ["point_slope_form"],
+      "topic_tags": [
+        "point_slope_form"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using point-slope form: y - 2 = 3(x - 1), which simplifies to y = 3x - 1, or rearranged to standard form: 3x - y - 1 = 0. Verify by substituting (1, 2): 3(1) - 2 - 1 = 0 ✓"
     },
     {
       "question_text": "If 5 fair coins are tossed, P(exactly 3 heads) equals:",
-      "options": ["5/16", "10/32", "1/2", "3/16"],
+      "options": [
+        "5/16",
+        "10/32",
+        "1/2",
+        "3/16"
+      ],
       "correct_answer": "A",
       "chapter": "Probability",
-      "topic_tags": ["binomial_distribution", "coin_toss"],
+      "topic_tags": [
+        "binomial_distribution",
+        "coin_toss"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Use the binomial probability formula: P(X=k) = C(n,k) × p^k × (1-p)^(n-k). With n=5, k=3, p=0.5: C(5,3) × (0.5)^3 × (0.5)^2 = 10 × (1/32) = 10/32 = 5/16."
     },
     {
       "question_text": "The angle between vectors a = i + 2j and b = 2i + j is:",
-      "options": ["30°", "45°", "60°", "cos⁻¹(4/5)"],
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "cos⁻¹(4/5)"
+      ],
       "correct_answer": "D",
       "chapter": "Vector Algebra",
-      "topic_tags": ["dot_product", "angle"],
+      "topic_tags": [
+        "dot_product",
+        "angle"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the dot product formula: a·b = |a||b|cos(θ). Calculate a·b = (1)(2) + (2)(1) = 4, |a| = √5, and |b| = √5. Therefore cos(θ) = 4/(√5·√5) = 4/5, giving θ = cos⁻¹(4/5)."
     },
     {
       "question_text": "If log₂ x + log₂ 4 = 3, then x equals:",
-      "options": ["2", "4", "8", "16"],
+      "options": [
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
       "correct_answer": "A",
       "chapter": "Logarithms",
-      "topic_tags": ["properties", "equations"],
+      "topic_tags": [
+        "properties",
+        "equations"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using logarithm properties, log₂ x + log₂ 4 = log₂(4x) = 3. Converting from logarithmic to exponential form: 4x = 2³ = 8, so x = 2."
     },
     {
       "question_text": "The distance of the point (3, 4) from the origin is:",
-      "options": ["3", "4", "5", "7"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["distance_formula"],
+      "topic_tags": [
+        "distance_formula"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the distance formula d = √[(x₂-x₁)² + (y₂-y₁)²], the distance from (3,4) to the origin (0,0) is √[3² + 4²] = √[9 + 16] = √25 = 5."
     },
     {
       "question_text": "Number of ways to choose 4 books from 8 distinct books is:",
-      "options": ["32", "56", "70", "1680"],
+      "options": [
+        "32",
+        "56",
+        "70",
+        "1680"
+      ],
       "correct_answer": "C",
       "chapter": "Permutations and Combinations",
-      "topic_tags": ["combinations"],
+      "topic_tags": [
+        "combinations"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a combination problem since the order of choosing books doesn't matter. We use C(8,4) = 8!/(4!×4!) = (8×7×6×5)/(4×3×2×1) = 1680/24 = 70."
     },
     {
       "question_text": "The sum of the infinite series 1 + 1/2 + 1/4 + 1/8 + ... is:",
-      "options": ["1", "3/2", "2", "∞"],
+      "options": [
+        "1",
+        "3/2",
+        "2",
+        "∞"
+      ],
       "correct_answer": "C",
       "chapter": "Sequences and Series",
-      "topic_tags": ["GP", "infinite_sum"],
+      "topic_tags": [
+        "GP",
+        "infinite_sum"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a geometric series with first term a = 1 and common ratio r = 1/2. Since |r| < 1, the series converges to a/(1-r) = 1/(1-1/2) = 1/(1/2) = 2."
     }
   ]
 }

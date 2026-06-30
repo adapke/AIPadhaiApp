@@ -6,30 +6,430 @@
   "default_year": 2025,
   "default_paper": "advanced",
   "questions": [
-    {"question_text": "Two charges +q and -q separated by distance 2a. Field at midpoint (along line):", "options": ["0", "kq/a²", "2kq/a²", "kq/(4a²)"], "correct_answer": "C", "chapter": "Electrostatics", "topic_tags": ["dipole_midpoint"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Capacitance of spherical capacitor C = 4πε₀ R for isolated sphere of radius R. Units of 4πε₀:", "options": ["F/m", "m/F", "F", "1/F"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["spherical"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wheatstone bridge balanced when:", "options": ["P/Q = R/S", "PQ = RS", "P + Q = R + S", "P = R, Q = S"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["Wheatstone"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Force per unit length between two parallel wires distance d apart, currents I₁ and I₂:", "options": ["μ₀I₁I₂/(2πd)", "μ₀I₁I₂/d", "I₁I₂/(2πd)", "μ₀/(2πI₁I₂d)"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["parallel_wires"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Self-inductance of solenoid: L = ?", "options": ["μ₀n²lA", "μ₀nl/A", "μ₀A/n²", "μ₀nlA²"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["solenoid_L"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resonance angular frequency of LC circuit:", "options": ["√(LC)", "1/√(LC)", "1/(LC)", "LC"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["LC_resonance"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Polarization angle for n=1.5 medium:", "options": ["30°", "45°", "56.3°", "60°"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["Brewster"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Magnifying power of compound microscope:", "options": ["m_o × m_e", "m_o + m_e", "m_o/m_e", "(m_o)²"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["microscope_M"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resolving power of telescope ∝", "options": ["aperture diameter", "wavelength", "1/wavelength × aperture", "magnification only"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["resolution"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Compton wavelength λ_c = h/(m_e c) for electron is approximately:", "options": ["2.43×10⁻¹² m", "2.43×10⁻⁶ m", "1×10⁻¹⁰ m", "Negligibly small"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["Compton_wavelength"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Force experienced by current carrying wire of length L in field B at angle θ:", "options": ["BIL sin θ", "BIL cos θ", "BIL", "BIL²"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["F_BIL"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnetic moment of electron orbital motion:", "options": ["evr/2", "evr", "ev/(2r)", "0"], "correct_answer": "A", "chapter": "Atomic Magnetism", "topic_tags": ["orbital_moment"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Half-life of substance after decay constant 0.1 per year:", "options": ["6.93 years", "10 years", "0.69 years", "100 years"], "correct_answer": "A", "chapter": "Nuclear Physics", "topic_tags": ["half_life"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Binding energy per nucleon is maximum near A = ?", "options": ["8", "56 (Fe)", "100", "238"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["binding_energy_curve"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Quantum number defining energy:", "options": ["n", "l", "m", "s"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["principal_qn"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Electron in n=4 orbit can occupy l values:", "options": ["0,1", "0,1,2", "0,1,2,3", "Only 4"], "correct_answer": "C", "chapter": "Atoms", "topic_tags": ["l_values"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Drift speed expression: v_d = ?", "options": ["I/(nAe)", "nAe/I", "IeA/n", "I/(eAn²)"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["drift_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "An α-particle entering a magnetic field B perpendicular to its velocity follows:", "options": ["Straight line", "Helix", "Circle", "Parabola"], "correct_answer": "C", "chapter": "Magnetism", "topic_tags": ["circular_motion_magnetic"], "difficulty": "easy", "marks": 4},
-    {"question_text": "X-ray production minimum wavelength λ_min when tube voltage V:", "options": ["hc/(eV)", "eV/(hc)", "hV/c", "Independent of V"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["X_rays"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Stefan-Boltzmann constant σ approximately:", "options": ["5.67×10⁻⁸ W/m²K⁴", "9.81 m/s²", "3×10⁸ m/s", "6.022×10²³"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["Stefan_Boltzmann"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wien's law: λ_max × T equals:", "options": ["2.9×10⁻³ m·K", "5.67×10⁻⁸", "h/c", "Variable"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["Wien"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Specific heat ratio γ = Cp/Cv for monoatomic gas:", "options": ["1.4", "5/3", "1.33", "1"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["gamma_mono"], "difficulty": "medium", "marks": 4},
-    {"question_text": "RMS velocity of gas molecules at temperature T:", "options": ["√(kT/m)", "√(3kT/m)", "3kT/m", "kT/(3m)"], "correct_answer": "B", "chapter": "Kinetic Theory", "topic_tags": ["RMS_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mean free path λ ∝", "options": ["1/n (where n is number density)", "n", "n²", "T"], "correct_answer": "A", "chapter": "Kinetic Theory", "topic_tags": ["mean_free_path"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Power dissipated in AC RLC at resonance:", "options": ["Minimum", "Maximum (Vrms²/R)", "Zero", "Indeterminate"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["resonance_power"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Two charges +q and -q separated by distance 2a. Field at midpoint (along line):",
+      "options": [
+        "0",
+        "kq/a²",
+        "2kq/a²",
+        "kq/(4a²)"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "dipole_midpoint"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At the midpoint, both charges are distance a away. The +q charge creates field pointing away from it (toward the midpoint), and the -q charge creates field pointing toward it (also toward the midpoint). These fields add rather than cancel, giving total field 2(kq/a²) = 2kq/a²."
+    },
+    {
+      "question_text": "Capacitance of spherical capacitor C = 4πε₀ R for isolated sphere of radius R. Units of 4πε₀:",
+      "options": [
+        "F/m",
+        "m/F",
+        "F",
+        "1/F"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "spherical"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "From the capacitance formula C = 4πε₀R, we can rearrange to find units of 4πε₀: since C has units of Farads (F) and R has units of meters (m), then 4πε₀ = C/R must have units of F/m."
+    },
+    {
+      "question_text": "Wheatstone bridge balanced when:",
+      "options": [
+        "P/Q = R/S",
+        "PQ = RS",
+        "P + Q = R + S",
+        "P = R, Q = S"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Wheatstone"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At balance, the voltage drop across the two sides of the bridge is equal, which occurs when the ratios of opposite resistances are equal: P/Q = R/S. This is the fundamental balancing condition for a Wheatstone bridge."
+    },
+    {
+      "question_text": "Force per unit length between two parallel wires distance d apart, currents I₁ and I₂:",
+      "options": [
+        "μ₀I₁I₂/(2πd)",
+        "μ₀I₁I₂/d",
+        "I₁I₂/(2πd)",
+        "μ₀/(2πI₁I₂d)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "parallel_wires"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The magnetic field from wire 1 at distance d is B = μ₀I₁/(2πd). The force per unit length on wire 2 carrying current I₂ in this field is F/L = I₂B = μ₀I₁I₂/(2πd)."
+    },
+    {
+      "question_text": "Self-inductance of solenoid: L = ?",
+      "options": [
+        "μ₀n²lA",
+        "μ₀nl/A",
+        "μ₀A/n²",
+        "μ₀nlA²"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "solenoid_L"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The self-inductance of a solenoid is L = μ₀n²lA, where the inductance is proportional to the square of the turn density (n²), the length (l), and cross-sectional area (A). The μ₀n² term comes from the magnetic field strength being proportional to n, and inductance depending on the square of this field relationship."
+    },
+    {
+      "question_text": "Resonance angular frequency of LC circuit:",
+      "options": [
+        "√(LC)",
+        "1/√(LC)",
+        "1/(LC)",
+        "LC"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "LC_resonance"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The resonance angular frequency in an LC circuit is derived from the condition where inductive and capacitive reactances are equal. The energy oscillates between the inductor and capacitor at ω = 1/√(LC), which is the natural oscillation frequency determined by the circuit's inductance and capacitance values."
+    },
+    {
+      "question_text": "Polarization angle for n=1.5 medium:",
+      "options": [
+        "30°",
+        "45°",
+        "56.3°",
+        "60°"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "Brewster"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Using Brewster's law, the polarization angle θ_p satisfies tan(θ_p) = n, where n is the refractive index. For n = 1.5: tan(θ_p) = 1.5, so θ_p = arctan(1.5) ≈ 56.3°."
+    },
+    {
+      "question_text": "Magnifying power of compound microscope:",
+      "options": [
+        "m_o × m_e",
+        "m_o + m_e",
+        "m_o/m_e",
+        "(m_o)²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "microscope_M"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The magnifying power of a compound microscope equals the product of the magnification produced by the objective lens (m_o) and the magnification produced by the eyepiece lens (m_e). When two optical elements are used sequentially, their magnifications multiply rather than add."
+    },
+    {
+      "question_text": "Resolving power of telescope ∝",
+      "options": [
+        "aperture diameter",
+        "wavelength",
+        "1/wavelength × aperture",
+        "magnification only"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "resolution"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Resolving power is determined by the Rayleigh criterion, which states that the minimum resolvable angle is proportional to wavelength divided by aperture diameter. Therefore, resolving power (1/minimum angle) is proportional to aperture diameter divided by wavelength, or equivalently, (1/wavelength) × aperture."
+    },
+    {
+      "question_text": "Compton wavelength λ_c = h/(m_e c) for electron is approximately:",
+      "options": [
+        "2.43×10⁻¹² m",
+        "2.43×10⁻⁶ m",
+        "1×10⁻¹⁰ m",
+        "Negligibly small"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "Compton_wavelength"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The Compton wavelength uses Planck's constant h = 6.626×10⁻³⁴ J·s, electron mass m_e = 9.109×10⁻³¹ kg, and c = 3×10⁸ m/s. Calculating h/(m_e c) yields approximately 2.43×10⁻¹² m, which matches option A and is the experimentally verified value for electron Compton wavelength."
+    },
+    {
+      "question_text": "Force experienced by current carrying wire of length L in field B at angle θ:",
+      "options": [
+        "BIL sin θ",
+        "BIL cos θ",
+        "BIL",
+        "BIL²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "F_BIL"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The magnetic force on a current-carrying wire is given by F = BIL sin θ, where θ is the angle between the wire and the magnetic field. The sine term accounts for only the perpendicular component of the wire's length contributing to the force."
+    },
+    {
+      "question_text": "Magnetic moment of electron orbital motion:",
+      "options": [
+        "evr/2",
+        "evr",
+        "ev/(2r)",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atomic Magnetism",
+      "topic_tags": [
+        "orbital_moment"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "An orbiting electron constitutes a current loop. The magnetic moment equals current times area: μ = I·A. The orbital current is I = e/(2πr/v) = ev/(2πr), and the area is A = πr². Multiplying gives μ = evr/2."
+    },
+    {
+      "question_text": "Half-life of substance after decay constant 0.1 per year:",
+      "options": [
+        "6.93 years",
+        "10 years",
+        "0.69 years",
+        "100 years"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclear Physics",
+      "topic_tags": [
+        "half_life"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The half-life formula is t₁/₂ = ln(2)/λ, where λ is the decay constant. Substituting λ = 0.1 per year: t₁/₂ = 0.693/0.1 = 6.93 years."
+    },
+    {
+      "question_text": "Binding energy per nucleon is maximum near A = ?",
+      "options": [
+        "8",
+        "56 (Fe)",
+        "100",
+        "238"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "binding_energy_curve"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Iron-56 is the most stable nucleus because it represents the peak of the binding energy per nucleon curve. Nuclei lighter than Fe-56 gain stability through fusion, while heavier nuclei gain stability through fission, making Fe-56 the optimal balance point."
+    },
+    {
+      "question_text": "Quantum number defining energy:",
+      "options": [
+        "n",
+        "l",
+        "m",
+        "s"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "principal_qn"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The principal quantum number n directly determines the energy level of an electron in an atom, defining which shell the electron occupies. While l, m, and s describe orbital shape, orientation, and spin respectively, only n defines the primary energy of the electron."
+    },
+    {
+      "question_text": "Electron in n=4 orbit can occupy l values:",
+      "options": [
+        "0,1",
+        "0,1,2",
+        "0,1,2,3",
+        "Only 4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "l_values"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a given principal quantum number n, the orbital angular momentum quantum number l can range from 0 to n-1. Since n=4, l can be 0, 1, 2, or 3, corresponding to s, p, d, and f orbitals respectively."
+    },
+    {
+      "question_text": "Drift speed expression: v_d = ?",
+      "options": [
+        "I/(nAe)",
+        "nAe/I",
+        "IeA/n",
+        "I/(eAn²)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The drift speed represents how slowly charge carriers actually move through a conductor. Starting from current I = nAev_d (where n is charge carrier density, A is cross-sectional area, e is elementary charge), solving for v_d by dividing both sides by nAe gives v_d = I/(nAe)."
+    },
+    {
+      "question_text": "An α-particle entering a magnetic field B perpendicular to its velocity follows:",
+      "options": [
+        "Straight line",
+        "Helix",
+        "Circle",
+        "Parabola"
+      ],
+      "correct_answer": "C",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "circular_motion_magnetic"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When a charged particle moves perpendicular to a magnetic field, the Lorentz force acts perpendicular to both the velocity and field, causing centripetal acceleration. This force continuously changes the particle's direction while maintaining constant speed, resulting in uniform circular motion in the plane perpendicular to B."
+    },
+    {
+      "question_text": "X-ray production minimum wavelength λ_min when tube voltage V:",
+      "options": [
+        "hc/(eV)",
+        "eV/(hc)",
+        "hV/c",
+        "Independent of V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "X_rays"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The minimum wavelength occurs when an electron converts all its kinetic energy (eV) into a single photon. Since photon energy E = hc/λ, setting eV = hc/λ_min and solving for λ_min gives hc/(eV)."
+    },
+    {
+      "question_text": "Stefan-Boltzmann constant σ approximately:",
+      "options": [
+        "5.67×10⁻⁸ W/m²K⁴",
+        "9.81 m/s²",
+        "3×10⁸ m/s",
+        "6.022×10²³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Stefan_Boltzmann"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Stefan-Boltzmann constant quantifies the power radiated per unit area from a black body and has units of W/m²K⁴. Option A has the correct value and units; the others are gravitational acceleration, speed of light, and Avogadro's number respectively."
+    },
+    {
+      "question_text": "Wien's law: λ_max × T equals:",
+      "options": [
+        "2.9×10⁻³ m·K",
+        "5.67×10⁻⁸",
+        "h/c",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Wien"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Wien's law states that the product of an object's peak wavelength and absolute temperature is constant, equal to Wien's displacement constant (2.9×10⁻³ m·K). This constant describes how hotter objects emit peak radiation at shorter wavelengths."
+    },
+    {
+      "question_text": "Specific heat ratio γ = Cp/Cv for monoatomic gas:",
+      "options": [
+        "1.4",
+        "5/3",
+        "1.33",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "gamma_mono"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a monoatomic ideal gas, Cv = (3/2)R (three translational degrees of freedom) and Cp = Cv + R = (5/2)R. Therefore, γ = Cp/Cv = (5/2)R / (3/2)R = 5/3 ≈ 1.67, which equals option B."
+    },
+    {
+      "question_text": "RMS velocity of gas molecules at temperature T:",
+      "options": [
+        "√(kT/m)",
+        "√(3kT/m)",
+        "3kT/m",
+        "kT/(3m)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetic Theory",
+      "topic_tags": [
+        "RMS_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The RMS velocity derives from equating the average kinetic energy (3/2)kT per molecule to (1/2)mv²_rms, yielding v_rms = √(3kT/m). The factor of 3 accounts for motion in all three spatial dimensions."
+    },
+    {
+      "question_text": "Mean free path λ ∝",
+      "options": [
+        "1/n (where n is number density)",
+        "n",
+        "n²",
+        "T"
+      ],
+      "correct_answer": "A",
+      "chapter": "Kinetic Theory",
+      "topic_tags": [
+        "mean_free_path"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The mean free path represents the average distance a molecule travels before colliding with another. Since collisions are more frequent when molecules are densely packed, mean free path is inversely proportional to number density: λ = 1/(√2 π d² n), where d is molecular diameter and n is number density."
+    },
+    {
+      "question_text": "Power dissipated in AC RLC at resonance:",
+      "options": [
+        "Minimum",
+        "Maximum (Vrms²/R)",
+        "Zero",
+        "Indeterminate"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "resonance_power"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At resonance, the inductive and capacitive reactances cancel (XL = XC), so impedance Z equals resistance R alone. Since power P = Vrms²/Z, impedance is minimized, making power dissipation maximum at P = Vrms²/R."
+    }
   ]
 }

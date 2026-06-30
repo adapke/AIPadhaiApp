@@ -8,228 +8,454 @@
   "questions": [
     {
       "question_text": "Which Article of the Indian Constitution deals with the Right to Constitutional Remedies?",
-      "options": ["Article 19", "Article 21", "Article 32", "Article 39"],
+      "options": [
+        "Article 19",
+        "Article 21",
+        "Article 32",
+        "Article 39"
+      ],
       "correct_answer": "C",
       "chapter": "Fundamental Rights",
-      "topic_tags": ["writs", "remedies"],
+      "topic_tags": [
+        "writs",
+        "remedies"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 32 grants the right to move the Supreme Court for the enforcement of fundamental rights through writs (habeas corpus, mandamus, prohibition, certiorari, quo warranto), making it the constitutional remedy provision. Articles 19 and 21 protect specific rights, while Article 39 deals with state policy."
     },
     {
       "question_text": "Which body conducts examinations for All India Services in India?",
-      "options": ["SSC", "UPSC", "State PSC", "RPSC"],
+      "options": [
+        "SSC",
+        "UPSC",
+        "State PSC",
+        "RPSC"
+      ],
       "correct_answer": "B",
       "chapter": "Constitutional Bodies",
-      "topic_tags": ["UPSC", "civil_services"],
+      "topic_tags": [
+        "UPSC",
+        "civil_services"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Union Public Service Commission (UPSC) is the constitutional body responsible for conducting recruitment examinations for All India Services, which include the Indian Administrative Service (IAS), Indian Police Service (IPS), and Indian Foreign Service (IFS)."
     },
     {
       "question_text": "The Lok Sabha can have a maximum of how many members?",
-      "options": ["500", "545", "552", "562"],
+      "options": [
+        "500",
+        "545",
+        "552",
+        "562"
+      ],
       "correct_answer": "C",
       "chapter": "Parliament",
-      "topic_tags": ["Lok_Sabha", "composition"],
+      "topic_tags": [
+        "Lok_Sabha",
+        "composition"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Lok Sabha's maximum strength is fixed at 552 members by Article 81 of the Constitution: 530 elected members from states, 20 from union territories, and 2 Anglo-Indian representatives nominated by the President."
     },
     {
       "question_text": "Who appoints the Chief Justice of India?",
-      "options": ["Prime Minister", "Parliament", "President", "Chief Justice himself"],
+      "options": [
+        "Prime Minister",
+        "Parliament",
+        "President",
+        "Chief Justice himself"
+      ],
       "correct_answer": "C",
       "chapter": "Judiciary",
-      "topic_tags": ["CJI", "appointment"],
+      "topic_tags": [
+        "CJI",
+        "appointment"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The President of India appoints the Chief Justice of India under Article 124(2) of the Constitution. While the appointment follows consultation with the outgoing Chief Justice and other judges, the formal power of appointment vests with the President as the constitutional head of state."
     },
     {
       "question_text": "The Directive Principles of State Policy are contained in which Part of the Constitution?",
-      "options": ["Part III", "Part IV", "Part V", "Part VI"],
+      "options": [
+        "Part III",
+        "Part IV",
+        "Part V",
+        "Part VI"
+      ],
       "correct_answer": "B",
       "chapter": "DPSP",
-      "topic_tags": ["DPSP", "constitution_parts"],
+      "topic_tags": [
+        "DPSP",
+        "constitution_parts"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Directive Principles of State Policy are fundamental policy guidelines that the state should follow in governance. They are specifically enumerated in Part IV (Articles 36-51) of the Indian Constitution, which distinguishes them from Part III containing Fundamental Rights."
     },
     {
       "question_text": "Which Article of the Constitution provides for the Election Commission?",
-      "options": ["Article 320", "Article 324", "Article 280", "Article 312"],
+      "options": [
+        "Article 320",
+        "Article 324",
+        "Article 280",
+        "Article 312"
+      ],
       "correct_answer": "B",
       "chapter": "Election Commission",
-      "topic_tags": ["ECI", "elections"],
+      "topic_tags": [
+        "ECI",
+        "elections"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 324 establishes the Election Commission of India and defines its constitution, powers, and functions. It is the foundational constitutional provision that creates this independent body responsible for conducting elections to Parliament and state legislatures."
     },
     {
       "question_text": "Which amendment is known as the 'mini-constitution' due to extensive changes?",
-      "options": ["42nd Amendment", "44th Amendment", "73rd Amendment", "86th Amendment"],
+      "options": [
+        "42nd Amendment",
+        "44th Amendment",
+        "73rd Amendment",
+        "86th Amendment"
+      ],
       "correct_answer": "A",
       "chapter": "Amendments",
-      "topic_tags": ["42nd_amendment", "1976"],
+      "topic_tags": [
+        "42nd_amendment",
+        "1976"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The 42nd Amendment (1976) dramatically restructured the Constitution during the Emergency period, fundamentally altering the balance of power by reducing judicial review, weakening federalism, and expanding executive authority—changes so extensive it's called the \"mini-constitution.\""
     },
     {
       "question_text": "The First Schedule of the Indian Constitution deals with:",
-      "options": ["List of States and Union Territories", "Salaries of high officials", "Languages", "Forms of oaths"],
+      "options": [
+        "List of States and Union Territories",
+        "Salaries of high officials",
+        "Languages",
+        "Forms of oaths"
+      ],
       "correct_answer": "A",
       "chapter": "Schedules",
-      "topic_tags": ["first_schedule", "states"],
+      "topic_tags": [
+        "first_schedule",
+        "states"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The First Schedule lists all the states and union territories of India along with their boundaries and territorial divisions, as established at the time of the Constitution's adoption. This was essential for defining the political structure and administrative organization of the newly independent nation."
     },
     {
       "question_text": "The right to vote in India is enshrined under which Article?",
-      "options": ["Article 19", "Article 326", "Article 21", "Article 325"],
+      "options": [
+        "Article 19",
+        "Article 326",
+        "Article 21",
+        "Article 325"
+      ],
       "correct_answer": "B",
       "chapter": "Elections",
-      "topic_tags": ["universal_suffrage", "voting"],
+      "topic_tags": [
+        "universal_suffrage",
+        "voting"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 326 specifically establishes the right to vote in elections to the Lok Sabha and State Legislative Assemblies, guaranteeing adult suffrage as a fundamental democratic principle in India's Constitution."
     },
     {
       "question_text": "Which schedule of the Constitution contains the anti-defection law?",
-      "options": ["8th Schedule", "9th Schedule", "10th Schedule", "11th Schedule"],
+      "options": [
+        "8th Schedule",
+        "9th Schedule",
+        "10th Schedule",
+        "11th Schedule"
+      ],
       "correct_answer": "C",
       "chapter": "Anti-Defection Law",
-      "topic_tags": ["tenth_schedule", "defection"],
+      "topic_tags": [
+        "tenth_schedule",
+        "defection"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The anti-defection law, formally known as the Tenth Schedule, was added to the Constitution by the 52nd Amendment Act (1985). It provides provisions to disqualify elected representatives who defect from their political party."
     },
     {
       "question_text": "Money Bills can be introduced in:",
-      "options": ["Either House", "Lok Sabha only", "Rajya Sabha only", "Joint sitting"],
+      "options": [
+        "Either House",
+        "Lok Sabha only",
+        "Rajya Sabha only",
+        "Joint sitting"
+      ],
       "correct_answer": "B",
       "chapter": "Money Bills",
-      "topic_tags": ["Lok_Sabha", "money_bills", "Article_110"],
+      "topic_tags": [
+        "Lok_Sabha",
+        "money_bills",
+        "Article_110"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Money Bills must originate in the Lok Sabha according to Article 109 of the Indian Constitution, as the lower house represents the people directly and controls public finances. The Rajya Sabha can only review and make recommendations, not introduce them."
     },
     {
       "question_text": "Who has the power to dissolve the Lok Sabha?",
-      "options": ["Speaker", "President", "Prime Minister", "Chief Justice"],
+      "options": [
+        "Speaker",
+        "President",
+        "Prime Minister",
+        "Chief Justice"
+      ],
       "correct_answer": "B",
       "chapter": "President",
-      "topic_tags": ["president", "dissolution"],
+      "topic_tags": [
+        "president",
+        "dissolution"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The President has the constitutional power to dissolve the Lok Sabha on the advice of the Prime Minister. This dissolution typically occurs before completing the five-year term or following a government's loss of confidence in Parliament."
     },
     {
       "question_text": "Which Article guarantees freedom of speech and expression?",
-      "options": ["Article 14", "Article 19", "Article 21", "Article 25"],
+      "options": [
+        "Article 14",
+        "Article 19",
+        "Article 21",
+        "Article 25"
+      ],
       "correct_answer": "B",
       "chapter": "Fundamental Rights",
-      "topic_tags": ["article_19", "freedom"],
+      "topic_tags": [
+        "article_19",
+        "freedom"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 19 of the Indian Constitution specifically guarantees the fundamental right to freedom of speech and expression along with other freedoms like assembly, association, movement, and profession, making it the constitutional foundation for these liberties."
     },
     {
       "question_text": "The concept of 'judicial review' in India is borrowed from:",
-      "options": ["UK", "USA", "Canada", "Australia"],
+      "options": [
+        "UK",
+        "USA",
+        "Canada",
+        "Australia"
+      ],
       "correct_answer": "B",
       "chapter": "Judiciary",
-      "topic_tags": ["judicial_review", "USA"],
+      "topic_tags": [
+        "judicial_review",
+        "USA"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Judicial review—the power of courts to examine and invalidate laws or government actions conflicting with the Constitution—originated in the USA through Marbury v. Madison (1803). While the UK has constitutional review, it lacks a written constitution, making the American model more directly applicable to India's constitutional framework."
     },
     {
       "question_text": "The President of India is elected by:",
-      "options": ["Direct election", "Electoral college of MPs and MLAs", "Parliament only", "MLAs only"],
+      "options": [
+        "Direct election",
+        "Electoral college of MPs and MLAs",
+        "Parliament only",
+        "MLAs only"
+      ],
       "correct_answer": "B",
       "chapter": "President",
-      "topic_tags": ["electoral_college", "indirect_election"],
+      "topic_tags": [
+        "electoral_college",
+        "indirect_election"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The President is elected by an electoral college comprising elected members of Parliament (Lok Sabha and Rajya Sabha) and elected members of State Legislative Assemblies, ensuring representation from both national and state levels of government rather than direct public voting or a single chamber."
     },
     {
       "question_text": "Which schedule contains the official languages of India?",
-      "options": ["7th Schedule", "8th Schedule", "9th Schedule", "10th Schedule"],
+      "options": [
+        "7th Schedule",
+        "8th Schedule",
+        "9th Schedule",
+        "10th Schedule"
+      ],
       "correct_answer": "B",
       "chapter": "Schedules",
-      "topic_tags": ["languages", "eighth_schedule"],
+      "topic_tags": [
+        "languages",
+        "eighth_schedule"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The 8th Schedule of the Indian Constitution lists the official languages recognized by the state. It originally contained 14 languages and has been amended multiple times to include additional languages like Sindhi, Sanskrit, Konkani, Manipuri, Nepali, Maithili, Santali, Bengali, Assamese, Punjabi, Bihari, Urdu, Kannada, Malayalam, Odia, and Tamil."
     },
     {
       "question_text": "Three lists in the 7th Schedule are:",
-      "options": ["Union, State, Concurrent", "Federal, State, Local", "Central, State, Joint", "All India, State, Inter-state"],
+      "options": [
+        "Union, State, Concurrent",
+        "Federal, State, Local",
+        "Central, State, Joint",
+        "All India, State, Inter-state"
+      ],
       "correct_answer": "A",
       "chapter": "Federalism",
-      "topic_tags": ["seventh_schedule", "lists"],
+      "topic_tags": [
+        "seventh_schedule",
+        "lists"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The 7th Schedule of the Indian Constitution divides legislative powers between the Union and States through three distinct lists: the Union List (matters under exclusive central control), the State List (matters under state jurisdiction), and the Concurrent List (matters where both can legislate, though Union law prevails in conflict)."
     },
     {
       "question_text": "The 73rd Constitutional Amendment Act deals with:",
-      "options": ["Municipalities", "Panchayati Raj", "Education", "Co-operative societies"],
+      "options": [
+        "Municipalities",
+        "Panchayati Raj",
+        "Education",
+        "Co-operative societies"
+      ],
       "correct_answer": "B",
       "chapter": "Local Self-Government",
-      "topic_tags": ["73rd_amendment", "panchayati_raj"],
+      "topic_tags": [
+        "73rd_amendment",
+        "panchayati_raj"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The 73rd Constitutional Amendment Act (1992) specifically established the constitutional framework for Panchayati Raj institutions at the village and local levels, introducing three-tier democratic structures in rural areas with mandatory elections and reserved seats."
     },
     {
       "question_text": "Quorum required for a sitting of the Lok Sabha is:",
-      "options": ["1/4 of total members", "1/10 of total members", "1/5 of total members", "1/3 of total members"],
+      "options": [
+        "1/4 of total members",
+        "1/10 of total members",
+        "1/5 of total members",
+        "1/3 of total members"
+      ],
       "correct_answer": "B",
       "chapter": "Parliament",
-      "topic_tags": ["quorum", "Lok_Sabha"],
+      "topic_tags": [
+        "quorum",
+        "Lok_Sabha"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The quorum for Lok Sabha is defined in Article 100 of the Constitution as one-tenth of the total membership. This means at least 55 members (out of 545) must be present for conducting business in the house."
     },
     {
       "question_text": "Goods and Services Tax (GST) was implemented in India on:",
-      "options": ["1 April 2017", "1 July 2017", "1 January 2017", "15 August 2017"],
+      "options": [
+        "1 April 2017",
+        "1 July 2017",
+        "1 January 2017",
+        "15 August 2017"
+      ],
       "correct_answer": "B",
       "chapter": "Economy / Taxation",
-      "topic_tags": ["GST", "indirect_tax"],
+      "topic_tags": [
+        "GST",
+        "indirect_tax"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "GST was officially rolled out in India on 1 July 2017, following the passage of the GST Bill in 2016. This date marked the transition from the previous indirect tax system to the unified GST framework across the country."
     },
     {
       "question_text": "Right to Education for children aged 6-14 is a fundamental right under:",
-      "options": ["Article 14", "Article 19", "Article 21", "Article 21A"],
+      "options": [
+        "Article 14",
+        "Article 19",
+        "Article 21",
+        "Article 21A"
+      ],
       "correct_answer": "D",
       "chapter": "Fundamental Rights",
-      "topic_tags": ["RTE", "Article_21A"],
+      "topic_tags": [
+        "RTE",
+        "Article_21A"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 21A was added to the Constitution through the 86th Amendment (2002) and specifically guarantees free and compulsory education as a fundamental right for all children aged 6-14 years. While Article 21 addresses the right to life, Article 21A is the dedicated provision for educational rights."
     },
     {
       "question_text": "The Comptroller and Auditor General of India is appointed by:",
-      "options": ["Prime Minister", "President", "Parliament", "Chief Justice"],
+      "options": [
+        "Prime Minister",
+        "President",
+        "Parliament",
+        "Chief Justice"
+      ],
       "correct_answer": "B",
       "chapter": "Constitutional Bodies",
-      "topic_tags": ["CAG", "Article_148"],
+      "topic_tags": [
+        "CAG",
+        "Article_148"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The President appoints the CAG under Article 148 of the Constitution. The CAG is a constitutional office holder who serves as the supreme audit authority, requiring appointment by the highest constitutional authority rather than the executive (PM) or legislature (Parliament)."
     },
     {
       "question_text": "Which body recommends financial transfers from Centre to States?",
-      "options": ["NITI Aayog", "Finance Commission", "Planning Commission", "Inter-State Council"],
+      "options": [
+        "NITI Aayog",
+        "Finance Commission",
+        "Planning Commission",
+        "Inter-State Council"
+      ],
       "correct_answer": "B",
       "chapter": "Federalism",
-      "topic_tags": ["Finance_Commission", "Article_280"],
+      "topic_tags": [
+        "Finance_Commission",
+        "Article_280"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Finance Commission is a constitutional body established under Article 280 of the Indian Constitution specifically tasked with recommending the distribution of tax revenues and financial grants from the Centre to States, ensuring equitable fiscal federalism."
     },
     {
       "question_text": "Which Article was repealed in 2019 to revoke the special status of J&K?",
-      "options": ["Article 369", "Article 370", "Article 371", "Article 372"],
+      "options": [
+        "Article 369",
+        "Article 370",
+        "Article 371",
+        "Article 372"
+      ],
       "correct_answer": "B",
       "chapter": "Special Provisions",
-      "topic_tags": ["Article_370", "JK"],
+      "topic_tags": [
+        "Article_370",
+        "JK"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 370 granted special autonomous status to Jammu & Kashmir, allowing it to have its own constitution and legislative powers. On August 5, 2019, the Indian Parliament repealed this article through a presidential order, thereby revoking J&K's special status and integrating it fully into the Indian union."
     },
     {
       "question_text": "Concurrent List includes which of the following?",
-      "options": ["Defence", "Currency", "Education", "Foreign affairs"],
+      "options": [
+        "Defence",
+        "Currency",
+        "Education",
+        "Foreign affairs"
+      ],
       "correct_answer": "C",
       "chapter": "Federalism",
-      "topic_tags": ["concurrent_list", "education"],
+      "topic_tags": [
+        "concurrent_list",
+        "education"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Concurrent List in the Indian Constitution covers subjects where both the Union and State governments can make laws, with Union law prevailing in case of conflict. Education is a classic example of a concurrent subject, allowing both levels of government to legislate. Defence, Currency, and Foreign Affairs are exclusively Union subjects under the Union List."
     }
   ]
 }

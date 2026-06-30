@@ -6,30 +6,430 @@
   "default_year": 2015,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Unit of momentum:", "options": ["kg·m/s", "N·s", "Both", "J/s"], "correct_answer": "C", "chapter": "Laws of Motion", "topic_tags": ["momentum_units"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Velocity-time graph slope represents:", "options": ["Displacement", "Velocity", "Acceleration", "Time"], "correct_answer": "C", "chapter": "Kinematics", "topic_tags": ["v_t_slope"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Friction force on stationary body equals:", "options": ["μN (kinetic)", "Applied force (up to μ_s·N max)", "Maximum always", "Zero"], "correct_answer": "B", "chapter": "Laws of Motion", "topic_tags": ["static_friction"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Banked road problem: max safe speed:", "options": ["√(rg·tanθ)", "rg", "√(rg/tanθ)", "rg·tanθ"], "correct_answer": "A", "chapter": "Circular Motion", "topic_tags": ["banking"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Escape velocity from a planet of mass M, radius R:", "options": ["√(GM/R)", "√(2GM/R)", "GM/R", "2GM/R"], "correct_answer": "B", "chapter": "Gravitation", "topic_tags": ["escape_v"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Pressure at depth h in fluid of density ρ:", "options": ["ρgh", "ρg/h", "ρ/h", "gh/ρ"], "correct_answer": "A", "chapter": "Fluids", "topic_tags": ["pressure_depth"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Specific heat at constant pressure Cp vs constant volume Cv: Cp - Cv =", "options": ["R (for ideal gas)", "0", "T", "p·V"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["Cp_Cv"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resonance in SHM occurs when:", "options": ["Damping is high", "Driving frequency = natural frequency", "No damping", "Amplitude is zero"], "correct_answer": "B", "chapter": "Oscillations", "topic_tags": ["resonance"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Frequency of fundamental in open pipe of length L:", "options": ["v/2L", "v/(4L)", "v/L", "2v/L"], "correct_answer": "A", "chapter": "Waves", "topic_tags": ["open_pipe"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Speed of sound in air (approx, room T):", "options": ["340 m/s", "1500 m/s", "5000 m/s", "10 m/s"], "correct_answer": "A", "chapter": "Waves", "topic_tags": ["v_sound"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Two point charges +Q, -Q. Field at midpoint (along line):", "options": ["0 (cancellation along line — wait, actually doubles for between)", "Field doubles toward -Q", "Field zero", "Infinite"], "correct_answer": "B", "chapter": "Electrostatics", "topic_tags": ["dipole_midpoint"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Capacitance of isolated sphere of radius R:", "options": ["4πε₀R", "ε₀R", "1/(4πε₀R)", "R²"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["sphere"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Kirchhoff's current law states:", "options": ["Sum of currents into node = sum out", "ΣV = 0 around loop", "Resistance is constant", "Voltage equals current"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["KCL"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Wheatstone bridge balance: P/Q = R/S means:", "options": ["No current through galvanometer", "Maximum current", "Random current", "Bridge is broken"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["Wheatstone"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Magnetic field at center of long current-carrying wire (infinite):", "options": ["Zero (on the axis)", "μ₀I/(2πr)", "μ₀I·r", "Infinite"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["wire_axis"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cyclotron used for:", "options": ["Accelerating charged particles", "Heating", "Cooling", "Magnetism"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["cyclotron"], "difficulty": "easy", "marks": 4},
-    {"question_text": "AC generator output is:", "options": ["DC pulses", "Sinusoidal AC", "Constant", "Random"], "correct_answer": "B", "chapter": "EMI", "topic_tags": ["AC_generator"], "difficulty": "easy", "marks": 4},
-    {"question_text": "RMS current of AC sinusoid with peak I₀:", "options": ["I₀", "I₀/√2", "I₀/2", "I₀·√2"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["RMS"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Polarization of light proves:", "options": ["Wave nature with transverse waves", "Particle nature", "Longitudinal nature", "Reflection only"], "correct_answer": "A", "chapter": "Wave Optics", "topic_tags": ["polarisation"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Convex mirror image:", "options": ["Real magnified", "Virtual erect diminished", "Real inverted", "Virtual inverted"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["convex_mirror"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Photoelectric current at constant intensity but increasing frequency above threshold:", "options": ["Increases", "Decreases", "Same (depends on intensity not freq)", "Becomes zero"], "correct_answer": "C", "chapter": "Dual Nature", "topic_tags": ["I_freq"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Energy of photon at λ = 6000 Å:", "options": ["~2.07 eV", "~10 eV", "~0.2 eV", "~100 eV"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["photon_E"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Rydberg formula gives:", "options": ["Wavelength of hydrogen spectral lines", "Mass of hydrogen", "Pressure", "Time"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Rydberg"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mass-energy equivalence: 1 amu = ?", "options": ["~931 MeV", "~1 MeV", "~13.6 eV", "9.81 J"], "correct_answer": "A", "chapter": "Nuclei", "topic_tags": ["1amu_MeV"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Truth table NOT gate: input 1 → output ?", "options": ["0", "1", "X", "Both"], "correct_answer": "A", "chapter": "Logic Gates", "topic_tags": ["NOT"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Unit of momentum:",
+      "options": [
+        "kg·m/s",
+        "N·s",
+        "Both",
+        "J/s"
+      ],
+      "correct_answer": "C",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "momentum_units"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Momentum equals mass times velocity (kg·m/s) and also equals force times time (N·s), since Newton equals kg·m/s². Both units are equivalent and correct representations of momentum."
+    },
+    {
+      "question_text": "Velocity-time graph slope represents:",
+      "options": [
+        "Displacement",
+        "Velocity",
+        "Acceleration",
+        "Time"
+      ],
+      "correct_answer": "C",
+      "chapter": "Kinematics",
+      "topic_tags": [
+        "v_t_slope"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The slope of any graph represents the rate of change of the y-axis variable with respect to the x-axis variable. In a velocity-time graph, slope = Δv/Δt, which is the definition of acceleration."
+    },
+    {
+      "question_text": "Friction force on stationary body equals:",
+      "options": [
+        "μN (kinetic)",
+        "Applied force (up to μ_s·N max)",
+        "Maximum always",
+        "Zero"
+      ],
+      "correct_answer": "B",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "static_friction"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Static friction is a passive force that adjusts to match the applied force, preventing motion up to a maximum limit of μₛN. Once this threshold is exceeded, the object moves and kinetic friction takes over, which equals μN."
+    },
+    {
+      "question_text": "Banked road problem: max safe speed:",
+      "options": [
+        "√(rg·tanθ)",
+        "rg",
+        "√(rg/tanθ)",
+        "rg·tanθ"
+      ],
+      "correct_answer": "A",
+      "chapter": "Circular Motion",
+      "topic_tags": [
+        "banking"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "On a banked road, the horizontal component of the normal force provides centripetal acceleration. Setting up the force balance: N·sinθ = mv²/r and N·cosθ = mg. Dividing these equations eliminates N, giving tanθ = v²/(rg), so v = √(rg·tanθ)."
+    },
+    {
+      "question_text": "Escape velocity from a planet of mass M, radius R:",
+      "options": [
+        "√(GM/R)",
+        "√(2GM/R)",
+        "GM/R",
+        "2GM/R"
+      ],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "escape_v"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Escape velocity is derived by setting kinetic energy equal to gravitational potential energy: ½mv² = GMm/R. Solving for v gives √(2GM/R), which accounts for the factor of 2 needed to completely overcome the planet's gravitational pull."
+    },
+    {
+      "question_text": "Pressure at depth h in fluid of density ρ:",
+      "options": [
+        "ρgh",
+        "ρg/h",
+        "ρ/h",
+        "gh/ρ"
+      ],
+      "correct_answer": "A",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "pressure_depth"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Pressure increases with the weight of fluid above. The hydrostatic pressure formula is P = ρgh, where the weight per unit area (ρgh) directly gives pressure at depth h."
+    },
+    {
+      "question_text": "Specific heat at constant pressure Cp vs constant volume Cv: Cp - Cv =",
+      "options": [
+        "R (for ideal gas)",
+        "0",
+        "T",
+        "p·V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Cp_Cv"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For an ideal gas, work done during constant pressure expansion is w = p(V_f - V_i) = nR∆T. Since heat at constant pressure Q_p = nC_p∆T must account for both internal energy change and this expansion work, while Q_v = nC_v∆T only changes internal energy, the difference Cp - Cv = R per mole."
+    },
+    {
+      "question_text": "Resonance in SHM occurs when:",
+      "options": [
+        "Damping is high",
+        "Driving frequency = natural frequency",
+        "No damping",
+        "Amplitude is zero"
+      ],
+      "correct_answer": "B",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "resonance"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Resonance occurs when an external driving force oscillates at the same frequency as the system's natural frequency, causing maximum energy transfer and amplitude amplification. This condition (driving frequency = natural frequency) defines resonance, regardless of damping levels or amplitude."
+    },
+    {
+      "question_text": "Frequency of fundamental in open pipe of length L:",
+      "options": [
+        "v/2L",
+        "v/(4L)",
+        "v/L",
+        "2v/L"
+      ],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": [
+        "open_pipe"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In an open pipe, both ends are open (antinodes), so the shortest standing wave has one half-wavelength fitting in the pipe. Thus L = λ/2, giving λ = 2L. Using f = v/λ, the fundamental frequency is v/2L."
+    },
+    {
+      "question_text": "Speed of sound in air (approx, room T):",
+      "options": [
+        "340 m/s",
+        "1500 m/s",
+        "5000 m/s",
+        "10 m/s"
+      ],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": [
+        "v_sound"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sound travels through air at approximately 340 m/s at room temperature. This is a fundamental constant in acoustics; the other values represent sound speeds in different media (1500 m/s in water, 5000 m/s in steel) or are unrealistically low."
+    },
+    {
+      "question_text": "Two point charges +Q, -Q. Field at midpoint (along line):",
+      "options": [
+        "0 (cancellation along line — wait, actually doubles for between)",
+        "Field doubles toward -Q",
+        "Field zero",
+        "Infinite"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "dipole_midpoint"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The electric field from +Q points away from it, while the field from -Q points toward it. At the midpoint, both fields point in the same direction (toward the negative charge), so they add rather than cancel, resulting in a doubled field magnitude."
+    },
+    {
+      "question_text": "Capacitance of isolated sphere of radius R:",
+      "options": [
+        "4πε₀R",
+        "ε₀R",
+        "1/(4πε₀R)",
+        "R²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "sphere"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "An isolated sphere's capacitance is defined as C = Q/V, where the potential V = Q/(4πε₀R). Substituting gives C = Q/[Q/(4πε₀R)] = 4πε₀R, directly matching the standard formula for a conducting sphere."
+    },
+    {
+      "question_text": "Kirchhoff's current law states:",
+      "options": [
+        "Sum of currents into node = sum out",
+        "ΣV = 0 around loop",
+        "Resistance is constant",
+        "Voltage equals current"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "KCL"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Kirchhoff's current law is based on charge conservation: charge cannot accumulate at a node, so all current flowing in must flow out. Option B describes Kirchhoff's voltage law, while C and D describe other circuit properties unrelated to current at nodes."
+    },
+    {
+      "question_text": "Wheatstone bridge balance: P/Q = R/S means:",
+      "options": [
+        "No current through galvanometer",
+        "Maximum current",
+        "Random current",
+        "Bridge is broken"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Wheatstone"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When the ratio P/Q equals R/S, the potential difference across the galvanometer becomes zero, resulting in no current flowing through it. This balanced condition is the defining characteristic of a balanced Wheatstone bridge."
+    },
+    {
+      "question_text": "Magnetic field at center of long current-carrying wire (infinite):",
+      "options": [
+        "Zero (on the axis)",
+        "μ₀I/(2πr)",
+        "μ₀I·r",
+        "Infinite"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "wire_axis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "On the axis of an infinite straight wire, the magnetic field contributions from opposite segments cancel due to symmetry—each element of the wire produces a field whose component along the axis from one side is canceled by the corresponding element on the other side, leaving zero net field at the center."
+    },
+    {
+      "question_text": "Cyclotron used for:",
+      "options": [
+        "Accelerating charged particles",
+        "Heating",
+        "Cooling",
+        "Magnetism"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "cyclotron"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A cyclotron uses a magnetic field and alternating electric field to accelerate charged particles in a spiral path, increasing their kinetic energy with each revolution until they reach the desired speed for use in research or medical applications."
+    },
+    {
+      "question_text": "AC generator output is:",
+      "options": [
+        "DC pulses",
+        "Sinusoidal AC",
+        "Constant",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": [
+        "AC_generator"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "An AC generator produces output by rotating a coil in a magnetic field, which causes the magnetic flux through the coil to vary sinusoidally with time. This sinusoidal variation in flux induces an EMF that also varies sinusoidally, creating alternating current that oscillates smoothly between positive and negative values."
+    },
+    {
+      "question_text": "RMS current of AC sinusoid with peak I₀:",
+      "options": [
+        "I₀",
+        "I₀/√2",
+        "I₀/2",
+        "I₀·√2"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "RMS"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a sinusoidal AC current, the RMS value is derived by taking the square root of the mean of the squared current over one period. For a sinusoid with peak amplitude I₀, this calculation yields I₀/√2, which equals approximately 0.707·I₀."
+    },
+    {
+      "question_text": "Polarization of light proves:",
+      "options": [
+        "Wave nature with transverse waves",
+        "Particle nature",
+        "Longitudinal nature",
+        "Reflection only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "polarisation"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Polarization occurs only when light waves oscillate perpendicular to their direction of propagation, which is a characteristic of transverse waves. Particles have no oscillation direction to polarize, and longitudinal waves (like sound) cannot be polarized since they oscillate parallel to propagation."
+    },
+    {
+      "question_text": "Convex mirror image:",
+      "options": [
+        "Real magnified",
+        "Virtual erect diminished",
+        "Real inverted",
+        "Virtual inverted"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "convex_mirror"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Convex mirrors always diverge light rays, making them appear to come from a virtual focal point behind the mirror. This produces an image that is virtual (behind the mirror), erect (upright), and diminished (smaller than the object)."
+    },
+    {
+      "question_text": "Photoelectric current at constant intensity but increasing frequency above threshold:",
+      "options": [
+        "Increases",
+        "Decreases",
+        "Same (depends on intensity not freq)",
+        "Becomes zero"
+      ],
+      "correct_answer": "C",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "I_freq"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Photoelectric current depends on the number of photons hitting the surface (determined by intensity), not their individual energy. Increasing frequency above the threshold increases electron kinetic energy but doesn't change how many electrons are ejected per unit time, so current remains constant."
+    },
+    {
+      "question_text": "Energy of photon at λ = 6000 Å:",
+      "options": [
+        "~2.07 eV",
+        "~10 eV",
+        "~0.2 eV",
+        "~100 eV"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "photon_E"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using E = hc/λ, where h = 4.14 × 10⁻¹⁵ eV·s and c = 3 × 10⁸ m/s: E = (4.14 × 10⁻¹⁵ × 3 × 10⁸)/(6000 × 10⁻¹⁰) ≈ 2.07 eV. Visible light wavelengths correspond to energies in the 2-3 eV range."
+    },
+    {
+      "question_text": "Rydberg formula gives:",
+      "options": [
+        "Wavelength of hydrogen spectral lines",
+        "Mass of hydrogen",
+        "Pressure",
+        "Time"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Rydberg"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Rydberg formula calculates the reciprocal of wavelength (1/λ) for hydrogen's spectral lines using the Rydberg constant and quantum numbers, directly predicting which wavelengths of light hydrogen emits or absorbs during electron transitions between energy levels."
+    },
+    {
+      "question_text": "Mass-energy equivalence: 1 amu = ?",
+      "options": [
+        "~931 MeV",
+        "~1 MeV",
+        "~13.6 eV",
+        "9.81 J"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "1amu_MeV"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using Einstein's mass-energy equivalence E=mc², one atomic mass unit (1 amu ≈ 1.66×10⁻²⁷ kg) converts to approximately 931 MeV, which is the standard conversion factor used in nuclear and particle physics."
+    },
+    {
+      "question_text": "Truth table NOT gate: input 1 → output ?",
+      "options": [
+        "0",
+        "1",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "A",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "NOT"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A NOT gate inverts its input: when the input is 1 (high/true), the output becomes 0 (low/false). This is the fundamental behavior of a logical NOT operation."
+    }
   ]
 }

@@ -6,30 +6,430 @@
   "default_year": 2020,
   "default_paper": "main",
   "questions": [
-    {"question_text": "A car accelerates from rest at 4 m/s² for 5s, then decelerates at 2 m/s² to stop. Total distance:", "options": ["50 m", "75 m", "100 m", "150 m"], "correct_answer": "B", "chapter": "Kinematics", "topic_tags": ["acceleration"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Projectile range R at angle θ with same speed: max R when θ =", "options": ["30°", "45°", "60°", "90°"], "correct_answer": "B", "chapter": "Motion in Plane", "topic_tags": ["projectile"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Coefficient of restitution e between elastic and perfectly inelastic:", "options": ["e=0 inelastic, e=1 elastic", "Reverse", "e=0.5 both", "Same"], "correct_answer": "A", "chapter": "Collisions", "topic_tags": ["restitution"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Angular momentum L = ?", "options": ["mv", "mvr", "Iω", "Both B and C"], "correct_answer": "D", "chapter": "Rotational Motion", "topic_tags": ["angular_momentum"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Spring force F = -kx is example of:", "options": ["Conservative force", "Non-conservative", "Frictional", "Variable"], "correct_answer": "A", "chapter": "Work and Energy", "topic_tags": ["conservative"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Universal gravitational constant G value:", "options": ["6.67×10⁻¹¹ N·m²/kg²", "9.81 m/s²", "3×10⁸", "1.6×10⁻¹⁹"], "correct_answer": "A", "chapter": "Gravitation", "topic_tags": ["G"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Speed of sound in air increases with:", "options": ["Temperature increase", "Pressure increase only", "Humidity decrease", "All"], "correct_answer": "A", "chapter": "Waves", "topic_tags": ["speed_sound_T"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Refraction makes light:", "options": ["Speed up in denser medium", "Slow down in denser medium", "Stop", "Always reflect"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["refraction"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Coulomb's force between two 1 C charges 1 m apart:", "options": ["9×10⁹ N", "9 N", "9×10⁻³ N", "0"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Coulomb"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Drift velocity v_d in metal:", "options": ["Few m/s", "10⁻⁴ m/s order", "Same as light", "10⁶ m/s"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["drift_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Power consumed by 60W bulb in 1 hr:", "options": ["60 J", "60 kJ", "60 Wh = 216 kJ", "3600 W"], "correct_answer": "C", "chapter": "Current Electricity", "topic_tags": ["energy"], "difficulty": "medium", "marks": 4},
-    {"question_text": "RMS current vs peak current:", "options": ["I_rms = I_peak/√2", "I_rms = I_peak × √2", "Equal", "I_rms = I_peak/2"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["RMS"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Wavelength of EM wave 100 MHz:", "options": ["1 m", "3 m", "30 cm", "10 m"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["wavelength"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Total internal reflection happens when:", "options": ["Dense to rarer at >critical angle", "Rarer to denser", "Any angle", "Perpendicular only"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["TIR"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Image by plane mirror:", "options": ["Real inverted", "Virtual erect same size", "Virtual magnified", "Real same size"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["plane_mirror"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Energy gap of semiconductor (Si):", "options": ["0.1 eV", "1.1 eV", "5 eV", "10 eV"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["band_gap_Si"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Bohr radius a₀ approximately:", "options": ["0.529 Å", "5.29 Å", "0.529 m", "1 Å"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Bohr_radius"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Alpha particle deflection in Rutherford experiment due to:", "options": ["Electron cloud", "Small dense positive nucleus", "Random scatter", "Mass attraction"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Rutherford"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Half-life of substance with decay constant λ:", "options": ["1/λ", "ln 2/λ", "λ·ln 2", "2λ"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["half_life"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Logical gate NOR truth table: (0,0) →", "options": ["0", "1", "X", "Both"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["NOR"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnetic moment of bar magnet placed in uniform field experiences:", "options": ["Translational force only", "Torque only (in uniform field)", "Both", "No effect"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["torque"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Ohm's law applies to:", "options": ["All conductors", "Ohmic conductors only", "All materials", "Only metals"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["Ohm_law"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Newton's universal gravitation: F ∝", "options": ["m₁m₂/r²", "m₁m₂·r²", "m₁ + m₂", "(m₁m₂)²"], "correct_answer": "A", "chapter": "Gravitation", "topic_tags": ["Newton_gravity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Doppler effect formula for source approaching observer (v_s):", "options": ["f' = f(v-v_s)/v", "f' = f·v/(v-v_s)", "f' = f", "f' = f·v_s/v"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["Doppler"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Photoelectric current is independent of:", "options": ["Frequency above threshold", "Intensity", "Voltage", "Frequency below threshold"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["photoelectric_current"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "A car accelerates from rest at 4 m/s² for 5s, then decelerates at 2 m/s² to stop. Total distance:",
+      "options": [
+        "50 m",
+        "75 m",
+        "100 m",
+        "150 m"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": [
+        "acceleration"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "During acceleration: v = at = 4(5) = 20 m/s, distance = ½at² = ½(4)(25) = 50 m. During deceleration from 20 m/s at -2 m/s²: distance = v²/(2a) = 400/4 = 25 m. Total = 50 + 25 = 75 m."
+    },
+    {
+      "question_text": "Projectile range R at angle θ with same speed: max R when θ =",
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
+      "correct_answer": "B",
+      "chapter": "Motion in Plane",
+      "topic_tags": [
+        "projectile"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The projectile range formula R = (v₀²sin2θ)/g is maximized when sin2θ = 1, which occurs at 2θ = 90°, giving θ = 45°. At this angle, the horizontal and vertical velocity components are equal, optimizing the balance between flight time and horizontal distance."
+    },
+    {
+      "question_text": "Coefficient of restitution e between elastic and perfectly inelastic:",
+      "options": [
+        "e=0 inelastic, e=1 elastic",
+        "Reverse",
+        "e=0.5 both",
+        "Same"
+      ],
+      "correct_answer": "A",
+      "chapter": "Collisions",
+      "topic_tags": [
+        "restitution"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For coefficient of restitution, e=1 means objects separate with the same relative velocity they approached (elastic collision with no energy loss), while e=0 means objects stick together with no separation (perfectly inelastic). Option A correctly assigns these values."
+    },
+    {
+      "question_text": "Angular momentum L = ?",
+      "options": [
+        "mv",
+        "mvr",
+        "Iω",
+        "Both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "angular_momentum"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Angular momentum can be expressed in two equivalent forms: L = mvr (linear form, where m is mass, v is tangential velocity, and r is radius) and L = Iω (rotational form, where I is moment of inertia and ω is angular velocity). Both expressions represent the same physical quantity in different contexts."
+    },
+    {
+      "question_text": "Spring force F = -kx is example of:",
+      "options": [
+        "Conservative force",
+        "Non-conservative",
+        "Frictional",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "Work and Energy",
+      "topic_tags": [
+        "conservative"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Spring force is conservative because the work done depends only on initial and final positions, not the path taken. The potential energy stored in a compressed or stretched spring can be completely recovered, which is the defining characteristic of conservative forces."
+    },
+    {
+      "question_text": "Universal gravitational constant G value:",
+      "options": [
+        "6.67×10⁻¹¹ N·m²/kg²",
+        "9.81 m/s²",
+        "3×10⁸",
+        "1.6×10⁻¹⁹"
+      ],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "G"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Option A is correct because it has the proper units (N·m²/kg²) for the gravitational constant used in Newton's law of universal gravitation (F = Gm₁m₂/r²). Option B is gravitational acceleration, C is the speed of light, and D is the elementary charge."
+    },
+    {
+      "question_text": "Speed of sound in air increases with:",
+      "options": [
+        "Temperature increase",
+        "Pressure increase only",
+        "Humidity decrease",
+        "All"
+      ],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": [
+        "speed_sound_T"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Sound speed depends on the medium's temperature because molecular motion increases with heat, enabling faster propagation. Pressure changes alone don't affect sound speed (density and pressure increase proportionally), and humidity has minimal effect compared to temperature."
+    },
+    {
+      "question_text": "Refraction makes light:",
+      "options": [
+        "Speed up in denser medium",
+        "Slow down in denser medium",
+        "Stop",
+        "Always reflect"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "refraction"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Light travels at different speeds depending on the medium's optical density. In denser mediums like glass or water, light slows down compared to its speed in air or vacuum, which causes the bending of light rays—this is refraction."
+    },
+    {
+      "question_text": "Coulomb's force between two 1 C charges 1 m apart:",
+      "options": [
+        "9×10⁹ N",
+        "9 N",
+        "9×10⁻³ N",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Coulomb"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using Coulomb's law: F = k(q₁q₂)/r², where k = 9×10⁹ N·m²/C². Substituting q₁ = 1 C, q₂ = 1 C, and r = 1 m gives F = 9×10⁹(1×1)/1² = 9×10⁹ N."
+    },
+    {
+      "question_text": "Drift velocity v_d in metal:",
+      "options": [
+        "Few m/s",
+        "10⁻⁴ m/s order",
+        "Same as light",
+        "10⁶ m/s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Drift velocity is determined by the balance between electric force on charge carriers and collisions with the lattice. In metals at room temperature, electrons move very slowly through the lattice despite high thermal speeds, resulting in drift velocities around 10⁻⁴ m/s, which can be verified using v_d = I/(nAe)."
+    },
+    {
+      "question_text": "Power consumed by 60W bulb in 1 hr:",
+      "options": [
+        "60 J",
+        "60 kJ",
+        "60 Wh = 216 kJ",
+        "3600 W"
+      ],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "energy"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Power is the rate of energy consumption. A 60W bulb consumes 60 joules per second. Over 1 hour (3600 seconds), total energy = 60 W × 3600 s = 216,000 J = 216 kJ, which equals 60 Wh (watt-hours)."
+    },
+    {
+      "question_text": "RMS current vs peak current:",
+      "options": [
+        "I_rms = I_peak/√2",
+        "I_rms = I_peak × √2",
+        "Equal",
+        "I_rms = I_peak/2"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "RMS"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For sinusoidal AC current, RMS (root mean square) is the effective value calculated by integrating the square of current over one period. This mathematical process yields I_rms = I_peak/√2, which is approximately 0.707 times the peak value."
+    },
+    {
+      "question_text": "Wavelength of EM wave 100 MHz:",
+      "options": [
+        "1 m",
+        "3 m",
+        "30 cm",
+        "10 m"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "wavelength"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the wave equation c = fλ, where c = 3 × 10⁸ m/s and f = 100 MHz = 10⁸ Hz, wavelength λ = c/f = (3 × 10⁸)/(10⁸) = 3 m."
+    },
+    {
+      "question_text": "Total internal reflection happens when:",
+      "options": [
+        "Dense to rarer at >critical angle",
+        "Rarer to denser",
+        "Any angle",
+        "Perpendicular only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "TIR"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Total internal reflection occurs when light travels from a denser medium (higher refractive index) to a rarer medium (lower refractive index) at an angle of incidence greater than the critical angle, where refraction becomes impossible and all light reflects back."
+    },
+    {
+      "question_text": "Image by plane mirror:",
+      "options": [
+        "Real inverted",
+        "Virtual erect same size",
+        "Virtual magnified",
+        "Real same size"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "plane_mirror"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A plane mirror reflects light rays such that the angle of incidence equals the angle of reflection, creating an image behind the mirror that cannot be projected on a screen (virtual), appears upright (erect), and has identical dimensions to the object."
+    },
+    {
+      "question_text": "Energy gap of semiconductor (Si):",
+      "options": [
+        "0.1 eV",
+        "1.1 eV",
+        "5 eV",
+        "10 eV"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "band_gap_Si"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Silicon's energy gap is approximately 1.1 eV at room temperature, which falls between insulators (large gaps ~5 eV or more) and conductors (negligible gaps). This moderate bandgap allows electrons to be thermally excited across it, defining silicon as a semiconductor suitable for electronic devices."
+    },
+    {
+      "question_text": "Bohr radius a₀ approximately:",
+      "options": [
+        "0.529 Å",
+        "5.29 Å",
+        "0.529 m",
+        "1 Å"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_radius"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Bohr radius is calculated as a₀ = ℏ²/(mₑke²) ≈ 0.529 × 10⁻¹⁰ m, which equals 0.529 Å (angstroms). This is the characteristic size of a hydrogen atom's electron orbit in the ground state."
+    },
+    {
+      "question_text": "Alpha particle deflection in Rutherford experiment due to:",
+      "options": [
+        "Electron cloud",
+        "Small dense positive nucleus",
+        "Random scatter",
+        "Mass attraction"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Rutherford"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Rutherford experiment observed large-angle deflections of alpha particles, which could only occur through a concentrated repulsive Coulomb force. A small, dense positive nucleus creates the intense electric field necessary to deflect positively-charged alpha particles at such sharp angles, disproving the previous \"plum pudding\" model."
+    },
+    {
+      "question_text": "Half-life of substance with decay constant λ:",
+      "options": [
+        "1/λ",
+        "ln 2/λ",
+        "λ·ln 2",
+        "2λ"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "half_life"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The decay equation N(t) = N₀e^(-λt) gives half the initial amount when N(t) = N₀/2. Solving N₀/2 = N₀e^(-λt₁/₂) yields e^(λt₁/₂) = 2, so t₁/₂ = ln 2/λ."
+    },
+    {
+      "question_text": "Logical gate NOR truth table: (0,0) →",
+      "options": [
+        "0",
+        "1",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "NOR"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A NOR gate outputs 1 only when both inputs are 0; in all other cases it outputs 0. Since both inputs here are 0, the output is 1."
+    },
+    {
+      "question_text": "Magnetic moment of bar magnet placed in uniform field experiences:",
+      "options": [
+        "Translational force only",
+        "Torque only (in uniform field)",
+        "Both",
+        "No effect"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "torque"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In a uniform magnetic field, the forces on the north and south poles of a bar magnet are equal in magnitude but opposite in direction. These forces cancel out, producing no net translational force. However, they act at different points (the poles), creating a couple that produces a torque, causing the magnet to align with the field."
+    },
+    {
+      "question_text": "Ohm's law applies to:",
+      "options": [
+        "All conductors",
+        "Ohmic conductors only",
+        "All materials",
+        "Only metals"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Ohm_law"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Ohm's law (V = IR) describes a linear relationship between voltage and current, which only holds for ohmic conductors where resistance remains constant regardless of voltage. Non-ohmic materials like semiconductors and diodes exhibit nonlinear voltage-current relationships."
+    },
+    {
+      "question_text": "Newton's universal gravitation: F ∝",
+      "options": [
+        "m₁m₂/r²",
+        "m₁m₂·r²",
+        "m₁ + m₂",
+        "(m₁m₂)²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "Newton_gravity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Newton's law of universal gravitation states that the gravitational force is directly proportional to the product of the two masses and inversely proportional to the square of the distance between them, giving F ∝ m₁m₂/r²."
+    },
+    {
+      "question_text": "Doppler effect formula for source approaching observer (v_s):",
+      "options": [
+        "f' = f(v-v_s)/v",
+        "f' = f·v/(v-v_s)",
+        "f' = f",
+        "f' = f·v_s/v"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "Doppler"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When a source approaches the observer, the wavelength compresses, causing the observed frequency to increase. The correct formula accounts for this by placing the source velocity in the denominator: as v_s increases (faster approach), the denominator decreases, making f' larger. Option A has the wrong sign convention, and C and D ignore the Doppler shift entirely."
+    },
+    {
+      "question_text": "Photoelectric current is independent of:",
+      "options": [
+        "Frequency above threshold",
+        "Intensity",
+        "Voltage",
+        "Frequency below threshold"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "photoelectric_current"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The photoelectric current depends on the number of photons hitting the surface, which is determined by light intensity. Once frequency exceeds the threshold, increasing frequency further doesn't increase current—only intensity does. Below threshold, no photoelectrons are ejected regardless of intensity."
+    }
   ]
 }

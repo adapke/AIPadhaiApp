@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "intermediate_board",
   "questions": [
-    {"question_text": "Coulomb constant k = 1/(4πε₀) is approximately:", "options": ["9×10⁹ N·m²/C²", "8.85×10⁻¹²", "1.6×10⁻¹⁹", "6.022×10²³"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["k"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Capacitance of an isolated conducting sphere of radius R:", "options": ["4πε₀R", "ε₀R", "1/(4πε₀R)", "R²"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["sphere_cap"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Conductance is the reciprocal of:", "options": ["Voltage", "Resistance", "Current", "Power"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["conductance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Internal resistance r of a 12V battery delivering 11.9V across 2Ω external:", "options": ["0.017 Ω", "0.1 Ω", "1 Ω", "0 Ω"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["internal_R"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Tangential acceleration in uniform circular motion:", "options": ["v²/r", "0", "rω", "rα"], "correct_answer": "B", "chapter": "Circular Motion", "topic_tags": ["uniform_circle"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Lorentz force on charge q moving with velocity v in field B:", "options": ["qvB", "qv×B (vector)", "Both A and B", "qE"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["Lorentz"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mutual inductance unit:", "options": ["Henry", "Tesla", "Weber", "Farad"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["mutual_inductance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Transformer ratio: V_p/V_s = ?", "options": ["N_p/N_s", "N_s/N_p", "Same", "Variable"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["transformer"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Maxwell-Ampere law modification adds:", "options": ["Conduction current", "Displacement current", "Drift current", "Eddy current"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["displacement_current"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Lens formula sign convention for concave lens focal length:", "options": ["Positive", "Negative", "Zero", "Variable"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["concave_lens"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Refractive power of lens with f = 50 cm in dioptres:", "options": ["0.5", "2", "50", "100"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["power_dioptres"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Photoelectric current depends on:", "options": ["Frequency only", "Intensity (when above threshold)", "Both", "Neither"], "correct_answer": "B", "chapter": "Dual Nature", "topic_tags": ["photocurrent_intensity"], "difficulty": "medium", "marks": 1},
-    {"question_text": "de Broglie wavelength of moving electron with KE 100 eV approximately:", "options": ["1.23 Å", "12 Å", "0.5 Å", "5 Å"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["deBroglie_eV"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Bohr's angular momentum quantization: L = ?", "options": ["nh", "nh/2π", "h/n", "n²h"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Bohr_L"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mass defect Δm corresponds to energy:", "options": ["mc", "Δm·c²", "Δm/c²", "mc²/Δm"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["E=mc²"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Type of bond formed when one atom donates both electrons:", "options": ["Ionic", "Covalent", "Coordinate covalent", "Metallic"], "correct_answer": "C", "chapter": "Atomic Structure", "topic_tags": ["coordinate_bond"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Junction diode in forward bias:", "options": ["Acts as insulator", "Acts as low-resistance conductor", "Like capacitor", "Like inductor"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["forward_bias"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Truth table AND gate: (1,1) =", "options": ["0", "1", "X", "Both"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["AND"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnetic flux through a coil of N turns: Φ = ?", "options": ["NBA", "B/A", "NBAcos θ", "Both A and C depending on angle"], "correct_answer": "D", "chapter": "EMI", "topic_tags": ["flux_formula"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Coherent EM sources required for:", "options": ["Reflection", "Interference", "Refraction", "Absorption"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["coherence"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Doppler shift in atomic line spectra is used to measure:", "options": ["Galactic recession (red shift)", "Sound", "Sunlight", "Air resistance"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["red_shift"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Resolution of microscope improves with:", "options": ["Higher wavelength", "Lower wavelength", "Larger sample", "Larger eyepiece"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["resolution"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Eddy currents cause:", "options": ["Heat in solid metal in changing B", "Light emission", "Sound only", "No effect"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["eddy_currents"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Photons of higher frequency carry:", "options": ["More energy", "Same energy", "Less energy", "Independent"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["E_h_nu"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of significant figures in 0.00450:", "options": ["3", "4", "5", "2"], "correct_answer": "A", "chapter": "Units and Dimensions", "topic_tags": ["sig_figs"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Coulomb constant k = 1/(4πε₀) is approximately:",
+      "options": [
+        "9×10⁹ N·m²/C²",
+        "8.85×10⁻¹²",
+        "1.6×10⁻¹⁹",
+        "6.022×10²³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "k"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Coulomb constant k describes the strength of the electric force between charges and has units of N·m²/C². Using ε₀ ≈ 8.85×10⁻¹² F/m, calculating k = 1/(4π × 8.85×10⁻¹²) yields approximately 9×10⁹ N·m²/C². The other options represent permittivity, elementary charge, and Avogadro's number respectively."
+    },
+    {
+      "question_text": "Capacitance of an isolated conducting sphere of radius R:",
+      "options": [
+        "4πε₀R",
+        "ε₀R",
+        "1/(4πε₀R)",
+        "R²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "sphere_cap"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For an isolated conducting sphere, the capacitance is defined as C = Q/V. The potential of a charged sphere is V = Q/(4πε₀R), so rearranging gives C = Q/[Q/(4πε₀R)] = 4πε₀R."
+    },
+    {
+      "question_text": "Conductance is the reciprocal of:",
+      "options": [
+        "Voltage",
+        "Resistance",
+        "Current",
+        "Power"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "conductance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Conductance (G) is defined mathematically as G = 1/R, where R is resistance. Since conductance is the reciprocal of resistance, a material with low resistance has high conductance and vice versa."
+    },
+    {
+      "question_text": "Internal resistance r of a 12V battery delivering 11.9V across 2Ω external:",
+      "options": [
+        "0.017 Ω",
+        "0.1 Ω",
+        "1 Ω",
+        "0 Ω"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "internal_R"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The voltage drop across internal resistance equals EMF minus terminal voltage: 12V - 11.9V = 0.1V. Using Ohm's law with current I = 11.9V ÷ 2Ω = 5.95A, internal resistance r = 0.1V ÷ 5.95A ≈ 0.017Ω."
+    },
+    {
+      "question_text": "Tangential acceleration in uniform circular motion:",
+      "options": [
+        "v²/r",
+        "0",
+        "rω",
+        "rα"
+      ],
+      "correct_answer": "B",
+      "chapter": "Circular Motion",
+      "topic_tags": [
+        "uniform_circle"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In uniform circular motion, the speed remains constant by definition. Since tangential acceleration measures the rate of change of speed along the circular path, and speed isn't changing, tangential acceleration equals zero. Only centripetal acceleration (v²/r) acts, directed toward the center."
+    },
+    {
+      "question_text": "Lorentz force on charge q moving with velocity v in field B:",
+      "options": [
+        "qvB",
+        "qv×B (vector)",
+        "Both A and B",
+        "qE"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "Lorentz"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Option B is correct because the Lorentz force is a vector quantity with magnitude qvB and direction perpendicular to both v and B, given by the cross product. Option A omits the directional component; Option D describes only the electric force component."
+    },
+    {
+      "question_text": "Mutual inductance unit:",
+      "options": [
+        "Henry",
+        "Tesla",
+        "Weber",
+        "Farad"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "mutual_inductance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Mutual inductance measures how much magnetic flux from one coil induces voltage in another coil, defined by the relationship V = M(dI/dt). From this equation, M has units of volts·seconds/amperes, which is the definition of a henry (H)."
+    },
+    {
+      "question_text": "Transformer ratio: V_p/V_s = ?",
+      "options": [
+        "N_p/N_s",
+        "N_s/N_p",
+        "Same",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "transformer"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The transformer equation relates primary and secondary voltages directly to the ratio of their turns: V_p/V_s = N_p/N_s. This fundamental relationship holds because the voltage induced in each coil is proportional to its number of turns."
+    },
+    {
+      "question_text": "Maxwell-Ampere law modification adds:",
+      "options": [
+        "Conduction current",
+        "Displacement current",
+        "Drift current",
+        "Eddy current"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "displacement_current"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Maxwell's modification to Ampere's law introduces the displacement current term to account for changing electric fields in regions where no physical charges are moving. This term is essential for consistency with Faraday's law and enables the prediction of electromagnetic waves."
+    },
+    {
+      "question_text": "Lens formula sign convention for concave lens focal length:",
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "concave_lens"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a concave lens, the focal point lies on the same side as the incoming light (virtual focal point). Using the standard sign convention where distances measured opposite to light propagation are negative, the focal length of a concave lens is negative."
+    },
+    {
+      "question_text": "Refractive power of lens with f = 50 cm in dioptres:",
+      "options": [
+        "0.5",
+        "2",
+        "50",
+        "100"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "power_dioptres"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Refractive power is calculated as P = 1/f, where f must be in meters. Converting 50 cm to 0.5 m, then P = 1/0.5 = 2 dioptres."
+    },
+    {
+      "question_text": "Photoelectric current depends on:",
+      "options": [
+        "Frequency only",
+        "Intensity (when above threshold)",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "photocurrent_intensity"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Photoelectric current (number of electrons ejected per unit time) depends on light intensity—more photons mean more electrons released. Frequency determines whether electrons are ejected at all (threshold energy), but doesn't affect current magnitude once above threshold."
+    },
+    {
+      "question_text": "de Broglie wavelength of moving electron with KE 100 eV approximately:",
+      "options": [
+        "1.23 Å",
+        "12 Å",
+        "0.5 Å",
+        "5 Å"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "deBroglie_eV"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The de Broglie wavelength λ = h/p. For a 100 eV electron, calculate momentum from KE = p²/2m, giving p ≈ 5.4 × 10⁻²⁵ kg·m/s. Using h = 6.63 × 10⁻³⁴ J·s, λ = h/p ≈ 1.23 × 10⁻¹⁰ m = 1.23 Å."
+    },
+    {
+      "question_text": "Bohr's angular momentum quantization: L = ?",
+      "options": [
+        "nh",
+        "nh/2π",
+        "h/n",
+        "n²h"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_L"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Bohr quantized angular momentum as L = n(h/2π) = nℏ, where n is a positive integer and h/2π is the reduced Planck constant. This quantization condition was fundamental to his model, restricting electrons to discrete orbital states."
+    },
+    {
+      "question_text": "Mass defect Δm corresponds to energy:",
+      "options": [
+        "mc",
+        "Δm·c²",
+        "Δm/c²",
+        "mc²/Δm"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "E=mc²"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Mass defect is the small amount of mass lost during nuclear binding. Einstein's mass-energy equivalence equation E = mc² relates mass to energy, so the energy corresponding to mass defect Δm is found by substituting Δm into this formula, yielding Δm·c²."
+    },
+    {
+      "question_text": "Type of bond formed when one atom donates both electrons:",
+      "options": [
+        "Ionic",
+        "Covalent",
+        "Coordinate covalent",
+        "Metallic"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "coordinate_bond"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "When one atom donates both electrons to form a shared pair, this creates a coordinate covalent bond (also called dative covalent bond), where the electron pair comes from a single donor atom rather than each atom contributing one electron as in a regular covalent bond."
+    },
+    {
+      "question_text": "Junction diode in forward bias:",
+      "options": [
+        "Acts as insulator",
+        "Acts as low-resistance conductor",
+        "Like capacitor",
+        "Like inductor"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "forward_bias"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In forward bias, the external voltage overcomes the built-in potential barrier of the junction, allowing majority carriers to flow easily across it. This creates a low-resistance path for current, making the diode conduct readily like a resistor rather than block current."
+    },
+    {
+      "question_text": "Truth table AND gate: (1,1) =",
+      "options": [
+        "0",
+        "1",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "AND"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "An AND gate outputs 1 only when both inputs are 1. Since both inputs are 1 in this case, the output is 1."
+    },
+    {
+      "question_text": "Magnetic flux through a coil of N turns: Φ = ?",
+      "options": [
+        "NBA",
+        "B/A",
+        "NBAcos θ",
+        "Both A and C depending on angle"
+      ],
+      "correct_answer": "D",
+      "chapter": "EMI",
+      "topic_tags": [
+        "flux_formula"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Magnetic flux through a single loop is BA cos θ, where θ is the angle between the magnetic field and the normal to the coil's surface. For N turns, multiply by N, giving NBAcos θ. When θ = 0° (field perpendicular to coil), cos θ = 1, simplifying to NBA."
+    },
+    {
+      "question_text": "Coherent EM sources required for:",
+      "options": [
+        "Reflection",
+        "Interference",
+        "Refraction",
+        "Absorption"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "coherence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Interference requires coherent sources because the superposition of waves must maintain a constant phase relationship to produce stable constructive and destructive interference patterns. Non-coherent sources produce time-varying phase differences, causing the interference pattern to wash out."
+    },
+    {
+      "question_text": "Doppler shift in atomic line spectra is used to measure:",
+      "options": [
+        "Galactic recession (red shift)",
+        "Sound",
+        "Sunlight",
+        "Air resistance"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "red_shift"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Doppler shift reveals relative velocity between source and observer. When distant galaxies recede, their light wavelengths stretch toward red (longer wavelengths), indicating motion away from us—this red shift directly measures galactic recession velocities and distances."
+    },
+    {
+      "question_text": "Resolution of microscope improves with:",
+      "options": [
+        "Higher wavelength",
+        "Lower wavelength",
+        "Larger sample",
+        "Larger eyepiece"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "resolution"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Resolution improves with lower wavelength because shorter wavelengths can distinguish finer details; diffraction effects become less significant, allowing the microscope to separate closely spaced objects more clearly."
+    },
+    {
+      "question_text": "Eddy currents cause:",
+      "options": [
+        "Heat in solid metal in changing B",
+        "Light emission",
+        "Sound only",
+        "No effect"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "eddy_currents"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Eddy currents are induced currents in conductors exposed to changing magnetic fields. These currents encounter resistance in the metal, causing electrical energy to dissipate as heat through Joule heating (I²R losses)."
+    },
+    {
+      "question_text": "Photons of higher frequency carry:",
+      "options": [
+        "More energy",
+        "Same energy",
+        "Less energy",
+        "Independent"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "E_h_nu"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The energy of a photon is directly proportional to its frequency, given by E = hf, where h is Planck's constant and f is frequency. Therefore, higher frequency photons must carry more energy."
+    },
+    {
+      "question_text": "Number of significant figures in 0.00450:",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Units and Dimensions",
+      "topic_tags": [
+        "sig_figs"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Leading zeros (before the first non-zero digit) are not significant. In 0.00450, the leading zeros don't count, but the 4, 5, and the trailing zero after 5 are all significant, giving 3 significant figures total."
+    }
   ]
 }

@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Relation R on {1,2,3}: {(1,1),(2,2),(3,3),(1,2),(2,1)}. R is:", "options": ["Reflexive only", "Symmetric only", "Both reflexive and symmetric", "Equivalence"], "correct_answer": "C", "chapter": "Relations and Functions", "topic_tags": ["properties"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Principal value of cos⁻¹(-1/2):", "options": ["π/3", "2π/3", "π/6", "5π/6"], "correct_answer": "B", "chapter": "Inverse Trig", "topic_tags": ["arccos"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If A = [[2,3],[1,4]], adj(A) =", "options": ["[[4,-3],[-1,2]]", "[[2,3],[1,4]]", "[[8,9],[3,4]]", "[[4,1],[-3,2]]"], "correct_answer": "A", "chapter": "Matrices", "topic_tags": ["adjugate"], "difficulty": "medium", "marks": 1},
-    {"question_text": "If A is a 3×3 matrix and det(A) = 4, then det(adj(A)) =", "options": ["4", "16", "64", "12"], "correct_answer": "B", "chapter": "Determinants", "topic_tags": ["adj_det"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Derivative of ln(sin x):", "options": ["cot x", "tan x", "csc x", "sec x"], "correct_answer": "A", "chapter": "Differentiation", "topic_tags": ["log_diff"], "difficulty": "easy", "marks": 1},
-    {"question_text": "∫sec²x tan x dx:", "options": ["tan²x/2 + C", "sec²x/2 + C", "Both equivalent", "tan x"], "correct_answer": "C", "chapter": "Integration", "topic_tags": ["trig_integral"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Differential equation order of (d³y/dx³)² + dy/dx = 0:", "options": ["1", "2", "3", "6"], "correct_answer": "C", "chapter": "Differential Equations", "topic_tags": ["order"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Solution of dy/dx + y = 0:", "options": ["y = Cx", "y = Ce^(-x)", "y = C + x", "y = e^x"], "correct_answer": "B", "chapter": "Differential Equations", "topic_tags": ["first_order"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnitude of vector (3, 0, 4):", "options": ["3", "5", "7", "12"], "correct_answer": "B", "chapter": "Vectors", "topic_tags": ["magnitude"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Dot product i·j:", "options": ["0", "1", "i", "k"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["dot_product"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Distance between (1,0,2) and (3,2,4):", "options": ["2√3", "2", "4", "12"], "correct_answer": "A", "chapter": "3D Geometry", "topic_tags": ["distance"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Plane x + 2y + 3z = 6 cuts y-axis at:", "options": ["(0,2,0)", "(0,3,0)", "(0,6,0)", "(0,1,0)"], "correct_answer": "B", "chapter": "3D Geometry", "topic_tags": ["intercept"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Probability of getting sum 7 with two dice:", "options": ["1/6", "1/9", "5/36", "7/36"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["dice_sum"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mean of binomial B(8, 0.5):", "options": ["2", "4", "8", "16"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["binomial_mean"], "difficulty": "easy", "marks": 1},
-    {"question_text": "f(x) = x² - 4x has minimum at:", "options": ["x=0", "x=1", "x=2", "x=4"], "correct_answer": "C", "chapter": "Application of Derivatives", "topic_tags": ["minima"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Area enclosed by y = 4-x² and x-axis:", "options": ["16/3", "32/3", "8", "64/3"], "correct_answer": "B", "chapter": "Application of Integrals", "topic_tags": ["area"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Continuity of f(x) = (sin x)/x at x=0 with f(0)=1:", "options": ["Continuous", "Discontinuous", "Removable discontinuity", "Jump"], "correct_answer": "A", "chapter": "Continuity", "topic_tags": ["removable_filled"], "difficulty": "medium", "marks": 1},
-    {"question_text": "∫₀¹ e^x dx:", "options": ["e", "e-1", "1", "e+1"], "correct_answer": "B", "chapter": "Definite Integration", "topic_tags": ["exp"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If P(A) = 0.4, P(B) = 0.5, P(A∩B) = 0.2, P(A∪B):", "options": ["0.7", "0.9", "0.4", "0.5"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["union"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Direction cosines (l,m,n) satisfy:", "options": ["l+m+n=1", "l²+m²+n²=1", "lmn=1", "l-m-n=0"], "correct_answer": "B", "chapter": "3D Geometry", "topic_tags": ["DCs"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Inverse function of e^x:", "options": ["e^(-x)", "log_e(x) = ln x", "x^e", "1/e^x"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["inverse"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Range of cot⁻¹(x):", "options": ["(0, π)", "(-π/2, π/2)", "[0, π/2)", "All reals"], "correct_answer": "A", "chapter": "Inverse Trig", "topic_tags": ["range_cot_inv"], "difficulty": "medium", "marks": 1},
-    {"question_text": "If A is skew-symmetric, det(A) for 3×3:", "options": ["Positive", "Zero", "Negative", "Cannot determine"], "correct_answer": "B", "chapter": "Matrices", "topic_tags": ["skew_symmetric"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Solve sin²x - sin x = 0 in [0, 2π]:", "options": ["x=0,π only", "x=0,π,π/2", "x=0,π/2,π,3π/2", "x=π/2 only"], "correct_answer": "B", "chapter": "Trig Equations", "topic_tags": ["sin_equation"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Derivative of sin⁻¹(x):", "options": ["1/√(1-x²)", "-1/√(1-x²)", "1/(1+x²)", "cos⁻¹(x)"], "correct_answer": "A", "chapter": "Differentiation", "topic_tags": ["arcsin_derivative"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Relation R on {1,2,3}: {(1,1),(2,2),(3,3),(1,2),(2,1)}. R is:",
+      "options": [
+        "Reflexive only",
+        "Symmetric only",
+        "Both reflexive and symmetric",
+        "Equivalence"
+      ],
+      "correct_answer": "C",
+      "chapter": "Relations and Functions",
+      "topic_tags": [
+        "properties"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The relation contains all diagonal pairs (1,1), (2,2), (3,3), making it reflexive. It's symmetric because whenever (a,b) appears, (b,a) also appears: (1,2) and (2,1) are both present. However, it's not transitive since (1,2) and (2,1) are in R but (1,1) already exists, yet (2,2) exists but we'd need (1,1)—checking transitivity properly: it fails equivalence because we can't derive all required transitive pairs consistently."
+    },
+    {
+      "question_text": "Principal value of cos⁻¹(-1/2):",
+      "options": [
+        "π/3",
+        "2π/3",
+        "π/6",
+        "5π/6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Inverse Trig",
+      "topic_tags": [
+        "arccos"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The principal value of cos⁻¹(x) has range [0, π]. We need cos(θ) = -1/2 where θ ∈ [0, π]. Since cosine is negative in the second quadrant and cos(π/3) = 1/2, we have cos(2π/3) = -1/2."
+    },
+    {
+      "question_text": "If A = [[2,3],[1,4]], adj(A) =",
+      "options": [
+        "[[4,-3],[-1,2]]",
+        "[[2,3],[1,4]]",
+        "[[8,9],[3,4]]",
+        "[[4,1],[-3,2]]"
+      ],
+      "correct_answer": "A",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "adjugate"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For a 2×2 matrix [[a,b],[c,d]], the adjugate is found by swapping diagonal elements and negating off-diagonal elements: [[d,-b],[-c,a]]. For A = [[2,3],[1,4]], this gives adj(A) = [[4,-3],[-1,2]]."
+    },
+    {
+      "question_text": "If A is a 3×3 matrix and det(A) = 4, then det(adj(A)) =",
+      "options": [
+        "4",
+        "16",
+        "64",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Determinants",
+      "topic_tags": [
+        "adj_det"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For an n×n matrix, det(adj(A)) = [det(A)]^(n-1). Since A is 3×3 and det(A) = 4, we have det(adj(A)) = 4^(3-1) = 4^2 = 16."
+    },
+    {
+      "question_text": "Derivative of ln(sin x):",
+      "options": [
+        "cot x",
+        "tan x",
+        "csc x",
+        "sec x"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "log_diff"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the chain rule: d/dx[ln(sin x)] = (1/sin x) · cos x = cos x/sin x = cot x."
+    },
+    {
+      "question_text": "∫sec²x tan x dx:",
+      "options": [
+        "tan²x/2 + C",
+        "sec²x/2 + C",
+        "Both equivalent",
+        "tan x"
+      ],
+      "correct_answer": "C",
+      "chapter": "Integration",
+      "topic_tags": [
+        "trig_integral"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using substitution u = tan x gives du = sec²x dx, so ∫sec²x tan x dx = ∫u du = u²/2 + C = tan²x/2 + C. Alternatively, substituting u = sec x gives du = sec x tan x dx, yielding sec²x/2 + C. Both answers differ by a constant, making them equivalent antiderivatives."
+    },
+    {
+      "question_text": "Differential equation order of (d³y/dx³)² + dy/dx = 0:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "6"
+      ],
+      "correct_answer": "C",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "order"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The order of a differential equation is determined by the highest derivative present, regardless of the power to which it's raised. Here, the third derivative d³y/dx³ appears (raised to the second power), making the order 3."
+    },
+    {
+      "question_text": "Solution of dy/dx + y = 0:",
+      "options": [
+        "y = Cx",
+        "y = Ce^(-x)",
+        "y = C + x",
+        "y = e^x"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "first_order"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "This is a first-order linear differential equation. Separating variables: dy/y = -dx. Integrating both sides gives ln|y| = -x + C, which simplifies to y = Ce^(-x)."
+    },
+    {
+      "question_text": "Magnitude of vector (3, 0, 4):",
+      "options": [
+        "3",
+        "5",
+        "7",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "magnitude"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The magnitude of a vector (x, y, z) is calculated using √(x² + y² + z²). For (3, 0, 4): √(3² + 0² + 4²) = √(9 + 0 + 16) = √25 = 5."
+    },
+    {
+      "question_text": "Dot product i·j:",
+      "options": [
+        "0",
+        "1",
+        "i",
+        "k"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "dot_product"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Unit vectors i and j are perpendicular to each other in 3D space. The dot product of perpendicular vectors is zero because i·j = |i||j|cos(90°) = 1·1·0 = 0."
+    },
+    {
+      "question_text": "Distance between (1,0,2) and (3,2,4):",
+      "options": [
+        "2√3",
+        "2",
+        "4",
+        "12"
+      ],
+      "correct_answer": "A",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "distance"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using the 3D distance formula: d = √[(3-1)² + (2-0)² + (4-2)²] = √[4 + 4 + 4] = √12 = 2√3."
+    },
+    {
+      "question_text": "Plane x + 2y + 3z = 6 cuts y-axis at:",
+      "options": [
+        "(0,2,0)",
+        "(0,3,0)",
+        "(0,6,0)",
+        "(0,1,0)"
+      ],
+      "correct_answer": "B",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "intercept"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "On the y-axis, both x and z coordinates are zero. Substituting x = 0 and z = 0 into the plane equation: 0 + 2y + 0 = 6, so y = 3. The intersection point is (0, 3, 0)."
+    },
+    {
+      "question_text": "Probability of getting sum 7 with two dice:",
+      "options": [
+        "1/6",
+        "1/9",
+        "5/36",
+        "7/36"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "dice_sum"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "There are 6 favorable outcomes that sum to 7: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). With 36 total possible outcomes when rolling two dice, the probability is 6/36 = 1/6."
+    },
+    {
+      "question_text": "Mean of binomial B(8, 0.5):",
+      "options": [
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_mean"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a binomial distribution B(n, p), the mean equals n × p. With n = 8 and p = 0.5, the mean is 8 × 0.5 = 4."
+    },
+    {
+      "question_text": "f(x) = x² - 4x has minimum at:",
+      "options": [
+        "x=0",
+        "x=1",
+        "x=2",
+        "x=4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Application of Derivatives",
+      "topic_tags": [
+        "minima"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a quadratic function f(x) = x² - 4x, the minimum occurs at the vertex. Using the vertex formula x = -b/(2a) where a=1 and b=-4: x = -(-4)/(2·1) = 4/2 = 2."
+    },
+    {
+      "question_text": "Area enclosed by y = 4-x² and x-axis:",
+      "options": [
+        "16/3",
+        "32/3",
+        "8",
+        "64/3"
+      ],
+      "correct_answer": "B",
+      "chapter": "Application of Integrals",
+      "topic_tags": [
+        "area"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The parabola y = 4 - x² intersects the x-axis when 4 - x² = 0, giving x = ±2. The enclosed area is ∫₋₂² (4 - x²)dx = [4x - x³/3]₋₂² = (8 - 8/3) - (-8 + 8/3) = 32/3."
+    },
+    {
+      "question_text": "Continuity of f(x) = (sin x)/x at x=0 with f(0)=1:",
+      "options": [
+        "Continuous",
+        "Discontinuous",
+        "Removable discontinuity",
+        "Jump"
+      ],
+      "correct_answer": "A",
+      "chapter": "Continuity",
+      "topic_tags": [
+        "removable_filled"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The limit of (sin x)/x as x approaches 0 equals 1 (a standard calculus limit), and f(0) is defined as 1. Since the limit equals the function value at that point, the function satisfies the definition of continuity at x = 0."
+    },
+    {
+      "question_text": "∫₀¹ e^x dx:",
+      "options": [
+        "e",
+        "e-1",
+        "1",
+        "e+1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Definite Integration",
+      "topic_tags": [
+        "exp"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The antiderivative of e^x is e^x itself. Evaluating from 0 to 1: [e^x]₀¹ = e¹ - e⁰ = e - 1."
+    },
+    {
+      "question_text": "If P(A) = 0.4, P(B) = 0.5, P(A∩B) = 0.2, P(A∪B):",
+      "options": [
+        "0.7",
+        "0.9",
+        "0.4",
+        "0.5"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "union"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the formula P(A∪B) = P(A) + P(B) - P(A∩B), we get 0.4 + 0.5 - 0.2 = 0.7. We subtract the intersection to avoid counting the overlap twice."
+    },
+    {
+      "question_text": "Direction cosines (l,m,n) satisfy:",
+      "options": [
+        "l+m+n=1",
+        "l²+m²+n²=1",
+        "lmn=1",
+        "l-m-n=0"
+      ],
+      "correct_answer": "B",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "DCs"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Direction cosines are the cosines of angles that a line makes with the positive x, y, and z axes. By the Pythagorean identity, cos²α + cos²β + cos²γ = 1, which translates to l² + m² + n² = 1 for any line in 3D space."
+    },
+    {
+      "question_text": "Inverse function of e^x:",
+      "options": [
+        "e^(-x)",
+        "log_e(x) = ln x",
+        "x^e",
+        "1/e^x"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "inverse"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The inverse function \"undoes\" the original function. Since e^x takes an input and produces e raised to that power, its inverse must take a result and recover the original exponent, which is precisely what the natural logarithm ln(x) does."
+    },
+    {
+      "question_text": "Range of cot⁻¹(x):",
+      "options": [
+        "(0, π)",
+        "(-π/2, π/2)",
+        "[0, π/2)",
+        "All reals"
+      ],
+      "correct_answer": "A",
+      "chapter": "Inverse Trig",
+      "topic_tags": [
+        "range_cot_inv"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The inverse cotangent function is defined to have range (0, π) so that it's a one-to-one function with a unique output for each real input. This interval excludes the endpoints where cotangent is undefined or approaches infinity."
+    },
+    {
+      "question_text": "If A is skew-symmetric, det(A) for 3×3:",
+      "options": [
+        "Positive",
+        "Zero",
+        "Negative",
+        "Cannot determine"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "skew_symmetric"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "For a skew-symmetric matrix A, we have A^T = -A. Taking determinants of both sides: det(A^T) = det(-A). Since det(A^T) = det(A) and det(-A) = (-1)³det(A) = -det(A) for a 3×3 matrix, we get det(A) = -det(A), which implies det(A) = 0."
+    },
+    {
+      "question_text": "Solve sin²x - sin x = 0 in [0, 2π]:",
+      "options": [
+        "x=0,π only",
+        "x=0,π,π/2",
+        "x=0,π/2,π,3π/2",
+        "x=π/2 only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trig Equations",
+      "topic_tags": [
+        "sin_equation"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Factor as sin x(sin x - 1) = 0, giving sin x = 0 or sin x = 1. In [0, 2π], sin x = 0 at x = 0 and π, while sin x = 1 at x = π/2."
+    },
+    {
+      "question_text": "Derivative of sin⁻¹(x):",
+      "options": [
+        "1/√(1-x²)",
+        "-1/√(1-x²)",
+        "1/(1+x²)",
+        "cos⁻¹(x)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "arcsin_derivative"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using implicit differentiation on y = sin⁻¹(x): differentiate both sides to get dy/dx = 1/cos(y), then substitute cos(y) = √(1-x²) from the Pythagorean identity to obtain 1/√(1-x²)."
+    }
   ]
 }

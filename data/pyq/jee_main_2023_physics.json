@@ -6,30 +6,430 @@
   "default_year": 2023,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Dimensions of pressure:", "options": ["[ML⁻¹T⁻²]", "[MLT⁻²]", "[ML²T⁻²]", "[MT⁻²]"], "correct_answer": "A", "chapter": "Units and Dimensions", "topic_tags": ["pressure_dim"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Vector A × A:", "options": ["A²", "|A|²", "0 (zero vector)", "Indeterminate"], "correct_answer": "C", "chapter": "Vectors", "topic_tags": ["cross_self"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Time of flight of projectile (initial speed u, angle θ):", "options": ["u sinθ/g", "2u sinθ/g", "u²sin2θ/g", "2u²/g"], "correct_answer": "B", "chapter": "Projectile Motion", "topic_tags": ["time_of_flight"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Body at rest under N forces in equilibrium; sum of forces:", "options": ["Zero", "Equal to weight", "Maximum", "Variable"], "correct_answer": "A", "chapter": "Laws of Motion", "topic_tags": ["equilibrium"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Maximum static friction coefficient is:", "options": ["μ_s > μ_k", "μ_s < μ_k", "μ_s = μ_k", "Random"], "correct_answer": "A", "chapter": "Friction", "topic_tags": ["static_kinetic"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Work-energy theorem: W_net = ?", "options": ["ΔKE", "ΔPE", "Force × displacement only", "Power × time"], "correct_answer": "A", "chapter": "Work and Energy", "topic_tags": ["WE_theorem"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Moment of inertia of thin uniform rod (mass M, length L) about centre:", "options": ["ML²/2", "ML²/12", "ML²/3", "ML²"], "correct_answer": "B", "chapter": "Rotational Motion", "topic_tags": ["MI_rod_centre"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Gravitational potential at distance r from mass M:", "options": ["-GM/r", "GM/r", "GM/r²", "-GM/r²"], "correct_answer": "A", "chapter": "Gravitation", "topic_tags": ["gravitational_potential"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Young's modulus has units of:", "options": ["N", "N/m", "N/m² (Pa)", "Pa·s"], "correct_answer": "C", "chapter": "Solids", "topic_tags": ["Young_modulus_units"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Reynolds number determines:", "options": ["Pressure", "Viscosity coefficient", "Flow type (laminar vs turbulent)", "Density"], "correct_answer": "C", "chapter": "Fluids", "topic_tags": ["Reynold"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mean kinetic energy per molecule of ideal gas at T:", "options": ["kT/2", "kT", "(3/2)kT", "3kT"], "correct_answer": "C", "chapter": "Kinetic Theory", "topic_tags": ["KE_per_molecule"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Speed of sound in monoatomic gas vs diatomic at same T:", "options": ["Same", "Monoatomic higher", "Diatomic higher", "Cannot say"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["speed_sound"], "difficulty": "hard", "marks": 4},
-    {"question_text": "First Bohr orbit energy for hydrogen:", "options": ["-13.6 eV", "+13.6 eV", "0", "-3.4 eV"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["H_E1"], "difficulty": "easy", "marks": 4},
-    {"question_text": "EMF of cell defined as energy per:", "options": ["Time", "Charge", "Current", "Voltage"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["EMF"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Capacitance of parallel plate with K dielectric:", "options": ["Kε₀A/d", "ε₀A/(Kd)", "ε₀A/d", "K·ε₀d/A"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["dielectric"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Magnetic field at axial point of bar magnet at distance d (d >> length):", "options": ["μ₀M/(2πd³)", "μ₀M/(4πd³)", "μ₀M/d", "0"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["bar_magnet_axial"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Coefficient of self-induction of solenoid increases with:", "options": ["More turns N", "Less area A", "Less length l", "Both A and decrease in l"], "correct_answer": "D", "chapter": "EMI", "topic_tags": ["L_solenoid"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Q-factor of series LCR at resonance:", "options": ["ωL/R", "R/(ωL)", "1/(ωRC)", "Both A and 1/(ωRC) — equal at resonance"], "correct_answer": "D", "chapter": "AC", "topic_tags": ["Q_factor"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Maxwell EM equations predict EM wave speed in vacuum:", "options": ["1/√(μ₀ε₀)", "μ₀ε₀", "√(μ₀ε₀)", "μ₀/ε₀"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["c_formula"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Critical angle for diamond (n=2.4):", "options": ["24.6°", "30°", "45°", "60°"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["TIR_diamond"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resolving power of prism is proportional to:", "options": ["Base length × dn/dλ", "Apex angle", "Refractive index only", "1/wavelength"], "correct_answer": "A", "chapter": "Wave Optics", "topic_tags": ["prism_RP"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Photoelectric current at constant intensity above threshold:", "options": ["Independent of voltage", "Linear in voltage", "Saturates above some voltage", "Decreases with voltage"], "correct_answer": "C", "chapter": "Dual Nature", "topic_tags": ["I_V_curve"], "difficulty": "medium", "marks": 4},
-    {"question_text": "α-particle is identical to:", "options": ["Hydrogen nucleus", "Helium nucleus (2p+2n)", "Beta particle", "Photon"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["alpha_particle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Junction diode in reverse bias acts as:", "options": ["Low resistance", "Open circuit (approx)", "Capacitor", "Inductor"], "correct_answer": "B", "chapter": "Semiconductor Electronics", "topic_tags": ["reverse_bias"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Earth's magnetic field intensity at equator approximately:", "options": ["0.3 G (3×10⁻⁵ T)", "1 G", "10 G", "1 T"], "correct_answer": "A", "chapter": "Earth Magnetism", "topic_tags": ["B_Earth"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Dimensions of pressure:",
+      "options": [
+        "[ML⁻¹T⁻²]",
+        "[MLT⁻²]",
+        "[ML²T⁻²]",
+        "[MT⁻²]"
+      ],
+      "correct_answer": "A",
+      "chapter": "Units and Dimensions",
+      "topic_tags": [
+        "pressure_dim"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Pressure is force per unit area. Force has dimensions [MLT⁻²], and area has dimensions [L²], so pressure = [MLT⁻²]/[L²] = [ML⁻¹T⁻²]."
+    },
+    {
+      "question_text": "Vector A × A:",
+      "options": [
+        "A²",
+        "|A|²",
+        "0 (zero vector)",
+        "Indeterminate"
+      ],
+      "correct_answer": "C",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "cross_self"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The cross product of any vector with itself is zero because the cross product A × B = |A||B|sin(θ) where θ is the angle between them. When a vector crosses itself, θ = 0°, so sin(0°) = 0, resulting in the zero vector."
+    },
+    {
+      "question_text": "Time of flight of projectile (initial speed u, angle θ):",
+      "options": [
+        "u sinθ/g",
+        "2u sinθ/g",
+        "u²sin2θ/g",
+        "2u²/g"
+      ],
+      "correct_answer": "B",
+      "chapter": "Projectile Motion",
+      "topic_tags": [
+        "time_of_flight"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The vertical component of velocity is u sinθ. Using the kinematic equation for vertical motion where the projectile returns to ground level, the total time equals twice the time to reach maximum height (u sinθ/g), giving 2u sinθ/g."
+    },
+    {
+      "question_text": "Body at rest under N forces in equilibrium; sum of forces:",
+      "options": [
+        "Zero",
+        "Equal to weight",
+        "Maximum",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "equilibrium"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a body at rest to remain in equilibrium, Newton's first law requires that the net force acting on it must be zero. If the sum of forces were non-zero, the body would accelerate and no longer remain at rest."
+    },
+    {
+      "question_text": "Maximum static friction coefficient is:",
+      "options": [
+        "μ_s > μ_k",
+        "μ_s < μ_k",
+        "μ_s = μ_k",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "Friction",
+      "topic_tags": [
+        "static_kinetic"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Static friction must overcome inertia to initiate motion, requiring a higher coefficient than kinetic friction, which only maintains motion against lower resistance."
+    },
+    {
+      "question_text": "Work-energy theorem: W_net = ?",
+      "options": [
+        "ΔKE",
+        "ΔPE",
+        "Force × displacement only",
+        "Power × time"
+      ],
+      "correct_answer": "A",
+      "chapter": "Work and Energy",
+      "topic_tags": [
+        "WE_theorem"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The work-energy theorem states that the net work done on an object equals its change in kinetic energy. This is the fundamental relationship between work and motion, showing how net work directly causes changes in an object's speed and kinetic energy."
+    },
+    {
+      "question_text": "Moment of inertia of thin uniform rod (mass M, length L) about centre:",
+      "options": [
+        "ML²/2",
+        "ML²/12",
+        "ML²/3",
+        "ML²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "MI_rod_centre"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a thin rod rotating about its center, integrate dm·r² where dm = (M/L)dr and r ranges from -L/2 to +L/2. This yields ∫(M/L)r²dr from -L/2 to +L/2 = ML²/12."
+    },
+    {
+      "question_text": "Gravitational potential at distance r from mass M:",
+      "options": [
+        "-GM/r",
+        "GM/r",
+        "GM/r²",
+        "-GM/r²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "gravitational_potential"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Gravitational potential is defined as potential energy per unit mass, which equals the work done per unit mass to bring a test mass from infinity. Since gravity is attractive, this work is negative, giving V = -GM/r. Option D incorrectly uses the gravitational field formula instead."
+    },
+    {
+      "question_text": "Young's modulus has units of:",
+      "options": [
+        "N",
+        "N/m",
+        "N/m² (Pa)",
+        "Pa·s"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solids",
+      "topic_tags": [
+        "Young_modulus_units"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Young's modulus measures stress (force per unit area) divided by strain (dimensionless ratio), so its units are force per unit area: N/m² or pascals. Option D (Pa·s) includes time, which is incorrect for Young's modulus."
+    },
+    {
+      "question_text": "Reynolds number determines:",
+      "options": [
+        "Pressure",
+        "Viscosity coefficient",
+        "Flow type (laminar vs turbulent)",
+        "Density"
+      ],
+      "correct_answer": "C",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "Reynold"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Reynolds number (Re = ρvD/μ) is a dimensionless ratio comparing inertial forces to viscous forces in a fluid. Low Re indicates laminar flow (viscous forces dominate), while high Re indicates turbulent flow (inertial forces dominate), making it the key criterion for determining flow regime."
+    },
+    {
+      "question_text": "Mean kinetic energy per molecule of ideal gas at T:",
+      "options": [
+        "kT/2",
+        "kT",
+        "(3/2)kT",
+        "3kT"
+      ],
+      "correct_answer": "C",
+      "chapter": "Kinetic Theory",
+      "topic_tags": [
+        "KE_per_molecule"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For an ideal gas in three dimensions, each translational degree of freedom contributes (1/2)kT to the mean kinetic energy per molecule. With three independent directions of motion (x, y, z), the total mean kinetic energy is 3 × (1/2)kT = (3/2)kT."
+    },
+    {
+      "question_text": "Speed of sound in monoatomic gas vs diatomic at same T:",
+      "options": [
+        "Same",
+        "Monoatomic higher",
+        "Diatomic higher",
+        "Cannot say"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "speed_sound"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The speed of sound in a gas depends on √(γRT/M), where γ is the heat capacity ratio. Monoatomic gases have γ = 5/3 while diatomic gases have γ = 7/5. Since monoatomic gases have a higher γ value at the same temperature and molar mass, they have a higher speed of sound."
+    },
+    {
+      "question_text": "First Bohr orbit energy for hydrogen:",
+      "options": [
+        "-13.6 eV",
+        "+13.6 eV",
+        "0",
+        "-3.4 eV"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "H_E1"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The energy of the first Bohr orbit is negative because the electron is bound to the nucleus. The magnitude is 13.6 eV (the ionization energy of hydrogen), giving -13.6 eV as the total energy referenced to a free electron at infinity."
+    },
+    {
+      "question_text": "EMF of cell defined as energy per:",
+      "options": [
+        "Time",
+        "Charge",
+        "Current",
+        "Voltage"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "EMF"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "EMF (electromotive force) represents the total energy supplied by a cell per unit charge moved through the circuit. Mathematically, EMF = W/Q, where W is energy and Q is charge, making charge the denominator in the definition."
+    },
+    {
+      "question_text": "Capacitance of parallel plate with K dielectric:",
+      "options": [
+        "Kε₀A/d",
+        "ε₀A/(Kd)",
+        "ε₀A/d",
+        "K·ε₀d/A"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "dielectric"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The dielectric constant K increases the capacitance by allowing greater charge storage in the electric field. The capacitance formula becomes C = Kε₀A/d, where K multiplies the permittivity to account for the dielectric's polarization effect."
+    },
+    {
+      "question_text": "Magnetic field at axial point of bar magnet at distance d (d >> length):",
+      "options": [
+        "μ₀M/(2πd³)",
+        "μ₀M/(4πd³)",
+        "μ₀M/d",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "bar_magnet_axial"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "At an axial point far from a bar magnet (d >> length), the magnet acts as a magnetic dipole with dipole moment M. Using the magnetic dipole field formula for the axial direction, the field is B = μ₀M/(2πd³), which is twice stronger than the equatorial field due to the aligned orientation of the dipole moment along the axis."
+    },
+    {
+      "question_text": "Coefficient of self-induction of solenoid increases with:",
+      "options": [
+        "More turns N",
+        "Less area A",
+        "Less length l",
+        "Both A and decrease in l"
+      ],
+      "correct_answer": "D",
+      "chapter": "EMI",
+      "topic_tags": [
+        "L_solenoid"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The self-inductance formula L = μ₀N²A/l shows inductance is proportional to N² and A, but inversely proportional to l. Therefore, inductance increases with more turns AND either larger area or shorter length, making option D correct."
+    },
+    {
+      "question_text": "Q-factor of series LCR at resonance:",
+      "options": [
+        "ωL/R",
+        "R/(ωL)",
+        "1/(ωRC)",
+        "Both A and 1/(ωRC) — equal at resonance"
+      ],
+      "correct_answer": "D",
+      "chapter": "AC",
+      "topic_tags": [
+        "Q_factor"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "At resonance, ω = 1/√(LC), so ωL = 1/(ωC). The Q-factor equals ωL/R = 1/(ωRC) because these expressions become equivalent when this resonance condition is substituted, making both A and C identical at resonance."
+    },
+    {
+      "question_text": "Maxwell EM equations predict EM wave speed in vacuum:",
+      "options": [
+        "1/√(μ₀ε₀)",
+        "μ₀ε₀",
+        "√(μ₀ε₀)",
+        "μ₀/ε₀"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "c_formula"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The wave equation derived from Maxwell's equations yields a wave speed of 1/√(μ₀ε₀), which equals the speed of light c. This inverse relationship with the square root of the product of permeability and permittivity is the fundamental prediction linking electromagnetic phenomena to light."
+    },
+    {
+      "question_text": "Critical angle for diamond (n=2.4):",
+      "options": [
+        "24.6°",
+        "30°",
+        "45°",
+        "60°"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "TIR_diamond"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The critical angle occurs when light refracts at 90° to the normal. Using sin(θc) = 1/n, we get sin(θc) = 1/2.4 ≈ 0.417, which gives θc ≈ 24.6°."
+    },
+    {
+      "question_text": "Resolving power of prism is proportional to:",
+      "options": [
+        "Base length × dn/dλ",
+        "Apex angle",
+        "Refractive index only",
+        "1/wavelength"
+      ],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "prism_RP"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The resolving power of a prism depends on its ability to separate light of different wavelengths. This requires both physical size (base length) to gather sufficient light and the material's dispersive property (dn/dλ, the rate of refractive index change with wavelength). Together, these factors determine the minimum wavelength separation the prism can distinguish."
+    },
+    {
+      "question_text": "Photoelectric current at constant intensity above threshold:",
+      "options": [
+        "Independent of voltage",
+        "Linear in voltage",
+        "Saturates above some voltage",
+        "Decreases with voltage"
+      ],
+      "correct_answer": "C",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "I_V_curve"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At constant light intensity, all photons deliver the same energy to electrons. Above the threshold, the number of ejected photoelectrons depends only on the light intensity, not voltage. The current saturates when voltage is high enough to collect all ejected electrons before they recombine, beyond which further voltage increases cannot increase current."
+    },
+    {
+      "question_text": "α-particle is identical to:",
+      "options": [
+        "Hydrogen nucleus",
+        "Helium nucleus (2p+2n)",
+        "Beta particle",
+        "Photon"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "alpha_particle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "An α-particle consists of 2 protons and 2 neutrons (mass number 4, atomic number 2), which is exactly the nucleus of helium-4. This makes it identical to a helium nucleus, whereas a hydrogen nucleus contains only 1 proton."
+    },
+    {
+      "question_text": "Junction diode in reverse bias acts as:",
+      "options": [
+        "Low resistance",
+        "Open circuit (approx)",
+        "Capacitor",
+        "Inductor"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": [
+        "reverse_bias"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In reverse bias, the depletion region widens significantly, blocking current flow and creating an extremely high resistance (approximately an open circuit). This occurs because the applied voltage opposes the natural junction potential, preventing charge carriers from crossing."
+    },
+    {
+      "question_text": "Earth's magnetic field intensity at equator approximately:",
+      "options": [
+        "0.3 G (3×10⁻⁵ T)",
+        "1 G",
+        "10 G",
+        "1 T"
+      ],
+      "correct_answer": "A",
+      "chapter": "Earth Magnetism",
+      "topic_tags": [
+        "B_Earth"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Earth's magnetic field is strongest at the poles (~0.6 G) and weakest at the equator. At the equator, the field is approximately 0.3 Gauss or 3×10⁻⁵ Tesla, about half the polar value, because field lines emerge from the South Pole and curve around to the North Pole."
+    }
   ]
 }

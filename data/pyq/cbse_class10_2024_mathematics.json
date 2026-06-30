@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Real Numbers",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The factors of 12 are 1, 2, 3, 4, 6, 12 and factors of 18 are 1, 2, 3, 6, 9, 18. The highest common factor shared by both numbers is 6."
     },
     {
       "question_text": "Solve: 2x + 3 = 11",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Linear Equations",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Subtract 3 from both sides to get 2x = 8, then divide both sides by 2 to get x = 4."
     },
     {
       "question_text": "Area of a circle with radius 7 cm (π=22/7):",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Areas Related to Circles",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The area formula is A = πr². Substituting r = 7 and π = 22/7: A = (22/7) × 7² = (22/7) × 49 = 22 × 7 = 154 cm²."
     },
     {
       "question_text": "Discriminant of x² + 4x + 4 = 0 is:",
@@ -56,7 +59,8 @@
       "correct_answer": "A",
       "chapter": "Quadratic Equations",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "For a quadratic ax² + bx + c = 0, the discriminant is b² - 4ac. Here, a = 1, b = 4, c = 4, so discriminant = 16 - 4(1)(4) = 16 - 16 = 0. This indicates the equation has one repeated real root."
     },
     {
       "question_text": "Pythagoras: legs 3, 4. Hypotenuse:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Triangles",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the Pythagorean theorem: c² = a² + b² = 3² + 4² = 9 + 16 = 25, so c = √25 = 5."
     },
     {
       "question_text": "Probability of getting a head when a fair coin is tossed:",
@@ -82,7 +87,8 @@
       "correct_answer": "C",
       "chapter": "Probability",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A fair coin has two equally likely outcomes: heads or tails. Since exactly one of these two outcomes is heads, the probability is 1 divided by 2, which equals 1/2."
     },
     {
       "question_text": "Mean of 5, 10, 15, 20, 25:",
@@ -95,7 +101,8 @@
       "correct_answer": "B",
       "chapter": "Statistics",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mean is calculated by summing all values and dividing by the count: (5 + 10 + 15 + 20 + 25) ÷ 5 = 75 ÷ 5 = 15."
     },
     {
       "question_text": "sin(30°) equals:",
@@ -108,7 +115,8 @@
       "correct_answer": "B",
       "chapter": "Trigonometry",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The sine of 30° is a standard angle value that equals 1/2. This comes from the unit circle or a 30-60-90 triangle where the side opposite the 30° angle is half the hypotenuse."
     }
   ]
 }

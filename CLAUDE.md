@@ -707,6 +707,20 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-196 — Whole-bank explanation sweep (99% coverage).** Ran the
+  prod-195 writer across the entire `data/pyq/*.json` seed after adding a
+  `--workers` thread pool to `explain_seed_files.py` (6-way shared-client
+  concurrency; ~1 hour → ~10 min). **2,344 explanations** added across
+  ~80 files with **0 failures**; re-import confirms **2542/2567 (99.0%)**
+  of the bank now carries a worked-solution explanation — all
+  version-controlled and shipping on the normal PYQ import. Every Indian
+  board/exam (CBSE / ICSE / JEE / NEET / UPSC / CAT / SSC / GATE / Bank /
+  RRB / all state boards, every seeded year) plus SAT is now covered. The
+  remaining 25 are DB-only stragglers (rows from older imports whose
+  question_text isn't in the current seed files) — not in the JSON, so
+  they don't ship; `backfill_explanations.py --all` mops them up on a
+  deployed DB if ever needed.
+
 - **prod-195 — Shipped explanations for the flagship Indian exams (JEE +
   NEET).** prod-194 built the AI explanation pipeline; this writes real
   explanations into the **version-controlled** seed JSON (not just a

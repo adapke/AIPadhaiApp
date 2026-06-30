@@ -17,7 +17,8 @@
       "correct_answer": "A",
       "chapter": "Fluids",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At sea level, atmospheric pressure equals the weight of the entire air column above, which standard measurement defines as 101,325 Pa, or approximately 101 kPa. Options B, C, and D are incorrect because they represent orders of magnitude too small or too large."
     },
     {
       "question_text": "Lever class with effort and load on either side of fulcrum:",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Simple Machines",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In a Class 1 lever, the fulcrum is positioned between the effort (force applied) and the load (resistance), allowing the effort and load to be on opposite sides of the pivot point. This arrangement is characteristic of Class 1 levers like seesaws and crowbars."
     },
     {
       "question_text": "Currency of India:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "General Knowledge",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "India's official currency is the Indian Rupee (₹). The dollar, euro, and pound are currencies of other countries or regions like the USA, EU, and UK respectively."
     },
     {
       "question_text": "Element with atomic number 1:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Periodic Table",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Hydrogen is the simplest element with one proton and one electron in its nucleus and electron shell, giving it atomic number 1. The atomic number directly corresponds to the number of protons in an atom."
     }
   ]
 }

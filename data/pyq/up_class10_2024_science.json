@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Acids",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Citric acid is the primary acid naturally present in citrus fruits like lemons, giving them their sour taste. While lemons contain trace amounts of other acids, citric acid is the dominant and characteristic acid responsible for the fruit's acidity."
     },
     {
       "question_text": "Speed of light is approximately:",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Light",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Light travels at approximately 300,000 km/s or 300,000,000 m/s, which equals 3 × 10⁸ m/s. The other options represent progressively smaller magnitudes that don't match this well-established physical constant."
     },
     {
       "question_text": "Number of protons in oxygen atom:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Atomic Structure",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Oxygen's atomic number is 8, which directly indicates the number of protons in its nucleus. The atomic number defines an element's identity and always equals the number of protons."
     },
     {
       "question_text": "Largest gland in human body:",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Human Body",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The liver is the largest gland by mass and volume in the human body, weighing approximately 1.5 kg in adults. While the thyroid, pancreas, and pituitary are important endocrine glands, they are all considerably smaller than the liver."
     }
   ]
 }

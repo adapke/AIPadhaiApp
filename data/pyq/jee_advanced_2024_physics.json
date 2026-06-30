@@ -17,7 +17,8 @@
       "correct_answer": "A",
       "chapter": "Oscillations",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In simple harmonic motion, velocity is maximum when the particle passes through equilibrium. At this point, all energy is kinetic: ½mv²_max = ½kA². Since ω = √(k/m), solving for v_max yields Aω."
     },
     {
       "question_text": "Two waves of frequencies 256 Hz and 260 Hz beat together. Beat frequency is:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Waves",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Beat frequency equals the absolute difference between the two frequencies: |260 Hz - 256 Hz| = 4 Hz."
     },
     {
       "question_text": "Photon of wavelength 600 nm — its energy is approximately:",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Dual Nature",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using E = hc/λ, where h = 4.14 × 10⁻¹⁵ eV·s and c = 3 × 10⁸ m/s: E = (4.14 × 10⁻¹⁵ × 3 × 10⁸)/(600 × 10⁻⁹) ≈ 2.07 eV. Longer wavelengths correspond to lower photon energies."
     },
     {
       "question_text": "Radioactive isotope half-life 5 years. After 15 years, fraction remaining:",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Nuclei",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "After 15 years, three half-lives have elapsed (15 ÷ 5 = 3). Each half-life reduces the sample by half, so the remaining fraction is (1/2)³ = 1/8."
     },
     {
       "question_text": "Young's modulus has dimensions:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Mechanical Properties of Solids",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Young's modulus is stress divided by strain. Stress is force per unit area (ML^-1T^-2), while strain is dimensionless. Therefore, Young's modulus has dimensions ML^-1T^-2."
     },
     {
       "question_text": "In Young's double-slit experiment, fringe width is proportional to:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Wave Optics",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Fringe width β = λD/d, where λ is wavelength, D is distance to screen, and d is slit separation. Since fringe width is inversely proportional to d, the answer is 1/d."
     },
     {
       "question_text": "A capacitor C charged to V is connected to identical uncharged C. Final V on each:",
@@ -95,7 +101,8 @@
       "correct_answer": "B",
       "chapter": "Capacitance",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When the charged capacitor connects to an identical uncharged one, charge redistributes equally between them since they're identical and in parallel. Total charge Q = CV remains constant, now split between two capacitors, so each holds Q/2, giving final voltage V/2 = (Q/2)/C."
     },
     {
       "question_text": "Lorentz force on a charge q moving at v in magnetic field B is:",
@@ -108,7 +115,8 @@
       "correct_answer": "B",
       "chapter": "Moving Charges",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Lorentz force depends on the vector cross product of velocity and magnetic field because the force direction must be perpendicular to both, following the right-hand rule. The magnitude is qvB sin(θ), which simplifies to qvB when v and B are perpendicular, making the vector formulation qv × B the complete and correct expression."
     }
   ]
 }

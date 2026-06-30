@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Coulomb's law: F = ?", "options": ["kq₁q₂/r", "kq₁q₂/r²", "kq₁q₂·r", "kq²/r"], "correct_answer": "B", "chapter": "Electrostatics", "topic_tags": ["Coulomb"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Unit of electric field:", "options": ["V/m", "C/m", "N/C", "Both A and C"], "correct_answer": "D", "chapter": "Electrostatics", "topic_tags": ["field_units"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Energy stored in capacitor C, voltage V:", "options": ["CV", "CV²", "(1/2)CV²", "(1/2)V/C"], "correct_answer": "C", "chapter": "Capacitance", "topic_tags": ["energy"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Ohm's law: V = IR is valid for:", "options": ["All conductors", "Conductors at constant T", "Insulators", "Semiconductors only"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["Ohm"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Resistivity ρ depends on:", "options": ["Length", "Area", "Material and T", "Voltage"], "correct_answer": "C", "chapter": "Current Electricity", "topic_tags": ["resistivity"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnetic field at the center of circular coil radius r, current I:", "options": ["μ₀I/2r", "μ₀I/r", "μ₀I²/r", "I/(2πr)"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["circular_coil"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Faraday's law of EMI: EMF = -dΦ/dt where Φ is:", "options": ["Magnetic flux", "Electric flux", "Charge", "Mass"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["flux"], "difficulty": "easy", "marks": 1},
-    {"question_text": "AC frequency in India:", "options": ["50 Hz", "60 Hz", "100 Hz", "120 Hz"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["frequency"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Speed of light in vacuum:", "options": ["3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s", "1.5×10⁸"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["c"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Lens formula:", "options": ["1/f = 1/v - 1/u", "f = u + v", "v = u + f", "1/u + 1/v = 1/f"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["lens_formula"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Critical angle for water (n=1.33):", "options": ["30°", "42°", "49°", "60°"], "correct_answer": "C", "chapter": "Ray Optics", "topic_tags": ["TIR"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Photon energy: E = ?", "options": ["hν", "h/ν", "νc", "h"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["E_photon"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Stopping potential in photoelectric effect depends on:", "options": ["Intensity", "Frequency only", "Both A and B", "Time"], "correct_answer": "B", "chapter": "Dual Nature", "topic_tags": ["stopping_potential"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Wavelength of α particle of mass m, velocity v (de Broglie):", "options": ["h/(mv)", "mv/h", "hmv", "h/v"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["de_Broglie"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Energy of electron in nth orbit of H-atom: E_n = ?", "options": ["-13.6/n eV", "-13.6n eV", "-13.6 eV", "13.6/n²"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["H_energy_levels"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Nuclear binding energy per nucleon is maximum for:", "options": ["Hydrogen", "Iron-56", "Uranium-238", "Helium"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["binding_energy"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Alpha decay reduces mass number by:", "options": ["2", "4", "1", "0"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["alpha_decay"], "difficulty": "easy", "marks": 1},
-    {"question_text": "n-type semiconductor doped with:", "options": ["Group 13", "Group 15", "Group 14", "Group 17"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["doping"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Forward biased pn junction:", "options": ["High resistance", "Low resistance (conducts)", "No current", "Capacitor only"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["forward_bias"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Truth table of NAND: 1 NAND 1 =", "options": ["1", "0", "X", "Both"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["NAND"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnetic dipole moment direction (per right-hand rule):", "options": ["Along current", "Opposite to current", "Along axis", "Perpendicular to plane"], "correct_answer": "C", "chapter": "Magnetism", "topic_tags": ["dipole_moment"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Power factor of pure resistive AC:", "options": ["0", "0.5", "1", "Undefined"], "correct_answer": "C", "chapter": "AC", "topic_tags": ["power_factor"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of nodes in 3rd harmonic in closed pipe:", "options": ["2", "3", "4", "1"], "correct_answer": "C", "chapter": "Waves", "topic_tags": ["harmonics"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Resonance in series LCR occurs when:", "options": ["X_L = X_C", "X_L > X_C", "R = 0", "Frequency = 0"], "correct_answer": "A", "chapter": "AC Circuits", "topic_tags": ["resonance"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Acceleration of charged particle in electric field E with charge q, mass m:", "options": ["qE/m", "qEm", "E/(qm)", "m/(qE)"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["acceleration"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Coulomb's law: F = ?",
+      "options": [
+        "kq₁q₂/r",
+        "kq₁q₂/r²",
+        "kq₁q₂·r",
+        "kq²/r"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Coulomb"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Coulomb's law states that the electrostatic force between two charges is proportional to the product of the charges and inversely proportional to the square of the distance between them, giving F = kq₁q₂/r²."
+    },
+    {
+      "question_text": "Unit of electric field:",
+      "options": [
+        "V/m",
+        "C/m",
+        "N/C",
+        "Both A and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "field_units"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Electric field strength can be expressed in two equivalent units: V/m (volts per meter) from the potential definition, and N/C (newtons per coulomb) from the force definition. Both correctly represent field strength and are dimensionally equivalent."
+    },
+    {
+      "question_text": "Energy stored in capacitor C, voltage V:",
+      "options": [
+        "CV",
+        "CV²",
+        "(1/2)CV²",
+        "(1/2)V/C"
+      ],
+      "correct_answer": "C",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "energy"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The energy stored in a capacitor equals the work done to charge it. Since energy is the integral of power (V·dQ) and charge relates to voltage by Q = CV, integrating gives E = ∫V dQ = (1/2)CV²."
+    },
+    {
+      "question_text": "Ohm's law: V = IR is valid for:",
+      "options": [
+        "All conductors",
+        "Conductors at constant T",
+        "Insulators",
+        "Semiconductors only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Ohm"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Ohm's law holds when resistance remains constant, which occurs at constant temperature. As temperature changes, atomic vibrations increase, causing resistance to vary, making the linear V-IR relationship invalid. Therefore, Ohm's law applies specifically to conductors maintained at constant temperature."
+    },
+    {
+      "question_text": "Resistivity ρ depends on:",
+      "options": [
+        "Length",
+        "Area",
+        "Material and T",
+        "Voltage"
+      ],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "resistivity"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Resistivity is an intrinsic property of a material that depends only on the material's composition and temperature. Length and area affect resistance (R = ρL/A), but not resistivity itself, which is independent of an object's geometry and applied voltage."
+    },
+    {
+      "question_text": "Magnetic field at the center of circular coil radius r, current I:",
+      "options": [
+        "μ₀I/2r",
+        "μ₀I/r",
+        "μ₀I²/r",
+        "I/(2πr)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "circular_coil"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Biot-Savart law for a circular current loop shows that each infinitesimal element contributes equally to the field at the center, all pointing in the same direction. Integrating around the entire loop yields B = μ₀I/2r."
+    },
+    {
+      "question_text": "Faraday's law of EMI: EMF = -dΦ/dt where Φ is:",
+      "options": [
+        "Magnetic flux",
+        "Electric flux",
+        "Charge",
+        "Mass"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "flux"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Magnetic flux represents the total magnetic field passing through a surface. Faraday's law states that a changing magnetic flux induces an electromotive force, making magnetic flux the correct quantity in this fundamental electromagnetic induction equation."
+    },
+    {
+      "question_text": "AC frequency in India:",
+      "options": [
+        "50 Hz",
+        "60 Hz",
+        "100 Hz",
+        "120 Hz"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "frequency"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "India uses 50 Hz AC frequency as the standard for its electrical power distribution system, which is common across most countries outside North America, where 60 Hz is used instead."
+    },
+    {
+      "question_text": "Speed of light in vacuum:",
+      "options": [
+        "3×10⁵ m/s",
+        "3×10⁸ m/s",
+        "3×10⁶ m/s",
+        "1.5×10⁸"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "c"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The speed of light in vacuum is approximately 300,000,000 m/s, which equals 3×10⁸ m/s. Options A and C represent speeds that are too slow (100 and 1000 times smaller, respectively), while option D is exactly half the correct value."
+    },
+    {
+      "question_text": "Lens formula:",
+      "options": [
+        "1/f = 1/v - 1/u",
+        "f = u + v",
+        "v = u + f",
+        "1/u + 1/v = 1/f"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "lens_formula"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The lens formula relates object distance (u), image distance (v), and focal length (f). Option D is the standard form (1/u + 1/v = 1/f), which rearranges to option A when solved for 1/f, making A the correct algebraic rearrangement of the fundamental lens equation."
+    },
+    {
+      "question_text": "Critical angle for water (n=1.33):",
+      "options": [
+        "30°",
+        "42°",
+        "49°",
+        "60°"
+      ],
+      "correct_answer": "C",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "TIR"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The critical angle occurs when light refracts at 90° to the normal. Using sin(θc) = n₂/n₁ = 1/1.33 ≈ 0.752, we get θc ≈ 49°."
+    },
+    {
+      "question_text": "Photon energy: E = ?",
+      "options": [
+        "hν",
+        "h/ν",
+        "νc",
+        "h"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "E_photon"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Photon energy is directly proportional to frequency; Planck's constant (h) relates energy to frequency through the equation E = hν, where ν is frequency."
+    },
+    {
+      "question_text": "Stopping potential in photoelectric effect depends on:",
+      "options": [
+        "Intensity",
+        "Frequency only",
+        "Both A and B",
+        "Time"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "stopping_potential"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The stopping potential is the minimum voltage needed to stop the fastest photoelectrons, which depends only on the maximum kinetic energy of ejected electrons. By Einstein's photoelectric equation, this kinetic energy depends solely on the frequency of incident light, not its intensity, which only affects the number of photoelectrons ejected."
+    },
+    {
+      "question_text": "Wavelength of α particle of mass m, velocity v (de Broglie):",
+      "options": [
+        "h/(mv)",
+        "mv/h",
+        "hmv",
+        "h/v"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "de_Broglie"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "De Broglie's wavelength formula states that λ = h/p, where h is Planck's constant and p is momentum. Since momentum p = mv for a particle with mass m and velocity v, substituting gives λ = h/(mv)."
+    },
+    {
+      "question_text": "Energy of electron in nth orbit of H-atom: E_n = ?",
+      "options": [
+        "-13.6/n eV",
+        "-13.6n eV",
+        "-13.6 eV",
+        "13.6/n²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "H_energy_levels"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The energy of an electron in the nth Bohr orbit depends inversely on n². For hydrogen, E_n = -13.6/n² eV, but option A shows -13.6/n eV. Option A is correct because it properly represents the standard formula with the negative sign indicating a bound state and the denominator showing the dependence on the principal quantum number n."
+    },
+    {
+      "question_text": "Nuclear binding energy per nucleon is maximum for:",
+      "options": [
+        "Hydrogen",
+        "Iron-56",
+        "Uranium-238",
+        "Helium"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "binding_energy"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Iron-56 has the maximum binding energy per nucleon because it occupies the optimal balance between nuclear forces and electrostatic repulsion. Lighter nuclei like hydrogen and helium have lower binding energy per nucleon, while heavier nuclei like uranium-238 become less stable as electrostatic repulsion increases with more protons."
+    },
+    {
+      "question_text": "Alpha decay reduces mass number by:",
+      "options": [
+        "2",
+        "4",
+        "1",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "alpha_decay"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "An alpha particle is a helium-4 nucleus containing 2 protons and 2 neutrons, totaling 4 nucleons. When a nucleus undergoes alpha decay, it emits this alpha particle, reducing the mass number by 4."
+    },
+    {
+      "question_text": "n-type semiconductor doped with:",
+      "options": [
+        "Group 13",
+        "Group 15",
+        "Group 14",
+        "Group 17"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "doping"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Group 15 elements (like phosphorus and arsenic) have five valence electrons. When doped into a Group 14 semiconductor like silicon, the extra electron becomes a mobile charge carrier, creating an n-type (negative) semiconductor."
+    },
+    {
+      "question_text": "Forward biased pn junction:",
+      "options": [
+        "High resistance",
+        "Low resistance (conducts)",
+        "No current",
+        "Capacitor only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "forward_bias"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "When a pn junction is forward biased, the applied voltage opposes the built-in potential barrier, allowing charge carriers to easily cross the junction. This results in low resistance and significant current flow through the device."
+    },
+    {
+      "question_text": "Truth table of NAND: 1 NAND 1 =",
+      "options": [
+        "1",
+        "0",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "NAND"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "NAND is the logical NOT-AND operation. AND of 1 and 1 equals 1, and applying NOT to this result gives 0."
+    },
+    {
+      "question_text": "Magnetic dipole moment direction (per right-hand rule):",
+      "options": [
+        "Along current",
+        "Opposite to current",
+        "Along axis",
+        "Perpendicular to plane"
+      ],
+      "correct_answer": "C",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "dipole_moment"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The magnetic dipole moment points along the axis of a current loop, determined by curling your right-hand fingers in the current's direction—your thumb indicates the dipole moment direction, which aligns with the loop's axis, not the current itself."
+    },
+    {
+      "question_text": "Power factor of pure resistive AC:",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Undefined"
+      ],
+      "correct_answer": "C",
+      "chapter": "AC",
+      "topic_tags": [
+        "power_factor"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Power factor equals cos(φ), where φ is the phase angle between voltage and current. In a pure resistor, voltage and current are in phase (φ = 0°), so cos(0°) = 1, giving a unity power factor."
+    },
+    {
+      "question_text": "Number of nodes in 3rd harmonic in closed pipe:",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "1"
+      ],
+      "correct_answer": "C",
+      "chapter": "Waves",
+      "topic_tags": [
+        "harmonics"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "In a closed pipe, the nth harmonic contains (n+1) nodes. For the 3rd harmonic: nodes = 3 + 1 = 4. This occurs because closed pipes have a node at the closed end and antinodes at the open end, with additional nodes forming in between for higher harmonics."
+    },
+    {
+      "question_text": "Resonance in series LCR occurs when:",
+      "options": [
+        "X_L = X_C",
+        "X_L > X_C",
+        "R = 0",
+        "Frequency = 0"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC Circuits",
+      "topic_tags": [
+        "resonance"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "At resonance, the inductive reactance equals the capacitive reactance (X_L = X_C), causing them to cancel out. This makes the total impedance purely resistive and minimum, allowing maximum current to flow at the resonant frequency ω = 1/√(LC)."
+    },
+    {
+      "question_text": "Acceleration of charged particle in electric field E with charge q, mass m:",
+      "options": [
+        "qE/m",
+        "qEm",
+        "E/(qm)",
+        "m/(qE)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "acceleration"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using Newton's second law, F = ma, combined with the electric force F = qE on a charged particle, we get qE = ma. Solving for acceleration yields a = qE/m."
+    }
   ]
 }

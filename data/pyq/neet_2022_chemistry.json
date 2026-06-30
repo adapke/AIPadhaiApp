@@ -8,228 +8,428 @@
   "questions": [
     {
       "question_text": "Bond angle in NH3 is approximately:",
-      "options": ["90°", "104.5°", "107°", "120°"],
+      "options": [
+        "90°",
+        "104.5°",
+        "107°",
+        "120°"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["NH3_geometry"],
+      "topic_tags": [
+        "NH3_geometry"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "NH3 has a tetrahedral electron geometry (4 electron pairs) but trigonal pyramidal molecular shape due to one lone pair. The lone pair repels bonding pairs more strongly than they repel each other, compressing the H-N-H bond angles from the ideal tetrahedral 109.5° to approximately 107°."
     },
     {
       "question_text": "Hybridisation of C in CO2:",
-      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "options": [
+        "sp",
+        "sp2",
+        "sp3",
+        "sp3d"
+      ],
       "correct_answer": "A",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["sp_hybrid"],
+      "topic_tags": [
+        "sp_hybrid"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In CO2, carbon forms two double bonds with oxygen atoms in a linear arrangement. Each double bond uses one σ bond, requiring two hybrid orbitals. The sp hybridization provides exactly two hybrid orbitals oriented 180° apart, matching the linear geometry and bonding requirements."
     },
     {
       "question_text": "Number of d-electrons in Mn²⁺ (Z=25):",
-      "options": ["3", "4", "5", "6"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
       "correct_answer": "C",
       "chapter": "d-Block",
-      "topic_tags": ["d_electrons"],
+      "topic_tags": [
+        "d_electrons"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Mn has atomic number 25, so its electron configuration is [Ar]3d⁵4s². When Mn²⁺ forms, it loses 2 electrons from the 4s orbital first, leaving [Ar]3d⁵. Therefore, Mn²⁺ contains 5 d-electrons."
     },
     {
       "question_text": "Maximum number of electrons in subshell f:",
-      "options": ["2", "6", "10", "14"],
+      "options": [
+        "2",
+        "6",
+        "10",
+        "14"
+      ],
       "correct_answer": "D",
       "chapter": "Atomic Structure",
-      "topic_tags": ["f_subshell"],
+      "topic_tags": [
+        "f_subshell"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The f subshell has l = 3, which means it contains 2l + 1 = 7 orbitals. Since each orbital holds a maximum of 2 electrons, the total capacity is 7 × 2 = 14 electrons."
     },
     {
       "question_text": "Acidic strength order: HF, HCl, HBr, HI",
-      "options": ["HF > HCl > HBr > HI", "HI > HBr > HCl > HF", "HF = HI", "Random"],
+      "options": [
+        "HF > HCl > HBr > HI",
+        "HI > HBr > HCl > HF",
+        "HF = HI",
+        "Random"
+      ],
       "correct_answer": "B",
       "chapter": "p-Block",
-      "topic_tags": ["acidity_halides"],
+      "topic_tags": [
+        "acidity_halides"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In aqueous solution, acid strength depends on how readily H⁺ dissociates. While HF is the strongest hydrogen halide in gas phase due to H-F bond strength, in water HI is strongest because the large I⁻ ion is best stabilized by hydration, making HI easiest to ionize. Acid strength increases down the halogen group: HI > HBr > HCl > HF."
     },
     {
       "question_text": "Reagent for Cannizzaro reaction:",
-      "options": ["Acid", "NaOH (strong base)", "Water", "Heat"],
+      "options": [
+        "Acid",
+        "NaOH (strong base)",
+        "Water",
+        "Heat"
+      ],
       "correct_answer": "B",
       "chapter": "Aldehydes and Ketones",
-      "topic_tags": ["Cannizzaro"],
+      "topic_tags": [
+        "Cannizzaro"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Cannizzaro reaction requires a strong base like NaOH because it involves the disproportionation of aldehydes without alpha hydrogens. The base abstracts a hydride ion from one aldehyde molecule, which then attacks another aldehyde, producing both an alcohol and a carboxylic acid salt."
     },
     {
       "question_text": "Aldehyde + Tollens' reagent gives:",
-      "options": ["Silver mirror", "White precipitate", "Yellow colour", "No reaction"],
+      "options": [
+        "Silver mirror",
+        "White precipitate",
+        "Yellow colour",
+        "No reaction"
+      ],
       "correct_answer": "A",
       "chapter": "Aldehydes",
-      "topic_tags": ["Tollens"],
+      "topic_tags": [
+        "Tollens"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Aldehydes are oxidized by Tollens' reagent (ammoniacal silver nitrate), producing silver metal that deposits on the test tube surface as a characteristic silver mirror. This is a classic positive test for aldehydes, where Ag⁺ ions are reduced to Ag metal while the aldehyde is oxidized to a carboxylic acid."
     },
     {
       "question_text": "Pauli exclusion principle states:",
-      "options": ["Max 2 electrons per orbital with opposite spin", "No 2 electrons in same atom", "All electrons spin same way", "Electrons can be in same place"],
+      "options": [
+        "Max 2 electrons per orbital with opposite spin",
+        "No 2 electrons in same atom",
+        "All electrons spin same way",
+        "Electrons can be in same place"
+      ],
       "correct_answer": "A",
       "chapter": "Atomic Structure",
-      "topic_tags": ["Pauli"],
+      "topic_tags": [
+        "Pauli"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Pauli exclusion principle states that each orbital can hold a maximum of two electrons, and these electrons must have opposite (paired) spins. This prevents identical electrons from occupying the same quantum state."
     },
     {
       "question_text": "Strongest acid in given set: H2SO4, HClO4, HNO3, H3PO4",
-      "options": ["H2SO4", "HClO4", "HNO3", "H3PO4"],
+      "options": [
+        "H2SO4",
+        "HClO4",
+        "HNO3",
+        "H3PO4"
+      ],
       "correct_answer": "B",
       "chapter": "Acid-Base",
-      "topic_tags": ["acid_strength"],
+      "topic_tags": [
+        "acid_strength"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "HClO4 is the strongest acid because it has the most oxygen atoms bonded to the central atom (chlorine), which maximizes electron withdrawal from the O-H bond, making the hydrogen most readily released as H⁺."
     },
     {
       "question_text": "First ionization energy is highest among:",
-      "options": ["Li", "Na", "K", "Rb"],
+      "options": [
+        "Li",
+        "Na",
+        "K",
+        "Rb"
+      ],
       "correct_answer": "A",
       "chapter": "Periodic Properties",
-      "topic_tags": ["IE_alkali"],
+      "topic_tags": [
+        "IE_alkali"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Lithium has the highest first ionization energy because it's the smallest atom in Group 1, so its valence electron is closest to the nucleus and most tightly held. As you move down the group (Na, K, Rb), atomic size increases and ionization energy decreases."
     },
     {
       "question_text": "Glucose contains how many chiral centres?",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "D",
       "chapter": "Biomolecules",
-      "topic_tags": ["chirality"],
+      "topic_tags": [
+        "chirality"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Glucose (in its open-chain form) has four chiral centres at C2, C3, C4, and C5—each carbon bonded to four different groups. The C1 carbonyl carbon and C6 primary carbon are not chiral centres."
     },
     {
       "question_text": "Reduction of carbonyl with NaBH4 gives:",
-      "options": ["Alcohol", "Acid", "Ester", "Aldehyde"],
+      "options": [
+        "Alcohol",
+        "Acid",
+        "Ester",
+        "Aldehyde"
+      ],
       "correct_answer": "A",
       "chapter": "Aldehydes",
-      "topic_tags": ["NaBH4"],
+      "topic_tags": [
+        "NaBH4"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "NaBH4 is a mild reducing agent that selectively reduces the C=O double bond by breaking it and adding hydrogen, converting carbonyl groups (aldehydes and ketones) into alcohols. It cannot reduce carboxylic acids or esters under normal conditions."
     },
     {
       "question_text": "Number of σ bonds in propane:",
-      "options": ["8", "9", "10", "11"],
+      "options": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
       "correct_answer": "C",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["sigma_bonds"],
+      "topic_tags": [
+        "sigma_bonds"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Propane (C₃H₈) has the structure CH₃-CH₂-CH₃. Count the bonds: 2 C-C single bonds plus 11 C-H single bonds (3+2+3 hydrogens on three carbons), totaling 10 σ bonds since all single bonds are sigma bonds."
     },
     {
       "question_text": "Order of basicity: NH3, PH3, AsH3, SbH3",
-      "options": ["NH3 > PH3 > AsH3 > SbH3", "Reverse", "Equal", "NH3 < PH3"],
+      "options": [
+        "NH3 > PH3 > AsH3 > SbH3",
+        "Reverse",
+        "Equal",
+        "NH3 < PH3"
+      ],
       "correct_answer": "A",
       "chapter": "p-Block",
-      "topic_tags": ["basicity_group15"],
+      "topic_tags": [
+        "basicity_group15"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Basicity increases as the ability to donate electron pairs increases, which depends on the availability of the lone pair. Down a group, atomic size increases and electronegativity decreases, making the lone pair less available for bonding. Nitrogen is smallest and most electronegative, holding its lone pair most tightly, making NH3 the strongest base. The trend reverses down the group: NH3 > PH3 > AsH3 > SbH3."
     },
     {
       "question_text": "Le Chatelier: increase pressure → equilibrium shifts to:",
-      "options": ["Side with fewer moles of gas", "Side with more moles of gas", "Random", "Reactants always"],
+      "options": [
+        "Side with fewer moles of gas",
+        "Side with more moles of gas",
+        "Random",
+        "Reactants always"
+      ],
       "correct_answer": "A",
       "chapter": "Equilibrium",
-      "topic_tags": ["Le_Chatelier"],
+      "topic_tags": [
+        "Le_Chatelier"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When pressure increases, the system responds by shifting equilibrium toward the side with fewer moles of gas, reducing the total number of gas molecules and thereby decreasing pressure back toward equilibrium."
     },
     {
       "question_text": "Kohlrausch's law deals with:",
-      "options": ["Conductance", "Acidity", "Equilibrium", "Reaction rate"],
+      "options": [
+        "Conductance",
+        "Acidity",
+        "Equilibrium",
+        "Reaction rate"
+      ],
       "correct_answer": "A",
       "chapter": "Electrochemistry",
-      "topic_tags": ["Kohlrausch"],
+      "topic_tags": [
+        "Kohlrausch"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Kohlrausch's law states that the molar conductance of a dilute solution approaches a definite value (limiting molar conductance) as concentration approaches zero, and that the conductance of an electrolyte is the sum of individual ionic contributions."
     },
     {
       "question_text": "Half-life of first-order reaction is:",
-      "options": ["ln 2 / k", "k / ln 2", "k", "1/k"],
+      "options": [
+        "ln 2 / k",
+        "k / ln 2",
+        "k",
+        "1/k"
+      ],
       "correct_answer": "A",
       "chapter": "Kinetics",
-      "topic_tags": ["first_order"],
+      "topic_tags": [
+        "first_order"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a first-order reaction, the integrated rate law is ln[A] = ln[A]₀ - kt. At half-life, [A] = [A]₀/2, so ln(1/2) = -kt₁/₂. Solving for t₁/₂ gives t₁/₂ = ln 2 / k, which is independent of initial concentration—a defining characteristic of first-order kinetics."
     },
     {
       "question_text": "Number of moles of H2 in 4 g of H2:",
-      "options": ["1", "2", "0.5", "4"],
+      "options": [
+        "1",
+        "2",
+        "0.5",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Mole Concept",
-      "topic_tags": ["moles"],
+      "topic_tags": [
+        "moles"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The molar mass of H2 is 2 g/mol (1 g/mol per hydrogen atom × 2). Using moles = mass ÷ molar mass: 4 g ÷ 2 g/mol = 2 moles."
     },
     {
       "question_text": "Acid rain pH is approximately:",
-      "options": ["4-5", "5-6", "6-7", "7-8"],
+      "options": [
+        "4-5",
+        "5-6",
+        "6-7",
+        "7-8"
+      ],
       "correct_answer": "A",
       "chapter": "Environmental Chemistry",
-      "topic_tags": ["acid_rain"],
+      "topic_tags": [
+        "acid_rain"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Acid rain contains sulfuric and nitric acids from atmospheric pollution, lowering its pH well below normal rainwater (pH ~5.6). A pH of 4-5 reflects this acidic nature, whereas pH 5-6 is barely acidic and wouldn't qualify as acid rain."
     },
     {
       "question_text": "Geometry of XeF4:",
-      "options": ["Tetrahedral", "Square planar", "Trigonal bipyramidal", "Octahedral"],
+      "options": [
+        "Tetrahedral",
+        "Square planar",
+        "Trigonal bipyramidal",
+        "Octahedral"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["XeF4"],
+      "topic_tags": [
+        "XeF4"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Xe has 8 valence electrons. With 4 F atoms bonded, 2 lone pairs remain. VSEPR theory predicts 6 electron domains (octahedral electron geometry), but the 2 lone pairs occupy axial positions, leaving the 4 F atoms in a square planar molecular geometry."
     },
     {
       "question_text": "Type of bonding in NaCl:",
-      "options": ["Covalent", "Ionic", "Metallic", "Hydrogen"],
+      "options": [
+        "Covalent",
+        "Ionic",
+        "Metallic",
+        "Hydrogen"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["ionic"],
+      "topic_tags": [
+        "ionic"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Sodium chloride (NaCl) forms through electron transfer where sodium donates its valence electron to chlorine, creating Na⁺ and Cl⁻ ions held together by electrostatic attraction, which defines ionic bonding."
     },
     {
       "question_text": "DNA contains the sugar:",
-      "options": ["Glucose", "Ribose", "Deoxyribose", "Sucrose"],
+      "options": [
+        "Glucose",
+        "Ribose",
+        "Deoxyribose",
+        "Sucrose"
+      ],
       "correct_answer": "C",
       "chapter": "Biomolecules",
-      "topic_tags": ["DNA"],
+      "topic_tags": [
+        "DNA"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "DNA's sugar backbone contains deoxyribose, a five-carbon sugar lacking one oxygen atom compared to ribose (found in RNA). This structural difference is why the molecule is called deoxyribonucleic acid."
     },
     {
       "question_text": "Common name of methanol:",
-      "options": ["Wood spirit", "Grain alcohol", "Rectified spirit", "Glycerol"],
+      "options": [
+        "Wood spirit",
+        "Grain alcohol",
+        "Rectified spirit",
+        "Glycerol"
+      ],
       "correct_answer": "A",
       "chapter": "Organic Chemistry",
-      "topic_tags": ["methanol"],
+      "topic_tags": [
+        "methanol"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Methanol is produced historically by destructive distillation of wood, giving it the common name \"wood spirit.\" Grain alcohol refers to ethanol, rectified spirit is purified ethanol, and glycerol is a different compound entirely."
     },
     {
       "question_text": "Compound used as antifreeze in car radiators:",
-      "options": ["Methanol", "Ethanol", "Ethylene glycol", "Glycerol"],
+      "options": [
+        "Methanol",
+        "Ethanol",
+        "Ethylene glycol",
+        "Glycerol"
+      ],
       "correct_answer": "C",
       "chapter": "Alcohols",
-      "topic_tags": ["antifreeze"],
+      "topic_tags": [
+        "antifreeze"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Ethylene glycol is ideal for antifreeze because it has a high boiling point (~198°C) and low freezing point (~-12°C), preventing both evaporation and freezing. Its miscibility with water and low toxicity compared to methanol make it the standard automotive choice."
     },
     {
       "question_text": "Bond energy is maximum in:",
-      "options": ["F-F", "Cl-Cl", "Br-Br", "I-I"],
+      "options": [
+        "F-F",
+        "Cl-Cl",
+        "Br-Br",
+        "I-I"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["bond_energy_halogens"],
+      "topic_tags": [
+        "bond_energy_halogens"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The F-F bond is unusually weak due to electron-electron repulsion between the small, highly electronegative fluorine atoms. Chlorine's larger atomic size allows better orbital overlap while maintaining strong electronegativity, resulting in maximum bond energy among the halogens."
     }
   ]
 }

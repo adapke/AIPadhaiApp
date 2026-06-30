@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Electricity",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Energy consumed equals power multiplied by time: E = P × t = 60 W × 2 h = 120 Wh. This is the standard formula for calculating electrical energy in watt-hours."
     },
     {
       "question_text": "Latin for sodium chloride is:",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Chemical Formulae",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "NaCl is the chemical formula for sodium chloride (table salt), where Na represents sodium and Cl represents chlorine. The other options represent different chemical compounds: K2SO4 is potassium sulfate, NaOH is sodium hydroxide, and Na2CO3 is sodium carbonate."
     },
     {
       "question_text": "Which vitamin deficiency causes rickets?",
@@ -43,7 +45,8 @@
       "correct_answer": "D",
       "chapter": "Nutrition",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Vitamin D deficiency causes rickets because this vitamin is essential for calcium absorption in the intestines and bone mineralization. Without adequate vitamin D, bones cannot properly harden and become weak and deformed."
     },
     {
       "question_text": "Magnetic field around a current carrying wire is:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Magnetic Effects",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The magnetic field forms concentric circles around a current-carrying wire, perpendicular to the wire's length, as determined by the right-hand rule. This circular pattern is consistent at all distances from the wire."
     },
     {
       "question_text": "Number of bones in adult human body:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Human Body",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An adult human skeleton typically contains 206 bones. This number is reached after infancy, when some bones fuse together during development—for example, the vertebral column and pelvis undergo fusion, reducing the total from the approximately 270 bones present at birth."
     }
   ]
 }

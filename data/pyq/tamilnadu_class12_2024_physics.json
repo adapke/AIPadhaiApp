@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "samacheer_kalvi_board",
   "questions": [
-    {"question_text": "Charge of electron:", "options": ["+1.6×10⁻¹⁹ C", "-1.6×10⁻¹⁹ C", "+1.6×10¹⁹ C", "-9.1×10⁻³¹ C"], "correct_answer": "B", "chapter": "Electrostatics", "topic_tags": ["electron_charge"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Permittivity of free space ε₀:", "options": ["8.85×10⁻¹² F/m", "9×10⁹ F/m", "1/(4π) F/m", "1 F/m"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["epsilon_0"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Capacitance increases by factor K when dielectric of constant K is inserted at constant:", "options": ["V", "Q", "Both", "Neither"], "correct_answer": "C", "chapter": "Capacitance", "topic_tags": ["dielectric"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Electric power dissipated in 2 Ω resistor with 5 V across:", "options": ["2.5 W", "10 W", "12.5 W", "25 W"], "correct_answer": "C", "chapter": "Current Electricity", "topic_tags": ["V²/R"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Drift velocity v_d depends on:", "options": ["E only", "μ only", "Both", "Neither"], "correct_answer": "C", "chapter": "Current Electricity", "topic_tags": ["drift"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Magnetic field outside long current-carrying solenoid:", "options": ["Same as inside", "Zero (ideal)", "Half of inside", "Infinite"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["solenoid"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Self-inductance unit:", "options": ["Henry", "Weber", "Tesla", "Ohm"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["units"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Power factor of pure inductive AC:", "options": ["0", "0.5", "1", "Undefined"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["power_factor"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Radio waves are in frequency range:", "options": ["0.1-100 Hz", "kHz-GHz", "10²⁰ Hz", "10¹⁵ Hz"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["radio"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Speed of EM wave in glass (n=1.5):", "options": ["1.5c", "c/1.5", "c", "0"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["speed_medium"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Plano-convex lens (n=1.5, R=20cm) focal length:", "options": ["20 cm", "30 cm", "40 cm", "60 cm"], "correct_answer": "C", "chapter": "Ray Optics", "topic_tags": ["lens_maker"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Critical angle for n=2 medium:", "options": ["30°", "45°", "60°", "90°"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["TIR"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Diffraction grating with 1000 lines/cm and λ=500nm. First-order angle:", "options": ["3°", "5°", "2.87°", "10°"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["grating"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Bragg's law: nλ =", "options": ["2d sin θ", "d sin θ", "2d cos θ", "d cos θ"], "correct_answer": "A", "chapter": "Wave Optics", "topic_tags": ["Bragg"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Work function of cesium is approximately:", "options": ["1 eV", "2 eV", "4 eV", "10 eV"], "correct_answer": "B", "chapter": "Dual Nature", "topic_tags": ["work_function"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Photon wavelength when E=2 eV:", "options": ["620 nm", "300 nm", "1000 nm", "100 nm"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["photon_wavelength"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Rydberg constant R approximately:", "options": ["1.097×10⁷ /m", "10⁻⁷", "10⁴", "10³"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Rydberg"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Alpha particle is:", "options": ["Hydrogen nucleus", "Helium nucleus", "Electron", "Photon"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["alpha"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Decay rate equation: dN/dt = -λN where λ is:", "options": ["Half-life", "Decay constant", "Frequency", "Wavelength"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["decay_constant"], "difficulty": "easy", "marks": 1},
-    {"question_text": "p-type semiconductor majority carrier:", "options": ["Electrons", "Holes", "Both equally", "Neither"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["p_type"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Zener diode is used as:", "options": ["Amplifier", "Voltage regulator", "Oscillator", "Rectifier"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["Zener"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Logic gate NAND (1,0):", "options": ["0", "1", "X", "Both"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["NAND"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Quantum number n=2, l can be:", "options": ["0,1", "0,1,2", "0,1,2,3", "Only 0"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["quantum_numbers"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Bohr radius for first orbit:", "options": ["0.529 Å", "0.529 nm", "5.29 m", "0.529 m"], "correct_answer": "A", "chapter": "Atoms", "topic_tags": ["Bohr_radius"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Frequency of an EM wave with λ = 600 nm:", "options": ["5×10¹⁴ Hz", "5×10⁷ Hz", "10⁸ Hz", "10⁶ Hz"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["frequency_wavelength"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Charge of electron:",
+      "options": [
+        "+1.6×10⁻¹⁹ C",
+        "-1.6×10⁻¹⁹ C",
+        "+1.6×10¹⁹ C",
+        "-9.1×10⁻³¹ C"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "electron_charge"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Electrons are negatively charged particles with a magnitude of 1.6×10⁻¹⁹ coulombs, so the charge is negative. Option D represents the electron's mass, not its charge."
+    },
+    {
+      "question_text": "Permittivity of free space ε₀:",
+      "options": [
+        "8.85×10⁻¹² F/m",
+        "9×10⁹ F/m",
+        "1/(4π) F/m",
+        "1 F/m"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "epsilon_0"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The permittivity of free space is a fundamental constant with the precise value 8.85×10⁻¹² F/m (farads per meter). Option B represents the Coulomb constant k, while options C and D are incorrect numerical values."
+    },
+    {
+      "question_text": "Capacitance increases by factor K when dielectric of constant K is inserted at constant:",
+      "options": [
+        "V",
+        "Q",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "C",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "dielectric"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "When a dielectric is inserted into a capacitor, C increases by factor K in both scenarios. At constant voltage, Q increases by factor K (since Q=CV). At constant charge, V decreases by factor K (since V=Q/C), but C still increases by factor K regardless. The capacitance change depends only on the dielectric material, not the conditions maintained."
+    },
+    {
+      "question_text": "Electric power dissipated in 2 Ω resistor with 5 V across:",
+      "options": [
+        "2.5 W",
+        "10 W",
+        "12.5 W",
+        "25 W"
+      ],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "V²/R"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using P = V²/R, the power dissipated is P = (5)²/2 = 25/2 = 12.5 W."
+    },
+    {
+      "question_text": "Drift velocity v_d depends on:",
+      "options": [
+        "E only",
+        "μ only",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "C",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Drift velocity is given by v_d = μE, where μ is charge carrier mobility and E is electric field strength. Since drift velocity is directly proportional to both parameters, it depends on both the electric field and mobility."
+    },
+    {
+      "question_text": "Magnetic field outside long current-carrying solenoid:",
+      "options": [
+        "Same as inside",
+        "Zero (ideal)",
+        "Half of inside",
+        "Infinite"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "solenoid"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "An ideal solenoid confines its magnetic field entirely within its coils through symmetrical current loops. The field lines form closed loops inside the solenoid and cancel completely in the exterior region, resulting in zero external field."
+    },
+    {
+      "question_text": "Self-inductance unit:",
+      "options": [
+        "Henry",
+        "Weber",
+        "Tesla",
+        "Ohm"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "units"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Self-inductance measures how effectively a circuit element opposes changes in current. The Henry (H) is the SI unit defined as the inductance that produces one volt of induced EMF when current changes at one ampere per second, making it the correct unit for self-inductance."
+    },
+    {
+      "question_text": "Power factor of pure inductive AC:",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Undefined"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "power_factor"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In a pure inductive circuit, current lags voltage by 90°, making the phase angle θ = 90°. Power factor equals cos(θ) = cos(90°) = 0, meaning no real power is consumed—only reactive power circulates."
+    },
+    {
+      "question_text": "Radio waves are in frequency range:",
+      "options": [
+        "0.1-100 Hz",
+        "kHz-GHz",
+        "10²⁰ Hz",
+        "10¹⁵ Hz"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "radio"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Radio waves occupy the kilohertz to gigahertz frequency range (10³ to 10⁹ Hz). Option A is too low (infrasound), while options C and D represent much higher frequencies corresponding to visible light and ultraviolet radiation respectively."
+    },
+    {
+      "question_text": "Speed of EM wave in glass (n=1.5):",
+      "options": [
+        "1.5c",
+        "c/1.5",
+        "c",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "speed_medium"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The refractive index represents how much slower light travels in a medium compared to vacuum. Since n = c/v, the speed in glass is v = c/n = c/1.5, which is approximately 0.67c."
+    },
+    {
+      "question_text": "Plano-convex lens (n=1.5, R=20cm) focal length:",
+      "options": [
+        "20 cm",
+        "30 cm",
+        "40 cm",
+        "60 cm"
+      ],
+      "correct_answer": "C",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "lens_maker"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Using the lensmaker's equation for a plano-convex lens: 1/f = (n-1)(1/R₁ - 1/R₂). With one flat surface (R₁ = ∞) and one curved surface (R₂ = -20cm), we get 1/f = (1.5-1)(0-1/-20) = 0.5 × (1/20), so f = 40 cm."
+    },
+    {
+      "question_text": "Critical angle for n=2 medium:",
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "TIR"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The critical angle occurs when the refracted ray travels along the interface (refraction angle = 90°). Using Snell's law: n₁sin(θc) = n₂sin(90°), with n₁ = 2 (denser medium) and n₂ = 1 (air), we get sin(θc) = 1/2, so θc = 30°."
+    },
+    {
+      "question_text": "Diffraction grating with 1000 lines/cm and λ=500nm. First-order angle:",
+      "options": [
+        "3°",
+        "5°",
+        "2.87°",
+        "10°"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "grating"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The grating equation d sin θ = mλ requires finding the slit spacing: d = 1/(1000 lines/cm) = 10⁻⁴ cm = 1000 nm. For first order (m=1): sin θ = 500/1000 = 0.5, giving θ = 30°... actually, recalculating: d = 1 cm/1000 = 0.01 mm = 10,000 nm, so sin θ = 500/10,000 = 0.05, yielding θ ≈ 2.87°."
+    },
+    {
+      "question_text": "Bragg's law: nλ =",
+      "options": [
+        "2d sin θ",
+        "d sin θ",
+        "2d cos θ",
+        "d cos θ"
+      ],
+      "correct_answer": "A",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "Bragg"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Bragg's law describes constructive interference of X-rays reflecting from crystal planes. The path difference between rays reflecting from adjacent planes equals 2d sin θ, where d is the plane spacing and θ is the incident angle. For constructive interference, this path difference must equal an integer multiple of wavelength λ."
+    },
+    {
+      "question_text": "Work function of cesium is approximately:",
+      "options": [
+        "1 eV",
+        "2 eV",
+        "4 eV",
+        "10 eV"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "work_function"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Cesium is an alkali metal with one of the lowest work functions of all elements because its valence electron is loosely bound. The work function of cesium is approximately 2 eV, making it highly sensitive to photoelectric effects at visible light wavelengths."
+    },
+    {
+      "question_text": "Photon wavelength when E=2 eV:",
+      "options": [
+        "620 nm",
+        "300 nm",
+        "1000 nm",
+        "100 nm"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "photon_wavelength"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using E = hc/λ, rearrange to λ = hc/E. With hc ≈ 1240 eV·nm and E = 2 eV, λ = 1240/2 = 620 nm, which falls in the red visible region."
+    },
+    {
+      "question_text": "Rydberg constant R approximately:",
+      "options": [
+        "1.097×10⁷ /m",
+        "10⁻⁷",
+        "10⁴",
+        "10³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Rydberg"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Rydberg constant relates energy levels in hydrogen atoms and appears in the Rydberg formula for wavelengths of spectral lines. Its experimentally determined value is approximately 1.097×10⁷ m⁻¹, which matches option A exactly."
+    },
+    {
+      "question_text": "Alpha particle is:",
+      "options": [
+        "Hydrogen nucleus",
+        "Helium nucleus",
+        "Electron",
+        "Photon"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "alpha"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "An alpha particle is a helium-4 nucleus consisting of 2 protons and 2 neutrons bound together. It's produced during alpha decay in radioactive elements and is distinct from a hydrogen nucleus (1 proton), electrons, and photons."
+    },
+    {
+      "question_text": "Decay rate equation: dN/dt = -λN where λ is:",
+      "options": [
+        "Half-life",
+        "Decay constant",
+        "Frequency",
+        "Wavelength"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "decay_constant"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The decay constant λ appears in the differential equation dN/dt = -λN, which describes exponential decay. It determines how quickly the decay occurs—larger λ means faster decay. This parameter is specifically defined as the decay constant in nuclear and radioactive physics."
+    },
+    {
+      "question_text": "p-type semiconductor majority carrier:",
+      "options": [
+        "Electrons",
+        "Holes",
+        "Both equally",
+        "Neither"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "p_type"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In p-type semiconductors, acceptor impurities create extra holes by accepting electrons from the valence band. These holes become the majority carriers because they outnumber the thermally generated electrons, which remain as minority carriers."
+    },
+    {
+      "question_text": "Zener diode is used as:",
+      "options": [
+        "Amplifier",
+        "Voltage regulator",
+        "Oscillator",
+        "Rectifier"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "Zener"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A Zener diode operates in reverse bias breakdown, maintaining a nearly constant voltage across its terminals regardless of current changes. This voltage regulation property makes it ideal for stabilizing output voltage in circuits, which is the defining function of a voltage regulator."
+    },
+    {
+      "question_text": "Logic gate NAND (1,0):",
+      "options": [
+        "0",
+        "1",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "NAND"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A NAND gate outputs 0 only when both inputs are 1; in all other cases it outputs 1. Since the inputs are (1,0), not both inputs are 1, so the output is 1."
+    },
+    {
+      "question_text": "Quantum number n=2, l can be:",
+      "options": [
+        "0,1",
+        "0,1,2",
+        "0,1,2,3",
+        "Only 0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "quantum_numbers"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For a given principal quantum number n, the orbital angular momentum quantum number l can range from 0 to n-1. With n=2, l can be 0 or 1, corresponding to s and p orbitals respectively."
+    },
+    {
+      "question_text": "Bohr radius for first orbit:",
+      "options": [
+        "0.529 Å",
+        "0.529 nm",
+        "5.29 m",
+        "0.529 m"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_radius"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Bohr radius is calculated as a₀ = 4πε₀ℏ²/mₑe², which equals approximately 0.529 angstroms (Å). While option B is numerically equivalent (0.529 nm = 5.29 Å), the standard unit for expressing Bohr radius is angstroms."
+    },
+    {
+      "question_text": "Frequency of an EM wave with λ = 600 nm:",
+      "options": [
+        "5×10¹⁴ Hz",
+        "5×10⁷ Hz",
+        "10⁸ Hz",
+        "10⁶ Hz"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "frequency_wavelength"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using the wave equation c = fλ, rearranging to f = c/λ: f = (3×10⁸ m/s)/(600×10⁻⁹ m) = (3×10⁸)/(6×10⁻⁷) = 5×10¹⁴ Hz."
+    }
   ]
 }

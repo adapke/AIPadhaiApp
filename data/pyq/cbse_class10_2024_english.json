@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Synonym of 'enormous':", "options": ["Small", "Huge", "Quick", "Slow"], "correct_answer": "B", "chapter": "Vocabulary", "topic_tags": ["synonyms"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Antonym of 'ancient':", "options": ["Old", "New", "Past", "Historic"], "correct_answer": "B", "chapter": "Vocabulary", "topic_tags": ["antonyms"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Correct spelling:", "options": ["Seperate", "Separate", "Saperate", "Sepperate"], "correct_answer": "B", "chapter": "Spelling", "topic_tags": ["spelling"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Active to passive: 'She is reading a book':", "options": ["A book was read by her", "A book is being read by her", "A book is read", "She has read a book"], "correct_answer": "B", "chapter": "Voice", "topic_tags": ["passive"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Reported: He said, 'I am happy.' becomes:", "options": ["He said he was happy", "He said he is happy", "He says he was happy", "He told he was happy"], "correct_answer": "A", "chapter": "Reported Speech", "topic_tags": ["indirect"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Tense: 'She has been writing for two hours' is:", "options": ["Present perfect", "Past continuous", "Present perfect continuous", "Past perfect"], "correct_answer": "C", "chapter": "Tenses", "topic_tags": ["tense"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Pronoun in 'They are friends':", "options": ["They", "are", "friends", "None"], "correct_answer": "A", "chapter": "Parts of Speech", "topic_tags": ["pronoun"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Idiom 'a piece of cake':", "options": ["Delicious food", "Very easy", "Confused", "Hungry"], "correct_answer": "B", "chapter": "Idioms", "topic_tags": ["idioms"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Preposition: 'He is afraid ___ snakes.'", "options": ["of", "from", "with", "to"], "correct_answer": "A", "chapter": "Prepositions", "topic_tags": ["prepositions"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Article: 'She is ___ honest person.'", "options": ["a", "an", "the", "no article"], "correct_answer": "B", "chapter": "Articles", "topic_tags": ["articles"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Author of 'A Letter to God':", "options": ["G.L. Fuentes", "Robert Frost", "Anne Frank", "Nelson Mandela"], "correct_answer": "A", "chapter": "First Flight", "topic_tags": ["Fuentes"], "difficulty": "easy", "marks": 1},
-    {"question_text": "'Nelson Mandela: Long Walk to Freedom' is an excerpt from his:", "options": ["Speech", "Autobiography", "Letter", "Poem"], "correct_answer": "B", "chapter": "First Flight", "topic_tags": ["Mandela"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Setting of 'Two Stories about Flying':", "options": ["Forest", "Ocean and sky", "Mountain", "City"], "correct_answer": "B", "chapter": "First Flight", "topic_tags": ["flying"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Author of 'The Diary of Anne Frank':", "options": ["Anne Frank", "Otto Frank", "Margot", "Jan"], "correct_answer": "A", "chapter": "First Flight", "topic_tags": ["Anne_Frank"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Robert Frost wrote 'Fire and Ice'. Theme:", "options": ["Two destructive emotions", "Love and friendship", "War", "Nature only"], "correct_answer": "A", "chapter": "First Flight - Poetry", "topic_tags": ["Frost"], "difficulty": "medium", "marks": 1},
-    {"question_text": "'The Necklace' moral lesson:", "options": ["Honesty pays", "Vanity has consequences", "Beauty is everything", "Wealth is happiness"], "correct_answer": "B", "chapter": "Footprints Without Feet", "topic_tags": ["Maupassant"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Subject-verb agreement: 'The team ___ winning.'", "options": ["is", "are", "be", "were"], "correct_answer": "A", "chapter": "Grammar", "topic_tags": ["collective"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Choose correct: 'I have ___ books than you.'", "options": ["less", "fewer", "lesser", "lessest"], "correct_answer": "B", "chapter": "Grammar", "topic_tags": ["countable"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Letter formal opening:", "options": ["Hi there", "Dear Sir/Madam", "Yours truly", "Bye"], "correct_answer": "B", "chapter": "Writing Skills", "topic_tags": ["letter"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Antonym of 'rare':", "options": ["Common", "Scarce", "Unique", "Special"], "correct_answer": "A", "chapter": "Vocabulary", "topic_tags": ["antonyms"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Quotation marks are used for:", "options": ["Numbers", "Direct speech", "Lists", "Math"], "correct_answer": "B", "chapter": "Punctuation", "topic_tags": ["quotes"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Notice writing should include:", "options": ["Title, date, body, signature", "Only date", "Only body", "Only title"], "correct_answer": "A", "chapter": "Writing Skills", "topic_tags": ["notice"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Theme of 'Mijbil the Otter':", "options": ["Friendship with wildlife", "City life", "School days", "War"], "correct_answer": "A", "chapter": "First Flight", "topic_tags": ["otter"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Conjunction in 'I went home because it was late':", "options": ["I", "went", "because", "home"], "correct_answer": "C", "chapter": "Grammar", "topic_tags": ["conjunction"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Plural of 'phenomenon':", "options": ["Phenomenons", "Phenomena", "Phenomenas", "Phenomenes"], "correct_answer": "B", "chapter": "Number", "topic_tags": ["plural"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Synonym of 'enormous':",
+      "options": [
+        "Small",
+        "Huge",
+        "Quick",
+        "Slow"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": [
+        "synonyms"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Enormous\" means very large in size. \"Huge\" is a direct synonym meaning exceptionally large, while the other options describe unrelated qualities (small is opposite, quick and slow relate to speed, not size)."
+    },
+    {
+      "question_text": "Antonym of 'ancient':",
+      "options": [
+        "Old",
+        "New",
+        "Past",
+        "Historic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vocabulary",
+      "topic_tags": [
+        "antonyms"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Ancient\" means very old or from a long time ago. \"New\" is the direct opposite, referring to something recently made or not old. The other options (old, past, historic) all relate to age or history, making them similar in meaning to ancient rather than opposite."
+    },
+    {
+      "question_text": "Correct spelling:",
+      "options": [
+        "Seperate",
+        "Separate",
+        "Saperate",
+        "Sepperate"
+      ],
+      "correct_answer": "B",
+      "chapter": "Spelling",
+      "topic_tags": [
+        "spelling"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Separate\" follows standard English spelling with the root \"part\" embedded in it (se-PART-e), making the 'a' vowels correct. Common misspellings like \"seperate\" swap the vowels incorrectly."
+    },
+    {
+      "question_text": "Active to passive: 'She is reading a book':",
+      "options": [
+        "A book was read by her",
+        "A book is being read by her",
+        "A book is read",
+        "She has read a book"
+      ],
+      "correct_answer": "B",
+      "chapter": "Voice",
+      "topic_tags": [
+        "passive"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "When converting present continuous ('is reading') to passive voice, the auxiliary verb 'is' combines with the present participle 'being' to form 'is being,' followed by the past participle 'read.' Option B correctly maintains the present continuous tense while shifting focus to the object."
+    },
+    {
+      "question_text": "Reported: He said, 'I am happy.' becomes:",
+      "options": [
+        "He said he was happy",
+        "He said he is happy",
+        "He says he was happy",
+        "He told he was happy"
+      ],
+      "correct_answer": "A",
+      "chapter": "Reported Speech",
+      "topic_tags": [
+        "indirect"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In reported speech, when the reporting verb is past tense (\"said\"), the direct speech verb must shift one tense back: \"am\" becomes \"was.\" Additionally, the pronoun \"I\" changes to \"he\" to reflect the third-person perspective. Option A correctly applies both transformations."
+    },
+    {
+      "question_text": "Tense: 'She has been writing for two hours' is:",
+      "options": [
+        "Present perfect",
+        "Past continuous",
+        "Present perfect continuous",
+        "Past perfect"
+      ],
+      "correct_answer": "C",
+      "chapter": "Tenses",
+      "topic_tags": [
+        "tense"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "This tense uses \"has been\" (auxiliary verbs) plus the present participle \"writing,\" which is the structure of present perfect continuous. It expresses an action that started in the past, continues to the present, and emphasizes the duration (two hours)."
+    },
+    {
+      "question_text": "Pronoun in 'They are friends':",
+      "options": [
+        "They",
+        "are",
+        "friends",
+        "None"
+      ],
+      "correct_answer": "A",
+      "chapter": "Parts of Speech",
+      "topic_tags": [
+        "pronoun"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A pronoun replaces a noun and refers to people or things. In this sentence, \"they\" is a pronoun replacing a previously mentioned group of people, while \"are\" is a verb and \"friends\" is a noun."
+    },
+    {
+      "question_text": "Idiom 'a piece of cake':",
+      "options": [
+        "Delicious food",
+        "Very easy",
+        "Confused",
+        "Hungry"
+      ],
+      "correct_answer": "B",
+      "chapter": "Idioms",
+      "topic_tags": [
+        "idioms"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The idiom \"a piece of cake\" means something is very easy to accomplish, not literally referring to actual cake. It's used when a task requires minimal effort or skill."
+    },
+    {
+      "question_text": "Preposition: 'He is afraid ___ snakes.'",
+      "options": [
+        "of",
+        "from",
+        "with",
+        "to"
+      ],
+      "correct_answer": "A",
+      "chapter": "Prepositions",
+      "topic_tags": [
+        "prepositions"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Afraid\" is a fixed prepositional phrase that requires \"of\" to show what someone fears or is anxious about. \"Afraid of\" is the standard English collocation used in this context."
+    },
+    {
+      "question_text": "Article: 'She is ___ honest person.'",
+      "options": [
+        "a",
+        "an",
+        "the",
+        "no article"
+      ],
+      "correct_answer": "B",
+      "chapter": "Articles",
+      "topic_tags": [
+        "articles"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The word \"honest\" begins with a vowel sound (the \"h\" is silent), so it requires the article \"an\" rather than \"a\". The article must match the sound, not the letter that begins the word."
+    },
+    {
+      "question_text": "Author of 'A Letter to God':",
+      "options": [
+        "G.L. Fuentes",
+        "Robert Frost",
+        "Anne Frank",
+        "Nelson Mandela"
+      ],
+      "correct_answer": "A",
+      "chapter": "First Flight",
+      "topic_tags": [
+        "Fuentes"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"A Letter to God\" is a famous short story written by Mexican author Gregorio López y Fuentes (G.L. Fuentes), published in 1930. The story depicts a farmer whose crops are destroyed by hail who writes to God asking for financial compensation."
+    },
+    {
+      "question_text": "'Nelson Mandela: Long Walk to Freedom' is an excerpt from his:",
+      "options": [
+        "Speech",
+        "Autobiography",
+        "Letter",
+        "Poem"
+      ],
+      "correct_answer": "B",
+      "chapter": "First Flight",
+      "topic_tags": [
+        "Mandela"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Long Walk to Freedom\" is Mandela's autobiography, a book-length memoir where he recounts his life story from childhood through his presidency. The excerpt title directly references the full autobiography's title, which is his primary written work of this type."
+    },
+    {
+      "question_text": "Setting of 'Two Stories about Flying':",
+      "options": [
+        "Forest",
+        "Ocean and sky",
+        "Mountain",
+        "City"
+      ],
+      "correct_answer": "B",
+      "chapter": "First Flight",
+      "topic_tags": [
+        "flying"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The two stories in this collection are centered on flight and aerial journeys, with one taking place over the ocean and another involving sky-based adventure, making the ocean and sky the primary settings rather than land-based locations like forests, mountains, or cities."
+    },
+    {
+      "question_text": "Author of 'The Diary of Anne Frank':",
+      "options": [
+        "Anne Frank",
+        "Otto Frank",
+        "Margot",
+        "Jan"
+      ],
+      "correct_answer": "A",
+      "chapter": "First Flight",
+      "topic_tags": [
+        "Anne_Frank"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Anne Frank wrote the diary herself during her time in hiding during World War II. While Otto Frank (her father) edited and published it after the war, Anne was the original author of the personal journal entries."
+    },
+    {
+      "question_text": "Robert Frost wrote 'Fire and Ice'. Theme:",
+      "options": [
+        "Two destructive emotions",
+        "Love and friendship",
+        "War",
+        "Nature only"
+      ],
+      "correct_answer": "A",
+      "chapter": "First Flight - Poetry",
+      "topic_tags": [
+        "Frost"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The poem presents fire as desire/passion and ice as hate/indifference, both portrayed as destructive forces capable of ending the world. This thematic focus on how extreme emotions can devastate rather than on literal nature, love, friendship, or war makes destructive emotions the central theme."
+    },
+    {
+      "question_text": "'The Necklace' moral lesson:",
+      "options": [
+        "Honesty pays",
+        "Vanity has consequences",
+        "Beauty is everything",
+        "Wealth is happiness"
+      ],
+      "correct_answer": "B",
+      "chapter": "Footprints Without Feet",
+      "topic_tags": [
+        "Maupassant"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Mathilde's obsession with appearing wealthy and fashionable leads her to borrow the necklace, lose it, and spend years repaying the replacement—only to discover the original was worthless. Her vanity directly causes her suffering and transforms her life."
+    },
+    {
+      "question_text": "Subject-verb agreement: 'The team ___ winning.'",
+      "options": [
+        "is",
+        "are",
+        "be",
+        "were"
+      ],
+      "correct_answer": "A",
+      "chapter": "Grammar",
+      "topic_tags": [
+        "collective"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "\"Team\" is a collective noun that functions as a single unit in American English, requiring the singular verb \"is.\" While British English sometimes treats it as plural, standard American usage pairs singular subjects with singular verbs."
+    },
+    {
+      "question_text": "Choose correct: 'I have ___ books than you.'",
+      "options": [
+        "less",
+        "fewer",
+        "lesser",
+        "lessest"
+      ],
+      "correct_answer": "B",
+      "chapter": "Grammar",
+      "topic_tags": [
+        "countable"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "\"Fewer\" is correct because it's used with countable nouns (individual books), while \"less\" applies to uncountable nouns (like water or sand). \"Lesser\" and \"lessest\" are not standard comparative/superlative forms in this context."
+    },
+    {
+      "question_text": "Letter formal opening:",
+      "options": [
+        "Hi there",
+        "Dear Sir/Madam",
+        "Yours truly",
+        "Bye"
+      ],
+      "correct_answer": "B",
+      "chapter": "Writing Skills",
+      "topic_tags": [
+        "letter"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A formal letter requires a respectful, professional greeting. \"Dear Sir/Madam\" is the standard formal salutation used in business correspondence, whereas \"Hi there\" is casual, \"Yours truly\" is a closing, and \"Bye\" is informal."
+    },
+    {
+      "question_text": "Antonym of 'rare':",
+      "options": [
+        "Common",
+        "Scarce",
+        "Unique",
+        "Special"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vocabulary",
+      "topic_tags": [
+        "antonyms"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Rare\" means infrequently found or occurring. \"Common\" is its direct opposite, meaning frequently found or occurring. The other options (scarce, unique, special) are synonyms or closely related to \"rare,\" not antonyms."
+    },
+    {
+      "question_text": "Quotation marks are used for:",
+      "options": [
+        "Numbers",
+        "Direct speech",
+        "Lists",
+        "Math"
+      ],
+      "correct_answer": "B",
+      "chapter": "Punctuation",
+      "topic_tags": [
+        "quotes"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Quotation marks enclose words that are spoken directly by a person, distinguishing them from the surrounding narrative text. This is their primary grammatical function in English writing."
+    },
+    {
+      "question_text": "Notice writing should include:",
+      "options": [
+        "Title, date, body, signature",
+        "Only date",
+        "Only body",
+        "Only title"
+      ],
+      "correct_answer": "A",
+      "chapter": "Writing Skills",
+      "topic_tags": [
+        "notice"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A notice requires a formal structure to be effective: the title identifies the purpose clearly, the date establishes when it was issued, the body contains the actual message and details, and the signature authenticates it from an official source."
+    },
+    {
+      "question_text": "Theme of 'Mijbil the Otter':",
+      "options": [
+        "Friendship with wildlife",
+        "City life",
+        "School days",
+        "War"
+      ],
+      "correct_answer": "A",
+      "chapter": "First Flight",
+      "topic_tags": [
+        "otter"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The story chronicles Gavin Maxwell's personal relationship with an otter he adopts, showcasing how he bonds with the animal, learns from it, and develops deep affection—illustrating the profound connection possible between humans and wildlife."
+    },
+    {
+      "question_text": "Conjunction in 'I went home because it was late':",
+      "options": [
+        "I",
+        "went",
+        "because",
+        "home"
+      ],
+      "correct_answer": "C",
+      "chapter": "Grammar",
+      "topic_tags": [
+        "conjunction"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "\"Because\" is a subordinating conjunction that links the main clause \"I went home\" with the dependent clause \"it was late,\" showing the causal relationship between the two ideas."
+    },
+    {
+      "question_text": "Plural of 'phenomenon':",
+      "options": [
+        "Phenomenons",
+        "Phenomena",
+        "Phenomenas",
+        "Phenomenes"
+      ],
+      "correct_answer": "B",
+      "chapter": "Number",
+      "topic_tags": [
+        "plural"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "\"Phenomenon\" is a Greek-derived word that retains its original Greek plural form \"phenomena\" rather than following standard English pluralization rules with \"-s\" or \"-es\"."
+    }
   ]
 }

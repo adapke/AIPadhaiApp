@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "gseb_board",
   "questions": [
-    {"question_text": "Two point charges +q each at distance d. Force is:", "options": ["Attractive", "Repulsive", "Zero", "Variable"], "correct_answer": "B", "chapter": "Electrostatics", "topic_tags": ["like_charges"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Electric flux through closed surface enclosing q:", "options": ["q/ε₀", "q·ε₀", "0", "q²"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Gauss"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Capacitance of 10 μF and 20 μF in series:", "options": ["6.67 μF", "30 μF", "15 μF", "200 μF"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["series_cap"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Power dissipated in 10 Ω resistor with 2 A current:", "options": ["20 W", "40 W", "5 W", "10 W"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["I2R"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Ohm's law applies to:", "options": ["All conductors", "Only ohmic conductors", "Insulators", "Vacuum"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["Ohm_scope"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Drift velocity of electron in conductor depends on:", "options": ["Field strength and mobility", "Only voltage", "Cross-section only", "Temperature only"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["drift"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Magnetic field B due to a long straight wire at distance r:", "options": ["μ₀I/(2πr)", "μ₀I/r", "μ₀I·r", "μ₀Ir/(2π)"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["wire_field"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Lorentz force on charge q with velocity v in field B:", "options": ["qv×B (cross product)", "qv·B", "qvB", "Both A and C in magnitude"], "correct_answer": "D", "chapter": "Magnetism", "topic_tags": ["Lorentz"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mutual inductance M depends on:", "options": ["Currents in coils", "Voltages only", "Geometry and orientation", "Time only"], "correct_answer": "C", "chapter": "EMI", "topic_tags": ["mutual_inductance"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Faraday's first law: EMF ∝", "options": ["Resistance", "Rate of change of flux", "Charge", "Length"], "correct_answer": "B", "chapter": "EMI", "topic_tags": ["Faraday"], "difficulty": "easy", "marks": 1},
-    {"question_text": "AC voltage 220 V (RMS) — peak voltage:", "options": ["220 V", "311 V", "440 V", "156 V"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["RMS_peak"], "difficulty": "medium", "marks": 1},
-    {"question_text": "EM wave in vacuum: E and B oscillate:", "options": ["In phase", "Out of phase by π/2", "Out of phase by π", "Random"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["E_B_phase"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Snell's law: n₁ sin θ₁ = n₂ sin θ₂. If n₂ > n₁:", "options": ["Light bends toward normal", "Light bends away from normal", "Light doesn't bend", "Reflects"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["Snell"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Compound microscope magnification (final image at near point):", "options": ["m_o × m_e", "m_o + m_e", "(v_o/u_o)(1 + D/f_e)", "Both A and C describe it"], "correct_answer": "D", "chapter": "Ray Optics", "topic_tags": ["microscope_M"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Resolving power of microscope improves with:", "options": ["Larger NA", "Shorter wavelength", "Both", "Larger eyepiece"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["microscope_RP"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Polaroid sheet polarizes light by:", "options": ["Reflection", "Selective absorption (dichroism)", "Diffraction", "Refraction"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["polaroid"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Photoelectric current depends on:", "options": ["Intensity (above threshold)", "Frequency above threshold (no extra effect)", "Both A always", "Material only"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["photocurrent"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Threshold frequency for photoelectric emission depends on:", "options": ["Material's work function (φ)", "Light intensity", "Light angle", "Temperature only"], "correct_answer": "A", "chapter": "Dual Nature", "topic_tags": ["threshold"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Bohr's hydrogen radius for n=2:", "options": ["a₀", "4a₀", "2a₀", "a₀/2"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Bohr_n_squared"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Energy of photon emitted from n=3 to n=2 in H atom (Balmer series):", "options": ["13.6 eV", "1.89 eV", "10.2 eV", "0.66 eV"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Balmer_H_alpha"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Nuclear force is:", "options": ["Long-range", "Short-range (femtometer scale)", "Same as gravity", "Electromagnetic"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["nuclear_force"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Beta decay emits:", "options": ["Electron + antineutrino", "Helium nucleus", "Photon only", "Proton"], "correct_answer": "A", "chapter": "Nuclei", "topic_tags": ["beta_decay"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Junction diode in reverse bias:", "options": ["Conducts easily", "Acts as high-resistance insulator", "Like capacitor only", "Like battery"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["reverse_bias"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Truth table of OR gate: (0,1) →", "options": ["0", "1", "X", "Both"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["OR"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of valence electrons in silicon (Z=14):", "options": ["2", "4", "6", "8"], "correct_answer": "B", "chapter": "Semiconductors", "topic_tags": ["Si_valence"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Two point charges +q each at distance d. Force is:",
+      "options": [
+        "Attractive",
+        "Repulsive",
+        "Zero",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "like_charges"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Like charges repel each other according to Coulomb's law. Since both charges are positive (+q), the electrostatic force between them is repulsive, pushing them apart."
+    },
+    {
+      "question_text": "Electric flux through closed surface enclosing q:",
+      "options": [
+        "q/ε₀",
+        "q·ε₀",
+        "0",
+        "q²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Gauss"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Gauss's law states that electric flux through a closed surface equals the enclosed charge divided by the permittivity of free space (ε₀). This is a fundamental principle in electrostatics, independent of the surface shape or charge distribution."
+    },
+    {
+      "question_text": "Capacitance of 10 μF and 20 μF in series:",
+      "options": [
+        "6.67 μF",
+        "30 μF",
+        "15 μF",
+        "200 μF"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "series_cap"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For capacitors in series, use 1/C_total = 1/C₁ + 1/C₂. Thus 1/C_total = 1/10 + 1/20 = 3/20, giving C_total = 20/3 ≈ 6.67 μF."
+    },
+    {
+      "question_text": "Power dissipated in 10 Ω resistor with 2 A current:",
+      "options": [
+        "20 W",
+        "40 W",
+        "5 W",
+        "10 W"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "I2R"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the power formula P = I²R, with current I = 2 A and resistance R = 10 Ω: P = (2)² × 10 = 4 × 10 = 40 W."
+    },
+    {
+      "question_text": "Ohm's law applies to:",
+      "options": [
+        "All conductors",
+        "Only ohmic conductors",
+        "Insulators",
+        "Vacuum"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Ohm_scope"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Ohm's law (V = IR) only holds when resistance remains constant regardless of applied voltage. Ohmic conductors maintain constant resistance across varying voltages, while non-ohmic conductors (like diodes or filaments) have resistance that changes with voltage, making the law inapplicable to them."
+    },
+    {
+      "question_text": "Drift velocity of electron in conductor depends on:",
+      "options": [
+        "Field strength and mobility",
+        "Only voltage",
+        "Cross-section only",
+        "Temperature only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Drift velocity is defined as vd = μE, where μ is the charge carrier mobility (which depends on temperature and material properties) and E is the electric field strength. Thus, drift velocity directly depends on both field strength and the mobility of charge carriers in the conductor."
+    },
+    {
+      "question_text": "Magnetic field B due to a long straight wire at distance r:",
+      "options": [
+        "μ₀I/(2πr)",
+        "μ₀I/r",
+        "μ₀I·r",
+        "μ₀Ir/(2π)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "wire_field"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using Ampère's Law on a circular path of radius r around the wire, the line integral of B equals μ₀ times the enclosed current. Since B is constant and tangential: B(2πr) = μ₀I, giving B = μ₀I/(2πr)."
+    },
+    {
+      "question_text": "Lorentz force on charge q with velocity v in field B:",
+      "options": [
+        "qv×B (cross product)",
+        "qv·B",
+        "qvB",
+        "Both A and C in magnitude"
+      ],
+      "correct_answer": "D",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "Lorentz"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Lorentz force is F = qv×B, which is a vector with magnitude |F| = qvB sin(θ). When v and B are perpendicular (θ = 90°), the magnitude equals qvB, making both the vector form (A) and scalar magnitude form (C) correct descriptions."
+    },
+    {
+      "question_text": "Mutual inductance M depends on:",
+      "options": [
+        "Currents in coils",
+        "Voltages only",
+        "Geometry and orientation",
+        "Time only"
+      ],
+      "correct_answer": "C",
+      "chapter": "EMI",
+      "topic_tags": [
+        "mutual_inductance"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Mutual inductance is a property of two coils that depends solely on their physical configuration—their geometry, size, spacing, and relative orientation. It is independent of the currents flowing through them or time; changing current induces a voltage, but M itself remains constant for a given coil arrangement."
+    },
+    {
+      "question_text": "Faraday's first law: EMF ∝",
+      "options": [
+        "Resistance",
+        "Rate of change of flux",
+        "Charge",
+        "Length"
+      ],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": [
+        "Faraday"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Faraday's law of electromagnetic induction states that the induced EMF is directly proportional to the rate of change of magnetic flux through a circuit. Mathematically, EMF = -dΦ/dt, showing the linear relationship between EMF and how quickly the magnetic flux changes."
+    },
+    {
+      "question_text": "AC voltage 220 V (RMS) — peak voltage:",
+      "options": [
+        "220 V",
+        "311 V",
+        "440 V",
+        "156 V"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "RMS_peak"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The RMS voltage is related to peak voltage by the formula: V_peak = V_RMS × √2. Therefore, 220 V × √2 ≈ 220 × 1.414 ≈ 311 V."
+    },
+    {
+      "question_text": "EM wave in vacuum: E and B oscillate:",
+      "options": [
+        "In phase",
+        "Out of phase by π/2",
+        "Out of phase by π",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "E_B_phase"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In an electromagnetic wave, the electric and magnetic fields are generated by the same oscillating charges and must satisfy Maxwell's equations. These equations couple E and B such that they oscillate synchronously at the same frequency with the same phase, reaching their maxima and minima simultaneously."
+    },
+    {
+      "question_text": "Snell's law: n₁ sin θ₁ = n₂ sin θ₂. If n₂ > n₁:",
+      "options": [
+        "Light bends toward normal",
+        "Light bends away from normal",
+        "Light doesn't bend",
+        "Reflects"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "Snell"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "When light enters a denser medium (n₂ > n₁), Snell's law requires sin θ₂ < sin θ₁, meaning θ₂ < θ₁. Since the refracted angle is smaller than the incident angle, the light ray bends closer to the normal line."
+    },
+    {
+      "question_text": "Compound microscope magnification (final image at near point):",
+      "options": [
+        "m_o × m_e",
+        "m_o + m_e",
+        "(v_o/u_o)(1 + D/f_e)",
+        "Both A and C describe it"
+      ],
+      "correct_answer": "D",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "microscope_M"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "When the final image is at the near point, the objective creates a real intermediate image with magnification m_o = v_o/u_o, and the eyepiece acts as a magnifying glass producing magnification m_e = (1 + D/f_e). Total magnification is their product: m_o × m_e, which equals (v_o/u_o)(1 + D/f_e). Both expressions are mathematically equivalent descriptions of the same magnification."
+    },
+    {
+      "question_text": "Resolving power of microscope improves with:",
+      "options": [
+        "Larger NA",
+        "Shorter wavelength",
+        "Both",
+        "Larger eyepiece"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "microscope_RP"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Resolving power is inversely proportional to the minimum resolvable distance (d = λ/2NA), so it improves with both shorter wavelengths, which reduce the numerator, and larger numerical apertures, which increase the denominator. The eyepiece only magnifies the image without affecting resolution limits."
+    },
+    {
+      "question_text": "Polaroid sheet polarizes light by:",
+      "options": [
+        "Reflection",
+        "Selective absorption (dichroism)",
+        "Diffraction",
+        "Refraction"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "polaroid"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Polaroid sheets contain aligned molecules that selectively absorb light waves oscillating in one direction while transmitting waves oscillating perpendicular to the alignment, a property called dichroism. This selective absorption of specific polarization states is the fundamental mechanism by which Polaroids polarize light."
+    },
+    {
+      "question_text": "Photoelectric current depends on:",
+      "options": [
+        "Intensity (above threshold)",
+        "Frequency above threshold (no extra effect)",
+        "Both A always",
+        "Material only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "photocurrent"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The photoelectric current (number of electrons ejected per unit time) is directly proportional to light intensity, which determines how many photons hit the surface. Frequency only matters for exceeding the threshold energy needed to eject electrons; above threshold, increasing frequency doesn't increase current—only intensity does."
+    },
+    {
+      "question_text": "Threshold frequency for photoelectric emission depends on:",
+      "options": [
+        "Material's work function (φ)",
+        "Light intensity",
+        "Light angle",
+        "Temperature only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "threshold"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The threshold frequency is the minimum frequency needed to eject electrons from a metal surface. According to Einstein's photoelectric equation (hf = φ + KE), threshold frequency occurs when kinetic energy equals zero, giving f₀ = φ/h. Since work function is a material property, threshold frequency depends only on the material, not on light intensity, angle, or temperature."
+    },
+    {
+      "question_text": "Bohr's hydrogen radius for n=2:",
+      "options": [
+        "a₀",
+        "4a₀",
+        "2a₀",
+        "a₀/2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_n_squared"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In Bohr's model, the radius of an electron orbit is given by rₙ = n²a₀, where a₀ is the Bohr radius. For n=2, this gives r₂ = (2)²a₀ = 4a₀."
+    },
+    {
+      "question_text": "Energy of photon emitted from n=3 to n=2 in H atom (Balmer series):",
+      "options": [
+        "13.6 eV",
+        "1.89 eV",
+        "10.2 eV",
+        "0.66 eV"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Balmer_H_alpha"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Using the Rydberg formula: ΔE = 13.6 eV(1/n₁² - 1/n₂²). For transition from n=3 to n=2: ΔE = 13.6(1/4 - 1/9) = 13.6(5/36) = 1.89 eV."
+    },
+    {
+      "question_text": "Nuclear force is:",
+      "options": [
+        "Long-range",
+        "Short-range (femtometer scale)",
+        "Same as gravity",
+        "Electromagnetic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "nuclear_force"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The nuclear force acts only between nucleons separated by distances on the order of 1-3 femtometers (10⁻¹⁵ m). Beyond this range, the force becomes negligible, making it fundamentally short-range, unlike the long-range electromagnetic and gravitational forces."
+    },
+    {
+      "question_text": "Beta decay emits:",
+      "options": [
+        "Electron + antineutrino",
+        "Helium nucleus",
+        "Photon only",
+        "Proton"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "beta_decay"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In beta-minus decay, a neutron converts into a proton, emitting an electron (beta particle) and an electron antineutrino to conserve both charge and lepton number. This is the fundamental process of radioactive beta decay."
+    },
+    {
+      "question_text": "Junction diode in reverse bias:",
+      "options": [
+        "Conducts easily",
+        "Acts as high-resistance insulator",
+        "Like capacitor only",
+        "Like battery"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "reverse_bias"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In reverse bias, the applied voltage pushes majority charge carriers away from the junction, widening the depletion region and dramatically increasing resistance. This creates a high-resistance barrier that prevents current flow, making the diode behave as an insulator."
+    },
+    {
+      "question_text": "Truth table of OR gate: (0,1) →",
+      "options": [
+        "0",
+        "1",
+        "X",
+        "Both"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "OR"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "An OR gate outputs 1 if at least one input is 1. Since the inputs (0,1) include a 1, the output is 1."
+    },
+    {
+      "question_text": "Number of valence electrons in silicon (Z=14):",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "Si_valence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Silicon has atomic number 14, giving electron configuration 1s² 2s² 2p⁶ 3s² 3p². Valence electrons are those in the outermost shell (n=3), which contains 2+2=4 electrons."
+    }
   ]
 }

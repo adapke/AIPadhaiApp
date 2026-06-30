@@ -17,7 +17,8 @@
       "correct_answer": "A",
       "chapter": "Local Self-Government",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The 73rd Amendment Act, 1992 introduced Part IX to the Constitution, establishing a three-tier panchayati raj system with constitutional recognition, regular elections, and reserved seats for scheduled castes and tribes in local governance at village, block, and district levels."
     },
     {
       "question_text": "Who is the ex-officio Chairman of the Rajya Sabha?",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Parliament",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Vice-President of India holds the constitutional position of ex-officio Chairman of the Rajya Sabha, as specified in Article 64 of the Indian Constitution. This is a statutory role inherent to the office, distinct from other constitutional positions."
     },
     {
       "question_text": "Article 32 of the Constitution provides:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Fundamental Rights",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 32 grants the right to move the Supreme Court for enforcement of fundamental rights and provides constitutional remedies against violation of those rights. It's the primary mechanism for protecting fundamental rights in India."
     },
     {
       "question_text": "The Directive Principles of State Policy are contained in:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "DPSP",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Directive Principles of State Policy are a set of constitutional guidelines for the Indian government, aimed at promoting social and economic welfare. Part IV of the Indian Constitution (Articles 36-51) specifically contains these non-enforceable principles, distinguishing them from the enforceable Fundamental Rights in Part III."
     },
     {
       "question_text": "Indian Constitution came into effect on:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Constitutional History",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Indian Constitution was adopted on 26 November 1949 but came into effect on 26 January 1950, which is celebrated as Republic Day. August 15, 1947 was Independence Day, and October 2, 1947 was Gandhi's birthday."
     },
     {
       "question_text": "How many Schedules does the Indian Constitution have today?",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Schedules",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Indian Constitution originally had 8 Schedules. Through constitutional amendments, 4 additional Schedules have been added: the 9th Schedule (1951), 10th Schedule (1992), 11th Schedule (1996), and 12th Schedule (2003), bringing the total to 12 Schedules."
     },
     {
       "question_text": "Election Commission of India is established by:",
@@ -95,7 +101,8 @@
       "correct_answer": "A",
       "chapter": "Constitutional Bodies",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Election Commission of India is constitutionally established under Article 324 of the Indian Constitution, which grants Parliament the power to regulate elections to Parliament and state legislatures. This article specifically provides for the establishment and functioning of the Election Commission as an independent constitutional body."
     },
     {
       "question_text": "Which Article deals with the appointment of the Prime Minister?",
@@ -108,7 +115,8 @@
       "correct_answer": "B",
       "chapter": "Executive",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Article 75 specifically outlines the appointment, oath, and tenure of the Prime Minister. The President appoints the Prime Minister, who must be a member of Parliament and commands majority in the Lok Sabha, as detailed in this article."
     }
   ]
 }

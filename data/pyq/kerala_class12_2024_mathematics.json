@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "scert_higher_secondary",
   "questions": [
-    {"question_text": "Set of all functions on a set forms a:", "options": ["Group", "Algebra", "Monoid", "Vector space"], "correct_answer": "C", "chapter": "Relations and Functions", "topic_tags": ["function_set"], "difficulty": "hard", "marks": 1},
-    {"question_text": "If f: A→B is onto, then:", "options": ["Every b∈B has at least one preimage", "f is one-to-one", "f is constant", "f doesn't exist"], "correct_answer": "A", "chapter": "Functions", "topic_tags": ["onto"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Principal value of sin⁻¹(√3/2):", "options": ["π/6", "π/3", "π/4", "π/2"], "correct_answer": "B", "chapter": "Inverse Trig", "topic_tags": ["arcsin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If A is 2×3 matrix, A^T is:", "options": ["2×3", "3×2", "3×3", "2×2"], "correct_answer": "B", "chapter": "Matrices", "topic_tags": ["transpose_dim"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Det of 3×3 identity matrix:", "options": ["0", "1", "3", "9"], "correct_answer": "B", "chapter": "Determinants", "topic_tags": ["I_det"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Rank of [[1,2],[2,4]]:", "options": ["0", "1", "2", "Undefined"], "correct_answer": "B", "chapter": "Matrices", "topic_tags": ["rank"], "difficulty": "medium", "marks": 1},
-    {"question_text": "f(x) = |x| is differentiable at x=0?", "options": ["Yes", "No (corner)", "Only from right", "Only from left"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["absolute_value"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Second derivative of x²:", "options": ["0", "2", "2x", "x"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["second_deriv"], "difficulty": "easy", "marks": 1},
-    {"question_text": "L'Hopital's rule applies when limit is:", "options": ["0/0 or ∞/∞", "Always", "Only 0/0", "Only at infinity"], "correct_answer": "A", "chapter": "Limits", "topic_tags": ["LHopital"], "difficulty": "medium", "marks": 1},
-    {"question_text": "∫(1/(1+x²)) dx:", "options": ["tan⁻¹(x) + C", "sin⁻¹(x) + C", "ln(1+x²) + C", "1/x + C"], "correct_answer": "A", "chapter": "Integration", "topic_tags": ["arctan_int"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Integration by parts: ∫u dv = ?", "options": ["uv - ∫v du", "u·v + C", "∫du · v", "u + v"], "correct_answer": "A", "chapter": "Integration", "topic_tags": ["IBP"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mean value theorem requires:", "options": ["Continuous + differentiable on the interval", "Continuous only", "Differentiable only", "Monotonic"], "correct_answer": "A", "chapter": "Application of Derivatives", "topic_tags": ["MVT"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Area between two curves f(x) and g(x) on [a,b] (f ≥ g):", "options": ["∫(f-g) dx", "∫f dx + ∫g dx", "∫f·g dx", "f(b)-g(a)"], "correct_answer": "A", "chapter": "Application of Integrals", "topic_tags": ["area_between"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Solution of dy/dx = x/y:", "options": ["y² = x² + C", "y = x + C", "ln(y) = x", "x² - y² = C"], "correct_answer": "A", "chapter": "Differential Equations", "topic_tags": ["separable"], "difficulty": "medium", "marks": 1},
-    {"question_text": "First-order linear DE: dy/dx + P(x)y = Q(x). Integrating factor:", "options": ["e^(∫P dx)", "e^(∫Q dx)", "P+Q", "P/Q"], "correct_answer": "A", "chapter": "Differential Equations", "topic_tags": ["int_factor"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Two vectors are equal if:", "options": ["Same magnitude only", "Same direction only", "Same magnitude AND direction", "Same starting point"], "correct_answer": "C", "chapter": "Vectors", "topic_tags": ["equal_vectors"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Direction cosines (l, m, n) of a vector satisfy:", "options": ["l + m + n = 1", "l² + m² + n² = 1", "lmn = 1", "l = m = n"], "correct_answer": "B", "chapter": "Vectors", "topic_tags": ["DCs_identity"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Equation of plane through (1,0,0), (0,1,0), (0,0,1):", "options": ["x+y+z=1", "xyz=1", "x²+y²+z²=1", "x-y-z=0"], "correct_answer": "A", "chapter": "3D Geometry", "topic_tags": ["plane_intercepts"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Bayes' theorem: P(A|B) = ?", "options": ["P(B|A)·P(A)/P(B)", "P(A)+P(B)", "P(A)·P(B)", "P(B)/P(A)"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["Bayes"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Binomial probability formula P(X=k):", "options": ["C(n,k)·p^k·(1-p)^(n-k)", "p^k", "n!·p", "p+k"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["binomial_pmf"], "difficulty": "medium", "marks": 1},
-    {"question_text": "If P(A) = 0.6, P(B) = 0.7, A and B are independent. P(A∩B):", "options": ["0.13", "0.42", "1.0", "0.30"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["independent"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Expected value of fair die roll:", "options": ["3", "3.5", "4", "6"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["expected_value"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Linear programming objective is:", "options": ["A function to maximize/minimize", "Always quadratic", "Never linear", "Random"], "correct_answer": "A", "chapter": "Linear Programming", "topic_tags": ["LP_objective"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Convex set property:", "options": ["Line segment between any two points lies in set", "Always closed", "Always bounded", "Symmetric"], "correct_answer": "A", "chapter": "Linear Programming", "topic_tags": ["convex"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Continuous random variable has probability of exact value:", "options": ["0", "1", "Non-zero", "Random"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["continuous_RV"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Set of all functions on a set forms a:",
+      "options": [
+        "Group",
+        "Algebra",
+        "Monoid",
+        "Vector space"
+      ],
+      "correct_answer": "C",
+      "chapter": "Relations and Functions",
+      "topic_tags": [
+        "function_set"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The set of all functions on a set forms a monoid under function composition because composition is associative and has an identity element (the identity function), but not all functions have inverses, so it doesn't qualify as a group."
+    },
+    {
+      "question_text": "If f: A→B is onto, then:",
+      "options": [
+        "Every b∈B has at least one preimage",
+        "f is one-to-one",
+        "f is constant",
+        "f doesn't exist"
+      ],
+      "correct_answer": "A",
+      "chapter": "Functions",
+      "topic_tags": [
+        "onto"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "An onto (surjective) function means every element in the codomain B must be mapped to by at least one element from domain A. This is the definition of surjectivity, ensuring no element in B is left unmapped."
+    },
+    {
+      "question_text": "Principal value of sin⁻¹(√3/2):",
+      "options": [
+        "π/6",
+        "π/3",
+        "π/4",
+        "π/2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Inverse Trig",
+      "topic_tags": [
+        "arcsin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The principal value of sin⁻¹ must lie in [-π/2, π/2]. Since sin(π/3) = √3/2 and π/3 falls within this range, the answer is π/3."
+    },
+    {
+      "question_text": "If A is 2×3 matrix, A^T is:",
+      "options": [
+        "2×3",
+        "3×2",
+        "3×3",
+        "2×2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "transpose_dim"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "When you transpose a matrix, rows and columns are swapped. A 2×3 matrix has 2 rows and 3 columns, so its transpose has 3 rows and 2 columns, resulting in a 3×2 matrix."
+    },
+    {
+      "question_text": "Det of 3×3 identity matrix:",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "9"
+      ],
+      "correct_answer": "B",
+      "chapter": "Determinants",
+      "topic_tags": [
+        "I_det"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The determinant of an identity matrix is always 1, since the identity matrix has 1s on the main diagonal and 0s elsewhere, and det(I) = 1·1·1 - (0 terms) = 1."
+    },
+    {
+      "question_text": "Rank of [[1,2],[2,4]]:",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "Undefined"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "rank"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The second row is a scalar multiple of the first row (2 times the first row), making them linearly dependent. Therefore, only one row is linearly independent, giving a rank of 1."
+    },
+    {
+      "question_text": "f(x) = |x| is differentiable at x=0?",
+      "options": [
+        "Yes",
+        "No (corner)",
+        "Only from right",
+        "Only from left"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "absolute_value"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The function f(x) = |x| has a sharp corner at x = 0 where the slope changes abruptly from -1 (left) to +1 (right). Since the left and right derivatives differ, the function is not differentiable at this point."
+    },
+    {
+      "question_text": "Second derivative of x²:",
+      "options": [
+        "0",
+        "2",
+        "2x",
+        "x"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "second_deriv"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The first derivative of x² is 2x, and the derivative of 2x is 2, which is constant."
+    },
+    {
+      "question_text": "L'Hopital's rule applies when limit is:",
+      "options": [
+        "0/0 or ∞/∞",
+        "Always",
+        "Only 0/0",
+        "Only at infinity"
+      ],
+      "correct_answer": "A",
+      "chapter": "Limits",
+      "topic_tags": [
+        "LHopital"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "L'Hôpital's rule requires an indeterminate form to apply. The two cases where it works are 0/0 and ∞/∞, as these forms allow the limit of derivatives to determine the original limit. Other indeterminate forms (like 0·∞ or ∞-∞) can sometimes be manipulated into these two cases."
+    },
+    {
+      "question_text": "∫(1/(1+x²)) dx:",
+      "options": [
+        "tan⁻¹(x) + C",
+        "sin⁻¹(x) + C",
+        "ln(1+x²) + C",
+        "1/x + C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": [
+        "arctan_int"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The derivative of tan⁻¹(x) is 1/(1+x²), so by the fundamental theorem of calculus, the antiderivative of 1/(1+x²) is tan⁻¹(x) + C. This is a standard integral formula."
+    },
+    {
+      "question_text": "Integration by parts: ∫u dv = ?",
+      "options": [
+        "uv - ∫v du",
+        "u·v + C",
+        "∫du · v",
+        "u + v"
+      ],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": [
+        "IBP"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Integration by parts is derived from the product rule for differentiation: d(uv) = u dv + v du. Rearranging gives u dv = d(uv) - v du, and integrating both sides yields the formula ∫u dv = uv - ∫v du."
+    },
+    {
+      "question_text": "Mean value theorem requires:",
+      "options": [
+        "Continuous + differentiable on the interval",
+        "Continuous only",
+        "Differentiable only",
+        "Monotonic"
+      ],
+      "correct_answer": "A",
+      "chapter": "Application of Derivatives",
+      "topic_tags": [
+        "MVT"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Mean Value Theorem requires the function to be continuous on the closed interval [a,b] AND differentiable on the open interval (a,b). Both conditions are necessary; continuity alone or differentiability alone is insufficient to guarantee the theorem's conclusion."
+    },
+    {
+      "question_text": "Area between two curves f(x) and g(x) on [a,b] (f ≥ g):",
+      "options": [
+        "∫(f-g) dx",
+        "∫f dx + ∫g dx",
+        "∫f·g dx",
+        "f(b)-g(a)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Application of Integrals",
+      "topic_tags": [
+        "area_between"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The area between two curves is found by integrating the difference of the upper curve minus the lower curve over the given interval. Option A correctly represents this as ∫(f-g) dx from a to b, which calculates the vertical distance between the curves at each point and sums them."
+    },
+    {
+      "question_text": "Solution of dy/dx = x/y:",
+      "options": [
+        "y² = x² + C",
+        "y = x + C",
+        "ln(y) = x",
+        "x² - y² = C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "separable"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "This is a separable differential equation. Rearranging: y dy = x dx. Integrating both sides: ∫y dy = ∫x dx gives y²/2 = x²/2 + C', which simplifies to y² = x² + C."
+    },
+    {
+      "question_text": "First-order linear DE: dy/dx + P(x)y = Q(x). Integrating factor:",
+      "options": [
+        "e^(∫P dx)",
+        "e^(∫Q dx)",
+        "P+Q",
+        "P/Q"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "int_factor"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The integrating factor for a first-order linear DE in standard form dy/dx + P(x)y = Q(x) is μ(x) = e^(∫P dx). Multiplying both sides by this factor converts the left side into the derivative of a product, d/dx[μy], allowing direct integration to solve for y."
+    },
+    {
+      "question_text": "Two vectors are equal if:",
+      "options": [
+        "Same magnitude only",
+        "Same direction only",
+        "Same magnitude AND direction",
+        "Same starting point"
+      ],
+      "correct_answer": "C",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "equal_vectors"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Two vectors are equal when they have both the same magnitude (length) and same direction. Magnitude alone (A) or direction alone (B) is insufficient, and the starting point (D) is irrelevant—vectors can be translated anywhere in space."
+    },
+    {
+      "question_text": "Direction cosines (l, m, n) of a vector satisfy:",
+      "options": [
+        "l + m + n = 1",
+        "l² + m² + n² = 1",
+        "lmn = 1",
+        "l = m = n"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "DCs_identity"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Direction cosines are defined as the cosines of angles that a vector makes with the positive x, y, and z axes. By the Pythagorean identity, these three cosines must satisfy l² + m² + n² = 1, since cos²α + cos²β + cos²γ = 1 for any vector's direction angles."
+    },
+    {
+      "question_text": "Equation of plane through (1,0,0), (0,1,0), (0,0,1):",
+      "options": [
+        "x+y+z=1",
+        "xyz=1",
+        "x²+y²+z²=1",
+        "x-y-z=0"
+      ],
+      "correct_answer": "A",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "plane_intercepts"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A plane through three non-collinear points can be found using the intercept form. Since the plane passes through (1,0,0), (0,1,0), and (0,0,1)—the x, y, and z intercepts respectively—the equation is x/1 + y/1 + z/1 = 1, which simplifies to x+y+z=1."
+    },
+    {
+      "question_text": "Bayes' theorem: P(A|B) = ?",
+      "options": [
+        "P(B|A)·P(A)/P(B)",
+        "P(A)+P(B)",
+        "P(A)·P(B)",
+        "P(B)/P(A)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "Bayes"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Bayes' theorem calculates conditional probability by combining the likelihood P(B|A) with the prior probability P(A), then normalizing by the total probability P(B). This formula reverses the conditioning to find the posterior probability of A given B."
+    },
+    {
+      "question_text": "Binomial probability formula P(X=k):",
+      "options": [
+        "C(n,k)·p^k·(1-p)^(n-k)",
+        "p^k",
+        "n!·p",
+        "p+k"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_pmf"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The binomial probability formula requires three components: the number of ways to choose k successes from n trials C(n,k), the probability of k successes p^k, and the probability of (n-k) failures (1-p)^(n-k). Option A combines all three correctly."
+    },
+    {
+      "question_text": "If P(A) = 0.6, P(B) = 0.7, A and B are independent. P(A∩B):",
+      "options": [
+        "0.13",
+        "0.42",
+        "1.0",
+        "0.30"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "independent"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "When events are independent, P(A∩B) = P(A) × P(B). Therefore, P(A∩B) = 0.6 × 0.7 = 0.42."
+    },
+    {
+      "question_text": "Expected value of fair die roll:",
+      "options": [
+        "3",
+        "3.5",
+        "4",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "expected_value"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The expected value is the average of all possible outcomes weighted by their probabilities. For a fair die: E(X) = (1+2+3+4+5+6)/6 = 21/6 = 3.5."
+    },
+    {
+      "question_text": "Linear programming objective is:",
+      "options": [
+        "A function to maximize/minimize",
+        "Always quadratic",
+        "Never linear",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "Linear Programming",
+      "topic_tags": [
+        "LP_objective"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The objective function in linear programming is specifically designed to be either maximized or minimized—such as maximizing profit or minimizing cost. It represents the goal of the optimization problem."
+    },
+    {
+      "question_text": "Convex set property:",
+      "options": [
+        "Line segment between any two points lies in set",
+        "Always closed",
+        "Always bounded",
+        "Symmetric"
+      ],
+      "correct_answer": "A",
+      "chapter": "Linear Programming",
+      "topic_tags": [
+        "convex"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "A convex set is defined as one where the line segment connecting any two points in the set lies entirely within the set. Options B, C, and D are not required properties—convex sets need not be closed (e.g., open intervals), bounded (e.g., half-planes), or symmetric."
+    },
+    {
+      "question_text": "Continuous random variable has probability of exact value:",
+      "options": [
+        "0",
+        "1",
+        "Non-zero",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "continuous_RV"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For a continuous random variable, the probability of any single exact value is 0 because there are infinitely many possible values in any interval. Probability is only defined for ranges of values, not individual points."
+    }
   ]
 }

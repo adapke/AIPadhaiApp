@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "samacheer_kalvi_board",
   "questions": [
-    {"question_text": "If A = [[1,2],[3,4]], A² is:", "options": ["[[7,10],[15,22]]", "[[1,4],[9,16]]", "[[2,4],[6,8]]", "[[5,11],[11,25]]"], "correct_answer": "A", "chapter": "Matrices", "topic_tags": ["matrix_square"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Inverse of identity matrix I:", "options": ["0", "I", "-I", "Undefined"], "correct_answer": "B", "chapter": "Matrices", "topic_tags": ["inverse"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Rank of zero matrix:", "options": ["0", "1", "undefined", "n"], "correct_answer": "A", "chapter": "Matrices", "topic_tags": ["rank"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Complex number 1+i in polar form r·e^(iθ): r=?", "options": ["1", "√2", "2", "i"], "correct_answer": "B", "chapter": "Complex Numbers", "topic_tags": ["modulus"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Argument of complex number i is:", "options": ["0", "π/2", "π", "3π/2"], "correct_answer": "B", "chapter": "Complex Numbers", "topic_tags": ["argument"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of roots of polynomial x³ - 1 = 0 (counting complex):", "options": ["1", "2", "3", "Infinitely many"], "correct_answer": "C", "chapter": "Theory of Equations", "topic_tags": ["fundamental_theorem"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sum of roots of ax² + bx + c = 0:", "options": ["-b/a", "b/a", "-c/a", "c/a"], "correct_answer": "A", "chapter": "Theory of Equations", "topic_tags": ["Vieta"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If sin⁻¹(x) = π/3, x =", "options": ["1/2", "√3/2", "1", "√2/2"], "correct_answer": "B", "chapter": "Inverse Trig", "topic_tags": ["arcsin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Eccentricity of circle:", "options": ["0", "1", "<1", ">1"], "correct_answer": "A", "chapter": "Two-Dim Analytical Geometry", "topic_tags": ["circle_eccentricity"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Length of latus rectum of y² = 4ax is:", "options": ["a", "2a", "4a", "4a²"], "correct_answer": "C", "chapter": "Conic Sections", "topic_tags": ["latus_rectum"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Direction cosines of x-axis:", "options": ["(1,0,0)", "(0,1,0)", "(0,0,1)", "(1,1,0)"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["direction_cosines"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Vector triple product: a×(b×c) =", "options": ["(a·c)b - (a·b)c", "(a·b)c - (a·c)b", "0", "abc"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["triple_product"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Distance from point (x₀,y₀,z₀) to plane ax+by+cz=d:", "options": ["|ax₀+by₀+cz₀-d|/√(a²+b²+c²)", "ax₀+by₀+cz₀-d", "|d|/√(a²+b²+c²)", "0"], "correct_answer": "A", "chapter": "3D Geometry", "topic_tags": ["distance_plane"], "difficulty": "medium", "marks": 1},
-    {"question_text": "lim x→0 (tan x)/x =", "options": ["0", "1", "∞", "Indeterminate"], "correct_answer": "B", "chapter": "Limits", "topic_tags": ["standard_limit"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Derivative of cos x:", "options": ["-sin x", "sin x", "-cos x", "tan x"], "correct_answer": "A", "chapter": "Differentiation", "topic_tags": ["trig_derivative"], "difficulty": "easy", "marks": 1},
-    {"question_text": "∫(1/x) dx =", "options": ["ln|x| + C", "x ln x", "-1/x²", "1/x²"], "correct_answer": "A", "chapter": "Integration", "topic_tags": ["log_integral"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Definite integral ∫₀^π sin x dx =", "options": ["0", "1", "2", "π"], "correct_answer": "C", "chapter": "Definite Integration", "topic_tags": ["sin_integral"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Area enclosed by y = x and x-axis between x=0 and x=2:", "options": ["1", "2", "4", "8"], "correct_answer": "B", "chapter": "Application of Integrals", "topic_tags": ["area"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Order of differential equation (d²y/dx²)³ + y = 0:", "options": ["1", "2", "3", "6"], "correct_answer": "B", "chapter": "Differential Equations", "topic_tags": ["order"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Degree of differential equation (dy/dx)² + y² = x:", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Differential Equations", "topic_tags": ["degree"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Solution of dy/dx = e^x is:", "options": ["e^x + C", "x e^x + C", "x + C", "ln(x) + C"], "correct_answer": "A", "chapter": "Differential Equations", "topic_tags": ["separable"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mean of binomial B(20, 0.5):", "options": ["5", "10", "15", "20"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["binomial_mean"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Variance of binomial B(n, p):", "options": ["np", "np(1-p)", "n²p", "p(1-p)"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["binomial_variance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If P(A∩B) = P(A)·P(B), events are:", "options": ["Mutually exclusive", "Independent", "Equal", "Dependent"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["independence"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sum of first 100 natural numbers:", "options": ["5050", "10100", "1000", "5000"], "correct_answer": "A", "chapter": "Sequences", "topic_tags": ["sum_natural"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "If A = [[1,2],[3,4]], A² is:",
+      "options": [
+        "[[7,10],[15,22]]",
+        "[[1,4],[9,16]]",
+        "[[2,4],[6,8]]",
+        "[[5,11],[11,25]]"
+      ],
+      "correct_answer": "A",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "matrix_square"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Multiply A by itself: the (1,1) entry is 1(1)+2(3)=7, (1,2) is 1(2)+2(4)=10, (2,1) is 3(1)+4(3)=15, and (2,2) is 3(2)+4(4)=22, giving [[7,10],[15,22]]."
+    },
+    {
+      "question_text": "Inverse of identity matrix I:",
+      "options": [
+        "0",
+        "I",
+        "-I",
+        "Undefined"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "inverse"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The identity matrix I multiplied by itself equals I (I × I = I), so I is its own inverse since A × A⁻¹ = I requires A⁻¹ = I when A = I."
+    },
+    {
+      "question_text": "Rank of zero matrix:",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "n"
+      ],
+      "correct_answer": "A",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "rank"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The zero matrix contains no linearly independent rows or columns, so its rank is 0. Rank measures the dimension of the row/column space, which is empty for a matrix with all zero entries."
+    },
+    {
+      "question_text": "Complex number 1+i in polar form r·e^(iθ): r=?",
+      "options": [
+        "1",
+        "√2",
+        "2",
+        "i"
+      ],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "modulus"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The modulus (magnitude) of a complex number a+bi is calculated as r = √(a²+b²). For 1+i, this gives r = √(1²+1²) = √2."
+    },
+    {
+      "question_text": "Argument of complex number i is:",
+      "options": [
+        "0",
+        "π/2",
+        "π",
+        "3π/2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "argument"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The complex number i lies on the positive imaginary axis of the complex plane. The argument is the angle measured counterclockwise from the positive real axis, which is π/2 radians (90°)."
+    },
+    {
+      "question_text": "Number of roots of polynomial x³ - 1 = 0 (counting complex):",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "Infinitely many"
+      ],
+      "correct_answer": "C",
+      "chapter": "Theory of Equations",
+      "topic_tags": [
+        "fundamental_theorem"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "By the Fundamental Theorem of Algebra, a polynomial of degree n has exactly n complex roots (counting multiplicities). Since x³ - 1 = 0 is a cubic polynomial, it has exactly 3 complex roots: 1, e^(2πi/3), and e^(4πi/3)."
+    },
+    {
+      "question_text": "Sum of roots of ax² + bx + c = 0:",
+      "options": [
+        "-b/a",
+        "b/a",
+        "-c/a",
+        "c/a"
+      ],
+      "correct_answer": "A",
+      "chapter": "Theory of Equations",
+      "topic_tags": [
+        "Vieta"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "By Vieta's formulas, for a quadratic equation ax² + bx + c = 0, the sum of roots equals the negative coefficient of x divided by the leading coefficient, which is -b/a."
+    },
+    {
+      "question_text": "If sin⁻¹(x) = π/3, x =",
+      "options": [
+        "1/2",
+        "√3/2",
+        "1",
+        "√2/2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Inverse Trig",
+      "topic_tags": [
+        "arcsin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "sin⁻¹(x) = π/3 means we need to find the value whose sine equals π/3. Since sin(π/3) = √3/2, we have x = √3/2."
+    },
+    {
+      "question_text": "Eccentricity of circle:",
+      "options": [
+        "0",
+        "1",
+        "<1",
+        ">1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Two-Dim Analytical Geometry",
+      "topic_tags": [
+        "circle_eccentricity"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A circle is a special case of an ellipse where both foci coincide at the center. Eccentricity measures how much a conic deviates from being circular, calculated as e = c/a (distance between foci divided by semi-major axis). For a circle, c = 0, making eccentricity = 0."
+    },
+    {
+      "question_text": "Length of latus rectum of y² = 4ax is:",
+      "options": [
+        "a",
+        "2a",
+        "4a",
+        "4a²"
+      ],
+      "correct_answer": "C",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "latus_rectum"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The latus rectum is the chord through the focus perpendicular to the axis of symmetry. For the parabola y² = 4ax, the focus is at (a, 0). Substituting x = a into y² = 4ax gives y² = 4a², so y = ±2a. The distance between these two points is 4a."
+    },
+    {
+      "question_text": "Direction cosines of x-axis:",
+      "options": [
+        "(1,0,0)",
+        "(0,1,0)",
+        "(0,0,1)",
+        "(1,1,0)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "direction_cosines"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The x-axis is parallel to the vector (1,0,0), which points in the positive x-direction with no y or z components. Direction cosines are the cosines of angles a line makes with coordinate axes; for the x-axis these are cos(0°), cos(90°), cos(90°) = (1,0,0)."
+    },
+    {
+      "question_text": "Vector triple product: a×(b×c) =",
+      "options": [
+        "(a·c)b - (a·b)c",
+        "(a·b)c - (a·c)b",
+        "0",
+        "abc"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "triple_product"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The vector triple product a×(b×c) follows the BAC-CAB rule: the result equals the middle vector times the dot product of the outer vectors, minus the first vector times the dot product of the other two. This gives (a·c)b - (a·b)c."
+    },
+    {
+      "question_text": "Distance from point (x₀,y₀,z₀) to plane ax+by+cz=d:",
+      "options": [
+        "|ax₀+by₀+cz₀-d|/√(a²+b²+c²)",
+        "ax₀+by₀+cz₀-d",
+        "|d|/√(a²+b²+c²)",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "distance_plane"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The distance formula uses the absolute value of the plane equation evaluated at the point, divided by the magnitude of the normal vector (a,b,c). This accounts for signed distance and normalizes by the plane's orientation, giving the perpendicular distance regardless of the point's position relative to the plane."
+    },
+    {
+      "question_text": "lim x→0 (tan x)/x =",
+      "options": [
+        "0",
+        "1",
+        "∞",
+        "Indeterminate"
+      ],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": [
+        "standard_limit"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the standard limit formula, lim x→0 (sin x)/x = 1, we can write tan x = sin x/cos x. Therefore, lim x→0 (tan x)/x = lim x→0 (sin x)/(x cos x) = lim x→0 (sin x)/x · 1/cos x = 1 · 1/1 = 1."
+    },
+    {
+      "question_text": "Derivative of cos x:",
+      "options": [
+        "-sin x",
+        "sin x",
+        "-cos x",
+        "tan x"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "trig_derivative"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The derivative of cos x is found using the standard differentiation rule: d/dx(cos x) = -sin x. The negative sign appears because cosine is a decreasing function at x = 0 and nearby points."
+    },
+    {
+      "question_text": "∫(1/x) dx =",
+      "options": [
+        "ln|x| + C",
+        "x ln x",
+        "-1/x²",
+        "1/x²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": [
+        "log_integral"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The antiderivative of 1/x is ln|x| + C because the derivative of ln|x| equals 1/x. The absolute value is necessary to handle negative x-values, and the constant C represents all possible antiderivatives."
+    },
+    {
+      "question_text": "Definite integral ∫₀^π sin x dx =",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "π"
+      ],
+      "correct_answer": "C",
+      "chapter": "Definite Integration",
+      "topic_tags": [
+        "sin_integral"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The antiderivative of sin x is -cos x. Evaluating from 0 to π: [-cos π - (-cos 0)] = [-(-1) - (-1)] = [1 + 1] = 2."
+    },
+    {
+      "question_text": "Area enclosed by y = x and x-axis between x=0 and x=2:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Application of Integrals",
+      "topic_tags": [
+        "area"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The area is found by integrating y = x from x = 0 to x = 2: ∫₀² x dx = [x²/2]₀² = 4/2 - 0 = 2."
+    },
+    {
+      "question_text": "Order of differential equation (d²y/dx²)³ + y = 0:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "order"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The order of a differential equation is determined by the highest derivative present, not by any exponents applied to it. Here, the highest derivative is d²y/dx², which is a second-order derivative, so the order is 2."
+    },
+    {
+      "question_text": "Degree of differential equation (dy/dx)² + y² = x:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "degree"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The degree of a differential equation is the highest power of the highest-order derivative. Here, the highest-order derivative is dy/dx (first order), and it appears with power 2 in the term (dy/dx)². Therefore, the degree is 2."
+    },
+    {
+      "question_text": "Solution of dy/dx = e^x is:",
+      "options": [
+        "e^x + C",
+        "x e^x + C",
+        "x + C",
+        "ln(x) + C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "separable"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The solution requires integrating both sides: ∫dy = ∫e^x dx. Since the integral of e^x is e^x itself, the solution is y = e^x + C, where C is the constant of integration."
+    },
+    {
+      "question_text": "Mean of binomial B(20, 0.5):",
+      "options": [
+        "5",
+        "10",
+        "15",
+        "20"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_mean"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a binomial distribution B(n, p), the mean is calculated as np. With n = 20 and p = 0.5, the mean equals 20 × 0.5 = 10."
+    },
+    {
+      "question_text": "Variance of binomial B(n, p):",
+      "options": [
+        "np",
+        "np(1-p)",
+        "n²p",
+        "p(1-p)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_variance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a binomial distribution B(n, p), the variance measures spread around the mean. It equals n times the variance of a single Bernoulli trial p(1-p), giving np(1-p)."
+    },
+    {
+      "question_text": "If P(A∩B) = P(A)·P(B), events are:",
+      "options": [
+        "Mutually exclusive",
+        "Independent",
+        "Equal",
+        "Dependent"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "independence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The equation P(A∩B) = P(A)·P(B) is the defining mathematical condition for independent events. When this multiplication rule holds, it means the occurrence of one event doesn't affect the probability of the other."
+    },
+    {
+      "question_text": "Sum of first 100 natural numbers:",
+      "options": [
+        "5050",
+        "10100",
+        "1000",
+        "5000"
+      ],
+      "correct_answer": "A",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "sum_natural"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The sum of first n natural numbers uses the formula n(n+1)/2. For n=100: 100(101)/2 = 10100/2 = 5050."
+    }
   ]
 }

@@ -6,30 +6,431 @@
   "default_year": 2023,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Year of Indian Independence:", "options": ["1945", "1947", "1950", "1942"], "correct_answer": "B", "chapter": "Modern History", "topic_tags": ["Independence"], "difficulty": "easy", "marks": 1},
-    {"question_text": "First Prime Minister of India:", "options": ["Gandhi", "Nehru", "Patel", "Bose"], "correct_answer": "B", "chapter": "Modern History", "topic_tags": ["Nehru"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Architect of Indian Constitution:", "options": ["Gandhi", "Nehru", "Ambedkar", "Patel"], "correct_answer": "C", "chapter": "Indian Polity", "topic_tags": ["Ambedkar"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Capital of Maharashtra:", "options": ["Mumbai", "Pune", "Nagpur", "Nashik"], "correct_answer": "A", "chapter": "Political Geography", "topic_tags": ["capitals"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Longest river entirely in India:", "options": ["Brahmaputra", "Ganga", "Krishna", "Godavari"], "correct_answer": "D", "chapter": "Drainage", "topic_tags": ["rivers"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Highest peak of India:", "options": ["Everest", "K2", "Kanchenjunga", "Nanda Devi"], "correct_answer": "C", "chapter": "Physical Features", "topic_tags": ["mountains"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Sundarban biosphere is in:", "options": ["Maharashtra", "West Bengal", "Tamil Nadu", "Kerala"], "correct_answer": "B", "chapter": "Forests", "topic_tags": ["Sundarbans"], "difficulty": "easy", "marks": 1},
-    {"question_text": "RTI Act passed in:", "options": ["2000", "2005", "2010", "2015"], "correct_answer": "B", "chapter": "Democratic Rights", "topic_tags": ["RTI"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Indian Standard Time meridian:", "options": ["75°E", "82.5°E", "90°E", "78°E"], "correct_answer": "B", "chapter": "Geography Basics", "topic_tags": ["IST"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mahatma Gandhi started Salt Satyagraha in:", "options": ["1920", "1925", "1930", "1942"], "correct_answer": "C", "chapter": "Indian Nationalism", "topic_tags": ["Salt_March"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Civil Disobedience Movement was launched in:", "options": ["1920", "1930", "1942", "1947"], "correct_answer": "B", "chapter": "Indian Nationalism", "topic_tags": ["civil_disobedience"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Money supplied by Reserve Bank of India:", "options": ["Hard currency", "Cheques", "Time deposits", "High-powered money"], "correct_answer": "D", "chapter": "Money and Credit", "topic_tags": ["RBI"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Tropic of Cancer passes through:", "options": ["5 states", "6 states", "8 states", "10 states"], "correct_answer": "C", "chapter": "Geography Basics", "topic_tags": ["Tropic_Cancer"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Capital of Bihar:", "options": ["Patna", "Ranchi", "Lucknow", "Bhopal"], "correct_answer": "A", "chapter": "Political Geography", "topic_tags": ["capitals"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Father of nationalism in Italy:", "options": ["Mazzini", "Garibaldi", "Cavour", "Bismarck"], "correct_answer": "A", "chapter": "Nationalism in Europe", "topic_tags": ["Mazzini"], "difficulty": "medium", "marks": 1},
-    {"question_text": "First woman President of India:", "options": ["Indira", "Pratibha Patil", "Sonia", "Sushma"], "correct_answer": "B", "chapter": "Indian Polity", "topic_tags": ["President"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Author of national anthem:", "options": ["Tagore", "Bankim Chandra", "Gandhi", "Nehru"], "correct_answer": "A", "chapter": "Indian Heritage", "topic_tags": ["Tagore", "anthem"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Author of national song Vande Mataram:", "options": ["Tagore", "Bankim Chandra Chatterjee", "Gandhi", "Nehru"], "correct_answer": "B", "chapter": "Indian Heritage", "topic_tags": ["Vande_Mataram"], "difficulty": "medium", "marks": 1},
-    {"question_text": "First five-year plan started in India in:", "options": ["1947", "1951", "1957", "1961"], "correct_answer": "B", "chapter": "Economy", "topic_tags": ["five_year_plan"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Green Revolution in India was in:", "options": ["1950s", "1960s-70s", "1980s", "1990s"], "correct_answer": "B", "chapter": "Agriculture", "topic_tags": ["Green_Revolution"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Black soil best suited for:", "options": ["Rice", "Cotton", "Tea", "Wheat"], "correct_answer": "B", "chapter": "Agriculture", "topic_tags": ["soil"], "difficulty": "easy", "marks": 1},
-    {"question_text": "First general elections in India:", "options": ["1947", "1950", "1951-52", "1955"], "correct_answer": "C", "chapter": "Indian Polity", "topic_tags": ["elections"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Jallianwala Bagh massacre year:", "options": ["1915", "1919", "1923", "1930"], "correct_answer": "B", "chapter": "Indian Nationalism", "topic_tags": ["Jallianwala"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Khilafat Movement leader:", "options": ["Gandhi", "Ali brothers", "Subhash Bose", "Nehru"], "correct_answer": "B", "chapter": "Indian Nationalism", "topic_tags": ["Khilafat"], "difficulty": "medium", "marks": 1},
-    {"question_text": "First president of Indian National Congress:", "options": ["Dadabhai Naoroji", "W.C. Bonnerjee", "A.O. Hume", "Gandhi"], "correct_answer": "B", "chapter": "Indian Nationalism", "topic_tags": ["INC_founders"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Year of Indian Independence:",
+      "options": [
+        "1945",
+        "1947",
+        "1950",
+        "1942"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern History",
+      "topic_tags": [
+        "Independence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "India gained independence from British rule on August 15, 1947, when the Indian Independence Act came into effect, marking the end of colonial governance and the birth of the independent Indian nation."
+    },
+    {
+      "question_text": "First Prime Minister of India:",
+      "options": [
+        "Gandhi",
+        "Nehru",
+        "Patel",
+        "Bose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern History",
+      "topic_tags": [
+        "Nehru"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Jawaharlal Nehru was appointed as India's first Prime Minister in 1947 after independence, serving until 1964. While Gandhi was the independence leader, he held no formal governmental position; Patel and Bose were not Prime Ministers."
+    },
+    {
+      "question_text": "Architect of Indian Constitution:",
+      "options": [
+        "Gandhi",
+        "Nehru",
+        "Ambedkar",
+        "Patel"
+      ],
+      "correct_answer": "C",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "Ambedkar"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Dr. B.R. Ambedkar was the chairman of the Drafting Committee of the Indian Constitution and played the primary role in its formulation, earning him the title \"Architect of the Indian Constitution.\" While Gandhi, Nehru, and Patel were important independence leaders, Ambedkar specifically authored the constitutional framework."
+    },
+    {
+      "question_text": "Capital of Maharashtra:",
+      "options": [
+        "Mumbai",
+        "Pune",
+        "Nagpur",
+        "Nashik"
+      ],
+      "correct_answer": "A",
+      "chapter": "Political Geography",
+      "topic_tags": [
+        "capitals"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Mumbai is the capital of Maharashtra state in India. It serves as the state's administrative, financial, and cultural center, and is also India's largest city by population."
+    },
+    {
+      "question_text": "Longest river entirely in India:",
+      "options": [
+        "Brahmaputra",
+        "Ganga",
+        "Krishna",
+        "Godavari"
+      ],
+      "correct_answer": "D",
+      "chapter": "Drainage",
+      "topic_tags": [
+        "rivers"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Godavari is the longest river entirely within India's borders, flowing approximately 1,465 km through the Deccan Plateau. The other options either originate or flow through neighboring countries—the Brahmaputra and Ganga originate in Tibet/Nepal, and the Krishna originates outside India's traditional boundaries."
+    },
+    {
+      "question_text": "Highest peak of India:",
+      "options": [
+        "Everest",
+        "K2",
+        "Kanchenjunga",
+        "Nanda Devi"
+      ],
+      "correct_answer": "C",
+      "chapter": "Physical Features",
+      "topic_tags": [
+        "mountains"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Kanchenjunga is the highest peak entirely within Indian territory at 8,586 meters. Mount Everest is higher but lies on the India-Nepal border, and K2 is in the disputed Kashmir region. Therefore, Kanchenjunga is India's highest peak by conventional geographical definition."
+    },
+    {
+      "question_text": "Sundarban biosphere is in:",
+      "options": [
+        "Maharashtra",
+        "West Bengal",
+        "Tamil Nadu",
+        "Kerala"
+      ],
+      "correct_answer": "B",
+      "chapter": "Forests",
+      "topic_tags": [
+        "Sundarbans"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Sundarbans is a vast mangrove forest located in the delta region where the Ganges, Brahmaputra, and Meghna rivers meet. This delta region is primarily situated in West Bengal, India, with a smaller portion extending into Bangladesh, making it one of the world's largest mangrove ecosystems."
+    },
+    {
+      "question_text": "RTI Act passed in:",
+      "options": [
+        "2000",
+        "2005",
+        "2010",
+        "2015"
+      ],
+      "correct_answer": "B",
+      "chapter": "Democratic Rights",
+      "topic_tags": [
+        "RTI"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Right to Information (RTI) Act was enacted in India in 2005, replacing the earlier Freedom of Information Act of 1989. It became effective on October 12, 2005, and established citizens' right to access government information."
+    },
+    {
+      "question_text": "Indian Standard Time meridian:",
+      "options": [
+        "75°E",
+        "82.5°E",
+        "90°E",
+        "78°E"
+      ],
+      "correct_answer": "B",
+      "chapter": "Geography Basics",
+      "topic_tags": [
+        "IST"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The 82.5°E meridian was chosen for Indian Standard Time because it represents the midpoint between India's easternmost (97°E) and westernmost (68°E) longitudes, ensuring a single unified time zone across the entire country while minimizing time differences at the borders."
+    },
+    {
+      "question_text": "Mahatma Gandhi started Salt Satyagraha in:",
+      "options": [
+        "1920",
+        "1925",
+        "1930",
+        "1942"
+      ],
+      "correct_answer": "C",
+      "chapter": "Indian Nationalism",
+      "topic_tags": [
+        "Salt_March"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Salt Satyagraha, also known as the Salt March, was Gandhi's major civil disobedience campaign against British salt monopoly in India. It began in March 1930 when Gandhi led thousands from Ahmedabad to the coastal town of Dandi to produce salt, directly challenging colonial authority and becoming a pivotal moment in India's independence movement."
+    },
+    {
+      "question_text": "Civil Disobedience Movement was launched in:",
+      "options": [
+        "1920",
+        "1930",
+        "1942",
+        "1947"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Nationalism",
+      "topic_tags": [
+        "civil_disobedience"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Civil Disobedience Movement, also known as the Salt March, was launched by Gandhi in 1930 to protest British salt monopoly and colonial rule, making it India's most significant mass civil resistance campaign before independence."
+    },
+    {
+      "question_text": "Money supplied by Reserve Bank of India:",
+      "options": [
+        "Hard currency",
+        "Cheques",
+        "Time deposits",
+        "High-powered money"
+      ],
+      "correct_answer": "D",
+      "chapter": "Money and Credit",
+      "topic_tags": [
+        "RBI"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Reserve Bank of India directly controls and supplies high-powered money (monetary base), which includes currency in circulation and bank reserves. Options A, B, and C are either derivative forms of money or liabilities held by other institutions, not directly supplied by the RBI."
+    },
+    {
+      "question_text": "Tropic of Cancer passes through:",
+      "options": [
+        "5 states",
+        "6 states",
+        "8 states",
+        "10 states"
+      ],
+      "correct_answer": "C",
+      "chapter": "Geography Basics",
+      "topic_tags": [
+        "Tropic_Cancer"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Tropic of Cancer (23.5°N latitude) passes through 8 Indian states: Rajasthan, Gujarat, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram, making it a significant geographical reference line dividing India into tropical and subtropical regions."
+    },
+    {
+      "question_text": "Capital of Bihar:",
+      "options": [
+        "Patna",
+        "Ranchi",
+        "Lucknow",
+        "Bhopal"
+      ],
+      "correct_answer": "A",
+      "chapter": "Political Geography",
+      "topic_tags": [
+        "capitals"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Patna is the capital of Bihar state in India. Ranchi is the capital of Jharkhand, Lucknow is the capital of Uttar Pradesh, and Bhopal is the capital of Madhya Pradesh."
+    },
+    {
+      "question_text": "Father of nationalism in Italy:",
+      "options": [
+        "Mazzini",
+        "Garibaldi",
+        "Cavour",
+        "Bismarck"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nationalism in Europe",
+      "topic_tags": [
+        "Mazzini"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Mazzini founded Young Italy, a revolutionary movement promoting Italian unification based on nationalist ideals and popular sovereignty, earning him the title \"Father of Italian Nationalism\" for his ideological contributions to the nationalist movement."
+    },
+    {
+      "question_text": "First woman President of India:",
+      "options": [
+        "Indira",
+        "Pratibha Patil",
+        "Sonia",
+        "Sushma"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "President"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Pratibha Patil served as India's 12th President from 2007 to 2012, making her the first woman to hold this constitutional position. The other options were prominent female political figures but never served as President."
+    },
+    {
+      "question_text": "Author of national anthem:",
+      "options": [
+        "Tagore",
+        "Bankim Chandra",
+        "Gandhi",
+        "Nehru"
+      ],
+      "correct_answer": "A",
+      "chapter": "Indian Heritage",
+      "topic_tags": [
+        "Tagore",
+        "anthem"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Rabindranath Tagore composed \"Jana Gana Mana,\" India's national anthem, in 1911. It was officially adopted as the national anthem after independence in 1950."
+    },
+    {
+      "question_text": "Author of national song Vande Mataram:",
+      "options": [
+        "Tagore",
+        "Bankim Chandra Chatterjee",
+        "Gandhi",
+        "Nehru"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Heritage",
+      "topic_tags": [
+        "Vande_Mataram"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Bankim Chandra Chatterjee wrote \"Vande Mataram\" in 1876 as part of his novel \"Anandamath.\" It became a rallying cry for the Indian independence movement and was later adopted as the national song, distinguishing it from the national anthem \"Jana Gana Mana\" written by Tagore."
+    },
+    {
+      "question_text": "First five-year plan started in India in:",
+      "options": [
+        "1947",
+        "1951",
+        "1957",
+        "1961"
+      ],
+      "correct_answer": "B",
+      "chapter": "Economy",
+      "topic_tags": [
+        "five_year_plan"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "India's first five-year plan was launched in 1951 under Prime Minister Jawaharlal Nehru's leadership, following the country's independence in 1947 and adoption of the Constitution in 1950, as part of the planned development strategy for the newly independent nation."
+    },
+    {
+      "question_text": "Green Revolution in India was in:",
+      "options": [
+        "1950s",
+        "1960s-70s",
+        "1980s",
+        "1990s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "Green_Revolution"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Green Revolution in India began in the mid-1960s under Prime Minister Lal Bahadur Shastri and gained momentum through the 1970s, introducing high-yielding crop varieties, fertilizers, and modern farming techniques to dramatically increase agricultural production."
+    },
+    {
+      "question_text": "Black soil best suited for:",
+      "options": [
+        "Rice",
+        "Cotton",
+        "Tea",
+        "Wheat"
+      ],
+      "correct_answer": "B",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "soil"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Black soil, also called regur soil, is rich in clay content and nutrients like iron and magnesium, making it ideal for cotton cultivation. Cotton requires well-draining soil that retains moisture during dry periods, which black soil provides perfectly."
+    },
+    {
+      "question_text": "First general elections in India:",
+      "options": [
+        "1947",
+        "1950",
+        "1951-52",
+        "1955"
+      ],
+      "correct_answer": "C",
+      "chapter": "Indian Polity",
+      "topic_tags": [
+        "elections"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "India's Constitution was adopted in 1950, but the first general elections were conducted over several months in 1951-52 due to the country's vast size, diverse population, and logistical challenges in organizing elections across all states and union territories."
+    },
+    {
+      "question_text": "Jallianwala Bagh massacre year:",
+      "options": [
+        "1915",
+        "1919",
+        "1923",
+        "1930"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Nationalism",
+      "topic_tags": [
+        "Jallianwala"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Jallianwala Bagh massacre occurred on April 13, 1919, in Amritsar, India, when British troops fired on an unarmed crowd protesting colonial policies, killing hundreds and becoming a pivotal event in India's independence movement."
+    },
+    {
+      "question_text": "Khilafat Movement leader:",
+      "options": [
+        "Gandhi",
+        "Ali brothers",
+        "Subhash Bose",
+        "Nehru"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Nationalism",
+      "topic_tags": [
+        "Khilafat"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Ali brothers (Muhammad Ali and Shaukat Ali) were the primary leaders of the Khilafat Movement (1919-1924), which opposed the abolition of the Ottoman Caliphate. While Gandhi supported the movement, the Ali brothers initiated and championed it most prominently."
+    },
+    {
+      "question_text": "First president of Indian National Congress:",
+      "options": [
+        "Dadabhai Naoroji",
+        "W.C. Bonnerjee",
+        "A.O. Hume",
+        "Gandhi"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Nationalism",
+      "topic_tags": [
+        "INC_founders"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "W.C. Bonnerjee was the first president when the Indian National Congress was founded in 1885. While A.O. Hume was the key organizer behind its creation, Bonnerjee served as the inaugural president of the organization itself."
+    }
   ]
 }

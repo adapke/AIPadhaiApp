@@ -6,30 +6,430 @@
   "default_year": 2021,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Number of neutrons in O-16:", "options": ["8", "16", "24", "32"], "correct_answer": "A", "chapter": "Atomic Structure", "topic_tags": ["neutrons"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Bond angle in BF3:", "options": ["104.5°", "107°", "120°", "180°"], "correct_answer": "C", "chapter": "Chemical Bonding", "topic_tags": ["BF3"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most stable conformation of cyclohexane:", "options": ["Chair", "Boat", "Twist-boat", "Planar"], "correct_answer": "A", "chapter": "Stereochemistry", "topic_tags": ["cyclohexane"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Acid strength: CH3COOH, HCOOH, CCl3COOH:", "options": ["Acetic > Formic > Trichloroacetic", "Trichloroacetic > Formic > Acetic", "Equal", "Formic > Acetic > Trichloroacetic"], "correct_answer": "B", "chapter": "Carboxylic Acids", "topic_tags": ["acid_strength"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reaction of ester with NaOH gives:", "options": ["Acid + alcohol", "Salt of acid + alcohol (saponification)", "Two alcohols", "No reaction"], "correct_answer": "B", "chapter": "Esters", "topic_tags": ["saponification"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Common ore of aluminium:", "options": ["Hematite", "Bauxite", "Galena", "Cinnabar"], "correct_answer": "B", "chapter": "Metallurgy", "topic_tags": ["bauxite"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Process of extracting iron from ore:", "options": ["Smelting", "Cracking", "Distillation", "Sublimation"], "correct_answer": "A", "chapter": "Metallurgy", "topic_tags": ["iron"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Equilibrium constant Kp for N2 + 3H2 ⇌ 2NH3 has units:", "options": ["atm⁻²", "atm²", "atm", "Dimensionless"], "correct_answer": "A", "chapter": "Equilibrium", "topic_tags": ["Kp_units"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Rate-determining step in a multi-step reaction:", "options": ["Fastest step", "Slowest step", "First step always", "Last step always"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["RDS"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Catalyst affects:", "options": ["Equilibrium constant", "Activation energy", "Both", "Free energy"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["catalyst"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Vapor pressure of solution containing non-volatile solute is:", "options": ["Higher than solvent", "Lower than solvent", "Equal", "Indeterminate"], "correct_answer": "B", "chapter": "Solutions", "topic_tags": ["Raoult"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Molarity is moles of solute per:", "options": ["liter of solvent", "liter of solution", "kg of solvent", "kg of solution"], "correct_answer": "B", "chapter": "Solutions", "topic_tags": ["molarity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Electrolysis of brine produces:", "options": ["H2 + Cl2 + NaOH", "Na + Cl2", "H2O", "HCl"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["brine"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Faraday constant approximately:", "options": ["96,500 C/mol", "6.022×10²³", "9.81 m/s²", "1.66×10⁻²⁷"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["Faraday"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Geometry of [Fe(CN)6]³⁻:", "options": ["Tetrahedral", "Octahedral", "Square planar", "Linear"], "correct_answer": "B", "chapter": "Coordination Compounds", "topic_tags": ["octahedral"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of unpaired electrons in [Co(NH3)6]³⁺ (Co³⁺, d6, strong field):", "options": ["0", "2", "4", "6"], "correct_answer": "A", "chapter": "Coordination Compounds", "topic_tags": ["CFT"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Largest atomic radius:", "options": ["F", "Cl", "Br", "I"], "correct_answer": "D", "chapter": "Periodic Properties", "topic_tags": ["radius_halogen"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Common name for CH3CH(OH)CH3:", "options": ["Isopropyl alcohol", "n-Propyl alcohol", "Methyl ethanol", "Acetone"], "correct_answer": "A", "chapter": "Alcohols", "topic_tags": ["isopropanol"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Polythene is a polymer of:", "options": ["Ethene", "Propene", "Styrene", "Vinyl chloride"], "correct_answer": "A", "chapter": "Polymers", "topic_tags": ["polythene"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Aspirin is used as:", "options": ["Antibiotic", "Antipyretic + analgesic", "Antiseptic", "Vitamin"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["aspirin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most common isotope of hydrogen:", "options": ["Protium", "Deuterium", "Tritium", "Equal"], "correct_answer": "A", "chapter": "Hydrogen", "topic_tags": ["isotopes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Lewis structure of O3 (ozone) has:", "options": ["One double + one single bond resonance", "Three single bonds", "Three double bonds", "No bonds"], "correct_answer": "A", "chapter": "Chemical Bonding", "topic_tags": ["ozone"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Most metallic element:", "options": ["Fr", "Li", "F", "He"], "correct_answer": "A", "chapter": "Periodic Properties", "topic_tags": ["metallic_character"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Buffer solution: HA + NaA. Maximum buffering at pH:", "options": ["pKa - 1", "pKa", "pKa + 1", "7"], "correct_answer": "B", "chapter": "Equilibrium", "topic_tags": ["buffer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Sucrose hydrolysis gives:", "options": ["Glucose only", "Fructose only", "Glucose + fructose", "Glucose + galactose"], "correct_answer": "C", "chapter": "Biomolecules", "topic_tags": ["sucrose"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Number of neutrons in O-16:",
+      "options": [
+        "8",
+        "16",
+        "24",
+        "32"
+      ],
+      "correct_answer": "A",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "neutrons"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Oxygen-16 has atomic number 8 (8 protons). The mass number 16 equals protons plus neutrons, so neutrons = 16 - 8 = 8."
+    },
+    {
+      "question_text": "Bond angle in BF3:",
+      "options": [
+        "104.5°",
+        "107°",
+        "120°",
+        "180°"
+      ],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "BF3"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "BF3 has boron as the central atom with three fluorine atoms bonded to it. Boron has three valence electrons and forms three B-F bonds with no lone pairs, resulting in sp² hybridization and a trigonal planar molecular geometry where all F-B-F bond angles are 120°."
+    },
+    {
+      "question_text": "Most stable conformation of cyclohexane:",
+      "options": [
+        "Chair",
+        "Boat",
+        "Twist-boat",
+        "Planar"
+      ],
+      "correct_answer": "A",
+      "chapter": "Stereochemistry",
+      "topic_tags": [
+        "cyclohexane"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The chair conformation minimizes steric strain by maximizing distance between atoms—hydrogens occupy equatorial and axial positions with minimal overlap. The boat conformation creates destabilizing interactions between flagpole hydrogens, making chair approximately 11 kcal/mol more stable."
+    },
+    {
+      "question_text": "Acid strength: CH3COOH, HCOOH, CCl3COOH:",
+      "options": [
+        "Acetic > Formic > Trichloroacetic",
+        "Trichloroacetic > Formic > Acetic",
+        "Equal",
+        "Formic > Acetic > Trichloroacetic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": [
+        "acid_strength"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Electron-withdrawing chlorine atoms stabilize the conjugate base (CCl3COO−) through inductive effects, making trichloroacetic acid the strongest. Formic acid is stronger than acetic acid because its smaller, less electron-donating hydrogen substituent destabilizes the conjugate base less than the methyl group in acetic acid."
+    },
+    {
+      "question_text": "Reaction of ester with NaOH gives:",
+      "options": [
+        "Acid + alcohol",
+        "Salt of acid + alcohol (saponification)",
+        "Two alcohols",
+        "No reaction"
+      ],
+      "correct_answer": "B",
+      "chapter": "Esters",
+      "topic_tags": [
+        "saponification"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Saponification is the hydrolysis of an ester by a strong base like NaOH, which breaks the ester bond and converts the carboxylic acid product into its sodium salt, while releasing the alcohol. This produces a salt of the acid plus alcohol, not a free acid."
+    },
+    {
+      "question_text": "Common ore of aluminium:",
+      "options": [
+        "Hematite",
+        "Bauxite",
+        "Galena",
+        "Cinnabar"
+      ],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": [
+        "bauxite"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Bauxite is the primary ore of aluminum, containing aluminum oxide (Al₂O₃) as its main component. The other options are ores of iron (hematite), lead (galena), and mercury (cinnabar), respectively."
+    },
+    {
+      "question_text": "Process of extracting iron from ore:",
+      "options": [
+        "Smelting",
+        "Cracking",
+        "Distillation",
+        "Sublimation"
+      ],
+      "correct_answer": "A",
+      "chapter": "Metallurgy",
+      "topic_tags": [
+        "iron"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Iron is extracted from its ore through heating with carbon in a blast furnace, which is the definition of smelting. The other processes (cracking for hydrocarbons, distillation for liquids, sublimation for solids to gases) are not used for iron extraction."
+    },
+    {
+      "question_text": "Equilibrium constant Kp for N2 + 3H2 ⇌ 2NH3 has units:",
+      "options": [
+        "atm⁻²",
+        "atm²",
+        "atm",
+        "Dimensionless"
+      ],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "Kp_units"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For Kp, use Kp = (P_NH3)²/((P_N2)(P_H2)³). The numerator has units atm², and the denominator has units atm¹ × atm³ = atm⁴. Therefore, Kp has units atm²/atm⁴ = atm⁻²."
+    },
+    {
+      "question_text": "Rate-determining step in a multi-step reaction:",
+      "options": [
+        "Fastest step",
+        "Slowest step",
+        "First step always",
+        "Last step always"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "RDS"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The rate-determining step is the slowest step because it acts as a bottleneck—the overall reaction cannot proceed faster than its slowest elementary step. This step controls the overall reaction rate regardless of how fast the other steps are."
+    },
+    {
+      "question_text": "Catalyst affects:",
+      "options": [
+        "Equilibrium constant",
+        "Activation energy",
+        "Both",
+        "Free energy"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "catalyst"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A catalyst speeds up a reaction by lowering the activation energy barrier, allowing reactants to form products more quickly. However, it does not change the equilibrium constant, free energy, or the final equilibrium position—only how fast equilibrium is reached."
+    },
+    {
+      "question_text": "Vapor pressure of solution containing non-volatile solute is:",
+      "options": [
+        "Higher than solvent",
+        "Lower than solvent",
+        "Equal",
+        "Indeterminate"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "Raoult"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When a non-volatile solute dissolves in a solvent, it reduces the mole fraction of solvent molecules at the liquid surface. According to Raoult's Law, vapor pressure is proportional to the mole fraction of solvent, so the solution's vapor pressure becomes lower than the pure solvent's vapor pressure."
+    },
+    {
+      "question_text": "Molarity is moles of solute per:",
+      "options": [
+        "liter of solvent",
+        "liter of solution",
+        "kg of solvent",
+        "kg of solution"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "molarity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Molarity is defined as moles of solute divided by the total volume of the final solution in liters. The key distinction is that the denominator includes the solute plus solvent combined, not just the solvent alone."
+    },
+    {
+      "question_text": "Electrolysis of brine produces:",
+      "options": [
+        "H2 + Cl2 + NaOH",
+        "Na + Cl2",
+        "H2O",
+        "HCl"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "brine"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Brine (NaCl solution) electrolysis uses the chlor-alkali process: at the cathode, water is reduced to produce H₂ gas; at the anode, Cl⁻ ions are oxidized to Cl₂ gas; and Na⁺ ions combine with OH⁻ (from water reduction) to form NaOH solution."
+    },
+    {
+      "question_text": "Faraday constant approximately:",
+      "options": [
+        "96,500 C/mol",
+        "6.022×10²³",
+        "9.81 m/s²",
+        "1.66×10⁻²⁷"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Faraday"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Faraday constant represents the charge carried by one mole of electrons and is defined as Avogadro's number multiplied by the elementary charge (6.022×10²³ × 1.602×10⁻¹⁹ C), which equals approximately 96,500 coulombs per mole."
+    },
+    {
+      "question_text": "Geometry of [Fe(CN)6]³⁻:",
+      "options": [
+        "Tetrahedral",
+        "Octahedral",
+        "Square planar",
+        "Linear"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "octahedral"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "CN⁻ is a strong field ligand that favors low-spin configurations in Fe³⁺. With six CN⁻ ligands, the coordination number is 6, which adopts octahedral geometry where the metal center is surrounded by ligands at the vertices of an octahedron."
+    },
+    {
+      "question_text": "Number of unpaired electrons in [Co(NH3)6]³⁺ (Co³⁺, d6, strong field):",
+      "options": [
+        "0",
+        "2",
+        "4",
+        "6"
+      ],
+      "correct_answer": "A",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "CFT"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "In a strong field (low spin) complex, NH₃ is a strong field ligand causing large splitting between d orbitals. With d⁶ configuration, electrons fill the lower energy orbitals first: t₂g orbitals fill completely (6 electrons) before any enter eg orbitals, resulting in all electrons paired with zero unpaired electrons."
+    },
+    {
+      "question_text": "Largest atomic radius:",
+      "options": [
+        "F",
+        "Cl",
+        "Br",
+        "I"
+      ],
+      "correct_answer": "D",
+      "chapter": "Periodic Properties",
+      "topic_tags": [
+        "radius_halogen"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Atomic radius increases down a group in the periodic table because each successive element has additional electron shells. Since all four elements are halogens in Group 17, iodine (I) is lowest in the group and therefore has the most electron shells, giving it the largest atomic radius."
+    },
+    {
+      "question_text": "Common name for CH3CH(OH)CH3:",
+      "options": [
+        "Isopropyl alcohol",
+        "n-Propyl alcohol",
+        "Methyl ethanol",
+        "Acetone"
+      ],
+      "correct_answer": "A",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "isopropanol"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The structure CH3CH(OH)CH3 has a hydroxyl group on the middle carbon of a three-carbon chain, making it a secondary alcohol with a branched structure. This is isopropyl alcohol, also called 2-propanol. n-Propyl alcohol has the OH on a terminal carbon, and acetone lacks the hydroxyl group entirely."
+    },
+    {
+      "question_text": "Polythene is a polymer of:",
+      "options": [
+        "Ethene",
+        "Propene",
+        "Styrene",
+        "Vinyl chloride"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "polythene"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Polythene forms through addition polymerization of ethene (C₂H₄) molecules, where the double bonds break and repeat units link together to create a long-chain hydrocarbon polymer. Ethene is the monomer that produces the simple, saturated polyethylene structure."
+    },
+    {
+      "question_text": "Aspirin is used as:",
+      "options": [
+        "Antibiotic",
+        "Antipyretic + analgesic",
+        "Antiseptic",
+        "Vitamin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "aspirin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Aspirin works by inhibiting prostaglandin synthesis, which reduces fever (antipyretic action) and alleviates pain (analgesic action). It is not an antibiotic, antiseptic, or vitamin—its primary therapeutic uses are fever and pain relief."
+    },
+    {
+      "question_text": "Most common isotope of hydrogen:",
+      "options": [
+        "Protium",
+        "Deuterium",
+        "Tritium",
+        "Equal"
+      ],
+      "correct_answer": "A",
+      "chapter": "Hydrogen",
+      "topic_tags": [
+        "isotopes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Protium has one proton and no neutrons, comprising approximately 99.98% of naturally occurring hydrogen. Deuterium and tritium are much rarer, with deuterium at ~0.02% and tritium being radioactive and essentially nonexistent in nature."
+    },
+    {
+      "question_text": "Lewis structure of O3 (ozone) has:",
+      "options": [
+        "One double + one single bond resonance",
+        "Three single bonds",
+        "Three double bonds",
+        "No bonds"
+      ],
+      "correct_answer": "A",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "ozone"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Ozone has 24 valence electrons total. The Lewis structure requires one O=O double bond and one O-O single bond between three oxygen atoms, with the double bond position resonating between the two terminal oxygens to account for the molecule's actual bonding."
+    },
+    {
+      "question_text": "Most metallic element:",
+      "options": [
+        "Fr",
+        "Li",
+        "F",
+        "He"
+      ],
+      "correct_answer": "A",
+      "chapter": "Periodic Properties",
+      "topic_tags": [
+        "metallic_character"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Metallic character increases down a group and decreases across a period in the periodic table. Francium (Fr) is the lowest element in Group 1, making it the most metallic element among the options given."
+    },
+    {
+      "question_text": "Buffer solution: HA + NaA. Maximum buffering at pH:",
+      "options": [
+        "pKa - 1",
+        "pKa",
+        "pKa + 1",
+        "7"
+      ],
+      "correct_answer": "B",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "buffer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A buffer solution has maximum buffering capacity when the ratio of conjugate base to weak acid is 1:1, which occurs when pH = pKa (derived from the Henderson-Hasselbalch equation: pH = pKa + log([A⁻]/[HA])). At this point, the buffer resists pH changes most effectively."
+    },
+    {
+      "question_text": "Sucrose hydrolysis gives:",
+      "options": [
+        "Glucose only",
+        "Fructose only",
+        "Glucose + fructose",
+        "Glucose + galactose"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "sucrose"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sucrose is a disaccharide composed of one glucose unit and one fructose unit linked by a glycosidic bond. Hydrolysis breaks this bond, releasing both monosaccharides."
+    }
   ]
 }

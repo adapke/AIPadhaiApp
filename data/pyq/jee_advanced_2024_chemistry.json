@@ -17,7 +17,8 @@
       "correct_answer": "C",
       "chapter": "Hydrocarbons",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Benzene has 6 carbon atoms bonded to each other in a ring (6 C-C σ bonds) plus 6 hydrogen atoms each bonded to one carbon (6 C-H σ bonds), totaling 12 σ bonds. The delocalized π electrons form the alternate double bonds but don't create additional σ bonds."
     },
     {
       "question_text": "pH of 0.001 M HCl solution is:",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Equilibrium",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "HCl is a strong acid that completely dissociates, so [H⁺] = 0.001 M = 10⁻³ M. Using pH = -log[H⁺], we get pH = -log(10⁻³) = 3."
     },
     {
       "question_text": "Which has the highest first ionization energy?",
@@ -43,7 +45,8 @@
       "correct_answer": "D",
       "chapter": "Periodic Properties",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Silicon has the highest first ionization energy because it has the smallest atomic radius among these elements due to increasing nuclear charge across the period, and smaller atoms hold their outermost electrons more tightly."
     },
     {
       "question_text": "Aldol condensation of acetaldehyde gives:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Aldehydes and Ketones",
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Aldol condensation involves nucleophilic addition of an enolate to a carbonyl carbon. Two acetaldehyde molecules react: one forms an enolate that attacks the carbonyl of another, producing a β-hydroxy aldehyde intermediate (3-hydroxybutanal) before potential dehydration to an α,β-unsaturated product."
     },
     {
       "question_text": "Coordination number of Na+ in NaCl crystal lattice is:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Solid State",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In the NaCl crystal structure, Na+ ions are surrounded by six Cl⁻ ions arranged in an octahedral geometry—each Na+ has Cl⁻ neighbors at all six directions (up, down, front, back, left, right), giving a coordination number of 6."
     },
     {
       "question_text": "Atomic radius increases down a group because of:",
@@ -82,7 +87,8 @@
       "correct_answer": "D",
       "chapter": "Periodic Properties",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "As you move down a group, each successive element has an additional electron shell, which directly increases atomic radius. Although nuclear charge increases, this effect is outweighed by increased electron shielding from inner shells, reducing the effective nuclear charge experienced by valence electrons, also increasing radius."
     },
     {
       "question_text": "Enthalpy of neutralization of strong acid + strong base is:",
@@ -95,7 +101,8 @@
       "correct_answer": "A",
       "chapter": "Thermodynamics",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When a strong acid and strong base neutralize, they both completely dissociate, so the net ionic equation is H⁺(aq) + OH⁻(aq) → H₂O(l). This reaction releases approximately 57.1 kJ/mol of heat, making the enthalpy change negative (exothermic) and independent of which strong acid/base pair is used."
     },
     {
       "question_text": "Bohr radius (n=1, H atom) is approximately:",
@@ -108,7 +115,8 @@
       "correct_answer": "A",
       "chapter": "Atomic Structure",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Bohr radius for n=1 in hydrogen is calculated from a₀ = 4πε₀ℏ²/(mₑe²) ≈ 0.529 Å or 0.53 × 10⁻¹⁰ m, which is the most accepted fundamental constant value for the ground state orbital radius."
     }
   ]
 }

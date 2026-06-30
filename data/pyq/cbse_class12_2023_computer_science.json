@@ -6,30 +6,430 @@
   "default_year": 2023,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Output of 5 % 2 in Python:", "options": ["2.5", "1", "2", "0"], "correct_answer": "B", "chapter": "Python Basics", "topic_tags": ["modulo"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Python list is:", "options": ["Immutable", "Mutable", "Set", "Tuple"], "correct_answer": "B", "chapter": "Data Structures", "topic_tags": ["list"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Method to add element to end of list:", "options": ["add()", "insert()", "append()", "push()"], "correct_answer": "C", "chapter": "Python Lists", "topic_tags": ["append"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Difference between list and tuple:", "options": ["Tuple is mutable", "List is mutable, tuple is immutable", "Both same", "Tuple is faster only"], "correct_answer": "B", "chapter": "Data Structures", "topic_tags": ["list_tuple"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Output of print(type({}))", "options": ["<class 'set'>", "<class 'dict'>", "<class 'list'>", "<class 'tuple'>"], "correct_answer": "B", "chapter": "Python Dicts", "topic_tags": ["dict"], "difficulty": "easy", "marks": 1},
-    {"question_text": "SQL query to select all from table 'users':", "options": ["SELECT users", "SELECT * FROM users", "GET users", "FETCH * FROM users"], "correct_answer": "B", "chapter": "SQL", "topic_tags": ["SELECT"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Primary key constraint ensures:", "options": ["Unique non-null values", "Foreign reference", "Default value", "Random uniqueness"], "correct_answer": "A", "chapter": "Database", "topic_tags": ["primary_key"], "difficulty": "easy", "marks": 1},
-    {"question_text": "TCP/IP layer responsible for routing:", "options": ["Application", "Transport", "Internet", "Network access"], "correct_answer": "C", "chapter": "Networking", "topic_tags": ["TCP_IP"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Default port for HTTP:", "options": ["21", "22", "80", "443"], "correct_answer": "C", "chapter": "Networking", "topic_tags": ["ports"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Star topology has:", "options": ["Bus connection", "Central hub", "Token passing", "Ring"], "correct_answer": "B", "chapter": "Networking", "topic_tags": ["topology"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Output of 'abc' + str(123) in Python:", "options": ["Error", "'abc123'", "abc + 123", "126"], "correct_answer": "B", "chapter": "Python Basics", "topic_tags": ["string_concat"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sorting algorithm with best worst-case complexity O(n log n):", "options": ["Bubble", "Quick", "Merge", "Selection"], "correct_answer": "C", "chapter": "Algorithms", "topic_tags": ["sorting"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Stack data structure follows:", "options": ["FIFO", "LIFO", "Priority", "Random"], "correct_answer": "B", "chapter": "Data Structures", "topic_tags": ["stack"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Queue follows:", "options": ["LIFO", "FIFO", "Random", "Priority"], "correct_answer": "B", "chapter": "Data Structures", "topic_tags": ["queue"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Function definition keyword in Python:", "options": ["function", "def", "func", "define"], "correct_answer": "B", "chapter": "Python Basics", "topic_tags": ["def"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Output of len('Python'):", "options": ["5", "6", "7", "Error"], "correct_answer": "B", "chapter": "Python Strings", "topic_tags": ["len"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mode for writing in file:", "options": ["'r'", "'w'", "'a'", "Both B and C"], "correct_answer": "D", "chapter": "File Handling", "topic_tags": ["modes"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Try-except in Python catches:", "options": ["All exceptions", "Specific exceptions only", "Both", "Compile errors"], "correct_answer": "C", "chapter": "Python Basics", "topic_tags": ["exception"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Python comment starts with:", "options": ["//", "#", "/*", "--"], "correct_answer": "B", "chapter": "Python Basics", "topic_tags": ["comments"], "difficulty": "easy", "marks": 1},
-    {"question_text": "SQL command to remove a row:", "options": ["REMOVE", "DROP", "DELETE", "REPLACE"], "correct_answer": "C", "chapter": "SQL", "topic_tags": ["DELETE"], "difficulty": "easy", "marks": 1},
-    {"question_text": "SQL aggregate function for sum:", "options": ["TOTAL", "SUM", "ADD", "PLUS"], "correct_answer": "B", "chapter": "SQL", "topic_tags": ["aggregate"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Switch in networking:", "options": ["Forwards based on MAC", "Forwards based on IP", "Routes", "Both A and C"], "correct_answer": "A", "chapter": "Networking", "topic_tags": ["switch"], "difficulty": "medium", "marks": 1},
-    {"question_text": "URL stands for:", "options": ["Universal Resource Locator", "Uniform Resource Locator", "Unique Resource Link", "Updated Resource Link"], "correct_answer": "B", "chapter": "Networking", "topic_tags": ["URL"], "difficulty": "easy", "marks": 1},
-    {"question_text": "GROUP BY in SQL is used:", "options": ["To sort", "To aggregate by groups", "To filter", "To join"], "correct_answer": "B", "chapter": "SQL", "topic_tags": ["GROUP_BY"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Python dict is accessed by:", "options": ["Index", "Key", "Position", "Iterator"], "correct_answer": "B", "chapter": "Python Dicts", "topic_tags": ["dict_access"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Output of 5 % 2 in Python:",
+      "options": [
+        "2.5",
+        "1",
+        "2",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Basics",
+      "topic_tags": [
+        "modulo"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The % operator in Python is the modulo operator, which returns the remainder after division. 5 divided by 2 equals 2 with remainder 1, so 5 % 2 = 1."
+    },
+    {
+      "question_text": "Python list is:",
+      "options": [
+        "Immutable",
+        "Mutable",
+        "Set",
+        "Tuple"
+      ],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": [
+        "list"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Python lists are mutable, meaning their contents can be modified after creation through operations like append, remove, or index assignment, unlike immutable tuples or strings."
+    },
+    {
+      "question_text": "Method to add element to end of list:",
+      "options": [
+        "add()",
+        "insert()",
+        "append()",
+        "push()"
+      ],
+      "correct_answer": "C",
+      "chapter": "Python Lists",
+      "topic_tags": [
+        "append"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The append() method specifically adds an element to the end of a list in Python. While insert() can add elements at any position and add() is used for sets, append() is the standard and most efficient method for appending to list ends."
+    },
+    {
+      "question_text": "Difference between list and tuple:",
+      "options": [
+        "Tuple is mutable",
+        "List is mutable, tuple is immutable",
+        "Both same",
+        "Tuple is faster only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": [
+        "list_tuple"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Lists are mutable, allowing elements to be modified, added, or removed after creation, while tuples are immutable and cannot be changed once created. This fundamental difference makes tuples hashable and suitable for dictionary keys, whereas lists cannot be."
+    },
+    {
+      "question_text": "Output of print(type({}))",
+      "options": [
+        "<class 'set'>",
+        "<class 'dict'>",
+        "<class 'list'>",
+        "<class 'tuple'>"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Dicts",
+      "topic_tags": [
+        "dict"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Empty curly braces {} in Python represent an empty dictionary, not a set. To create an empty set, you must use set() since {} alone defaults to dict type."
+    },
+    {
+      "question_text": "SQL query to select all from table 'users':",
+      "options": [
+        "SELECT users",
+        "SELECT * FROM users",
+        "GET users",
+        "FETCH * FROM users"
+      ],
+      "correct_answer": "B",
+      "chapter": "SQL",
+      "topic_tags": [
+        "SELECT"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The asterisk (*) wildcard selects all columns, and FROM specifies the table name. This is standard SQL syntax; other options either omit required keywords (A), use non-SQL commands (C), or use incorrect syntax (D)."
+    },
+    {
+      "question_text": "Primary key constraint ensures:",
+      "options": [
+        "Unique non-null values",
+        "Foreign reference",
+        "Default value",
+        "Random uniqueness"
+      ],
+      "correct_answer": "A",
+      "chapter": "Database",
+      "topic_tags": [
+        "primary_key"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A primary key must uniquely identify each row in a table and cannot contain null values, ensuring both uniqueness and non-nullability of the designated column(s)."
+    },
+    {
+      "question_text": "TCP/IP layer responsible for routing:",
+      "options": [
+        "Application",
+        "Transport",
+        "Internet",
+        "Network access"
+      ],
+      "correct_answer": "C",
+      "chapter": "Networking",
+      "topic_tags": [
+        "TCP_IP"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Internet layer handles IP addressing and routing decisions, determining the best path for packets to travel across networks using routing protocols and routing tables."
+    },
+    {
+      "question_text": "Default port for HTTP:",
+      "options": [
+        "21",
+        "22",
+        "80",
+        "443"
+      ],
+      "correct_answer": "C",
+      "chapter": "Networking",
+      "topic_tags": [
+        "ports"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "HTTP uses port 80 by default, which is the standard port for unencrypted web traffic. Port 21 is FTP, port 22 is SSH, and port 443 is HTTPS (encrypted HTTP)."
+    },
+    {
+      "question_text": "Star topology has:",
+      "options": [
+        "Bus connection",
+        "Central hub",
+        "Token passing",
+        "Ring"
+      ],
+      "correct_answer": "B",
+      "chapter": "Networking",
+      "topic_tags": [
+        "topology"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In a star topology, all devices connect directly to a single central point (hub or switch) rather than connecting to each other in a line or ring, making the central hub the defining characteristic."
+    },
+    {
+      "question_text": "Output of 'abc' + str(123) in Python:",
+      "options": [
+        "Error",
+        "'abc123'",
+        "abc + 123",
+        "126"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Basics",
+      "topic_tags": [
+        "string_concat"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In Python, the `+` operator concatenates strings when both operands are strings. `str(123)` converts the integer 123 to the string `'123'`, so `'abc' + '123'` produces `'abc123'`."
+    },
+    {
+      "question_text": "Sorting algorithm with best worst-case complexity O(n log n):",
+      "options": [
+        "Bubble",
+        "Quick",
+        "Merge",
+        "Selection"
+      ],
+      "correct_answer": "C",
+      "chapter": "Algorithms",
+      "topic_tags": [
+        "sorting"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Merge sort guarantees O(n log n) worst-case complexity because it consistently divides the array into halves and merges them, regardless of input distribution. Other algorithms like quicksort have O(n²) worst-case, while bubble and selection sort are O(n²) always."
+    },
+    {
+      "question_text": "Stack data structure follows:",
+      "options": [
+        "FIFO",
+        "LIFO",
+        "Priority",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": [
+        "stack"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A stack operates on the Last In, First Out (LIFO) principle, where the most recently added element is removed first, like a stack of plates where you take from the top."
+    },
+    {
+      "question_text": "Queue follows:",
+      "options": [
+        "LIFO",
+        "FIFO",
+        "Random",
+        "Priority"
+      ],
+      "correct_answer": "B",
+      "chapter": "Data Structures",
+      "topic_tags": [
+        "queue"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A queue follows the First-In-First-Out (FIFO) principle, where elements are added at the rear and removed from the front in the same order they were inserted, making the first element added the first one to be removed."
+    },
+    {
+      "question_text": "Function definition keyword in Python:",
+      "options": [
+        "function",
+        "def",
+        "func",
+        "define"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Basics",
+      "topic_tags": [
+        "def"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Python uses the keyword `def` to define functions, followed by the function name and parentheses for parameters. This is the standard syntax across all Python versions."
+    },
+    {
+      "question_text": "Output of len('Python'):",
+      "options": [
+        "5",
+        "6",
+        "7",
+        "Error"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Strings",
+      "topic_tags": [
+        "len"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The string 'Python' contains 6 characters: P, y, t, h, o, n. The len() function counts each character in the string, returning 6."
+    },
+    {
+      "question_text": "Mode for writing in file:",
+      "options": [
+        "'r'",
+        "'w'",
+        "'a'",
+        "Both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "File Handling",
+      "topic_tags": [
+        "modes"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Both 'w' and 'a' modes allow writing to files: 'w' opens a file for writing (truncating existing content), while 'a' opens it for appending (adding content at the end). The 'r' mode only reads files."
+    },
+    {
+      "question_text": "Try-except in Python catches:",
+      "options": [
+        "All exceptions",
+        "Specific exceptions only",
+        "Both",
+        "Compile errors"
+      ],
+      "correct_answer": "C",
+      "chapter": "Python Basics",
+      "topic_tags": [
+        "exception"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Try-except can catch both specific exceptions (when you specify exception types like `except ValueError:`) and all exceptions (using a bare `except:` clause), making it flexible for different error-handling scenarios."
+    },
+    {
+      "question_text": "Python comment starts with:",
+      "options": [
+        "//",
+        "#",
+        "/*",
+        "--"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Basics",
+      "topic_tags": [
+        "comments"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In Python, the hash symbol (#) is used to denote single-line comments. The other symbols are comment syntax from different languages: // and /* */ are used in C/Java, and -- is used in SQL."
+    },
+    {
+      "question_text": "SQL command to remove a row:",
+      "options": [
+        "REMOVE",
+        "DROP",
+        "DELETE",
+        "REPLACE"
+      ],
+      "correct_answer": "C",
+      "chapter": "SQL",
+      "topic_tags": [
+        "DELETE"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The DELETE command specifically removes rows from a table while preserving the table structure itself. DROP removes entire tables or databases, REMOVE isn't a standard SQL command, and REPLACE is for inserting or updating records."
+    },
+    {
+      "question_text": "SQL aggregate function for sum:",
+      "options": [
+        "TOTAL",
+        "SUM",
+        "ADD",
+        "PLUS"
+      ],
+      "correct_answer": "B",
+      "chapter": "SQL",
+      "topic_tags": [
+        "aggregate"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "SUM is the standard SQL aggregate function used to calculate the total of numeric values in a column. TOTAL, ADD, and PLUS are not valid SQL aggregate functions for this purpose."
+    },
+    {
+      "question_text": "Switch in networking:",
+      "options": [
+        "Forwards based on MAC",
+        "Forwards based on IP",
+        "Routes",
+        "Both A and C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Networking",
+      "topic_tags": [
+        "switch"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "A switch operates at Layer 2 (Data Link Layer) and uses MAC addresses from the frame header to forward packets to the correct physical port, enabling local network communication. Routing (Layer 3) and IP-based forwarding are functions of routers, not switches."
+    },
+    {
+      "question_text": "URL stands for:",
+      "options": [
+        "Universal Resource Locator",
+        "Uniform Resource Locator",
+        "Unique Resource Link",
+        "Updated Resource Link"
+      ],
+      "correct_answer": "B",
+      "chapter": "Networking",
+      "topic_tags": [
+        "URL"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "URL stands for \"Uniform Resource Locator\" because it describes a standardized system for locating resources on the internet using a consistent format (like http://www.example.com). The word \"Uniform\" emphasizes this standardization, not \"Universal\" or other alternatives."
+    },
+    {
+      "question_text": "GROUP BY in SQL is used:",
+      "options": [
+        "To sort",
+        "To aggregate by groups",
+        "To filter",
+        "To join"
+      ],
+      "correct_answer": "B",
+      "chapter": "SQL",
+      "topic_tags": [
+        "GROUP_BY"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "GROUP BY aggregates rows sharing common values in specified columns, allowing calculation of summary statistics (like COUNT, SUM, AVG) per group rather than sorting, filtering, or joining data."
+    },
+    {
+      "question_text": "Python dict is accessed by:",
+      "options": [
+        "Index",
+        "Key",
+        "Position",
+        "Iterator"
+      ],
+      "correct_answer": "B",
+      "chapter": "Python Dicts",
+      "topic_tags": [
+        "dict_access"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Dictionaries in Python use key-value pairs, where you access values by providing their associated key (e.g., `my_dict[key]`), not by numeric index or position like lists do."
+    }
   ]
 }

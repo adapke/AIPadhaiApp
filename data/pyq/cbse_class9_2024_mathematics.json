@@ -8,228 +8,437 @@
   "questions": [
     {
       "question_text": "√2 is a:",
-      "options": ["Rational number", "Irrational number", "Whole number", "Natural number"],
+      "options": [
+        "Rational number",
+        "Irrational number",
+        "Whole number",
+        "Natural number"
+      ],
       "correct_answer": "B",
       "chapter": "Number Systems",
-      "topic_tags": ["irrational", "real_numbers"],
+      "topic_tags": [
+        "irrational",
+        "real_numbers"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "√2 cannot be expressed as a ratio of two integers (p/q in lowest terms), since assuming it can leads to a contradiction: if √2 = p/q, then 2q² = p², meaning p must be even, but this forces q to also be even, contradicting the assumption they share no common factors. Therefore √2 is irrational."
     },
     {
       "question_text": "Degree of polynomial 4x³ + 2x² - 7x + 1 is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "C",
       "chapter": "Polynomials",
-      "topic_tags": ["degree", "polynomial"],
+      "topic_tags": [
+        "degree",
+        "polynomial"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The degree of a polynomial is the highest power of the variable present in the expression. In 4x³ + 2x² - 7x + 1, the highest power is 3 (from the term 4x³), so the degree is 3."
     },
     {
       "question_text": "Linear equation in two variables has how many solutions?",
-      "options": ["1", "2", "Infinite", "0"],
+      "options": [
+        "1",
+        "2",
+        "Infinite",
+        "0"
+      ],
       "correct_answer": "C",
       "chapter": "Linear Equations in Two Variables",
-      "topic_tags": ["linear_equations"],
+      "topic_tags": [
+        "linear_equations"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A linear equation in two variables represents a straight line on a coordinate plane. Every point on that line satisfies the equation, giving infinitely many ordered pairs (x, y) as solutions."
     },
     {
       "question_text": "Two angles whose sum is 180° are called:",
-      "options": ["Complementary", "Supplementary", "Adjacent", "Vertical"],
+      "options": [
+        "Complementary",
+        "Supplementary",
+        "Adjacent",
+        "Vertical"
+      ],
       "correct_answer": "B",
       "chapter": "Lines and Angles",
-      "topic_tags": ["angles", "supplementary"],
+      "topic_tags": [
+        "angles",
+        "supplementary"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Two angles that sum to 180° are supplementary by definition. Complementary angles sum to 90°, adjacent angles share a vertex and side, and vertical angles are formed by intersecting lines and are equal."
     },
     {
       "question_text": "Sum of angles of a triangle is:",
-      "options": ["90°", "180°", "270°", "360°"],
+      "options": [
+        "90°",
+        "180°",
+        "270°",
+        "360°"
+      ],
       "correct_answer": "B",
       "chapter": "Triangles",
-      "topic_tags": ["triangle", "angle_sum"],
+      "topic_tags": [
+        "triangle",
+        "angle_sum"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A triangle has three interior angles. By the fundamental property of Euclidean geometry, these three angles always sum to exactly 180°, which can be proven by drawing a line parallel to one side through the opposite vertex."
     },
     {
       "question_text": "Each angle of an equilateral triangle is:",
-      "options": ["60°", "90°", "45°", "30°"],
+      "options": [
+        "60°",
+        "90°",
+        "45°",
+        "30°"
+      ],
       "correct_answer": "A",
       "chapter": "Triangles",
-      "topic_tags": ["equilateral"],
+      "topic_tags": [
+        "equilateral"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In any triangle, the sum of all angles equals 180°. Since an equilateral triangle has three equal angles, each angle measures 180° ÷ 3 = 60°."
     },
     {
       "question_text": "Diagonals of a rhombus:",
-      "options": ["Are equal", "Bisect each other at right angles", "Are parallel", "None"],
+      "options": [
+        "Are equal",
+        "Bisect each other at right angles",
+        "Are parallel",
+        "None"
+      ],
       "correct_answer": "B",
       "chapter": "Quadrilaterals",
-      "topic_tags": ["rhombus"],
+      "topic_tags": [
+        "rhombus"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A rhombus's diagonals bisect each other because its opposite sides are equal and parallel. They meet at right angles due to the symmetry property of a rhombus, where each diagonal is a line of symmetry that reflects the other diagonal onto itself."
     },
     {
       "question_text": "Area of triangle with base 10 cm and height 8 cm is:",
-      "options": ["40 cm²", "80 cm²", "20 cm²", "100 cm²"],
+      "options": [
+        "40 cm²",
+        "80 cm²",
+        "20 cm²",
+        "100 cm²"
+      ],
       "correct_answer": "A",
       "chapter": "Areas of Parallelograms and Triangles",
-      "topic_tags": ["area", "triangle"],
+      "topic_tags": [
+        "area",
+        "triangle"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The area of a triangle is calculated using the formula Area = (1/2) × base × height. With base 10 cm and height 8 cm: Area = (1/2) × 10 × 8 = 40 cm²."
     },
     {
       "question_text": "Volume of cube with side 5 cm is:",
-      "options": ["25 cm³", "125 cm³", "250 cm³", "100 cm³"],
+      "options": [
+        "25 cm³",
+        "125 cm³",
+        "250 cm³",
+        "100 cm³"
+      ],
       "correct_answer": "B",
       "chapter": "Surface Areas and Volumes",
-      "topic_tags": ["cube", "volume"],
+      "topic_tags": [
+        "cube",
+        "volume"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The volume of a cube is calculated using the formula V = s³, where s is the side length. With s = 5 cm, V = 5³ = 125 cm³."
     },
     {
       "question_text": "Surface area of sphere with radius r is:",
-      "options": ["4πr²", "(4/3)πr³", "πr²", "2πr"],
+      "options": [
+        "4πr²",
+        "(4/3)πr³",
+        "πr²",
+        "2πr"
+      ],
       "correct_answer": "A",
       "chapter": "Surface Areas and Volumes",
-      "topic_tags": ["sphere", "surface_area"],
+      "topic_tags": [
+        "sphere",
+        "surface_area"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A sphere's surface area formula is derived by integrating over its curved surface. The total surface area equals 4πr², which is four times the area of a great circle (πr²)."
     },
     {
       "question_text": "Mean of 5 numbers 2, 4, 6, 8, 10 is:",
-      "options": ["4", "5", "6", "7"],
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Statistics",
-      "topic_tags": ["mean"],
+      "topic_tags": [
+        "mean"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mean is calculated by summing all numbers and dividing by how many numbers there are: (2 + 4 + 6 + 8 + 10) ÷ 5 = 30 ÷ 5 = 6."
     },
     {
       "question_text": "Probability of impossible event is:",
-      "options": ["0", "0.5", "1", "Undefined"],
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Undefined"
+      ],
       "correct_answer": "A",
       "chapter": "Probability",
-      "topic_tags": ["impossible_event"],
+      "topic_tags": [
+        "impossible_event"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An impossible event can never occur, so it has no favorable outcomes. Probability is calculated as (favorable outcomes)/(total outcomes), which equals 0/total = 0."
     },
     {
       "question_text": "If x=2 is a zero of p(x)=x²-5x+k, value of k is:",
-      "options": ["2", "4", "6", "8"],
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
       "correct_answer": "C",
       "chapter": "Polynomials",
-      "topic_tags": ["zero_polynomial"],
+      "topic_tags": [
+        "zero_polynomial"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since x=2 is a zero of p(x), substituting gives p(2)=0. Therefore: 4-10+k=0, which solves to k=6."
     },
     {
       "question_text": "Coordinates of a point on x-axis are of form:",
-      "options": ["(x, 0)", "(0, y)", "(x, y)", "(y, x)"],
+      "options": [
+        "(x, 0)",
+        "(0, y)",
+        "(x, y)",
+        "(y, x)"
+      ],
       "correct_answer": "A",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["x_axis"],
+      "topic_tags": [
+        "x_axis"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Points on the x-axis have a y-coordinate of 0, since they lie directly on the horizontal axis. Therefore, any point on the x-axis has coordinates (x, 0) where x can be any real number."
     },
     {
       "question_text": "Pythagoras theorem: for right triangle with sides a, b, c (c hypotenuse):",
-      "options": ["a + b = c", "a² + b² = c²", "a × b = c²", "a² - b² = c²"],
+      "options": [
+        "a + b = c",
+        "a² + b² = c²",
+        "a × b = c²",
+        "a² - b² = c²"
+      ],
       "correct_answer": "B",
       "chapter": "Triangles",
-      "topic_tags": ["Pythagoras"],
+      "topic_tags": [
+        "Pythagoras"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Pythagorean theorem states that in a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides. Option B correctly expresses this relationship: a² + b² = c²."
     },
     {
       "question_text": "Sum of interior angles of a quadrilateral is:",
-      "options": ["180°", "360°", "540°", "720°"],
+      "options": [
+        "180°",
+        "360°",
+        "540°",
+        "720°"
+      ],
       "correct_answer": "B",
       "chapter": "Quadrilaterals",
-      "topic_tags": ["interior_angles"],
+      "topic_tags": [
+        "interior_angles"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A quadrilateral has 4 sides, so it can be divided into 2 triangles by drawing a diagonal. Since each triangle's angles sum to 180°, the total is 2 × 180° = 360°."
     },
     {
       "question_text": "If angles of triangle are in ratio 1:2:3, largest angle is:",
-      "options": ["30°", "60°", "90°", "120°"],
+      "options": [
+        "30°",
+        "60°",
+        "90°",
+        "120°"
+      ],
       "correct_answer": "C",
       "chapter": "Triangles",
-      "topic_tags": ["ratio", "angles"],
+      "topic_tags": [
+        "ratio",
+        "angles"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The angles are in ratio 1:2:3, so they equal x, 2x, and 3x respectively. Since angles in a triangle sum to 180°, we have x + 2x + 3x = 180°, giving 6x = 180°, so x = 30°. The largest angle is 3x = 90°."
     },
     {
       "question_text": "HCF of 12 and 18 is:",
-      "options": ["2", "3", "6", "12"],
+      "options": [
+        "2",
+        "3",
+        "6",
+        "12"
+      ],
       "correct_answer": "C",
       "chapter": "Number Systems",
-      "topic_tags": ["HCF"],
+      "topic_tags": [
+        "HCF"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The HCF (Highest Common Factor) is the largest number that divides both 12 and 18. The factors of 12 are 1, 2, 3, 4, 6, 12 and factors of 18 are 1, 2, 3, 6, 9, 18. The greatest common factor is 6."
     },
     {
       "question_text": "Median of 3, 1, 5, 2, 4 is:",
-      "options": ["1", "3", "4", "5"],
+      "options": [
+        "1",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Statistics",
-      "topic_tags": ["median"],
+      "topic_tags": [
+        "median"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "To find the median, arrange the numbers in order: 1, 2, 3, 4, 5. The median is the middle value of an odd-sized dataset, which is the third number: 3."
     },
     {
       "question_text": "Mode of 2, 3, 3, 4, 3, 5 is:",
-      "options": ["2", "3", "4", "5"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Statistics",
-      "topic_tags": ["mode"],
+      "topic_tags": [
+        "mode"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mode is the value that appears most frequently in a dataset. In the set {2, 3, 3, 4, 3, 5}, the number 3 appears three times while all other values appear only once, making 3 the mode."
     },
     {
       "question_text": "Circumference of circle with radius 7 (π=22/7) is:",
-      "options": ["22", "44", "14", "49"],
+      "options": [
+        "22",
+        "44",
+        "14",
+        "49"
+      ],
       "correct_answer": "B",
       "chapter": "Circles",
-      "topic_tags": ["circumference"],
+      "topic_tags": [
+        "circumference"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The circumference formula is C = 2πr. Substituting r = 7 and π = 22/7 gives C = 2 × (22/7) × 7 = 2 × 22 = 44."
     },
     {
       "question_text": "Three points are collinear if:",
-      "options": ["Same plane", "Same line", "Form a triangle", "Equal distance"],
+      "options": [
+        "Same plane",
+        "Same line",
+        "Form a triangle",
+        "Equal distance"
+      ],
       "correct_answer": "B",
       "chapter": "Lines and Angles",
-      "topic_tags": ["collinear"],
+      "topic_tags": [
+        "collinear"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Three collinear points lie on the same straight line by definition. \"Collinear\" literally means \"col-\" (together) and \"-linear\" (on a line), so points are collinear when they share a single line."
     },
     {
       "question_text": "Surface area of cube with edge a is:",
-      "options": ["a²", "4a²", "6a²", "a³"],
+      "options": [
+        "a²",
+        "4a²",
+        "6a²",
+        "a³"
+      ],
       "correct_answer": "C",
       "chapter": "Surface Areas and Volumes",
-      "topic_tags": ["cube", "surface"],
+      "topic_tags": [
+        "cube",
+        "surface"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A cube has 6 faces, each with area a². Therefore, total surface area = 6 × a² = 6a²."
     },
     {
       "question_text": "Two figures are congruent if they have:",
-      "options": ["Same area", "Same shape and size", "Same perimeter", "Same volume"],
+      "options": [
+        "Same area",
+        "Same shape and size",
+        "Same perimeter",
+        "Same volume"
+      ],
       "correct_answer": "B",
       "chapter": "Triangles",
-      "topic_tags": ["congruent"],
+      "topic_tags": [
+        "congruent"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Congruent figures must be identical in both shape and size, meaning one can be transformed into the other through rotation, reflection, or translation. Having only the same area or perimeter is insufficient, as different shapes can share these properties."
     },
     {
       "question_text": "Discriminant of x²+2x+1=0 is:",
-      "options": ["-2", "0", "2", "4"],
+      "options": [
+        "-2",
+        "0",
+        "2",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Polynomials",
-      "topic_tags": ["discriminant"],
+      "topic_tags": [
+        "discriminant"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For a quadratic equation ax²+bx+c=0, the discriminant is b²-4ac. Here, a=1, b=2, c=1, so the discriminant equals 2²-4(1)(1)=4-4=0. This zero discriminant indicates the equation has one repeated real root."
     }
   ]
 }

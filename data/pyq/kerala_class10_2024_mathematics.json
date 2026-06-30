@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "scert_sslc",
   "questions": [
-    {"question_text": "Common difference of AP 5, 8, 11, 14, ...:", "options": ["3", "5", "8", "11"], "correct_answer": "A", "chapter": "Arithmetic Sequences", "topic_tags": ["AP_d"], "difficulty": "easy", "marks": 1},
-    {"question_text": "nth term of AP a=3, d=2:", "options": ["2n+1", "3n+1", "n+2", "n²"], "correct_answer": "A", "chapter": "Arithmetic Sequences", "topic_tags": ["AP_nth"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Sum of 1+2+3+...+10:", "options": ["45", "55", "100", "110"], "correct_answer": "B", "chapter": "Arithmetic Sequences", "topic_tags": ["AP_sum"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Circle equation x² + y² = 16. Radius:", "options": ["4", "8", "16", "2"], "correct_answer": "A", "chapter": "Circles", "topic_tags": ["radius"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Length of arc subtended by 60° in circle of radius 6:", "options": ["π", "2π", "3π", "6π"], "correct_answer": "B", "chapter": "Circles", "topic_tags": ["arc_length"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Probability of getting head on fair coin:", "options": ["1/4", "1/2", "1", "0"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["coin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Probability of rolling 6 on fair die:", "options": ["1/2", "1/3", "1/4", "1/6"], "correct_answer": "D", "chapter": "Probability", "topic_tags": ["die"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Pythagoras theorem applies to:", "options": ["Right-angled triangle", "Any triangle", "Equilateral only", "Circle"], "correct_answer": "A", "chapter": "Pythagoras Theorem", "topic_tags": ["pythagoras"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If a triangle has sides 3, 4, 5: right angle is opposite to side:", "options": ["3", "4", "5", "All"], "correct_answer": "C", "chapter": "Pythagoras Theorem", "topic_tags": ["right_angle"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Distance from (0,0) to (3,4):", "options": ["3", "4", "5", "7"], "correct_answer": "C", "chapter": "Coordinate Geometry", "topic_tags": ["distance"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Slope of line y = 2x + 3:", "options": ["1", "2", "3", "5"], "correct_answer": "B", "chapter": "Coordinate Geometry", "topic_tags": ["slope"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Discriminant of x² - 4x + 4 = 0:", "options": ["0", "4", "8", "16"], "correct_answer": "A", "chapter": "Quadratic Equations", "topic_tags": ["discriminant"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Roots of x² + 5x + 6 = 0:", "options": ["-2, -3", "2, 3", "-1, -6", "1, 6"], "correct_answer": "A", "chapter": "Quadratic Equations", "topic_tags": ["roots"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Mean of 5, 10, 15, 20:", "options": ["10", "12.5", "15", "20"], "correct_answer": "B", "chapter": "Statistics", "topic_tags": ["mean"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Median of 3, 5, 7, 9, 11:", "options": ["5", "7", "9", "11"], "correct_answer": "B", "chapter": "Statistics", "topic_tags": ["median"], "difficulty": "easy", "marks": 1},
-    {"question_text": "tan 45° equals:", "options": ["0", "1", "√3", "1/√3"], "correct_answer": "B", "chapter": "Trigonometry", "topic_tags": ["tan_45"], "difficulty": "easy", "marks": 1},
-    {"question_text": "sin 0° equals:", "options": ["0", "1", "1/2", "Undefined"], "correct_answer": "A", "chapter": "Trigonometry", "topic_tags": ["sin_0"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Surface area of sphere of radius r:", "options": ["πr²", "2πr²", "4πr²", "(4/3)πr³"], "correct_answer": "C", "chapter": "Solids", "topic_tags": ["sphere_SA"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Volume of cube edge 4:", "options": ["16", "32", "64", "256"], "correct_answer": "C", "chapter": "Solids", "topic_tags": ["cube"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Polynomial degree of 2x³ - 5x + 7:", "options": ["1", "2", "3", "7"], "correct_answer": "C", "chapter": "Polynomials", "topic_tags": ["degree"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Factorize x² - 9:", "options": ["(x-3)(x+3)", "(x-3)²", "(x+3)²", "x(x-9)"], "correct_answer": "A", "chapter": "Polynomials", "topic_tags": ["difference_squares"], "difficulty": "easy", "marks": 1},
-    {"question_text": "HCF of 24, 36:", "options": ["6", "12", "18", "36"], "correct_answer": "B", "chapter": "Number System", "topic_tags": ["HCF"], "difficulty": "easy", "marks": 1},
-    {"question_text": "LCM of 6, 8:", "options": ["2", "12", "24", "48"], "correct_answer": "C", "chapter": "Number System", "topic_tags": ["LCM"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Perimeter of square side 7:", "options": ["14", "21", "28", "49"], "correct_answer": "C", "chapter": "Mensuration", "topic_tags": ["square_perimeter"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If x:y = 2:3 and y = 9, x =", "options": ["4", "6", "12", "1.5"], "correct_answer": "B", "chapter": "Ratio", "topic_tags": ["ratio"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Common difference of AP 5, 8, 11, 14, ...:",
+      "options": [
+        "3",
+        "5",
+        "8",
+        "11"
+      ],
+      "correct_answer": "A",
+      "chapter": "Arithmetic Sequences",
+      "topic_tags": [
+        "AP_d"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The common difference is found by subtracting any term from the next consecutive term: 8 - 5 = 3, or 11 - 8 = 3. This constant difference of 3 defines the arithmetic progression."
+    },
+    {
+      "question_text": "nth term of AP a=3, d=2:",
+      "options": [
+        "2n+1",
+        "3n+1",
+        "n+2",
+        "n²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Arithmetic Sequences",
+      "topic_tags": [
+        "AP_nth"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The nth term formula for an AP is a_n = a + (n-1)d. Substituting a=3 and d=2: a_n = 3 + (n-1)×2 = 3 + 2n - 2 = 2n + 1."
+    },
+    {
+      "question_text": "Sum of 1+2+3+...+10:",
+      "options": [
+        "45",
+        "55",
+        "100",
+        "110"
+      ],
+      "correct_answer": "B",
+      "chapter": "Arithmetic Sequences",
+      "topic_tags": [
+        "AP_sum"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the formula for the sum of first n natural numbers: n(n+1)/2, where n=10 gives 10(11)/2 = 110/2 = 55."
+    },
+    {
+      "question_text": "Circle equation x² + y² = 16. Radius:",
+      "options": [
+        "4",
+        "8",
+        "16",
+        "2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Circles",
+      "topic_tags": [
+        "radius"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The standard form of a circle is x² + y² = r², where r is the radius. Since the equation equals 16, we have r² = 16, so r = 4."
+    },
+    {
+      "question_text": "Length of arc subtended by 60° in circle of radius 6:",
+      "options": [
+        "π",
+        "2π",
+        "3π",
+        "6π"
+      ],
+      "correct_answer": "B",
+      "chapter": "Circles",
+      "topic_tags": [
+        "arc_length"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Arc length formula is s = rθ, where θ is in radians. Convert 60° to radians: 60° = π/3 radians. Then s = 6 × π/3 = 2π."
+    },
+    {
+      "question_text": "Probability of getting head on fair coin:",
+      "options": [
+        "1/4",
+        "1/2",
+        "1",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "coin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A fair coin has two equally likely outcomes: heads or tails. Therefore, the probability of getting heads is 1 divided by 2 possible outcomes, which equals 1/2."
+    },
+    {
+      "question_text": "Probability of rolling 6 on fair die:",
+      "options": [
+        "1/2",
+        "1/3",
+        "1/4",
+        "1/6"
+      ],
+      "correct_answer": "D",
+      "chapter": "Probability",
+      "topic_tags": [
+        "die"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A fair die has 6 equally likely outcomes (1, 2, 3, 4, 5, 6). Rolling a 6 is one favorable outcome, so the probability is 1/6."
+    },
+    {
+      "question_text": "Pythagoras theorem applies to:",
+      "options": [
+        "Right-angled triangle",
+        "Any triangle",
+        "Equilateral only",
+        "Circle"
+      ],
+      "correct_answer": "A",
+      "chapter": "Pythagoras Theorem",
+      "topic_tags": [
+        "pythagoras"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Pythagoras theorem specifically relates the sides of a right-angled triangle through the equation a² + b² = c², where c is the hypotenuse opposite the 90° angle. This relationship only holds for triangles containing a right angle."
+    },
+    {
+      "question_text": "If a triangle has sides 3, 4, 5: right angle is opposite to side:",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "All"
+      ],
+      "correct_answer": "C",
+      "chapter": "Pythagoras Theorem",
+      "topic_tags": [
+        "right_angle"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In a right triangle, the right angle is always opposite the longest side, which is the hypotenuse. Since 3-4-5 is a Pythagorean triple (3² + 4² = 5²), the side of length 5 is the hypotenuse and therefore opposite the right angle."
+    },
+    {
+      "question_text": "Distance from (0,0) to (3,4):",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "distance"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the distance formula: d = √[(3-0)² + (4-0)²] = √(9 + 16) = √25 = 5. This is a 3-4-5 right triangle, a common Pythagorean triple."
+    },
+    {
+      "question_text": "Slope of line y = 2x + 3:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "slope"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The equation is in slope-intercept form y = mx + b, where m is the slope. Here, m = 2, so the slope is 2."
+    },
+    {
+      "question_text": "Discriminant of x² - 4x + 4 = 0:",
+      "options": [
+        "0",
+        "4",
+        "8",
+        "16"
+      ],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "topic_tags": [
+        "discriminant"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using the discriminant formula b² - 4ac where a=1, b=-4, c=4: (-4)² - 4(1)(4) = 16 - 16 = 0. A discriminant of 0 indicates one repeated real root, which matches the perfect square trinomial (x-2)²."
+    },
+    {
+      "question_text": "Roots of x² + 5x + 6 = 0:",
+      "options": [
+        "-2, -3",
+        "2, 3",
+        "-1, -6",
+        "1, 6"
+      ],
+      "correct_answer": "A",
+      "chapter": "Quadratic Equations",
+      "topic_tags": [
+        "roots"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Factor the quadratic: x² + 5x + 6 = (x + 2)(x + 3) = 0. Setting each factor to zero gives x = -2 and x = -3. You can verify: (-2)² + 5(-2) + 6 = 4 - 10 + 6 = 0 ✓"
+    },
+    {
+      "question_text": "Mean of 5, 10, 15, 20:",
+      "options": [
+        "10",
+        "12.5",
+        "15",
+        "20"
+      ],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "mean"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The mean is calculated by summing all values and dividing by how many values there are: (5 + 10 + 15 + 20) ÷ 4 = 50 ÷ 4 = 12.5."
+    },
+    {
+      "question_text": "Median of 3, 5, 7, 9, 11:",
+      "options": [
+        "5",
+        "7",
+        "9",
+        "11"
+      ],
+      "correct_answer": "B",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "median"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The median is the middle value when data is arranged in order. With 5 numbers, the median is the 3rd value: 3, 5, **7**, 9, 11."
+    },
+    {
+      "question_text": "tan 45° equals:",
+      "options": [
+        "0",
+        "1",
+        "√3",
+        "1/√3"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "tan_45"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "At 45°, the sine and cosine values are equal (both √2/2), so tan 45° = sin 45°/cos 45° = 1. Alternatively, in a 45-45-90 triangle, the opposite and adjacent sides are equal, making the ratio 1."
+    },
+    {
+      "question_text": "sin 0° equals:",
+      "options": [
+        "0",
+        "1",
+        "1/2",
+        "Undefined"
+      ],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "sin_0"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The sine of 0° equals 0 because sin(θ) = opposite/hypotenuse, and at 0°, the angle lies on the positive x-axis where the vertical component (opposite side) is zero, making the ratio 0/1 = 0."
+    },
+    {
+      "question_text": "Surface area of sphere of radius r:",
+      "options": [
+        "πr²",
+        "2πr²",
+        "4πr²",
+        "(4/3)πr³"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solids",
+      "topic_tags": [
+        "sphere_SA"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The surface area of a sphere is derived by integration and equals 4πr². Option D is volume (not surface area), while A and B are incomplete formulas missing the factor of 4."
+    },
+    {
+      "question_text": "Volume of cube edge 4:",
+      "options": [
+        "16",
+        "32",
+        "64",
+        "256"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solids",
+      "topic_tags": [
+        "cube"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The volume of a cube is calculated using V = s³, where s is the edge length. With edge length 4, V = 4³ = 64."
+    },
+    {
+      "question_text": "Polynomial degree of 2x³ - 5x + 7:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "7"
+      ],
+      "correct_answer": "C",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "degree"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The degree of a polynomial is the highest exponent of any variable term. In 2x³ - 5x + 7, the term 2x³ has the highest exponent of 3, making the polynomial's degree 3."
+    },
+    {
+      "question_text": "Factorize x² - 9:",
+      "options": [
+        "(x-3)(x+3)",
+        "(x-3)²",
+        "(x+3)²",
+        "x(x-9)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "difference_squares"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "This is a difference of squares: x² - 9 = x² - 3². The formula a² - b² = (a-b)(a+b) gives us (x-3)(x+3). Options B and C expand to trinomials with a middle term, while D doesn't equal x² - 9."
+    },
+    {
+      "question_text": "HCF of 24, 36:",
+      "options": [
+        "6",
+        "12",
+        "18",
+        "36"
+      ],
+      "correct_answer": "B",
+      "chapter": "Number System",
+      "topic_tags": [
+        "HCF"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The factors of 24 are 1, 2, 3, 4, 6, 8, 12, 24 and the factors of 36 are 1, 2, 3, 4, 6, 9, 12, 18, 36. The highest common factor shared by both numbers is 12."
+    },
+    {
+      "question_text": "LCM of 6, 8:",
+      "options": [
+        "2",
+        "12",
+        "24",
+        "48"
+      ],
+      "correct_answer": "C",
+      "chapter": "Number System",
+      "topic_tags": [
+        "LCM"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The LCM is the smallest number divisible by both 6 and 8. Prime factorization: 6 = 2 × 3 and 8 = 2³. Taking the highest power of each prime: 2³ × 3 = 24."
+    },
+    {
+      "question_text": "Perimeter of square side 7:",
+      "options": [
+        "14",
+        "21",
+        "28",
+        "49"
+      ],
+      "correct_answer": "C",
+      "chapter": "Mensuration",
+      "topic_tags": [
+        "square_perimeter"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A square has 4 equal sides, so the perimeter is 4 × 7 = 28. Perimeter measures the total distance around a shape, not the area (which would be 49)."
+    },
+    {
+      "question_text": "If x:y = 2:3 and y = 9, x =",
+      "options": [
+        "4",
+        "6",
+        "12",
+        "1.5"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ratio",
+      "topic_tags": [
+        "ratio"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Since x:y = 2:3, we have x/y = 2/3. Substituting y = 9: x/9 = 2/3, so x = 9 × (2/3) = 6."
+    }
   ]
 }

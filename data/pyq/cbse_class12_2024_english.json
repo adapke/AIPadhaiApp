@@ -8,228 +8,433 @@
   "questions": [
     {
       "question_text": "Author of 'The Last Lesson' is:",
-      "options": ["Alphonse Daudet", "Anees Jung", "Khushwant Singh", "Bama"],
+      "options": [
+        "Alphonse Daudet",
+        "Anees Jung",
+        "Khushwant Singh",
+        "Bama"
+      ],
       "correct_answer": "A",
       "chapter": "Flamingo - The Last Lesson",
-      "topic_tags": ["Daudet", "Alsace"],
+      "topic_tags": [
+        "Daudet",
+        "Alsace"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Alphonse Daudet, the French author, wrote \"The Last Lesson,\" a powerful short story about a boy's final French class under German occupation, reflecting themes of language, culture, and national identity during the Franco-Prussian War."
     },
     {
       "question_text": "'Lost Spring' is written by:",
-      "options": ["Anees Jung", "Selma Lagerlof", "Pearl S. Buck", "Louis Fischer"],
+      "options": [
+        "Anees Jung",
+        "Selma Lagerlof",
+        "Pearl S. Buck",
+        "Louis Fischer"
+      ],
       "correct_answer": "A",
       "chapter": "Flamingo - Lost Spring",
-      "topic_tags": ["Anees_Jung", "child_labour"],
+      "topic_tags": [
+        "Anees_Jung",
+        "child_labour"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'Lost Spring' is a collection of narrative essays by Anees Jung that focuses on the lives of impoverished children in India, particularly those engaged in child labor. It is a well-known work in contemporary Indian English literature."
     },
     {
       "question_text": "Theme of 'Deep Water':",
-      "options": ["Friendship", "Fear and overcoming it", "Travel", "War"],
+      "options": [
+        "Friendship",
+        "Fear and overcoming it",
+        "Travel",
+        "War"
+      ],
       "correct_answer": "B",
       "chapter": "Flamingo - Deep Water",
-      "topic_tags": ["Douglas", "fear"],
+      "topic_tags": [
+        "Douglas",
+        "fear"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The story follows Carruthers' internal struggle with his fear of water and his eventual decision to confront it by learning to swim, demonstrating personal growth through overcoming his phobia rather than avoiding it."
     },
     {
       "question_text": "Word meaning 'Strong dislike':",
-      "options": ["Affinity", "Aversion", "Empathy", "Reverence"],
+      "options": [
+        "Affinity",
+        "Aversion",
+        "Empathy",
+        "Reverence"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Aversion directly means a strong dislike or opposition to something. Affinity means attraction, empathy means understanding others' feelings, and reverence means deep respect—all opposite or unrelated to the concept of strong dislike."
     },
     {
       "question_text": "Antonym of 'Vivid':",
-      "options": ["Bright", "Vague", "Clear", "Bold"],
+      "options": [
+        "Bright",
+        "Vague",
+        "Clear",
+        "Bold"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["antonyms"],
+      "topic_tags": [
+        "antonyms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An antonym is a word with opposite meaning. Vivid means bright, clear, and striking in appearance or description. Vague means unclear, indefinite, and lacking clarity—the direct opposite of vivid."
     },
     {
       "question_text": "Letter of complaint should begin with:",
-      "options": ["Yours sincerely", "Sir/Madam", "Dear friend", "Hi"],
+      "options": [
+        "Yours sincerely",
+        "Sir/Madam",
+        "Dear friend",
+        "Hi"
+      ],
       "correct_answer": "B",
       "chapter": "Writing Skills",
-      "topic_tags": ["letter_writing"],
+      "topic_tags": [
+        "letter_writing"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A formal letter of complaint requires a formal salutation appropriate for business correspondence. \"Sir/Madam\" is the standard professional greeting when the recipient's name is unknown, whereas the other options are either closings (A), too casual (D), or inappropriately personal (C)."
     },
     {
       "question_text": "Active to passive: 'She wrote a letter.'",
-      "options": ["A letter is written by her", "A letter was written by her", "She is writing", "Letter written by her"],
+      "options": [
+        "A letter is written by her",
+        "A letter was written by her",
+        "She is writing",
+        "Letter written by her"
+      ],
       "correct_answer": "B",
       "chapter": "Grammar - Voice",
-      "topic_tags": ["passive"],
+      "topic_tags": [
+        "passive"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The original sentence uses past tense (\"wrote\"), so the passive voice must also be past tense. Option B correctly converts the active voice to passive by using \"was written\" (past tense) instead of \"is written\" (present tense in A) or incomplete structures in C and D."
     },
     {
       "question_text": "Indirect speech: He said, 'I am tired.'",
-      "options": ["He said he was tired", "He said he is tired", "He said he had been tired", "He says he is tired"],
+      "options": [
+        "He said he was tired",
+        "He said he is tired",
+        "He said he had been tired",
+        "He says he is tired"
+      ],
       "correct_answer": "A",
       "chapter": "Grammar - Reported Speech",
-      "topic_tags": ["indirect_speech"],
+      "topic_tags": [
+        "indirect_speech"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When converting direct speech to indirect speech, the tense shifts back one step: present tense becomes past tense. Additionally, the reporting verb \"said\" (past tense) requires the reported clause to be in past tense, so \"am\" becomes \"was.\""
     },
     {
       "question_text": "Author of 'My Mother at Sixty-Six':",
-      "options": ["Pablo Neruda", "Kamala Das", "Sylvia Plath", "Adrienne Rich"],
+      "options": [
+        "Pablo Neruda",
+        "Kamala Das",
+        "Sylvia Plath",
+        "Adrienne Rich"
+      ],
       "correct_answer": "B",
       "chapter": "Poetry - Kamala Das",
-      "topic_tags": ["Kamala_Das"],
+      "topic_tags": [
+        "Kamala_Das"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Kamala Das, an Indian poet, wrote 'My Mother at Sixty-Six,' a poem reflecting on her aging mother and the passage of time during a car journey, exploring themes of mortality and maternal love through vivid imagery."
     },
     {
       "question_text": "'An Elementary School Classroom in a Slum' is by:",
-      "options": ["W.B. Yeats", "Stephen Spender", "Robert Frost", "T.S. Eliot"],
+      "options": [
+        "W.B. Yeats",
+        "Stephen Spender",
+        "Robert Frost",
+        "T.S. Eliot"
+      ],
       "correct_answer": "B",
       "chapter": "Poetry - Stephen Spender",
-      "topic_tags": ["Spender"],
+      "topic_tags": [
+        "Spender"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Stephen Spender wrote this socially conscious poem in the 1930s, criticizing the education system's failure to nurture disadvantaged children in slum areas. The poem's themes of social injustice and its modernist style are characteristic of Spender's work."
     },
     {
       "question_text": "Robert Frost's 'A Roadside Stand' deals with:",
-      "options": ["Urban migration", "Poverty of rural folk", "Industrial revolution", "Friendship"],
+      "options": [
+        "Urban migration",
+        "Poverty of rural folk",
+        "Industrial revolution",
+        "Friendship"
+      ],
       "correct_answer": "B",
       "chapter": "Poetry - Robert Frost",
-      "topic_tags": ["Frost"],
+      "topic_tags": [
+        "Frost"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The poem depicts a struggling roadside fruit stand operated by poor rural inhabitants, contrasting their meager earnings with passing motorists' indifference. Frost critiques the economic hardship and neglect faced by rural communities, making rural poverty the central theme."
     },
     {
       "question_text": "Notice writing must include:",
-      "options": ["Date, time, venue, subject", "Only date", "Only signature", "Only subject"],
+      "options": [
+        "Date, time, venue, subject",
+        "Only date",
+        "Only signature",
+        "Only subject"
+      ],
       "correct_answer": "A",
       "chapter": "Writing Skills",
-      "topic_tags": ["notice"],
+      "topic_tags": [
+        "notice"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A notice requires all essential details to ensure clarity and complete information for the audience. Date, time, and venue establish when and where an event occurs, while the subject line clearly indicates the notice's purpose, making option A the most comprehensive and correct choice."
     },
     {
       "question_text": "Idiom 'A blessing in disguise' means:",
-      "options": ["Hidden curse", "Good thing that seemed bad initially", "Disguised friend", "Hidden gift"],
+      "options": [
+        "Hidden curse",
+        "Good thing that seemed bad initially",
+        "Disguised friend",
+        "Hidden gift"
+      ],
       "correct_answer": "B",
       "chapter": "Idioms",
-      "topic_tags": ["idioms"],
+      "topic_tags": [
+        "idioms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A blessing is something good, and \"in disguise\" means it initially appears to be something else (bad or negative). Therefore, the idiom describes a situation that seems unfortunate at first but turns out to be beneficial or fortunate."
     },
     {
       "question_text": "Article: 'I want ___ apple.'",
-      "options": ["a", "an", "the", "no article"],
+      "options": [
+        "a",
+        "an",
+        "the",
+        "no article"
+      ],
       "correct_answer": "B",
       "chapter": "Grammar - Articles",
-      "topic_tags": ["articles"],
+      "topic_tags": [
+        "articles"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The word \"apple\" begins with a vowel sound (/æ/), so it requires the indefinite article \"an\" rather than \"a\" to ensure smooth pronunciation and proper grammar."
     },
     {
       "question_text": "Preposition: 'She is angry ___ me.'",
-      "options": ["on", "with", "at", "of"],
+      "options": [
+        "on",
+        "with",
+        "at",
+        "of"
+      ],
       "correct_answer": "B",
       "chapter": "Grammar - Prepositions",
-      "topic_tags": ["prepositions"],
+      "topic_tags": [
+        "prepositions"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "\"Angry\" takes the preposition \"with\" when referring to the person who is the object of one's anger. While \"at\" can follow \"angry,\" it's typically used with situations or things rather than people."
     },
     {
       "question_text": "Subject-verb: 'The committee ___ split.'",
-      "options": ["is", "are", "be", "were"],
+      "options": [
+        "is",
+        "are",
+        "be",
+        "were"
+      ],
       "correct_answer": "B",
       "chapter": "Grammar - Agreement",
-      "topic_tags": ["collective_noun"],
+      "topic_tags": [
+        "collective_noun"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A committee can be treated as a collective noun referring to multiple individual members acting separately. When the members disagree or act independently (as \"split\" implies), the plural verb \"are\" is correct because the focus is on the individual members rather than the committee as a unified body."
     },
     {
       "question_text": "Speaker in 'My Mother at Sixty-Six':",
-      "options": ["The mother", "The daughter (poet)", "Father", "Brother"],
+      "options": [
+        "The mother",
+        "The daughter (poet)",
+        "Father",
+        "Brother"
+      ],
       "correct_answer": "B",
       "chapter": "Poetry - Kamala Das",
-      "topic_tags": ["narrator"],
+      "topic_tags": [
+        "narrator"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The poem is written in first person from the perspective of someone observing their mother during a car journey, reflecting on aging and mortality. The speaker's intimate observations and emotional connection to the subject matter reveal this is the poet herself, the daughter, not the mother being described."
     },
     {
       "question_text": "'Going Places' tells the story of:",
-      "options": ["Anil and Sophie", "Sophie's dreams", "Sophie's father", "Sophie and Jansie"],
+      "options": [
+        "Anil and Sophie",
+        "Sophie's dreams",
+        "Sophie's father",
+        "Sophie and Jansie"
+      ],
       "correct_answer": "B",
       "chapter": "Flamingo - Going Places",
-      "topic_tags": ["A.R._Barton"],
+      "topic_tags": [
+        "A.R._Barton"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sophie's aspirations and fantasies form the central narrative of the story, as the author explores how Sophie's vivid imagination and unrealistic daydreams contrast sharply with her actual mundane reality and limited prospects, revealing the gap between her dreams and her likely future."
     },
     {
       "question_text": "Choose correct spelling:",
-      "options": ["Recieve", "Receive", "Reciept", "Reciver"],
+      "options": [
+        "Recieve",
+        "Receive",
+        "Reciept",
+        "Reciver"
+      ],
       "correct_answer": "B",
       "chapter": "Spelling",
-      "topic_tags": ["spelling"],
+      "topic_tags": [
+        "spelling"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The word follows the \"i before e except after c\" rule: since \"c\" precedes the vowels, \"e\" comes before \"i\", making \"receive\" the correct spelling."
     },
     {
       "question_text": "Synonym of 'Concise':",
-      "options": ["Verbose", "Brief", "Lengthy", "Vague"],
+      "options": [
+        "Verbose",
+        "Brief",
+        "Lengthy",
+        "Vague"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "\"Concise\" means expressing something in few words without unnecessary detail. \"Brief\" is a direct synonym, both indicating short and to-the-point communication, while verbose and lengthy mean the opposite, and vague refers to lack of clarity."
     },
     {
       "question_text": "Tense: 'I have been studying for hours' is:",
-      "options": ["Present continuous", "Present perfect continuous", "Past perfect", "Future"],
+      "options": [
+        "Present continuous",
+        "Present perfect continuous",
+        "Past perfect",
+        "Future"
+      ],
       "correct_answer": "B",
       "chapter": "Grammar - Tenses",
-      "topic_tags": ["tense"],
+      "topic_tags": [
+        "tense"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The verb phrase \"have been studying\" combines \"have\" (present perfect marker) with \"been studying\" (continuous aspect), creating the present perfect continuous tense, which expresses an action that started in the past and continues to the present moment."
     },
     {
       "question_text": "Bama's 'Memories of Childhood' theme:",
-      "options": ["Caste discrimination", "Friendship", "Travel", "War"],
+      "options": [
+        "Caste discrimination",
+        "Friendship",
+        "Travel",
+        "War"
+      ],
       "correct_answer": "A",
       "chapter": "Vistas - Memories of Childhood",
-      "topic_tags": ["caste", "Bama"],
+      "topic_tags": [
+        "caste",
+        "Bama"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Bama's \"Memories of Childhood\" is an autobiographical narrative that explicitly documents her personal experiences with caste-based discrimination and social prejudice in Tamil Nadu. The text centers on how caste hierarchy affected her childhood, making discrimination the dominant theme rather than friendship, travel, or war."
     },
     {
       "question_text": "Author of 'On the Face of It':",
-      "options": ["Susan Hill", "Bama", "Anees Jung", "Pearl Buck"],
+      "options": [
+        "Susan Hill",
+        "Bama",
+        "Anees Jung",
+        "Pearl Buck"
+      ],
       "correct_answer": "A",
       "chapter": "Vistas - On the Face of It",
-      "topic_tags": ["Susan_Hill"],
+      "topic_tags": [
+        "Susan_Hill"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'On the Face of It' is a one-act play written by Susan Hill that explores themes of prejudice and human connection through the interaction between a disfigured man and a blind boy, demonstrating how appearances and assumptions can be transcended through genuine human understanding."
     },
     {
       "question_text": "Article writing word limit (CBSE Class 12):",
-      "options": ["50-80", "100-120", "120-150", "Up to 200"],
+      "options": [
+        "50-80",
+        "100-120",
+        "120-150",
+        "Up to 200"
+      ],
       "correct_answer": "C",
       "chapter": "Writing Skills",
-      "topic_tags": ["article_writing"],
+      "topic_tags": [
+        "article_writing"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "CBSE Class 12 article writing requires between 120-150 words to adequately develop ideas with proper introduction, body paragraphs, and conclusion while maintaining conciseness expected in formal writing assignments."
     },
     {
       "question_text": "'The Tiger King' is a satire by:",
-      "options": ["Kalki", "R.K. Narayan", "Khushwant Singh", "Mulk Raj Anand"],
+      "options": [
+        "Kalki",
+        "R.K. Narayan",
+        "Khushwant Singh",
+        "Mulk Raj Anand"
+      ],
       "correct_answer": "A",
       "chapter": "Vistas - The Tiger King",
-      "topic_tags": ["Kalki", "satire"],
+      "topic_tags": [
+        "Kalki",
+        "satire"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "'The Tiger King' is a satirical short story written by Kalki, a renowned Tamil writer and journalist. The story satirizes the vanity and arrogance of Indian rulers through the protagonist's obsessive tiger-hunting expeditions."
     }
   ]
 }

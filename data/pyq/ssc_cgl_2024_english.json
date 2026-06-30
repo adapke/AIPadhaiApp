@@ -8,228 +8,429 @@
   "questions": [
     {
       "question_text": "Synonym of 'Abundant':",
-      "options": ["Scarce", "Plentiful", "Empty", "Limited"],
+      "options": [
+        "Scarce",
+        "Plentiful",
+        "Empty",
+        "Limited"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary - Synonyms",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Abundant means existing or available in large quantities. Plentiful is its direct synonym, both describing something that is present in plenty or ample supply. The other options (scarce, empty, limited) are antonyms."
     },
     {
       "question_text": "Antonym of 'Brave':",
-      "options": ["Cowardly", "Strong", "Bold", "Fierce"],
+      "options": [
+        "Cowardly",
+        "Strong",
+        "Bold",
+        "Fierce"
+      ],
       "correct_answer": "A",
       "chapter": "Vocabulary - Antonyms",
-      "topic_tags": ["antonyms"],
+      "topic_tags": [
+        "antonyms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Brave means having courage and fearlessness. Its direct opposite is cowardly, which means lacking courage or being afraid. Strong, bold, and fierce are either synonyms or related positive qualities, not opposites."
     },
     {
       "question_text": "Choose correct spelling:",
-      "options": ["Accomodate", "Accommodate", "Acommodate", "Accommadate"],
+      "options": [
+        "Accomodate",
+        "Accommodate",
+        "Acommodate",
+        "Accommadate"
+      ],
       "correct_answer": "B",
       "chapter": "Spellings",
-      "topic_tags": ["spelling"],
+      "topic_tags": [
+        "spelling"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The word \"accommodate\" contains two c's and two m's. Option B is correct because it has the double-c (accom-) followed by double-m (-mmodate), matching the standard English spelling derived from the Latin root \"commodus.\""
     },
     {
       "question_text": "Fill in the blank: She has been working ___ this project for two weeks.",
-      "options": ["in", "at", "on", "of"],
+      "options": [
+        "in",
+        "at",
+        "on",
+        "of"
+      ],
       "correct_answer": "C",
       "chapter": "Prepositions",
-      "topic_tags": ["prepositions"],
+      "topic_tags": [
+        "prepositions"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The preposition \"on\" is used with the verb phrase \"working on\" to indicate engagement with a specific task or project. \"Working in\" suggests a location or field, while \"at\" and \"of\" are incorrect in this context."
     },
     {
       "question_text": "Idiom 'A piece of cake' means:",
-      "options": ["Delicious food", "Very easy", "Very difficult", "Sweet thing"],
+      "options": [
+        "Delicious food",
+        "Very easy",
+        "Very difficult",
+        "Sweet thing"
+      ],
       "correct_answer": "B",
       "chapter": "Idioms and Phrases",
-      "topic_tags": ["idioms"],
+      "topic_tags": [
+        "idioms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The idiom \"a piece of cake\" is figurative language meaning something is simple and effortless to accomplish, not literal cake. It's used when a task requires minimal effort or skill."
     },
     {
       "question_text": "Choose correctly punctuated sentence:",
-      "options": ["I told him 'come here'", "I told him, come here.", "I told him, 'come here.'", "I told him come here"],
+      "options": [
+        "I told him 'come here'",
+        "I told him, come here.",
+        "I told him, 'come here.'",
+        "I told him come here"
+      ],
       "correct_answer": "C",
       "chapter": "Punctuation",
-      "topic_tags": ["punctuation"],
+      "topic_tags": [
+        "punctuation"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When reporting direct speech, a comma should separate the reporting clause from the quoted words, and the quoted material must be enclosed in quotation marks with proper punctuation inside them. Option C correctly uses both the comma and single quotation marks around the direct speech."
     },
     {
       "question_text": "Active to passive: 'She wrote a letter.' becomes:",
-      "options": ["A letter was written by her", "A letter is written by her", "She is writing a letter", "A letter has been written"],
+      "options": [
+        "A letter was written by her",
+        "A letter is written by her",
+        "She is writing a letter",
+        "A letter has been written"
+      ],
       "correct_answer": "A",
       "chapter": "Voice",
-      "topic_tags": ["passive_voice"],
+      "topic_tags": [
+        "passive_voice"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "In passive voice, the object of the active sentence becomes the subject. \"She wrote\" (past tense) converts to \"was written by her\" (past tense passive), maintaining the original tense while restructuring the sentence around the letter as the main subject."
     },
     {
       "question_text": "Direct to indirect: He said, 'I am happy.' becomes:",
-      "options": ["He said that he is happy", "He said that he was happy", "He says that he is happy", "He told he is happy"],
+      "options": [
+        "He said that he is happy",
+        "He said that he was happy",
+        "He says that he is happy",
+        "He told he is happy"
+      ],
       "correct_answer": "B",
       "chapter": "Narration",
-      "topic_tags": ["reported_speech"],
+      "topic_tags": [
+        "reported_speech"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When converting direct speech to indirect speech, the tense shifts one step backward in time. \"Am\" (present) becomes \"was\" (past), and the pronoun \"I\" becomes \"he\" to match the subject. Option B correctly applies both the tense change and pronoun adjustment."
     },
     {
       "question_text": "Plural of 'Mouse':",
-      "options": ["Mouses", "Mice", "Moose", "Mices"],
+      "options": [
+        "Mouses",
+        "Mice",
+        "Moose",
+        "Mices"
+      ],
       "correct_answer": "B",
       "chapter": "Number",
-      "topic_tags": ["plural"],
+      "topic_tags": [
+        "plural"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"Mouse\" is an irregular noun that doesn't follow standard pluralization rules by adding \"-s\" or \"-es\". Instead, it undergoes a vowel change where the \"ou\" becomes \"i\", making the plural \"mice\"."
     },
     {
       "question_text": "Fill: Either he or his brothers ___ responsible.",
-      "options": ["is", "are", "was", "be"],
+      "options": [
+        "is",
+        "are",
+        "was",
+        "be"
+      ],
       "correct_answer": "B",
       "chapter": "Subject-Verb Agreement",
-      "topic_tags": ["agreement"],
+      "topic_tags": [
+        "agreement"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When subjects are joined by \"or,\" the verb agrees with the nearest subject. Here, \"brothers\" (plural) is closest to the blank, so the plural verb \"are\" is correct."
     },
     {
       "question_text": "Synonym of 'Reluctant':",
-      "options": ["Eager", "Unwilling", "Quick", "Lazy"],
+      "options": [
+        "Eager",
+        "Unwilling",
+        "Quick",
+        "Lazy"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "'Reluctant' means unwilling or disinclined to do something. Option B directly matches this meaning, as 'unwilling' is the primary synonym. The other options—eager (opposite), quick (unrelated), and lazy (different meaning)—do not capture reluctance's core sense of resistance or disinclination."
     },
     {
       "question_text": "Antonym of 'Optimistic':",
-      "options": ["Hopeful", "Pessimistic", "Positive", "Cheerful"],
+      "options": [
+        "Hopeful",
+        "Pessimistic",
+        "Positive",
+        "Cheerful"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["antonyms"],
+      "topic_tags": [
+        "antonyms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Optimistic means having a positive outlook and expecting favorable outcomes. Pessimistic is its direct opposite, meaning expecting unfavorable outcomes and having a negative outlook. The other options (hopeful, positive, cheerful) are all synonyms or related to optimism, not antonyms."
     },
     {
       "question_text": "Choose grammatically correct: 'Neither of the two ___ available.'",
-      "options": ["is", "are", "were", "have"],
+      "options": [
+        "is",
+        "are",
+        "were",
+        "have"
+      ],
       "correct_answer": "A",
       "chapter": "Subject-Verb Agreement",
-      "topic_tags": ["neither_nor"],
+      "topic_tags": [
+        "neither_nor"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"Neither\" is a singular pronoun that takes a singular verb. Although it refers to two items, grammatically it requires \"is\" to maintain subject-verb agreement, not the plural \"are.\""
     },
     {
       "question_text": "Word with same meaning as 'verbose':",
-      "options": ["Concise", "Wordy", "Quiet", "Brief"],
+      "options": [
+        "Concise",
+        "Wordy",
+        "Quiet",
+        "Brief"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"Verbose\" means using more words than necessary to express something. \"Wordy\" is a direct synonym meaning the same thing—using excessive or unnecessary words. The other options represent opposite qualities (concise and brief) or unrelated characteristics (quiet)."
     },
     {
       "question_text": "Tense of 'I had been working': ",
-      "options": ["Past perfect continuous", "Past perfect", "Present perfect", "Past simple"],
+      "options": [
+        "Past perfect continuous",
+        "Past perfect",
+        "Present perfect",
+        "Past simple"
+      ],
       "correct_answer": "A",
       "chapter": "Tenses",
-      "topic_tags": ["tense"],
+      "topic_tags": [
+        "tense"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"Had been working\" combines \"had\" (past perfect auxiliary) with \"been\" (continuous aspect marker) and the present participle \"working,\" indicating an action that started before another past event and continued up to that point—the defining structure of past perfect continuous."
     },
     {
       "question_text": "'Hit the books' idiom means:",
-      "options": ["Read intensely", "Be angry", "Destroy books", "Avoid studying"],
+      "options": [
+        "Read intensely",
+        "Be angry",
+        "Destroy books",
+        "Avoid studying"
+      ],
       "correct_answer": "A",
       "chapter": "Idioms",
-      "topic_tags": ["idioms"],
+      "topic_tags": [
+        "idioms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The idiom \"hit the books\" uses figurative language where \"hit\" means to apply oneself energetically to a task. It refers to studying hard or reading seriously, not literal violence or anger toward books."
     },
     {
       "question_text": "Pronoun in 'He is my friend':",
-      "options": ["He", "my", "friend", "is"],
+      "options": [
+        "He",
+        "my",
+        "friend",
+        "is"
+      ],
       "correct_answer": "A",
       "chapter": "Parts of Speech",
-      "topic_tags": ["pronoun"],
+      "topic_tags": [
+        "pronoun"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"He\" is a pronoun because it's a word that replaces a noun (a person's name) to avoid repetition. \"My\" is a possessive adjective, \"friend\" is a noun, and \"is\" is a verb."
     },
     {
       "question_text": "Article: She has ___ honest opinion.",
-      "options": ["a", "an", "the", "no article"],
+      "options": [
+        "a",
+        "an",
+        "the",
+        "no article"
+      ],
       "correct_answer": "B",
       "chapter": "Articles",
-      "topic_tags": ["articles", "vowel_sound"],
+      "topic_tags": [
+        "articles",
+        "vowel_sound"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The word \"honest\" begins with a vowel sound (the 'h' is silent), so it requires the article \"an\" rather than \"a\" before it."
     },
     {
       "question_text": "Choose correct: 'He is taller than ___'",
-      "options": ["me", "I", "myself", "mine"],
+      "options": [
+        "me",
+        "I",
+        "myself",
+        "mine"
+      ],
       "correct_answer": "B",
       "chapter": "Pronouns",
-      "topic_tags": ["comparative"],
+      "topic_tags": [
+        "comparative"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "In comparisons with \"than,\" use the same pronoun case as would appear in a complete sentence. \"He is taller than I [am]\" correctly uses the nominative pronoun \"I\" to match the implied verb."
     },
     {
       "question_text": "Antonym of 'Generous':",
-      "options": ["Kind", "Stingy", "Greedy", "Both B and C"],
+      "options": [
+        "Kind",
+        "Stingy",
+        "Greedy",
+        "Both B and C"
+      ],
       "correct_answer": "D",
       "chapter": "Vocabulary",
-      "topic_tags": ["antonyms"],
+      "topic_tags": [
+        "antonyms"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Both \"stingy\" (unwilling to spend money) and \"greedy\" (excessively desirous of wealth or possessions) directly oppose \"generous\" (willing to give freely). While greedy emphasizes excessive desire and stingy emphasizes reluctance to give, both contradict generosity."
     },
     {
       "question_text": "Sentence type: 'How beautiful the flower is!'",
-      "options": ["Assertive", "Interrogative", "Imperative", "Exclamatory"],
+      "options": [
+        "Assertive",
+        "Interrogative",
+        "Imperative",
+        "Exclamatory"
+      ],
       "correct_answer": "D",
       "chapter": "Sentence Types",
-      "topic_tags": ["exclamatory"],
+      "topic_tags": [
+        "exclamatory"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "This sentence expresses strong emotion or admiration about the flower's beauty and ends with an exclamation mark, which are defining characteristics of an exclamatory sentence. Exclamatory sentences convey feelings of surprise, joy, or emphasis rather than making statements, asking questions, or giving commands."
     },
     {
       "question_text": "Choose correct verb: 'The team ___ doing well.'",
-      "options": ["is", "are", "be", "were"],
+      "options": [
+        "is",
+        "are",
+        "be",
+        "were"
+      ],
       "correct_answer": "A",
       "chapter": "Subject-Verb Agreement",
-      "topic_tags": ["collective_noun"],
+      "topic_tags": [
+        "collective_noun"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "\"Team\" is a collective noun that functions as a single unit, requiring the singular verb \"is.\" While British English sometimes treats collectives as plural, American English standard usage treats them as singular, making \"is\" the correct choice."
     },
     {
       "question_text": "Conjunction in 'She studies hard but fails':",
-      "options": ["she", "hard", "but", "fails"],
+      "options": [
+        "she",
+        "hard",
+        "but",
+        "fails"
+      ],
       "correct_answer": "C",
       "chapter": "Parts of Speech",
-      "topic_tags": ["conjunction"],
+      "topic_tags": [
+        "conjunction"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A conjunction is a word that connects words, phrases, or clauses. In this sentence, \"but\" links two contrasting ideas—studying hard and failing—making it the conjunction that establishes the relationship between these independent clauses."
     },
     {
       "question_text": "Synonym of 'Lethargic':",
-      "options": ["Active", "Sluggish", "Energetic", "Quick"],
+      "options": [
+        "Active",
+        "Sluggish",
+        "Energetic",
+        "Quick"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["synonyms"],
+      "topic_tags": [
+        "synonyms"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Lethargic means lacking energy or being sluggish. Option B (Sluggish) directly matches this definition, meaning slow-moving and lacking vitality. Options A, C, and D all describe high energy or speed, which are antonyms rather than synonyms."
     },
     {
       "question_text": "Correct sentence: 'He hardly never comes' should be:",
-      "options": ["He hardly ever comes", "He hardly often comes", "He rarely never comes", "Original is correct"],
+      "options": [
+        "He hardly ever comes",
+        "He hardly often comes",
+        "He rarely never comes",
+        "Original is correct"
+      ],
       "correct_answer": "A",
       "chapter": "Common Errors",
-      "topic_tags": ["double_negative"],
+      "topic_tags": [
+        "double_negative"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The original sentence uses a double negative (\"hardly never\"), which is grammatically incorrect in standard English. Option A corrects this by replacing \"never\" with \"ever,\" creating a proper negative construction where \"hardly\" (meaning scarcely) logically modifies the frequency adverb."
     }
   ]
 }

@@ -8,228 +8,440 @@
   "questions": [
     {
       "question_text": "Matter is made up of:",
-      "options": ["Only atoms", "Only molecules", "Atoms and molecules", "Only ions"],
+      "options": [
+        "Only atoms",
+        "Only molecules",
+        "Atoms and molecules",
+        "Only ions"
+      ],
       "correct_answer": "C",
       "chapter": "Matter in Our Surroundings",
-      "topic_tags": ["matter", "atoms"],
+      "topic_tags": [
+        "matter",
+        "atoms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Atoms are the basic building blocks of all matter. Molecules form when atoms bond together, so matter can consist of individual atoms (like noble gases) or molecules (atoms bonded together). Therefore, matter is made up of both atoms and molecules."
     },
     {
       "question_text": "States of matter are:",
-      "options": ["Two", "Three", "Four", "Five"],
+      "options": [
+        "Two",
+        "Three",
+        "Four",
+        "Five"
+      ],
       "correct_answer": "B",
       "chapter": "Matter in Our Surroundings",
-      "topic_tags": ["states_of_matter"],
+      "topic_tags": [
+        "states_of_matter"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The three main states of matter are solid, liquid, and gas, defined by how their particles are arranged and move. While plasma is sometimes considered a fourth state, the fundamental classification is three."
     },
     {
       "question_text": "SI unit of force is:",
-      "options": ["dyne", "newton", "kg", "joule"],
+      "options": [
+        "dyne",
+        "newton",
+        "kg",
+        "joule"
+      ],
       "correct_answer": "B",
       "chapter": "Force and Laws of Motion",
-      "topic_tags": ["units", "force"],
+      "topic_tags": [
+        "units",
+        "force"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The newton (N) is defined as the force required to accelerate a 1 kg mass at 1 m/s², making it the SI standard unit of force. Dyne is CGS, kg measures mass, and joule measures energy."
     },
     {
       "question_text": "Gravitational force between two objects depends on:",
-      "options": ["Their masses only", "Distance only", "Both masses and distance", "Nothing"],
+      "options": [
+        "Their masses only",
+        "Distance only",
+        "Both masses and distance",
+        "Nothing"
+      ],
       "correct_answer": "C",
       "chapter": "Gravitation",
-      "topic_tags": ["gravity", "Newton's law"],
+      "topic_tags": [
+        "gravity",
+        "Newton's law"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Gravitational force is described by Newton's law of universal gravitation: F = G(m₁m₂)/r². Force increases with mass but decreases with the square of the distance between objects, so both factors are essential."
     },
     {
       "question_text": "Sound cannot travel through:",
-      "options": ["Solids", "Liquids", "Gases", "Vacuum"],
+      "options": [
+        "Solids",
+        "Liquids",
+        "Gases",
+        "Vacuum"
+      ],
       "correct_answer": "D",
       "chapter": "Sound",
-      "topic_tags": ["sound", "medium"],
+      "topic_tags": [
+        "sound",
+        "medium"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sound requires a medium of particles to propagate through vibrations. A vacuum contains no particles, so sound waves have nothing to vibrate and therefore cannot travel through it, unlike solids, liquids, and gases which all contain matter."
     },
     {
       "question_text": "Basic unit of life is:",
-      "options": ["Atom", "Molecule", "Cell", "Tissue"],
+      "options": [
+        "Atom",
+        "Molecule",
+        "Cell",
+        "Tissue"
+      ],
       "correct_answer": "C",
       "chapter": "The Fundamental Unit of Life",
-      "topic_tags": ["cell"],
+      "topic_tags": [
+        "cell"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The cell is the smallest unit capable of performing all life functions independently, including metabolism, reproduction, and response to stimuli. While atoms and molecules are smaller building blocks, tissues are composed of multiple cells."
     },
     {
       "question_text": "Plant tissue that transports water from roots to leaves is:",
-      "options": ["Phloem", "Xylem", "Cortex", "Pith"],
+      "options": [
+        "Phloem",
+        "Xylem",
+        "Cortex",
+        "Pith"
+      ],
       "correct_answer": "B",
       "chapter": "Tissues",
-      "topic_tags": ["xylem", "transport"],
+      "topic_tags": [
+        "xylem",
+        "transport"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Xylem is the vascular tissue specialized for water transport, moving water and minerals upward from the roots to leaves against gravity through continuous columns in stem and leaf veins. Phloem, by contrast, transports sugars downward."
     },
     {
       "question_text": "Number of protons in oxygen atom (Z=8) is:",
-      "options": ["6", "7", "8", "16"],
+      "options": [
+        "6",
+        "7",
+        "8",
+        "16"
+      ],
       "correct_answer": "C",
       "chapter": "Structure of the Atom",
-      "topic_tags": ["atomic_number", "oxygen"],
+      "topic_tags": [
+        "atomic_number",
+        "oxygen"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The atomic number (Z) directly indicates the number of protons in an atom's nucleus. Since oxygen has Z=8, it contains exactly 8 protons."
     },
     {
       "question_text": "Mass number = number of:",
-      "options": ["Protons only", "Neutrons only", "Protons + electrons", "Protons + neutrons"],
+      "options": [
+        "Protons only",
+        "Neutrons only",
+        "Protons + electrons",
+        "Protons + neutrons"
+      ],
       "correct_answer": "D",
       "chapter": "Structure of the Atom",
-      "topic_tags": ["mass_number"],
+      "topic_tags": [
+        "mass_number"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mass number represents the total count of particles in the nucleus. Since protons and neutrons are the only particles with significant mass in an atom, the mass number equals protons plus neutrons."
     },
     {
       "question_text": "Speed of sound in air at 20°C is approximately:",
-      "options": ["343 m/s", "1500 m/s", "10 m/s", "3×10⁸ m/s"],
+      "options": [
+        "343 m/s",
+        "1500 m/s",
+        "10 m/s",
+        "3×10⁸ m/s"
+      ],
       "correct_answer": "A",
       "chapter": "Sound",
-      "topic_tags": ["speed_of_sound"],
+      "topic_tags": [
+        "speed_of_sound"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At 20°C, sound travels through air at approximately 343 m/s. Option B represents sound speed in water (~1500 m/s), C is too slow for any medium, and D is the speed of light, not sound."
     },
     {
       "question_text": "Acceleration due to gravity on the surface of moon is approximately:",
-      "options": ["g/6", "g/3", "g", "6g"],
+      "options": [
+        "g/6",
+        "g/3",
+        "g",
+        "6g"
+      ],
       "correct_answer": "A",
       "chapter": "Gravitation",
-      "topic_tags": ["moon", "gravity"],
+      "topic_tags": [
+        "moon",
+        "gravity"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Moon's mass is about 1/81 of Earth's mass and its radius is about 1/4 of Earth's radius. Using the gravity formula g = GM/r², the Moon's surface gravity works out to approximately 1/6 of Earth's gravity."
     },
     {
       "question_text": "Number of moles in 36 g of water is:",
-      "options": ["1", "2", "3", "0.5"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0.5"
+      ],
       "correct_answer": "B",
       "chapter": "Atoms and Molecules",
-      "topic_tags": ["mole"],
+      "topic_tags": [
+        "mole"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Water (H₂O) has a molar mass of 18 g/mol (1+1+16). Using moles = mass/molar mass: 36 g ÷ 18 g/mol = 2 moles."
     },
     {
       "question_text": "Tissue that connects bones is:",
-      "options": ["Muscle", "Cartilage", "Ligament", "Tendon"],
+      "options": [
+        "Muscle",
+        "Cartilage",
+        "Ligament",
+        "Tendon"
+      ],
       "correct_answer": "C",
       "chapter": "Tissues",
-      "topic_tags": ["ligament"],
+      "topic_tags": [
+        "ligament"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ligaments are fibrous connective tissues that directly link bone to bone, providing stability to joints. While cartilage cushions bones and tendons connect muscle to bone, ligaments specifically join bones together."
     },
     {
       "question_text": "Centre of mass of a uniform sphere is at:",
-      "options": ["Surface", "Centre", "One edge", "Top"],
+      "options": [
+        "Surface",
+        "Centre",
+        "One edge",
+        "Top"
+      ],
       "correct_answer": "B",
       "chapter": "Gravitation",
-      "topic_tags": ["centre_of_mass"],
+      "topic_tags": [
+        "centre_of_mass"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For a uniform sphere with symmetric mass distribution, the centre of mass coincides with the geometric centre due to equal mass distributed equally in all directions from that point."
     },
     {
       "question_text": "Law of conservation of mass states that mass:",
-      "options": ["Increases", "Decreases", "Neither created nor destroyed", "Equals energy"],
+      "options": [
+        "Increases",
+        "Decreases",
+        "Neither created nor destroyed",
+        "Equals energy"
+      ],
       "correct_answer": "C",
       "chapter": "Atoms and Molecules",
-      "topic_tags": ["conservation"],
+      "topic_tags": [
+        "conservation"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The law of conservation of mass states that in a closed system, matter cannot be created or destroyed during chemical reactions—it only changes form. Mass remains constant before and after a reaction."
     },
     {
       "question_text": "Tsunami is associated with:",
-      "options": ["Wind", "Earthquakes under sea", "Volcano on land", "Heavy rain"],
+      "options": [
+        "Wind",
+        "Earthquakes under sea",
+        "Volcano on land",
+        "Heavy rain"
+      ],
       "correct_answer": "B",
       "chapter": "Natural Phenomena",
-      "topic_tags": ["tsunami"],
+      "topic_tags": [
+        "tsunami"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Tsunamis are generated by sudden, large-scale disturbances of water, most commonly caused by underwater earthquakes that displace massive volumes of ocean water. While volcanoes and other events can trigger tsunamis, submarine earthquakes are the primary and most significant cause."
     },
     {
       "question_text": "Atom of helium contains how many electrons?",
-      "options": ["1", "2", "4", "8"],
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
       "correct_answer": "B",
       "chapter": "Structure of the Atom",
-      "topic_tags": ["helium", "electrons"],
+      "topic_tags": [
+        "helium",
+        "electrons"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Helium has atomic number 2, meaning it has 2 protons in its nucleus. In a neutral atom, the number of electrons equals the number of protons, so helium contains 2 electrons."
     },
     {
       "question_text": "Plant tissue that gives mechanical strength is:",
-      "options": ["Parenchyma", "Collenchyma", "Sclerenchyma", "All of these"],
+      "options": [
+        "Parenchyma",
+        "Collenchyma",
+        "Sclerenchyma",
+        "All of these"
+      ],
       "correct_answer": "C",
       "chapter": "Tissues",
-      "topic_tags": ["sclerenchyma"],
+      "topic_tags": [
+        "sclerenchyma"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sclerenchyma tissue provides mechanical strength due to its thick, lignified (woody) cell walls that are rigid and inelastic, making it ideal for support in mature plant structures. While collenchyma offers some flexibility, sclerenchyma's extreme durability makes it the primary tissue for mechanical support."
     },
     {
       "question_text": "Free fall is motion under influence of:",
-      "options": ["Friction", "Gravity only", "Air resistance", "Applied force"],
+      "options": [
+        "Friction",
+        "Gravity only",
+        "Air resistance",
+        "Applied force"
+      ],
       "correct_answer": "B",
       "chapter": "Gravitation",
-      "topic_tags": ["free_fall"],
+      "topic_tags": [
+        "free_fall"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Free fall is defined as motion where only gravitational force acts on an object, with all other forces (like friction and air resistance) being negligible or absent. Applied forces are also not involved in true free fall."
     },
     {
       "question_text": "Molecular formula of water is:",
-      "options": ["H2", "O2", "H2O", "H2O2"],
+      "options": [
+        "H2",
+        "O2",
+        "H2O",
+        "H2O2"
+      ],
       "correct_answer": "C",
       "chapter": "Atoms and Molecules",
-      "topic_tags": ["formula", "water"],
+      "topic_tags": [
+        "formula",
+        "water"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Water consists of two hydrogen atoms bonded to one oxygen atom. The molecular formula C (H2O) correctly represents this composition, while H2 and O2 are individual elements and H2O2 is hydrogen peroxide, a different compound."
     },
     {
       "question_text": "Newton's first law of motion is also called:",
-      "options": ["Law of force", "Law of inertia", "Law of action-reaction", "Law of gravity"],
+      "options": [
+        "Law of force",
+        "Law of inertia",
+        "Law of action-reaction",
+        "Law of gravity"
+      ],
       "correct_answer": "B",
       "chapter": "Force and Laws of Motion",
-      "topic_tags": ["Newton", "inertia"],
+      "topic_tags": [
+        "Newton",
+        "inertia"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Newton's first law states that an object at rest stays at rest and an object in motion stays in motion unless acted upon by an external force. This principle describes inertia—the tendency of objects to resist changes in their motion."
     },
     {
       "question_text": "Ultrasonic frequency is above:",
-      "options": ["20 Hz", "200 Hz", "2000 Hz", "20000 Hz"],
+      "options": [
+        "20 Hz",
+        "200 Hz",
+        "2000 Hz",
+        "20000 Hz"
+      ],
       "correct_answer": "D",
       "chapter": "Sound",
-      "topic_tags": ["ultrasonic"],
+      "topic_tags": [
+        "ultrasonic"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ultrasonic frequencies are those above the upper limit of human hearing, which is approximately 20,000 Hz (20 kHz). Anything below this threshold falls within the audible range for humans."
     },
     {
       "question_text": "Number of bones in adult human body is:",
-      "options": ["180", "206", "250", "300"],
+      "options": [
+        "180",
+        "206",
+        "250",
+        "300"
+      ],
       "correct_answer": "B",
       "chapter": "Why Do We Fall Ill",
-      "topic_tags": ["bones", "human_body"],
+      "topic_tags": [
+        "bones",
+        "human_body"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An adult human skeleton contains 206 bones. Infants are born with approximately 270 bones, many made of cartilage, which gradually fuse and ossify during development, resulting in the lower adult count."
     },
     {
       "question_text": "Common cold is caused by:",
-      "options": ["Bacteria", "Virus", "Fungus", "Protozoa"],
+      "options": [
+        "Bacteria",
+        "Virus",
+        "Fungus",
+        "Protozoa"
+      ],
       "correct_answer": "B",
       "chapter": "Why Do We Fall Ill",
-      "topic_tags": ["cold", "virus"],
+      "topic_tags": [
+        "cold",
+        "virus"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The common cold is caused by various rhinoviruses and other RNA viruses that infect the upper respiratory tract. Bacteria, fungi, and protozoa do not typically cause the common cold syndrome."
     },
     {
       "question_text": "Stable structure of an atom has octet of electrons in:",
-      "options": ["Innermost shell", "Outermost shell (valence)", "Nucleus", "Anywhere"],
+      "options": [
+        "Innermost shell",
+        "Outermost shell (valence)",
+        "Nucleus",
+        "Anywhere"
+      ],
       "correct_answer": "B",
       "chapter": "Structure of the Atom",
-      "topic_tags": ["octet"],
+      "topic_tags": [
+        "octet"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The outermost shell (valence shell) achieves stability with an octet of electrons because atoms bond and react based on achieving a full outer shell configuration. The innermost shell follows the duet rule (2 electrons), and the nucleus contains protons/neutrons, not electrons."
     }
   ]
 }

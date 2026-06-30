@@ -8,228 +8,431 @@
   "questions": [
     {
       "question_text": "Relation R = {(1,1), (2,2), (3,3)} on set {1,2,3} is:",
-      "options": ["Reflexive only", "Symmetric only", "Equivalence", "None"],
+      "options": [
+        "Reflexive only",
+        "Symmetric only",
+        "Equivalence",
+        "None"
+      ],
       "correct_answer": "C",
       "chapter": "Relations and Functions",
-      "topic_tags": ["equivalence_relation"],
+      "topic_tags": [
+        "equivalence_relation"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "R is reflexive because every element maps to itself: (1,1), (2,2), (3,3). It's symmetric since whenever (a,b) is in R, (b,a) is also in R. It's transitive because all pairs in R are reflexive. Since R is reflexive, symmetric, and transitive, it's an equivalence relation."
     },
     {
       "question_text": "Principal value of sin⁻¹(1/√2) is:",
-      "options": ["π/4", "π/3", "π/6", "π/2"],
+      "options": [
+        "π/4",
+        "π/3",
+        "π/6",
+        "π/2"
+      ],
       "correct_answer": "A",
       "chapter": "Inverse Trigonometric Functions",
-      "topic_tags": ["arcsin"],
+      "topic_tags": [
+        "arcsin"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "sin⁻¹ asks: what angle has a sine of 1/√2? Since sin(π/4) = 1/√2 and π/4 lies within the principal range [-π/2, π/2], the answer is π/4."
     },
     {
       "question_text": "If A is a 3×3 matrix and |A| = 5, then |3A| equals:",
-      "options": ["15", "45", "135", "5"],
+      "options": [
+        "15",
+        "45",
+        "135",
+        "5"
+      ],
       "correct_answer": "C",
       "chapter": "Matrices",
-      "topic_tags": ["determinant_scalar"],
+      "topic_tags": [
+        "determinant_scalar"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When multiplying a matrix by a scalar k, the determinant is multiplied by k^n, where n is the matrix dimension. Here, |3A| = 3³|A| = 27 × 5 = 135."
     },
     {
       "question_text": "If A and B are 2×2 matrices, then (AB)ᵀ equals:",
-      "options": ["AᵀBᵀ", "BᵀAᵀ", "AB", "BA"],
+      "options": [
+        "AᵀBᵀ",
+        "BᵀAᵀ",
+        "AB",
+        "BA"
+      ],
       "correct_answer": "B",
       "chapter": "Matrices",
-      "topic_tags": ["transpose"],
+      "topic_tags": [
+        "transpose"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When transposing a product of matrices, the order reverses: (AB)ᵀ = BᵀAᵀ. This is because the transpose swaps rows and columns, and matrix multiplication is non-commutative, requiring the factors to be reversed to maintain the correct element positions."
     },
     {
       "question_text": "d/dx (sin x cos x) equals:",
-      "options": ["cos 2x", "cos²x", "-sin²x", "sin 2x"],
+      "options": [
+        "cos 2x",
+        "cos²x",
+        "-sin²x",
+        "sin 2x"
+      ],
       "correct_answer": "A",
       "chapter": "Differentiation",
-      "topic_tags": ["product_rule"],
+      "topic_tags": [
+        "product_rule"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the product rule: d/dx(sin x cos x) = cos x · cos x + sin x · (-sin x) = cos²x - sin²x. This simplifies to cos 2x using the double angle identity cos 2x = cos²x - sin²x."
     },
     {
       "question_text": "∫1/(1+x²) dx equals:",
-      "options": ["tan⁻¹x + C", "sec⁻¹x + C", "ln(1+x²) + C", "x/(1+x²) + C"],
+      "options": [
+        "tan⁻¹x + C",
+        "sec⁻¹x + C",
+        "ln(1+x²) + C",
+        "x/(1+x²) + C"
+      ],
       "correct_answer": "A",
       "chapter": "Integration",
-      "topic_tags": ["arctan_integral"],
+      "topic_tags": [
+        "arctan_integral"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The antiderivative of 1/(1+x²) is a standard integral formula that equals arctan(x). This can be verified by differentiating arctan(x), which yields 1/(1+x²)."
     },
     {
       "question_text": "Order of differential equation y'' + 2y' + y = 0 is:",
-      "options": ["1", "2", "3", "0"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
       "correct_answer": "B",
       "chapter": "Differential Equations",
-      "topic_tags": ["order"],
+      "topic_tags": [
+        "order"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The order of a differential equation is determined by the highest derivative present. Since y'' (second derivative) is the highest derivative in this equation, the order is 2."
     },
     {
       "question_text": "Solution of dy/dx = y is:",
-      "options": ["y = Cx", "y = Ce^x", "y = C + x", "y = e^(Cx)"],
+      "options": [
+        "y = Cx",
+        "y = Ce^x",
+        "y = C + x",
+        "y = e^(Cx)"
+      ],
       "correct_answer": "B",
       "chapter": "Differential Equations",
-      "topic_tags": ["first_order"],
+      "topic_tags": [
+        "first_order"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "This is a separable differential equation. Rearranging: dy/y = dx. Integrating both sides gives ln|y| = x + C, which exponentiates to y = e^(x+C) = e^C · e^x = Ce^x, where C is an arbitrary constant."
     },
     {
       "question_text": "If a vector has magnitude 5 and makes angle 60° with positive x-axis, x-component is:",
-      "options": ["2.5", "5", "5/2", "10"],
+      "options": [
+        "2.5",
+        "5",
+        "5/2",
+        "10"
+      ],
       "correct_answer": "A",
       "chapter": "Vectors",
-      "topic_tags": ["components"],
+      "topic_tags": [
+        "components"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The x-component of a vector is found using the formula: x-component = magnitude × cos(angle). Here, x-component = 5 × cos(60°) = 5 × 0.5 = 2.5."
     },
     {
       "question_text": "Dot product of (i + 2j) and (3i + 4j) is:",
-      "options": ["3", "8", "11", "5"],
+      "options": [
+        "3",
+        "8",
+        "11",
+        "5"
+      ],
       "correct_answer": "C",
       "chapter": "Vectors",
-      "topic_tags": ["dot_product"],
+      "topic_tags": [
+        "dot_product"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The dot product multiplies corresponding components and sums them: (1)(3) + (2)(4) = 3 + 8 = 11."
     },
     {
       "question_text": "Direction cosines of vector (3, 4, 0) are:",
-      "options": ["(3/5, 4/5, 0)", "(3, 4, 0)/5", "Same as (a) or (b)", "(1, 1, 0)"],
+      "options": [
+        "(3/5, 4/5, 0)",
+        "(3, 4, 0)/5",
+        "Same as (a) or (b)",
+        "(1, 1, 0)"
+      ],
       "correct_answer": "C",
       "chapter": "Three-Dimensional Geometry",
-      "topic_tags": ["direction_cosines"],
+      "topic_tags": [
+        "direction_cosines"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Direction cosines are found by dividing each component by the vector's magnitude. The magnitude of (3, 4, 0) is √(9+16+0) = 5, giving direction cosines (3/5, 4/5, 0). Options A and B represent the same values since (3, 4, 0)/5 equals (3/5, 4/5, 0)."
     },
     {
       "question_text": "Plane 2x + 3y + 4z = 12 cuts z-axis at:",
-      "options": ["(0,0,3)", "(0,0,4)", "(0,0,6)", "(0,0,12)"],
+      "options": [
+        "(0,0,3)",
+        "(0,0,4)",
+        "(0,0,6)",
+        "(0,0,12)"
+      ],
       "correct_answer": "A",
       "chapter": "Three-Dimensional Geometry",
-      "topic_tags": ["plane", "intercept"],
+      "topic_tags": [
+        "plane",
+        "intercept"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "On the z-axis, both x and y coordinates are zero. Substituting x = 0 and y = 0 into the plane equation: 2(0) + 3(0) + 4z = 12, which gives 4z = 12, so z = 3."
     },
     {
       "question_text": "If P(A) = 0.6, P(B) = 0.4, P(A∩B) = 0.2, then P(A∪B) is:",
-      "options": ["0.6", "0.8", "1.0", "0.2"],
+      "options": [
+        "0.6",
+        "0.8",
+        "1.0",
+        "0.2"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["union_probability"],
+      "topic_tags": [
+        "union_probability"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the addition rule for probability: P(A∪B) = P(A) + P(B) - P(A∩B) = 0.6 + 0.4 - 0.2 = 0.8. We subtract the intersection to avoid counting the overlap twice."
     },
     {
       "question_text": "Mean of binomial distribution with n=10, p=0.4 is:",
-      "options": ["4", "0.4", "6", "10"],
+      "options": [
+        "4",
+        "0.4",
+        "6",
+        "10"
+      ],
       "correct_answer": "A",
       "chapter": "Probability",
-      "topic_tags": ["binomial", "mean"],
+      "topic_tags": [
+        "binomial",
+        "mean"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mean of a binomial distribution is calculated using the formula μ = np. With n=10 and p=0.4, we get μ = 10 × 0.4 = 4."
     },
     {
       "question_text": "Function f(x) = x³ is:",
-      "options": ["Always increasing", "Always decreasing", "Has local max and min", "Constant"],
+      "options": [
+        "Always increasing",
+        "Always decreasing",
+        "Has local max and min",
+        "Constant"
+      ],
       "correct_answer": "A",
       "chapter": "Application of Derivatives",
-      "topic_tags": ["monotonic"],
+      "topic_tags": [
+        "monotonic"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The derivative f'(x) = 3x² is always non-negative and equals zero only at x = 0 (an inflection point, not an extremum), so the function strictly increases everywhere except at that single point, making it always increasing overall."
     },
     {
       "question_text": "Maximum value of f(x) = x²(1-x) on [0,1] is at:",
-      "options": ["x = 0", "x = 1", "x = 1/3", "x = 2/3"],
+      "options": [
+        "x = 0",
+        "x = 1",
+        "x = 1/3",
+        "x = 2/3"
+      ],
       "correct_answer": "D",
       "chapter": "Application of Derivatives",
-      "topic_tags": ["maxima", "critical_points"],
+      "topic_tags": [
+        "maxima",
+        "critical_points"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "To find the maximum, take the derivative: f'(x) = 2x(1-x) + x²(-1) = 2x - 3x². Setting f'(x) = 0 gives x(2-3x) = 0, so x = 0 or x = 2/3. Evaluating f at critical points and endpoints: f(0) = 0, f(2/3) = 4/27 ≈ 0.148, f(1) = 0, so the maximum occurs at x = 2/3."
     },
     {
       "question_text": "∫₀^(π/2) cos x dx equals:",
-      "options": ["0", "1", "-1", "π/2"],
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "π/2"
+      ],
       "correct_answer": "B",
       "chapter": "Definite Integration",
-      "topic_tags": ["definite_integral"],
+      "topic_tags": [
+        "definite_integral"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The antiderivative of cos x is sin x. Evaluating from 0 to π/2: sin(π/2) - sin(0) = 1 - 0 = 1."
     },
     {
       "question_text": "Area enclosed by y = x², x-axis, and lines x=0, x=2 is:",
-      "options": ["4/3", "8/3", "2", "4"],
+      "options": [
+        "4/3",
+        "8/3",
+        "2",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Application of Integrals",
-      "topic_tags": ["area_under_curve"],
+      "topic_tags": [
+        "area_under_curve"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The area is found by integrating y = x² from x = 0 to x = 2: ∫₀² x² dx = [x³/3]₀² = 8/3 - 0 = 8/3."
     },
     {
       "question_text": "If A and B are independent with P(A)=0.5, P(B)=0.4, P(A∩B) is:",
-      "options": ["0.2", "0.9", "0.5", "0.4"],
+      "options": [
+        "0.2",
+        "0.9",
+        "0.5",
+        "0.4"
+      ],
       "correct_answer": "A",
       "chapter": "Probability",
-      "topic_tags": ["independent_events"],
+      "topic_tags": [
+        "independent_events"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For independent events, P(A∩B) = P(A) × P(B). Therefore, P(A∩B) = 0.5 × 0.4 = 0.2."
     },
     {
       "question_text": "tan⁻¹(1) + tan⁻¹(2) + tan⁻¹(3) equals:",
-      "options": ["π/2", "π", "3π/4", "π/3"],
+      "options": [
+        "π/2",
+        "π",
+        "3π/4",
+        "π/3"
+      ],
       "correct_answer": "B",
       "chapter": "Inverse Trigonometric Functions",
-      "topic_tags": ["identity"],
+      "topic_tags": [
+        "identity"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the addition formula for inverse tangent, tan⁻¹(a) + tan⁻¹(b) = tan⁻¹((a+b)/(1-ab)) when ab < 1, or equals π + tan⁻¹((a+b)/(1-ab)) when ab > 1. First, tan⁻¹(1) + tan⁻¹(2) gives (1+2)/(1-2) = -3, so this equals π + tan⁻¹(-3). Adding tan⁻¹(3): π + tan⁻¹(-3) + tan⁻¹(3) = π"
     },
     {
       "question_text": "If f(x) = x² + 2x + 1, then f'(0) is:",
-      "options": ["0", "1", "2", "3"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
       "correct_answer": "C",
       "chapter": "Differentiation",
-      "topic_tags": ["polynomial_derivative"],
+      "topic_tags": [
+        "polynomial_derivative"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Taking the derivative of f(x) = x² + 2x + 1 gives f'(x) = 2x + 2. Evaluating at x = 0: f'(0) = 2(0) + 2 = 2."
     },
     {
       "question_text": "Continuity of f(x) = 1/x at x=0:",
-      "options": ["Continuous", "Discontinuous", "Removable discontinuity", "Removable"],
+      "options": [
+        "Continuous",
+        "Discontinuous",
+        "Removable discontinuity",
+        "Removable"
+      ],
       "correct_answer": "B",
       "chapter": "Continuity",
-      "topic_tags": ["discontinuity"],
+      "topic_tags": [
+        "discontinuity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The function f(x) = 1/x is undefined at x = 0 since division by zero is impossible. Since the function doesn't exist at this point and the limit doesn't exist as x approaches 0, the function is discontinuous there."
     },
     {
       "question_text": "Direction ratios of line joining (1,2,3) and (4,5,6) are:",
-      "options": ["(1,1,1)", "(3,3,3)", "(5,7,9)", "(4,10,18)"],
+      "options": [
+        "(1,1,1)",
+        "(3,3,3)",
+        "(5,7,9)",
+        "(4,10,18)"
+      ],
       "correct_answer": "B",
       "chapter": "Three-Dimensional Geometry",
-      "topic_tags": ["direction_ratios"],
+      "topic_tags": [
+        "direction_ratios"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Direction ratios are found by subtracting coordinates of the first point from the second: (4-1, 5-2, 6-3) = (3, 3, 3). Option B is correct; any scalar multiple of this vector also represents valid direction ratios."
     },
     {
       "question_text": "Number of one-to-one functions from set {1,2} to {1,2,3} is:",
-      "options": ["3", "6", "9", "8"],
+      "options": [
+        "3",
+        "6",
+        "9",
+        "8"
+      ],
       "correct_answer": "B",
       "chapter": "Relations and Functions",
-      "topic_tags": ["injective_count"],
+      "topic_tags": [
+        "injective_count"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A one-to-one (injective) function requires each input to map to a distinct output. For the first element, there are 3 choices; for the second element, there are 2 remaining choices. Total: 3 × 2 = 6."
     },
     {
       "question_text": "Find the integrating factor of dy/dx + y = e^x:",
-      "options": ["e^x", "e^(-x)", "x", "e^(x²)"],
+      "options": [
+        "e^x",
+        "e^(-x)",
+        "x",
+        "e^(x²)"
+      ],
       "correct_answer": "A",
       "chapter": "Differential Equations",
-      "topic_tags": ["integrating_factor"],
+      "topic_tags": [
+        "integrating_factor"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The equation is in standard form dy/dx + P(x)y = Q(x) where P(x) = 1. The integrating factor is e^(∫P(x)dx) = e^(∫1dx) = e^x, which when multiplied by the differential equation allows the left side to be written as d/dx(e^x · y)."
     }
   ]
 }

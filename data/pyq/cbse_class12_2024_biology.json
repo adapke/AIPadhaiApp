@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "board",
   "questions": [
-    {"question_text": "Binary fission is shown by:", "options": ["Yeast", "Amoeba", "Hydra", "Plants"], "correct_answer": "B", "chapter": "Reproduction in Organisms", "topic_tags": ["binary_fission"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Embryo sac in flowering plants is:", "options": ["Microgametophyte", "Megagametophyte", "Pollen grain", "Sporophyte"], "correct_answer": "B", "chapter": "Sexual Reproduction in Plants", "topic_tags": ["embryo_sac"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of polar bodies produced in oogenesis:", "options": ["1", "2", "3", "4"], "correct_answer": "C", "chapter": "Human Reproduction", "topic_tags": ["oogenesis"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Inheritance of skin colour is:", "options": ["Mendelian", "Polygenic", "Sex-linked", "Recessive only"], "correct_answer": "B", "chapter": "Principles of Inheritance", "topic_tags": ["polygenic"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of nucleotides per turn in DNA double helix:", "options": ["5", "10", "20", "100"], "correct_answer": "B", "chapter": "Molecular Basis of Inheritance", "topic_tags": ["DNA_structure"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Lamarck's theory in one phrase:", "options": ["Survival of fittest", "Inheritance of acquired characters", "Natural selection", "Mutation"], "correct_answer": "B", "chapter": "Evolution", "topic_tags": ["Lamarck"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Antibody is which protein class:", "options": ["Carbohydrate", "Immunoglobulin", "Lipid", "Nucleic acid"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["antibody"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Bt cotton resists:", "options": ["Drought", "Bollworm pest", "Frost", "Bacteria"], "correct_answer": "B", "chapter": "Biotechnology Applications", "topic_tags": ["Bt"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Restriction enzyme cuts DNA at:", "options": ["Random sites", "Specific palindromic sequence", "Only at ends", "Hydrogen bonds"], "correct_answer": "B", "chapter": "Biotechnology Principles", "topic_tags": ["restriction"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of generations PCR doubles DNA per cycle:", "options": ["1", "2 (doubles)", "10", "Random"], "correct_answer": "B", "chapter": "Biotechnology Principles", "topic_tags": ["PCR"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Decomposers in food chain are:", "options": ["Producers", "Primary consumers", "Saprotrophs (bacteria + fungi)", "Animals"], "correct_answer": "C", "chapter": "Ecosystem", "topic_tags": ["decomposers"], "difficulty": "easy", "marks": 1},
-    {"question_text": "10% rule (Lindeman) refers to:", "options": ["Energy transferred between trophic levels", "Mass transferred", "Both", "Volume"], "correct_answer": "A", "chapter": "Ecosystem", "topic_tags": ["Lindeman"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Biodiversity hotspots in India number:", "options": ["1", "2", "4", "8"], "correct_answer": "C", "chapter": "Biodiversity", "topic_tags": ["hotspots_India"], "difficulty": "medium", "marks": 1},
-    {"question_text": "CITES is convention on:", "options": ["Climate change", "International trade in endangered species", "Marine pollution", "Forest cover"], "correct_answer": "B", "chapter": "Biodiversity", "topic_tags": ["CITES"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Eutrophication caused by:", "options": ["Acid rain", "Nutrient runoff causing algal bloom", "Plastic", "Heat"], "correct_answer": "B", "chapter": "Environmental Issues", "topic_tags": ["eutrophication"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Apomixis produces:", "options": ["Diploid embryos from somatic cells (no fertilization)", "Tetraploid", "Polyploid only", "Haploid"], "correct_answer": "A", "chapter": "Reproduction in Plants", "topic_tags": ["apomixis"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Common name for Saccharomyces cerevisiae:", "options": ["Bread mold", "Brewer's/baker's yeast", "Bacteria", "Algae"], "correct_answer": "B", "chapter": "Microbes in Human Welfare", "topic_tags": ["yeast"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Penicillium produces:", "options": ["Penicillin antibiotic", "Vinegar", "Cheese only", "Yoghurt"], "correct_answer": "A", "chapter": "Microbes in Human Welfare", "topic_tags": ["penicillin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Most common bacteria in human gut:", "options": ["E. coli (commensal strains)", "Salmonella", "Vibrio", "Streptococcus"], "correct_answer": "A", "chapter": "Microbes in Human Welfare", "topic_tags": ["gut_bacteria"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Coral reefs grow best in:", "options": ["Cold deep water", "Warm shallow seas", "Polar regions", "Freshwater lakes"], "correct_answer": "B", "chapter": "Biodiversity", "topic_tags": ["coral"], "difficulty": "easy", "marks": 1},
-    {"question_text": "DNA fingerprinting uses:", "options": ["VNTRs (Variable Number Tandem Repeats)", "Single bases", "Genes only", "Random sequences"], "correct_answer": "A", "chapter": "Molecular Basis of Inheritance", "topic_tags": ["VNTR"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Genetically modified bacteria producing human insulin uses:", "options": ["E. coli with human gene", "Yeast with human gene", "Both used historically", "Insulin is from pigs only"], "correct_answer": "C", "chapter": "Biotechnology Applications", "topic_tags": ["insulin"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Hardy-Weinberg equilibrium requires:", "options": ["Large population, random mating, no migration, no mutation, no selection", "Small isolated population", "Selection pressure", "High mutation rate"], "correct_answer": "A", "chapter": "Evolution", "topic_tags": ["Hardy_Weinberg"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of pairs of autosomes in human:", "options": ["22", "23", "44", "46"], "correct_answer": "A", "chapter": "Genetics", "topic_tags": ["autosomes"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sickle cell anemia is caused by:", "options": ["Point mutation in β-globin", "Loss of whole chromosome", "Polyploidy", "Translocation"], "correct_answer": "A", "chapter": "Genetics", "topic_tags": ["sickle_cell"], "difficulty": "medium", "marks": 1}
+    {
+      "question_text": "Binary fission is shown by:",
+      "options": [
+        "Yeast",
+        "Amoeba",
+        "Hydra",
+        "Plants"
+      ],
+      "correct_answer": "B",
+      "chapter": "Reproduction in Organisms",
+      "topic_tags": [
+        "binary_fission"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Binary fission is asexual reproduction where a cell divides into two identical daughter cells, characteristic of prokaryotes and some protozoans. Amoeba, being a single-celled protozoan, reproduces by binary fission, while yeast reproduces by budding, hydra by budding or sexual reproduction, and plants by various methods including mitosis but not binary fission."
+    },
+    {
+      "question_text": "Embryo sac in flowering plants is:",
+      "options": [
+        "Microgametophyte",
+        "Megagametophyte",
+        "Pollen grain",
+        "Sporophyte"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sexual Reproduction in Plants",
+      "topic_tags": [
+        "embryo_sac"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The embryo sac develops from the megaspore through mitotic divisions and represents the female gametophyte in flowering plants. Since it produces the egg cell (gamete), it is classified as a megagametophyte, distinguishing it from the microgametophyte (pollen grain), which is the male gametophyte."
+    },
+    {
+      "question_text": "Number of polar bodies produced in oogenesis:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "oogenesis"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "During oogenesis, meiosis I produces one secondary oocyte and one first polar body. Meiosis II then produces the mature ovum and a second polar body, while the first polar body typically divides to form two additional polar bodies, totaling three polar bodies."
+    },
+    {
+      "question_text": "Inheritance of skin colour is:",
+      "options": [
+        "Mendelian",
+        "Polygenic",
+        "Sex-linked",
+        "Recessive only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Principles of Inheritance",
+      "topic_tags": [
+        "polygenic"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Skin colour is controlled by multiple genes (polygenes), each contributing small additive effects to produce a continuous range of phenotypes. This polygenic inheritance pattern, rather than simple dominant-recessive inheritance, explains the wide variation observed in human skin tones."
+    },
+    {
+      "question_text": "Number of nucleotides per turn in DNA double helix:",
+      "options": [
+        "5",
+        "10",
+        "20",
+        "100"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Basis of Inheritance",
+      "topic_tags": [
+        "DNA_structure"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "DNA's double helix completes one full turn (360°) every 10 base pairs, with each nucleotide pair contributing 36° of rotation. This spacing is the characteristic pitch of B-form DNA, the most common helical structure in cells."
+    },
+    {
+      "question_text": "Lamarck's theory in one phrase:",
+      "options": [
+        "Survival of fittest",
+        "Inheritance of acquired characters",
+        "Natural selection",
+        "Mutation"
+      ],
+      "correct_answer": "B",
+      "chapter": "Evolution",
+      "topic_tags": [
+        "Lamarck"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Lamarck proposed that traits acquired during an organism's lifetime through use or disuse could be inherited by offspring, a mechanism now known to be incorrect but central to his evolutionary theory."
+    },
+    {
+      "question_text": "Antibody is which protein class:",
+      "options": [
+        "Carbohydrate",
+        "Immunoglobulin",
+        "Lipid",
+        "Nucleic acid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "antibody"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Antibodies are glycoproteins that belong to the immunoglobulin family, a specific class of proteins produced by immune cells to recognize and bind foreign antigens. The term \"immunoglobulin\" is the scientific name for antibodies."
+    },
+    {
+      "question_text": "Bt cotton resists:",
+      "options": [
+        "Drought",
+        "Bollworm pest",
+        "Frost",
+        "Bacteria"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biotechnology Applications",
+      "topic_tags": [
+        "Bt"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Bt cotton is genetically modified to produce Bt toxin (from Bacillus thuringiensis bacterium), which is lethal to lepidopteran insect larvae like bollworms. This toxin acts as an internal pesticide, allowing the plant to resist damage from these major cotton pests."
+    },
+    {
+      "question_text": "Restriction enzyme cuts DNA at:",
+      "options": [
+        "Random sites",
+        "Specific palindromic sequence",
+        "Only at ends",
+        "Hydrogen bonds"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biotechnology Principles",
+      "topic_tags": [
+        "restriction"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Restriction enzymes recognize and bind to specific DNA sequences that are typically palindromic (read the same on both strands in opposite directions), then cleave the DNA at predictable sites within or near these sequences. This specificity is their defining characteristic, allowing them to be used as precise molecular tools."
+    },
+    {
+      "question_text": "Number of generations PCR doubles DNA per cycle:",
+      "options": [
+        "1",
+        "2 (doubles)",
+        "10",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biotechnology Principles",
+      "topic_tags": [
+        "PCR"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In PCR, each cycle consists of three steps (denaturation, annealing, extension) that occur twice per cycle—once for each original DNA strand. This produces two copies from one template, doubling the DNA amount exponentially with each complete cycle."
+    },
+    {
+      "question_text": "Decomposers in food chain are:",
+      "options": [
+        "Producers",
+        "Primary consumers",
+        "Saprotrophs (bacteria + fungi)",
+        "Animals"
+      ],
+      "correct_answer": "C",
+      "chapter": "Ecosystem",
+      "topic_tags": [
+        "decomposers"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Decomposers break down dead organic matter and return nutrients to soil through saprotrophic nutrition. Bacteria and fungi are the primary decomposers in ecosystems, distinct from producers, consumers, and other animals."
+    },
+    {
+      "question_text": "10% rule (Lindeman) refers to:",
+      "options": [
+        "Energy transferred between trophic levels",
+        "Mass transferred",
+        "Both",
+        "Volume"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ecosystem",
+      "topic_tags": [
+        "Lindeman"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The 10% rule specifically quantifies energy flow in ecosystems, where only about 10% of energy is transferred from one trophic level to the next, with the remaining 90% lost through metabolism and heat. This describes energy transfer, not mass or volume measurements."
+    },
+    {
+      "question_text": "Biodiversity hotspots in India number:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biodiversity",
+      "topic_tags": [
+        "hotspots_India"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "India has four recognized biodiversity hotspots: the Western Ghats, the Eastern Himalayas, the Indo-Burma region, and the Sundaland. These regions contain exceptional concentrations of endemic species and face significant habitat loss threats."
+    },
+    {
+      "question_text": "CITES is convention on:",
+      "options": [
+        "Climate change",
+        "International trade in endangered species",
+        "Marine pollution",
+        "Forest cover"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biodiversity",
+      "topic_tags": [
+        "CITES"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "CITES (Convention on International Trade in Endangered Species) specifically regulates and monitors the international trade of wild animals and plants to prevent their overexploitation and ensure their survival in the wild."
+    },
+    {
+      "question_text": "Eutrophication caused by:",
+      "options": [
+        "Acid rain",
+        "Nutrient runoff causing algal bloom",
+        "Plastic",
+        "Heat"
+      ],
+      "correct_answer": "B",
+      "chapter": "Environmental Issues",
+      "topic_tags": [
+        "eutrophication"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Eutrophication is the excessive enrichment of water with nutrients (nitrogen and phosphorus), primarily from agricultural runoff and sewage, which triggers algal blooms that deplete oxygen and kill aquatic life. The other options cause different environmental problems but not eutrophication."
+    },
+    {
+      "question_text": "Apomixis produces:",
+      "options": [
+        "Diploid embryos from somatic cells (no fertilization)",
+        "Tetraploid",
+        "Polyploid only",
+        "Haploid"
+      ],
+      "correct_answer": "A",
+      "chapter": "Reproduction in Plants",
+      "topic_tags": [
+        "apomixis"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Apomixis is asexual reproduction in plants where embryos develop without fertilization, directly from somatic (body) cells of the ovule, producing genetically identical diploid offspring rather than haploid or polyploid variants."
+    },
+    {
+      "question_text": "Common name for Saccharomyces cerevisiae:",
+      "options": [
+        "Bread mold",
+        "Brewer's/baker's yeast",
+        "Bacteria",
+        "Algae"
+      ],
+      "correct_answer": "B",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": [
+        "yeast"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Saccharomyces cerevisiae is a unicellular fungus historically used in fermentation processes for thousands of years. Its scientific name literally translates to \"sugar fungus of beer,\" and it's the primary microorganism used in bread baking and beer brewing."
+    },
+    {
+      "question_text": "Penicillium produces:",
+      "options": [
+        "Penicillin antibiotic",
+        "Vinegar",
+        "Cheese only",
+        "Yoghurt"
+      ],
+      "correct_answer": "A",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": [
+        "penicillin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Penicillium is a fungus that naturally synthesizes penicillin as a secondary metabolite, which inhibits bacterial cell wall formation. This antibiotic was first discovered from Penicillium notatum and is now widely used in medicine, while other options represent products from different microorganisms (vinegar from bacteria, cheese from mold but not its defining product)."
+    },
+    {
+      "question_text": "Most common bacteria in human gut:",
+      "options": [
+        "E. coli (commensal strains)",
+        "Salmonella",
+        "Vibrio",
+        "Streptococcus"
+      ],
+      "correct_answer": "A",
+      "chapter": "Microbes in Human Welfare",
+      "topic_tags": [
+        "gut_bacteria"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "E. coli commensal strains dominate the gut microbiota because they are facultative anaerobes well-adapted to the intestinal environment, proliferate efficiently there, and establish early colonization in infants. Salmonella, Vibrio, and Streptococcus are either pathogens or minor gut inhabitants."
+    },
+    {
+      "question_text": "Coral reefs grow best in:",
+      "options": [
+        "Cold deep water",
+        "Warm shallow seas",
+        "Polar regions",
+        "Freshwater lakes"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biodiversity",
+      "topic_tags": [
+        "coral"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Reef-building corals contain symbiotic zooxanthellae algae that require sunlight for photosynthesis, necessitating shallow water. These corals also thrive in warm temperatures (typically 23-29°C), making warm shallow seas ideal for growth."
+    },
+    {
+      "question_text": "DNA fingerprinting uses:",
+      "options": [
+        "VNTRs (Variable Number Tandem Repeats)",
+        "Single bases",
+        "Genes only",
+        "Random sequences"
+      ],
+      "correct_answer": "A",
+      "chapter": "Molecular Basis of Inheritance",
+      "topic_tags": [
+        "VNTR"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "VNTRs are highly variable between individuals because the number of repetitive sequences differs, creating unique patterns when cut with restriction enzymes and analyzed. This natural variation makes them ideal genetic markers for distinguishing individuals, whereas single bases, genes, and random sequences lack sufficient discriminatory power for reliable identification."
+    },
+    {
+      "question_text": "Genetically modified bacteria producing human insulin uses:",
+      "options": [
+        "E. coli with human gene",
+        "Yeast with human gene",
+        "Both used historically",
+        "Insulin is from pigs only"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biotechnology Applications",
+      "topic_tags": [
+        "insulin"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Historically, both E. coli and yeast have been used to produce human insulin through genetic engineering. E. coli was the first organism successfully engineered for this purpose in the 1970s, while yeast became another viable production method later, making both options valid historically."
+    },
+    {
+      "question_text": "Hardy-Weinberg equilibrium requires:",
+      "options": [
+        "Large population, random mating, no migration, no mutation, no selection",
+        "Small isolated population",
+        "Selection pressure",
+        "High mutation rate"
+      ],
+      "correct_answer": "A",
+      "chapter": "Evolution",
+      "topic_tags": [
+        "Hardy_Weinberg"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Hardy-Weinberg equilibrium requires specific conditions to maintain constant allele frequencies: a large population (to prevent genetic drift), random mating (no mate preference), and absence of evolutionary forces like migration, mutation, and natural selection. Without all these conditions, allele frequencies will change across generations."
+    },
+    {
+      "question_text": "Number of pairs of autosomes in human:",
+      "options": [
+        "22",
+        "23",
+        "44",
+        "46"
+      ],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "autosomes"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Humans have 23 pairs of chromosomes total, with 22 pairs being autosomes (non-sex chromosomes) and 1 pair being sex chromosomes (XX or XY). Therefore, there are 22 pairs of autosomes."
+    },
+    {
+      "question_text": "Sickle cell anemia is caused by:",
+      "options": [
+        "Point mutation in β-globin",
+        "Loss of whole chromosome",
+        "Polyploidy",
+        "Translocation"
+      ],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "sickle_cell"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The β-globin gene has a single nucleotide substitution (adenine to thymine) in the DNA sequence, changing the codon from GAG to GTG. This point mutation causes glutamic acid to be replaced by valine at position 6 of the β-globin protein, resulting in abnormal hemoglobin S that polymerizes under low oxygen conditions, deforming red blood cells into the characteristic sickle shape."
+    }
   ]
 }

@@ -6,30 +6,430 @@
   "default_year": 2022,
   "default_paper": "advanced",
   "questions": [
-    {"question_text": "Dimension of force is:", "options": ["[MLT⁻¹]", "[MLT⁻²]", "[ML²T⁻²]", "[ML²T⁻¹]"], "correct_answer": "B", "chapter": "Units and Dimensions", "topic_tags": ["dimensions"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Vector A · B = 0 means:", "options": ["Vectors equal", "Vectors parallel", "Vectors perpendicular", "Vectors opposite"], "correct_answer": "C", "chapter": "Vectors", "topic_tags": ["dot_product"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Body in equilibrium has:", "options": ["Zero net force", "Constant velocity", "Both A and B", "Acceleration"], "correct_answer": "C", "chapter": "Laws of Motion", "topic_tags": ["equilibrium"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Spring constant k of two springs in series each k:", "options": ["2k", "k/2", "k", "k²"], "correct_answer": "B", "chapter": "Oscillations", "topic_tags": ["series_spring"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Coefficient of friction μ between rest object and surface depends on:", "options": ["Mass only", "Area of contact", "Materials in contact", "Velocity"], "correct_answer": "C", "chapter": "Laws of Motion", "topic_tags": ["friction"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Power developed by force F moving at velocity v:", "options": ["F+v", "F-v", "F·v (dot product)", "F/v"], "correct_answer": "C", "chapter": "Work and Energy", "topic_tags": ["power"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Moment of inertia of solid sphere of radius R, mass M about its diameter:", "options": ["(1/2)MR²", "(2/5)MR²", "MR²", "(1/3)MR²"], "correct_answer": "B", "chapter": "Rotational Motion", "topic_tags": ["MI_sphere"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Kepler's third law: T² ∝ ?", "options": ["r", "r²", "r³", "r⁴"], "correct_answer": "C", "chapter": "Gravitation", "topic_tags": ["Kepler"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Specific gravity of water:", "options": ["0", "0.5", "1", "1000"], "correct_answer": "C", "chapter": "Fluids", "topic_tags": ["specific_gravity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Boyle's law: P × V = ?", "options": ["RT", "constant at fixed T", "0", "nT"], "correct_answer": "B", "chapter": "Kinetic Theory", "topic_tags": ["Boyle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Heat capacity at constant volume Cv for monoatomic gas:", "options": ["(1/2)R", "(3/2)R", "(5/2)R", "R"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["Cv"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wavelength of fundamental in stretched string of length L:", "options": ["L", "2L", "L/2", "4L"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["string"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Beats per second from frequencies 256 Hz and 260 Hz:", "options": ["1", "2", "4", "8"], "correct_answer": "C", "chapter": "Waves", "topic_tags": ["beats"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Photoelectric work function of metal is energy needed to:", "options": ["Ionize", "Remove valence electron from surface", "Move nucleus", "Heat metal"], "correct_answer": "B", "chapter": "Modern Physics", "topic_tags": ["work_function"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Photon momentum p = ?", "options": ["E/c", "Ec", "hν", "h/λ"], "correct_answer": "D", "chapter": "Modern Physics", "topic_tags": ["photon_momentum"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Activity of radioactive sample is proportional to:", "options": ["Number of nuclei", "Half-life", "1/decay constant", "Temperature"], "correct_answer": "A", "chapter": "Nuclear Physics", "topic_tags": ["activity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Capacitance of parallel-plate capacitor with vacuum, area A, distance d:", "options": ["ε₀ A/d", "ε₀ d/A", "ε₀ A d", "A/(ε₀ d)"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["formula"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Ohm's law: V = ?", "options": ["I/R", "IR", "I + R", "R/I"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["Ohm"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Reactance of inductor at frequency ω:", "options": ["ωL", "1/(ωL)", "L/ω", "ωL²"], "correct_answer": "A", "chapter": "AC Circuits", "topic_tags": ["inductive_reactance"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnification of telescope (normal adjustment): f_o/f_e where:", "options": ["f_o is eyepiece", "f_o is objective", "f_e is objective", "Same"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["telescope"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Diffraction is significant when slit width is:", "options": ["Much larger than λ", "Comparable to λ", "Doesn't matter", "Always"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["diffraction_condition"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Speed of sound in air at 20°C:", "options": ["340 m/s", "1500 m/s", "5000 m/s", "0 (no medium)"], "correct_answer": "A", "chapter": "Waves", "topic_tags": ["speed_sound"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Logic gate that gives 1 only when one input is 1 and other 0 is:", "options": ["AND", "OR", "XOR", "NAND"], "correct_answer": "C", "chapter": "Logic Gates", "topic_tags": ["XOR"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Bohr's first postulate: electron orbits are:", "options": ["Continuous", "Quantized (specific orbits only)", "Random", "Stable always"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Bohr_postulate"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wavelength of visible light range:", "options": ["10-100 nm", "400-700 nm", "1-10 μm", "1 mm"], "correct_answer": "B", "chapter": "Electromagnetic Waves", "topic_tags": ["visible_light"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Dimension of force is:",
+      "options": [
+        "[MLT⁻¹]",
+        "[MLT⁻²]",
+        "[ML²T⁻²]",
+        "[ML²T⁻¹]"
+      ],
+      "correct_answer": "B",
+      "chapter": "Units and Dimensions",
+      "topic_tags": [
+        "dimensions"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Force is defined by Newton's second law as F = ma, where mass has dimension [M] and acceleration has dimension [LT⁻²]. Multiplying these gives [M][LT⁻²] = [MLT⁻²]."
+    },
+    {
+      "question_text": "Vector A · B = 0 means:",
+      "options": [
+        "Vectors equal",
+        "Vectors parallel",
+        "Vectors perpendicular",
+        "Vectors opposite"
+      ],
+      "correct_answer": "C",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "dot_product"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The dot product of two vectors equals zero when cos(θ) = 0, which occurs at θ = 90°. This means the vectors are perpendicular to each other."
+    },
+    {
+      "question_text": "Body in equilibrium has:",
+      "options": [
+        "Zero net force",
+        "Constant velocity",
+        "Both A and B",
+        "Acceleration"
+      ],
+      "correct_answer": "C",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "equilibrium"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A body in equilibrium must have zero net force (Newton's first law), which means it either remains at rest or moves at constant velocity. Both conditions satisfy equilibrium: stationary objects have zero velocity (constant), and moving objects maintain constant velocity with no acceleration."
+    },
+    {
+      "question_text": "Spring constant k of two springs in series each k:",
+      "options": [
+        "2k",
+        "k/2",
+        "k",
+        "k²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "series_spring"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When springs are in series, the same force acts on each, causing individual displacements that add together. Since total displacement doubles while force remains constant, the effective spring constant is half the individual spring constant: k_eff = k/2."
+    },
+    {
+      "question_text": "Coefficient of friction μ between rest object and surface depends on:",
+      "options": [
+        "Mass only",
+        "Area of contact",
+        "Materials in contact",
+        "Velocity"
+      ],
+      "correct_answer": "C",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "friction"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The coefficient of friction is a material property that depends on the nature and roughness of the surfaces in contact, not on mass, contact area, or velocity. It's an intrinsic characteristic determined by the specific pair of materials rubbing together."
+    },
+    {
+      "question_text": "Power developed by force F moving at velocity v:",
+      "options": [
+        "F+v",
+        "F-v",
+        "F·v (dot product)",
+        "F/v"
+      ],
+      "correct_answer": "C",
+      "chapter": "Work and Energy",
+      "topic_tags": [
+        "power"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power is the rate of energy transfer, defined as work per unit time. Since work equals force times displacement, power equals force times velocity. The dot product accounts for only the force component in the direction of motion, giving the correct instantaneous power."
+    },
+    {
+      "question_text": "Moment of inertia of solid sphere of radius R, mass M about its diameter:",
+      "options": [
+        "(1/2)MR²",
+        "(2/5)MR²",
+        "MR²",
+        "(1/3)MR²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "MI_sphere"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A solid sphere's moment of inertia about a diameter is derived by integrating dm·r² where r is the perpendicular distance from the axis. Using spherical coordinates and the uniform density ρ = 3M/(4πR³), the integration yields (2/5)MR², which is the standard result for rotational inertia of a solid sphere about any axis through its center."
+    },
+    {
+      "question_text": "Kepler's third law: T² ∝ ?",
+      "options": [
+        "r",
+        "r²",
+        "r³",
+        "r⁴"
+      ],
+      "correct_answer": "C",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "Kepler"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Kepler's third law states that the square of an orbital period is proportional to the cube of the semi-major axis: T² ∝ r³. This relationship emerges from balancing gravitational force with centripetal force in circular orbits."
+    },
+    {
+      "question_text": "Specific gravity of water:",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "1000"
+      ],
+      "correct_answer": "C",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "specific_gravity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Specific gravity is the ratio of a substance's density to the density of water at standard conditions. Since water is the reference standard, its density divided by itself equals 1."
+    },
+    {
+      "question_text": "Boyle's law: P × V = ?",
+      "options": [
+        "RT",
+        "constant at fixed T",
+        "0",
+        "nT"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetic Theory",
+      "topic_tags": [
+        "Boyle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For an ideal gas at constant temperature, the product of pressure and volume remains constant because as volume decreases, pressure increases proportionally to maintain the same number of gas molecules in a confined space."
+    },
+    {
+      "question_text": "Heat capacity at constant volume Cv for monoatomic gas:",
+      "options": [
+        "(1/2)R",
+        "(3/2)R",
+        "(5/2)R",
+        "R"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Cv"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a monoatomic ideal gas, only translational kinetic energy contributes to internal energy (3 degrees of freedom). Using the equipartition theorem, each degree of freedom contributes (1/2)R to molar heat capacity, giving Cv = 3 × (1/2)R = (3/2)R."
+    },
+    {
+      "question_text": "Wavelength of fundamental in stretched string of length L:",
+      "options": [
+        "L",
+        "2L",
+        "L/2",
+        "4L"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "string"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a stretched string fixed at both ends, the fundamental mode has one half-wavelength fitting along the length L, so L = λ/2, giving λ = 2L."
+    },
+    {
+      "question_text": "Beats per second from frequencies 256 Hz and 260 Hz:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Waves",
+      "topic_tags": [
+        "beats"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The beat frequency equals the absolute difference between the two frequencies: |260 Hz - 256 Hz| = 4 Hz, meaning 4 beats per second."
+    },
+    {
+      "question_text": "Photoelectric work function of metal is energy needed to:",
+      "options": [
+        "Ionize",
+        "Remove valence electron from surface",
+        "Move nucleus",
+        "Heat metal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "work_function"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The work function is the minimum energy required to eject an electron from the metal's surface into vacuum. This specifically involves removing a valence electron (the outermost, most loosely bound electron) from the surface, which is the physical basis of the photoelectric effect."
+    },
+    {
+      "question_text": "Photon momentum p = ?",
+      "options": [
+        "E/c",
+        "Ec",
+        "hν",
+        "h/λ"
+      ],
+      "correct_answer": "D",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "photon_momentum"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A photon's momentum is related to its wavelength through de Broglie's relation: p = h/λ, where h is Planck's constant and λ is the wavelength. While option A (E/c) is also correct, option D is the fundamental definition most directly expressing photon momentum in terms of wave properties."
+    },
+    {
+      "question_text": "Activity of radioactive sample is proportional to:",
+      "options": [
+        "Number of nuclei",
+        "Half-life",
+        "1/decay constant",
+        "Temperature"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclear Physics",
+      "topic_tags": [
+        "activity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Activity measures the rate of radioactive decay, defined as A = λN, where λ is the decay constant and N is the number of nuclei present. Therefore, activity is directly proportional to the number of nuclei in the sample."
+    },
+    {
+      "question_text": "Capacitance of parallel-plate capacitor with vacuum, area A, distance d:",
+      "options": [
+        "ε₀ A/d",
+        "ε₀ d/A",
+        "ε₀ A d",
+        "A/(ε₀ d)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "formula"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The capacitance formula derives from C = Q/V, where V = Ed and E = σ/ε₀. This gives C = ε₀A/d because capacitance is proportional to plate area (more surface stores charge) and inversely proportional to separation (weaker field between plates)."
+    },
+    {
+      "question_text": "Ohm's law: V = ?",
+      "options": [
+        "I/R",
+        "IR",
+        "I + R",
+        "R/I"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "Ohm"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Ohm's law states that voltage equals current multiplied by resistance. The formula V = IR shows this direct proportional relationship, where voltage increases with either greater current or higher resistance."
+    },
+    {
+      "question_text": "Reactance of inductor at frequency ω:",
+      "options": [
+        "ωL",
+        "1/(ωL)",
+        "L/ω",
+        "ωL²"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC Circuits",
+      "topic_tags": [
+        "inductive_reactance"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The inductive reactance is the opposition to alternating current caused by an inductor. By definition, it equals ωL, where ω is angular frequency and L is inductance. This relationship comes directly from the induced voltage across an inductor (V = L·dI/dt) applied to sinusoidal AC circuits."
+    },
+    {
+      "question_text": "Magnification of telescope (normal adjustment): f_o/f_e where:",
+      "options": [
+        "f_o is eyepiece",
+        "f_o is objective",
+        "f_e is objective",
+        "Same"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "telescope"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The magnification formula for a telescope in normal adjustment is the ratio of the objective focal length to the eyepiece focal length. The objective (longer focal length) forms the initial magnified image, while the eyepiece (shorter focal length) magnifies that image further, making f_o the objective lens."
+    },
+    {
+      "question_text": "Diffraction is significant when slit width is:",
+      "options": [
+        "Much larger than λ",
+        "Comparable to λ",
+        "Doesn't matter",
+        "Always"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "diffraction_condition"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Diffraction effects become pronounced when the aperture size is comparable to the wavelength because the wave can then bend significantly around the edges. When the slit is much larger than λ, the wave passes through relatively straight, minimizing diffraction."
+    },
+    {
+      "question_text": "Speed of sound in air at 20°C:",
+      "options": [
+        "340 m/s",
+        "1500 m/s",
+        "5000 m/s",
+        "0 (no medium)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": [
+        "speed_sound"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sound travels through air at approximately 340 m/s at 20°C. This is a standard reference value in physics; option B represents sound in water (much faster due to denser medium), C is too high, and D is incorrect since sound does travel through air."
+    },
+    {
+      "question_text": "Logic gate that gives 1 only when one input is 1 and other 0 is:",
+      "options": [
+        "AND",
+        "OR",
+        "XOR",
+        "NAND"
+      ],
+      "correct_answer": "C",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "XOR"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The XOR (exclusive OR) gate outputs 1 only when its inputs are different—specifically when one input is 1 and the other is 0. All other input combinations (0,0 or 1,1) produce output 0."
+    },
+    {
+      "question_text": "Bohr's first postulate: electron orbits are:",
+      "options": [
+        "Continuous",
+        "Quantized (specific orbits only)",
+        "Random",
+        "Stable always"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_postulate"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Bohr's first postulate states that electrons can only occupy specific discrete energy levels or orbits, not any arbitrary distance from the nucleus. This quantization means only certain orbital radii are allowed, fundamentally distinguishing atoms from classical mechanics where any orbit would be possible."
+    },
+    {
+      "question_text": "Wavelength of visible light range:",
+      "options": [
+        "10-100 nm",
+        "400-700 nm",
+        "1-10 μm",
+        "1 mm"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": [
+        "visible_light"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The visible light spectrum corresponds to wavelengths where the human eye is sensitive, spanning from violet (~400 nm) to red (~700 nm). Options A and C fall in the ultraviolet and infrared regions respectively, while D represents microwave radiation."
+    }
   ]
 }

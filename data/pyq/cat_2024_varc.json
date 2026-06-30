@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Vocabulary",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Ephemeral means lasting for a very short time or temporary. \"Fleeting\" directly captures this meaning—describing something brief and passing quickly—making it the perfect synonym."
     },
     {
       "question_text": "Antonym of 'benevolent':",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Vocabulary",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Benevolent means kind and generous, wishing well for others. Malevolent is its direct opposite, meaning evil or wishing harm on others. Options A and B are synonyms of benevolent, and option D is unrelated."
     },
     {
       "question_text": "Choose the correctly spelled word:",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Spelling",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "The word \"accommodate\" requires two c's and two m's. Option A is the only spelling with both double letters in the correct positions: acc-o-mm-o-date."
     },
     {
       "question_text": "Identify the part of speech of 'quickly' in 'She ran quickly':",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Grammar",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "'Quickly' modifies the verb 'ran' by describing how the action was performed. Words ending in '-ly' that modify verbs, adjectives, or other adverbs are adverbs, making 'quickly' an adverb."
     },
     {
       "question_text": "Closest meaning to 'ubiquitous':",
@@ -69,7 +73,8 @@
       "correct_answer": "C",
       "chapter": "Vocabulary",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Ubiquitous means present or found in all places at the same time. Option C directly captures this definition, while the other options describe unrelated qualities—rarity, age, or cost."
     }
   ]
 }

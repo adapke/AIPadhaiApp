@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "tsbie_ssc",
   "questions": [
-    {"question_text": "Number of bones in adult human:", "options": ["180", "206", "250", "300"], "correct_answer": "B", "chapter": "Human Body", "topic_tags": ["bones"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Powerhouse of cell:", "options": ["Nucleus", "Mitochondria", "Lysosome", "Ribosome"], "correct_answer": "B", "chapter": "Cell Biology", "topic_tags": ["mitochondria"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Smallest unit of life:", "options": ["Atom", "Molecule", "Cell", "Tissue"], "correct_answer": "C", "chapter": "Cell Biology", "topic_tags": ["cell"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Chemical symbol of gold:", "options": ["Go", "Au", "Ag", "Gd"], "correct_answer": "B", "chapter": "Periodic Table", "topic_tags": ["symbols"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Atomic number of oxygen:", "options": ["6", "7", "8", "16"], "correct_answer": "C", "chapter": "Atomic Structure", "topic_tags": ["oxygen"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of valence electrons in carbon:", "options": ["2", "4", "6", "8"], "correct_answer": "B", "chapter": "Periodic Table", "topic_tags": ["valence"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Molecular formula of methane:", "options": ["CH₂", "CH₄", "C₂H₄", "C₂H₆"], "correct_answer": "B", "chapter": "Carbon Compounds", "topic_tags": ["methane"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Common name for sodium chloride:", "options": ["Salt", "Sugar", "Sand", "Soda"], "correct_answer": "A", "chapter": "Chemistry", "topic_tags": ["NaCl"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Speed of light in vacuum approximately:", "options": ["3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s", "3×10¹⁰ m/s"], "correct_answer": "B", "chapter": "Light", "topic_tags": ["c"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Unit of force:", "options": ["Joule", "Newton", "Watt", "Pascal"], "correct_answer": "B", "chapter": "Force", "topic_tags": ["units"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Newton's first law of motion is also called:", "options": ["Law of force", "Law of inertia", "Action-reaction", "Law of gravity"], "correct_answer": "B", "chapter": "Laws of Motion", "topic_tags": ["inertia"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Acceleration due to gravity on Earth's surface:", "options": ["9.8 m/s²", "98 m/s²", "0.98 m/s²", "0"], "correct_answer": "A", "chapter": "Gravitation", "topic_tags": ["g"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Ohm's law: V = ?", "options": ["I/R", "IR", "I + R", "R/I"], "correct_answer": "B", "chapter": "Electricity", "topic_tags": ["Ohm"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Resistance unit:", "options": ["Volt", "Ampere", "Ohm", "Watt"], "correct_answer": "C", "chapter": "Electricity", "topic_tags": ["units"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnetic field lines outside bar magnet point:", "options": ["From N to S", "From S to N", "Random", "No field"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["field_lines"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Plant tissue that transports water:", "options": ["Xylem", "Phloem", "Cortex", "Pith"], "correct_answer": "A", "chapter": "Plant Biology", "topic_tags": ["xylem"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Genetic material of cell:", "options": ["RNA only", "DNA", "Both", "Protein"], "correct_answer": "B", "chapter": "Heredity", "topic_tags": ["DNA"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Cellular respiration produces:", "options": ["O2", "CO2 + H2O + energy", "Glucose", "Light"], "correct_answer": "B", "chapter": "Life Processes", "topic_tags": ["respiration"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Photosynthesis produces:", "options": ["CO2", "Oxygen + glucose", "Water only", "Nitrogen"], "correct_answer": "B", "chapter": "Life Processes", "topic_tags": ["photosynthesis"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Vitamin D deficiency causes:", "options": ["Scurvy", "Rickets", "Beriberi", "Night blindness"], "correct_answer": "B", "chapter": "Nutrition", "topic_tags": ["rickets"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Acid turns blue litmus:", "options": ["Red", "Blue", "Green", "Unchanged"], "correct_answer": "A", "chapter": "Acids and Bases", "topic_tags": ["litmus"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Pure water pH:", "options": ["0", "7", "14", "10"], "correct_answer": "B", "chapter": "Acids and Bases", "topic_tags": ["pH_water"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Soap is sodium salt of:", "options": ["Acid", "Long-chain fatty acid", "Sugar", "Amine"], "correct_answer": "B", "chapter": "Carbon Compounds", "topic_tags": ["soap"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of electrons in neutral helium atom:", "options": ["1", "2", "4", "8"], "correct_answer": "B", "chapter": "Atomic Structure", "topic_tags": ["helium"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Renewable source of energy:", "options": ["Coal", "Solar", "Petroleum", "Natural gas"], "correct_answer": "B", "chapter": "Energy", "topic_tags": ["renewable"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Number of bones in adult human:",
+      "options": [
+        "180",
+        "206",
+        "250",
+        "300"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Body",
+      "topic_tags": [
+        "bones"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Adults have 206 bones because many bones fuse together during growth and development—infants are born with approximately 270 bones (mostly cartilage), which gradually ossify and consolidate into the 206 bones of a mature skeleton."
+    },
+    {
+      "question_text": "Powerhouse of cell:",
+      "options": [
+        "Nucleus",
+        "Mitochondria",
+        "Lysosome",
+        "Ribosome"
+      ],
+      "correct_answer": "B",
+      "chapter": "Cell Biology",
+      "topic_tags": [
+        "mitochondria"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Mitochondria is called the powerhouse of the cell because it generates ATP through cellular respiration, providing energy for all cellular processes. The other organelles have different functions: nucleus controls genes, lysosomes digest waste, and ribosomes synthesize proteins."
+    },
+    {
+      "question_text": "Smallest unit of life:",
+      "options": [
+        "Atom",
+        "Molecule",
+        "Cell",
+        "Tissue"
+      ],
+      "correct_answer": "C",
+      "chapter": "Cell Biology",
+      "topic_tags": [
+        "cell"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The cell is the smallest unit capable of independent life and performing all life functions—metabolism, growth, and reproduction. While atoms and molecules are smaller building blocks, they lack the organization and complexity necessary to be considered living units."
+    },
+    {
+      "question_text": "Chemical symbol of gold:",
+      "options": [
+        "Go",
+        "Au",
+        "Ag",
+        "Gd"
+      ],
+      "correct_answer": "B",
+      "chapter": "Periodic Table",
+      "topic_tags": [
+        "symbols"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Gold's chemical symbol is Au, derived from its Latin name \"aurum.\" The other options represent different elements: Go is not a valid symbol, Ag is silver, and Gd is gadolinium."
+    },
+    {
+      "question_text": "Atomic number of oxygen:",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "16"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "oxygen"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Oxygen has 8 protons in its nucleus, which defines its atomic number. The atomic number uniquely identifies each element on the periodic table."
+    },
+    {
+      "question_text": "Number of valence electrons in carbon:",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Periodic Table",
+      "topic_tags": [
+        "valence"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Carbon has atomic number 6, so its electron configuration is 1s² 2s² 2p². Valence electrons are those in the outermost shell (n=2), which contains 2s² 2p² = 4 electrons total."
+    },
+    {
+      "question_text": "Molecular formula of methane:",
+      "options": [
+        "CH₂",
+        "CH₄",
+        "C₂H₄",
+        "C₂H₆"
+      ],
+      "correct_answer": "B",
+      "chapter": "Carbon Compounds",
+      "topic_tags": [
+        "methane"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Methane is the simplest hydrocarbon, consisting of one carbon atom bonded to four hydrogen atoms. Carbon has four valence electrons and needs four bonds to achieve a stable octet, which four hydrogen atoms provide."
+    },
+    {
+      "question_text": "Common name for sodium chloride:",
+      "options": [
+        "Salt",
+        "Sugar",
+        "Sand",
+        "Soda"
+      ],
+      "correct_answer": "A",
+      "chapter": "Chemistry",
+      "topic_tags": [
+        "NaCl"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Sodium chloride (NaCl) is the chemical compound that makes up table salt, which is the common name people use daily for this crystalline mineral used for seasoning and food preservation."
+    },
+    {
+      "question_text": "Speed of light in vacuum approximately:",
+      "options": [
+        "3×10⁵ m/s",
+        "3×10⁸ m/s",
+        "3×10⁶ m/s",
+        "3×10¹⁰ m/s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Light",
+      "topic_tags": [
+        "c"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The speed of light in vacuum is approximately 299,792,458 m/s, which rounds to 3×10⁸ m/s. Options A, C, and D are orders of magnitude too small or too large to represent this fundamental constant."
+    },
+    {
+      "question_text": "Unit of force:",
+      "options": [
+        "Joule",
+        "Newton",
+        "Watt",
+        "Pascal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Force",
+      "topic_tags": [
+        "units"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Force is defined as mass times acceleration (F=ma). The SI unit combining kilograms and meters per second squared is the Newton, named after Isaac Newton who formulated this fundamental relationship."
+    },
+    {
+      "question_text": "Newton's first law of motion is also called:",
+      "options": [
+        "Law of force",
+        "Law of inertia",
+        "Action-reaction",
+        "Law of gravity"
+      ],
+      "correct_answer": "B",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "inertia"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Newton's first law states that an object at rest stays at rest and an object in motion stays in motion unless acted upon by an external force. This describes inertia—the tendency of objects to resist changes in their state of motion."
+    },
+    {
+      "question_text": "Acceleration due to gravity on Earth's surface:",
+      "options": [
+        "9.8 m/s²",
+        "98 m/s²",
+        "0.98 m/s²",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "g"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "At Earth's surface, gravitational acceleration is calculated from Newton's law of universal gravitation using Earth's mass and radius, yielding approximately 9.8 m/s². This is the standard value used in physics for objects in free fall near Earth's surface."
+    },
+    {
+      "question_text": "Ohm's law: V = ?",
+      "options": [
+        "I/R",
+        "IR",
+        "I + R",
+        "R/I"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electricity",
+      "topic_tags": [
+        "Ohm"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Ohm's law states that voltage equals current multiplied by resistance. The formula V = IR directly expresses this relationship, where V is voltage in volts, I is current in amperes, and R is resistance in ohms."
+    },
+    {
+      "question_text": "Resistance unit:",
+      "options": [
+        "Volt",
+        "Ampere",
+        "Ohm",
+        "Watt"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electricity",
+      "topic_tags": [
+        "units"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Resistance is defined by Ohm's Law (V = IR), where voltage is measured in volts, current in amperes, and resistance in ohms. One ohm equals one volt per ampere, making it the fundamental unit of electrical resistance."
+    },
+    {
+      "question_text": "Magnetic field lines outside bar magnet point:",
+      "options": [
+        "From N to S",
+        "From S to N",
+        "Random",
+        "No field"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "field_lines"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Magnetic field lines by convention point from the north pole to the south pole outside a magnet. This is the standard definition used to describe magnetic field direction in space surrounding a bar magnet."
+    },
+    {
+      "question_text": "Plant tissue that transports water:",
+      "options": [
+        "Xylem",
+        "Phloem",
+        "Cortex",
+        "Pith"
+      ],
+      "correct_answer": "A",
+      "chapter": "Plant Biology",
+      "topic_tags": [
+        "xylem"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Xylem is specialized vascular tissue with hollow, tube-like cells that transport water and minerals upward from roots to leaves through capillary action and transpiration pull, whereas phloem transports sugars, cortex stores nutrients, and pith provides structural support."
+    },
+    {
+      "question_text": "Genetic material of cell:",
+      "options": [
+        "RNA only",
+        "DNA",
+        "Both",
+        "Protein"
+      ],
+      "correct_answer": "B",
+      "chapter": "Heredity",
+      "topic_tags": [
+        "DNA"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "DNA is the primary genetic material in cells because it stably stores hereditary information and passes it to offspring. While RNA plays important roles in gene expression, DNA is the molecule that actually contains and preserves genetic instructions."
+    },
+    {
+      "question_text": "Cellular respiration produces:",
+      "options": [
+        "O2",
+        "CO2 + H2O + energy",
+        "Glucose",
+        "Light"
+      ],
+      "correct_answer": "B",
+      "chapter": "Life Processes",
+      "topic_tags": [
+        "respiration"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Cellular respiration is the metabolic process where cells break down glucose using oxygen to release energy, producing carbon dioxide and water as byproducts. Options A, C, and D describe photosynthesis reactants or unrelated processes, not respiration's products."
+    },
+    {
+      "question_text": "Photosynthesis produces:",
+      "options": [
+        "CO2",
+        "Oxygen + glucose",
+        "Water only",
+        "Nitrogen"
+      ],
+      "correct_answer": "B",
+      "chapter": "Life Processes",
+      "topic_tags": [
+        "photosynthesis"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Photosynthesis converts light energy, water, and carbon dioxide into glucose (sugar) for plant energy and releases oxygen as a byproduct. The overall reaction produces these two key products that sustain plant growth and provide oxygen for other organisms."
+    },
+    {
+      "question_text": "Vitamin D deficiency causes:",
+      "options": [
+        "Scurvy",
+        "Rickets",
+        "Beriberi",
+        "Night blindness"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nutrition",
+      "topic_tags": [
+        "rickets"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Vitamin D is essential for calcium absorption and bone mineralization. Without adequate vitamin D, bones don't mineralize properly, leading to rickets in children (soft, weak bones) and osteomalacia in adults."
+    },
+    {
+      "question_text": "Acid turns blue litmus:",
+      "options": [
+        "Red",
+        "Blue",
+        "Green",
+        "Unchanged"
+      ],
+      "correct_answer": "A",
+      "chapter": "Acids and Bases",
+      "topic_tags": [
+        "litmus"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Acids contain hydrogen ions that chemically alter the pH-sensitive dye in blue litmus paper, causing it to lose its blue color and turn red. This color change is the defining property used to identify acidic solutions."
+    },
+    {
+      "question_text": "Pure water pH:",
+      "options": [
+        "0",
+        "7",
+        "14",
+        "10"
+      ],
+      "correct_answer": "B",
+      "chapter": "Acids and Bases",
+      "topic_tags": [
+        "pH_water"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Pure water undergoes autoionization, producing equal concentrations of H⁺ and OH⁻ ions (10⁻⁷ M each). Since pH = -log[H⁺], this gives pH = 7, which is neutral on the pH scale."
+    },
+    {
+      "question_text": "Soap is sodium salt of:",
+      "options": [
+        "Acid",
+        "Long-chain fatty acid",
+        "Sugar",
+        "Amine"
+      ],
+      "correct_answer": "B",
+      "chapter": "Carbon Compounds",
+      "topic_tags": [
+        "soap"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Soap is produced through saponification, where fats or oils (containing long-chain fatty acids) react with sodium hydroxide. The resulting sodium salts of these long-chain fatty acids are what give soap its cleaning properties."
+    },
+    {
+      "question_text": "Number of electrons in neutral helium atom:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "helium"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Helium has atomic number 2, meaning its nucleus contains 2 protons. In a neutral atom, the number of electrons equals the number of protons, so helium has 2 electrons."
+    },
+    {
+      "question_text": "Renewable source of energy:",
+      "options": [
+        "Coal",
+        "Solar",
+        "Petroleum",
+        "Natural gas"
+      ],
+      "correct_answer": "B",
+      "chapter": "Energy",
+      "topic_tags": [
+        "renewable"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Solar energy is renewable because the sun continuously produces energy through nuclear fusion and will do so for billions of years, making it inexhaustible on human timescales. Coal, petroleum, and natural gas are finite fossil fuels that take millions of years to form and deplete with use."
+    }
   ]
 }

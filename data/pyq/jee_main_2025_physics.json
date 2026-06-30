@@ -8,228 +8,449 @@
   "questions": [
     {
       "question_text": "A particle moves with constant acceleration of 2 m/s² from rest. Distance covered in 5 s is:",
-      "options": ["10 m", "25 m", "50 m", "100 m"],
+      "options": [
+        "10 m",
+        "25 m",
+        "50 m",
+        "100 m"
+      ],
       "correct_answer": "B",
       "chapter": "Kinematics",
-      "topic_tags": ["uniform_acceleration", "displacement"],
+      "topic_tags": [
+        "uniform_acceleration",
+        "displacement"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the kinematic equation s = ut + ½at² where u = 0 (starts from rest), a = 2 m/s², and t = 5 s: s = 0 + ½(2)(5²) = 1 × 25 = 25 m."
     },
     {
       "question_text": "A body of mass 2 kg falls freely from a height of 20 m. Kinetic energy just before hitting ground is (g=10 m/s²):",
-      "options": ["100 J", "200 J", "400 J", "800 J"],
+      "options": [
+        "100 J",
+        "200 J",
+        "400 J",
+        "800 J"
+      ],
       "correct_answer": "C",
       "chapter": "Work-Energy",
-      "topic_tags": ["free_fall", "kinetic_energy"],
+      "topic_tags": [
+        "free_fall",
+        "kinetic_energy"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using energy conservation, the potential energy at height converts to kinetic energy: KE = mgh = 2 × 10 × 20 = 400 J. Alternatively, the final velocity is v = √(2gh) = √(400) = 20 m/s, so KE = ½mv² = ½(2)(400) = 400 J."
     },
     {
       "question_text": "The frequency of a simple pendulum with length 1 m on Earth is (g=π² m/s²):",
-      "options": ["0.5 Hz", "1 Hz", "2 Hz", "4 Hz"],
+      "options": [
+        "0.5 Hz",
+        "1 Hz",
+        "2 Hz",
+        "4 Hz"
+      ],
       "correct_answer": "A",
       "chapter": "Oscillations",
-      "topic_tags": ["pendulum", "frequency"],
+      "topic_tags": [
+        "pendulum",
+        "frequency"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The period of a simple pendulum is T = 2π√(L/g). With L = 1 m and g = π² m/s², we get T = 2π√(1/π²) = 2π(1/π) = 2 seconds. Since frequency f = 1/T, we have f = 1/2 = 0.5 Hz."
     },
     {
       "question_text": "Two resistors 4Ω and 6Ω are connected in parallel. Equivalent resistance is:",
-      "options": ["2.4 Ω", "5 Ω", "10 Ω", "1.5 Ω"],
+      "options": [
+        "2.4 Ω",
+        "5 Ω",
+        "10 Ω",
+        "1.5 Ω"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["parallel_resistance"],
+      "topic_tags": [
+        "parallel_resistance"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For parallel resistors, use 1/R_eq = 1/R₁ + 1/R₂. Thus 1/R_eq = 1/4 + 1/6 = 3/12 + 2/12 = 5/12, giving R_eq = 12/5 = 2.4Ω."
     },
     {
       "question_text": "The work function of a metal is 2 eV. Threshold frequency for photoelectric emission is approximately:",
-      "options": ["5×10¹⁴ Hz", "5×10¹³ Hz", "5×10¹⁵ Hz", "5×10¹² Hz"],
+      "options": [
+        "5×10¹⁴ Hz",
+        "5×10¹³ Hz",
+        "5×10¹⁵ Hz",
+        "5×10¹² Hz"
+      ],
       "correct_answer": "A",
       "chapter": "Modern Physics",
-      "topic_tags": ["photoelectric_effect", "work_function"],
+      "topic_tags": [
+        "photoelectric_effect",
+        "work_function"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The threshold frequency is found using the relation φ = hf₀, where φ is the work function and h is Planck's constant (6.63×10⁻³⁴ J·s). Converting 2 eV to joules (2×1.6×10⁻¹⁹ = 3.2×10⁻¹⁹ J) and solving: f₀ = 3.2×10⁻¹⁹ / 6.63×10⁻³⁴ ≈ 5×10¹⁴ Hz."
     },
     {
       "question_text": "A 5μF and a 10μF capacitor in series. Equivalent capacitance is:",
-      "options": ["15 μF", "3.33 μF", "7.5 μF", "5 μF"],
+      "options": [
+        "15 μF",
+        "3.33 μF",
+        "7.5 μF",
+        "5 μF"
+      ],
       "correct_answer": "B",
       "chapter": "Capacitance",
-      "topic_tags": ["series_capacitors"],
+      "topic_tags": [
+        "series_capacitors"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For capacitors in series, reciprocals add: 1/C_eq = 1/C₁ + 1/C₂ = 1/5 + 1/10 = 3/10, so C_eq = 10/3 ≈ 3.33 μF."
     },
     {
       "question_text": "Light of wavelength 600 nm passes through a slit of width 0.1 mm. First minimum is at angle:",
-      "options": ["6×10⁻³ rad", "0.6 rad", "0.06 rad", "60 rad"],
+      "options": [
+        "6×10⁻³ rad",
+        "0.6 rad",
+        "0.06 rad",
+        "60 rad"
+      ],
       "correct_answer": "A",
       "chapter": "Wave Optics",
-      "topic_tags": ["diffraction", "single_slit"],
+      "topic_tags": [
+        "diffraction",
+        "single_slit"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For single-slit diffraction, the first minimum occurs at angle θ where a sin(θ) = λ. With a = 0.1 mm = 10⁻⁴ m and λ = 600 nm = 6×10⁻⁷ m, we get sin(θ) ≈ θ = 6×10⁻⁷/10⁻⁴ = 6×10⁻³ rad."
     },
     {
       "question_text": "A wave on a string has equation y = 5 sin(20πx - 100πt). Speed of the wave is:",
-      "options": ["5 m/s", "20 m/s", "5π m/s", "100 m/s"],
+      "options": [
+        "5 m/s",
+        "20 m/s",
+        "5π m/s",
+        "100 m/s"
+      ],
       "correct_answer": "A",
       "chapter": "Waves",
-      "topic_tags": ["wave_equation", "speed"],
+      "topic_tags": [
+        "wave_equation",
+        "speed"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The wave equation is in the form y = A sin(kx - ωt), where k = 20π is the wave number and ω = 100π is the angular frequency. Wave speed v = ω/k = 100π/(20π) = 5 m/s."
     },
     {
       "question_text": "Force on a 1 C charge moving at 10 m/s perpendicular to B = 2 T is:",
-      "options": ["10 N", "20 N", "5 N", "0 N"],
+      "options": [
+        "10 N",
+        "20 N",
+        "5 N",
+        "0 N"
+      ],
       "correct_answer": "B",
       "chapter": "Magnetism",
-      "topic_tags": ["Lorentz_force", "F=qvB"],
+      "topic_tags": [
+        "Lorentz_force",
+        "F=qvB"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The magnetic force on a moving charge is F = qvB sin(θ), where θ is the angle between velocity and magnetic field. With q = 1 C, v = 10 m/s, B = 2 T, and θ = 90° (perpendicular), F = 1 × 10 × 2 × sin(90°) = 20 N."
     },
     {
       "question_text": "Half-life of a radioactive isotope is 10 years. After 30 years, fraction remaining is:",
-      "options": ["1/2", "1/4", "1/8", "1/16"],
+      "options": [
+        "1/2",
+        "1/4",
+        "1/8",
+        "1/16"
+      ],
       "correct_answer": "C",
       "chapter": "Nuclear Physics",
-      "topic_tags": ["radioactive_decay", "half_life"],
+      "topic_tags": [
+        "radioactive_decay",
+        "half_life"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "After 30 years, three half-lives have passed (30 ÷ 10 = 3). Each half-life reduces the amount by half, so the remaining fraction is (1/2)³ = 1/8."
     },
     {
       "question_text": "Period of revolution of a satellite at radius r around Earth (mass M):",
-      "options": ["T = 2π√(r³/GM)", "T = 2π√(GM/r³)", "T = 2π·r/v", "T = 2π·r²"],
+      "options": [
+        "T = 2π√(r³/GM)",
+        "T = 2π√(GM/r³)",
+        "T = 2π·r/v",
+        "T = 2π·r²"
+      ],
       "correct_answer": "A",
       "chapter": "Gravitation",
-      "topic_tags": ["satellite", "Kepler_third_law"],
+      "topic_tags": [
+        "satellite",
+        "Kepler_third_law"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a satellite in circular orbit, gravitational force provides centripetal force: GMm/r² = mv²/r. Solving for v and substituting into T = 2πr/v yields T = 2π√(r³/GM), which shows period increases with orbital radius and depends on Earth's mass."
     },
     {
       "question_text": "The heat required to raise temperature of 2 kg water from 20°C to 100°C is (c=4200 J/kg·K):",
-      "options": ["336 kJ", "672 kJ", "168 kJ", "84 kJ"],
+      "options": [
+        "336 kJ",
+        "672 kJ",
+        "168 kJ",
+        "84 kJ"
+      ],
       "correct_answer": "B",
       "chapter": "Thermodynamics",
-      "topic_tags": ["specific_heat", "calorimetry"],
+      "topic_tags": [
+        "specific_heat",
+        "calorimetry"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using Q = mcΔT, where m = 2 kg, c = 4200 J/kg·K, and ΔT = 100 - 20 = 80 K: Q = 2 × 4200 × 80 = 672,000 J = 672 kJ."
     },
     {
       "question_text": "An EM wave in vacuum has E = 100 V/m. Magnitude of B is:",
-      "options": ["3.33×10⁻⁷ T", "3×10¹⁰ T", "10 T", "1 T"],
+      "options": [
+        "3.33×10⁻⁷ T",
+        "3×10¹⁰ T",
+        "10 T",
+        "1 T"
+      ],
       "correct_answer": "A",
       "chapter": "Electromagnetic Waves",
-      "topic_tags": ["E_to_B_ratio", "speed_of_light"],
+      "topic_tags": [
+        "E_to_B_ratio",
+        "speed_of_light"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In an EM wave, the electric and magnetic fields are related by E = cB, where c is the speed of light (3×10⁸ m/s). Solving for B: B = E/c = 100/(3×10⁸) = 3.33×10⁻⁷ T."
     },
     {
       "question_text": "A converging lens of focal length 20 cm forms an image at 30 cm. Object distance is:",
-      "options": ["60 cm", "12 cm", "10 cm", "50 cm"],
+      "options": [
+        "60 cm",
+        "12 cm",
+        "10 cm",
+        "50 cm"
+      ],
       "correct_answer": "A",
       "chapter": "Ray Optics",
-      "topic_tags": ["lens_formula"],
+      "topic_tags": [
+        "lens_formula"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the lens equation 1/f = 1/u + 1/v, where f = 20 cm and v = 30 cm: 1/20 = 1/u + 1/30. Solving for u gives 1/u = 1/20 - 1/30 = 1/60, so u = 60 cm."
     },
     {
       "question_text": "Moment of inertia of a thin rod (length L, mass M) about its centre is:",
-      "options": ["ML²/2", "ML²/3", "ML²/12", "ML²"],
+      "options": [
+        "ML²/2",
+        "ML²/3",
+        "ML²/12",
+        "ML²"
+      ],
       "correct_answer": "C",
       "chapter": "Rotational Motion",
-      "topic_tags": ["moment_of_inertia", "rod"],
+      "topic_tags": [
+        "moment_of_inertia",
+        "rod"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a thin rod, divide it into infinitesimal mass elements dm at distance x from the center, then integrate I = ∫x²dm from -L/2 to L/2. This yields ML²/12, accounting for mass distribution symmetrically about the central axis."
     },
     {
       "question_text": "Drift velocity of electrons in a conductor depends on:",
-      "options": ["Only voltage", "Only current", "Voltage and length", "Cross-sectional area only"],
+      "options": [
+        "Only voltage",
+        "Only current",
+        "Voltage and length",
+        "Cross-sectional area only"
+      ],
       "correct_answer": "C",
       "chapter": "Current Electricity",
-      "topic_tags": ["drift_velocity", "Ohm_microscopic"],
+      "topic_tags": [
+        "drift_velocity",
+        "Ohm_microscopic"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Drift velocity depends on the electric field strength in the conductor, which is determined by voltage divided by length (E = V/L). Since v_d = (e·E·τ)/(m), drift velocity is directly proportional to voltage and inversely proportional to length."
     },
     {
       "question_text": "Coefficient of restitution e=1 means:",
-      "options": ["Perfectly inelastic", "Perfectly elastic", "Partially elastic", "No collision"],
+      "options": [
+        "Perfectly inelastic",
+        "Perfectly elastic",
+        "Partially elastic",
+        "No collision"
+      ],
       "correct_answer": "B",
       "chapter": "Collisions",
-      "topic_tags": ["restitution", "elastic"],
+      "topic_tags": [
+        "restitution",
+        "elastic"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When e=1, the relative velocity of separation equals the relative velocity of approach, meaning no kinetic energy is lost during collision. This defines a perfectly elastic collision where objects bounce apart with maximum speed."
     },
     {
       "question_text": "An ideal gas expands isothermally to twice its volume. Work done is:",
-      "options": ["nRT", "nRT ln 2", "0", "2nRT"],
+      "options": [
+        "nRT",
+        "nRT ln 2",
+        "0",
+        "2nRT"
+      ],
       "correct_answer": "B",
       "chapter": "Thermodynamics",
-      "topic_tags": ["isothermal", "work"],
+      "topic_tags": [
+        "isothermal",
+        "work"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For an isothermal process, temperature is constant, so internal energy doesn't change and all heat goes into work. The work done by an ideal gas is W = ∫PdV = nRT ln(Vf/Vi). Since the volume doubles, W = nRT ln(2)."
     },
     {
       "question_text": "Resistivity of a conductor depends on:",
-      "options": ["Length", "Cross-section", "Temperature", "Voltage"],
+      "options": [
+        "Length",
+        "Cross-section",
+        "Temperature",
+        "Voltage"
+      ],
       "correct_answer": "C",
       "chapter": "Current Electricity",
-      "topic_tags": ["resistivity", "temperature"],
+      "topic_tags": [
+        "resistivity",
+        "temperature"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Resistivity is an intrinsic material property that describes how strongly a material opposes current flow. It depends only on the material's nature and temperature; length and cross-section affect resistance (not resistivity), and voltage doesn't affect resistivity at all."
     },
     {
       "question_text": "Pressure exerted by a column of mercury of height 76 cm at sea level is approximately:",
-      "options": ["1 atm", "2 atm", "0.5 atm", "10 atm"],
+      "options": [
+        "1 atm",
+        "2 atm",
+        "0.5 atm",
+        "10 atm"
+      ],
       "correct_answer": "A",
       "chapter": "Fluid Mechanics",
-      "topic_tags": ["pressure", "barometer"],
+      "topic_tags": [
+        "pressure",
+        "barometer"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A 76 cm column of mercury is the standard definition of atmospheric pressure at sea level, equivalent to 1 atm. This is derived from the barometric formula: pressure = ρgh, where a mercury column of this specific height produces exactly 101,325 Pa, the accepted value for 1 atmosphere."
     },
     {
       "question_text": "An AC source 220 V supplies 5 A current to a pure resistor. Power dissipated is:",
-      "options": ["110 W", "1100 W", "44 W", "550 W"],
+      "options": [
+        "110 W",
+        "1100 W",
+        "44 W",
+        "550 W"
+      ],
       "correct_answer": "B",
       "chapter": "AC Circuits",
-      "topic_tags": ["RMS_power"],
+      "topic_tags": [
+        "RMS_power"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a pure resistor with AC voltage, power is calculated using P = V × I, where V is the RMS voltage. Here, P = 220 V × 5 A = 1100 W. Since the load is purely resistive (no reactance), the power factor is 1, so no correction factor is needed."
     },
     {
       "question_text": "Light wave goes from glass (n=1.5) to vacuum (n=1). Critical angle is:",
-      "options": ["30°", "45°", "sin⁻¹(2/3)", "60°"],
+      "options": [
+        "30°",
+        "45°",
+        "sin⁻¹(2/3)",
+        "60°"
+      ],
       "correct_answer": "C",
       "chapter": "Ray Optics",
-      "topic_tags": ["total_internal_reflection", "critical_angle"],
+      "topic_tags": [
+        "total_internal_reflection",
+        "critical_angle"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The critical angle for total internal reflection is found using sin(θc) = n₂/n₁, where light travels from the denser medium (glass, n=1.5) to the less dense medium (vacuum, n=1). Therefore, sin(θc) = 1/1.5 = 2/3, giving θc = sin⁻¹(2/3)."
     },
     {
       "question_text": "A 1 kg ball is thrown vertically up with 20 m/s. Maximum height (g=10):",
-      "options": ["10 m", "20 m", "30 m", "40 m"],
+      "options": [
+        "10 m",
+        "20 m",
+        "30 m",
+        "40 m"
+      ],
       "correct_answer": "B",
       "chapter": "Kinematics",
-      "topic_tags": ["projectile", "max_height"],
+      "topic_tags": [
+        "projectile",
+        "max_height"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the kinematic equation v² = u² - 2gh, at maximum height v = 0. Substituting: 0 = (20)² - 2(10)h gives h = 400/20 = 20 m. The mass is irrelevant for this calculation."
     },
     {
       "question_text": "The dimensional formula of Planck's constant is:",
-      "options": ["[ML²T⁻¹]", "[MLT⁻¹]", "[ML²T⁻²]", "[ML⁰T⁻¹]"],
+      "options": [
+        "[ML²T⁻¹]",
+        "[MLT⁻¹]",
+        "[ML²T⁻²]",
+        "[ML⁰T⁻¹]"
+      ],
       "correct_answer": "A",
       "chapter": "Units and Measurements",
-      "topic_tags": ["dimensions", "Planck"],
+      "topic_tags": [
+        "dimensions",
+        "Planck"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Planck's constant relates energy to frequency through E = hf. Since energy has dimensions [ML²T⁻²] and frequency has dimensions [T⁻¹], dividing gives h = [ML²T⁻²]/[T⁻¹] = [ML²T⁻¹], which represents angular momentum."
     },
     {
       "question_text": "Number of electrons in 1 coulomb is approximately:",
-      "options": ["6.25×10¹⁸", "1.6×10⁻¹⁹", "6.022×10²³", "1.6×10¹⁹"],
+      "options": [
+        "6.25×10¹⁸",
+        "1.6×10⁻¹⁹",
+        "6.022×10²³",
+        "1.6×10¹⁹"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["charge", "electron"],
+      "topic_tags": [
+        "charge",
+        "electron"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The elementary charge (charge of one electron) is 1.6×10⁻¹⁹ coulombs. To find the number of electrons in 1 coulomb, divide: 1 ÷ (1.6×10⁻¹⁹) = 6.25×10¹⁸ electrons."
     }
   ]
 }

@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Acids Bases Salts",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At 25°C, pure water undergoes autoionization producing equal concentrations of H⁺ and OH⁻ ions (10⁻⁷ M each). Since pH = -log[H⁺], the pH equals -log(10⁻⁷) = 7, making pure water neutral."
     },
     {
       "question_text": "Heart muscles are made of:",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Life Processes",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The heart is a specialized organ with its own unique muscle type distinct from skeletal and smooth muscle. Cardiac muscle has unique properties including intercalated discs for coordinated contractions and involuntary control, making it the specific tissue that composes heart walls."
     },
     {
       "question_text": "Unit of electric resistance:",
@@ -43,7 +45,8 @@
       "correct_answer": "C",
       "chapter": "Electricity",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Electric resistance measures how much a material opposes current flow. The ohm (Ω) is the standard SI unit of resistance, defined as one volt per ampere (V/A), making it the correct answer."
     },
     {
       "question_text": "Which gas evolved when zinc reacts with HCl?",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Metals and Non-Metals",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Zinc is more reactive than hydrogen, so it displaces hydrogen from hydrochloric acid in a single displacement reaction: Zn + 2HCl → ZnCl₂ + H₂. The hydrogen gas (H₂) is released as bubbles."
     },
     {
       "question_text": "Photosynthesis requires:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Life Processes",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Photosynthesis uses light energy to convert water and carbon dioxide into glucose and oxygen. Light, water, and CO2 are the three essential inputs; oxygen is a byproduct, not a requirement."
     },
     {
       "question_text": "Refractive index of water is approximately:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Light Refraction",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Water's refractive index is the ratio of light's speed in vacuum to its speed in water. Light travels slower in water than in air, producing a refractive index of approximately 1.33, which is experimentally well-established and commonly used in optics calculations."
     },
     {
       "question_text": "An object placed at infinity in front of concave mirror, image forms at:",
@@ -95,7 +101,8 @@
       "correct_answer": "B",
       "chapter": "Light Reflection",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When an object is at infinity, light rays from it arrive at the mirror as parallel rays. By the mirror's property, all parallel rays converge at the focal point after reflection, so the image forms at the focus."
     },
     {
       "question_text": "Which biome contains the largest carbon stock on land?",
@@ -108,7 +115,8 @@
       "correct_answer": "B",
       "chapter": "Our Environment",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Tropical forests store the most carbon on land because their high biodiversity, dense vegetation, and rapid growth rates create massive above-ground biomass in trees, while their warm, wet conditions support thick soil layers rich in organic carbon."
     }
   ]
 }

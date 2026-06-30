@@ -8,228 +8,432 @@
   "questions": [
     {
       "question_text": "HCF of 12 and 18 is:",
-      "options": ["2", "3", "6", "12"],
+      "options": [
+        "2",
+        "3",
+        "6",
+        "12"
+      ],
       "correct_answer": "C",
       "chapter": "Real Numbers",
-      "topic_tags": ["HCF", "factors"],
+      "topic_tags": [
+        "HCF",
+        "factors"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The HCF (Highest Common Factor) is the largest number that divides both 12 and 18. The factors of 12 are 1, 2, 3, 4, 6, 12 and factors of 18 are 1, 2, 3, 6, 9, 18. The largest common factor is 6."
     },
     {
       "question_text": "Which of the following is irrational?",
-      "options": ["√4", "√9", "√7", "0.25"],
+      "options": [
+        "√4",
+        "√9",
+        "√7",
+        "0.25"
+      ],
       "correct_answer": "C",
       "chapter": "Real Numbers",
-      "topic_tags": ["irrational", "square_root"],
+      "topic_tags": [
+        "irrational",
+        "square_root"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "√7 cannot be expressed as a ratio of two integers because 7 is not a perfect square, making it irrational. The other options are all rational: √4 = 2, √9 = 3, and 0.25 = 1/4."
     },
     {
       "question_text": "Sum of roots of x² - 5x + 6 = 0 is:",
-      "options": ["5", "6", "-5", "-6"],
+      "options": [
+        "5",
+        "6",
+        "-5",
+        "-6"
+      ],
       "correct_answer": "A",
       "chapter": "Polynomials",
-      "topic_tags": ["quadratic", "sum_of_roots"],
+      "topic_tags": [
+        "quadratic",
+        "sum_of_roots"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For a quadratic equation ax² + bx + c = 0, the sum of roots equals -b/a. Here, a = 1 and b = -5, so the sum is -(-5)/1 = 5."
     },
     {
       "question_text": "If 2x + 3y = 12 and x = 3, then y is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Linear Equations",
-      "topic_tags": ["substitution"],
+      "topic_tags": [
+        "substitution"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Substitute x = 3 into the equation: 2(3) + 3y = 12, which gives 6 + 3y = 12. Solving for y: 3y = 6, so y = 2."
     },
     {
       "question_text": "Roots of x² - 4 = 0 are:",
-      "options": ["±2", "±4", "2 only", "0 and 4"],
+      "options": [
+        "±2",
+        "±4",
+        "2 only",
+        "0 and 4"
+      ],
       "correct_answer": "A",
       "chapter": "Quadratic Equations",
-      "topic_tags": ["roots"],
+      "topic_tags": [
+        "roots"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Factoring gives (x - 2)(x + 2) = 0, so x = 2 or x = -2, which is written as ±2. Both values satisfy the equation when squared and subtracted from 4."
     },
     {
       "question_text": "Common difference of AP 2, 5, 8, 11... is:",
-      "options": ["2", "3", "4", "5"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Arithmetic Progression",
-      "topic_tags": ["common_difference"],
+      "topic_tags": [
+        "common_difference"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The common difference is found by subtracting any term from the term that follows it. Here, 5 - 2 = 3, or 8 - 5 = 3, confirming the constant difference between consecutive terms is 3."
     },
     {
       "question_text": "10th term of AP 3, 7, 11... is:",
-      "options": ["35", "39", "43", "47"],
+      "options": [
+        "35",
+        "39",
+        "43",
+        "47"
+      ],
       "correct_answer": "B",
       "chapter": "Arithmetic Progression",
-      "topic_tags": ["nth_term"],
+      "topic_tags": [
+        "nth_term"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The AP has first term a = 3 and common difference d = 4. Using the formula for the nth term: aₙ = a + (n-1)d, the 10th term is 3 + (10-1)×4 = 3 + 36 = 39."
     },
     {
       "question_text": "Distance between (0,0) and (3,4) is:",
-      "options": ["3", "4", "5", "7"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["distance_formula"],
+      "topic_tags": [
+        "distance_formula"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the distance formula, d = √[(x₂-x₁)² + (y₂-y₁)²], we get d = √[(3-0)² + (4-0)²] = √[9 + 16] = √25 = 5."
     },
     {
       "question_text": "Midpoint of A(2,4) and B(6,8) is:",
-      "options": ["(2,4)", "(4,6)", "(8,12)", "(3,6)"],
+      "options": [
+        "(2,4)",
+        "(4,6)",
+        "(8,12)",
+        "(3,6)"
+      ],
       "correct_answer": "B",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["midpoint"],
+      "topic_tags": [
+        "midpoint"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the midpoint formula, the x-coordinate is (2+6)/2 = 4 and the y-coordinate is (4+8)/2 = 6, giving the midpoint (4,6)."
     },
     {
       "question_text": "sin 30° equals:",
-      "options": ["1/2", "√3/2", "1", "0"],
+      "options": [
+        "1/2",
+        "√3/2",
+        "1",
+        "0"
+      ],
       "correct_answer": "A",
       "chapter": "Introduction to Trigonometry",
-      "topic_tags": ["trig_values"],
+      "topic_tags": [
+        "trig_values"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "sin 30° is a standard angle in trigonometry. In a 30-60-90 triangle, the side opposite the 30° angle is half the hypotenuse, giving sin 30° = 1/2."
     },
     {
       "question_text": "tan 45° equals:",
-      "options": ["0", "1", "√3", "1/√3"],
+      "options": [
+        "0",
+        "1",
+        "√3",
+        "1/√3"
+      ],
       "correct_answer": "B",
       "chapter": "Introduction to Trigonometry",
-      "topic_tags": ["trig_values"],
+      "topic_tags": [
+        "trig_values"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At 45°, the opposite and adjacent sides of a right triangle are equal, so tan 45° = opposite/adjacent = 1/1 = 1."
     },
     {
       "question_text": "sin²θ + cos²θ equals:",
-      "options": ["0", "1", "2", "sinθ"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "sinθ"
+      ],
       "correct_answer": "B",
       "chapter": "Introduction to Trigonometry",
-      "topic_tags": ["identity"],
+      "topic_tags": [
+        "identity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "This is the fundamental Pythagorean trigonometric identity. For any angle θ, the sine and cosine values represent the legs of a right triangle inscribed in a unit circle, whose hypotenuse has length 1, so their squares must sum to 1."
     },
     {
       "question_text": "If a tangent makes an angle of 60° with the radius at the point of contact, the angle of contact is:",
-      "options": ["30°", "60°", "90°", "120°"],
+      "options": [
+        "30°",
+        "60°",
+        "90°",
+        "120°"
+      ],
       "correct_answer": "C",
       "chapter": "Circles",
-      "topic_tags": ["tangent_radius"],
+      "topic_tags": [
+        "tangent_radius"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A radius drawn to a point on a circle is always perpendicular to the tangent at that point. This is a fundamental property of tangents, so the angle between them must be 90°, regardless of the angle the tangent makes with other lines."
     },
     {
       "question_text": "Number of tangents from external point to a circle is:",
-      "options": ["0", "1", "2", "infinite"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "infinite"
+      ],
       "correct_answer": "C",
       "chapter": "Circles",
-      "topic_tags": ["tangents"],
+      "topic_tags": [
+        "tangents"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "From any external point, exactly two tangent lines can be drawn to a circle. These two tangents are equidistant from the center and touch the circle at two different points, making them symmetric about the line joining the external point to the center."
     },
     {
       "question_text": "Area of circle of radius 7 cm is (π=22/7):",
-      "options": ["44", "154", "22", "49"],
+      "options": [
+        "44",
+        "154",
+        "22",
+        "49"
+      ],
       "correct_answer": "B",
       "chapter": "Areas Related to Circles",
-      "topic_tags": ["area", "circle"],
+      "topic_tags": [
+        "area",
+        "circle"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the formula A = πr², with r = 7 cm and π = 22/7: A = (22/7) × 7² = (22/7) × 49 = 22 × 7 = 154 cm²."
     },
     {
       "question_text": "Volume of sphere of radius r is:",
-      "options": ["4πr²", "(4/3)πr³", "πr³", "πr²"],
+      "options": [
+        "4πr²",
+        "(4/3)πr³",
+        "πr³",
+        "πr²"
+      ],
       "correct_answer": "B",
       "chapter": "Surface Areas and Volumes",
-      "topic_tags": ["sphere_volume"],
+      "topic_tags": [
+        "sphere_volume"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The volume formula for a sphere is derived by integration and equals (4/3)πr³. Options A and D are surface area formulas, while C omits the crucial 4/3 coefficient that accounts for the sphere's three-dimensional geometry."
     },
     {
       "question_text": "Mean of 2, 4, 6, 8, 10 is:",
-      "options": ["4", "5", "6", "7"],
+      "options": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Statistics",
-      "topic_tags": ["mean"],
+      "topic_tags": [
+        "mean"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mean is calculated by summing all values and dividing by how many values there are: (2+4+6+8+10)÷5 = 30÷5 = 6."
     },
     {
       "question_text": "Mode is the value that:",
-      "options": ["Occurs least", "Occurs most", "Is the middle value", "Is the average"],
+      "options": [
+        "Occurs least",
+        "Occurs most",
+        "Is the middle value",
+        "Is the average"
+      ],
       "correct_answer": "B",
       "chapter": "Statistics",
-      "topic_tags": ["mode"],
+      "topic_tags": [
+        "mode"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The mode is defined as the value that appears most frequently in a dataset. It represents the observation with the highest frequency of occurrence."
     },
     {
       "question_text": "Probability of getting heads in fair coin toss is:",
-      "options": ["0", "1/4", "1/2", "1"],
+      "options": [
+        "0",
+        "1/4",
+        "1/2",
+        "1"
+      ],
       "correct_answer": "C",
       "chapter": "Probability",
-      "topic_tags": ["coin_toss"],
+      "topic_tags": [
+        "coin_toss"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A fair coin has two equally likely outcomes: heads or tails. Since there are two possible outcomes and only one favorable outcome (heads), the probability is 1 divided by 2, which equals 1/2."
     },
     {
       "question_text": "Probability of getting 6 on a fair die is:",
-      "options": ["1/2", "1/3", "1/4", "1/6"],
+      "options": [
+        "1/2",
+        "1/3",
+        "1/4",
+        "1/6"
+      ],
       "correct_answer": "D",
       "chapter": "Probability",
-      "topic_tags": ["die"],
+      "topic_tags": [
+        "die"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A fair die has 6 equally likely outcomes (1, 2, 3, 4, 5, 6), and only one of these outcomes is a 6. Therefore, the probability is 1/6."
     },
     {
       "question_text": "If sin A = 3/5, then cos A is:",
-      "options": ["3/5", "4/5", "5/3", "5/4"],
+      "options": [
+        "3/5",
+        "4/5",
+        "5/3",
+        "5/4"
+      ],
       "correct_answer": "B",
       "chapter": "Introduction to Trigonometry",
-      "topic_tags": ["pythagorean"],
+      "topic_tags": [
+        "pythagorean"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using the Pythagorean identity sin²A + cos²A = 1: (3/5)² + cos²A = 1 gives 9/25 + cos²A = 1, so cos²A = 16/25, and cos A = 4/5."
     },
     {
       "question_text": "Area of triangle with vertices (0,0), (4,0), (0,3) is:",
-      "options": ["6", "12", "24", "7"],
+      "options": [
+        "6",
+        "12",
+        "24",
+        "7"
+      ],
       "correct_answer": "A",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["triangle_area"],
+      "topic_tags": [
+        "triangle_area"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "This is a right triangle with legs along the x and y axes of length 4 and 3 respectively. Using the formula Area = ½ × base × height = ½ × 4 × 3 = 6."
     },
     {
       "question_text": "Sum of first n natural numbers is:",
-      "options": ["n", "n²", "n(n+1)/2", "n(n-1)/2"],
+      "options": [
+        "n",
+        "n²",
+        "n(n+1)/2",
+        "n(n-1)/2"
+      ],
       "correct_answer": "C",
       "chapter": "Arithmetic Progression",
-      "topic_tags": ["sum_n"],
+      "topic_tags": [
+        "sum_n"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The sum follows the formula derived from pairing terms: adding the first and last number repeatedly (1+n, 2+(n-1), etc.) gives n pairs, each summing to (n+1), so the total is n(n+1)/2."
     },
     {
       "question_text": "Discriminant of ax² + bx + c = 0 is:",
-      "options": ["b² + 4ac", "b² - 4ac", "4ac - b²", "b - 4ac"],
+      "options": [
+        "b² + 4ac",
+        "b² - 4ac",
+        "4ac - b²",
+        "b - 4ac"
+      ],
       "correct_answer": "B",
       "chapter": "Quadratic Equations",
-      "topic_tags": ["discriminant"],
+      "topic_tags": [
+        "discriminant"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The discriminant formula comes from the quadratic formula's radicand. For ax² + bx + c = 0, the discriminant is b² - 4ac, which determines whether roots are real and distinct (positive), equal (zero), or complex (negative)."
     },
     {
       "question_text": "If the discriminant of a quadratic equation is 0, roots are:",
-      "options": ["Real and equal", "Real and distinct", "Complex", "Zero"],
+      "options": [
+        "Real and equal",
+        "Real and distinct",
+        "Complex",
+        "Zero"
+      ],
       "correct_answer": "A",
       "chapter": "Quadratic Equations",
-      "topic_tags": ["nature_of_roots"],
+      "topic_tags": [
+        "nature_of_roots"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When the discriminant equals zero, the quadratic formula yields a single repeated root: x = -b/(2a). This root is real (not complex) and appears twice, making the two roots equal to each other."
     }
   ]
 }

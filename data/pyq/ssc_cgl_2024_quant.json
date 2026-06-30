@@ -8,228 +8,435 @@
   "questions": [
     {
       "question_text": "Average of first 5 multiples of 3 is:",
-      "options": ["8", "9", "10", "12"],
+      "options": [
+        "8",
+        "9",
+        "10",
+        "12"
+      ],
       "correct_answer": "B",
       "chapter": "Averages",
-      "topic_tags": ["average", "multiples"],
+      "topic_tags": [
+        "average",
+        "multiples"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The first 5 multiples of 3 are 3, 6, 9, 12, and 15. Their sum is 45, and dividing by 5 gives an average of 9."
     },
     {
       "question_text": "If 12% of x = 84, then x is:",
-      "options": ["700", "750", "650", "800"],
+      "options": [
+        "700",
+        "750",
+        "650",
+        "800"
+      ],
       "correct_answer": "A",
       "chapter": "Percentages",
-      "topic_tags": ["percentage"],
+      "topic_tags": [
+        "percentage"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Setting up the equation from \"12% of x = 84\": 0.12x = 84. Dividing both sides by 0.12 gives x = 84/0.12 = 700."
     },
     {
       "question_text": "Simple interest on Rs 5000 at 8% per annum for 3 years is:",
-      "options": ["Rs 1000", "Rs 1200", "Rs 1500", "Rs 2000"],
+      "options": [
+        "Rs 1000",
+        "Rs 1200",
+        "Rs 1500",
+        "Rs 2000"
+      ],
       "correct_answer": "B",
       "chapter": "Simple Interest",
-      "topic_tags": ["SI", "interest"],
+      "topic_tags": [
+        "SI",
+        "interest"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Simple Interest = (Principal × Rate × Time) / 100 = (5000 × 8 × 3) / 100 = 120000 / 100 = Rs 1200."
     },
     {
       "question_text": "Compound interest on Rs 10000 at 10% per annum for 2 years is:",
-      "options": ["Rs 2000", "Rs 2100", "Rs 2200", "Rs 2400"],
+      "options": [
+        "Rs 2000",
+        "Rs 2100",
+        "Rs 2200",
+        "Rs 2400"
+      ],
       "correct_answer": "B",
       "chapter": "Compound Interest",
-      "topic_tags": ["CI"],
+      "topic_tags": [
+        "CI"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the compound interest formula: A = P(1 + r/100)^n, we get A = 10000(1.1)^2 = 10000(1.21) = 12100. Subtracting principal: CI = 12100 - 10000 = Rs 2100."
     },
     {
       "question_text": "Ratio of two numbers is 3:5 and their sum is 80. The numbers are:",
-      "options": ["30 and 50", "20 and 60", "40 and 40", "25 and 55"],
+      "options": [
+        "30 and 50",
+        "20 and 60",
+        "40 and 40",
+        "25 and 55"
+      ],
       "correct_answer": "A",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["ratio"],
+      "topic_tags": [
+        "ratio"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Let the numbers be 3x and 5x. Their sum is 3x + 5x = 8x = 80, so x = 10. The numbers are 3(10) = 30 and 5(10) = 50, which are in ratio 3:5 and sum to 80."
     },
     {
       "question_text": "If A:B = 3:4 and B:C = 6:7, then A:B:C is:",
-      "options": ["3:4:7", "9:12:14", "3:4:5", "9:12:21"],
+      "options": [
+        "3:4:7",
+        "9:12:14",
+        "3:4:5",
+        "9:12:21"
+      ],
       "correct_answer": "B",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["compound_ratio"],
+      "topic_tags": [
+        "compound_ratio"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "To find A:B:C, we need a common value for B in both ratios. From A:B = 3:4, multiply by 3 to get A:B = 9:12. From B:C = 6:7, multiply by 2 to get B:C = 12:14. Now B equals 12 in both, so A:B:C = 9:12:14."
     },
     {
       "question_text": "Two trains 200 m and 150 m long travel in opposite directions at 36 km/h and 54 km/h. Time to cross each other:",
-      "options": ["10 s", "12 s", "14 s", "15 s"],
+      "options": [
+        "10 s",
+        "12 s",
+        "14 s",
+        "15 s"
+      ],
       "correct_answer": "C",
       "chapter": "Time, Speed and Distance",
-      "topic_tags": ["trains", "relative_speed"],
+      "topic_tags": [
+        "trains",
+        "relative_speed"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When trains travel in opposite directions, their relative speed is the sum of individual speeds: 36 + 54 = 90 km/h = 25 m/s. The total distance to cover is the sum of their lengths: 200 + 150 = 350 m. Time = Distance/Speed = 350/25 = 14 seconds."
     },
     {
       "question_text": "A boat goes 30 km upstream and 45 km downstream in 9 hours. Speed in still water is 8 km/h. Stream speed is:",
-      "options": ["1 km/h", "2 km/h", "3 km/h", "4 km/h"],
+      "options": [
+        "1 km/h",
+        "2 km/h",
+        "3 km/h",
+        "4 km/h"
+      ],
       "correct_answer": "C",
       "chapter": "Boats and Streams",
-      "topic_tags": ["boat_stream"],
+      "topic_tags": [
+        "boat_stream"
+      ],
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Let boat speed in still water = 8 km/h and stream speed = x km/h. Upstream speed = (8-x) km/h, downstream speed = (8+x) km/h. Time equation: 30/(8-x) + 45/(8+x) = 9. Solving: 30(8+x) + 45(8-x) = 9(8-x)(8+x), which simplifies to 9x² + 18x - 27 = 0, giving x = 3 km/h."
     },
     {
       "question_text": "A and B can do work in 12 and 18 days. Together they finish in:",
-      "options": ["6 days", "7 days", "7.2 days", "8 days"],
+      "options": [
+        "6 days",
+        "7 days",
+        "7.2 days",
+        "8 days"
+      ],
       "correct_answer": "C",
       "chapter": "Time and Work",
-      "topic_tags": ["combined_work"],
+      "topic_tags": [
+        "combined_work"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A's work rate is 1/12 per day and B's is 1/18 per day. Combined rate: 1/12 + 1/18 = 3/36 + 2/36 = 5/36 per day. Time to complete: 36/5 = 7.2 days."
     },
     {
       "question_text": "Profit % on selling at Rs 240 with CP Rs 200:",
-      "options": ["10%", "15%", "20%", "25%"],
+      "options": [
+        "10%",
+        "15%",
+        "20%",
+        "25%"
+      ],
       "correct_answer": "C",
       "chapter": "Profit and Loss",
-      "topic_tags": ["profit"],
+      "topic_tags": [
+        "profit"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Profit = Selling Price - Cost Price = 240 - 200 = 40. Profit % = (Profit / CP) × 100 = (40 / 200) × 100 = 20%."
     },
     {
       "question_text": "After 20% discount, an article costs Rs 800. Original price:",
-      "options": ["Rs 1000", "Rs 960", "Rs 1100", "Rs 850"],
+      "options": [
+        "Rs 1000",
+        "Rs 960",
+        "Rs 1100",
+        "Rs 850"
+      ],
       "correct_answer": "A",
       "chapter": "Discount",
-      "topic_tags": ["discount"],
+      "topic_tags": [
+        "discount"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "If a 20% discount is applied, the customer pays 80% of the original price. Setting up the equation: 0.80 × Original Price = 800, so Original Price = 800 ÷ 0.80 = Rs 1000."
     },
     {
       "question_text": "Mean of 5 numbers is 12. If one number 20 is removed, new mean is:",
-      "options": ["10", "11", "12", "13"],
+      "options": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
       "correct_answer": "A",
       "chapter": "Averages",
-      "topic_tags": ["mean", "removing"],
+      "topic_tags": [
+        "mean",
+        "removing"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The sum of 5 numbers is 5 × 12 = 60. Removing 20 leaves a sum of 60 - 20 = 40 for 4 numbers. The new mean is 40 ÷ 4 = 10."
     },
     {
       "question_text": "Area of circle with radius 14 (π=22/7):",
-      "options": ["44 cm²", "154 cm²", "616 cm²", "1232 cm²"],
+      "options": [
+        "44 cm²",
+        "154 cm²",
+        "616 cm²",
+        "1232 cm²"
+      ],
       "correct_answer": "C",
       "chapter": "Mensuration",
-      "topic_tags": ["circle", "area"],
+      "topic_tags": [
+        "circle",
+        "area"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the formula Area = πr², with r = 14 and π = 22/7: Area = (22/7) × 14² = (22/7) × 196 = 22 × 28 = 616 cm²."
     },
     {
       "question_text": "Volume of cylinder with radius 7 and height 10 is (π=22/7):",
-      "options": ["1540", "770", "440", "2200"],
+      "options": [
+        "1540",
+        "770",
+        "440",
+        "2200"
+      ],
       "correct_answer": "A",
       "chapter": "Mensuration",
-      "topic_tags": ["cylinder", "volume"],
+      "topic_tags": [
+        "cylinder",
+        "volume"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The volume of a cylinder is V = πr²h. Substituting r = 7, h = 10, and π = 22/7: V = (22/7) × 7² × 10 = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540."
     },
     {
       "question_text": "Sum of angles in pentagon is:",
-      "options": ["360°", "540°", "720°", "900°"],
+      "options": [
+        "360°",
+        "540°",
+        "720°",
+        "900°"
+      ],
       "correct_answer": "B",
       "chapter": "Geometry",
-      "topic_tags": ["polygon"],
+      "topic_tags": [
+        "polygon"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A pentagon has 5 sides. Using the formula for sum of interior angles: (n-2) × 180°, where n is the number of sides: (5-2) × 180° = 3 × 180° = 540°."
     },
     {
       "question_text": "LCM of 12 and 18 is:",
-      "options": ["6", "24", "36", "72"],
+      "options": [
+        "6",
+        "24",
+        "36",
+        "72"
+      ],
       "correct_answer": "C",
       "chapter": "Number System",
-      "topic_tags": ["LCM"],
+      "topic_tags": [
+        "LCM"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The LCM is the smallest number divisible by both 12 and 18. Factoring: 12 = 2² × 3 and 18 = 2 × 3². Taking the highest power of each prime: 2² × 3² = 4 × 9 = 36."
     },
     {
       "question_text": "If x + 1/x = 4, then x² + 1/x² is:",
-      "options": ["12", "14", "16", "18"],
+      "options": [
+        "12",
+        "14",
+        "16",
+        "18"
+      ],
       "correct_answer": "B",
       "chapter": "Algebra",
-      "topic_tags": ["algebra"],
+      "topic_tags": [
+        "algebra"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Square both sides of x + 1/x = 4 to get x² + 2 + 1/x² = 16. Subtract 2 from both sides to isolate x² + 1/x² = 14."
     },
     {
       "question_text": "Square root of 1.21 is:",
-      "options": ["0.11", "1.1", "1.21", "11"],
+      "options": [
+        "0.11",
+        "1.1",
+        "1.21",
+        "11"
+      ],
       "correct_answer": "B",
       "chapter": "Number System",
-      "topic_tags": ["square_root"],
+      "topic_tags": [
+        "square_root"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "1.21 can be rewritten as 121/100. Taking the square root: √(121/100) = √121/√100 = 11/10 = 1.1."
     },
     {
       "question_text": "Cube root of 0.000027 is:",
-      "options": ["0.03", "0.003", "0.3", "0.0003"],
+      "options": [
+        "0.03",
+        "0.003",
+        "0.3",
+        "0.0003"
+      ],
       "correct_answer": "A",
       "chapter": "Number System",
-      "topic_tags": ["cube_root"],
+      "topic_tags": [
+        "cube_root"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "0.000027 = 27/1,000,000 = 27/10^6. The cube root is ∛27/∛(10^6) = 3/100 = 0.03."
     },
     {
       "question_text": "5x - 2 = 13, x = ?",
-      "options": ["2", "3", "4", "5"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Algebra",
-      "topic_tags": ["linear_equation"],
+      "topic_tags": [
+        "linear_equation"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Add 2 to both sides: 5x = 15. Divide by 5: x = 3."
     },
     {
       "question_text": "Selling at loss 10% means SP is what % of CP?",
-      "options": ["90%", "100%", "110%", "80%"],
+      "options": [
+        "90%",
+        "100%",
+        "110%",
+        "80%"
+      ],
       "correct_answer": "A",
       "chapter": "Profit and Loss",
-      "topic_tags": ["loss"],
+      "topic_tags": [
+        "loss"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When selling at a 10% loss, the selling price (SP) is 10% less than the cost price (CP). Therefore, SP = CP - 0.10×CP = 0.90×CP, which means SP is 90% of CP."
     },
     {
       "question_text": "If x : y = 2 : 3 and y : z = 4 : 5, find x : z:",
-      "options": ["8 : 15", "5 : 6", "2 : 5", "1 : 2"],
+      "options": [
+        "8 : 15",
+        "5 : 6",
+        "2 : 5",
+        "1 : 2"
+      ],
       "correct_answer": "A",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["combined_ratio"],
+      "topic_tags": [
+        "combined_ratio"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "To find x : z, we need a common value for y. From x : y = 2 : 3, we get x = 2k and y = 3k. From y : z = 4 : 5, we get y = 4m and z = 5m. Setting 3k = 4m gives k = 4 and m = 3, so x = 8, y = 12, z = 15. Therefore x : z = 8 : 15."
     },
     {
       "question_text": "Population grows from 50000 to 60000 in 2 years. Growth rate (compound):",
-      "options": ["Approx 9.5%", "10%", "15%", "20%"],
+      "options": [
+        "Approx 9.5%",
+        "10%",
+        "15%",
+        "20%"
+      ],
       "correct_answer": "A",
       "chapter": "Compound Interest",
-      "topic_tags": ["growth"],
+      "topic_tags": [
+        "growth"
+      ],
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the compound growth formula: Final = Initial × (1 + r)^n, we get 60000 = 50000 × (1 + r)^2. Solving for r: (1 + r)^2 = 1.2, so r = √1.2 - 1 ≈ 0.095 or 9.5%."
     },
     {
       "question_text": "Number divisible by both 4 and 6 is divisible by:",
-      "options": ["10", "12", "24", "20"],
+      "options": [
+        "10",
+        "12",
+        "24",
+        "20"
+      ],
       "correct_answer": "B",
       "chapter": "Number System",
-      "topic_tags": ["divisibility", "LCM"],
+      "topic_tags": [
+        "divisibility",
+        "LCM"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A number divisible by both 4 and 6 must be divisible by their least common multiple (LCM). Since 4 = 2² and 6 = 2×3, their LCM is 2²×3 = 12."
     },
     {
       "question_text": "If 3a = 5b, then a/b is:",
-      "options": ["3/5", "5/3", "1/3", "5/8"],
+      "options": [
+        "3/5",
+        "5/3",
+        "1/3",
+        "5/8"
+      ],
       "correct_answer": "B",
       "chapter": "Algebra",
-      "topic_tags": ["algebra"],
+      "topic_tags": [
+        "algebra"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "From 3a = 5b, divide both sides by b to get 3(a/b) = 5, then divide by 3 to isolate a/b = 5/3."
     }
   ]
 }

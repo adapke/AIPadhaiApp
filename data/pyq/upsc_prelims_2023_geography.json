@@ -6,30 +6,430 @@
   "default_year": 2023,
   "default_paper": "prelims",
   "questions": [
-    {"question_text": "Highest peak in Western Ghats:", "options": ["Anamudi", "Mahabaleshwar", "Doddabetta", "Kalsubai"], "correct_answer": "A", "chapter": "Indian Geography", "topic_tags": ["peaks"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Tropic of Cancer passes through how many Indian states?", "options": ["6", "7", "8", "9"], "correct_answer": "C", "chapter": "Indian Geography", "topic_tags": ["Tropic_Cancer"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Longest river entirely in India:", "options": ["Ganga", "Yamuna", "Godavari", "Krishna"], "correct_answer": "C", "chapter": "Drainage", "topic_tags": ["rivers"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Easternmost point of India is in:", "options": ["Arunachal Pradesh", "Nagaland", "Manipur", "Mizoram"], "correct_answer": "A", "chapter": "Indian Geography", "topic_tags": ["extremities"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Black soil best for which crop?", "options": ["Rice", "Wheat", "Cotton", "Tea"], "correct_answer": "C", "chapter": "Soils", "topic_tags": ["black_soil"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Tea is grown in:", "options": ["Assam, Darjeeling, Nilgiris", "Punjab only", "Kerala only", "Maharashtra"], "correct_answer": "A", "chapter": "Agriculture", "topic_tags": ["tea"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Most populated state in India (2011 census):", "options": ["Maharashtra", "Uttar Pradesh", "Bihar", "West Bengal"], "correct_answer": "B", "chapter": "Indian Geography", "topic_tags": ["population"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Bhakra Nangal Dam is on river:", "options": ["Sutlej", "Beas", "Yamuna", "Krishna"], "correct_answer": "A", "chapter": "Water Resources", "topic_tags": ["dams"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Indian Ocean dipole influences:", "options": ["South Indian monsoon", "Pacific El Niño", "Atlantic hurricanes", "Arctic ice"], "correct_answer": "A", "chapter": "Climate", "topic_tags": ["IOD"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Northeast monsoon brings rain to:", "options": ["Whole India", "Tamil Nadu coast (Oct-Dec)", "Punjab only", "Mumbai only"], "correct_answer": "B", "chapter": "Climate", "topic_tags": ["NE_monsoon"], "difficulty": "medium", "marks": 2},
-    {"question_text": "World's highest waterfall:", "options": ["Niagara", "Angel Falls (Venezuela)", "Victoria", "Jog Falls"], "correct_answer": "B", "chapter": "World Geography", "topic_tags": ["waterfalls"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Largest desert in the world:", "options": ["Sahara", "Antarctic (cold desert)", "Gobi", "Arabian"], "correct_answer": "B", "chapter": "World Geography", "topic_tags": ["deserts"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Capital of Australia:", "options": ["Sydney", "Melbourne", "Canberra", "Perth"], "correct_answer": "C", "chapter": "World Geography", "topic_tags": ["capitals"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Equator passes through how many Indian states?", "options": ["0 (doesn't pass through India)", "1", "2", "8"], "correct_answer": "A", "chapter": "World Geography", "topic_tags": ["equator"], "difficulty": "easy", "marks": 2},
-    {"question_text": "International Date Line is approximately:", "options": ["0° longitude", "90° longitude", "180° longitude", "Equator"], "correct_answer": "C", "chapter": "World Geography", "topic_tags": ["IDL"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Time difference between Greenwich and IST:", "options": ["+5 hr", "+5.5 hr", "+6 hr", "-5 hr"], "correct_answer": "B", "chapter": "Geographical Basics", "topic_tags": ["IST"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Karewas of Kashmir are famous for:", "options": ["Saffron cultivation", "Apple orchards", "Wheat", "Tea"], "correct_answer": "A", "chapter": "Agriculture", "topic_tags": ["saffron"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Largest tribal state by population:", "options": ["Madhya Pradesh", "Rajasthan", "Chhattisgarh", "Jharkhand"], "correct_answer": "A", "chapter": "Indian Geography", "topic_tags": ["tribes"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Indian Standard Time meridian (longitude):", "options": ["75°E", "82.5°E", "90°E", "78°E"], "correct_answer": "B", "chapter": "Geographical Basics", "topic_tags": ["IST_longitude"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Sundarbans is associated with:", "options": ["Mangrove forests", "Pine forests", "Coral reefs", "Tundra"], "correct_answer": "A", "chapter": "Forests", "topic_tags": ["mangroves"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Chilka Lake is in:", "options": ["Kerala", "Odisha", "Andhra Pradesh", "Tamil Nadu"], "correct_answer": "B", "chapter": "Lakes", "topic_tags": ["Chilka"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Wular Lake is in:", "options": ["Punjab", "Uttarakhand", "J&K", "Sikkim"], "correct_answer": "C", "chapter": "Lakes", "topic_tags": ["Wular"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Capital of Telangana:", "options": ["Hyderabad", "Visakhapatnam", "Amaravati", "Vijayawada"], "correct_answer": "A", "chapter": "Political Geography", "topic_tags": ["capitals"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Bandipur National Park is in:", "options": ["Karnataka", "Kerala", "Tamil Nadu", "Andhra Pradesh"], "correct_answer": "A", "chapter": "National Parks", "topic_tags": ["Bandipur"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Cherrapunji's rain shadow effect explains:", "options": ["Heavy rain on south slope only", "Mawsynram nearby gets more rain (orographic)", "No rain", "Rain in Punjab"], "correct_answer": "B", "chapter": "Climate", "topic_tags": ["orographic"], "difficulty": "medium", "marks": 2}
+    {
+      "question_text": "Highest peak in Western Ghats:",
+      "options": [
+        "Anamudi",
+        "Mahabaleshwar",
+        "Doddabetta",
+        "Kalsubai"
+      ],
+      "correct_answer": "A",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "peaks"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Anamudi, located in Kerala's Idukki district, stands at 2,695 meters and is the highest peak in the Western Ghats mountain range."
+    },
+    {
+      "question_text": "Tropic of Cancer passes through how many Indian states?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correct_answer": "C",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "Tropic_Cancer"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Tropic of Cancer (23.5°N latitude) passes through 8 Indian states: Rajasthan, Gujarat, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram, running diagonally across India from west to east."
+    },
+    {
+      "question_text": "Longest river entirely in India:",
+      "options": [
+        "Ganga",
+        "Yamuna",
+        "Godavari",
+        "Krishna"
+      ],
+      "correct_answer": "C",
+      "chapter": "Drainage",
+      "topic_tags": [
+        "rivers"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Ganga and Yamuna originate in the Himalayas but flow through multiple countries or have sources outside India. The Krishna originates in the Western Ghats but flows into Andhra Pradesh and Telangana. The Godavari is entirely contained within India, originating in Maharashtra and flowing through multiple Indian states before emptying into the Bay of Bengal."
+    },
+    {
+      "question_text": "Easternmost point of India is in:",
+      "options": [
+        "Arunachal Pradesh",
+        "Nagaland",
+        "Manipur",
+        "Mizoram"
+      ],
+      "correct_answer": "A",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "extremities"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Arunachal Pradesh contains Kibithu, located at approximately 97°30'E longitude, which marks India's easternmost point. The other northeastern states lie further west of this meridian."
+    },
+    {
+      "question_text": "Black soil best for which crop?",
+      "options": [
+        "Rice",
+        "Wheat",
+        "Cotton",
+        "Tea"
+      ],
+      "correct_answer": "C",
+      "chapter": "Soils",
+      "topic_tags": [
+        "black_soil"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Black soil, rich in iron oxide and clay minerals, retains moisture well and provides excellent drainage—ideal properties for cotton cultivation. Cotton thrives in these nutrient-rich soils found in regions like the Deccan Plateau."
+    },
+    {
+      "question_text": "Tea is grown in:",
+      "options": [
+        "Assam, Darjeeling, Nilgiris",
+        "Punjab only",
+        "Kerala only",
+        "Maharashtra"
+      ],
+      "correct_answer": "A",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "tea"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Tea cultivation in India requires specific climatic conditions—high rainfall, well-drained soil, and cooler temperatures on elevated terrain. Assam, Darjeeling, and Nilgiris all meet these requirements, making them the major tea-growing regions, while Punjab, Kerala, and Maharashtra lack the ideal combination of these conditions."
+    },
+    {
+      "question_text": "Most populated state in India (2011 census):",
+      "options": [
+        "Maharashtra",
+        "Uttar Pradesh",
+        "Bihar",
+        "West Bengal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "population"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Uttar Pradesh had approximately 199.8 million people in the 2011 census, making it India's most populous state by a significant margin, ahead of Maharashtra's ~112 million."
+    },
+    {
+      "question_text": "Bhakra Nangal Dam is on river:",
+      "options": [
+        "Sutlej",
+        "Beas",
+        "Yamuna",
+        "Krishna"
+      ],
+      "correct_answer": "A",
+      "chapter": "Water Resources",
+      "topic_tags": [
+        "dams"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Bhakra Nangal Dam is constructed across the Sutlej River in Himachal Pradesh, India. It is one of India's tallest and most important multi-purpose dams, built for irrigation, hydroelectric power generation, and flood control."
+    },
+    {
+      "question_text": "Indian Ocean dipole influences:",
+      "options": [
+        "South Indian monsoon",
+        "Pacific El Niño",
+        "Atlantic hurricanes",
+        "Arctic ice"
+      ],
+      "correct_answer": "A",
+      "chapter": "Climate",
+      "topic_tags": [
+        "IOD"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Indian Ocean Dipole (IOD) is an ocean-climate pattern characterized by temperature differences between the western and eastern Indian Ocean, which directly drives variations in sea surface temperatures and wind patterns that control monsoon rainfall over the Indian subcontinent, particularly affecting the South Indian monsoon."
+    },
+    {
+      "question_text": "Northeast monsoon brings rain to:",
+      "options": [
+        "Whole India",
+        "Tamil Nadu coast (Oct-Dec)",
+        "Punjab only",
+        "Mumbai only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Climate",
+      "topic_tags": [
+        "NE_monsoon"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Northeast monsoon originates from the Bay of Bengal and Arabian Sea, traveling southwest. It primarily affects the Tamil Nadu coast and southeastern regions during October to December, bringing significant rainfall to this area while other parts of India experience dry conditions."
+    },
+    {
+      "question_text": "World's highest waterfall:",
+      "options": [
+        "Niagara",
+        "Angel Falls (Venezuela)",
+        "Victoria",
+        "Jog Falls"
+      ],
+      "correct_answer": "B",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "waterfalls"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Angel Falls in Venezuela drops 979 meters (3,212 feet), making it the world's highest uninterrupted waterfall, far exceeding Niagara Falls (51m) and the others listed."
+    },
+    {
+      "question_text": "Largest desert in the world:",
+      "options": [
+        "Sahara",
+        "Antarctic (cold desert)",
+        "Gobi",
+        "Arabian"
+      ],
+      "correct_answer": "B",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "deserts"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Antarctic is classified as a cold desert because it receives minimal precipitation (snow) annually, meeting the technical definition of a desert. While the Sahara is the largest *hot* desert, the Antarctic continent is larger overall and qualifies as a desert due to its extremely low moisture."
+    },
+    {
+      "question_text": "Capital of Australia:",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Perth"
+      ],
+      "correct_answer": "C",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "capitals"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Canberra was purpose-built as a compromise capital city between rivals Sydney and Melbourne, and was selected as Australia's capital in 1927. Sydney and Melbourne are major cities but not capitals; Perth is the capital of Western Australia, not the national capital."
+    },
+    {
+      "question_text": "Equator passes through how many Indian states?",
+      "options": [
+        "0 (doesn't pass through India)",
+        "1",
+        "2",
+        "8"
+      ],
+      "correct_answer": "A",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "equator"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "The equator passes through regions near the equator in Africa and South America, but India lies entirely north of the equator between approximately 8°N and 35°N latitude, so it doesn't intersect any Indian states."
+    },
+    {
+      "question_text": "International Date Line is approximately:",
+      "options": [
+        "0° longitude",
+        "90° longitude",
+        "180° longitude",
+        "Equator"
+      ],
+      "correct_answer": "C",
+      "chapter": "World Geography",
+      "topic_tags": [
+        "IDL"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "The International Date Line follows the 180° meridian, which is the line of longitude directly opposite the Prime Meridian (0°). This location marks where the calendar date changes as you cross between time zones."
+    },
+    {
+      "question_text": "Time difference between Greenwich and IST:",
+      "options": [
+        "+5 hr",
+        "+5.5 hr",
+        "+6 hr",
+        "-5 hr"
+      ],
+      "correct_answer": "B",
+      "chapter": "Geographical Basics",
+      "topic_tags": [
+        "IST"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "IST (Indian Standard Time) is UTC+5:30, while Greenwich Mean Time (GMT) is UTC+0. The difference is 5 hours and 30 minutes ahead, making IST +5.5 hours from GMT."
+    },
+    {
+      "question_text": "Karewas of Kashmir are famous for:",
+      "options": [
+        "Saffron cultivation",
+        "Apple orchards",
+        "Wheat",
+        "Tea"
+      ],
+      "correct_answer": "A",
+      "chapter": "Agriculture",
+      "topic_tags": [
+        "saffron"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Karewas are elevated plateau formations in Kashmir that provide the specific soil, climate, and altitude conditions ideal for saffron cultivation, making Kashmir the world's saffron-producing region. This distinctive crop is what karewas are historically and economically renowned for."
+    },
+    {
+      "question_text": "Largest tribal state by population:",
+      "options": [
+        "Madhya Pradesh",
+        "Rajasthan",
+        "Chhattisgarh",
+        "Jharkhand"
+      ],
+      "correct_answer": "A",
+      "chapter": "Indian Geography",
+      "topic_tags": [
+        "tribes"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Madhya Pradesh has the largest tribal population among Indian states, with over 14% of its population comprising scheduled tribes, primarily in its central and eastern regions. This accounts for a larger absolute tribal population than other states listed."
+    },
+    {
+      "question_text": "Indian Standard Time meridian (longitude):",
+      "options": [
+        "75°E",
+        "82.5°E",
+        "90°E",
+        "78°E"
+      ],
+      "correct_answer": "B",
+      "chapter": "Geographical Basics",
+      "topic_tags": [
+        "IST_longitude"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Indian Standard Time is based on the meridian at 82.5°E longitude, which passes through the eastern part of India. This meridian was chosen because it represents the mean solar time for India's longitudinal extent, allowing a single time zone to serve the entire country effectively."
+    },
+    {
+      "question_text": "Sundarbans is associated with:",
+      "options": [
+        "Mangrove forests",
+        "Pine forests",
+        "Coral reefs",
+        "Tundra"
+      ],
+      "correct_answer": "A",
+      "chapter": "Forests",
+      "topic_tags": [
+        "mangroves"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Sundarbans, located in the Ganges Delta region of Bangladesh and India, is the world's largest mangrove forest ecosystem. Its saline, swampy terrain and characteristic mangrove trees adapted to brackish water make it distinctly a mangrove forest, not pine forests, coral reefs, or tundra."
+    },
+    {
+      "question_text": "Chilka Lake is in:",
+      "options": [
+        "Kerala",
+        "Odisha",
+        "Andhra Pradesh",
+        "Tamil Nadu"
+      ],
+      "correct_answer": "B",
+      "chapter": "Lakes",
+      "topic_tags": [
+        "Chilka"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Chilka Lake is India's largest coastal lagoon, located in Odisha along the Bay of Bengal coast. It spans parts of Ganjam and Puri districts and is renowned for its biodiversity and migratory birds."
+    },
+    {
+      "question_text": "Wular Lake is in:",
+      "options": [
+        "Punjab",
+        "Uttarakhand",
+        "J&K",
+        "Sikkim"
+      ],
+      "correct_answer": "C",
+      "chapter": "Lakes",
+      "topic_tags": [
+        "Wular"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Wular Lake is India's largest freshwater lake, located in the Kashmir Valley of Jammu & Kashmir. It lies in the Bandipore district and is fed by the Jhelum River."
+    },
+    {
+      "question_text": "Capital of Telangana:",
+      "options": [
+        "Hyderabad",
+        "Visakhapatnam",
+        "Amaravati",
+        "Vijayawada"
+      ],
+      "correct_answer": "A",
+      "chapter": "Political Geography",
+      "topic_tags": [
+        "capitals"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Hyderabad is the capital of Telangana, which was formed as a separate state in 2014 from the partition of Andhra Pradesh. The other cities listed are either capitals or major cities of neighboring Andhra Pradesh."
+    },
+    {
+      "question_text": "Bandipur National Park is in:",
+      "options": [
+        "Karnataka",
+        "Kerala",
+        "Tamil Nadu",
+        "Andhra Pradesh"
+      ],
+      "correct_answer": "A",
+      "chapter": "National Parks",
+      "topic_tags": [
+        "Bandipur"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Bandipur National Park is located in the Chamarajanagar district of Karnataka state in southern India, established in 1974 to protect the region's tiger and elephant populations."
+    },
+    {
+      "question_text": "Cherrapunji's rain shadow effect explains:",
+      "options": [
+        "Heavy rain on south slope only",
+        "Mawsynram nearby gets more rain (orographic)",
+        "No rain",
+        "Rain in Punjab"
+      ],
+      "correct_answer": "B",
+      "chapter": "Climate",
+      "topic_tags": [
+        "orographic"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Cherrapunji sits on the windward slope of the Khasi Hills, receiving monsoon moisture. Mawsynram, located slightly higher on the same range, experiences even greater orographic lifting, extracting more moisture and becoming one of Earth's wettest places—demonstrating how orographic effect intensifies with elevation gain along the slope."
+    }
   ]
 }

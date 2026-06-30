@@ -8,228 +8,439 @@
   "questions": [
     {
       "question_text": "Which is the principal ore of aluminium?",
-      "options": ["Magnetite", "Bauxite", "Hematite", "Galena"],
+      "options": [
+        "Magnetite",
+        "Bauxite",
+        "Hematite",
+        "Galena"
+      ],
       "correct_answer": "B",
       "chapter": "General Principles of Metallurgy",
-      "topic_tags": ["ores", "aluminium"],
+      "topic_tags": [
+        "ores",
+        "aluminium"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Bauxite is the principal ore of aluminium because it contains aluminium oxide (Al₂O₃) in high concentrations and is the most economically viable source for industrial aluminium extraction through the Bayer process."
     },
     {
       "question_text": "Le Chatelier's principle applies to:",
-      "options": ["Saturated solutions only", "Equilibrium reactions", "Combustion only", "Acid-base only"],
+      "options": [
+        "Saturated solutions only",
+        "Equilibrium reactions",
+        "Combustion only",
+        "Acid-base only"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Equilibrium",
-      "topic_tags": ["Le_Chatelier"],
+      "topic_tags": [
+        "Le_Chatelier"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Le Chatelier's principle states that when a system at equilibrium is disturbed, it shifts to counteract the disturbance. This principle applies specifically to systems at equilibrium, regardless of whether they're saturated solutions, combustion, or acid-base reactions."
     },
     {
       "question_text": "Molarity is defined as moles of solute per:",
-      "options": ["litre of solvent", "litre of solution", "kg of solvent", "kg of solution"],
+      "options": [
+        "litre of solvent",
+        "litre of solution",
+        "kg of solvent",
+        "kg of solution"
+      ],
       "correct_answer": "B",
       "chapter": "Solutions",
-      "topic_tags": ["molarity"],
+      "topic_tags": [
+        "molarity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Molarity specifically measures the concentration of a solute dissolved in a total volume of solution, not just the solvent alone. The solution includes both the dissolved solute and solvent combined, making litre of solution the correct denominator."
     },
     {
       "question_text": "Standard hydrogen electrode (SHE) potential is taken as:",
-      "options": ["0 V", "1 V", "-1 V", "0.76 V"],
+      "options": [
+        "0 V",
+        "1 V",
+        "-1 V",
+        "0.76 V"
+      ],
       "correct_answer": "A",
       "chapter": "Electrochemistry",
-      "topic_tags": ["SHE", "reference"],
+      "topic_tags": [
+        "SHE",
+        "reference"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The SHE is defined as the reference electrode for measuring all other electrode potentials, so it must have an arbitrarily assigned value. By convention, this reference value is set to exactly 0 V at standard conditions (25°C, 1 atm, 1 M H⁺), allowing all other potentials to be measured relative to it."
     },
     {
       "question_text": "Order of a reaction can be:",
-      "options": ["Only positive integer", "Only fractional", "Zero, fractional or integer", "Always 1"],
+      "options": [
+        "Only positive integer",
+        "Only fractional",
+        "Zero, fractional or integer",
+        "Always 1"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Kinetics",
-      "topic_tags": ["order_of_reaction"],
+      "topic_tags": [
+        "order_of_reaction"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Order of reaction is determined experimentally from rate law data and is not restricted by stoichiometry. It can be zero (zero-order kinetics), a positive integer (first, second order), fractional (like 1.5), or even negative in rare cases. Therefore, it encompasses zero, fractional, and integer values."
     },
     {
       "question_text": "Tyndall effect is observed in:",
-      "options": ["True solution", "Suspension", "Colloid", "Distilled water"],
+      "options": [
+        "True solution",
+        "Suspension",
+        "Colloid",
+        "Distilled water"
+      ],
       "correct_answer": "C",
       "chapter": "Surface Chemistry",
-      "topic_tags": ["Tyndall", "colloid"],
+      "topic_tags": [
+        "Tyndall",
+        "colloid"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Tyndall effect occurs when light scatters off colloidal particles (1-1000 nm), making the light path visible. True solutions have dissolved solutes too small to scatter light, while suspensions have particles too large that settle quickly. Only colloids have appropriately-sized particles for this scattering effect."
     },
     {
       "question_text": "Number of oxygen atoms in K2Cr2O7 is:",
-      "options": ["5", "6", "7", "8"],
+      "options": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
       "correct_answer": "C",
       "chapter": "d and f Block",
-      "topic_tags": ["dichromate", "formula"],
+      "topic_tags": [
+        "dichromate",
+        "formula"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In the chemical formula K2Cr2O7, the subscript after oxygen indicates there are 7 oxygen atoms per molecule. The potassium and chromium atoms don't affect the oxygen count—only the \"O7\" portion tells us the total number of oxygen atoms present."
     },
     {
       "question_text": "Coordination number of Na+ in NaCl crystal is:",
-      "options": ["4", "6", "8", "12"],
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
       "correct_answer": "B",
       "chapter": "Solid State",
-      "topic_tags": ["NaCl", "coordination_number"],
+      "topic_tags": [
+        "NaCl",
+        "coordination_number"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In the NaCl crystal structure, each Na+ ion is surrounded by 6 Cl⁻ ions arranged octahedrally (one above, one below, and four in a square plane). This octahedral arrangement defines the coordination number as 6."
     },
     {
       "question_text": "Lanthanoid contraction is due to:",
-      "options": ["Poor shielding by 4f electrons", "Poor shielding by 3d", "Increase in nuclear charge alone", "Decrease in atomic number"],
+      "options": [
+        "Poor shielding by 4f electrons",
+        "Poor shielding by 3d",
+        "Increase in nuclear charge alone",
+        "Decrease in atomic number"
+      ],
       "correct_answer": "A",
       "chapter": "d and f Block",
-      "topic_tags": ["lanthanoid_contraction"],
+      "topic_tags": [
+        "lanthanoid_contraction"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The 4f electrons being added across the lanthanide series have poor shielding ability due to their diffuse nature and spatial distribution, failing to effectively shield outer electrons from increasing nuclear charge. This causes the effective nuclear charge to increase significantly, resulting in atomic and ionic radius decrease despite adding electrons."
     },
     {
       "question_text": "Hybridisation of Cr in [Cr(NH3)6]³⁺ is:",
-      "options": ["sp3", "dsp2", "d2sp3", "sp3d2"],
+      "options": [
+        "sp3",
+        "dsp2",
+        "d2sp3",
+        "sp3d2"
+      ],
       "correct_answer": "C",
       "chapter": "Coordination Compounds",
-      "topic_tags": ["hybridisation", "octahedral_complex"],
+      "topic_tags": [
+        "hybridisation",
+        "octahedral_complex"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In [Cr(NH3)6]³⁺, Cr³⁺ has a d³ configuration and forms 6 coordinate bonds with ammonia ligands. The 6 ligands require 6 hybrid orbitals, which are formed by mixing one d orbital, two s orbitals, and three p orbitals from the metal—giving d²sp³ hybridization with octahedral geometry."
     },
     {
       "question_text": "IUPAC name of (CH3)2CHCH2OH is:",
-      "options": ["2-methylpropan-1-ol", "2-methylpropan-2-ol", "1-methylpropan-2-ol", "Butan-2-ol"],
+      "options": [
+        "2-methylpropan-1-ol",
+        "2-methylpropan-2-ol",
+        "1-methylpropan-2-ol",
+        "Butan-2-ol"
+      ],
       "correct_answer": "A",
       "chapter": "Alcohols and Phenols",
-      "topic_tags": ["IUPAC"],
+      "topic_tags": [
+        "IUPAC"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The structure has a 3-carbon main chain with the OH group at position 1 and a methyl branch at position 2. Following IUPAC rules: number from the end nearest the OH group, name the main chain (propan), indicate OH position (1-ol), and name the substituent (2-methyl). This gives 2-methylpropan-1-ol."
     },
     {
       "question_text": "Reaction of phenol with FeCl3 gives:",
-      "options": ["White precipitate", "Yellow colour", "Violet colour", "No reaction"],
+      "options": [
+        "White precipitate",
+        "Yellow colour",
+        "Violet colour",
+        "No reaction"
+      ],
       "correct_answer": "C",
       "chapter": "Phenols",
-      "topic_tags": ["FeCl3_test"],
+      "topic_tags": [
+        "FeCl3_test"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Phenol contains a hydroxyl group bonded to benzene, which forms a complex with Fe³⁺ ions. This FeCl₃-phenol complex absorbs light in the yellow region, causing the solution to appear violet/purple due to complementary color absorption."
     },
     {
       "question_text": "Cannizzaro reaction is given by:",
-      "options": ["Acetaldehyde", "Propanal", "Benzaldehyde (no alpha-H)", "Acetone"],
+      "options": [
+        "Acetaldehyde",
+        "Propanal",
+        "Benzaldehyde (no alpha-H)",
+        "Acetone"
+      ],
       "correct_answer": "C",
       "chapter": "Aldehydes and Ketones",
-      "topic_tags": ["Cannizzaro"],
+      "topic_tags": [
+        "Cannizzaro"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Cannizzaro reaction requires an aldehyde without alpha-hydrogens, which undergoes disproportionation in strong base to form both a carboxylic acid and an alcohol. Benzaldehyde lacks alpha-hydrogens, making it the only viable substrate; acetaldehyde and propanal have alpha-H atoms (allowing aldol condensation instead), and acetone is a ketone, not an aldehyde."
     },
     {
       "question_text": "Most basic among the following amines is:",
-      "options": ["NH3", "CH3NH2", "(CH3)2NH", "Aniline"],
+      "options": [
+        "NH3",
+        "CH3NH2",
+        "(CH3)2NH",
+        "Aniline"
+      ],
       "correct_answer": "C",
       "chapter": "Amines",
-      "topic_tags": ["basicity"],
+      "topic_tags": [
+        "basicity"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Alkyl groups donate electron density to nitrogen through the inductive effect, increasing basicity. (CH3)2NH has two electron-donating methyl groups, making it more basic than NH3 (no alkyl groups) and CH3NH2 (one alkyl group). Aniline is least basic because the benzene ring's π-electrons delocalize the lone pair on nitrogen, reducing its availability for protonation."
     },
     {
       "question_text": "Glucose and fructose are:",
-      "options": ["Same molecule", "Geometrical isomers", "Functional isomers", "Optical isomers only"],
+      "options": [
+        "Same molecule",
+        "Geometrical isomers",
+        "Functional isomers",
+        "Optical isomers only"
+      ],
       "correct_answer": "C",
       "chapter": "Biomolecules",
-      "topic_tags": ["isomerism", "carbohydrates"],
+      "topic_tags": [
+        "isomerism",
+        "carbohydrates"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Both glucose and fructose have the same molecular formula (C₆H₁₂O₆) but different structural arrangements—glucose is an aldohexose with an aldehyde group, while fructose is a ketohexose with a ketone group. This difference in functional groups makes them functional isomers."
     },
     {
       "question_text": "DNA contains the sugar:",
-      "options": ["Glucose", "Ribose", "Deoxyribose", "Sucrose"],
+      "options": [
+        "Glucose",
+        "Ribose",
+        "Deoxyribose",
+        "Sucrose"
+      ],
       "correct_answer": "C",
       "chapter": "Biomolecules",
-      "topic_tags": ["DNA", "sugar"],
+      "topic_tags": [
+        "DNA",
+        "sugar"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "DNA's sugar component has one fewer oxygen atom than RNA's ribose sugar, making it deoxyribose (literally \"without oxygen ribose\"). Glucose, ribose, and sucrose are found in other biological molecules but not in DNA's backbone."
     },
     {
       "question_text": "Nylon-6,6 is a:",
-      "options": ["Addition polymer", "Condensation polymer", "Co-polymer of one monomer", "Natural polymer"],
+      "options": [
+        "Addition polymer",
+        "Condensation polymer",
+        "Co-polymer of one monomer",
+        "Natural polymer"
+      ],
       "correct_answer": "B",
       "chapter": "Polymers",
-      "topic_tags": ["condensation", "Nylon"],
+      "topic_tags": [
+        "condensation",
+        "Nylon"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Nylon-6,6 forms through a condensation reaction between hexanedioic acid and hexane-1,6-diamine, with water released as a byproduct. This condensation polymerization mechanism—not addition—makes it a condensation polymer."
     },
     {
       "question_text": "Aspirin chemically is:",
-      "options": ["Acetylsalicylic acid", "Salicylic acid", "Paracetamol", "Phenol"],
+      "options": [
+        "Acetylsalicylic acid",
+        "Salicylic acid",
+        "Paracetamol",
+        "Phenol"
+      ],
       "correct_answer": "A",
       "chapter": "Chemistry in Everyday Life",
-      "topic_tags": ["medicines"],
+      "topic_tags": [
+        "medicines"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Aspirin is the common name for acetylsalicylic acid, which is an acetyl derivative of salicylic acid. While salicylic acid is the parent compound, aspirin specifically refers to the acetylated form with the chemical structure containing an acetyl group (-COCH₃) attached to the salicylic acid molecule."
     },
     {
       "question_text": "Brass is an alloy of:",
-      "options": ["Cu and Sn", "Cu and Zn", "Fe and C", "Pb and Sn"],
+      "options": [
+        "Cu and Sn",
+        "Cu and Zn",
+        "Fe and C",
+        "Pb and Sn"
+      ],
       "correct_answer": "B",
       "chapter": "Metallurgy",
-      "topic_tags": ["alloys"],
+      "topic_tags": [
+        "alloys"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Brass is defined as a copper-zinc alloy, where copper is the primary component and zinc is added to improve hardness and corrosion resistance. Option A (Cu and Sn) describes bronze, while C and D are incorrect metal combinations."
     },
     {
       "question_text": "Group 18 elements are called:",
-      "options": ["Alkali metals", "Halogens", "Noble gases", "Chalcogens"],
+      "options": [
+        "Alkali metals",
+        "Halogens",
+        "Noble gases",
+        "Chalcogens"
+      ],
       "correct_answer": "C",
       "chapter": "p-Block",
-      "topic_tags": ["periodic_table"],
+      "topic_tags": [
+        "periodic_table"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Group 18 elements (He, Ne, Ar, Kr, Xe, Rn) are called noble gases because they have a complete valence electron shell, making them extremely unreactive and chemically stable under normal conditions."
     },
     {
       "question_text": "Number of moles of H2 in 4 g of H2 is:",
-      "options": ["1", "2", "0.5", "4"],
+      "options": [
+        "1",
+        "2",
+        "0.5",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Mole Concept",
-      "topic_tags": ["moles"],
+      "topic_tags": [
+        "moles"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The molar mass of H2 is 2 g/mol (1 g/mol per hydrogen atom × 2). Using moles = mass ÷ molar mass: 4 g ÷ 2 g/mol = 2 moles."
     },
     {
       "question_text": "Boiling point elevation depends on:",
-      "options": ["Nature of solute", "Molality of solute (non-volatile)", "Volume only", "Pressure"],
+      "options": [
+        "Nature of solute",
+        "Molality of solute (non-volatile)",
+        "Volume only",
+        "Pressure"
+      ],
       "correct_answer": "B",
       "chapter": "Solutions",
-      "topic_tags": ["colligative_property"],
+      "topic_tags": [
+        "colligative_property"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Boiling point elevation is a colligative property that depends only on the number of solute particles (molality) in solution, not their identity or chemical nature. This makes it independent of the solute's specific properties, volume alone, or external pressure."
     },
     {
       "question_text": "Strongest oxidising agent among halogens is:",
-      "options": ["F2", "Cl2", "Br2", "I2"],
+      "options": [
+        "F2",
+        "Cl2",
+        "Br2",
+        "I2"
+      ],
       "correct_answer": "A",
       "chapter": "p-Block",
-      "topic_tags": ["halogens", "oxidising"],
+      "topic_tags": [
+        "halogens",
+        "oxidising"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Fluorine has the highest electronegativity and strongest tendency to gain electrons, making it the strongest oxidizing agent. As you move down the halogen group, atomic size increases and electronegativity decreases, reducing oxidizing power."
     },
     {
       "question_text": "Cell potential of a galvanic cell becomes zero when:",
-      "options": ["Reaction stops", "Equilibrium is reached", "Concentration is 1 M", "Temperature is 0 K"],
+      "options": [
+        "Reaction stops",
+        "Equilibrium is reached",
+        "Concentration is 1 M",
+        "Temperature is 0 K"
+      ],
       "correct_answer": "B",
       "chapter": "Electrochemistry",
-      "topic_tags": ["cell_emf", "equilibrium"],
+      "topic_tags": [
+        "cell_emf",
+        "equilibrium"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Cell potential becomes zero at equilibrium because the Gibbs free energy (ΔG = -nFE°cell) equals zero when the system reaches equilibrium, making E°cell = 0. This occurs when the forward and reverse reactions proceed at equal rates, regardless of concentrations or temperature conditions."
     },
     {
       "question_text": "Which compound shows hydrogen bonding?",
-      "options": ["CH4", "HCl", "H2O", "CO2"],
+      "options": [
+        "CH4",
+        "HCl",
+        "H2O",
+        "CO2"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["hydrogen_bond"],
+      "topic_tags": [
+        "hydrogen_bond"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Water (H2O) exhibits hydrogen bonding because hydrogen is covalently bonded to a highly electronegative atom (oxygen), creating a polar bond where the hydrogen carries significant positive charge to attract lone pairs on other oxygen atoms."
     }
   ]
 }

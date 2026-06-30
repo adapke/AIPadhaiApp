@@ -6,30 +6,430 @@
   "default_year": 2019,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Smallest unit of evolution:", "options": ["Individual", "Population", "Species", "Cell"], "correct_answer": "B", "chapter": "Evolution", "topic_tags": ["population"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mendel's pea plant experiments showed:", "options": ["Linkage", "Inheritance patterns of traits", "Mutation", "Polyploidy"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["Mendel"], "difficulty": "easy", "marks": 4},
-    {"question_text": "ATP is synthesized by:", "options": ["Lysosome", "Mitochondria", "Nucleus", "Ribosome"], "correct_answer": "B", "chapter": "Cell Biology", "topic_tags": ["ATP"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of bones in human spinal column:", "options": ["32", "33", "34", "26"], "correct_answer": "B", "chapter": "Locomotion", "topic_tags": ["vertebrae"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Functional unit of contractile system in muscle:", "options": ["Myofibril", "Sarcomere", "Sarcoplasm", "Tropomyosin"], "correct_answer": "B", "chapter": "Locomotion", "topic_tags": ["sarcomere"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Endocrine gland that secretes thyroxine:", "options": ["Pituitary", "Thyroid", "Adrenal", "Pancreas"], "correct_answer": "B", "chapter": "Endocrine", "topic_tags": ["thyroid"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Site of fat digestion:", "options": ["Stomach", "Small intestine", "Large intestine", "Liver"], "correct_answer": "B", "chapter": "Digestive System", "topic_tags": ["fat_digestion"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Photoperiodism is response of plant to:", "options": ["Temperature", "Light duration", "Water", "Soil"], "correct_answer": "B", "chapter": "Plant Physiology", "topic_tags": ["photoperiodism"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Calvin cycle takes place in:", "options": ["Thylakoid", "Stroma of chloroplast", "Mitochondria", "Cytoplasm"], "correct_answer": "B", "chapter": "Photosynthesis", "topic_tags": ["Calvin"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Algae mostly produce food via:", "options": ["Photosynthesis", "Chemosynthesis", "Respiration", "Fermentation"], "correct_answer": "A", "chapter": "Plant Kingdom", "topic_tags": ["algae"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most diverse class of arthropoda:", "options": ["Crustacea", "Insecta", "Arachnida", "Diplopoda"], "correct_answer": "B", "chapter": "Animal Kingdom", "topic_tags": ["insecta"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Nephron functional unit of:", "options": ["Liver", "Heart", "Kidney", "Lung"], "correct_answer": "C", "chapter": "Excretion", "topic_tags": ["nephron"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sliding filament theory explains:", "options": ["DNA replication", "Muscle contraction", "Cell division", "Photosynthesis"], "correct_answer": "B", "chapter": "Locomotion", "topic_tags": ["sliding_filament"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Vector for Dengue:", "options": ["Aedes", "Anopheles", "Culex", "Tsetse"], "correct_answer": "A", "chapter": "Human Health", "topic_tags": ["dengue"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Reverse transcriptase enzyme:", "options": ["DNA→DNA", "RNA→RNA", "RNA→DNA", "Protein→RNA"], "correct_answer": "C", "chapter": "Molecular Biology", "topic_tags": ["reverse_transcriptase"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Father of Indian botany:", "options": ["Birbal Sahni", "P. Maheshwari", "M.S. Swaminathan", "J.C. Bose"], "correct_answer": "B", "chapter": "Botany", "topic_tags": ["history"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Auxin discovery is credited to:", "options": ["Darwin", "Went", "Mendel", "Theophrastus"], "correct_answer": "B", "chapter": "Plant Growth", "topic_tags": ["auxin"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of stomata mostly on which leaf surface:", "options": ["Upper", "Lower", "Both equal", "None"], "correct_answer": "B", "chapter": "Plant Physiology", "topic_tags": ["stomata"], "difficulty": "easy", "marks": 4},
-    {"question_text": "C3 plants fix CO2 via:", "options": ["RuBisCO", "PEP carboxylase", "Both", "Neither"], "correct_answer": "A", "chapter": "Photosynthesis", "topic_tags": ["RuBisCO"], "difficulty": "medium", "marks": 4},
-    {"question_text": "RNA contains the base:", "options": ["Thymine", "Uracil", "Inosine", "Hypoxanthine"], "correct_answer": "B", "chapter": "Molecular Biology", "topic_tags": ["RNA_bases"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Glycolysis takes place in:", "options": ["Cytoplasm", "Mitochondrial matrix", "Nucleus", "ER"], "correct_answer": "A", "chapter": "Cell Respiration", "topic_tags": ["glycolysis"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most abundant gas in atmosphere:", "options": ["O2", "N2", "CO2", "Argon"], "correct_answer": "B", "chapter": "Environment", "topic_tags": ["atmosphere"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Decomposers in ecosystem:", "options": ["Plants", "Bacteria and fungi", "Animals", "Insects only"], "correct_answer": "B", "chapter": "Ecosystem", "topic_tags": ["decomposers"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Endangered species are listed in:", "options": ["Red Data Book", "Wild Life Act", "Forest Act", "Environmental Act"], "correct_answer": "A", "chapter": "Biodiversity", "topic_tags": ["red_data_book"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Functional unit of nervous system:", "options": ["Neuron", "Synapse", "Brain", "Spinal cord"], "correct_answer": "A", "chapter": "Neural System", "topic_tags": ["neuron"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Smallest unit of evolution:",
+      "options": [
+        "Individual",
+        "Population",
+        "Species",
+        "Cell"
+      ],
+      "correct_answer": "B",
+      "chapter": "Evolution",
+      "topic_tags": [
+        "population"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Evolution requires genetic variation and differential reproduction across generations. An individual cannot evolve during its lifetime, while a population's allele frequencies can change over time, making it the smallest unit where evolutionary processes actually occur."
+    },
+    {
+      "question_text": "Mendel's pea plant experiments showed:",
+      "options": [
+        "Linkage",
+        "Inheritance patterns of traits",
+        "Mutation",
+        "Polyploidy"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "Mendel"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Mendel's experiments demonstrated how traits are passed from parents to offspring through predictable ratios (3:1 in F2 generation), establishing the fundamental principles of inheritance including dominance and segregation of alleles."
+    },
+    {
+      "question_text": "ATP is synthesized by:",
+      "options": [
+        "Lysosome",
+        "Mitochondria",
+        "Nucleus",
+        "Ribosome"
+      ],
+      "correct_answer": "B",
+      "chapter": "Cell Biology",
+      "topic_tags": [
+        "ATP"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Mitochondria is the powerhouse of the cell where aerobic respiration occurs, producing ATP through oxidative phosphorylation in the cristae. The other organelles lack the enzymatic machinery and electron transport chains necessary for ATP synthesis."
+    },
+    {
+      "question_text": "Number of bones in human spinal column:",
+      "options": [
+        "32",
+        "33",
+        "34",
+        "26"
+      ],
+      "correct_answer": "B",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "vertebrae"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The human spinal column contains 33 vertebrae: 7 cervical, 12 thoracic, 5 lumbar, 5 sacral (fused into one sacrum), and 4 coccygeal (fused into one coccyx). When counting individual bones, this totals 33."
+    },
+    {
+      "question_text": "Functional unit of contractile system in muscle:",
+      "options": [
+        "Myofibril",
+        "Sarcomere",
+        "Sarcoplasm",
+        "Tropomyosin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "sarcomere"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The sarcomere is the smallest contractile unit bounded by Z-discs, containing thick and thin filaments that slide past each other during muscle contraction. Myofibrils are larger structures made of sarcomeres, while sarcoplasm and tropomyosin are non-contractile components."
+    },
+    {
+      "question_text": "Endocrine gland that secretes thyroxine:",
+      "options": [
+        "Pituitary",
+        "Thyroid",
+        "Adrenal",
+        "Pancreas"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine",
+      "topic_tags": [
+        "thyroid"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The thyroid gland is the primary endocrine organ responsible for producing and secreting thyroxine (T4), a hormone that regulates metabolic rate and energy production throughout the body. The other glands produce different hormones entirely."
+    },
+    {
+      "question_text": "Site of fat digestion:",
+      "options": [
+        "Stomach",
+        "Small intestine",
+        "Large intestine",
+        "Liver"
+      ],
+      "correct_answer": "B",
+      "chapter": "Digestive System",
+      "topic_tags": [
+        "fat_digestion"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Fat digestion begins in the stomach with gastric lipase but occurs primarily in the small intestine, where pancreatic lipase and bile salts efficiently break down fats into fatty acids and monoglycerides for absorption."
+    },
+    {
+      "question_text": "Photoperiodism is response of plant to:",
+      "options": [
+        "Temperature",
+        "Light duration",
+        "Water",
+        "Soil"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Physiology",
+      "topic_tags": [
+        "photoperiodism"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Photoperiodism is the physiological response plants use to measure seasonal changes by detecting day length (light duration). Plants use this mechanism to regulate flowering, dormancy, and other seasonal processes based on the relative proportions of light and darkness."
+    },
+    {
+      "question_text": "Calvin cycle takes place in:",
+      "options": [
+        "Thylakoid",
+        "Stroma of chloroplast",
+        "Mitochondria",
+        "Cytoplasm"
+      ],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "Calvin"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Calvin cycle is the light-independent reactions of photosynthesis that fix CO₂ into glucose. It occurs in the stroma, the fluid-filled space surrounding the thylakoids, where it uses ATP and NADPH produced by the light reactions."
+    },
+    {
+      "question_text": "Algae mostly produce food via:",
+      "options": [
+        "Photosynthesis",
+        "Chemosynthesis",
+        "Respiration",
+        "Fermentation"
+      ],
+      "correct_answer": "A",
+      "chapter": "Plant Kingdom",
+      "topic_tags": [
+        "algae"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Algae contain chlorophyll and use light energy to convert carbon dioxide and water into glucose, which is the definition of photosynthesis. The other processes either don't produce food (respiration and fermentation break down existing molecules) or require chemical energy sources that algae don't typically rely on."
+    },
+    {
+      "question_text": "Most diverse class of arthropoda:",
+      "options": [
+        "Crustacea",
+        "Insecta",
+        "Arachnida",
+        "Diplopoda"
+      ],
+      "correct_answer": "B",
+      "chapter": "Animal Kingdom",
+      "topic_tags": [
+        "insecta"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Insecta is the most diverse class of arthropods, containing over 1 million described species—approximately 80% of all known arthropod species. This diversity far exceeds other arthropod classes like Crustacea, Arachnida, and Diplopoda."
+    },
+    {
+      "question_text": "Nephron functional unit of:",
+      "options": [
+        "Liver",
+        "Heart",
+        "Kidney",
+        "Lung"
+      ],
+      "correct_answer": "C",
+      "chapter": "Excretion",
+      "topic_tags": [
+        "nephron"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A nephron is the microscopic filtering unit responsible for urine production and blood filtration. The kidney contains millions of nephrons that work together to remove waste and regulate water balance in the body."
+    },
+    {
+      "question_text": "Sliding filament theory explains:",
+      "options": [
+        "DNA replication",
+        "Muscle contraction",
+        "Cell division",
+        "Photosynthesis"
+      ],
+      "correct_answer": "B",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "sliding_filament"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The sliding filament theory describes how thin filaments (actin) slide past thick filaments (myosin) during muscle contraction, shortening the sarcomere and producing movement. This mechanism directly explains muscle contraction at the molecular level."
+    },
+    {
+      "question_text": "Vector for Dengue:",
+      "options": [
+        "Aedes",
+        "Anopheles",
+        "Culex",
+        "Tsetse"
+      ],
+      "correct_answer": "A",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "dengue"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Aedes mosquitoes, particularly Aedes aegypti, are the primary vectors for dengue virus transmission to humans. Anopheles transmits malaria, Culex transmits filariasis, and Tsetse flies transmit sleeping sickness."
+    },
+    {
+      "question_text": "Reverse transcriptase enzyme:",
+      "options": [
+        "DNA→DNA",
+        "RNA→RNA",
+        "RNA→DNA",
+        "Protein→RNA"
+      ],
+      "correct_answer": "C",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "reverse_transcriptase"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Reverse transcriptase synthesizes DNA from an RNA template, the reverse of normal transcription. This enzyme is found in retroviruses and is essential for converting their RNA genomes into DNA that can integrate into host chromosomes."
+    },
+    {
+      "question_text": "Father of Indian botany:",
+      "options": [
+        "Birbal Sahni",
+        "P. Maheshwari",
+        "M.S. Swaminathan",
+        "J.C. Bose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Botany",
+      "topic_tags": [
+        "history"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "P. Maheshwari is regarded as the father of Indian botany due to his pioneering work in plant embryology and experimental taxonomy, establishing fundamental botanical research practices in India during the mid-20th century."
+    },
+    {
+      "question_text": "Auxin discovery is credited to:",
+      "options": [
+        "Darwin",
+        "Went",
+        "Mendel",
+        "Theophrastus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Growth",
+      "topic_tags": [
+        "auxin"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Went conducted the classic experiments in the 1920s where he demonstrated that a diffusible chemical substance (later identified as auxin) from the plant's tip was responsible for phototropic bending, establishing the foundation of auxin research."
+    },
+    {
+      "question_text": "Number of stomata mostly on which leaf surface:",
+      "options": [
+        "Upper",
+        "Lower",
+        "Both equal",
+        "None"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Physiology",
+      "topic_tags": [
+        "stomata"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Most stomata are located on the lower (abaxial) leaf surface because this side receives less direct sunlight and heat, reducing water loss through transpiration while still allowing gas exchange for photosynthesis."
+    },
+    {
+      "question_text": "C3 plants fix CO2 via:",
+      "options": [
+        "RuBisCO",
+        "PEP carboxylase",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "A",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "RuBisCO"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "C3 plants use RuBisCO (ribulose-1,5-bisphosphate carboxylase/oxygenase) to fix CO2 into 3-phosphoglycerate, a 3-carbon compound that gives C3 plants their name. PEP carboxylase is used by C4 plants for their initial CO2 fixation step."
+    },
+    {
+      "question_text": "RNA contains the base:",
+      "options": [
+        "Thymine",
+        "Uracil",
+        "Inosine",
+        "Hypoxanthine"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "RNA_bases"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "RNA uses uracil as one of its four nitrogenous bases instead of thymine, which is found in DNA. Uracil pairs with adenine during RNA synthesis and function."
+    },
+    {
+      "question_text": "Glycolysis takes place in:",
+      "options": [
+        "Cytoplasm",
+        "Mitochondrial matrix",
+        "Nucleus",
+        "ER"
+      ],
+      "correct_answer": "A",
+      "chapter": "Cell Respiration",
+      "topic_tags": [
+        "glycolysis"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Glycolysis is the metabolic pathway that converts glucose into pyruvate through a series of ten enzyme-catalyzed reactions, and all these enzymes are located in the cytoplasm, not in organelles."
+    },
+    {
+      "question_text": "Most abundant gas in atmosphere:",
+      "options": [
+        "O2",
+        "N2",
+        "CO2",
+        "Argon"
+      ],
+      "correct_answer": "B",
+      "chapter": "Environment",
+      "topic_tags": [
+        "atmosphere"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Nitrogen (N2) comprises approximately 78% of Earth's atmosphere, making it by far the most abundant gas, while oxygen is only about 21% and carbon dioxide and argon are present in much smaller concentrations."
+    },
+    {
+      "question_text": "Decomposers in ecosystem:",
+      "options": [
+        "Plants",
+        "Bacteria and fungi",
+        "Animals",
+        "Insects only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ecosystem",
+      "topic_tags": [
+        "decomposers"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Decomposers break down dead organic matter and return nutrients to the soil. Bacteria and fungi are the primary decomposers because they have enzymes that can break down complex organic compounds that plants, animals, and insects cannot efficiently decompose."
+    },
+    {
+      "question_text": "Endangered species are listed in:",
+      "options": [
+        "Red Data Book",
+        "Wild Life Act",
+        "Forest Act",
+        "Environmental Act"
+      ],
+      "correct_answer": "A",
+      "chapter": "Biodiversity",
+      "topic_tags": [
+        "red_data_book"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Red Data Book is the official international document published by the IUCN that specifically catalogs and classifies endangered, vulnerable, and threatened species with their conservation status. While the other acts are regulatory frameworks governing wildlife protection, only the Red Data Book serves as the comprehensive listing system for endangered species."
+    },
+    {
+      "question_text": "Functional unit of nervous system:",
+      "options": [
+        "Neuron",
+        "Synapse",
+        "Brain",
+        "Spinal cord"
+      ],
+      "correct_answer": "A",
+      "chapter": "Neural System",
+      "topic_tags": [
+        "neuron"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The neuron is the basic structural and functional unit of the nervous system because it can independently receive, process, and transmit electrical and chemical signals. While synapses enable communication between neurons and the brain/spinal cord are larger structures, only the individual neuron possesses all functional capabilities required for nervous system activity."
+    }
   ]
 }

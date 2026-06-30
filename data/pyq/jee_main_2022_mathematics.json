@@ -6,30 +6,430 @@
   "default_year": 2022,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Number of permutations of 5 distinct objects taken 3 at a time:", "options": ["10", "15", "60", "125"], "correct_answer": "C", "chapter": "Permutations and Combinations", "topic_tags": ["nPr"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If f(x) = x² + 2x + 1, f(-1) =", "options": ["0", "1", "2", "-1"], "correct_answer": "A", "chapter": "Functions", "topic_tags": ["polynomial"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Conjugate of z = 3 + 4i:", "options": ["3 - 4i", "-3 + 4i", "-3 - 4i", "4 + 3i"], "correct_answer": "A", "chapter": "Complex Numbers", "topic_tags": ["conjugate"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sum of geometric series: 1 + 1/2 + 1/4 + ... (infinite):", "options": ["1", "2", "1.5", "Infinity"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["GP_infinity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Variance of 2, 4, 4, 4, 5, 5, 7, 9:", "options": ["4", "5", "5.5", "6"], "correct_answer": "A", "chapter": "Statistics", "topic_tags": ["variance"], "difficulty": "medium", "marks": 4},
-    {"question_text": "lim x→0 sin(3x)/x equals:", "options": ["0", "1", "3", "Infinity"], "correct_answer": "C", "chapter": "Limits", "topic_tags": ["sin_limit"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Derivative of x^x:", "options": ["x·x^(x-1)", "x^x·(1 + ln x)", "x^x", "x · ln x"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["log_diff"], "difficulty": "hard", "marks": 4},
-    {"question_text": "∫₀¹ x² dx:", "options": ["1/2", "1/3", "1/4", "1"], "correct_answer": "B", "chapter": "Integration", "topic_tags": ["definite"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Range of f(x) = 1/x:", "options": ["All reals", "(0, ∞)", "(-∞, 0) ∪ (0, ∞)", "[0, ∞)"], "correct_answer": "C", "chapter": "Functions", "topic_tags": ["range"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Slope of normal to y = x² at (1, 1):", "options": ["2", "-2", "1/2", "-1/2"], "correct_answer": "D", "chapter": "Application of Derivatives", "topic_tags": ["normal_slope"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cross product (i + j) × k:", "options": ["i - j", "j - i", "-i + j", "i + j"], "correct_answer": "B", "chapter": "Vectors", "topic_tags": ["cross_product"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Equation of line through (1, 2, 3) parallel to z-axis:", "options": ["x=1, y=2", "x=1, y=2, z varies", "y=2, z=3", "Both A and B"], "correct_answer": "D", "chapter": "3D Geometry", "topic_tags": ["parametric"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of distinct real roots of x³ - 3x + 2 = 0:", "options": ["0", "1", "2", "3"], "correct_answer": "C", "chapter": "Polynomial Equations", "topic_tags": ["roots"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If A is 3×3 with det(A) = 0, then A is:", "options": ["Identity", "Singular", "Non-singular", "Symmetric"], "correct_answer": "B", "chapter": "Determinants", "topic_tags": ["singular"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Eccentricity of x² = 4ay is:", "options": ["0", "1", "2", "Undefined"], "correct_answer": "B", "chapter": "Conic Sections", "topic_tags": ["parabola"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Equation of circle centre (0,0), radius 3:", "options": ["x² + y² = 9", "x² + y² = 3", "(x-3)² + y² = 0", "x + y = 3"], "correct_answer": "A", "chapter": "Conic Sections", "topic_tags": ["circle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sum of n terms of AP with a=1, d=2:", "options": ["n²", "n(n+1)", "n(n+1)/2", "2n-1"], "correct_answer": "A", "chapter": "Sequences", "topic_tags": ["AP_sum"], "difficulty": "medium", "marks": 4},
-    {"question_text": "lim n→∞ (1 + 1/n)^n:", "options": ["1", "e", "Infinity", "0"], "correct_answer": "B", "chapter": "Limits", "topic_tags": ["e"], "difficulty": "medium", "marks": 4},
-    {"question_text": "P(A or B) when independent: P(A)=0.5, P(B)=0.4:", "options": ["0.9", "0.7", "0.2", "0.5"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["union"], "difficulty": "medium", "marks": 4},
-    {"question_text": "sin(2x) =", "options": ["2 sin x", "2 cos x", "2 sin x cos x", "sin x + cos x"], "correct_answer": "C", "chapter": "Trigonometry", "topic_tags": ["double_angle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sum of roots of x² + 5x + 6 = 0:", "options": ["5", "-5", "6", "-6"], "correct_answer": "B", "chapter": "Polynomials", "topic_tags": ["Vieta"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of injective functions from {1,2} to {1,2,3,4}:", "options": ["4", "8", "12", "16"], "correct_answer": "C", "chapter": "Functions", "topic_tags": ["injective_count"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If y = e^(2x), y' equals:", "options": ["e^(2x)", "2e^(2x)", "e^x", "2x·e^x"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["exponential"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Inverse of (1, 2; 3, 4) matrix has determinant:", "options": ["-1/2", "1/2", "-2", "2"], "correct_answer": "A", "chapter": "Matrices", "topic_tags": ["inverse"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Direction cosines of x-axis:", "options": ["(1,0,0)", "(0,1,0)", "(0,0,1)", "(1,1,1)"], "correct_answer": "A", "chapter": "3D Geometry", "topic_tags": ["direction_cosines"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Number of permutations of 5 distinct objects taken 3 at a time:",
+      "options": [
+        "10",
+        "15",
+        "60",
+        "125"
+      ],
+      "correct_answer": "C",
+      "chapter": "Permutations and Combinations",
+      "topic_tags": [
+        "nPr"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Use the permutation formula P(n,r) = n!/(n-r)!. Here, P(5,3) = 5!/2! = (5×4×3×2×1)/(2×1) = 120/2 = 60. This counts all ordered arrangements of 3 objects selected from 5 distinct objects."
+    },
+    {
+      "question_text": "If f(x) = x² + 2x + 1, f(-1) =",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "-1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Functions",
+      "topic_tags": [
+        "polynomial"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Substitute x = -1 into f(x): f(-1) = (-1)² + 2(-1) + 1 = 1 - 2 + 1 = 0. Alternatively, recognize that f(x) = (x + 1)², so f(-1) = (-1 + 1)² = 0²."
+    },
+    {
+      "question_text": "Conjugate of z = 3 + 4i:",
+      "options": [
+        "3 - 4i",
+        "-3 + 4i",
+        "-3 - 4i",
+        "4 + 3i"
+      ],
+      "correct_answer": "A",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "conjugate"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The conjugate of a complex number a + bi is found by changing the sign of the imaginary part only, giving a - bi. For z = 3 + 4i, this yields 3 - 4i."
+    },
+    {
+      "question_text": "Sum of geometric series: 1 + 1/2 + 1/4 + ... (infinite):",
+      "options": [
+        "1",
+        "2",
+        "1.5",
+        "Infinity"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "GP_infinity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The series has first term a = 1 and common ratio r = 1/2. Since |r| < 1, the infinite geometric series converges to a/(1-r) = 1/(1-1/2) = 1/(1/2) = 2."
+    },
+    {
+      "question_text": "Variance of 2, 4, 4, 4, 5, 5, 7, 9:",
+      "options": [
+        "4",
+        "5",
+        "5.5",
+        "6"
+      ],
+      "correct_answer": "A",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "variance"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Find the mean: (2+4+4+4+5+5+7+9)/8 = 40/8 = 5. Then calculate the average of squared deviations from the mean: [(2-5)² + (4-5)² + (4-5)² + (4-5)² + (5-5)² + (5-5)² + (7-5)² + (9-5)²]/8 = [9+1+1+1+0+0+4+16]/8 = 32/8 = 4."
+    },
+    {
+      "question_text": "lim x→0 sin(3x)/x equals:",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "Infinity"
+      ],
+      "correct_answer": "C",
+      "chapter": "Limits",
+      "topic_tags": [
+        "sin_limit"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Use the standard limit lim(u→0) sin(u)/u = 1. Rewrite sin(3x)/x as 3·sin(3x)/(3x). As x→0, let u=3x, so this becomes 3·lim(u→0) sin(u)/u = 3·1 = 3."
+    },
+    {
+      "question_text": "Derivative of x^x:",
+      "options": [
+        "x·x^(x-1)",
+        "x^x·(1 + ln x)",
+        "x^x",
+        "x · ln x"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "log_diff"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "To find the derivative of x^x, rewrite it using logarithms: let y = x^x, then ln y = x ln x. Differentiating both sides: (1/y)(dy/dx) = ln x + 1. Therefore dy/dx = x^x(ln x + 1) = x^x(1 + ln x)."
+    },
+    {
+      "question_text": "∫₀¹ x² dx:",
+      "options": [
+        "1/2",
+        "1/3",
+        "1/4",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Integration",
+      "topic_tags": [
+        "definite"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The antiderivative of x² is x³/3. Evaluating from 0 to 1 gives (1³/3) - (0³/3) = 1/3."
+    },
+    {
+      "question_text": "Range of f(x) = 1/x:",
+      "options": [
+        "All reals",
+        "(0, ∞)",
+        "(-∞, 0) ∪ (0, ∞)",
+        "[0, ∞)"
+      ],
+      "correct_answer": "C",
+      "chapter": "Functions",
+      "topic_tags": [
+        "range"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The function f(x) = 1/x can produce any real number except zero: as x approaches 0 from either side, f(x) approaches ±∞, and for any nonzero target value y, we can solve x = 1/y to find a corresponding input. Thus the range excludes only 0."
+    },
+    {
+      "question_text": "Slope of normal to y = x² at (1, 1):",
+      "options": [
+        "2",
+        "-2",
+        "1/2",
+        "-1/2"
+      ],
+      "correct_answer": "D",
+      "chapter": "Application of Derivatives",
+      "topic_tags": [
+        "normal_slope"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The derivative of y = x² is dy/dx = 2x, which equals 2 at x = 1. Since the tangent slope is 2, the normal line (perpendicular to tangent) has slope -1/2."
+    },
+    {
+      "question_text": "Cross product (i + j) × k:",
+      "options": [
+        "i - j",
+        "j - i",
+        "-i + j",
+        "i + j"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "cross_product"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the right-hand rule and standard basis vector cross products: i × k = -j and j × k = i. Therefore, (i + j) × k = i × k + j × k = -j + i = j - i."
+    },
+    {
+      "question_text": "Equation of line through (1, 2, 3) parallel to z-axis:",
+      "options": [
+        "x=1, y=2",
+        "x=1, y=2, z varies",
+        "y=2, z=3",
+        "Both A and B"
+      ],
+      "correct_answer": "D",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "parametric"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A line parallel to the z-axis has constant x and y coordinates while z varies freely. The point (1, 2, 3) gives us x=1 and y=2. Options A and B both correctly express this condition—A implicitly shows z varies, while B states it explicitly—making D correct."
+    },
+    {
+      "question_text": "Number of distinct real roots of x³ - 3x + 2 = 0:",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correct_answer": "C",
+      "chapter": "Polynomial Equations",
+      "topic_tags": [
+        "roots"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Factor the polynomial as (x - 1)²(x + 2) = 0. This gives x = 1 (repeated root) and x = -2 (simple root). Since a repeated root counts as only one distinct value, there are 2 distinct real roots."
+    },
+    {
+      "question_text": "If A is 3×3 with det(A) = 0, then A is:",
+      "options": [
+        "Identity",
+        "Singular",
+        "Non-singular",
+        "Symmetric"
+      ],
+      "correct_answer": "B",
+      "chapter": "Determinants",
+      "topic_tags": [
+        "singular"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A matrix with determinant equal to zero is defined as singular, meaning it lacks an inverse and its rows/columns are linearly dependent. This is a fundamental definition in linear algebra."
+    },
+    {
+      "question_text": "Eccentricity of x² = 4ay is:",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "Undefined"
+      ],
+      "correct_answer": "B",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "parabola"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The equation x² = 4ay is a parabola with vertical axis. For any parabola, eccentricity is defined as the constant ratio of distance from a point to the focus versus distance to the directrix, which equals 1 by definition."
+    },
+    {
+      "question_text": "Equation of circle centre (0,0), radius 3:",
+      "options": [
+        "x² + y² = 9",
+        "x² + y² = 3",
+        "(x-3)² + y² = 0",
+        "x + y = 3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "circle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The standard form of a circle with center (h,k) and radius r is (x-h)² + (y-k)² = r². With center (0,0) and radius 3, this becomes x² + y² = 9, since we square the radius (3² = 9)."
+    },
+    {
+      "question_text": "Sum of n terms of AP with a=1, d=2:",
+      "options": [
+        "n²",
+        "n(n+1)",
+        "n(n+1)/2",
+        "2n-1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "AP_sum"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the AP sum formula Sₙ = n/2[2a + (n-1)d], substitute a=1 and d=2: Sₙ = n/2[2(1) + (n-1)(2)] = n/2[2 + 2n - 2] = n/2(2n) = n²."
+    },
+    {
+      "question_text": "lim n→∞ (1 + 1/n)^n:",
+      "options": [
+        "1",
+        "e",
+        "Infinity",
+        "0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": [
+        "e"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "This is the fundamental definition of the mathematical constant e. As n increases, (1 + 1/n)^n approaches e ≈ 2.718, which is the base of the natural logarithm and appears throughout calculus and exponential functions."
+    },
+    {
+      "question_text": "P(A or B) when independent: P(A)=0.5, P(B)=0.4:",
+      "options": [
+        "0.9",
+        "0.7",
+        "0.2",
+        "0.5"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "union"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For independent events, P(A or B) = P(A) + P(B) - P(A)·P(B). With P(A) = 0.5 and P(B) = 0.4: P(A or B) = 0.5 + 0.4 - (0.5)(0.4) = 0.9 - 0.2 = 0.7."
+    },
+    {
+      "question_text": "sin(2x) =",
+      "options": [
+        "2 sin x",
+        "2 cos x",
+        "2 sin x cos x",
+        "sin x + cos x"
+      ],
+      "correct_answer": "C",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "double_angle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The double angle formula for sine derives from sin(2x) = sin(x + x) = sin x cos x + cos x sin x = 2 sin x cos x, combining the angle addition formula with like terms."
+    },
+    {
+      "question_text": "Sum of roots of x² + 5x + 6 = 0:",
+      "options": [
+        "5",
+        "-5",
+        "6",
+        "-6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "Vieta"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a quadratic equation x² + bx + c = 0, the sum of roots equals -b. Here, b = 5, so the sum of roots is -5. This can be verified by factoring: (x + 2)(x + 3) = 0 gives roots -2 and -3, which sum to -5."
+    },
+    {
+      "question_text": "Number of injective functions from {1,2} to {1,2,3,4}:",
+      "options": [
+        "4",
+        "8",
+        "12",
+        "16"
+      ],
+      "correct_answer": "C",
+      "chapter": "Functions",
+      "topic_tags": [
+        "injective_count"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For an injective function, each element in the domain must map to a distinct element in the codomain. The first element has 4 choices, and the second element has 3 remaining choices, giving 4 × 3 = 12 total injective functions."
+    },
+    {
+      "question_text": "If y = e^(2x), y' equals:",
+      "options": [
+        "e^(2x)",
+        "2e^(2x)",
+        "e^x",
+        "2x·e^x"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "exponential"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the chain rule, the derivative of e^(2x) is e^(2x) multiplied by the derivative of the exponent (2x). Since d/dx(2x) = 2, we get y' = 2e^(2x)."
+    },
+    {
+      "question_text": "Inverse of (1, 2; 3, 4) matrix has determinant:",
+      "options": [
+        "-1/2",
+        "1/2",
+        "-2",
+        "2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "inverse"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a 2×2 matrix, the determinant of its inverse equals 1 divided by the original determinant. The original matrix has determinant (1)(4) - (2)(3) = 4 - 6 = -2, so the inverse's determinant is 1/(-2) = -1/2."
+    },
+    {
+      "question_text": "Direction cosines of x-axis:",
+      "options": [
+        "(1,0,0)",
+        "(0,1,0)",
+        "(0,0,1)",
+        "(1,1,1)"
+      ],
+      "correct_answer": "A",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "direction_cosines"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The x-axis is aligned with the unit vector pointing in the x-direction, which has components (1,0,0). Direction cosines represent the cosines of angles a line makes with the coordinate axes; the x-axis makes 0° with itself (cos 0° = 1) and 90° with the y and z axes (cos 90° = 0)."
+    }
   ]
 }

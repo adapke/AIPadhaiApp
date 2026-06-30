@@ -8,228 +8,450 @@
   "questions": [
     {
       "question_text": "The number of moles in 22 g of CO2 is:",
-      "options": ["0.25", "0.5", "1", "2"],
+      "options": [
+        "0.25",
+        "0.5",
+        "1",
+        "2"
+      ],
       "correct_answer": "B",
       "chapter": "Mole Concept",
-      "topic_tags": ["mole", "molar_mass"],
+      "topic_tags": [
+        "mole",
+        "molar_mass"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The molar mass of CO₂ is 12 + 2(16) = 44 g/mol. Using moles = mass/molar mass: 22 g ÷ 44 g/mol = 0.5 mol."
     },
     {
       "question_text": "Hybridisation of carbon in methane (CH4) is:",
-      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "options": [
+        "sp",
+        "sp2",
+        "sp3",
+        "sp3d"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["hybridisation", "methane"],
+      "topic_tags": [
+        "hybridisation",
+        "methane"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In methane, carbon forms four single bonds with four hydrogen atoms. To accommodate four bonding pairs with tetrahedral geometry, carbon requires four equivalent hybrid orbitals, which only sp³ hybridization provides."
     },
     {
       "question_text": "The IUPAC name of CH3-CH(OH)-CH3 is:",
-      "options": ["1-propanol", "2-propanol", "propan-1-ol", "propanone"],
+      "options": [
+        "1-propanol",
+        "2-propanol",
+        "propan-1-ol",
+        "propanone"
+      ],
       "correct_answer": "B",
       "chapter": "Organic Nomenclature",
-      "topic_tags": ["IUPAC", "alcohols"],
+      "topic_tags": [
+        "IUPAC",
+        "alcohols"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The molecule has three carbons in the main chain with a hydroxyl group on the second carbon (the middle one). According to IUPAC nomenclature, the position number indicates which carbon bears the -OH group, and \"2-propanol\" correctly identifies this as propanol with the hydroxyl substituent at position 2."
     },
     {
       "question_text": "pH of 0.001 M HCl solution is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "C",
       "chapter": "Ionic Equilibrium",
-      "topic_tags": ["pH", "strong_acid"],
+      "topic_tags": [
+        "pH",
+        "strong_acid"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "HCl is a strong acid that completely dissociates, so [H⁺] = 0.001 M = 10⁻³ M. Using pH = -log[H⁺], we get pH = -log(10⁻³) = 3."
     },
     {
       "question_text": "Aldehydes give a positive test with:",
-      "options": ["Fehling's solution", "NaOH", "HCl", "KMnO4 cold dilute"],
+      "options": [
+        "Fehling's solution",
+        "NaOH",
+        "HCl",
+        "KMnO4 cold dilute"
+      ],
       "correct_answer": "A",
       "chapter": "Aldehydes and Ketones",
-      "topic_tags": ["Fehlings", "aldehyde_test"],
+      "topic_tags": [
+        "Fehlings",
+        "aldehyde_test"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Aldehydes contain a highly oxidizable -CHO group that readily reduces Fehling's solution (Cu²⁺ complex), producing a characteristic brick-red Cu₂O precipitate. The other reagents either don't provide a specific test for aldehydes or require different conditions."
     },
     {
       "question_text": "The oxidation state of Mn in KMnO4 is:",
-      "options": ["+5", "+6", "+7", "+4"],
+      "options": [
+        "+5",
+        "+6",
+        "+7",
+        "+4"
+      ],
       "correct_answer": "C",
       "chapter": "Redox",
-      "topic_tags": ["oxidation_state", "permanganate"],
+      "topic_tags": [
+        "oxidation_state",
+        "permanganate"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In KMnO4, potassium has +1 and each oxygen has -2. Since the compound is neutral: (+1) + Mn + 4(-2) = 0, so Mn = +7. Manganese reaches its maximum oxidation state in this strong oxidizing agent."
     },
     {
       "question_text": "Equilibrium constant Kc depends on:",
-      "options": ["Concentration", "Pressure", "Temperature", "Volume"],
+      "options": [
+        "Concentration",
+        "Pressure",
+        "Temperature",
+        "Volume"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Equilibrium",
-      "topic_tags": ["Kc", "temperature_dependence"],
+      "topic_tags": [
+        "Kc",
+        "temperature_dependence"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Kc is defined by the ratio of product and reactant concentrations at equilibrium, which is constant only at a specific temperature. Changes in temperature alter the position of equilibrium and thus Kc itself, while concentration, pressure, and volume changes only shift where equilibrium is reached without changing Kc."
     },
     {
       "question_text": "Number of unpaired electrons in Fe3+ (Z=26) is:",
-      "options": ["3", "4", "5", "6"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
       "correct_answer": "C",
       "chapter": "Coordination Compounds",
-      "topic_tags": ["d_electrons", "spin"],
+      "topic_tags": [
+        "d_electrons",
+        "spin"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Fe has atomic number 26, so its electron configuration is [Ar]3d⁶4s². Fe³⁺ loses 3 electrons (2 from 4s and 1 from 3d), giving [Ar]3d⁵. In the d orbitals, these 5 electrons occupy separate orbitals with parallel spins (following Hund's rule), resulting in 5 unpaired electrons."
     },
     {
       "question_text": "Benzene undergoes which reaction more readily?",
-      "options": ["Addition", "Substitution", "Polymerisation", "Combustion"],
+      "options": [
+        "Addition",
+        "Substitution",
+        "Polymerisation",
+        "Combustion"
+      ],
       "correct_answer": "B",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["aromatic", "substitution"],
+      "topic_tags": [
+        "aromatic",
+        "substitution"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Benzene's aromatic ring is stabilized by resonance, making it highly resistant to addition reactions that would break the aromatic system. Substitution reactions preserve aromaticity, allowing electrophilic aromatic substitution to occur readily without losing the stabilization energy of the benzene ring."
     },
     {
       "question_text": "Markovnikov's rule applies to:",
-      "options": ["Symmetrical alkenes", "Unsymmetrical alkenes", "Alkanes", "Aromatics"],
+      "options": [
+        "Symmetrical alkenes",
+        "Unsymmetrical alkenes",
+        "Alkanes",
+        "Aromatics"
+      ],
       "correct_answer": "B",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["Markovnikov", "addition"],
+      "topic_tags": [
+        "Markovnikov",
+        "addition"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Markovnikov's rule predicts that when adding HX to unsymmetrical alkenes, hydrogen attaches to the carbon with more existing hydrogens, forming the more stable carbocation intermediate. It's unnecessary for symmetrical alkenes since both carbons are equivalent."
     },
     {
       "question_text": "Catalyst used in Haber's process for ammonia synthesis is:",
-      "options": ["Fe", "Pt", "Ni", "V2O5"],
+      "options": [
+        "Fe",
+        "Pt",
+        "Ni",
+        "V2O5"
+      ],
       "correct_answer": "A",
       "chapter": "p-Block",
-      "topic_tags": ["Haber_process", "catalyst"],
+      "topic_tags": [
+        "Haber_process",
+        "catalyst"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Iron (Fe) is the industrial catalyst of choice for the Haber process because it is cost-effective, abundant, and provides good catalytic activity for nitrogen fixation at the high temperatures and pressures required, making it economically viable for large-scale ammonia production."
     },
     {
       "question_text": "Among CH3F, CH3Cl, CH3Br, CH3I, the most reactive in SN2 reaction is:",
-      "options": ["CH3F", "CH3Cl", "CH3Br", "CH3I"],
+      "options": [
+        "CH3F",
+        "CH3Cl",
+        "CH3Br",
+        "CH3I"
+      ],
       "correct_answer": "D",
       "chapter": "Haloalkanes",
-      "topic_tags": ["SN2", "leaving_group"],
+      "topic_tags": [
+        "SN2",
+        "leaving_group"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "SN2 reactivity depends on leaving group ability. As we go down Group 17 (F→Cl→Br→I), electronegativity decreases but size increases, making the C-X bond weaker and easier to break. Iodide is the best leaving group, making CH3I most reactive in SN2 reactions."
     },
     {
       "question_text": "The most acidic among the following is:",
-      "options": ["Ethanol", "Phenol", "Methanol", "Water"],
+      "options": [
+        "Ethanol",
+        "Phenol",
+        "Methanol",
+        "Water"
+      ],
       "correct_answer": "B",
       "chapter": "Phenols",
-      "topic_tags": ["acidity", "phenol"],
+      "topic_tags": [
+        "acidity",
+        "phenol"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Phenol is most acidic because its conjugate base is stabilized by resonance delocalization of the negative charge into the aromatic ring, making it much more stable than the alkoxide ions from alcohols or hydroxide from water."
     },
     {
       "question_text": "Avogadro's number value (per mole) is approximately:",
-      "options": ["6.022×10²³", "6.022×10²²", "6.022×10²⁴", "6.022×10²¹"],
+      "options": [
+        "6.022×10²³",
+        "6.022×10²²",
+        "6.022×10²⁴",
+        "6.022×10²¹"
+      ],
       "correct_answer": "A",
       "chapter": "Mole Concept",
-      "topic_tags": ["Avogadro_number"],
+      "topic_tags": [
+        "Avogadro_number"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Avogadro's number is a fundamental constant in chemistry that represents the number of particles (atoms, molecules, etc.) in exactly one mole of substance. This value was experimentally determined and standardized as 6.022×10²³ particles/mole."
     },
     {
       "question_text": "Reducing agent in the reaction Zn + CuSO4 -> ZnSO4 + Cu is:",
-      "options": ["Zn", "Cu", "CuSO4", "ZnSO4"],
+      "options": [
+        "Zn",
+        "Cu",
+        "CuSO4",
+        "ZnSO4"
+      ],
       "correct_answer": "A",
       "chapter": "Redox",
-      "topic_tags": ["reducing_agent", "displacement"],
+      "topic_tags": [
+        "reducing_agent",
+        "displacement"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Zn is oxidized from 0 to +2 oxidation state, losing electrons that reduce Cu²⁺ to Cu. A reducing agent is a substance that causes reduction by donating electrons, making Zn the reducing agent."
     },
     {
       "question_text": "Functional group of carboxylic acid is:",
-      "options": ["-OH", "-CHO", "-COOH", "-NH2"],
+      "options": [
+        "-OH",
+        "-CHO",
+        "-COOH",
+        "-NH2"
+      ],
       "correct_answer": "C",
       "chapter": "Carboxylic Acids",
-      "topic_tags": ["functional_group"],
+      "topic_tags": [
+        "functional_group"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The carboxylic acid functional group consists of a carbonyl carbon (C=O) bonded to a hydroxyl group (-OH), giving the structure -COOH. This combination is unique to carboxylic acids and distinguishes them from other functional groups like alcohols (-OH), aldehydes (-CHO), or amines (-NH2)."
     },
     {
       "question_text": "Saponification is the alkaline hydrolysis of:",
-      "options": ["Esters", "Ethers", "Alcohols", "Amines"],
+      "options": [
+        "Esters",
+        "Ethers",
+        "Alcohols",
+        "Amines"
+      ],
       "correct_answer": "A",
       "chapter": "Esters",
-      "topic_tags": ["saponification", "ester"],
+      "topic_tags": [
+        "saponification",
+        "ester"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Saponification is the alkaline hydrolysis of esters, particularly fats and oils, which breaks the ester bonds and produces glycerol and fatty acid salts (soap). This reaction specifically requires the ester functional group to proceed."
     },
     {
       "question_text": "Atomic number of element with electronic configuration [Ar]3d⁵4s¹ is:",
-      "options": ["24", "25", "26", "23"],
+      "options": [
+        "24",
+        "25",
+        "26",
+        "23"
+      ],
       "correct_answer": "A",
       "chapter": "Atomic Structure",
-      "topic_tags": ["configuration", "chromium"],
+      "topic_tags": [
+        "configuration",
+        "chromium"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The electron configuration [Ar] represents 18 electrons. Adding 3d⁵ (5 electrons) and 4s¹ (1 electron) gives 18 + 5 + 1 = 24 total electrons, which equals the atomic number."
     },
     {
       "question_text": "The strongest reducing agent among alkali metals is:",
-      "options": ["Li", "Na", "K", "Cs"],
+      "options": [
+        "Li",
+        "Na",
+        "K",
+        "Cs"
+      ],
       "correct_answer": "A",
       "chapter": "s-Block",
-      "topic_tags": ["reducing", "alkali_metals"],
+      "topic_tags": [
+        "reducing",
+        "alkali_metals"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Lithium is the strongest reducing agent because it has the highest reduction potential (most negative), meaning it loses electrons most readily. Despite having the highest ionization energy, its small size and resulting high hydration energy make Li⁺ formation highly favorable, driving oxidation strongly."
     },
     {
       "question_text": "Number of pi bonds in benzene is:",
-      "options": ["1", "2", "3", "6"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "6"
+      ],
       "correct_answer": "C",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["pi_bonds", "benzene"],
+      "topic_tags": [
+        "pi_bonds",
+        "benzene"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Benzene has a resonance structure with alternating single and double bonds around its six-carbon ring. Each double bond contains one pi bond, and with three double bonds in the structure, there are 3 pi bonds total."
     },
     {
       "question_text": "The geometry of SF6 molecule is:",
-      "options": ["Tetrahedral", "Trigonal bipyramidal", "Octahedral", "Square planar"],
+      "options": [
+        "Tetrahedral",
+        "Trigonal bipyramidal",
+        "Octahedral",
+        "Square planar"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["VSEPR", "octahedral"],
+      "topic_tags": [
+        "VSEPR",
+        "octahedral"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "SF6 has sulfur as the central atom with 6 fluorine atoms bonded to it and no lone pairs. According to VSEPR theory, 6 bonding pairs with no lone pairs arrange themselves to minimize repulsion by adopting an octahedral geometry, where fluorine atoms occupy the corners of an octahedron."
     },
     {
       "question_text": "Among the following, the molecule with permanent dipole moment is:",
-      "options": ["CO2", "CCl4", "H2O", "BF3"],
+      "options": [
+        "CO2",
+        "CCl4",
+        "H2O",
+        "BF3"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["dipole_moment", "polarity"],
+      "topic_tags": [
+        "dipole_moment",
+        "polarity"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Water (H2O) has a bent molecular geometry due to two lone pairs on oxygen, making it asymmetrical. This asymmetry prevents dipole cancellation, resulting in a net permanent dipole moment. The other molecules are symmetrical (linear CO2, tetrahedral CCl4, trigonal planar BF3), so their bond dipoles cancel completely."
     },
     {
       "question_text": "Glucose on reduction with H2/Ni gives:",
-      "options": ["Sorbitol", "Gluconic acid", "Fructose", "Mannose"],
+      "options": [
+        "Sorbitol",
+        "Gluconic acid",
+        "Fructose",
+        "Mannose"
+      ],
       "correct_answer": "A",
       "chapter": "Biomolecules",
-      "topic_tags": ["glucose", "reduction"],
+      "topic_tags": [
+        "glucose",
+        "reduction"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Reduction with H2/Ni reduces the aldehyde group (-CHO) of glucose to a primary alcohol (-CH2OH), converting glucose into sorbitol, a six-carbon sugar alcohol (polyol). This is a standard reduction reaction that doesn't affect the other hydroxyl groups or the carbon skeleton."
     },
     {
       "question_text": "Maximum number of electrons in an orbital is:",
-      "options": ["1", "2", "4", "8"],
+      "options": [
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
       "correct_answer": "B",
       "chapter": "Atomic Structure",
-      "topic_tags": ["Pauli", "orbital"],
+      "topic_tags": [
+        "Pauli",
+        "orbital"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "An orbital is a region of space where an electron can be found, and according to the Pauli Exclusion Principle, each orbital can hold a maximum of 2 electrons with opposite spins (one spin-up, one spin-down)."
     },
     {
       "question_text": "Common name of HCOOH is:",
-      "options": ["Acetic acid", "Formic acid", "Propionic acid", "Butyric acid"],
+      "options": [
+        "Acetic acid",
+        "Formic acid",
+        "Propionic acid",
+        "Butyric acid"
+      ],
       "correct_answer": "B",
       "chapter": "Carboxylic Acids",
-      "topic_tags": ["common_names"],
+      "topic_tags": [
+        "common_names"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "HCOOH is the simplest carboxylic acid with only one carbon atom. Formic acid is its common name, derived from \"formica\" (Latin for ant), as it was originally isolated from ant venom. Acetic acid (CH₃COOH) has two carbons, making it structurally different."
     }
   ]
 }

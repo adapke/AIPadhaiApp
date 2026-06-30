@@ -6,30 +6,430 @@
   "default_year": 2019,
   "default_paper": "main",
   "questions": [
-    {"question_text": "If f(x) = x², f(f(2)) =", "options": ["4", "16", "8", "32"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["composition"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Derivative of x^3 at x=2:", "options": ["6", "8", "12", "24"], "correct_answer": "C", "chapter": "Differentiation", "topic_tags": ["power_rule"], "difficulty": "easy", "marks": 4},
-    {"question_text": "lim x→0 (sin x)/x:", "options": ["0", "1", "Infinity", "DNE"], "correct_answer": "B", "chapter": "Limits", "topic_tags": ["sin_limit"], "difficulty": "easy", "marks": 4},
-    {"question_text": "∫₀¹ x² dx:", "options": ["1/3", "1/2", "1", "2/3"], "correct_answer": "A", "chapter": "Definite Integration", "topic_tags": ["polynomial_def"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Area enclosed by y = x² and y = 4:", "options": ["8/3", "16/3", "32/3", "8"], "correct_answer": "C", "chapter": "Application of Integrals", "topic_tags": ["area_between"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Solution of dy/dx = 2x:", "options": ["x²", "x² + C", "2x + C", "x + C"], "correct_answer": "B", "chapter": "Differential Equations", "topic_tags": ["separable"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sum of roots of x² + 3x - 4 = 0:", "options": ["3", "-3", "4", "-4"], "correct_answer": "B", "chapter": "Polynomials", "topic_tags": ["Vieta"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Discriminant of x² + x + 1 = 0:", "options": ["-3", "-1", "1", "3"], "correct_answer": "A", "chapter": "Polynomials", "topic_tags": ["discriminant"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Eccentricity of x²/9 + y²/4 = 1:", "options": ["√5/3", "√5/2", "1/3", "2/3"], "correct_answer": "A", "chapter": "Conic Sections", "topic_tags": ["ellipse"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Slope of perpendicular to y = 3x + 2:", "options": ["3", "-3", "1/3", "-1/3"], "correct_answer": "D", "chapter": "Coordinate Geometry", "topic_tags": ["perpendicular"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnitude of 3i + 4j + 12k:", "options": ["7", "13", "19", "25"], "correct_answer": "B", "chapter": "Vectors", "topic_tags": ["magnitude_3D"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Dot product (1,2,3)·(4,5,6):", "options": ["32", "30", "26", "12"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["dot_product"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If P(A) = 1/3, P(A∪B) = 1/2, P(B) = 1/4, P(A∩B) =", "options": ["1/12", "1/24", "1/6", "1/3"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["inclusion_exclusion"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of permutations of letters in 'APPLE':", "options": ["60", "120", "240", "30"], "correct_answer": "A", "chapter": "Permutations", "topic_tags": ["with_repetition"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Sum of first n natural numbers:", "options": ["n²", "n(n+1)/2", "n(n-1)/2", "(n+1)/2"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["sum_natural"], "difficulty": "easy", "marks": 4},
-    {"question_text": "GP: 2, 6, 18, 54. Next term:", "options": ["108", "162", "216", "324"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["GP"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Modulus of complex z = 3 - 4i:", "options": ["3", "4", "5", "7"], "correct_answer": "C", "chapter": "Complex Numbers", "topic_tags": ["modulus"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Argument of complex -i:", "options": ["0", "π/2", "-π/2", "π"], "correct_answer": "C", "chapter": "Complex Numbers", "topic_tags": ["argument"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If A is 3×3 with det(A) = 5, det(2A):", "options": ["10", "20", "40", "8"], "correct_answer": "C", "chapter": "Determinants", "topic_tags": ["det_scalar"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Trace of I_3 (3×3 identity):", "options": ["0", "1", "3", "9"], "correct_answer": "C", "chapter": "Matrices", "topic_tags": ["trace"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Domain of √(x-1):", "options": ["x > 1", "x ≥ 1", "x > 0", "All reals"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["domain"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Range of sin²x:", "options": ["[-1, 1]", "[0, 1]", "(-∞, ∞)", "[-1, 0]"], "correct_answer": "B", "chapter": "Trig Functions", "topic_tags": ["range"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of solutions of sin x = 1/2 in [0, 2π):", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Trig Equations", "topic_tags": ["sin_eq"], "difficulty": "easy", "marks": 4},
-    {"question_text": "tan(π/3) =", "options": ["1/√3", "1", "√3", "2"], "correct_answer": "C", "chapter": "Trigonometry", "topic_tags": ["standard_value"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If logₐ(b) = 3 and a = 2, b =", "options": ["6", "8", "9", "16"], "correct_answer": "B", "chapter": "Logarithms", "topic_tags": ["log_solve"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "If f(x) = x², f(f(2)) =",
+      "options": [
+        "4",
+        "16",
+        "8",
+        "32"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "composition"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Work from the inside out: f(2) = 2² = 4, then f(f(2)) = f(4) = 4² = 16."
+    },
+    {
+      "question_text": "Derivative of x^3 at x=2:",
+      "options": [
+        "6",
+        "8",
+        "12",
+        "24"
+      ],
+      "correct_answer": "C",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "power_rule"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The derivative of x³ is 3x². Substituting x=2 gives 3(2)² = 3(4) = 12."
+    },
+    {
+      "question_text": "lim x→0 (sin x)/x:",
+      "options": [
+        "0",
+        "1",
+        "Infinity",
+        "DNE"
+      ],
+      "correct_answer": "B",
+      "chapter": "Limits",
+      "topic_tags": [
+        "sin_limit"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "This is a fundamental limit in calculus. As x approaches 0, both sin x and x approach 0, creating an indeterminate form. Using L'Hôpital's rule or the Taylor series expansion of sin x ≈ x for small x shows the ratio approaches 1."
+    },
+    {
+      "question_text": "∫₀¹ x² dx:",
+      "options": [
+        "1/3",
+        "1/2",
+        "1",
+        "2/3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Definite Integration",
+      "topic_tags": [
+        "polynomial_def"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the power rule for integration, ∫x² dx = x³/3 + C. Evaluating from 0 to 1 gives [1³/3 - 0³/3] = 1/3."
+    },
+    {
+      "question_text": "Area enclosed by y = x² and y = 4:",
+      "options": [
+        "8/3",
+        "16/3",
+        "32/3",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Application of Integrals",
+      "topic_tags": [
+        "area_between"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Find intersection points: x² = 4 gives x = ±2. The area is ∫₋₂² (4 - x²)dx = [4x - x³/3]₋₂² = (8 - 8/3) - (-8 + 8/3) = 16 - 16/3 = 32/3."
+    },
+    {
+      "question_text": "Solution of dy/dx = 2x:",
+      "options": [
+        "x²",
+        "x² + C",
+        "2x + C",
+        "x + C"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "separable"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Integrating dy/dx = 2x with respect to x gives y = ∫2x dx = x² + C, where C is the arbitrary constant of integration required for the general solution of a differential equation."
+    },
+    {
+      "question_text": "Sum of roots of x² + 3x - 4 = 0:",
+      "options": [
+        "3",
+        "-3",
+        "4",
+        "-4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "Vieta"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "By Vieta's formulas, for a quadratic equation x² + bx + c = 0, the sum of roots equals -b. Here, b = 3, so the sum of roots is -3."
+    },
+    {
+      "question_text": "Discriminant of x² + x + 1 = 0:",
+      "options": [
+        "-3",
+        "-1",
+        "1",
+        "3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "discriminant"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a quadratic ax² + bx + c = 0, the discriminant is b² - 4ac. Here, a = 1, b = 1, c = 1, so the discriminant equals 1² - 4(1)(1) = 1 - 4 = -3."
+    },
+    {
+      "question_text": "Eccentricity of x²/9 + y²/4 = 1:",
+      "options": [
+        "√5/3",
+        "√5/2",
+        "1/3",
+        "2/3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "ellipse"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For this ellipse, a² = 9 and b² = 4, so a = 3 and b = 2. Since a > b, the major axis is horizontal. Using c² = a² - b² = 9 - 4 = 5, we get c = √5. Eccentricity is e = c/a = √5/3."
+    },
+    {
+      "question_text": "Slope of perpendicular to y = 3x + 2:",
+      "options": [
+        "3",
+        "-3",
+        "1/3",
+        "-1/3"
+      ],
+      "correct_answer": "D",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "perpendicular"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The original line has slope 3. Perpendicular lines have slopes that are negative reciprocals of each other, so the perpendicular slope is -1/3."
+    },
+    {
+      "question_text": "Magnitude of 3i + 4j + 12k:",
+      "options": [
+        "7",
+        "13",
+        "19",
+        "25"
+      ],
+      "correct_answer": "B",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "magnitude_3D"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The magnitude of a vector is found using the formula √(a² + b² + c²). For the vector 3i + 4j + 12k, this equals √(3² + 4² + 12²) = √(9 + 16 + 144) = √169 = 13."
+    },
+    {
+      "question_text": "Dot product (1,2,3)·(4,5,6):",
+      "options": [
+        "32",
+        "30",
+        "26",
+        "12"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "dot_product"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The dot product multiplies corresponding components and sums them: (1×4) + (2×5) + (3×6) = 4 + 10 + 18 = 32."
+    },
+    {
+      "question_text": "If P(A) = 1/3, P(A∪B) = 1/2, P(B) = 1/4, P(A∩B) =",
+      "options": [
+        "1/12",
+        "1/24",
+        "1/6",
+        "1/3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "inclusion_exclusion"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the addition rule for probability: P(A∪B) = P(A) + P(B) - P(A∩B). Substituting the given values: 1/2 = 1/3 + 1/4 - P(A∩B). Solving for P(A∩B): P(A∩B) = 1/3 + 1/4 - 1/2 = 4/12 + 3/12 - 6/12 = 1/12."
+    },
+    {
+      "question_text": "Number of permutations of letters in 'APPLE':",
+      "options": [
+        "60",
+        "120",
+        "240",
+        "30"
+      ],
+      "correct_answer": "A",
+      "chapter": "Permutations",
+      "topic_tags": [
+        "with_repetition"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "APPLE has 5 letters with P repeated twice. Total permutations = 5!/2! = 120/2 = 60, since identical letters reduce the count by dividing by the factorial of their frequency."
+    },
+    {
+      "question_text": "Sum of first n natural numbers:",
+      "options": [
+        "n²",
+        "n(n+1)/2",
+        "n(n-1)/2",
+        "(n+1)/2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "sum_natural"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The formula derives from pairing terms: 1+2+3+...+n can be rearranged so the first and last terms sum to (n+1), the second and second-to-last also sum to (n+1), and this pattern repeats n/2 times, giving n(n+1)/2."
+    },
+    {
+      "question_text": "GP: 2, 6, 18, 54. Next term:",
+      "options": [
+        "108",
+        "162",
+        "216",
+        "324"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "GP"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The common ratio is 3 (each term equals the previous term multiplied by 3). The next term is 54 × 3 = 162."
+    },
+    {
+      "question_text": "Modulus of complex z = 3 - 4i:",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
+      "correct_answer": "C",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "modulus"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a complex number z = a + bi, the modulus is |z| = √(a² + b²). Here, |z| = √(3² + (-4)²) = √(9 + 16) = √25 = 5."
+    },
+    {
+      "question_text": "Argument of complex -i:",
+      "options": [
+        "0",
+        "π/2",
+        "-π/2",
+        "π"
+      ],
+      "correct_answer": "C",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "argument"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The complex number -i lies on the negative imaginary axis. The argument is the angle measured counterclockwise from the positive real axis. Since -i points downward, the angle is -π/2 (or equivalently 3π/2)."
+    },
+    {
+      "question_text": "If A is 3×3 with det(A) = 5, det(2A):",
+      "options": [
+        "10",
+        "20",
+        "40",
+        "8"
+      ],
+      "correct_answer": "C",
+      "chapter": "Determinants",
+      "topic_tags": [
+        "det_scalar"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When scaling a matrix by a scalar k, the determinant is multiplied by k^n where n is the dimension. Here, det(2A) = 2³ × det(A) = 8 × 5 = 40."
+    },
+    {
+      "question_text": "Trace of I_3 (3×3 identity):",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "9"
+      ],
+      "correct_answer": "C",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "trace"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The trace of a matrix is the sum of its diagonal elements. The 3×3 identity matrix has 1's on the diagonal and 0's elsewhere, so trace(I₃) = 1 + 1 + 1 = 3."
+    },
+    {
+      "question_text": "Domain of √(x-1):",
+      "options": [
+        "x > 1",
+        "x ≥ 1",
+        "x > 0",
+        "All reals"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "domain"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The expression under a square root must be non-negative, so x - 1 ≥ 0, which gives x ≥ 1. This includes the endpoint where x = 1 (since √0 is defined), making it a closed interval rather than an open one."
+    },
+    {
+      "question_text": "Range of sin²x:",
+      "options": [
+        "[-1, 1]",
+        "[0, 1]",
+        "(-∞, ∞)",
+        "[-1, 0]"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trig Functions",
+      "topic_tags": [
+        "range"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Since -1 ≤ sin x ≤ 1 for all real x, squaring this expression gives 0 ≤ sin²x ≤ 1. The value 0 occurs when sin x = 0, and the value 1 occurs when sin x = ±1, so the range is [0, 1]."
+    },
+    {
+      "question_text": "Number of solutions of sin x = 1/2 in [0, 2π):",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trig Equations",
+      "topic_tags": [
+        "sin_eq"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In the interval [0, 2π), sin x = 1/2 at exactly two points: x = π/6 (in the first quadrant) and x = 5π/6 (in the second quadrant), where sine is positive."
+    },
+    {
+      "question_text": "tan(π/3) =",
+      "options": [
+        "1/√3",
+        "1",
+        "√3",
+        "2"
+      ],
+      "correct_answer": "C",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "standard_value"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "tan(π/3) equals tan(60°). Using the unit circle, at 60° the sine is √3/2 and cosine is 1/2, so tan(60°) = (√3/2)/(1/2) = √3."
+    },
+    {
+      "question_text": "If logₐ(b) = 3 and a = 2, b =",
+      "options": [
+        "6",
+        "8",
+        "9",
+        "16"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logarithms",
+      "topic_tags": [
+        "log_solve"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Since logₐ(b) = 3 means a³ = b, and a = 2, we calculate b = 2³ = 8."
+    }
   ]
 }

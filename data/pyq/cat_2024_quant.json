@@ -17,7 +17,8 @@
       "correct_answer": "A",
       "chapter": "Algebra",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Use the algebraic identity (x + y)² = x² + 2xy + y². Substituting: 7² = x² + 2(12) + y², so 49 = x² + y² + 24, giving x² + y² = 25."
     },
     {
       "question_text": "Speed of train 60 km/h. Distance covered in 90 min:",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Speed Time Distance",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "90 minutes equals 1.5 hours. Using Distance = Speed × Time: Distance = 60 km/h × 1.5 h = 90 km."
     },
     {
       "question_text": "30% of 250 is:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Percentages",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "To find 30% of 250, multiply: (30/100) × 250 = 0.3 × 250 = 75. This represents three-tenths of 250."
     },
     {
       "question_text": "If a sum doubles in 5 years at SI, rate is:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Simple Interest",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "When a sum doubles at simple interest, the interest earned equals the principal. Using SI = (P × R × T)/100, if interest equals P and time is 5 years: P = (P × R × 5)/100, which simplifies to R = 20% per annum."
     },
     {
       "question_text": "Average of first 10 natural numbers is:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Averages",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "The first 10 natural numbers are 1, 2, 3, ..., 10. Their sum is 10(11)/2 = 55. Dividing by 10 gives 55/10 = 5.5."
     },
     {
       "question_text": "log base 2 of 32 equals:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Logarithms",
       "difficulty": "easy",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Since 2^5 = 32, log₂(32) = 5. We're finding the exponent to which 2 must be raised to equal 32."
     }
   ]
 }

@@ -6,30 +6,430 @@
   "default_year": 2013,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Father of modern taxonomy:", "options": ["Aristotle", "Linnaeus", "Theophrastus", "Darwin"], "correct_answer": "B", "chapter": "Diversity", "topic_tags": ["Linnaeus"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Five kingdom classification proposed by:", "options": ["Linnaeus", "Whittaker", "Mayr", "Aristotle"], "correct_answer": "B", "chapter": "Biological Classification", "topic_tags": ["five_kingdom"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mycoplasma cell:", "options": ["Has cell wall", "Lacks cell wall (smallest free-living)", "Multicellular", "Photosynthetic"], "correct_answer": "B", "chapter": "Biological Classification", "topic_tags": ["Mycoplasma"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cyanobacteria:", "options": ["Photosynthetic prokaryotes", "Fungi", "Algae (eukaryote)", "Protozoa"], "correct_answer": "A", "chapter": "Biological Classification", "topic_tags": ["cyanobacteria"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of pyrenoids in Chlamydomonas:", "options": ["0", "1", "Many", "Variable"], "correct_answer": "B", "chapter": "Plant Kingdom", "topic_tags": ["pyrenoid"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Triplet code consists of:", "options": ["3 codons", "3 nucleotides specifying one amino acid", "3 amino acids", "3 proteins"], "correct_answer": "B", "chapter": "Molecular Biology", "topic_tags": ["codon"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Stop codons in genetic code:", "options": ["UAA, UAG, UGA", "AUG only", "All UNN", "GCG"], "correct_answer": "A", "chapter": "Molecular Biology", "topic_tags": ["stop_codons"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wobble hypothesis explains:", "options": ["Codon-anticodon pairing flexibility at 3rd position", "Protein folding", "DNA mutation", "RNA splicing"], "correct_answer": "A", "chapter": "Molecular Biology", "topic_tags": ["wobble"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Operon model proposed by:", "options": ["Watson", "Jacob and Monod", "Crick", "Sanger"], "correct_answer": "B", "chapter": "Molecular Biology", "topic_tags": ["operon"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of vertebrae in human:", "options": ["26", "33", "34", "32"], "correct_answer": "B", "chapter": "Locomotion", "topic_tags": ["vertebrae"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Maximum lung capacity in adult human (TLC):", "options": ["~3 L", "~6 L", "~9 L", "~1 L"], "correct_answer": "B", "chapter": "Respiration", "topic_tags": ["TLC"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Bohr effect refers to:", "options": ["O2 release from hemoglobin in CO2-rich tissues", "DNA replication", "Photosynthesis", "Mitosis"], "correct_answer": "A", "chapter": "Circulation", "topic_tags": ["Bohr_effect"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cardiac cycle duration in resting adult:", "options": ["~0.4 s", "~0.8 s", "~1.5 s", "~3 s"], "correct_answer": "B", "chapter": "Circulation", "topic_tags": ["cardiac_cycle"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Glomerular filtration rate in healthy human:", "options": ["~50 mL/min", "~125 mL/min", "~500 mL/min", "~1000 mL/min"], "correct_answer": "B", "chapter": "Excretion", "topic_tags": ["GFR"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Resting membrane potential of neuron approximately:", "options": ["-30 mV", "-70 mV", "+30 mV", "0 mV"], "correct_answer": "B", "chapter": "Neural Control", "topic_tags": ["RMP"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Neurotransmitter at neuromuscular junction:", "options": ["Acetylcholine", "Dopamine", "Serotonin", "GABA"], "correct_answer": "A", "chapter": "Neural Control", "topic_tags": ["acetylcholine"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hormone increasing blood Ca²⁺:", "options": ["Calcitonin", "Parathyroid hormone (PTH)", "Insulin", "Adrenaline"], "correct_answer": "B", "chapter": "Endocrine", "topic_tags": ["PTH"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Type-2 diabetes is due to:", "options": ["No insulin", "Insulin resistance", "Hyperthyroidism", "Genetic deletion"], "correct_answer": "B", "chapter": "Endocrine", "topic_tags": ["type_2_diabetes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Spermatogenesis produces:", "options": ["2 sperm cells per primary spermatocyte", "4 sperm cells per primary spermatocyte", "1 sperm + 3 polar bodies", "Random"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["spermatogenesis"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Oogenesis produces:", "options": ["4 viable ova", "1 viable ovum + 3 polar bodies", "2 ova", "Always 1 ovum"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["oogenesis"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Down's syndrome chromosomal cause:", "options": ["Trisomy 21", "Monosomy 21", "Trisomy 18", "Translocation 9-22"], "correct_answer": "A", "chapter": "Genetics", "topic_tags": ["Down"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Klinefelter syndrome karyotype:", "options": ["44+XO", "44+XXY", "44+XYY", "47+XYY"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["Klinefelter"], "difficulty": "medium", "marks": 4},
-    {"question_text": "RBC count in healthy adult male approximately:", "options": ["5 million/μL", "1 million/μL", "10 million/μL", "100/μL"], "correct_answer": "A", "chapter": "Body Fluids", "topic_tags": ["RBC_count"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Most abundant antibody in blood:", "options": ["IgA", "IgG", "IgM", "IgE"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["IgG"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Vector for filariasis:", "options": ["Aedes", "Culex (mosquito)", "Anopheles", "Sandfly"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["filariasis"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Father of modern taxonomy:",
+      "options": [
+        "Aristotle",
+        "Linnaeus",
+        "Theophrastus",
+        "Darwin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Diversity",
+      "topic_tags": [
+        "Linnaeus"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Linnaeus developed the binomial nomenclature system and hierarchical classification scheme (kingdom, phylum, class, order, family, genus, species) that form the foundation of modern taxonomy, earning him the title \"Father of Modern Taxonomy.\""
+    },
+    {
+      "question_text": "Five kingdom classification proposed by:",
+      "options": [
+        "Linnaeus",
+        "Whittaker",
+        "Mayr",
+        "Aristotle"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biological Classification",
+      "topic_tags": [
+        "five_kingdom"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Whittaker proposed the five kingdom classification system in 1969, dividing organisms into Monera, Protista, Fungi, Plantae, and Animalia based on cell type, nutrition method, and body organization—improving upon earlier two and three kingdom systems."
+    },
+    {
+      "question_text": "Mycoplasma cell:",
+      "options": [
+        "Has cell wall",
+        "Lacks cell wall (smallest free-living)",
+        "Multicellular",
+        "Photosynthetic"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biological Classification",
+      "topic_tags": [
+        "Mycoplasma"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Mycoplasma are the smallest free-living organisms and lack a peptidoglycan cell wall, instead having only a plasma membrane for structural support. This absence of a cell wall is their defining characteristic and makes them unique among bacteria."
+    },
+    {
+      "question_text": "Cyanobacteria:",
+      "options": [
+        "Photosynthetic prokaryotes",
+        "Fungi",
+        "Algae (eukaryote)",
+        "Protozoa"
+      ],
+      "correct_answer": "A",
+      "chapter": "Biological Classification",
+      "topic_tags": [
+        "cyanobacteria"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Cyanobacteria are prokaryotes (lacking a membrane-bound nucleus) that perform oxygenic photosynthesis using chlorophyll. They are bacteria, not eukaryotic organisms like fungi or algae, nor are they protozoa."
+    },
+    {
+      "question_text": "Number of pyrenoids in Chlamydomonas:",
+      "options": [
+        "0",
+        "1",
+        "Many",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Kingdom",
+      "topic_tags": [
+        "pyrenoid"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Chlamydomonas typically contains a single, prominent pyrenoid located within its chloroplast. The pyrenoid is a protein-rich structure that functions in starch synthesis and accumulation, and this unicellular alga characteristically has just one per cell."
+    },
+    {
+      "question_text": "Triplet code consists of:",
+      "options": [
+        "3 codons",
+        "3 nucleotides specifying one amino acid",
+        "3 amino acids",
+        "3 proteins"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "codon"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A triplet code (or codon) is a sequence of exactly three nucleotides that together specify which single amino acid should be added during protein synthesis. Three nucleotides create 64 possible combinations, allowing them to encode all 20 standard amino acids plus stop signals."
+    },
+    {
+      "question_text": "Stop codons in genetic code:",
+      "options": [
+        "UAA, UAG, UGA",
+        "AUG only",
+        "All UNN",
+        "GCG"
+      ],
+      "correct_answer": "A",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "stop_codons"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Stop codons signal termination of translation and are the three specific sequences UAA, UAG, and UGA. AUG codes for methionine (start codon), not stop; other options don't represent actual stop codons."
+    },
+    {
+      "question_text": "Wobble hypothesis explains:",
+      "options": [
+        "Codon-anticodon pairing flexibility at 3rd position",
+        "Protein folding",
+        "DNA mutation",
+        "RNA splicing"
+      ],
+      "correct_answer": "A",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "wobble"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The wobble hypothesis, proposed by Francis Crick, describes how the third position of a codon can form non-standard base pairs with the first position of an anticodon on tRNA, allowing one tRNA to recognize multiple codons and explaining why the genetic code is degenerate."
+    },
+    {
+      "question_text": "Operon model proposed by:",
+      "options": [
+        "Watson",
+        "Jacob and Monod",
+        "Crick",
+        "Sanger"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "operon"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Jacob and Monod proposed the operon model in 1961 based on their studies of gene regulation in bacteria, specifically the lac operon in E. coli, which demonstrated how genes could be coordinately controlled by a single regulatory element."
+    },
+    {
+      "question_text": "Number of vertebrae in human:",
+      "options": [
+        "26",
+        "33",
+        "34",
+        "32"
+      ],
+      "correct_answer": "B",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "vertebrae"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Adults have 33 vertebrae total: 7 cervical, 12 thoracic, 5 lumbar, 5 sacral (fused into one sacrum), and 4 coccygeal (fused into one coccyx). The option of 26 results from counting only the unfused vertebrae, while 32-34 reflect variations in fused vertebrae counts."
+    },
+    {
+      "question_text": "Maximum lung capacity in adult human (TLC):",
+      "options": [
+        "~3 L",
+        "~6 L",
+        "~9 L",
+        "~1 L"
+      ],
+      "correct_answer": "B",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "TLC"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Total lung capacity (TLC) in adult humans averages approximately 6 liters, combining residual volume (~1.2L), expiratory reserve volume (~1.1L), tidal volume (~0.5L), and inspiratory reserve volume (~3.1L)."
+    },
+    {
+      "question_text": "Bohr effect refers to:",
+      "options": [
+        "O2 release from hemoglobin in CO2-rich tissues",
+        "DNA replication",
+        "Photosynthesis",
+        "Mitosis"
+      ],
+      "correct_answer": "A",
+      "chapter": "Circulation",
+      "topic_tags": [
+        "Bohr_effect"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Bohr effect describes how increased CO2 and lower pH in metabolically active tissues shift hemoglobin's oxygen-binding curve, causing it to release O2 more readily where cells need it most. This is a fundamental mechanism of oxygen delivery in aerobic metabolism."
+    },
+    {
+      "question_text": "Cardiac cycle duration in resting adult:",
+      "options": [
+        "~0.4 s",
+        "~0.8 s",
+        "~1.5 s",
+        "~3 s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Circulation",
+      "topic_tags": [
+        "cardiac_cycle"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At rest, the average heart rate is 60-100 beats per minute, which means each complete cardiac cycle lasts approximately 0.6-1.0 seconds. The standard value used is ~0.8 seconds, corresponding to a normal resting heart rate of about 75 beats per minute."
+    },
+    {
+      "question_text": "Glomerular filtration rate in healthy human:",
+      "options": [
+        "~50 mL/min",
+        "~125 mL/min",
+        "~500 mL/min",
+        "~1000 mL/min"
+      ],
+      "correct_answer": "B",
+      "chapter": "Excretion",
+      "topic_tags": [
+        "GFR"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The glomerular filtration rate (GFR) is the volume of filtrate produced by the kidneys per minute. In healthy adults, this is approximately 125 mL/min, which filters about 180 liters daily—most of which is reabsorbed in the renal tubules to maintain homeostasis."
+    },
+    {
+      "question_text": "Resting membrane potential of neuron approximately:",
+      "options": [
+        "-30 mV",
+        "-70 mV",
+        "+30 mV",
+        "0 mV"
+      ],
+      "correct_answer": "B",
+      "chapter": "Neural Control",
+      "topic_tags": [
+        "RMP"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The resting membrane potential is maintained by the Na+/K+-ATPase pump, which extrudes more positive ions than it imports, and by selective membrane permeability favoring potassium efflux. This results in the inside of the neuron being approximately -70 mV relative to the outside."
+    },
+    {
+      "question_text": "Neurotransmitter at neuromuscular junction:",
+      "options": [
+        "Acetylcholine",
+        "Dopamine",
+        "Serotonin",
+        "GABA"
+      ],
+      "correct_answer": "A",
+      "chapter": "Neural Control",
+      "topic_tags": [
+        "acetylcholine"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Acetylcholine is the primary excitatory neurotransmitter released by motor neurons at the neuromuscular junction, where it binds to nicotinic receptors on muscle cells to trigger contraction. The other options function in the central nervous system but not at this synapse."
+    },
+    {
+      "question_text": "Hormone increasing blood Ca²⁺:",
+      "options": [
+        "Calcitonin",
+        "Parathyroid hormone (PTH)",
+        "Insulin",
+        "Adrenaline"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine",
+      "topic_tags": [
+        "PTH"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "PTH increases blood calcium by stimulating osteoclasts to release calcium from bone, promoting calcium reabsorption in kidneys, and activating vitamin D to increase intestinal calcium absorption. Calcitonin does the opposite, while insulin and adrenaline regulate glucose and metabolic rate respectively."
+    },
+    {
+      "question_text": "Type-2 diabetes is due to:",
+      "options": [
+        "No insulin",
+        "Insulin resistance",
+        "Hyperthyroidism",
+        "Genetic deletion"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine",
+      "topic_tags": [
+        "type_2_diabetes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Type-2 diabetes occurs when cells fail to respond properly to insulin (insulin resistance), so the pancreas produces insulin but it cannot effectively lower blood glucose levels. This differs from Type-1, where the pancreas produces little or no insulin."
+    },
+    {
+      "question_text": "Spermatogenesis produces:",
+      "options": [
+        "2 sperm cells per primary spermatocyte",
+        "4 sperm cells per primary spermatocyte",
+        "1 sperm + 3 polar bodies",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "spermatogenesis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "During spermatogenesis, a primary spermatocyte undergoes meiosis I to produce two secondary spermatocytes, then meiosis II produces four haploid spermatids that each develop into functional sperm cells. This differs from oogenesis, which produces one egg and polar bodies."
+    },
+    {
+      "question_text": "Oogenesis produces:",
+      "options": [
+        "4 viable ova",
+        "1 viable ovum + 3 polar bodies",
+        "2 ova",
+        "Always 1 ovum"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "oogenesis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "During oogenesis, a primary oocyte completes meiosis I unequally, producing a secondary oocyte and a first polar body. The secondary oocyte then completes meiosis II, yielding one mature ovum and a second polar body, while the first polar body also divides. This results in one large viable egg cell and three smaller, non-functional polar bodies."
+    },
+    {
+      "question_text": "Down's syndrome chromosomal cause:",
+      "options": [
+        "Trisomy 21",
+        "Monosomy 21",
+        "Trisomy 18",
+        "Translocation 9-22"
+      ],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "Down"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Down's syndrome results from having three copies of chromosome 21 instead of the normal two copies, causing intellectual disability and characteristic physical features. Trisomy 21 accounts for approximately 95% of Down's syndrome cases."
+    },
+    {
+      "question_text": "Klinefelter syndrome karyotype:",
+      "options": [
+        "44+XO",
+        "44+XXY",
+        "44+XYY",
+        "47+XYY"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "Klinefelter"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Klinefelter syndrome results from an extra X chromosome in males, producing a 47,XXY karyotype. The notation 44+XXY indicates 44 autosomes plus the XXY sex chromosome combination, which is the characteristic genetic abnormality causing this condition."
+    },
+    {
+      "question_text": "RBC count in healthy adult male approximately:",
+      "options": [
+        "5 million/μL",
+        "1 million/μL",
+        "10 million/μL",
+        "100/μL"
+      ],
+      "correct_answer": "A",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "RBC_count"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Healthy adult males maintain RBC counts between 4.5-5.5 million cells per microliter of blood, making 5 million/μL the standard reference value. This higher count compared to females supports greater oxygen-carrying capacity for metabolic needs."
+    },
+    {
+      "question_text": "Most abundant antibody in blood:",
+      "options": [
+        "IgA",
+        "IgG",
+        "IgM",
+        "IgE"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "IgG"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "IgG comprises approximately 75-80% of total serum immunoglobulins and is the predominant antibody in secondary immune responses, making it the most abundant in blood. Other immunoglobulins are present in much lower concentrations."
+    },
+    {
+      "question_text": "Vector for filariasis:",
+      "options": [
+        "Aedes",
+        "Culex (mosquito)",
+        "Anopheles",
+        "Sandfly"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "filariasis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Culex mosquitoes are the primary vectors for lymphatic filariasis, transmitting Wuchereria bancrofti and Brugia malayi parasites through their bites. Aedes, Anopheles, and sandflies transmit other diseases like dengue, malaria, and leishmaniasis respectively, not filariasis."
+    }
   ]
 }

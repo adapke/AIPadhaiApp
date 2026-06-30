@@ -17,7 +17,8 @@
       "correct_answer": "A",
       "chapter": "Ratio",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "To find a:c, multiply the two ratios together by making b consistent. From a:b = 2:3, we get a = 2k and b = 3k. From b:c = 4:5, we get b = 4m and c = 5m. Since b equals 3k and 4m, set 3k = 4m, giving k = 4m/3. Therefore a = 8m/3 and c = 5m, so a:c = 8m/3 : 5m = 8:15."
     },
     {
       "question_text": "Square root of 144:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Squares and Roots",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since 12 × 12 = 144, the square root of 144 equals 12."
     },
     {
       "question_text": "LCM of 12 and 18:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Real Numbers",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The LCM is the smallest number divisible by both 12 and 18. Since 12 = 2² × 3 and 18 = 2 × 3², the LCM takes the highest power of each prime factor: 2² × 3² = 36."
     },
     {
       "question_text": "Slope of line passing through (1,2) and (3,6):",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Coordinate Geometry",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the slope formula m = (y₂ - y₁)/(x₂ - x₁), we get m = (6 - 2)/(3 - 1) = 4/2 = 2."
     }
   ]
 }

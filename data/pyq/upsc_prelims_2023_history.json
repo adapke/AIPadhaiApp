@@ -6,30 +6,430 @@
   "default_year": 2023,
   "default_paper": "prelims",
   "questions": [
-    {"question_text": "Battle of Plassey was fought in:", "options": ["1757", "1764", "1817", "1857"], "correct_answer": "A", "chapter": "Modern India", "topic_tags": ["Plassey"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Maurya empire founder:", "options": ["Bindusara", "Ashoka", "Chandragupta Maurya", "Pushyamitra"], "correct_answer": "C", "chapter": "Ancient India", "topic_tags": ["Maurya"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Indus Valley city famous for Great Bath:", "options": ["Harappa", "Mohenjo-daro", "Lothal", "Dholavira"], "correct_answer": "B", "chapter": "Ancient India", "topic_tags": ["Mohenjo_daro"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Buddha attained enlightenment at:", "options": ["Lumbini", "Bodh Gaya", "Sarnath", "Kushinagar"], "correct_answer": "B", "chapter": "Ancient India", "topic_tags": ["Buddha"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Ashoka's edicts were written in:", "options": ["Sanskrit", "Prakrit, Brahmi script", "Pali only", "Tamil"], "correct_answer": "B", "chapter": "Ancient India", "topic_tags": ["Ashoka_edicts"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Founder of Sikh religion:", "options": ["Guru Nanak", "Guru Govind Singh", "Guru Ramdas", "Guru Arjan"], "correct_answer": "A", "chapter": "Medieval India", "topic_tags": ["Sikh_founder"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Akbar's chief biographer:", "options": ["Abul Fazl", "Birbal", "Tansen", "Todar Mal"], "correct_answer": "A", "chapter": "Medieval India", "topic_tags": ["Akbar"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Year of Quit India movement:", "options": ["1929", "1930", "1942", "1947"], "correct_answer": "C", "chapter": "Modern India", "topic_tags": ["Quit_India"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Subhash Chandra Bose was the supreme commander of:", "options": ["Indian National Army", "British Indian Army", "Indian Civil Service", "Congress Working Committee"], "correct_answer": "A", "chapter": "Modern India", "topic_tags": ["INA"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Lord Dalhousie introduced the policy of:", "options": ["Subsidiary Alliance", "Doctrine of Lapse", "Permanent Settlement", "Mahalwari"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Dalhousie"], "difficulty": "medium", "marks": 2},
-    {"question_text": "First female ruler of Delhi Sultanate:", "options": ["Razia Sultan", "Nur Jahan", "Mumtaz Mahal", "Jahanara"], "correct_answer": "A", "chapter": "Medieval India", "topic_tags": ["Razia"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Bhakti saint who composed Sursagar:", "options": ["Tulsidas", "Mirabai", "Surdas", "Kabir"], "correct_answer": "C", "chapter": "Medieval India", "topic_tags": ["Surdas"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Khilji dynasty founder:", "options": ["Iltutmish", "Balban", "Jalaluddin Khilji", "Alauddin Khilji"], "correct_answer": "C", "chapter": "Medieval India", "topic_tags": ["Khilji"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Indian National Congress founded in:", "options": ["1857", "1885", "1905", "1920"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["INC_founding"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Bardoli Satyagraha (1928) was led by:", "options": ["Gandhi", "Sardar Patel", "Nehru", "Bose"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Bardoli"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Year of Champaran Satyagraha:", "options": ["1915", "1917", "1919", "1920"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Champaran"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Author of 'Anandamath':", "options": ["Tagore", "Bankim Chandra Chattopadhyay", "Sarat Chandra", "Premchand"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["literature"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Vijayanagara empire founder:", "options": ["Krishnadevaraya", "Harihara and Bukka", "Devaraya", "Ramaraya"], "correct_answer": "B", "chapter": "Medieval India", "topic_tags": ["Vijayanagara"], "difficulty": "medium", "marks": 2},
-    {"question_text": "First Anglo-Mysore War year:", "options": ["1755", "1767-69", "1780", "1799"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Mysore_war"], "difficulty": "hard", "marks": 2},
-    {"question_text": "Year of Permanent Settlement of Bengal:", "options": ["1765", "1793", "1857", "1858"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Permanent_Settlement"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Founder of Brahmo Samaj:", "options": ["Raja Ram Mohan Roy", "Dayananda Saraswati", "Vivekananda", "Tagore"], "correct_answer": "A", "chapter": "Modern India", "topic_tags": ["Brahmo"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Arya Samaj founder:", "options": ["Ram Mohan Roy", "Dayananda Saraswati", "Vivekananda", "Annie Besant"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Arya_Samaj"], "difficulty": "easy", "marks": 2},
-    {"question_text": "Famous painting 'Bharat Mata' by:", "options": ["Tagore", "Abanindranath Tagore", "Raja Ravi Varma", "Nandalal Bose"], "correct_answer": "B", "chapter": "Modern India", "topic_tags": ["Bharat_Mata"], "difficulty": "medium", "marks": 2},
-    {"question_text": "First Indian Governor-General of independent India:", "options": ["Nehru", "Patel", "C. Rajagopalachari", "Mountbatten"], "correct_answer": "C", "chapter": "Modern India", "topic_tags": ["Rajagopalachari"], "difficulty": "medium", "marks": 2},
-    {"question_text": "Treaty of Allahabad signed in:", "options": ["1757", "1764", "1765", "1857"], "correct_answer": "C", "chapter": "Modern India", "topic_tags": ["Allahabad_treaty"], "difficulty": "medium", "marks": 2}
+    {
+      "question_text": "Battle of Plassey was fought in:",
+      "options": [
+        "1757",
+        "1764",
+        "1817",
+        "1857"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Plassey"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "The Battle of Plassey occurred in 1757 when Robert Clive defeated the Nawab of Bengal, marking a pivotal moment in British colonial expansion in India and establishing East India Company dominance in the region."
+    },
+    {
+      "question_text": "Maurya empire founder:",
+      "options": [
+        "Bindusara",
+        "Ashoka",
+        "Chandragupta Maurya",
+        "Pushyamitra"
+      ],
+      "correct_answer": "C",
+      "chapter": "Ancient India",
+      "topic_tags": [
+        "Maurya"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Chandragupta Maurya founded the Maurya Empire around 322 BCE after overthrowing the Nanda Dynasty with help from Chanakya. Bindusara was his son and successor, Ashoka was his grandson, and Pushyamitra founded the later Shunga Dynasty."
+    },
+    {
+      "question_text": "Indus Valley city famous for Great Bath:",
+      "options": [
+        "Harappa",
+        "Mohenjo-daro",
+        "Lothal",
+        "Dholavira"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "topic_tags": [
+        "Mohenjo_daro"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Mohenjo-daro is renowned for its well-preserved Great Bath, a sophisticated public bathing structure measuring approximately 39 feet long and 23 feet wide, with a depth of 8 feet. This elaborate facility demonstrates the advanced urban planning and civic infrastructure of the Indus Valley Civilization around 2500 BCE."
+    },
+    {
+      "question_text": "Buddha attained enlightenment at:",
+      "options": [
+        "Lumbini",
+        "Bodh Gaya",
+        "Sarnath",
+        "Kushinagar"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "topic_tags": [
+        "Buddha"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Buddha meditated under the Bodhi tree at Bodh Gaya and achieved enlightenment there. While Lumbini was his birthplace, Sarnath where he first preached, and Kushinagar where he died are also important Buddhist sites, enlightenment specifically occurred at Bodh Gaya."
+    },
+    {
+      "question_text": "Ashoka's edicts were written in:",
+      "options": [
+        "Sanskrit",
+        "Prakrit, Brahmi script",
+        "Pali only",
+        "Tamil"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ancient India",
+      "topic_tags": [
+        "Ashoka_edicts"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Ashoka deliberately chose Prakrit and Brahmi script for his edicts to communicate with common people across his empire, rather than Sanskrit which was restricted to the elite Brahmin class. This made his messages accessible to the majority population."
+    },
+    {
+      "question_text": "Founder of Sikh religion:",
+      "options": [
+        "Guru Nanak",
+        "Guru Govind Singh",
+        "Guru Ramdas",
+        "Guru Arjan"
+      ],
+      "correct_answer": "A",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Sikh_founder"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Guru Nanak (1469-1539) established Sikhism in Punjab and is recognized as the first Guru, founding the religion's core principles of monotheism and social equality. The other Gurus were his successors who developed and consolidated the faith."
+    },
+    {
+      "question_text": "Akbar's chief biographer:",
+      "options": [
+        "Abul Fazl",
+        "Birbal",
+        "Tansen",
+        "Todar Mal"
+      ],
+      "correct_answer": "A",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Akbar"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Abul Fazl was Akbar's official historian and wrote the Akbarnama, a comprehensive biography documenting the emperor's life, reign, and achievements. While Birbal, Tansen, and Todar Mal were important members of Akbar's court, none served as his chief biographer."
+    },
+    {
+      "question_text": "Year of Quit India movement:",
+      "options": [
+        "1929",
+        "1930",
+        "1942",
+        "1947"
+      ],
+      "correct_answer": "C",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Quit_India"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "The Quit India movement, launched by Mahatma Gandhi on August 9, 1942, demanded immediate British withdrawal from India. This major civil disobedience campaign became a turning point in India's independence struggle, occurring just a few years before independence was achieved in 1947."
+    },
+    {
+      "question_text": "Subhash Chandra Bose was the supreme commander of:",
+      "options": [
+        "Indian National Army",
+        "British Indian Army",
+        "Indian Civil Service",
+        "Congress Working Committee"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "INA"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Subhash Chandra Bose organized and led the Indian National Army (INA), also known as Netaji's Army, which fought against British rule during World War II with Japanese support. He was never part of the British Indian Army's command structure or the other organizations listed."
+    },
+    {
+      "question_text": "Lord Dalhousie introduced the policy of:",
+      "options": [
+        "Subsidiary Alliance",
+        "Doctrine of Lapse",
+        "Permanent Settlement",
+        "Mahalwari"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Dalhousie"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Lord Dalhousie (Governor-General 1848-1856) created the Doctrine of Lapse, which allowed the British to annex Indian princely states whose rulers died without direct heirs. This aggressive expansionist policy significantly increased British territorial control in India."
+    },
+    {
+      "question_text": "First female ruler of Delhi Sultanate:",
+      "options": [
+        "Razia Sultan",
+        "Nur Jahan",
+        "Mumtaz Mahal",
+        "Jahanara"
+      ],
+      "correct_answer": "A",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Razia"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Razia Sultan ruled Delhi Sultanate (1236-1240) as its first female ruler, actively governing and commanding armies. The other options were associated with later Mughal empires, not the Delhi Sultanate."
+    },
+    {
+      "question_text": "Bhakti saint who composed Sursagar:",
+      "options": [
+        "Tulsidas",
+        "Mirabai",
+        "Surdas",
+        "Kabir"
+      ],
+      "correct_answer": "C",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Surdas"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Surdas was a prominent blind bhakti poet of the 16th century who composed the Sursagar, a collection of devotional poems celebrating Lord Krishna. The work is considered one of the most important texts in Hindi literature and bhakti tradition."
+    },
+    {
+      "question_text": "Khilji dynasty founder:",
+      "options": [
+        "Iltutmish",
+        "Balban",
+        "Jalaluddin Khilji",
+        "Alauddin Khilji"
+      ],
+      "correct_answer": "C",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Khilji"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Jalaluddin Khilji established the Khilji dynasty in 1290 after overthrowing the Mamluk Sultanate, making him the founder. While Alauddin Khilji was his more famous successor who expanded the empire significantly, he did not establish the dynasty."
+    },
+    {
+      "question_text": "Indian National Congress founded in:",
+      "options": [
+        "1857",
+        "1885",
+        "1905",
+        "1920"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "INC_founding"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "The Indian National Congress was formally established in 1885 by Allan Octavian Hume with the support of prominent Indian leaders, making it the oldest political organization in India dedicated to advocating for Indian independence and reform."
+    },
+    {
+      "question_text": "Bardoli Satyagraha (1928) was led by:",
+      "options": [
+        "Gandhi",
+        "Sardar Patel",
+        "Nehru",
+        "Bose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Bardoli"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Bardoli Satyagraha was a peasant uprising against increased land taxes in Gujarat, and Sardar Patel led this nonviolent movement successfully, earning him the title \"Sardar\" (leader). While Gandhi championed satyagraha broadly, Patel directly organized and led this specific 1928 campaign."
+    },
+    {
+      "question_text": "Year of Champaran Satyagraha:",
+      "options": [
+        "1915",
+        "1917",
+        "1919",
+        "1920"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Champaran"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Champaran Satyagraha occurred in 1917 when Gandhi led a non-violent protest against indigo planters in Bihar who were exploiting peasant farmers. This was Gandhi's first major civil disobedience campaign in India, establishing his Satyagraha method domestically."
+    },
+    {
+      "question_text": "Author of 'Anandamath':",
+      "options": [
+        "Tagore",
+        "Bankim Chandra Chattopadhyay",
+        "Sarat Chandra",
+        "Premchand"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "literature"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "'Anandamath' was written by Bankim Chandra Chattopadhyay in 1882. This influential Bengali novel, featuring the famous patriotic song \"Vande Mataram,\" became a cornerstone of Indian nationalist literature during the British colonial period."
+    },
+    {
+      "question_text": "Vijayanagara empire founder:",
+      "options": [
+        "Krishnadevaraya",
+        "Harihara and Bukka",
+        "Devaraya",
+        "Ramaraya"
+      ],
+      "correct_answer": "B",
+      "chapter": "Medieval India",
+      "topic_tags": [
+        "Vijayanagara"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Harihara and Bukka were brothers who founded the Vijayanagara Empire in 1336. Krishnadevaraya was a later ruler who expanded it to its greatest extent, while Devaraya and Ramaraya were also subsequent rulers, not founders."
+    },
+    {
+      "question_text": "First Anglo-Mysore War year:",
+      "options": [
+        "1755",
+        "1767-69",
+        "1780",
+        "1799"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Mysore_war"
+      ],
+      "difficulty": "hard",
+      "marks": 2,
+      "explanation": "The First Anglo-Mysore War occurred when Hyder Ali of Mysore challenged British expansion in southern India, resulting in the Treaty of Madras (1769) that ended the conflict. Option B correctly identifies the duration of this war."
+    },
+    {
+      "question_text": "Year of Permanent Settlement of Bengal:",
+      "options": [
+        "1765",
+        "1793",
+        "1857",
+        "1858"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Permanent_Settlement"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Permanent Settlement was introduced by Lord Cornwallis in 1793, which fixed land revenue assessments in Bengal permanently and established zamindars as landowners rather than tax collectors, fundamentally restructuring agrarian relations in the region."
+    },
+    {
+      "question_text": "Founder of Brahmo Samaj:",
+      "options": [
+        "Raja Ram Mohan Roy",
+        "Dayananda Saraswati",
+        "Vivekananda",
+        "Tagore"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Brahmo"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Raja Ram Mohan Roy founded the Brahmo Samaj in 1828 as a reform movement that promoted monotheism and rejected caste discrimination and idol worship within Hinduism. While other figures like Dayananda and Vivekananda were important Hindu reformers, they founded or led different organizations."
+    },
+    {
+      "question_text": "Arya Samaj founder:",
+      "options": [
+        "Ram Mohan Roy",
+        "Dayananda Saraswati",
+        "Vivekananda",
+        "Annie Besant"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Arya_Samaj"
+      ],
+      "difficulty": "easy",
+      "marks": 2,
+      "explanation": "Dayananda Saraswati founded the Arya Samaj in 1875 as a reform movement advocating return to Vedic principles and opposing idol worship. While Ram Mohan Roy founded the earlier Brahmo Samaj, Dayananda specifically established the Arya Samaj."
+    },
+    {
+      "question_text": "Famous painting 'Bharat Mata' by:",
+      "options": [
+        "Tagore",
+        "Abanindranath Tagore",
+        "Raja Ravi Varma",
+        "Nandalal Bose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Bharat_Mata"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "Abanindranath Tagore, the nephew of Rabindranath Tagore, painted \"Bharat Mata\" in 1905 as an iconic nationalist image depicting Mother India. This became a powerful symbol during the Indian independence movement and is one of his most celebrated works."
+    },
+    {
+      "question_text": "First Indian Governor-General of independent India:",
+      "options": [
+        "Nehru",
+        "Patel",
+        "C. Rajagopalachari",
+        "Mountbatten"
+      ],
+      "correct_answer": "C",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Rajagopalachari"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "C. Rajagopalachari was the first Indian Governor-General, serving from June 1948 after independence. Mountbatten was the last British Governor-General, while Nehru and Patel held other prominent positions but not this office."
+    },
+    {
+      "question_text": "Treaty of Allahabad signed in:",
+      "options": [
+        "1757",
+        "1764",
+        "1765",
+        "1857"
+      ],
+      "correct_answer": "C",
+      "chapter": "Modern India",
+      "topic_tags": [
+        "Allahabad_treaty"
+      ],
+      "difficulty": "medium",
+      "marks": 2,
+      "explanation": "The Treaty of Allahabad was signed in 1765 between the British East India Company and the Mughal Emperor following Robert Clive's victory at the Battle of Buxar in 1764, cementing British dominance in India."
+    }
   ]
 }

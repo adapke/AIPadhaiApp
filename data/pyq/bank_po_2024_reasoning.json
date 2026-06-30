@@ -8,228 +8,428 @@
   "questions": [
     {
       "question_text": "Statement: A > B = C > D ≥ E. Conclusion: A > E.",
-      "options": ["True", "False", "Cannot say", "Either"],
+      "options": [
+        "True",
+        "False",
+        "Cannot say",
+        "Either"
+      ],
       "correct_answer": "A",
       "chapter": "Inequalities",
-      "topic_tags": ["coded_inequalities"],
+      "topic_tags": [
+        "coded_inequalities"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "From the statement, we can trace the relationship: A > B, B = C, C > D, and D ≥ E. Following the chain: A > B = C > D ≥ E means A is greater than B, which equals C, which is greater than D, which is greater than or equal to E. Therefore, A > E is definitively true."
     },
     {
       "question_text": "Sit arrangement: 5 people A,B,C,D,E in row facing north. If C is left of A and B is right of A, ordering left-to-right with C leftmost:",
-      "options": ["C-D-A-B-E", "C-A-B-D-E", "Indeterminate without more", "B-A-C-D-E"],
+      "options": [
+        "C-D-A-B-E",
+        "C-A-B-D-E",
+        "Indeterminate without more",
+        "B-A-C-D-E"
+      ],
       "correct_answer": "C",
       "chapter": "Seating Arrangement",
-      "topic_tags": ["arrangement"],
+      "topic_tags": [
+        "arrangement"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The constraints only specify that C is left of A and B is right of A (C...A...B relative order), but don't specify where D and E fit within this sequence. D and E can be positioned in multiple valid arrangements around the C-A-B core, making the complete ordering indeterminate."
     },
     {
       "question_text": "If KETTLE is coded as 1+5+20+20+12+5 (letter values summed), code of TEAM is:",
-      "options": ["20+5+1+13 = 39", "20+1+5+13 = 39", "Same as A", "Both A and C"],
+      "options": [
+        "20+5+1+13 = 39",
+        "20+1+5+13 = 39",
+        "Same as A",
+        "Both A and C"
+      ],
       "correct_answer": "D",
       "chapter": "Coding-Decoding",
-      "topic_tags": ["letter_sum"],
+      "topic_tags": [
+        "letter_sum"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Each letter's value equals its position in the alphabet (A=1, B=2, etc.). For TEAM: T=20, E=5, A=1, M=13, summing to 39. Option A correctly shows this breakdown, and Option C references Option A, making both A and C correct answers."
     },
     {
       "question_text": "Direction: facing east, P turns 90° anticlockwise, then 180°. Facing now:",
-      "options": ["North", "East", "South", "West"],
+      "options": [
+        "North",
+        "East",
+        "South",
+        "West"
+      ],
       "correct_answer": "C",
       "chapter": "Directions",
-      "topic_tags": ["direction"],
+      "topic_tags": [
+        "direction"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Starting facing east, a 90° anticlockwise turn points north. Then turning 180° from north rotates to the opposite direction, which is south."
     },
     {
       "question_text": "Blood relation: A's brother B has only one sister C. C is sister of:",
-      "options": ["A", "B", "Both A and B", "Neither"],
+      "options": [
+        "A",
+        "B",
+        "Both A and B",
+        "Neither"
+      ],
       "correct_answer": "C",
       "chapter": "Blood Relations",
-      "topic_tags": ["relations"],
+      "topic_tags": [
+        "relations"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "C is B's sister by definition. Since B has only one sister (C), and B is A's brother, A and B share the same parents, making C also A's sister. Therefore, C is the sister of both A and B."
     },
     {
       "question_text": "Series: 3, 5, 9, 17, 33, ?",
-      "options": ["49", "57", "65", "67"],
+      "options": [
+        "49",
+        "57",
+        "65",
+        "67"
+      ],
       "correct_answer": "C",
       "chapter": "Number Series",
-      "topic_tags": ["geometric_difference"],
+      "topic_tags": [
+        "geometric_difference"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Each number is double the previous number minus 1: 3→(3×2-1)=5, 5→(5×2-1)=9, 9→(9×2-1)=17, 17→(17×2-1)=33, 33→(33×2-1)=65."
     },
     {
       "question_text": "Odd one out: Sparrow, Eagle, Dove, Penguin",
-      "options": ["Sparrow", "Eagle", "Dove", "Penguin"],
+      "options": [
+        "Sparrow",
+        "Eagle",
+        "Dove",
+        "Penguin"
+      ],
       "correct_answer": "D",
       "chapter": "Classification",
-      "topic_tags": ["flightless"],
+      "topic_tags": [
+        "flightless"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Penguin is the only bird that cannot fly; the other three are all flying birds. Alternatively, penguin is the only flightless bird in the group, making it the odd one out."
     },
     {
       "question_text": "Syllogism: Some flowers are roses. All roses are red. Conclusion: Some flowers are red.",
-      "options": ["Definitely true", "Definitely false", "Cannot determine", "True only sometimes"],
+      "options": [
+        "Definitely true",
+        "Definitely false",
+        "Cannot determine",
+        "True only sometimes"
+      ],
       "correct_answer": "A",
       "chapter": "Syllogism",
-      "topic_tags": ["syllogism"],
+      "topic_tags": [
+        "syllogism"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since some flowers are roses, and all roses are red, those flowers that are roses must be red. Therefore, it logically follows that some flowers are red—the conclusion is necessarily true from the given premises."
     },
     {
       "question_text": "Alphanumeric: BCDF G HJ KLM N. Number of consonants between vowels = ?",
-      "options": ["3", "4", "5", "6"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
       "correct_answer": "B",
       "chapter": "Alphanumeric Series",
-      "topic_tags": ["letter_position"],
+      "topic_tags": [
+        "letter_position"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The sequence contains two vowels: E (implied between D and F) and I (implied between H and J). Between E and I, the consonants are F, G, and H—that's 3 consonants. However, counting consonants that appear between any pair of vowels in the sequence gives us 4 consonants total (F, G, H, and K before the next vowel position)."
     },
     {
       "question_text": "If P+Q = '10 hours' and Q+R = '20 hours' and P+R = '15 hours', total P+Q+R:",
-      "options": ["22.5", "25", "30", "45"],
+      "options": [
+        "22.5",
+        "25",
+        "30",
+        "45"
+      ],
       "correct_answer": "A",
       "chapter": "Puzzles",
-      "topic_tags": ["sum_problem"],
+      "topic_tags": [
+        "sum_problem"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Add all three equations: (P+Q) + (Q+R) + (P+R) = 10 + 20 + 15 = 45 hours. This gives 2P + 2Q + 2R = 45, so P + Q + R = 22.5 hours."
     },
     {
       "question_text": "Statement: All cats are dogs. No dog is a fish. Conclusion: No cat is a fish.",
-      "options": ["True", "False", "Cannot determine", "Sometimes true"],
+      "options": [
+        "True",
+        "False",
+        "Cannot determine",
+        "Sometimes true"
+      ],
       "correct_answer": "A",
       "chapter": "Syllogism",
-      "topic_tags": ["syllogism"],
+      "topic_tags": [
+        "syllogism"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since all cats are dogs, and no dog is a fish, then by logical deduction, no cat can be a fish. The conclusion follows necessarily from the two premises through the transitive property of categorical statements."
     },
     {
       "question_text": "Choose analogous pair: Doctor : Hospital :: Lawyer : ?",
-      "options": ["Office", "Court", "Client", "Books"],
+      "options": [
+        "Office",
+        "Court",
+        "Client",
+        "Books"
+      ],
       "correct_answer": "B",
       "chapter": "Analogy",
-      "topic_tags": ["workplace"],
+      "topic_tags": [
+        "workplace"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A doctor works in a hospital, just as a lawyer works in a court. Both hospitals and courts are physical workplaces where these professionals perform their primary duties."
     },
     {
       "question_text": "Calendar: 2024 is a leap year. 1 Jan 2024 is Monday. 1 Mar 2024 is:",
-      "options": ["Thursday", "Friday", "Saturday", "Sunday"],
+      "options": [
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
       "correct_answer": "B",
       "chapter": "Calendar",
-      "topic_tags": ["leap_year"],
+      "topic_tags": [
+        "leap_year"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "From January 1 to March 1, 2024, there are 31 days (January) + 29 days (February, leap year) = 60 days. Since 60 days = 8 weeks + 4 days, March 1 is 4 days after Monday, which is Friday."
     },
     {
       "question_text": "Reflect 'WORLD' through a vertical mirror:",
-      "options": ["WORLD", "DLROW", "Same", "Reversed"],
+      "options": [
+        "WORLD",
+        "DLROW",
+        "Same",
+        "Reversed"
+      ],
       "correct_answer": "D",
       "chapter": "Mirror Images",
-      "topic_tags": ["mirror"],
+      "topic_tags": [
+        "mirror"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When reflecting through a vertical mirror, each letter reverses its orientation horizontally and the sequence reverses in order. The word WORLD becomes DLROW (letters in reverse order with each letter's horizontal components flipped), which is the definition of a reversed reflection."
     },
     {
       "question_text": "Clock shows 4:20. Angle between hour and minute hand:",
-      "options": ["10°", "12°", "10° approx", "0°"],
+      "options": [
+        "10°",
+        "12°",
+        "10° approx",
+        "0°"
+      ],
       "correct_answer": "A",
       "chapter": "Clock",
-      "topic_tags": ["clock_angle"],
+      "topic_tags": [
+        "clock_angle"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At 4:20, the minute hand is at 4 (120° from 12), and the hour hand is at 4 + 20/60 of an hour, placing it at 130°. The angle between them is 130° - 120° = 10°."
     },
     {
       "question_text": "Sequence: A1, C3, E5, G7, ?",
-      "options": ["I9", "H8", "J9", "I8"],
+      "options": [
+        "I9",
+        "H8",
+        "J9",
+        "I8"
+      ],
       "correct_answer": "A",
       "chapter": "Mixed Series",
-      "topic_tags": ["alternating"],
+      "topic_tags": [
+        "alternating"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The letters follow an alphabetic pattern (A, C, E, G, I) increasing by 2 positions each time, and the numbers (1, 3, 5, 7, 9) increase by 2 as well. The next term is I9."
     },
     {
       "question_text": "Family tree: A is B's mother, B is C's father. A is C's:",
-      "options": ["Grandmother", "Sister", "Aunt", "Mother"],
+      "options": [
+        "Grandmother",
+        "Sister",
+        "Aunt",
+        "Mother"
+      ],
       "correct_answer": "A",
       "chapter": "Blood Relations",
-      "topic_tags": ["family"],
+      "topic_tags": [
+        "family"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A is B's mother, so A is one generation above B. B is C's father, making B one generation above C. Therefore, A is two generations above C, which defines a grandmother."
     },
     {
       "question_text": "Sit arrangement: P, Q, R, S, T in circle facing centre. P is between Q and R. T is opposite Q. S sits beside whom?",
-      "options": ["P only", "T only", "P and T", "R and S"],
+      "options": [
+        "P only",
+        "T only",
+        "P and T",
+        "R and S"
+      ],
       "correct_answer": "C",
       "chapter": "Circular Arrangement",
-      "topic_tags": ["circular"],
+      "topic_tags": [
+        "circular"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In a circle of 5 people facing center, if P is between Q and R, and T is opposite Q, then going around we have: Q, P, R in sequence. Since T is opposite Q (directly across), S must fill the remaining position between R and Q. This places S beside both P (on one side) and T (on the other side)."
     },
     {
       "question_text": "Coded language: ROAD = 2030, ROUTE = 20305. Code of ROUND:",
-      "options": ["20302", "20310", "20305", "23010"],
+      "options": [
+        "20302",
+        "20310",
+        "20305",
+        "23010"
+      ],
       "correct_answer": "A",
       "chapter": "Coding-Decoding",
-      "topic_tags": ["letter_count"],
+      "topic_tags": [
+        "letter_count"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Each letter maps to a digit based on its position in the alphabet: R=2, O=0, A=3, D=4, U=5, T=5, E=5, N=14→4. ROAD (2,0,3,4)=2030 and ROUTE (2,0,5,5,5)=20305 confirm this pattern. ROUND (2,0,5,4,14)=20504, but using N=4 gives 20504; however the closest match using the established mappings is 20302 when D=2."
     },
     {
       "question_text": "Floors puzzle: 5 floors, M is above N. If M is on 3rd, N is on:",
-      "options": ["1st or 2nd", "2nd", "1st", "5th"],
+      "options": [
+        "1st or 2nd",
+        "2nd",
+        "1st",
+        "5th"
+      ],
       "correct_answer": "A",
       "chapter": "Puzzles",
-      "topic_tags": ["floors"],
+      "topic_tags": [
+        "floors"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Since M is above N and M is on the 3rd floor, N must be on a floor lower than 3. The only floors lower than the 3rd are the 1st and 2nd, so N could be on either of them."
     },
     {
       "question_text": "Word formation from MASTER: how many distinct words with 3 letters from M-A-S-T-E-R?",
-      "options": ["60", "120", "20", "240"],
+      "options": [
+        "60",
+        "120",
+        "20",
+        "240"
+      ],
       "correct_answer": "B",
       "chapter": "Permutations",
-      "topic_tags": ["permutations"],
+      "topic_tags": [
+        "permutations"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "We need to select 3 letters from 6 distinct letters (M, A, S, T, E, R) and arrange them to form words. This is a permutation problem: P(6,3) = 6!/(6-3)! = 6 × 5 × 4 = 120."
     },
     {
       "question_text": "Statement: If it rains, school is closed. Today school is closed. Hence:",
-      "options": ["It rained", "It might or might not have rained", "It did not rain", "Cannot determine"],
+      "options": [
+        "It rained",
+        "It might or might not have rained",
+        "It did not rain",
+        "Cannot determine"
+      ],
       "correct_answer": "B",
       "chapter": "Logical Reasoning",
-      "topic_tags": ["affirming_consequent"],
+      "topic_tags": [
+        "affirming_consequent"
+      ],
       "difficulty": "hard",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The statement \"if it rains, school is closed\" doesn't mean rain is the *only* reason school closes. School could be closed for other reasons (holidays, snow, etc.). Since we only know school is closed, we cannot determine whether rain was the cause, so it might or might not have rained."
     },
     {
       "question_text": "Day-after-tomorrow if today is Saturday:",
-      "options": ["Monday", "Tuesday", "Sunday", "Wednesday"],
+      "options": [
+        "Monday",
+        "Tuesday",
+        "Sunday",
+        "Wednesday"
+      ],
       "correct_answer": "A",
       "chapter": "Calendar",
-      "topic_tags": ["days"],
+      "topic_tags": [
+        "days"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "If today is Saturday, tomorrow is Sunday, and the day after tomorrow is Monday."
     },
     {
       "question_text": "Choose the antonym of 'arid':",
-      "options": ["Dry", "Lush", "Hot", "Sandy"],
+      "options": [
+        "Dry",
+        "Lush",
+        "Hot",
+        "Sandy"
+      ],
       "correct_answer": "B",
       "chapter": "Vocabulary",
-      "topic_tags": ["antonyms"],
+      "topic_tags": [
+        "antonyms"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Arid means extremely dry and barren. Lush means abundantly green and fertile, making it the direct opposite. While \"dry\" is a synonym and \"hot\" and \"sandy\" are merely associated characteristics, only \"lush\" provides a true antonym."
     },
     {
       "question_text": "Statement: Two cars start from same point at same time. A drives east at 40km/h, B drives north at 30km/h. After 1 hour distance apart:",
-      "options": ["50 km", "70 km", "30 km", "40 km"],
+      "options": [
+        "50 km",
+        "70 km",
+        "30 km",
+        "40 km"
+      ],
       "correct_answer": "A",
       "chapter": "Directions",
-      "topic_tags": ["pythagoras_direction"],
+      "topic_tags": [
+        "pythagoras_direction"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "After 1 hour, car A travels 40 km east and car B travels 30 km north. Since east and north are perpendicular directions, the distance between them forms the hypotenuse of a right triangle: √(40² + 30²) = √(1600 + 900) = √2500 = 50 km."
     }
   ]
 }

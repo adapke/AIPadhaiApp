@@ -8,228 +8,428 @@
   "questions": [
     {
       "question_text": "Average of 6 consecutive integers is 17.5. The smallest:",
-      "options": ["13", "14", "15", "16"],
+      "options": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
       "correct_answer": "C",
       "chapter": "Averages",
-      "topic_tags": ["consecutive"],
+      "topic_tags": [
+        "consecutive"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "For 6 consecutive integers, the average equals the mean of the smallest and largest numbers. If the average is 17.5, then (smallest + largest)/2 = 17.5, so smallest + largest = 35. Since consecutive integers differ by 5 between first and last, smallest + (smallest + 5) = 35, giving smallest = 15."
     },
     {
       "question_text": "A man can row at 5 km/h in still water. Stream is 1 km/h. Time to row 12 km downstream + upstream:",
-      "options": ["4 hr", "5 hr", "6 hr", "7 hr"],
+      "options": [
+        "4 hr",
+        "5 hr",
+        "6 hr",
+        "7 hr"
+      ],
       "correct_answer": "B",
       "chapter": "Time and Work",
-      "topic_tags": ["boat_stream"],
+      "topic_tags": [
+        "boat_stream"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Downstream speed = 5 + 1 = 6 km/h; time = 12/6 = 2 hours. Upstream speed = 5 - 1 = 4 km/h; time = 12/4 = 3 hours. Total time = 2 + 3 = 5 hours."
     },
     {
       "question_text": "Statement: All philosophers are wise. Some wise people are kind. Conclusion: Some philosophers are kind.",
-      "options": ["Valid", "Invalid (illicit major)", "Both A and possible", "Cannot say"],
+      "options": [
+        "Valid",
+        "Invalid (illicit major)",
+        "Both A and possible",
+        "Cannot say"
+      ],
       "correct_answer": "B",
       "chapter": "Logical Reasoning",
-      "topic_tags": ["syllogism"],
+      "topic_tags": [
+        "syllogism"
+      ],
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The conclusion doesn't validly follow because we know some wise people are kind, but we don't know if those kind wise people are among the philosophers. The logical form commits an illicit major term—the predicate \"kind\" is distributed in the conclusion but not in the premise where it appears."
     },
     {
       "question_text": "If x² - 5x + 6 = 0, sum of roots:",
-      "options": ["5", "6", "-5", "-6"],
+      "options": [
+        "5",
+        "6",
+        "-5",
+        "-6"
+      ],
       "correct_answer": "A",
       "chapter": "Algebra",
-      "topic_tags": ["Vieta"],
+      "topic_tags": [
+        "Vieta"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "For a quadratic equation ax² + bx + c = 0, the sum of roots equals -b/a. Here, a = 1 and b = -5, so the sum is -(-5)/1 = 5."
     },
     {
       "question_text": "Three persons A, B, C have heights in ratio 2:3:5. Total 30. C's height:",
-      "options": ["6", "9", "15", "20"],
+      "options": [
+        "6",
+        "9",
+        "15",
+        "20"
+      ],
       "correct_answer": "C",
       "chapter": "Ratio and Proportion",
-      "topic_tags": ["partitioning"],
+      "topic_tags": [
+        "partitioning"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The heights are in ratio 2:3:5, so let them be 2x, 3x, and 5x respectively. Since the total is 30: 2x + 3x + 5x = 30, which gives 10x = 30, so x = 3. Therefore C's height = 5x = 5(3) = 15."
     },
     {
       "question_text": "Comprehension type: paragraph about climate change. (For brevity, simulated) — Main idea:",
-      "options": ["Climate change is caused mainly by industry", "Climate change is unavoidable", "Mitigation requires global cooperation", "It is a future problem"],
+      "options": [
+        "Climate change is caused mainly by industry",
+        "Climate change is unavoidable",
+        "Mitigation requires global cooperation",
+        "It is a future problem"
+      ],
       "correct_answer": "C",
       "chapter": "Reading Comprehension",
-      "topic_tags": ["main_idea"],
+      "topic_tags": [
+        "main_idea"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Global cooperation is the main idea because the paragraph emphasizes that addressing climate change requires coordinated international efforts and shared responsibility across nations, rather than attributing causes or dismissing the problem as inevitable or distant."
     },
     {
       "question_text": "Code: GLOBE→FKNAD. Code for EARTH:",
-      "options": ["DZQSG", "FZQSG", "DAQSI", "FZQTH"],
+      "options": [
+        "DZQSG",
+        "FZQSG",
+        "DAQSI",
+        "FZQTH"
+      ],
       "correct_answer": "A",
       "chapter": "Coding-Decoding",
-      "topic_tags": ["shift_back_1"],
+      "topic_tags": [
+        "shift_back_1"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Each letter shifts backward by a consistent amount: G→F (1), L→K (1), O→N (1), B→A (1), E→D (1). Applying this same -1 shift to EARTH: E→D, A→Z (wrapping around), R→Q, T→S, H→G gives DZQSG."
     },
     {
       "question_text": "Number of trailing zeros in 50!:",
-      "options": ["10", "12", "14", "16"],
+      "options": [
+        "10",
+        "12",
+        "14",
+        "16"
+      ],
       "correct_answer": "B",
       "chapter": "Number Theory",
-      "topic_tags": ["factorial"],
+      "topic_tags": [
+        "factorial"
+      ],
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Trailing zeros are created by factors of 10, which require pairs of 2 and 5. Since factors of 5 are rarer, count multiples of 5 in 50!: ⌊50/5⌋ + ⌊50/25⌋ = 10 + 2 = 12."
     },
     {
       "question_text": "Sum of first 100 even numbers:",
-      "options": ["5050", "10100", "10000", "5000"],
+      "options": [
+        "5050",
+        "10100",
+        "10000",
+        "5000"
+      ],
       "correct_answer": "B",
       "chapter": "AP",
-      "topic_tags": ["sum_AP"],
+      "topic_tags": [
+        "sum_AP"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The first 100 even numbers are 2, 4, 6, ..., 200. Using the arithmetic series formula: Sum = n/2 × (first + last) = 100/2 × (2 + 200) = 50 × 202 = 10100."
     },
     {
       "question_text": "What comes next: 1, 4, 9, 16, ?",
-      "options": ["20", "23", "25", "27"],
+      "options": [
+        "20",
+        "23",
+        "25",
+        "27"
+      ],
       "correct_answer": "C",
       "chapter": "Number Series",
-      "topic_tags": ["squares"],
+      "topic_tags": [
+        "squares"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "These are perfect squares: 1², 2², 3², 4², so the next term is 5² = 25."
     },
     {
       "question_text": "Pipe A fills tank in 6 hr, pipe B empties in 8 hr. Both open, time to fill:",
-      "options": ["18 hr", "24 hr", "12 hr", "16 hr"],
+      "options": [
+        "18 hr",
+        "24 hr",
+        "12 hr",
+        "16 hr"
+      ],
       "correct_answer": "B",
       "chapter": "Pipes and Cisterns",
-      "topic_tags": ["fill_empty"],
+      "topic_tags": [
+        "fill_empty"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Pipe A's rate is 1/6 tank per hour; pipe B's rate is -1/8 tank per hour (emptying). Combined rate: 1/6 - 1/8 = 4/24 - 3/24 = 1/24 tank per hour, so filling takes 24 hours."
     },
     {
       "question_text": "Probability of getting 3 heads in 5 coin tosses:",
-      "options": ["1/2", "3/16", "5/16", "10/32"],
+      "options": [
+        "1/2",
+        "3/16",
+        "5/16",
+        "10/32"
+      ],
       "correct_answer": "D",
       "chapter": "Probability",
-      "topic_tags": ["binomial"],
+      "topic_tags": [
+        "binomial"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the binomial probability formula: P(X=3) = C(5,3) × (1/2)^3 × (1/2)^2 = 10 × (1/32) = 10/32. There are 10 ways to arrange 3 heads among 5 tosses, each with probability 1/32."
     },
     {
       "question_text": "If 30% of A = 20% of B, A:B is:",
-      "options": ["3:2", "2:3", "1:2", "5:3"],
+      "options": [
+        "3:2",
+        "2:3",
+        "1:2",
+        "5:3"
+      ],
       "correct_answer": "B",
       "chapter": "Ratio",
-      "topic_tags": ["proportional"],
+      "topic_tags": [
+        "proportional"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Setting up the equation from the given condition: 0.30A = 0.20B. Dividing both sides by 0.20 gives A/B = 0.20/0.30 = 2/3, so A:B = 2:3."
     },
     {
       "question_text": "Largest prime less than 100:",
-      "options": ["89", "97", "91", "93"],
+      "options": [
+        "89",
+        "97",
+        "91",
+        "93"
+      ],
       "correct_answer": "B",
       "chapter": "Number Theory",
-      "topic_tags": ["primes"],
+      "topic_tags": [
+        "primes"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "97 is prime (only divisible by 1 and itself), while 93 = 3 × 31, 91 = 7 × 13, and 89 is prime but smaller than 97, making 97 the largest prime under 100."
     },
     {
       "question_text": "If population grows at 10% annually, in 3 years it becomes ___ times original:",
-      "options": ["1.1", "1.21", "1.331", "1.5"],
+      "options": [
+        "1.1",
+        "1.21",
+        "1.331",
+        "1.5"
+      ],
       "correct_answer": "C",
       "chapter": "Compound Interest",
-      "topic_tags": ["growth"],
+      "topic_tags": [
+        "growth"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "With 10% annual growth, the population multiplies by 1.1 each year. Over 3 years: 1.1 × 1.1 × 1.1 = 1.1³ = 1.331, meaning the population becomes 1.331 times its original size."
     },
     {
       "question_text": "Speed of car 60 km/h for 2 hr + 80 km/h for 1 hr. Avg speed:",
-      "options": ["66.67 km/h", "70 km/h", "65 km/h", "60 km/h"],
+      "options": [
+        "66.67 km/h",
+        "70 km/h",
+        "65 km/h",
+        "60 km/h"
+      ],
       "correct_answer": "A",
       "chapter": "Time, Speed, Distance",
-      "topic_tags": ["average_speed"],
+      "topic_tags": [
+        "average_speed"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Average speed equals total distance divided by total time. Distance covered: (60 × 2) + (80 × 1) = 200 km. Total time: 2 + 1 = 3 hours. Average speed: 200 ÷ 3 = 66.67 km/h."
     },
     {
       "question_text": "Probability of NOT getting 6 when rolling die:",
-      "options": ["1/6", "5/6", "1/2", "2/3"],
+      "options": [
+        "1/6",
+        "5/6",
+        "1/2",
+        "2/3"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["complementary"],
+      "topic_tags": [
+        "complementary"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A standard die has 6 equally likely outcomes. Since there are 5 outcomes that are not 6 (1, 2, 3, 4, 5), the probability is 5/6."
     },
     {
       "question_text": "Volume of cone radius 7, height 12 (π=22/7):",
-      "options": ["616", "264", "924", "176"],
+      "options": [
+        "616",
+        "264",
+        "924",
+        "176"
+      ],
       "correct_answer": "A",
       "chapter": "Mensuration",
-      "topic_tags": ["cone"],
+      "topic_tags": [
+        "cone"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The cone volume formula is (1/3)πr²h. Substituting: (1/3) × (22/7) × 7² × 12 = (1/3) × (22/7) × 49 × 12 = (1/3) × 22 × 7 × 12 = (1/3) × 1848 = 616."
     },
     {
       "question_text": "Days from 1 Jan 2024 (Mon) to 1 Mar 2024 (skip leap consideration since 2024 IS leap):",
-      "options": ["59 days, Friday", "60 days, Saturday", "60 days, Friday", "61 days, Sunday"],
+      "options": [
+        "59 days, Friday",
+        "60 days, Saturday",
+        "60 days, Friday",
+        "61 days, Sunday"
+      ],
       "correct_answer": "C",
       "chapter": "Calendar",
-      "topic_tags": ["leap"],
+      "topic_tags": [
+        "leap"
+      ],
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "From 1 Jan to 1 Mar 2024 (leap year): January has 31 days, so 31 days remain in January after Jan 1. February has 29 days (leap year). Total: 31 + 29 = 60 days. Starting Monday + 60 days = 60 ÷ 7 = 8 weeks + 4 days, landing on Friday."
     },
     {
       "question_text": "Cost of dozen pens is Rs 120. Cost of 25 pens:",
-      "options": ["Rs 250", "Rs 240", "Rs 280", "Rs 300"],
+      "options": [
+        "Rs 250",
+        "Rs 240",
+        "Rs 280",
+        "Rs 300"
+      ],
       "correct_answer": "A",
       "chapter": "Ratio",
-      "topic_tags": ["unitary_method"],
+      "topic_tags": [
+        "unitary_method"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A dozen pens (12 pens) cost Rs 120, so each pen costs 120÷12 = Rs 10. Therefore, 25 pens cost 25×10 = Rs 250."
     },
     {
       "question_text": "If A and B together do work in 6 days, A alone in 10. B alone:",
-      "options": ["10 days", "15 days", "12 days", "20 days"],
+      "options": [
+        "10 days",
+        "15 days",
+        "12 days",
+        "20 days"
+      ],
       "correct_answer": "B",
       "chapter": "Time and Work",
-      "topic_tags": ["work"],
+      "topic_tags": [
+        "work"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A and B's combined rate is 1/6 per day. A's rate alone is 1/10 per day. Therefore, B's rate is 1/6 - 1/10 = 5/30 - 3/30 = 2/30 = 1/15 per day, meaning B alone takes 15 days."
     },
     {
       "question_text": "Diagonal of cube with side 6 cm:",
-      "options": ["6", "6√2", "6√3", "12"],
+      "options": [
+        "6",
+        "6√2",
+        "6√3",
+        "12"
+      ],
       "correct_answer": "C",
       "chapter": "Mensuration",
-      "topic_tags": ["cube_diagonal"],
+      "topic_tags": [
+        "cube_diagonal"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The space diagonal of a cube connects two opposite vertices through the interior. Using the 3D distance formula, it equals √(6² + 6² + 6²) = √108 = 6√3 cm."
     },
     {
       "question_text": "Sum of interior angles of hexagon:",
-      "options": ["360°", "540°", "720°", "900°"],
+      "options": [
+        "360°",
+        "540°",
+        "720°",
+        "900°"
+      ],
       "correct_answer": "C",
       "chapter": "Geometry",
-      "topic_tags": ["polygon"],
+      "topic_tags": [
+        "polygon"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "A hexagon has 6 sides. Using the formula for sum of interior angles: (n - 2) × 180°, where n is the number of sides: (6 - 2) × 180° = 4 × 180° = 720°."
     },
     {
       "question_text": "Mean of 1, 2, 3, ..., 99:",
-      "options": ["49", "50", "49.5", "51"],
+      "options": [
+        "49",
+        "50",
+        "49.5",
+        "51"
+      ],
       "correct_answer": "B",
       "chapter": "Averages",
-      "topic_tags": ["sum_natural"],
+      "topic_tags": [
+        "sum_natural"
+      ],
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The mean of consecutive integers from 1 to 99 equals (first + last)/2 = (1 + 99)/2 = 100/2 = 50. This is because the values are symmetrically distributed around the center."
     },
     {
       "question_text": "Smallest 3-digit number divisible by 11:",
-      "options": ["110", "121", "132", "100"],
+      "options": [
+        "110",
+        "121",
+        "132",
+        "100"
+      ],
       "correct_answer": "A",
       "chapter": "Number Theory",
-      "topic_tags": ["divisibility"],
+      "topic_tags": [
+        "divisibility"
+      ],
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The smallest 3-digit number is 100. Dividing 100 by 11 gives approximately 9.09, so we need the next multiple: 11 × 10 = 110, which is divisible by 11."
     }
   ]
 }

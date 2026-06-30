@@ -17,7 +17,8 @@
       "correct_answer": "C",
       "chapter": "Real Numbers",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "When squaring any real number, both positive and negative values produce the same positive result. Since 7² = 49 and (-7)² = 49, both solutions satisfy the equation, so x = ±7."
     },
     {
       "question_text": "Volume of cube with side 5 cm:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Mensuration",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The volume of a cube is calculated using V = s³, where s is the side length. With s = 5 cm, V = 5³ = 125 cm³."
     },
     {
       "question_text": "Sum of angles in a quadrilateral:",
@@ -43,7 +45,8 @@
       "correct_answer": "C",
       "chapter": "Geometry",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A quadrilateral can be divided into two triangles by drawing a diagonal. Since each triangle has angles summing to 180°, the total is 2 × 180° = 360°."
     },
     {
       "question_text": "Linear equation in two variables: 2x + 3y = 6. y when x=0:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Linear Equations",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Substitute x = 0 into the equation: 2(0) + 3y = 6, which gives 3y = 6. Dividing both sides by 3 yields y = 2."
     },
     {
       "question_text": "Discriminant b² - 4ac. For x² + 2x + 1 = 0, value is:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Quadratic Equations",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "For x² + 2x + 1 = 0, we have a = 1, b = 2, and c = 1. The discriminant is b² - 4ac = 2² - 4(1)(1) = 4 - 4 = 0. A discriminant of 0 indicates one repeated real root."
     }
   ]
 }

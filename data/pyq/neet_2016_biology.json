@@ -6,30 +6,430 @@
   "default_year": 2016,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Number of cells in a typical bacterium:", "options": ["1 (unicellular)", "Few", "Hundreds", "Variable"], "correct_answer": "A", "chapter": "Cell Biology", "topic_tags": ["unicellular"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Bacterial cell wall is made of:", "options": ["Cellulose", "Peptidoglycan (murein)", "Chitin", "Lignin"], "correct_answer": "B", "chapter": "Microbiology", "topic_tags": ["peptidoglycan"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cyanobacteria fix:", "options": ["Carbon only", "Nitrogen (and carbon via photosynthesis)", "Sulfur", "Phosphorus"], "correct_answer": "B", "chapter": "Microbes", "topic_tags": ["N_fixation"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of chambers in fish heart:", "options": ["1", "2 (1 atrium + 1 ventricle)", "3", "4"], "correct_answer": "B", "chapter": "Animal Kingdom", "topic_tags": ["fish_heart"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Pteridophytes (ferns) need water for:", "options": ["Nutrition only", "Reproduction (motile sperm)", "Photosynthesis", "Transport only"], "correct_answer": "B", "chapter": "Plant Kingdom", "topic_tags": ["pteridophytes"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Endosperm in gymnosperms is:", "options": ["Haploid", "Diploid", "Triploid", "Tetraploid"], "correct_answer": "A", "chapter": "Plant Kingdom", "topic_tags": ["gymnosperm_endosperm"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Calvin cycle's first stable product:", "options": ["3-PGA (3 carbon)", "OAA (4 carbon)", "Pyruvate", "Glucose"], "correct_answer": "A", "chapter": "Photosynthesis", "topic_tags": ["3PGA"], "difficulty": "medium", "marks": 4},
-    {"question_text": "C4 plants' first stable product:", "options": ["3-PGA", "OAA (4 carbon)", "Pyruvate", "Glucose"], "correct_answer": "B", "chapter": "Photosynthesis", "topic_tags": ["C4"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Glycolysis occurs in:", "options": ["Mitochondrial matrix", "Cytoplasm", "Chloroplast", "Nucleus"], "correct_answer": "B", "chapter": "Respiration", "topic_tags": ["glycolysis_location"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Krebs cycle occurs in:", "options": ["Cytoplasm", "Mitochondrial matrix", "Chloroplast", "ER"], "correct_answer": "B", "chapter": "Respiration", "topic_tags": ["Krebs"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of CO2 produced per glucose in aerobic respiration:", "options": ["2", "4", "6", "10"], "correct_answer": "C", "chapter": "Respiration", "topic_tags": ["CO2_glucose"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hormone responsible for ripening of fruit:", "options": ["Auxin", "Gibberellin", "Cytokinin", "Ethylene"], "correct_answer": "D", "chapter": "Plant Growth", "topic_tags": ["ethylene_ripening"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Stomata open in light because:", "options": ["Guard cells take up K+ ions → turgid", "Heat from sunlight", "Random", "Always open"], "correct_answer": "A", "chapter": "Plant Physiology", "topic_tags": ["stomata_K"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of pairs of human autosomes:", "options": ["22", "23", "44", "46"], "correct_answer": "A", "chapter": "Genetics", "topic_tags": ["autosomes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "ABO blood group antigen on RBC for type O:", "options": ["A only", "B only", "Both A and B", "Neither (no antigen)"], "correct_answer": "D", "chapter": "Body Fluids", "topic_tags": ["O_antigen"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of testes per human male:", "options": ["1", "2", "4", "Variable"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["testes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Hormone secreted by corpus luteum:", "options": ["Estrogen mainly", "Progesterone", "Both", "LH"], "correct_answer": "C", "chapter": "Human Reproduction", "topic_tags": ["corpus_luteum"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Largest cell in human body:", "options": ["RBC", "Neuron", "Ovum", "Sperm"], "correct_answer": "C", "chapter": "Human Anatomy", "topic_tags": ["ovum_largest"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Smallest functional unit of kidney:", "options": ["Nephron", "Glomerulus", "Bowman's capsule", "Loop of Henle"], "correct_answer": "A", "chapter": "Excretion", "topic_tags": ["nephron"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Hormone deficiency causes diabetes mellitus:", "options": ["Glucagon", "Insulin", "Thyroxine", "Adrenaline"], "correct_answer": "B", "chapter": "Endocrine", "topic_tags": ["insulin_deficiency"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Cellular respiration is opposite of:", "options": ["Photosynthesis", "Transpiration", "Excretion", "Digestion"], "correct_answer": "A", "chapter": "Respiration", "topic_tags": ["photosynthesis_inverse"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Father of taxonomy:", "options": ["Darwin", "Linnaeus", "Mendel", "Watson"], "correct_answer": "B", "chapter": "Diversity in Living World", "topic_tags": ["Linnaeus"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of fingers/toes (digits) per human:", "options": ["10", "20", "5", "Both A and B total"], "correct_answer": "B", "chapter": "Human Anatomy", "topic_tags": ["digits"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Eye lens focuses image on:", "options": ["Cornea", "Retina", "Iris", "Pupil"], "correct_answer": "B", "chapter": "Neural Control", "topic_tags": ["retina"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sound waves in ear are converted to neural signals by:", "options": ["Pinna", "Cochlea + hair cells", "Eardrum alone", "Eustachian tube"], "correct_answer": "B", "chapter": "Neural Control", "topic_tags": ["cochlea"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Number of cells in a typical bacterium:",
+      "options": [
+        "1 (unicellular)",
+        "Few",
+        "Hundreds",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "Cell Biology",
+      "topic_tags": [
+        "unicellular"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Bacteria are prokaryotes that exist as single, independent cells. Each bacterium is a complete, self-contained organism capable of all life functions, making them unicellular organisms."
+    },
+    {
+      "question_text": "Bacterial cell wall is made of:",
+      "options": [
+        "Cellulose",
+        "Peptidoglycan (murein)",
+        "Chitin",
+        "Lignin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Microbiology",
+      "topic_tags": [
+        "peptidoglycan"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Peptidoglycan (murein) is a unique polymer composed of alternating N-acetylglucosamine and N-acetylmuramic acid linked by peptide chains, which is the primary structural component of bacterial cell walls. The other options are found in plant cells (cellulose, lignin) or fungi/arthropods (chitin)."
+    },
+    {
+      "question_text": "Cyanobacteria fix:",
+      "options": [
+        "Carbon only",
+        "Nitrogen (and carbon via photosynthesis)",
+        "Sulfur",
+        "Phosphorus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Microbes",
+      "topic_tags": [
+        "N_fixation"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Cyanobacteria possess nitrogenase enzyme, allowing them to convert atmospheric N₂ into usable ammonia through nitrogen fixation. Simultaneously, they perform oxygenic photosynthesis to fix carbon dioxide into organic compounds, making them unique prokaryotes capable of both processes."
+    },
+    {
+      "question_text": "Number of chambers in fish heart:",
+      "options": [
+        "1",
+        "2 (1 atrium + 1 ventricle)",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Animal Kingdom",
+      "topic_tags": [
+        "fish_heart"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Fish hearts have a single atrium that receives deoxygenated blood from the body and a single ventricle that pumps it to the gills, making two chambers total. This two-chambered structure is simpler than the three-chambered amphibian heart or four-chambered mammalian heart."
+    },
+    {
+      "question_text": "Pteridophytes (ferns) need water for:",
+      "options": [
+        "Nutrition only",
+        "Reproduction (motile sperm)",
+        "Photosynthesis",
+        "Transport only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Kingdom",
+      "topic_tags": [
+        "pteridophytes"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Ferns have motile sperm that require a liquid water medium to swim from the male gametangium to the female gametangium for fertilization. Without water, sexual reproduction cannot occur, making water essential for their reproductive cycle."
+    },
+    {
+      "question_text": "Endosperm in gymnosperms is:",
+      "options": [
+        "Haploid",
+        "Diploid",
+        "Triploid",
+        "Tetraploid"
+      ],
+      "correct_answer": "A",
+      "chapter": "Plant Kingdom",
+      "topic_tags": [
+        "gymnosperm_endosperm"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "In gymnosperms, the endosperm develops from the female gametophyte, which is haploid (n). Unlike angiosperms where endosperm is triploid from double fertilization, gymnosperm endosperm retains the haploid condition of its maternal origin."
+    },
+    {
+      "question_text": "Calvin cycle's first stable product:",
+      "options": [
+        "3-PGA (3 carbon)",
+        "OAA (4 carbon)",
+        "Pyruvate",
+        "Glucose"
+      ],
+      "correct_answer": "A",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "3PGA"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "CO2 is initially fixed by RuBP (5-carbon) through the enzyme RuBisCO, immediately producing an unstable 6-carbon intermediate that rapidly splits into two molecules of 3-PGA, making 3-PGA the first stable, detectable product of the Calvin cycle."
+    },
+    {
+      "question_text": "C4 plants' first stable product:",
+      "options": [
+        "3-PGA",
+        "OAA (4 carbon)",
+        "Pyruvate",
+        "Glucose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "C4"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In C4 plants, CO₂ is first fixed by the enzyme PEP carboxylase into phosphoenolpyruvate (PEP), directly producing oxaloacetate (OAA), a 4-carbon compound. This is the defining characteristic of C4 photosynthesis, distinguishing it from C3 plants where 3-PGA is the first stable product."
+    },
+    {
+      "question_text": "Glycolysis occurs in:",
+      "options": [
+        "Mitochondrial matrix",
+        "Cytoplasm",
+        "Chloroplast",
+        "Nucleus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "glycolysis_location"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Glycolysis is the metabolic pathway that breaks down glucose into pyruvate, and all its enzymes are located in the cytoplasm rather than being bound to organelles. This allows glucose metabolism to proceed independently in the cytoplasm before pyruvate enters mitochondria for further oxidation."
+    },
+    {
+      "question_text": "Krebs cycle occurs in:",
+      "options": [
+        "Cytoplasm",
+        "Mitochondrial matrix",
+        "Chloroplast",
+        "ER"
+      ],
+      "correct_answer": "B",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "Krebs"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Krebs cycle (citric acid cycle) requires enzymes and cofactors housed in the mitochondrial matrix, where acetyl-CoA enters and undergoes oxidation to generate NADH, FADH₂, and ATP for cellular energy production."
+    },
+    {
+      "question_text": "Number of CO2 produced per glucose in aerobic respiration:",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "10"
+      ],
+      "correct_answer": "C",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "CO2_glucose"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "During aerobic respiration, one glucose molecule is completely oxidized through glycolysis, the citric acid cycle, and the electron transport chain. The citric acid cycle alone produces 2 CO2 per acetyl-CoA, and each glucose yields 2 acetyl-CoA, resulting in 4 CO2 from the cycle plus 2 CO2 from pyruvate oxidation, totaling 6 CO2."
+    },
+    {
+      "question_text": "Hormone responsible for ripening of fruit:",
+      "options": [
+        "Auxin",
+        "Gibberellin",
+        "Cytokinin",
+        "Ethylene"
+      ],
+      "correct_answer": "D",
+      "chapter": "Plant Growth",
+      "topic_tags": [
+        "ethylene_ripening"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Ethylene is the hormone that promotes fruit ripening by triggering the breakdown of chlorophyll, softening of cell walls, and development of color and flavor in fruits. The other hormones regulate growth and cell division but don't directly control ripening."
+    },
+    {
+      "question_text": "Stomata open in light because:",
+      "options": [
+        "Guard cells take up K+ ions → turgid",
+        "Heat from sunlight",
+        "Random",
+        "Always open"
+      ],
+      "correct_answer": "A",
+      "chapter": "Plant Physiology",
+      "topic_tags": [
+        "stomata_K"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Guard cells take up potassium ions (K+) in response to light, which increases their water potential and causes them to absorb water osmotically, becoming turgid and swelling to open the stoma."
+    },
+    {
+      "question_text": "Number of pairs of human autosomes:",
+      "options": [
+        "22",
+        "23",
+        "44",
+        "46"
+      ],
+      "correct_answer": "A",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "autosomes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Humans have 23 pairs of chromosomes total (46 chromosomes). Of these pairs, 22 are autosomes (non-sex chromosomes), while 1 pair consists of sex chromosomes (XX or XY)."
+    },
+    {
+      "question_text": "ABO blood group antigen on RBC for type O:",
+      "options": [
+        "A only",
+        "B only",
+        "Both A and B",
+        "Neither (no antigen)"
+      ],
+      "correct_answer": "D",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "O_antigen"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Type O blood lacks both A and B antigens on red blood cells because individuals with type O genotype (ii) don't produce the enzymes needed to synthesize these antigens, even though they have the H antigen precursor present."
+    },
+    {
+      "question_text": "Number of testes per human male:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "Variable"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "testes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Humans have two testes, one in each side of the scrotum, which develop symmetrically during fetal development. This paired arrangement is standard reproductive anatomy in all healthy males."
+    },
+    {
+      "question_text": "Hormone secreted by corpus luteum:",
+      "options": [
+        "Estrogen mainly",
+        "Progesterone",
+        "Both",
+        "LH"
+      ],
+      "correct_answer": "C",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "corpus_luteum"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The corpus luteum secretes both progesterone and estrogen. While progesterone is its primary hormone, the corpus luteum also produces significant amounts of estrogen during the luteal phase of the menstrual cycle, making \"both\" the most accurate answer."
+    },
+    {
+      "question_text": "Largest cell in human body:",
+      "options": [
+        "RBC",
+        "Neuron",
+        "Ovum",
+        "Sperm"
+      ],
+      "correct_answer": "C",
+      "chapter": "Human Anatomy",
+      "topic_tags": [
+        "ovum_largest"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The ovum (egg cell) is the largest human cell at approximately 100 micrometers in diameter, while neurons and sperm are much longer but narrower, and RBCs lack nuclei and are significantly smaller."
+    },
+    {
+      "question_text": "Smallest functional unit of kidney:",
+      "options": [
+        "Nephron",
+        "Glomerulus",
+        "Bowman's capsule",
+        "Loop of Henle"
+      ],
+      "correct_answer": "A",
+      "chapter": "Excretion",
+      "topic_tags": [
+        "nephron"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The nephron is the kidney's smallest functional unit because it contains all necessary structures (glomerulus, Bowman's capsule, proximal tubule, loop of Henle, and collecting duct) to independently filter blood and produce urine. The other options are individual components within the nephron, not complete functional units."
+    },
+    {
+      "question_text": "Hormone deficiency causes diabetes mellitus:",
+      "options": [
+        "Glucagon",
+        "Insulin",
+        "Thyroxine",
+        "Adrenaline"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine",
+      "topic_tags": [
+        "insulin_deficiency"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Insulin deficiency directly causes diabetes mellitus by preventing cells from taking up glucose, leading to high blood sugar levels. While glucagon deficiency could cause hypoglycemia, and thyroxine/adrenaline deficiencies cause other metabolic disorders, only insulin deficiency defines diabetes mellitus."
+    },
+    {
+      "question_text": "Cellular respiration is opposite of:",
+      "options": [
+        "Photosynthesis",
+        "Transpiration",
+        "Excretion",
+        "Digestion"
+      ],
+      "correct_answer": "A",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "photosynthesis_inverse"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Cellular respiration breaks down glucose to release energy, while photosynthesis uses light energy to build glucose from CO₂ and water. These are inverse metabolic processes with opposite reactants and products."
+    },
+    {
+      "question_text": "Father of taxonomy:",
+      "options": [
+        "Darwin",
+        "Linnaeus",
+        "Mendel",
+        "Watson"
+      ],
+      "correct_answer": "B",
+      "chapter": "Diversity in Living World",
+      "topic_tags": [
+        "Linnaeus"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Linnaeus developed the binomial nomenclature system and hierarchical classification of organisms (kingdom, phylum, class, order, family, genus, species), establishing the foundation of modern taxonomy. Darwin, Mendel, and Watson made contributions to evolution, genetics, and DNA structure respectively, but not to taxonomy's founding principles."
+    },
+    {
+      "question_text": "Number of fingers/toes (digits) per human:",
+      "options": [
+        "10",
+        "20",
+        "5",
+        "Both A and B total"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Anatomy",
+      "topic_tags": [
+        "digits"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Humans have 5 digits on each hand and 5 on each foot, totaling 20 digits. Option A counts only fingers, while B correctly includes all digits on both hands and feet."
+    },
+    {
+      "question_text": "Eye lens focuses image on:",
+      "options": [
+        "Cornea",
+        "Retina",
+        "Iris",
+        "Pupil"
+      ],
+      "correct_answer": "B",
+      "chapter": "Neural Control",
+      "topic_tags": [
+        "retina"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The lens refracts light rays to converge them onto the light-sensitive photoreceptor cells of the retina, where the image is formed and converted into neural signals for vision."
+    },
+    {
+      "question_text": "Sound waves in ear are converted to neural signals by:",
+      "options": [
+        "Pinna",
+        "Cochlea + hair cells",
+        "Eardrum alone",
+        "Eustachian tube"
+      ],
+      "correct_answer": "B",
+      "chapter": "Neural Control",
+      "topic_tags": [
+        "cochlea"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The cochlea contains fluid-filled chambers with hair cells that convert mechanical vibrations into electrical signals through neurotransmitter release, which are then transmitted to the brain via the auditory nerve. The other structures transmit or equalize pressure but don't perform this transduction."
+    }
   ]
 }

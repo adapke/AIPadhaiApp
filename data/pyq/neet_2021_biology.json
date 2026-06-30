@@ -6,30 +6,430 @@
   "default_year": 2021,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Cell wall in plant cells is made of:", "options": ["Cellulose", "Chitin", "Peptidoglycan", "Lignin only"], "correct_answer": "A", "chapter": "Cell Biology", "topic_tags": ["cell_wall"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Genetic material in retroviruses is:", "options": ["DNA", "RNA", "Both", "Protein"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["retrovirus"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of valves in human heart:", "options": ["2", "3", "4", "5"], "correct_answer": "C", "chapter": "Circulation", "topic_tags": ["heart"], "difficulty": "easy", "marks": 4},
-    {"question_text": "RBC lifespan:", "options": ["30 days", "60 days", "120 days", "365 days"], "correct_answer": "C", "chapter": "Body Fluids", "topic_tags": ["RBC"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Insulin is produced by:", "options": ["Alpha cells", "Beta cells of pancreas", "Liver", "Kidney"], "correct_answer": "B", "chapter": "Endocrine System", "topic_tags": ["insulin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Universal recipient blood group:", "options": ["A+", "B+", "O+", "AB+"], "correct_answer": "D", "chapter": "Body Fluids", "topic_tags": ["blood_groups"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Smallest bone in human body:", "options": ["Stapes (in ear)", "Femur", "Patella", "Phalanges"], "correct_answer": "A", "chapter": "Locomotion", "topic_tags": ["stapes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Largest organ in human body:", "options": ["Liver", "Skin", "Heart", "Brain"], "correct_answer": "B", "chapter": "Human Anatomy", "topic_tags": ["skin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Photosynthesis pigment is:", "options": ["Hemoglobin", "Chlorophyll", "Carotene", "Melanin"], "correct_answer": "B", "chapter": "Plant Physiology", "topic_tags": ["chlorophyll"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Site of light reaction in photosynthesis:", "options": ["Cytoplasm", "Thylakoid (chloroplast)", "Mitochondria", "Nucleus"], "correct_answer": "B", "chapter": "Photosynthesis", "topic_tags": ["thylakoid"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of ATP from one glucose in aerobic respiration:", "options": ["2", "6", "38", "100"], "correct_answer": "C", "chapter": "Respiration", "topic_tags": ["ATP"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Pacemaker of human heart:", "options": ["SA node", "AV node", "Bundle of His", "Purkinje fibers"], "correct_answer": "A", "chapter": "Circulation", "topic_tags": ["SA_node"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Father of Indian Green Revolution:", "options": ["M.S. Swaminathan", "Norman Borlaug", "C.V. Raman", "J.C. Bose"], "correct_answer": "A", "chapter": "Microbes in Welfare", "topic_tags": ["Green_Revolution"], "difficulty": "easy", "marks": 4},
-    {"question_text": "DNA replication enzyme:", "options": ["DNA helicase", "DNA polymerase", "DNA ligase", "All of these"], "correct_answer": "D", "chapter": "Molecular Biology", "topic_tags": ["replication"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of pairs of chromosomes in humans:", "options": ["22", "23", "44", "46"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["chromosomes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Heredity unit:", "options": ["Allele", "Gene", "Chromosome", "Nucleotide"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["gene"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mendel's law of segregation deals with:", "options": ["Linkage", "Monohybrid cross", "Crossing over", "Mutation"], "correct_answer": "B", "chapter": "Genetics", "topic_tags": ["Mendel"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Vector for malaria:", "options": ["Aedes", "Anopheles", "Culex", "Tsetse"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["malaria"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Causative agent of tuberculosis:", "options": ["Virus", "Mycobacterium tuberculosis", "Plasmodium", "Fungus"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["TB"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Penicillin source:", "options": ["Bacteria", "Penicillium notatum (fungus)", "Virus", "Algae"], "correct_answer": "B", "chapter": "Microbes in Welfare", "topic_tags": ["penicillin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of carbon atoms in glucose:", "options": ["4", "5", "6", "12"], "correct_answer": "C", "chapter": "Biomolecules", "topic_tags": ["glucose"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Enzymes are made of:", "options": ["Lipids", "Proteins", "Nucleic acids", "Carbohydrates"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["enzymes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Apomixis is a form of:", "options": ["Sexual reproduction", "Asexual reproduction producing seeds", "Mutation", "Vegetative propagation only"], "correct_answer": "B", "chapter": "Reproduction in Plants", "topic_tags": ["apomixis"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Largest gland in human body:", "options": ["Pancreas", "Liver", "Thyroid", "Adrenal"], "correct_answer": "B", "chapter": "Digestive System", "topic_tags": ["liver"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Ovulation in human female occurs around day:", "options": ["1", "14", "21", "28"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["ovulation"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Cell wall in plant cells is made of:",
+      "options": [
+        "Cellulose",
+        "Chitin",
+        "Peptidoglycan",
+        "Lignin only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Cell Biology",
+      "topic_tags": [
+        "cell_wall"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Cellulose is the primary structural polysaccharide of plant cell walls, providing rigidity and strength. While lignin reinforces cell walls in woody plants, cellulose forms the main framework in all plant cells."
+    },
+    {
+      "question_text": "Genetic material in retroviruses is:",
+      "options": [
+        "DNA",
+        "RNA",
+        "Both",
+        "Protein"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "retrovirus"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Retroviruses use RNA as their genetic material, which they reverse transcribe into DNA once inside a host cell. This reverse transcription process is their defining characteristic and distinguishes them from other viruses."
+    },
+    {
+      "question_text": "Number of valves in human heart:",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct_answer": "C",
+      "chapter": "Circulation",
+      "topic_tags": [
+        "heart"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The human heart has four valves: the tricuspid valve (right atrium-ventricle), mitral/bicuspid valve (left atrium-ventricle), pulmonary valve (right ventricle-pulmonary artery), and aortic valve (left ventricle-aorta). These prevent backflow of blood through the chambers."
+    },
+    {
+      "question_text": "RBC lifespan:",
+      "options": [
+        "30 days",
+        "60 days",
+        "120 days",
+        "365 days"
+      ],
+      "correct_answer": "C",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "RBC"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Red blood cells survive approximately 120 days in circulation before being removed by the spleen and liver, after which the body replaces them with newly produced RBCs from bone marrow at a rate of about 2 million cells per second."
+    },
+    {
+      "question_text": "Insulin is produced by:",
+      "options": [
+        "Alpha cells",
+        "Beta cells of pancreas",
+        "Liver",
+        "Kidney"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine System",
+      "topic_tags": [
+        "insulin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Beta cells in the pancreatic islets (islets of Langerhans) produce and secrete insulin in response to elevated blood glucose levels. Alpha cells produce glucagon, the liver produces glucose, and kidneys filter blood but don't produce insulin."
+    },
+    {
+      "question_text": "Universal recipient blood group:",
+      "options": [
+        "A+",
+        "B+",
+        "O+",
+        "AB+"
+      ],
+      "correct_answer": "D",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "blood_groups"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "AB+ individuals have both A and B antigens on their red blood cells, so they don't produce antibodies against A, B, or Rh antigens, allowing them to receive blood from all other types without triggering an immune reaction."
+    },
+    {
+      "question_text": "Smallest bone in human body:",
+      "options": [
+        "Stapes (in ear)",
+        "Femur",
+        "Patella",
+        "Phalanges"
+      ],
+      "correct_answer": "A",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "stapes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The stapes is the smallest bone in the human body, measuring approximately 2.8 mm in length. Located in the middle ear, it's one of three tiny ossicles that transmit sound vibrations to the inner ear."
+    },
+    {
+      "question_text": "Largest organ in human body:",
+      "options": [
+        "Liver",
+        "Skin",
+        "Heart",
+        "Brain"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Anatomy",
+      "topic_tags": [
+        "skin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The skin is the body's largest organ by surface area and mass, covering approximately 2 square meters and weighing about 3.6 kg in adults, whereas the liver, while the largest internal organ, is smaller overall."
+    },
+    {
+      "question_text": "Photosynthesis pigment is:",
+      "options": [
+        "Hemoglobin",
+        "Chlorophyll",
+        "Carotene",
+        "Melanin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Plant Physiology",
+      "topic_tags": [
+        "chlorophyll"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Chlorophyll is the primary photosynthetic pigment that absorbs light energy and transfers it to reaction centers during photosynthesis. While carotene is also a photosynthetic pigment, chlorophyll is the main pigment responsible for capturing light energy in plants and algae."
+    },
+    {
+      "question_text": "Site of light reaction in photosynthesis:",
+      "options": [
+        "Cytoplasm",
+        "Thylakoid (chloroplast)",
+        "Mitochondria",
+        "Nucleus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "thylakoid"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Light reactions require chlorophyll and the electron transport chain, both located in the thylakoid membranes of chloroplasts. These reactions convert light energy into ATP and NADPH, which cannot occur in the cytoplasm, mitochondria, or nucleus."
+    },
+    {
+      "question_text": "Number of ATP from one glucose in aerobic respiration:",
+      "options": [
+        "2",
+        "6",
+        "38",
+        "100"
+      ],
+      "correct_answer": "C",
+      "chapter": "Respiration",
+      "topic_tags": [
+        "ATP"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Aerobic respiration yields approximately 38 ATP per glucose: 2 from glycolysis, 2 from the citric acid cycle, and about 34 from the electron transport chain, where most ATP is generated through oxidative phosphorylation."
+    },
+    {
+      "question_text": "Pacemaker of human heart:",
+      "options": [
+        "SA node",
+        "AV node",
+        "Bundle of His",
+        "Purkinje fibers"
+      ],
+      "correct_answer": "A",
+      "chapter": "Circulation",
+      "topic_tags": [
+        "SA_node"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The SA node generates the fastest spontaneous depolarization rate (~60-100 beats/min), making it the natural pacemaker that sets the heart's rhythm and dominates other potential pacemakers in the conduction system."
+    },
+    {
+      "question_text": "Father of Indian Green Revolution:",
+      "options": [
+        "M.S. Swaminathan",
+        "Norman Borlaug",
+        "C.V. Raman",
+        "J.C. Bose"
+      ],
+      "correct_answer": "A",
+      "chapter": "Microbes in Welfare",
+      "topic_tags": [
+        "Green_Revolution"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "M.S. Swaminathan led India's agricultural transformation through high-yielding crop varieties and modern farming techniques, establishing agricultural research institutes and training programs that made India self-sufficient in food production during the 1960s-70s."
+    },
+    {
+      "question_text": "DNA replication enzyme:",
+      "options": [
+        "DNA helicase",
+        "DNA polymerase",
+        "DNA ligase",
+        "All of these"
+      ],
+      "correct_answer": "D",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "replication"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "DNA replication requires all three enzymes: helicase unwinds the double helix, polymerase synthesizes new DNA strands by adding nucleotides, and ligase seals the phosphodiester bonds between Okazaki fragments on the lagging strand."
+    },
+    {
+      "question_text": "Number of pairs of chromosomes in humans:",
+      "options": [
+        "22",
+        "23",
+        "44",
+        "46"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "chromosomes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Humans have 23 pairs of chromosomes (46 total chromosomes). This includes 22 pairs of autosomes plus 1 pair of sex chromosomes (XX or XY), making 23 pairs total."
+    },
+    {
+      "question_text": "Heredity unit:",
+      "options": [
+        "Allele",
+        "Gene",
+        "Chromosome",
+        "Nucleotide"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "gene"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A gene is the functional unit of heredity that codes for a specific trait and can be passed from parents to offspring. While alleles are variants of genes, chromosomes are structures containing genes, and nucleotides are molecular building blocks, only genes serve as the fundamental hereditary units themselves."
+    },
+    {
+      "question_text": "Mendel's law of segregation deals with:",
+      "options": [
+        "Linkage",
+        "Monohybrid cross",
+        "Crossing over",
+        "Mutation"
+      ],
+      "correct_answer": "B",
+      "chapter": "Genetics",
+      "topic_tags": [
+        "Mendel"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The law of segregation specifically describes how a single gene's two alleles separate during gamete formation, which is directly demonstrated through a monohybrid cross (involving one trait). This fundamental principle doesn't address linkage, crossing over, or mutations."
+    },
+    {
+      "question_text": "Vector for malaria:",
+      "options": [
+        "Aedes",
+        "Anopheles",
+        "Culex",
+        "Tsetse"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "malaria"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Anopheles mosquitoes are the sole vectors for Plasmodium parasites that cause malaria. Aedes transmits dengue/yellow fever, Culex transmits filariasis/encephalitis, and Tsetse flies transmit sleeping sickness."
+    },
+    {
+      "question_text": "Causative agent of tuberculosis:",
+      "options": [
+        "Virus",
+        "Mycobacterium tuberculosis",
+        "Plasmodium",
+        "Fungus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "TB"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Mycobacterium tuberculosis is a bacterium that causes tuberculosis. It's neither a virus, fungus, nor protozoan like Plasmodium, making it the definitive causative agent of TB."
+    },
+    {
+      "question_text": "Penicillin source:",
+      "options": [
+        "Bacteria",
+        "Penicillium notatum (fungus)",
+        "Virus",
+        "Algae"
+      ],
+      "correct_answer": "B",
+      "chapter": "Microbes in Welfare",
+      "topic_tags": [
+        "penicillin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Penicillin was discovered in the mold Penicillium notatum, which is a fungus, not a bacterium. Fleming's 1928 observation of contaminated bacterial cultures showed that this fungus produced a substance inhibiting bacterial growth, leading to the first widely used antibiotic."
+    },
+    {
+      "question_text": "Number of carbon atoms in glucose:",
+      "options": [
+        "4",
+        "5",
+        "6",
+        "12"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "glucose"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Glucose is a hexose sugar with the molecular formula C₆H₁₂O₆, containing exactly 6 carbon atoms arranged in a linear or ring structure."
+    },
+    {
+      "question_text": "Enzymes are made of:",
+      "options": [
+        "Lipids",
+        "Proteins",
+        "Nucleic acids",
+        "Carbohydrates"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "enzymes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Enzymes are biological catalysts composed of amino acids linked together in specific 3D structures that enable them to bind substrates and accelerate chemical reactions, which is the defining characteristic of proteins."
+    },
+    {
+      "question_text": "Apomixis is a form of:",
+      "options": [
+        "Sexual reproduction",
+        "Asexual reproduction producing seeds",
+        "Mutation",
+        "Vegetative propagation only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Reproduction in Plants",
+      "topic_tags": [
+        "apomixis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Apomixis is the production of seeds without meiosis or fertilization, bypassing sexual reproduction entirely. These seeds develop from somatic cells, making it asexual reproduction that still produces seeds—distinguishing it from typical vegetative propagation which doesn't involve seeds."
+    },
+    {
+      "question_text": "Largest gland in human body:",
+      "options": [
+        "Pancreas",
+        "Liver",
+        "Thyroid",
+        "Adrenal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Digestive System",
+      "topic_tags": [
+        "liver"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The liver is the largest internal organ and gland in the human body, weighing approximately 1.5 kg in adults. The pancreas is smaller, while the thyroid and adrenal glands are much smaller endocrine glands."
+    },
+    {
+      "question_text": "Ovulation in human female occurs around day:",
+      "options": [
+        "1",
+        "14",
+        "21",
+        "28"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "ovulation"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In a typical 28-day menstrual cycle, ovulation occurs during the luteal phase transition, approximately 14 days after menstruation begins. This timing allows the corpus luteum sufficient time to develop and maintain the uterine lining for potential implantation."
+    }
   ]
 }

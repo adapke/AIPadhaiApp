@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Nationalism in India",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Rabindranath Tagore wrote \"Jana Gana Mana,\" which became India's national anthem after independence in 1950. He originally composed it in Bengali in 1911, and it was later officially adopted as the national anthem."
     },
     {
       "question_text": "Globalization in India accelerated after which year?",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Globalization",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "India's economic liberalization policies began in 1991, opening markets to foreign investment and trade, fundamentally accelerating the country's integration into the global economy. This marked the decisive shift from a closed, state-controlled economy to a globalized one."
     },
     {
       "question_text": "Major iron-ore producing state in India:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Resources",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Jharkhand is India's largest iron-ore producer, accounting for over 30% of national production. The state has abundant mineral resources, particularly in the Singhbhum district, making it the dominant iron-ore mining region in the country."
     },
     {
       "question_text": "First general election in India was held in:",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Political History",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "India's Constitution was adopted on January 26, 1950, establishing it as a republic. The first general elections were then conducted between 1951-52 to elect members of the Lok Sabha and state assemblies under this new constitutional framework."
     },
     {
       "question_text": "Power sharing arrangement most common in India:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Federalism",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "India's Constitution establishes a federal system dividing powers between the central government and state governments, with each level having distinct jurisdictions over legislative, executive, and judicial matters. This structural power-sharing mechanism is the foundational framework for Indian governance."
     }
   ]
 }

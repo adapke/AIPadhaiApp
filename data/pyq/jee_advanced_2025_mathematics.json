@@ -8,228 +8,435 @@
   "questions": [
     {
       "question_text": "Value of lim x→0 (sin x)/x is:",
-      "options": ["0", "1", "∞", "Does not exist"],
+      "options": [
+        "0",
+        "1",
+        "∞",
+        "Does not exist"
+      ],
       "correct_answer": "B",
       "chapter": "Limits and Continuity",
-      "topic_tags": ["limits", "standard_limit"],
+      "topic_tags": [
+        "limits",
+        "standard_limit"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a fundamental limit in calculus. Using L'Hôpital's rule (since we get 0/0 form), we differentiate numerator and denominator: d(sin x)/dx = cos x and d(x)/dx = 1, giving cos(0)/1 = 1. Alternatively, this limit equals 1 by the standard Taylor series expansion of sin x ≈ x for small x."
     },
     {
       "question_text": "Derivative of sin(x²) with respect to x is:",
-      "options": ["cos(x²)", "2x·cos(x²)", "2x·sin(x²)", "-cos(x²)"],
+      "options": [
+        "cos(x²)",
+        "2x·cos(x²)",
+        "2x·sin(x²)",
+        "-cos(x²)"
+      ],
       "correct_answer": "B",
       "chapter": "Differentiation",
-      "topic_tags": ["chain_rule"],
+      "topic_tags": [
+        "chain_rule"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the chain rule: d/dx[sin(x²)] = cos(x²) · d/dx(x²) = cos(x²) · 2x = 2x·cos(x²). The inner function x² differentiates to 2x, which multiplies the derivative of the outer sine function."
     },
     {
       "question_text": "∫ x² dx equals:",
-      "options": ["x³/3 + C", "2x + C", "x³ + C", "x²/2 + C"],
+      "options": [
+        "x³/3 + C",
+        "2x + C",
+        "x³ + C",
+        "x²/2 + C"
+      ],
       "correct_answer": "A",
       "chapter": "Integration",
-      "topic_tags": ["basic_integral"],
+      "topic_tags": [
+        "basic_integral"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the power rule for integration, ∫xⁿ dx = xⁿ⁺¹/(n+1) + C, we get ∫x² dx = x³/3 + C. The exponent increases by 1 and we divide by the new exponent."
     },
     {
       "question_text": "If |z|=1, then z·z̄ equals:",
-      "options": ["0", "1", "i", "2"],
+      "options": [
+        "0",
+        "1",
+        "i",
+        "2"
+      ],
       "correct_answer": "B",
       "chapter": "Complex Numbers",
-      "topic_tags": ["modulus", "conjugate"],
+      "topic_tags": [
+        "modulus",
+        "conjugate"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For any complex number z, the product z·z̄ equals |z|². Since |z|=1, we have z·z̄ = 1² = 1."
     },
     {
       "question_text": "Number of solutions of sin x = 1/2 in [0, 2π) is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Trigonometric Equations",
-      "topic_tags": ["sin", "equation"],
+      "topic_tags": [
+        "sin",
+        "equation"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In the interval [0, 2π), sin x = 1/2 at x = π/6 (in the first quadrant) and x = 5π/6 (in the second quadrant), since sine is positive in both quadrants I and II and equals 1/2 at these two angles."
     },
     {
       "question_text": "Equation of line through (2,3) with slope 2 is:",
-      "options": ["y = 2x + 1", "y = 2x - 1", "y = 2x + 3", "y - 3 = 2(x - 2)"],
+      "options": [
+        "y = 2x + 1",
+        "y = 2x - 1",
+        "y = 2x + 3",
+        "y - 3 = 2(x - 2)"
+      ],
       "correct_answer": "D",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["line_equation"],
+      "topic_tags": [
+        "line_equation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using point-slope form y - y₁ = m(x - x₁) with point (2,3) and slope m = 2 gives y - 3 = 2(x - 2). While option A simplifies to this same line, option D is the direct application of point-slope form."
     },
     {
       "question_text": "Eccentricity of ellipse x²/25 + y²/16 = 1 is:",
-      "options": ["3/5", "4/5", "5/4", "1"],
+      "options": [
+        "3/5",
+        "4/5",
+        "5/4",
+        "1"
+      ],
       "correct_answer": "A",
       "chapter": "Conic Sections",
-      "topic_tags": ["ellipse", "eccentricity"],
+      "topic_tags": [
+        "ellipse",
+        "eccentricity"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For an ellipse x²/a² + y²/b² = 1 where a > b, eccentricity e = √(a² - b²)/a. Here a² = 25 and b² = 16, so e = √(25 - 16)/5 = √9/5 = 3/5."
     },
     {
       "question_text": "If A and B are independent events with P(A)=0.5, P(B)=0.4, then P(A∩B) is:",
-      "options": ["0.1", "0.2", "0.5", "0.9"],
+      "options": [
+        "0.1",
+        "0.2",
+        "0.5",
+        "0.9"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["independent_events"],
+      "topic_tags": [
+        "independent_events"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For independent events, the probability of both occurring equals the product of their individual probabilities: P(A∩B) = P(A) × P(B) = 0.5 × 0.4 = 0.2."
     },
     {
       "question_text": "Coefficient of x² in (1+x)⁵ is:",
-      "options": ["5", "10", "20", "25"],
+      "options": [
+        "5",
+        "10",
+        "20",
+        "25"
+      ],
       "correct_answer": "B",
       "chapter": "Binomial Theorem",
-      "topic_tags": ["binomial_coefficient"],
+      "topic_tags": [
+        "binomial_coefficient"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the binomial theorem, the coefficient of x² in (1+x)⁵ is C(5,2) = 5!/(2!3!) = (5×4)/(2×1) = 10."
     },
     {
       "question_text": "If A = [[1, 2], [3, 4]], then det(A) is:",
-      "options": ["-2", "2", "-10", "10"],
+      "options": [
+        "-2",
+        "2",
+        "-10",
+        "10"
+      ],
       "correct_answer": "A",
       "chapter": "Matrices and Determinants",
-      "topic_tags": ["determinant_2x2"],
+      "topic_tags": [
+        "determinant_2x2"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a 2×2 matrix, det(A) = (1)(4) - (2)(3) = 4 - 6 = -2."
     },
     {
       "question_text": "Number of arrangements of letters in 'MATH' is:",
-      "options": ["12", "16", "24", "48"],
+      "options": [
+        "12",
+        "16",
+        "24",
+        "48"
+      ],
       "correct_answer": "C",
       "chapter": "Permutations and Combinations",
-      "topic_tags": ["permutations"],
+      "topic_tags": [
+        "permutations"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The word 'MATH' has 4 distinct letters with no repetitions, so the number of arrangements is 4! = 4 × 3 × 2 × 1 = 24."
     },
     {
       "question_text": "Sum of first 100 natural numbers is:",
-      "options": ["5050", "5000", "10100", "1000"],
+      "options": [
+        "5050",
+        "5000",
+        "10100",
+        "1000"
+      ],
       "correct_answer": "A",
       "chapter": "Sequences and Series",
-      "topic_tags": ["sum_AP"],
+      "topic_tags": [
+        "sum_AP"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the formula for the sum of first n natural numbers: S = n(n+1)/2. For n=100: S = 100(101)/2 = 10100/2 = 5050."
     },
     {
       "question_text": "Maximum value of 3sin θ + 4cos θ is:",
-      "options": ["3", "4", "5", "7"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Trigonometric Functions",
-      "topic_tags": ["max_min", "a_sin_b_cos"],
+      "topic_tags": [
+        "max_min",
+        "a_sin_b_cos"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For expressions of the form a sin θ + b cos θ, the maximum value is √(a² + b²). Here, the maximum is √(3² + 4²) = √(9 + 16) = √25 = 5."
     },
     {
       "question_text": "If f(x) = x³ - 3x + 2, then f'(1) is:",
-      "options": ["-3", "0", "3", "6"],
+      "options": [
+        "-3",
+        "0",
+        "3",
+        "6"
+      ],
       "correct_answer": "B",
       "chapter": "Differentiation",
-      "topic_tags": ["polynomial_derivative"],
+      "topic_tags": [
+        "polynomial_derivative"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Taking the derivative of f(x) = x³ - 3x + 2 gives f'(x) = 3x² - 3. Evaluating at x = 1: f'(1) = 3(1)² - 3 = 3 - 3 = 0."
     },
     {
       "question_text": "∫₀^π sin x dx equals:",
-      "options": ["0", "1", "2", "π"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "π"
+      ],
       "correct_answer": "C",
       "chapter": "Definite Integration",
-      "topic_tags": ["definite_integral", "sin"],
+      "topic_tags": [
+        "definite_integral",
+        "sin"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The antiderivative of sin x is -cos x. Evaluating from 0 to π: [-cos π] - [-cos 0] = [-(-1)] - [-1] = 1 + 1 = 2."
     },
     {
       "question_text": "Distance from origin to line 3x + 4y - 5 = 0 is:",
-      "options": ["1", "2", "3", "5"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
       "correct_answer": "A",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["distance_from_line"],
+      "topic_tags": [
+        "distance_from_line"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The distance from a point (x₀, y₀) to line ax + by + c = 0 uses the formula: d = |ax₀ + by₀ + c|/√(a² + b²). For origin (0,0) and line 3x + 4y - 5 = 0: d = |-5|/√(9 + 16) = 5/5 = 1."
     },
     {
       "question_text": "Domain of f(x) = √(x-2) is:",
-      "options": ["x > 0", "x ≥ 0", "x ≥ 2", "x > 2"],
+      "options": [
+        "x > 0",
+        "x ≥ 0",
+        "x ≥ 2",
+        "x > 2"
+      ],
       "correct_answer": "C",
       "chapter": "Functions",
-      "topic_tags": ["domain"],
+      "topic_tags": [
+        "domain"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The expression under a square root must be non-negative. Setting x - 2 ≥ 0 gives x ≥ 2, which is the complete set of real numbers for which the function is defined."
     },
     {
       "question_text": "tan(π/4) equals:",
-      "options": ["0", "1/2", "1", "√3"],
+      "options": [
+        "0",
+        "1/2",
+        "1",
+        "√3"
+      ],
       "correct_answer": "C",
       "chapter": "Trigonometric Functions",
-      "topic_tags": ["standard_value"],
+      "topic_tags": [
+        "standard_value"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At π/4 radians (45°), sine and cosine are equal: sin(π/4) = cos(π/4) = √2/2. Therefore, tan(π/4) = sin(π/4)/cos(π/4) = 1."
     },
     {
       "question_text": "If the line y = mx + c is tangent to y² = 4x, then c equals:",
-      "options": ["1/m", "m", "-1/m", "0"],
+      "options": [
+        "1/m",
+        "m",
+        "-1/m",
+        "0"
+      ],
       "correct_answer": "A",
       "chapter": "Conic Sections",
-      "topic_tags": ["parabola_tangent"],
+      "topic_tags": [
+        "parabola_tangent"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For the line y = mx + c to be tangent to the parabola y² = 4x, substitute the line equation into the parabola: (mx + c)² = 4x. Expanding gives m²x² + 2mcx + c² = 4x. Rearranging: m²x² + (2mc - 4)x + c² = 0. For tangency, the discriminant must equal zero: (2mc - 4)² - 4m²c² = 0, which simplifies to 16 - 16mc = 0, giving c = 1/m."
     },
     {
       "question_text": "Value of i⁴ is:",
-      "options": ["i", "-i", "1", "-1"],
+      "options": [
+        "i",
+        "-i",
+        "1",
+        "-1"
+      ],
       "correct_answer": "C",
       "chapter": "Complex Numbers",
-      "topic_tags": ["powers_of_i"],
+      "topic_tags": [
+        "powers_of_i"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Powers of i follow a repeating cycle: i¹ = i, i² = -1, i³ = -i, i⁴ = 1. Since i² = -1, then i⁴ = (i²)² = (-1)² = 1."
     },
     {
       "question_text": "Sum to infinity of GP 1 + 1/2 + 1/4 + ... is:",
-      "options": ["1", "2", "3", "Infinity"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "Infinity"
+      ],
       "correct_answer": "B",
       "chapter": "Sequences and Series",
-      "topic_tags": ["GP_sum_infinity"],
+      "topic_tags": [
+        "GP_sum_infinity"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a geometric progression with first term a = 1 and common ratio r = 1/2, the sum to infinity is a/(1-r) = 1/(1-1/2) = 1/(1/2) = 2. This formula applies when |r| < 1."
     },
     {
       "question_text": "Vector cross product i×j equals:",
-      "options": ["k", "-k", "0", "1"],
+      "options": [
+        "k",
+        "-k",
+        "0",
+        "1"
+      ],
       "correct_answer": "A",
       "chapter": "Vectors",
-      "topic_tags": ["cross_product"],
+      "topic_tags": [
+        "cross_product"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The standard basis vectors follow the right-hand rule: i×j points in the direction of k with magnitude 1, so i×j = k."
     },
     {
       "question_text": "If sin⁻¹(x) = π/6, then x is:",
-      "options": ["1/2", "√3/2", "1", "0"],
+      "options": [
+        "1/2",
+        "√3/2",
+        "1",
+        "0"
+      ],
       "correct_answer": "A",
       "chapter": "Inverse Trig",
-      "topic_tags": ["arcsin"],
+      "topic_tags": [
+        "arcsin"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "sin⁻¹(x) = π/6 means we need the value whose sine equals π/6. Since sin(π/6) = 1/2, we have x = 1/2."
     },
     {
       "question_text": "If A is a 3×3 matrix with det(A)=2, then det(2A) is:",
-      "options": ["4", "8", "16", "32"],
+      "options": [
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
       "correct_answer": "C",
       "chapter": "Determinants",
-      "topic_tags": ["determinant_scalar"],
+      "topic_tags": [
+        "determinant_scalar"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When scaling a matrix by a scalar k, the determinant scales by k^n where n is the matrix dimension. Here, det(2A) = 2³ × det(A) = 8 × 2 = 16."
     },
     {
       "question_text": "Probability of getting at least one head in 2 coin tosses is:",
-      "options": ["1/4", "1/2", "3/4", "1"],
+      "options": [
+        "1/4",
+        "1/2",
+        "3/4",
+        "1"
+      ],
       "correct_answer": "C",
       "chapter": "Probability",
-      "topic_tags": ["coin_toss", "at_least"],
+      "topic_tags": [
+        "coin_toss",
+        "at_least"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The complement approach is most efficient: the probability of at least one head equals 1 minus the probability of no heads (both tails). P(both tails) = 1/2 × 1/2 = 1/4, so P(at least one head) = 1 - 1/4 = 3/4."
     }
   ]
 }

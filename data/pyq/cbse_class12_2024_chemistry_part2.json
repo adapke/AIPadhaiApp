@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "board_part2",
   "questions": [
-    {"question_text": "Density of unit cell (BCC, atomic mass M, edge a):", "options": ["2M/(N_A·a³)", "M/(N_A·a³)", "4M/(N_A·a³)", "6M/(N_A·a³)"], "correct_answer": "A", "chapter": "Solid State", "topic_tags": ["density_BCC"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Schottky defect in NaCl is observed when:", "options": ["Cation + anion missing pair-wise", "Extra electron", "Cation interstitial", "Anion replaced"], "correct_answer": "A", "chapter": "Solid State", "topic_tags": ["Schottky"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Vapor pressure of solution Raoult's law: P = ?", "options": ["P°_pure × x_solvent", "P°_pure × x_solute", "Sum of P°s", "x_solute/x_solvent"], "correct_answer": "A", "chapter": "Solutions", "topic_tags": ["Raoult"], "difficulty": "medium", "marks": 1},
-    {"question_text": "van't Hoff factor for NaCl (assumed full dissociation):", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Solutions", "topic_tags": ["van_t_Hoff"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Conductance of solution increases with:", "options": ["Decrease in concentration", "Increase in concentration (in low-conc strong electrolyte)", "Both A in dilution, B otherwise — molar conductance complex", "None"], "correct_answer": "C", "chapter": "Electrochemistry", "topic_tags": ["conductance"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Nernst equation at 25°C uses 0.0591 because:", "options": ["RT/F at 298K in log10", "Pure coincidence", "Faraday in kJ", "Avogadro number"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["Nernst"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Pseudo first-order reaction: hydrolysis of ester in excess water has order:", "options": ["1 (in ester) — pseudo first", "2 overall", "0", "3"], "correct_answer": "A", "chapter": "Kinetics", "topic_tags": ["pseudo_first"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Brownian motion in colloid:", "options": ["Sedimentation downward", "Random zigzag due to molecular collisions", "Smooth straight line", "Doesn't exist"], "correct_answer": "B", "chapter": "Surface Chemistry", "topic_tags": ["Brownian"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Electrophoresis movement of colloidal particles in electric field:", "options": ["Toward like-charged electrode", "Toward oppositely-charged electrode", "Stationary", "Random"], "correct_answer": "B", "chapter": "Surface Chemistry", "topic_tags": ["electrophoresis"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Zone refining purifies metals by:", "options": ["Heating in air", "Moving molten zone through ingot — impurities concentrate at one end", "Acid treatment", "Distillation"], "correct_answer": "B", "chapter": "Metallurgy", "topic_tags": ["zone_refining"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Group 15 element with maximum metallic character:", "options": ["N", "P", "As", "Bi"], "correct_answer": "D", "chapter": "p-Block", "topic_tags": ["metallic_trend"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Maximum oxidation state of S in compounds:", "options": ["+2", "+4", "+6", "+8"], "correct_answer": "C", "chapter": "p-Block", "topic_tags": ["S_OS"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Most stable interhalogen compound type:", "options": ["XX'", "XX'_3", "XX'_5", "XX'_7"], "correct_answer": "D", "chapter": "p-Block", "topic_tags": ["interhalogen"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Iso-electronic species: N3⁻, O2⁻ — number of electrons:", "options": ["10", "12", "16", "Different counts"], "correct_answer": "A", "chapter": "p-Block", "topic_tags": ["isoelectronic"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Atomic radii of Cu vs Ag vs Au:", "options": ["Cu > Ag > Au", "Au > Ag > Cu", "Ag > Au > Cu", "All equal"], "correct_answer": "C", "chapter": "d-Block", "topic_tags": ["lanthanoid_contraction"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Number of unpaired electrons in [Fe(H2O)6]³⁺ (weak field):", "options": ["3", "4", "5", "6"], "correct_answer": "C", "chapter": "Coordination Compounds", "topic_tags": ["high_spin"], "difficulty": "hard", "marks": 1},
-    {"question_text": "IUPAC name of [Pt(NH3)2Cl2]:", "options": ["Diamminedichloroplatinum(II)", "Cisplatin (common name)", "Both", "Diamine dichloride"], "correct_answer": "C", "chapter": "Coordination Compounds", "topic_tags": ["IUPAC_complex"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Reactivity of haloalkanes in SN2 increases with:", "options": ["More substitution at α-C", "Less substitution at α-C", "Bulkier R", "No effect"], "correct_answer": "B", "chapter": "Haloalkanes", "topic_tags": ["SN2_steric"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Type of isomerism in glucose ↔ fructose:", "options": ["Geometrical", "Functional", "Optical only", "Tautomerism"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["functional_isomer"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Most acidic functional group:", "options": ["-OH (alcohol)", "-COOH (carboxylic acid)", "-NH2", "-C≡CH"], "correct_answer": "B", "chapter": "Functional Groups", "topic_tags": ["acidity_groups"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Reagent for Riemer-Tiemann reaction:", "options": ["CHCl3 + NaOH (phenol → salicylaldehyde)", "AlCl3", "H2SO4", "Br2"], "correct_answer": "A", "chapter": "Phenols", "topic_tags": ["Riemer_Tiemann"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Aldol condensation gives:", "options": ["β-hydroxy aldehyde (or further α,β-unsaturated)", "Acid", "Ester", "Alcohol only"], "correct_answer": "A", "chapter": "Aldehydes", "topic_tags": ["aldol_product"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Wolff-Kishner reduction converts C=O to:", "options": ["C-OH", "CH2 (full reduction)", "Acid", "Ether"], "correct_answer": "B", "chapter": "Aldehydes", "topic_tags": ["Wolff_Kishner"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Buna-S rubber monomers:", "options": ["Butadiene + styrene", "Isoprene only", "Chloroprene", "Ethene"], "correct_answer": "A", "chapter": "Polymers", "topic_tags": ["Buna_S"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Tincture of iodine antiseptic is iodine in:", "options": ["Water", "Ethanol", "Acetone", "Petroleum"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["tincture"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Density of unit cell (BCC, atomic mass M, edge a):",
+      "options": [
+        "2M/(N_A·a³)",
+        "M/(N_A·a³)",
+        "4M/(N_A·a³)",
+        "6M/(N_A·a³)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "density_BCC"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "In a BCC unit cell, there are 2 atoms total (8 corner atoms × 1/8 + 1 center atom = 2). Density equals mass per unit volume: (2 atoms × M/N_A)/(a³) = 2M/(N_A·a³)."
+    },
+    {
+      "question_text": "Schottky defect in NaCl is observed when:",
+      "options": [
+        "Cation + anion missing pair-wise",
+        "Extra electron",
+        "Cation interstitial",
+        "Anion replaced"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "Schottky"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "A Schottky defect involves equal numbers of cations and anions leaving their lattice sites simultaneously, creating vacant lattice positions while maintaining overall electrical neutrality. This paired absence is characteristic of and defines Schottky defects."
+    },
+    {
+      "question_text": "Vapor pressure of solution Raoult's law: P = ?",
+      "options": [
+        "P°_pure × x_solvent",
+        "P°_pure × x_solute",
+        "Sum of P°s",
+        "x_solute/x_solvent"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "Raoult"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Raoult's law states that the vapor pressure of a solution equals the vapor pressure of the pure solvent multiplied by the mole fraction of the solvent. Since the solvent is the major component, only its vapor pressure contributes significantly, and it's reduced proportionally by its mole fraction in the solution."
+    },
+    {
+      "question_text": "van't Hoff factor for NaCl (assumed full dissociation):",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "van_t_Hoff"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "NaCl completely dissociates into two particles: one Na⁺ ion and one Cl⁻ ion. The van't Hoff factor equals the number of particles produced per formula unit, so i = 2."
+    },
+    {
+      "question_text": "Conductance of solution increases with:",
+      "options": [
+        "Decrease in concentration",
+        "Increase in concentration (in low-conc strong electrolyte)",
+        "Both A in dilution, B otherwise — molar conductance complex",
+        "None"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "conductance"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Conductance depends on both the number of ions (increases with concentration) and ion mobility (decreases at high concentrations due to inter-ionic attractions). In dilute strong electrolytes, molar conductance increases during dilution as ions move more freely, while total conductance still increases with concentration. At higher concentrations, inter-ionic effects dominate the behavior, making the relationship more complex."
+    },
+    {
+      "question_text": "Nernst equation at 25°C uses 0.0591 because:",
+      "options": [
+        "RT/F at 298K in log10",
+        "Pure coincidence",
+        "Faraday in kJ",
+        "Avogadro number"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Nernst"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "At 25°C (298K), converting the natural logarithm form of the Nernst equation to base-10 logarithm requires multiplying by 2.303. The term 0.0591 equals (2.303 × R × T) / F, where R is the gas constant, T is 298K, and F is Faraday's constant—this specific value emerges from calculating RT/F at this temperature and converting to log₁₀."
+    },
+    {
+      "question_text": "Pseudo first-order reaction: hydrolysis of ester in excess water has order:",
+      "options": [
+        "1 (in ester) — pseudo first",
+        "2 overall",
+        "0",
+        "3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "pseudo_first"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In ester hydrolysis with excess water, the true rate law is second-order overall (first-order in ester, first-order in water). However, since water is in vast excess, its concentration remains essentially constant throughout the reaction, so it can be incorporated into the rate constant, making the observed kinetics appear first-order in ester only—this is called pseudo first-order kinetics."
+    },
+    {
+      "question_text": "Brownian motion in colloid:",
+      "options": [
+        "Sedimentation downward",
+        "Random zigzag due to molecular collisions",
+        "Smooth straight line",
+        "Doesn't exist"
+      ],
+      "correct_answer": "B",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "Brownian"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Brownian motion occurs when colloidal particles are bombarded randomly by surrounding molecules from all directions. Since collisions are unequal and random, particles move in an unpredictable zigzag pattern rather than settling smoothly or moving in a straight line."
+    },
+    {
+      "question_text": "Electrophoresis movement of colloidal particles in electric field:",
+      "options": [
+        "Toward like-charged electrode",
+        "Toward oppositely-charged electrode",
+        "Stationary",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "electrophoresis"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Colloidal particles carry a net electric charge (positive or negative) due to selective adsorption of ions. In an electric field, they experience an electrostatic force toward the electrode opposite to their own charge, causing directional movement—this is electrophoresis."
+    },
+    {
+      "question_text": "Zone refining purifies metals by:",
+      "options": [
+        "Heating in air",
+        "Moving molten zone through ingot — impurities concentrate at one end",
+        "Acid treatment",
+        "Distillation"
+      ],
+      "correct_answer": "B",
+      "chapter": "Metallurgy",
+      "topic_tags": [
+        "zone_refining"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Zone refining exploits the principle that impurities have different solubility in molten versus solid metal. As a molten zone slowly moves through the ingot, impurities preferentially remain in the liquid phase and accumulate at the trailing end, leaving purified solid metal behind."
+    },
+    {
+      "question_text": "Group 15 element with maximum metallic character:",
+      "options": [
+        "N",
+        "P",
+        "As",
+        "Bi"
+      ],
+      "correct_answer": "D",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "metallic_trend"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In Group 15, metallic character increases down the group as atomic size increases and ionization energy decreases. Bismuth (Bi) is at the bottom of the group, making it the most metallic element, displaying true metallic properties like electrical conductivity and metallic luster."
+    },
+    {
+      "question_text": "Maximum oxidation state of S in compounds:",
+      "options": [
+        "+2",
+        "+4",
+        "+6",
+        "+8"
+      ],
+      "correct_answer": "C",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "S_OS"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Sulfur has an electron configuration of [Ne]3s²3p⁴, allowing it to expand its octet and use d-orbitals. The maximum oxidation state occurs in compounds like H₂SO₄ and SO₃, where all six valence electrons are lost, achieving +6 oxidation state."
+    },
+    {
+      "question_text": "Most stable interhalogen compound type:",
+      "options": [
+        "XX'",
+        "XX'_3",
+        "XX'_5",
+        "XX'_7"
+      ],
+      "correct_answer": "D",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "interhalogen"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Interhalogen compounds follow a pattern where the more electronegative halogen is central and forms maximum covalent bonds. XX'₇ represents halogens bonded in a 1:7 ratio, maximizing bonding and achieving the most stable electron configuration through expanded octets and optimal orbital overlap."
+    },
+    {
+      "question_text": "Iso-electronic species: N3⁻, O2⁻ — number of electrons:",
+      "options": [
+        "10",
+        "12",
+        "16",
+        "Different counts"
+      ],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "isoelectronic"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "N3⁻ has 7 + 3 = 10 electrons, and O2⁻ has 8 + 2 = 10 electrons. Both species are isoelectronic with neon, each containing 10 electrons total."
+    },
+    {
+      "question_text": "Atomic radii of Cu vs Ag vs Au:",
+      "options": [
+        "Cu > Ag > Au",
+        "Au > Ag > Cu",
+        "Ag > Au > Cu",
+        "All equal"
+      ],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "lanthanoid_contraction"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Moving down Group 11 (Cu → Ag → Au), atomic radius increases due to added electron shells, so Ag > Cu. However, Au is smaller than Ag because lanthanide contraction reduces its size despite being lower in the group, making the order Ag > Au > Cu."
+    },
+    {
+      "question_text": "Number of unpaired electrons in [Fe(H2O)6]³⁺ (weak field):",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "high_spin"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Fe³⁺ has electron configuration [Ar]3d⁵. In a weak field (weak ligand), the d-orbitals split minimally, so electrons occupy all five d-orbitals singly before pairing occurs, resulting in 5 unpaired electrons regardless of the octahedral geometry."
+    },
+    {
+      "question_text": "IUPAC name of [Pt(NH3)2Cl2]:",
+      "options": [
+        "Diamminedichloroplatinum(II)",
+        "Cisplatin (common name)",
+        "Both",
+        "Diamine dichloride"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "IUPAC_complex"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The complex contains two ammonia ligands (diammine) and two chloride ligands (dichloro) coordinated to platinum(II). \"Diamminedichloroplatinum(II)\" is the proper IUPAC systematic name, while \"cisplatin\" is the widely recognized common name for this important anticancer drug, making both designations correct."
+    },
+    {
+      "question_text": "Reactivity of haloalkanes in SN2 increases with:",
+      "options": [
+        "More substitution at α-C",
+        "Less substitution at α-C",
+        "Bulkier R",
+        "No effect"
+      ],
+      "correct_answer": "B",
+      "chapter": "Haloalkanes",
+      "topic_tags": [
+        "SN2_steric"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "SN2 reactions proceed through a single-step bimolecular mechanism requiring nucleophilic attack from the back side of the C-X bond. Increased substitution at the α-carbon (the carbon bearing the leaving group) creates steric hindrance that blocks the nucleophile's approach, slowing the reaction. Therefore, less substitution—primary > secondary > tertiary—favors faster SN2 reactions."
+    },
+    {
+      "question_text": "Type of isomerism in glucose ↔ fructose:",
+      "options": [
+        "Geometrical",
+        "Functional",
+        "Optical only",
+        "Tautomerism"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "functional_isomer"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Glucose and fructose are both C₆H₁₂O₆ with identical molecular formulas but different functional groups—glucose contains an aldehyde group while fructose contains a ketone group. This difference in functional group type defines functional isomerism, making B correct."
+    },
+    {
+      "question_text": "Most acidic functional group:",
+      "options": [
+        "-OH (alcohol)",
+        "-COOH (carboxylic acid)",
+        "-NH2",
+        "-C≡CH"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functional Groups",
+      "topic_tags": [
+        "acidity_groups"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Carboxylic acids are most acidic because the carboxyl group's structure allows resonance stabilization of the conjugate base (carboxylate ion), making it easier to donate a proton compared to alcohols, amines, or alkynes."
+    },
+    {
+      "question_text": "Reagent for Riemer-Tiemann reaction:",
+      "options": [
+        "CHCl3 + NaOH (phenol → salicylaldehyde)",
+        "AlCl3",
+        "H2SO4",
+        "Br2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Phenols",
+      "topic_tags": [
+        "Riemer_Tiemann"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The Riemer-Tiemann reaction is a specific named reaction where chloroform (CHCl3) reacts with a phenol in the presence of strong base (NaOH) to form an ortho-substituted aldehyde, typically salicylaldehyde. This combination of reagents is characteristic and defines this particular reaction."
+    },
+    {
+      "question_text": "Aldol condensation gives:",
+      "options": [
+        "β-hydroxy aldehyde (or further α,β-unsaturated)",
+        "Acid",
+        "Ester",
+        "Alcohol only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "aldol_product"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Aldol condensation involves nucleophilic addition of an enolate to a carbonyl group, forming a C-C bond and creating a β-hydroxy carbonyl product. This intermediate can then lose water through dehydration to yield an α,β-unsaturated carbonyl compound, making both forms characteristic aldol products."
+    },
+    {
+      "question_text": "Wolff-Kishner reduction converts C=O to:",
+      "options": [
+        "C-OH",
+        "CH2 (full reduction)",
+        "Acid",
+        "Ether"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "Wolff_Kishner"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Wolff-Kishner reduction uses hydrazine (N2H4) and base to reduce carbonyl groups to methylene (CH2) by converting C=O to a hydrazone intermediate, which is then decomposed with heat to eliminate nitrogen gas, yielding the fully reduced CH2 product."
+    },
+    {
+      "question_text": "Buna-S rubber monomers:",
+      "options": [
+        "Butadiene + styrene",
+        "Isoprene only",
+        "Chloroprene",
+        "Ethene"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "Buna_S"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Buna-S is a synthetic rubber produced by copolymerization of two distinct monomers: butadiene (a diene with four carbons) and styrene (an aromatic monomer). The name itself reflects this composition—\"Bu\" for butadiene, \"na\" for sodium (the catalyst), and \"S\" for styrene."
+    },
+    {
+      "question_text": "Tincture of iodine antiseptic is iodine in:",
+      "options": [
+        "Water",
+        "Ethanol",
+        "Acetone",
+        "Petroleum"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "tincture"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Iodine is poorly soluble in water but highly soluble in ethanol, making ethanol the ideal solvent for tincture of iodine. This solution provides better antiseptic efficacy and stability compared to other solvents, which is why ethanol has been historically used for pharmaceutical iodine preparations."
+    }
   ]
 }

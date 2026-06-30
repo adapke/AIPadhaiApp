@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Electromagnetic Induction",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Faraday's law mathematically states that the induced EMF equals the negative rate of change of magnetic flux through a circuit (ε = -dΦ/dt), establishing the fundamental relationship between these two quantities."
     },
     {
       "question_text": "Critical angle of a medium with refractive index 1.5 (rounded):",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Ray Optics",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "At the critical angle, light refracts at 90° to the normal. Using Snell's law: n·sin(θc) = 1·sin(90°), so sin(θc) = 1/1.5 = 0.667, giving θc ≈ 42°."
     },
     {
       "question_text": "Energy of photon E = hν. Unit of Planck's constant h:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Dual Nature",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Planck's constant h relates energy (in joules) to frequency (in hertz). Since E = hν and E is in joules while ν is in hertz (1/s), h must have units of J·s to make the equation dimensionally consistent."
     },
     {
       "question_text": "Logic gate that gives 1 only when both inputs are 0:",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Semiconductors",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A NOR gate is the negation of an OR gate. The OR gate outputs 1 when at least one input is 1, so NOR outputs 1 only when both inputs are 0 (when OR would output 0)."
     },
     {
       "question_text": "Two equal point charges +q at distance r. Force on each is:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Electric Charges",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "By Coulomb's law, the electrostatic force between two charges is F = kq₁q₂/r². With both charges equal to +q and separated by distance r, the force on each is F = kq·q/r² = kq²/r²."
     },
     {
       "question_text": "Maxwell's first equation (Gauss's law for E) is:",
@@ -82,7 +87,8 @@
       "correct_answer": "A",
       "chapter": "Electromagnetic Waves",
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Gauss's law for the electric field states that the electric flux through a closed surface equals the enclosed charge divided by the permittivity of free space. Option A correctly expresses this relationship with the surface integral of E·dA equaling q/ε₀."
     }
   ]
 }

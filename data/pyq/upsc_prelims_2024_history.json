@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Ancient India",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Chandragupta Maurya established the Maurya empire around 322 BCE after overthrowing the Nanda dynasty. While Ashoka became its most famous ruler and Bindusara was his successor, Chandragupta was the actual founder."
     },
     {
       "question_text": "Battle of Plassey was fought in:",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Modern India",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Battle of Plassey occurred in 1757 when Robert Clive defeated the Nawab of Bengal, marking a decisive British victory that established British dominance in India and laid the foundation for their colonial rule."
     },
     {
       "question_text": "Permanent Settlement of Bengal was introduced by:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Modern India",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Cornwallis introduced the Permanent Settlement of Bengal in 1793, which fixed land revenue assessments at a permanent rate and established zamindars as landlords with hereditary rights, fundamentally transforming Bengal's agrarian structure during British rule."
     },
     {
       "question_text": "Quit India Movement was launched in:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Freedom Struggle",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The Quit India Movement was launched on August 8, 1942, following Gandhi's call for immediate British withdrawal from India. This mass civil disobedience campaign became a pivotal moment in India's independence struggle during World War II."
     },
     {
       "question_text": "Who was the founder of the Bahmani Kingdom?",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Medieval India",
       "difficulty": "hard",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Alauddin Hasan declared independence from the Delhi Sultanate in 1347 and established the Bahmani Kingdom in the Deccan region, becoming its founder. He ruled as the first sultan of the dynasty, which lasted until 1518."
     },
     {
       "question_text": "Indus Valley Civilization sites Dholavira is in:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Ancient India",
       "difficulty": "medium",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Dholavira is located in the Kutch district of Gujarat, in northwestern India. It is one of the largest and most well-preserved Indus Valley Civilization sites, situated on an island in the Great Rann of Kutch."
     },
     {
       "question_text": "Vasco da Gama landed at Calicut in:",
@@ -95,7 +101,8 @@
       "correct_answer": "B",
       "chapter": "Modern India",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Vasco da Gama completed the first direct sea route from Europe to India, arriving at Calicut (Kozhikode) in 1498 after rounding the Cape of Good Hope. This voyage established a crucial maritime trade route between Europe and Asia."
     }
   ]
 }

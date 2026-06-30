@@ -17,7 +17,8 @@
       "correct_answer": "C",
       "chapter": "Periodic Table",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sodium's chemical symbol is Na, derived from its Latin name \"natrium.\" The other options represent different elements: S is sulfur, So is not a valid element symbol, and N is nitrogen."
     },
     {
       "question_text": "Insectivorous plant:",
@@ -30,7 +31,8 @@
       "correct_answer": "C",
       "chapter": "Life Processes",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Venus flytrap is an insectivorous plant because it actively traps and digests insects to obtain nitrogen and other nutrients from poor soil conditions, whereas mango, rose, and tulsi are autotrophic plants that obtain nutrients solely from soil and photosynthesis."
     },
     {
       "question_text": "Which is a renewable source of energy?",
@@ -43,7 +45,8 @@
       "correct_answer": "C",
       "chapter": "Energy",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Solar energy is renewable because the sun continuously radiates energy that can be captured and converted to electricity or heat without depleting the sun's resources, whereas coal and petroleum are finite fossil fuels that take millions of years to form."
     },
     {
       "question_text": "Newton's first law of motion is about:",
@@ -56,7 +59,8 @@
       "correct_answer": "A",
       "chapter": "Force and Motion",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Newton's first law states that an object at rest stays at rest and an object in motion stays in motion unless acted upon by an external force—this property is the definition of inertia, an object's resistance to changes in motion."
     },
     {
       "question_text": "Largest planet in solar system:",
@@ -69,7 +73,8 @@
       "correct_answer": "C",
       "chapter": "Universe",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Jupiter is the largest planet by both mass and volume, with a diameter roughly 11 times that of Earth and containing more mass than all other planets combined."
     }
   ]
 }

@@ -6,30 +6,430 @@
   "default_year": 2017,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Atomic mass of carbon-12 (defined):", "options": ["12 g/mol exactly", "12.011 g/mol", "13", "11"], "correct_answer": "A", "chapter": "Mole Concept", "topic_tags": ["C12_definition"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of moles of CO2 in 8.8 g (M=44):", "options": ["0.1", "0.2", "0.5", "1"], "correct_answer": "B", "chapter": "Mole Concept", "topic_tags": ["moles"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Empirical formula of glucose (C6H12O6):", "options": ["CHO", "CH2O", "C2H4O2", "CH3O"], "correct_answer": "B", "chapter": "Mole Concept", "topic_tags": ["empirical"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of significant figures in 0.002030:", "options": ["3", "4", "5", "6"], "correct_answer": "B", "chapter": "Some Basic Concepts", "topic_tags": ["sig_figs"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Aufbau order: 4s vs 3d filling:", "options": ["3d first", "4s first then 3d", "Both fill simultaneously", "Random"], "correct_answer": "B", "chapter": "Atomic Structure", "topic_tags": ["aufbau"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Quantum number n=2, l=1 represents:", "options": ["2s", "2p", "2d", "2f"], "correct_answer": "B", "chapter": "Atomic Structure", "topic_tags": ["orbital_label"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most electronegative element:", "options": ["F", "O", "Cl", "N"], "correct_answer": "A", "chapter": "Periodic Properties", "topic_tags": ["electronegativity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Maximum oxidation state of S:", "options": ["+4", "+5", "+6", "+7"], "correct_answer": "C", "chapter": "Redox", "topic_tags": ["S_max_OS"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Bond angle in H2O:", "options": ["90°", "104.5°", "107°", "120°"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["H2O_angle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Geometry of BF3:", "options": ["Bent", "Trigonal planar", "Tetrahedral", "Linear"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["BF3"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Solubility of NaCl in water is due to:", "options": ["Ion-dipole interactions", "Covalent bonds", "Hydrogen bonds", "Metallic bonds"], "correct_answer": "A", "chapter": "Solutions", "topic_tags": ["ion_dipole"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Real gas behaves like ideal gas at:", "options": ["High P, low T", "Low P, high T", "Both A", "STP only"], "correct_answer": "B", "chapter": "States of Matter", "topic_tags": ["ideal_gas"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Le Chatelier's principle: if temperature increased on exothermic reaction:", "options": ["Equilibrium shifts forward (more products)", "Backward (more reactants)", "No change", "Reaction stops"], "correct_answer": "B", "chapter": "Equilibrium", "topic_tags": ["Le_Chatelier"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Buffer made of weak acid + its salt. Henderson equation: pH = ?", "options": ["pKa + log[salt]/[acid]", "pKa + log[acid]/[salt]", "pKb", "pH = pKa"], "correct_answer": "A", "chapter": "Equilibrium", "topic_tags": ["Henderson"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Catalyst affects which property?", "options": ["Equilibrium constant", "Activation energy + rate", "Free energy", "Bond enthalpy"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["catalyst"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Cathode in galvanic cell undergoes:", "options": ["Oxidation", "Reduction", "Both", "Neither"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["cathode"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Standard hydrogen electrode potential:", "options": ["0 V", "0.76 V", "-0.76 V", "1 V"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["SHE"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most reactive metal (electrochemical series):", "options": ["Li", "Cs", "Na", "K"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["reactive_metal"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reagent to convert primary alcohol to aldehyde:", "options": ["KMnO4 hot", "PCC mild", "NaBH4", "LiAlH4"], "correct_answer": "B", "chapter": "Alcohols", "topic_tags": ["PCC"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hofmann elimination favours:", "options": ["More substituted alkene", "Less substituted (Hofmann product)", "No regioselectivity", "Substitution only"], "correct_answer": "B", "chapter": "Amines", "topic_tags": ["Hofmann_elim"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Saytzeff (Zaitsev) elimination favours:", "options": ["Less substituted alkene", "More substituted alkene", "Random", "Tertiary only"], "correct_answer": "B", "chapter": "Haloalkanes", "topic_tags": ["Saytzeff"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of stereoisomers of 2-bromobutane:", "options": ["1", "2 (enantiomers)", "3", "4"], "correct_answer": "B", "chapter": "Stereochemistry", "topic_tags": ["chirality"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Glucose ring form (most stable):", "options": ["α-D-glucopyranose", "β-D-glucopyranose", "Open chain", "α-furanose"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["glucose_form"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of α-amino acids in protein:", "options": ["10", "20", "30", "50"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["amino_acids"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Vitamin K is essential for:", "options": ["Vision", "Blood clotting", "Bone formation", "Energy"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["vitamin_K"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Atomic mass of carbon-12 (defined):",
+      "options": [
+        "12 g/mol exactly",
+        "12.011 g/mol",
+        "13",
+        "11"
+      ],
+      "correct_answer": "A",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "C12_definition"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Carbon-12 is the reference standard by definition—it is assigned exactly 12 atomic mass units (u) and exactly 12 g/mol by international agreement. This definition anchors the entire atomic mass scale and molar mass system."
+    },
+    {
+      "question_text": "Number of moles of CO2 in 8.8 g (M=44):",
+      "options": [
+        "0.1",
+        "0.2",
+        "0.5",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "moles"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the moles formula: moles = mass ÷ molar mass. With mass = 8.8 g and molar mass of CO₂ = 44 g/mol, we get moles = 8.8 ÷ 44 = 0.2 mol."
+    },
+    {
+      "question_text": "Empirical formula of glucose (C6H12O6):",
+      "options": [
+        "CHO",
+        "CH2O",
+        "C2H4O2",
+        "CH3O"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "empirical"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The empirical formula is the simplest whole-number ratio of atoms in a compound. Dividing all subscripts in C6H12O6 by their greatest common divisor (6) gives CH2O."
+    },
+    {
+      "question_text": "Number of significant figures in 0.002030:",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Some Basic Concepts",
+      "topic_tags": [
+        "sig_figs"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Leading zeros (the three zeros at the start) are never significant. The significant figures are 2, 0, 3, and the trailing zero after the decimal point, giving 4 significant figures total."
+    },
+    {
+      "question_text": "Aufbau order: 4s vs 3d filling:",
+      "options": [
+        "3d first",
+        "4s first then 3d",
+        "Both fill simultaneously",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "aufbau"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The 4s orbital fills before 3d because it has lower energy when empty. However, once 3d orbitals begin filling, they become lower in energy than 4s, which is why 4s electrons are removed first during ionization of transition metals."
+    },
+    {
+      "question_text": "Quantum number n=2, l=1 represents:",
+      "options": [
+        "2s",
+        "2p",
+        "2d",
+        "2f"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "orbital_label"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The principal quantum number n=2 indicates the second energy level, and the angular momentum quantum number l=1 corresponds to the p orbital (l=0 is s, l=1 is p, l=2 is d, l=3 is f). Therefore, n=2, l=1 represents the 2p orbital."
+    },
+    {
+      "question_text": "Most electronegative element:",
+      "options": [
+        "F",
+        "O",
+        "Cl",
+        "N"
+      ],
+      "correct_answer": "A",
+      "chapter": "Periodic Properties",
+      "topic_tags": [
+        "electronegativity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Fluorine has the highest electronegativity of all elements because it is the smallest nonmetal in the periodic table and has the strongest attraction for electrons in chemical bonds."
+    },
+    {
+      "question_text": "Maximum oxidation state of S:",
+      "options": [
+        "+4",
+        "+5",
+        "+6",
+        "+7"
+      ],
+      "correct_answer": "C",
+      "chapter": "Redox",
+      "topic_tags": [
+        "S_max_OS"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Sulfur has 6 valence electrons (3s² 3p⁴), so it can lose all 6 electrons to achieve a maximum oxidation state of +6, seen in compounds like H₂SO₄ and SF₆."
+    },
+    {
+      "question_text": "Bond angle in H2O:",
+      "options": [
+        "90°",
+        "104.5°",
+        "107°",
+        "120°"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "H2O_angle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Water has two bonding pairs and two lone pairs around oxygen. VSEPR theory predicts tetrahedral electron geometry, but the molecular shape is bent. Lone pairs repel more strongly than bonding pairs, compressing the H-O-H angle to approximately 104.5° from the ideal tetrahedral angle of 109.5°."
+    },
+    {
+      "question_text": "Geometry of BF3:",
+      "options": [
+        "Bent",
+        "Trigonal planar",
+        "Tetrahedral",
+        "Linear"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "BF3"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "BF3 has boron as the central atom with three fluorine atoms bonded to it and no lone pairs. With three bonding pairs and zero lone pairs, VSEPR theory predicts trigonal planar geometry where the three B-F bonds are arranged 120° apart in a plane."
+    },
+    {
+      "question_text": "Solubility of NaCl in water is due to:",
+      "options": [
+        "Ion-dipole interactions",
+        "Covalent bonds",
+        "Hydrogen bonds",
+        "Metallic bonds"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "ion_dipole"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Water's polar molecules have a negative end (oxygen) and positive end (hydrogen). The negative end attracts Na⁺ ions while the positive end attracts Cl⁻ ions, forming ion-dipole interactions that surround and dissolve the salt crystals."
+    },
+    {
+      "question_text": "Real gas behaves like ideal gas at:",
+      "options": [
+        "High P, low T",
+        "Low P, high T",
+        "Both A",
+        "STP only"
+      ],
+      "correct_answer": "B",
+      "chapter": "States of Matter",
+      "topic_tags": [
+        "ideal_gas"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At low pressure, gas molecules are far apart so intermolecular forces become negligible, and at high temperature, kinetic energy dominates over intermolecular attractions. Both conditions minimize deviations from ideal behavior, making the gas behave ideally."
+    },
+    {
+      "question_text": "Le Chatelier's principle: if temperature increased on exothermic reaction:",
+      "options": [
+        "Equilibrium shifts forward (more products)",
+        "Backward (more reactants)",
+        "No change",
+        "Reaction stops"
+      ],
+      "correct_answer": "B",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "Le_Chatelier"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Increasing temperature adds heat to an exothermic reaction, which already releases heat. By Le Chatelier's principle, the system responds by shifting backward (endothermic direction) to absorb the added heat and counteract the disturbance, producing more reactants."
+    },
+    {
+      "question_text": "Buffer made of weak acid + its salt. Henderson equation: pH = ?",
+      "options": [
+        "pKa + log[salt]/[acid]",
+        "pKa + log[acid]/[salt]",
+        "pKb",
+        "pH = pKa"
+      ],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "Henderson"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Henderson-Hasselbalch equation derives from the Ka expression rearranged to solve for pH, yielding pH = pKa + log([A⁻]/[HA]), where [A⁻] is the salt concentration and [HA] is the weak acid concentration. The ratio is inverted compared to option B because the conjugate base (salt) appears in the numerator of the equilibrium expression."
+    },
+    {
+      "question_text": "Catalyst affects which property?",
+      "options": [
+        "Equilibrium constant",
+        "Activation energy + rate",
+        "Free energy",
+        "Bond enthalpy"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "catalyst"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A catalyst works by providing an alternative reaction pathway with lower activation energy, thereby increasing the reaction rate. It does not affect the equilibrium position, free energy of reactants/products, or bond strengths—only how quickly equilibrium is reached."
+    },
+    {
+      "question_text": "Cathode in galvanic cell undergoes:",
+      "options": [
+        "Oxidation",
+        "Reduction",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "cathode"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In a galvanic cell, the cathode is where reduction occurs because it's the positive electrode where electrons are gained by cations from the external circuit, converting them to neutral or less oxidized species."
+    },
+    {
+      "question_text": "Standard hydrogen electrode potential:",
+      "options": [
+        "0 V",
+        "0.76 V",
+        "-0.76 V",
+        "1 V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "SHE"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The standard hydrogen electrode (SHE) is defined as the reference point for all standard electrode potentials, arbitrarily assigned a value of 0 V by international convention. All other electrode potentials are measured relative to this reference."
+    },
+    {
+      "question_text": "Most reactive metal (electrochemical series):",
+      "options": [
+        "Li",
+        "Cs",
+        "Na",
+        "K"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "reactive_metal"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Lithium has the most negative standard reduction potential (-3.04V), meaning it loses electrons most readily. Although cesium is lower in the periodic table, lithium's exceptionally high charge density and strong reducing ability make it the most reactive metal overall."
+    },
+    {
+      "question_text": "Reagent to convert primary alcohol to aldehyde:",
+      "options": [
+        "KMnO4 hot",
+        "PCC mild",
+        "NaBH4",
+        "LiAlH4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "PCC"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "PCC (pyridinium chlorochromate) is a mild oxidizing agent that selectively oxidizes primary alcohols to aldehydes and stops at this stage, preventing over-oxidation to carboxylic acids. KMnO4 hot is too strong and over-oxidizes to carboxylic acids, while NaBH4 and LiAlH4 are reducing agents."
+    },
+    {
+      "question_text": "Hofmann elimination favours:",
+      "options": [
+        "More substituted alkene",
+        "Less substituted (Hofmann product)",
+        "No regioselectivity",
+        "Substitution only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Amines",
+      "topic_tags": [
+        "Hofmann_elim"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Hofmann elimination involves a bulky base attacking the β-hydrogen of a quaternary ammonium salt. The steric bulk of the base favors removal of the least hindered hydrogen, producing the less substituted (Hofmann) alkene rather than the more substituted Zaitsev product."
+    },
+    {
+      "question_text": "Saytzeff (Zaitsev) elimination favours:",
+      "options": [
+        "Less substituted alkene",
+        "More substituted alkene",
+        "Random",
+        "Tertiary only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Haloalkanes",
+      "topic_tags": [
+        "Saytzeff"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Zaitsev's rule states that elimination reactions preferentially form the most stable alkene product, which is the more substituted alkene. Greater alkyl substitution around the double bond increases stability through hyperconjugation and reduces steric strain."
+    },
+    {
+      "question_text": "Number of stereoisomers of 2-bromobutane:",
+      "options": [
+        "1",
+        "2 (enantiomers)",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Stereochemistry",
+      "topic_tags": [
+        "chirality"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "2-bromobutane has one stereogenic center at C2 (bonded to four different groups: Br, H, CH₃, and C₂H₅). A single stereogenic center produces two stereoisomers that are non-superimposable mirror images (enantiomers)."
+    },
+    {
+      "question_text": "Glucose ring form (most stable):",
+      "options": [
+        "α-D-glucopyranose",
+        "β-D-glucopyranose",
+        "Open chain",
+        "α-furanose"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "glucose_form"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In aqueous solution, β-D-glucopyranose is most stable because the bulky hydroxyl group at C1 (anomeric carbon) occupies the equatorial position, minimizing steric hindrance compared to the α-form where it's axial."
+    },
+    {
+      "question_text": "Number of α-amino acids in protein:",
+      "options": [
+        "10",
+        "20",
+        "30",
+        "50"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "amino_acids"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Proteins are synthesized from 20 standard α-amino acids that are encoded by the genetic code. These 20 amino acids contain an amino group and carboxyl group attached to the same carbon (the α-carbon), which is the defining characteristic of α-amino acids."
+    },
+    {
+      "question_text": "Vitamin K is essential for:",
+      "options": [
+        "Vision",
+        "Blood clotting",
+        "Bone formation",
+        "Energy"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "vitamin_K"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Vitamin K is a cofactor for the carboxylation of glutamic acid residues in prothrombin and other clotting factors, enabling them to bind calcium and phospholipids necessary for the coagulation cascade."
+    }
   ]
 }

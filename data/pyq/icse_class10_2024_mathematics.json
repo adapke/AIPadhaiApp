@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Compound Interest",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "After year 1: ₹1000 × 1.10 = ₹1100. After year 2: ₹1100 × 1.10 = ₹1210. Compound interest = ₹1210 - ₹1000 = ₹210."
     },
     {
       "question_text": "If A = {1,2,3}, B = {2,3,4}, then A ∩ B is:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Sets",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The intersection of two sets contains only the elements that appear in both sets. Since 2 and 3 are the only elements present in both A and B, A ∩ B = {2,3}."
     },
     {
       "question_text": "Volume of a cylinder, radius 7 cm, height 10 cm (π=22/7):",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Mensuration",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Volume of cylinder = πr²h = (22/7) × 7² × 10 = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540 cm³."
     },
     {
       "question_text": "GST at 18% on ₹500 is:",
@@ -56,7 +59,8 @@
       "correct_answer": "A",
       "chapter": "GST",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "GST is calculated as 18% of the base amount. 18% of ₹500 = (18/100) × 500 = 0.18 × 500 = ₹90."
     },
     {
       "question_text": "Banker's discount on ₹2000 for 3 months at 4%:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Banking",
       "difficulty": "medium",
-      "marks": 3
+      "marks": 3,
+      "explanation": "Banker's discount equals simple interest on the face value. Using SI = (P × R × T)/100 where P = ₹2000, R = 4% p.a., and T = 3/12 years: BD = (2000 × 4 × 3/12)/100 = (2000 × 4 × 0.25)/100 = 2000/100 = ₹20."
     },
     {
       "question_text": "Median of 2, 4, 6, 8, 10:",
@@ -82,7 +87,8 @@
       "correct_answer": "C",
       "chapter": "Statistics",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "With five numbers already in order, the median is the middle value—the third number. Counting to the middle position: 2, 4, **6**, 8, 10, so the median is 6."
     }
   ]
 }

@@ -8,228 +8,438 @@
   "questions": [
     {
       "question_text": "Five-kingdom classification was proposed by:",
-      "options": ["Linnaeus", "Whittaker", "Hutchinson", "Bentham and Hooker"],
+      "options": [
+        "Linnaeus",
+        "Whittaker",
+        "Hutchinson",
+        "Bentham and Hooker"
+      ],
       "correct_answer": "B",
       "chapter": "Diversity in the Living World",
-      "topic_tags": ["classification", "Whittaker"],
+      "topic_tags": [
+        "classification",
+        "Whittaker"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Whittaker proposed the five-kingdom classification system in 1969, which divided organisms into Monera, Protista, Fungi, Plantae, and Animalia based on cell type, nutrition mode, and body organization—improving upon earlier two and three-kingdom systems."
     },
     {
       "question_text": "Mycelium is composed of:",
-      "options": ["Bacteria", "Hyphae of fungi", "Algal filaments", "Protozoa"],
+      "options": [
+        "Bacteria",
+        "Hyphae of fungi",
+        "Algal filaments",
+        "Protozoa"
+      ],
       "correct_answer": "B",
       "chapter": "Biological Classification",
-      "topic_tags": ["fungi", "mycelium"],
+      "topic_tags": [
+        "fungi",
+        "mycelium"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mycelium is the vegetative body of fungi, consisting of thread-like filaments called hyphae that branch and interconnect to form the fungal network. Bacteria, algae, and protozoa are separate organisms that don't compose fungal mycelium."
     },
     {
       "question_text": "Bryophytes lack:",
-      "options": ["Roots", "Vascular tissue", "Both A and B", "Chlorophyll"],
+      "options": [
+        "Roots",
+        "Vascular tissue",
+        "Both A and B",
+        "Chlorophyll"
+      ],
       "correct_answer": "C",
       "chapter": "Plant Kingdom",
-      "topic_tags": ["bryophyte"],
+      "topic_tags": [
+        "bryophyte"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Bryophytes (mosses, liverworts, hornworts) are non-vascular plants that lack true roots—they have rhizoids instead—and lack vascular tissue (xylem and phloem) for transporting water and nutrients. They do possess chlorophyll for photosynthesis."
     },
     {
       "question_text": "Closed circulatory system is found in:",
-      "options": ["Insects", "Earthworms", "Cockroach", "Snail"],
+      "options": [
+        "Insects",
+        "Earthworms",
+        "Cockroach",
+        "Snail"
+      ],
       "correct_answer": "B",
       "chapter": "Animal Kingdom",
-      "topic_tags": ["circulation", "earthworm"],
+      "topic_tags": [
+        "circulation",
+        "earthworm"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Earthworms have a closed circulatory system where blood flows entirely within vessels, allowing efficient nutrient and oxygen transport to tissues. Insects, cockroaches, and snails all possess open circulatory systems where blood bathes organs directly in hemocoel cavities."
     },
     {
       "question_text": "Cell organelle that makes ATP is:",
-      "options": ["Nucleus", "Mitochondria", "Lysosome", "Ribosome"],
+      "options": [
+        "Nucleus",
+        "Mitochondria",
+        "Lysosome",
+        "Ribosome"
+      ],
       "correct_answer": "B",
       "chapter": "Cell - The Unit of Life",
-      "topic_tags": ["ATP", "mitochondria"],
+      "topic_tags": [
+        "ATP",
+        "mitochondria"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mitochondria is the powerhouse of the cell, containing enzymes and the electron transport chain that generate ATP through aerobic respiration, providing energy for cellular processes."
     },
     {
       "question_text": "Number of chromosomes in human gametes:",
-      "options": ["46", "23", "44", "22"],
+      "options": [
+        "46",
+        "23",
+        "44",
+        "22"
+      ],
       "correct_answer": "B",
       "chapter": "Cell Cycle",
-      "topic_tags": ["chromosomes"],
+      "topic_tags": [
+        "chromosomes"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Human gametes (sperm and egg cells) are produced through meiosis, which reduces the chromosome number by half. Since somatic cells contain 46 chromosomes (23 pairs), gametes contain only 23 chromosomes."
     },
     {
       "question_text": "Meiosis produces:",
-      "options": ["2 identical cells", "4 genetically different haploid cells", "2 haploid cells", "4 identical cells"],
+      "options": [
+        "2 identical cells",
+        "4 genetically different haploid cells",
+        "2 haploid cells",
+        "4 identical cells"
+      ],
       "correct_answer": "B",
       "chapter": "Cell Cycle",
-      "topic_tags": ["meiosis"],
+      "topic_tags": [
+        "meiosis"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Meiosis involves two consecutive cell divisions that reduce chromosome number by half and include crossing over and independent assortment, producing four genetically distinct haploid cells rather than two identical diploid cells."
     },
     {
       "question_text": "Photolysis of water occurs in:",
-      "options": ["Mitochondria", "Chloroplast (PS-II)", "Cytoplasm", "Nucleus"],
+      "options": [
+        "Mitochondria",
+        "Chloroplast (PS-II)",
+        "Cytoplasm",
+        "Nucleus"
+      ],
       "correct_answer": "B",
       "chapter": "Photosynthesis",
-      "topic_tags": ["photolysis"],
+      "topic_tags": [
+        "photolysis"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Water photolysis is the light-dependent splitting of water molecules into hydrogen ions, electrons, and oxygen, which occurs specifically at Photosystem II in the thylakoid membrane of chloroplasts where light energy is captured."
     },
     {
       "question_text": "End product of glycolysis in aerobic respiration:",
-      "options": ["Lactic acid", "Pyruvate", "Ethanol", "Glucose"],
+      "options": [
+        "Lactic acid",
+        "Pyruvate",
+        "Ethanol",
+        "Glucose"
+      ],
       "correct_answer": "B",
       "chapter": "Respiration in Plants",
-      "topic_tags": ["glycolysis"],
+      "topic_tags": [
+        "glycolysis"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Glycolysis breaks down glucose into two pyruvate molecules through a series of enzymatic reactions. In aerobic respiration, pyruvate enters the mitochondria for further oxidation in the citric acid cycle, whereas lactic acid and ethanol are produced only under anaerobic conditions."
     },
     {
       "question_text": "Hormone that opens stomata:",
-      "options": ["Auxin", "Cytokinin", "Gibberellin", "ABA closes them"],
+      "options": [
+        "Auxin",
+        "Cytokinin",
+        "Gibberellin",
+        "ABA closes them"
+      ],
       "correct_answer": "B",
       "chapter": "Plant Growth",
-      "topic_tags": ["stomata", "cytokinin"],
+      "topic_tags": [
+        "stomata",
+        "cytokinin"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Cytokinins promote cell division and growth in guard cells, increasing their turgor pressure and causing stomata to open. This contrasts with abscisic acid (ABA), which closes stomata by decreasing guard cell turgor."
     },
     {
       "question_text": "Site of urea formation in human body:",
-      "options": ["Kidney", "Liver", "Spleen", "Stomach"],
+      "options": [
+        "Kidney",
+        "Liver",
+        "Spleen",
+        "Stomach"
+      ],
       "correct_answer": "B",
       "chapter": "Excretory System",
-      "topic_tags": ["urea", "liver"],
+      "topic_tags": [
+        "urea",
+        "liver"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Urea is synthesized in the liver through the ornithine cycle (urea cycle), where ammonia from amino acid deamination is converted into urea for safe transport and excretion. The kidneys only filter and excrete urea, not produce it."
     },
     {
       "question_text": "Nephron is the functional unit of:",
-      "options": ["Liver", "Lung", "Kidney", "Heart"],
+      "options": [
+        "Liver",
+        "Lung",
+        "Kidney",
+        "Heart"
+      ],
       "correct_answer": "C",
       "chapter": "Excretory System",
-      "topic_tags": ["nephron"],
+      "topic_tags": [
+        "nephron"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The nephron is a microscopic structure containing a glomerulus and tubule that filters blood to produce urine. Since the kidney's primary function is filtration and urine production, the nephron is its functional unit."
     },
     {
       "question_text": "Bones connected by joints with synovial fluid:",
-      "options": ["Skull", "Vertebrae", "Knee", "All of skull"],
+      "options": [
+        "Skull",
+        "Vertebrae",
+        "Knee",
+        "All of skull"
+      ],
       "correct_answer": "C",
       "chapter": "Locomotion and Movement",
-      "topic_tags": ["synovial", "knee"],
+      "topic_tags": [
+        "synovial",
+        "knee"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The knee is a synovial joint with a synovial cavity containing synovial fluid that lubricates movement. The skull bones are connected by immovable sutures without synovial fluid, and vertebrae connect via cartilaginous discs and facet joints that lack synovial cavities."
     },
     {
       "question_text": "Hormone produced by pancreas to lower blood sugar:",
-      "options": ["Insulin", "Glucagon", "Adrenaline", "Thyroxine"],
+      "options": [
+        "Insulin",
+        "Glucagon",
+        "Adrenaline",
+        "Thyroxine"
+      ],
       "correct_answer": "A",
       "chapter": "Chemical Coordination",
-      "topic_tags": ["insulin", "pancreas"],
+      "topic_tags": [
+        "insulin",
+        "pancreas"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Insulin is produced by beta cells in the pancreatic islets and directly lowers blood glucose by promoting cellular uptake of glucose and storage as glycogen. Glucagon raises blood sugar, while adrenaline and thyroxine have different primary functions."
     },
     {
       "question_text": "Master gland of human body:",
-      "options": ["Thyroid", "Pituitary", "Adrenal", "Pancreas"],
+      "options": [
+        "Thyroid",
+        "Pituitary",
+        "Adrenal",
+        "Pancreas"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Coordination",
-      "topic_tags": ["pituitary"],
+      "topic_tags": [
+        "pituitary"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The pituitary gland controls the secretion of most other endocrine glands by releasing hormones that regulate thyroid, adrenal, and reproductive functions, earning it the title \"master gland.\" It also directly controls growth and metabolism."
     },
     {
       "question_text": "Smallest taxonomic unit:",
-      "options": ["Genus", "Family", "Species", "Order"],
+      "options": [
+        "Genus",
+        "Family",
+        "Species",
+        "Order"
+      ],
       "correct_answer": "C",
       "chapter": "Diversity in the Living World",
-      "topic_tags": ["taxonomy"],
+      "topic_tags": [
+        "taxonomy"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Species is the smallest taxonomic rank among these options because it represents individual organisms capable of interbreeding and producing fertile offspring, making it the most specific and lowest classification level shown."
     },
     {
       "question_text": "Binomial nomenclature uses:",
-      "options": ["Only genus", "Genus and species", "Family and order", "Common and Latin name"],
+      "options": [
+        "Only genus",
+        "Genus and species",
+        "Family and order",
+        "Common and Latin name"
+      ],
       "correct_answer": "B",
       "chapter": "Diversity in the Living World",
-      "topic_tags": ["binomial"],
+      "topic_tags": [
+        "binomial"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Binomial nomenclature consists of two parts: the genus (capitalized) and the species (lowercase), written in Latin. This two-part naming system uniquely identifies every organism and is the standard classification method in taxonomy."
     },
     {
       "question_text": "Edible part of cauliflower is:",
-      "options": ["Stem", "Inflorescence", "Leaves", "Root"],
+      "options": [
+        "Stem",
+        "Inflorescence",
+        "Leaves",
+        "Root"
+      ],
       "correct_answer": "B",
       "chapter": "Morphology of Flowering Plants",
-      "topic_tags": ["cauliflower"],
+      "topic_tags": [
+        "cauliflower"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The edible part of cauliflower is the immature flower cluster (inflorescence) before the individual flowers bloom. This dense, compact head consists of underdeveloped floral buds and stems grouped together, which is characteristic of inflorescence tissue."
     },
     {
       "question_text": "Phloem transports:",
-      "options": ["Water", "Sugars and food", "Minerals only", "Oxygen"],
+      "options": [
+        "Water",
+        "Sugars and food",
+        "Minerals only",
+        "Oxygen"
+      ],
       "correct_answer": "B",
       "chapter": "Transport in Plants",
-      "topic_tags": ["phloem"],
+      "topic_tags": [
+        "phloem"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Phloem is specialized tissue that transports organic compounds, particularly sugars produced by photosynthesis, from leaves to other plant parts. Water, minerals, and oxygen are transported by xylem or move through different pathways, not phloem."
     },
     {
       "question_text": "Hemoglobin contains which metal:",
-      "options": ["Calcium", "Iron", "Magnesium", "Copper"],
+      "options": [
+        "Calcium",
+        "Iron",
+        "Magnesium",
+        "Copper"
+      ],
       "correct_answer": "B",
       "chapter": "Body Fluids and Circulation",
-      "topic_tags": ["hemoglobin", "iron"],
+      "topic_tags": [
+        "hemoglobin",
+        "iron"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Hemoglobin's heme group contains an iron (Fe²⁺) atom at its center, which binds reversibly to oxygen molecules. This iron is essential for hemoglobin's function in transporting oxygen throughout the body."
     },
     {
       "question_text": "Number of pairs of cranial nerves in humans:",
-      "options": ["8", "10", "12", "14"],
+      "options": [
+        "8",
+        "10",
+        "12",
+        "14"
+      ],
       "correct_answer": "C",
       "chapter": "Neural Control",
-      "topic_tags": ["cranial_nerves"],
+      "topic_tags": [
+        "cranial_nerves"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Humans have 12 pairs of cranial nerves, numbered I through XII. These include the olfactory, optic, oculomotor, trochlear, trigeminal, abducens, facial, vestibulocochlear, glossopharyngeal, vagus, accessory, and hypoglossal nerves."
     },
     {
       "question_text": "Cardiac muscles are:",
-      "options": ["Voluntary", "Involuntary", "Striated and involuntary", "Smooth"],
+      "options": [
+        "Voluntary",
+        "Involuntary",
+        "Striated and involuntary",
+        "Smooth"
+      ],
       "correct_answer": "C",
       "chapter": "Locomotion and Movement",
-      "topic_tags": ["cardiac_muscle"],
+      "topic_tags": [
+        "cardiac_muscle"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Cardiac muscle cells contain organized sarcomeres that create visible striations (like skeletal muscle), but contraction is controlled by the autonomic nervous system and intrinsic pacemaker activity, making it involuntary rather than under conscious control."
     },
     {
       "question_text": "Cellulose is made up of:",
-      "options": ["Amino acids", "Glucose units", "Fatty acids", "Nucleotides"],
+      "options": [
+        "Amino acids",
+        "Glucose units",
+        "Fatty acids",
+        "Nucleotides"
+      ],
       "correct_answer": "B",
       "chapter": "Biomolecules",
-      "topic_tags": ["cellulose"],
+      "topic_tags": [
+        "cellulose"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Cellulose is a polysaccharide polymer formed when glucose molecules link together through glycosidic bonds, creating a long chain structure that provides structural support in plant cell walls."
     },
     {
       "question_text": "Enzymes are biologically:",
-      "options": ["Lipids", "Proteins", "Carbohydrates", "Nucleic acids"],
+      "options": [
+        "Lipids",
+        "Proteins",
+        "Carbohydrates",
+        "Nucleic acids"
+      ],
       "correct_answer": "B",
       "chapter": "Biomolecules",
-      "topic_tags": ["enzymes"],
+      "topic_tags": [
+        "enzymes"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Enzymes are primarily proteins with specific three-dimensional structures that allow them to bind substrates and catalyze biochemical reactions. While some RNA molecules have enzymatic properties, the vast majority of enzymes are proteins."
     },
     {
       "question_text": "Gas exchange in alveoli is via:",
-      "options": ["Active transport", "Diffusion", "Osmosis", "Pinocytosis"],
+      "options": [
+        "Active transport",
+        "Diffusion",
+        "Osmosis",
+        "Pinocytosis"
+      ],
       "correct_answer": "B",
       "chapter": "Breathing and Exchange of Gases",
-      "topic_tags": ["alveoli", "diffusion"],
+      "topic_tags": [
+        "alveoli",
+        "diffusion"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Gases move across the alveolar membrane along their concentration gradients without requiring energy or a carrier protein, which is the definition of diffusion. Oxygen diffuses into blood while carbon dioxide diffuses out based on their partial pressure differences."
     }
   ]
 }

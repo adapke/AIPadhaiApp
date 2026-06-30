@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Solid State",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In a body-centred cubic lattice, each atom at the corner is surrounded by 8 nearest neighbor atoms—one at the center of the cube plus 7 others from adjacent unit cells. The atom at the body center is equidistant from all 8 corner atoms, giving a coordination number of 8."
     },
     {
       "question_text": "Faraday constant equals approximately:",
@@ -30,7 +31,8 @@
       "correct_answer": "A",
       "chapter": "Electrochemistry",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Faraday constant represents the total electric charge carried by one mole of electrons, which is the product of Avogadro's number and the elementary charge (6.022 × 10²³ × 1.6 × 10⁻¹⁹ C), equaling approximately 96500 C/mol."
     },
     {
       "question_text": "First-order rate law:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Chemical Kinetics",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A first-order reaction has a rate that depends linearly on the concentration of one reactant raised to the first power. The rate law is expressed as rate = k[A], where k is the rate constant and [A] is the concentration of reactant A."
     },
     {
       "question_text": "Which amino acid has a sulfur atom?",
@@ -56,7 +59,8 @@
       "correct_answer": "C",
       "chapter": "Biomolecules",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Methionine contains sulfur in its side chain as part of a thioether group (-S-CH₃). The other amino acids listed have only carbon, hydrogen, nitrogen, and oxygen in their structures."
     },
     {
       "question_text": "Bond angle in NH3 (ammonia):",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "p-Block Elements",
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ammonia has four electron domains (three bonding pairs and one lone pair) around nitrogen, giving tetrahedral electron geometry. However, the lone pair repels bonding pairs more strongly than bonds repel each other, compressing the H-N-H bond angles from the ideal tetrahedral 109.5° down to approximately 107.5°."
     },
     {
       "question_text": "Polymer formed by ethene monomers:",
@@ -82,7 +87,8 @@
       "correct_answer": "A",
       "chapter": "Polymers",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ethene (C2H4) undergoes addition polymerization through its C=C double bond, linking monomers together to form polyethylene (polythene). PVC requires vinyl chloride, nylon requires condensation of amines and carboxylic acids, and bakelite requires phenol and formaldehyde."
     }
   ]
 }

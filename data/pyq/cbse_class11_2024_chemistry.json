@@ -8,228 +8,431 @@
   "questions": [
     {
       "question_text": "Avogadro's number is:",
-      "options": ["6.022×10²³", "9.1×10⁻³¹", "1.66×10⁻²⁷", "3×10⁸"],
+      "options": [
+        "6.022×10²³",
+        "9.1×10⁻³¹",
+        "1.66×10⁻²⁷",
+        "3×10⁸"
+      ],
       "correct_answer": "A",
       "chapter": "Some Basic Concepts of Chemistry",
-      "topic_tags": ["Avogadro"],
+      "topic_tags": [
+        "Avogadro"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Avogadro's number represents the quantity of particles (atoms, molecules, or ions) in one mole of substance, defined as exactly 6.022×10²³. The other values represent different physical constants: electron mass, atomic mass unit, and speed of light, respectively."
     },
     {
       "question_text": "Most stable electronic configuration of carbon (Z=6) is:",
-      "options": ["1s² 2s² 2p²", "1s² 2s³ 2p¹", "1s² 2p⁴", "2s² 2p⁴"],
+      "options": [
+        "1s² 2s² 2p²",
+        "1s² 2s³ 2p¹",
+        "1s² 2p⁴",
+        "2s² 2p⁴"
+      ],
       "correct_answer": "A",
       "chapter": "Structure of Atom",
-      "topic_tags": ["configuration", "carbon"],
+      "topic_tags": [
+        "configuration",
+        "carbon"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Carbon has 6 electrons following the Aufbau principle: electrons fill orbitals in order of increasing energy (1s, then 2s, then 2p). This gives 1s² 2s² 2p², which matches option A and represents the ground state, most stable configuration."
     },
     {
       "question_text": "First periodic table was given by:",
-      "options": ["Dalton", "Bohr", "Mendeleev", "Newton"],
+      "options": [
+        "Dalton",
+        "Bohr",
+        "Mendeleev",
+        "Newton"
+      ],
       "correct_answer": "C",
       "chapter": "Classification of Elements",
-      "topic_tags": ["Mendeleev"],
+      "topic_tags": [
+        "Mendeleev"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mendeleev created the first periodic table in 1869 by arranging elements by atomic weight and leaving gaps for undiscovered elements, which he used to predict their properties with remarkable accuracy."
     },
     {
       "question_text": "Bond type in NaCl is:",
-      "options": ["Covalent", "Ionic", "Metallic", "Hydrogen"],
+      "options": [
+        "Covalent",
+        "Ionic",
+        "Metallic",
+        "Hydrogen"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["ionic"],
+      "topic_tags": [
+        "ionic"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sodium chloride forms when Na loses an electron to Cl, creating Na⁺ and Cl⁻ ions held together by electrostatic attraction between oppositely charged ions, which defines an ionic bond."
     },
     {
       "question_text": "Geometry of methane (CH4) is:",
-      "options": ["Trigonal", "Tetrahedral", "Linear", "Octahedral"],
+      "options": [
+        "Trigonal",
+        "Tetrahedral",
+        "Linear",
+        "Octahedral"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["VSEPR", "tetrahedral"],
+      "topic_tags": [
+        "VSEPR",
+        "tetrahedral"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Carbon has four valence electrons and forms four single bonds with hydrogen atoms. VSEPR theory predicts maximum electron pair repulsion when four bonding pairs arrange themselves in a tetrahedral geometry, with bond angles of approximately 109.5°."
     },
     {
       "question_text": "At constant temperature, pressure of gas is inversely proportional to volume — this is:",
-      "options": ["Charles' law", "Boyle's law", "Avogadro's law", "Gay-Lussac's law"],
+      "options": [
+        "Charles' law",
+        "Boyle's law",
+        "Avogadro's law",
+        "Gay-Lussac's law"
+      ],
       "correct_answer": "B",
       "chapter": "States of Matter",
-      "topic_tags": ["Boyle"],
+      "topic_tags": [
+        "Boyle"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Boyle's law states that at constant temperature, the pressure of a gas is inversely proportional to its volume (P∝1/V or PV=constant). This is the defining relationship described in the question."
     },
     {
       "question_text": "Enthalpy change for exothermic reaction is:",
-      "options": ["Positive", "Negative", "Zero", "Infinite"],
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Infinite"
+      ],
       "correct_answer": "B",
       "chapter": "Thermodynamics",
-      "topic_tags": ["exothermic"],
+      "topic_tags": [
+        "exothermic"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Exothermic reactions release heat to the surroundings, so the system loses energy. By convention, enthalpy change (ΔH) is negative when heat is released, representing energy loss from the system."
     },
     {
       "question_text": "pH of pure water at 25°C is:",
-      "options": ["0", "1", "7", "14"],
+      "options": [
+        "0",
+        "1",
+        "7",
+        "14"
+      ],
       "correct_answer": "C",
       "chapter": "Equilibrium",
-      "topic_tags": ["pH"],
+      "topic_tags": [
+        "pH"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At 25°C, pure water has Kw = 1.0 × 10⁻¹⁴, and since [H⁺] = [OH⁻] in neutral water, [H⁺] = 1.0 × 10⁻⁷ M. Therefore pH = -log(1.0 × 10⁻⁷) = 7."
     },
     {
       "question_text": "Oxidation state of Cl in HCl is:",
-      "options": ["+1", "-1", "0", "+7"],
+      "options": [
+        "+1",
+        "-1",
+        "0",
+        "+7"
+      ],
       "correct_answer": "B",
       "chapter": "Redox Reactions",
-      "topic_tags": ["oxidation_state"],
+      "topic_tags": [
+        "oxidation_state"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In HCl, hydrogen has oxidation state +1 (as it's bonded to a nonmetal). Since the compound is neutral, chlorine must have oxidation state -1 to balance the charge."
     },
     {
       "question_text": "Hardest naturally-occurring substance is:",
-      "options": ["Iron", "Diamond", "Graphite", "Quartz"],
+      "options": [
+        "Iron",
+        "Diamond",
+        "Graphite",
+        "Quartz"
+      ],
       "correct_answer": "B",
       "chapter": "The s-Block and p-Block",
-      "topic_tags": ["diamond"],
+      "topic_tags": [
+        "diamond"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Diamond is the hardest naturally-occurring substance because its carbon atoms are arranged in an extremely rigid tetrahedral crystal lattice where each carbon atom bonds to four others with strong covalent bonds in all directions, creating an exceptionally hard structure."
     },
     {
       "question_text": "Element with highest electronegativity is:",
-      "options": ["O", "F", "Cl", "N"],
+      "options": [
+        "O",
+        "F",
+        "Cl",
+        "N"
+      ],
       "correct_answer": "B",
       "chapter": "Classification of Elements",
-      "topic_tags": ["electronegativity"],
+      "topic_tags": [
+        "electronegativity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Fluorine has the highest electronegativity of all elements because it's in the upper right of the periodic table, where electronegativity increases. Its small atomic radius and high nuclear charge create the strongest pull on electrons."
     },
     {
       "question_text": "Number of sigma bonds in propane (C3H8):",
-      "options": ["8", "9", "10", "11"],
+      "options": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
       "correct_answer": "C",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["sigma_bonds"],
+      "topic_tags": [
+        "sigma_bonds"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Propane (C₃H₈) has a structure with three carbon atoms bonded in a chain. Counting sigma bonds: 2 C-C bonds in the chain plus 8 C-H bonds (3 on the terminal carbons, 2 on the middle carbon) = 10 total sigma bonds."
     },
     {
       "question_text": "Hund's rule deals with filling of:",
-      "options": ["Shells", "Subshells", "Orbitals of same energy", "Nucleus"],
+      "options": [
+        "Shells",
+        "Subshells",
+        "Orbitals of same energy",
+        "Nucleus"
+      ],
       "correct_answer": "C",
       "chapter": "Structure of Atom",
-      "topic_tags": ["Hund"],
+      "topic_tags": [
+        "Hund"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Hund's rule states that electrons fill orbitals of equal energy (degenerate orbitals within a subshell) one at a time with parallel spins before pairing up, minimizing electron repulsion and maximizing stability."
     },
     {
       "question_text": "Hybridisation of carbon in ethyne (C2H2) is:",
-      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "options": [
+        "sp",
+        "sp2",
+        "sp3",
+        "sp3d"
+      ],
       "correct_answer": "A",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["sp_hybridisation"],
+      "topic_tags": [
+        "sp_hybridisation"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In ethyne, each carbon atom forms a triple bond with the other carbon and a single bond with hydrogen. A triple bond requires two p orbitals to remain unhybridized (for the two π bonds), leaving only one s and one p orbital hybridized, resulting in sp hybridization."
     },
     {
       "question_text": "Standard temperature and pressure (STP) is:",
-      "options": ["0°C and 1 atm", "25°C and 1 atm", "0°C and 760 atm", "100°C and 1 atm"],
+      "options": [
+        "0°C and 1 atm",
+        "25°C and 1 atm",
+        "0°C and 760 atm",
+        "100°C and 1 atm"
+      ],
       "correct_answer": "A",
       "chapter": "States of Matter",
-      "topic_tags": ["STP"],
+      "topic_tags": [
+        "STP"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "STP is historically defined as 0°C (273.15 K) and 1 atm pressure, the freezing point of water and standard atmospheric pressure. This is the reference condition used in gas law calculations and molar volume determinations."
     },
     {
       "question_text": "Molar volume of an ideal gas at STP is:",
-      "options": ["22.4 L", "11.2 L", "44.8 L", "1 L"],
+      "options": [
+        "22.4 L",
+        "11.2 L",
+        "44.8 L",
+        "1 L"
+      ],
       "correct_answer": "A",
       "chapter": "States of Matter",
-      "topic_tags": ["molar_volume"],
+      "topic_tags": [
+        "molar_volume"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At STP (Standard Temperature and Pressure: 0°C and 1 atm), one mole of an ideal gas occupies 22.4 L. This is derived from the ideal gas law (PV = nRT) using standard conditions and is a fundamental constant in chemistry."
     },
     {
       "question_text": "Lewis structure of carbon dioxide (CO2) has how many lone pairs on O:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["Lewis", "CO2"],
+      "topic_tags": [
+        "Lewis",
+        "CO2"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In CO2, carbon forms two double bonds with each oxygen atom (O=C=O). Each double bond consists of 4 electrons shared between carbon and oxygen. Each oxygen has 6 valence electrons total; 4 are used in the double bond, leaving 2 electrons as one lone pair on each oxygen."
     },
     {
       "question_text": "Common name of methanol is:",
-      "options": ["Methyl alcohol", "Wood spirit", "Both A and B", "Ethanol"],
+      "options": [
+        "Methyl alcohol",
+        "Wood spirit",
+        "Both A and B",
+        "Ethanol"
+      ],
       "correct_answer": "C",
       "chapter": "Organic Chemistry Basics",
-      "topic_tags": ["methanol"],
+      "topic_tags": [
+        "methanol"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Methanol has two well-established common names: methyl alcohol (referring to its structure as the simplest alcohol with one carbon) and wood spirit (its historical name from destructive distillation of wood). Both terms are correct and widely used."
     },
     {
       "question_text": "Order of nucleophilic strength: F⁻, Cl⁻, Br⁻, I⁻ (in polar protic solvent) is:",
-      "options": ["F > Cl > Br > I", "I > Br > Cl > F", "Cl > F > Br > I", "All equal"],
+      "options": [
+        "F > Cl > Br > I",
+        "I > Br > Cl > F",
+        "Cl > F > Br > I",
+        "All equal"
+      ],
       "correct_answer": "B",
       "chapter": "Organic Chemistry Basics",
-      "topic_tags": ["nucleophile"],
+      "topic_tags": [
+        "nucleophile"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In polar protic solvents, nucleophilic strength follows the opposite trend of basicity due to hydrogen bonding effects. Larger halides like I⁻ are less heavily solvated than smaller F⁻, making them more available to attack the electrophile, resulting in I⁻ > Br⁻ > Cl⁻ > F⁻."
     },
     {
       "question_text": "Empirical formula of glucose (C6H12O6) is:",
-      "options": ["CH2O", "C2H4O2", "C3H6O3", "CHO"],
+      "options": [
+        "CH2O",
+        "C2H4O2",
+        "C3H6O3",
+        "CHO"
+      ],
       "correct_answer": "A",
       "chapter": "Some Basic Concepts of Chemistry",
-      "topic_tags": ["empirical_formula"],
+      "topic_tags": [
+        "empirical_formula"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The empirical formula is the simplest whole-number ratio of atoms in a compound. Dividing all subscripts in C6H12O6 by their greatest common divisor (6) gives CH2O."
     },
     {
       "question_text": "Calcium (Z=20) has electronic configuration ending in:",
-      "options": ["3p⁶", "4s²", "3d²", "4p²"],
+      "options": [
+        "3p⁶",
+        "4s²",
+        "3d²",
+        "4p²"
+      ],
       "correct_answer": "B",
       "chapter": "Structure of Atom",
-      "topic_tags": ["calcium"],
+      "topic_tags": [
+        "calcium"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Calcium has 20 electrons that fill orbitals in order of increasing energy: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s². The last two electrons occupy the 4s orbital, so the configuration ends in 4s²."
     },
     {
       "question_text": "Number of moles in 56 g of N2:",
-      "options": ["1", "2", "0.5", "4"],
+      "options": [
+        "1",
+        "2",
+        "0.5",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Some Basic Concepts of Chemistry",
-      "topic_tags": ["moles"],
+      "topic_tags": [
+        "moles"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The molar mass of N₂ is 28 g/mol (nitrogen atomic mass ≈ 14, so 14 × 2 = 28). Using moles = mass/molar mass: 56 g ÷ 28 g/mol = 2 moles."
     },
     {
       "question_text": "Reaction with rate constant in mol/L·s is:",
-      "options": ["Zero order", "First order", "Second order", "Third order"],
+      "options": [
+        "Zero order",
+        "First order",
+        "Second order",
+        "Third order"
+      ],
       "correct_answer": "A",
       "chapter": "Equilibrium",
-      "topic_tags": ["rate_constant"],
+      "topic_tags": [
+        "rate_constant"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The units mol/L·s correspond to a change in concentration per unit time with no order dependence. For zero-order reactions, the rate constant has units of concentration/time (mol/L·s), whereas first-order, second-order, and higher reactions have different units involving inverse time factors."
     },
     {
       "question_text": "Compound with maximum acidic strength among HCl, H2O, NH3, CH4 is:",
-      "options": ["HCl", "H2O", "NH3", "CH4"],
+      "options": [
+        "HCl",
+        "H2O",
+        "NH3",
+        "CH4"
+      ],
       "correct_answer": "A",
       "chapter": "Equilibrium",
-      "topic_tags": ["acid_strength"],
+      "topic_tags": [
+        "acid_strength"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "HCl is the strongest acid because chlorine is highly electronegative and effectively withdraws electron density from the H-Cl bond, weakening it and making the hydrogen easily released as H⁺. The other compounds are either very weak acids (H2O, CH4) or basic (NH3)."
     },
     {
       "question_text": "Maximum number of electrons in p subshell is:",
-      "options": ["2", "6", "10", "14"],
+      "options": [
+        "2",
+        "6",
+        "10",
+        "14"
+      ],
       "correct_answer": "B",
       "chapter": "Structure of Atom",
-      "topic_tags": ["subshell"],
+      "topic_tags": [
+        "subshell"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The p subshell has three orbitals (px, py, pz), and each orbital can hold a maximum of 2 electrons. Therefore, 3 orbitals × 2 electrons = 6 electrons maximum."
     }
   ]
 }

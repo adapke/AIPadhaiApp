@@ -6,30 +6,430 @@
   "default_year": 2017,
   "default_paper": "advanced",
   "questions": [
-    {"question_text": "A simple pendulum's period at the equator vs. the pole:", "options": ["Same", "Longer at equator (g lower)", "Longer at pole", "Random"], "correct_answer": "B", "chapter": "Oscillations", "topic_tags": ["pendulum_g"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Rotational KE of solid sphere rolling without slipping:", "options": ["(1/2)mv²", "(7/10)mv²", "(2/5)mv²", "mv²"], "correct_answer": "B", "chapter": "Rotational Motion", "topic_tags": ["rolling_sphere"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Moment of inertia of thin ring (mass M, radius R) about axis perp to plane through center:", "options": ["MR²/2", "MR²", "(2/5)MR²", "MR²/12"], "correct_answer": "B", "chapter": "Rotational Motion", "topic_tags": ["MI_ring"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Doppler frequency observer moving toward stationary source at v:", "options": ["f·(v_sound+v)/v_sound", "f·v_sound/(v_sound-v)", "f·(v_sound-v)/v_sound", "f"], "correct_answer": "A", "chapter": "Waves", "topic_tags": ["Doppler_observer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Intensity of sound at distance r from point source ∝", "options": ["1/r", "1/r²", "r", "r²"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["intensity_distance"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mean free path of gas molecule depends on:", "options": ["Density (inverse) and cross-section", "Only temperature", "Only pressure", "Only volume"], "correct_answer": "A", "chapter": "Kinetic Theory", "topic_tags": ["mean_free_path"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Wien's displacement: λ_max·T = b. As T rises, λ_max:", "options": ["Increases", "Decreases", "Same", "Random"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["Wien_shift"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Adiabatic process (ideal gas): PV^γ = ?", "options": ["Constant", "Variable", "0", "T"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["adiabatic"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Carnot engine reversed becomes:", "options": ["Heat pump / refrigerator", "Just heat engine again", "Diode", "Capacitor"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["Carnot_reverse"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Inside long uniformly charged cylindrical shell, E is:", "options": ["0", "λ/(2πε₀r)", "Q/r²", "Constant"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["cylinder_inside"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Electric potential at center of uniformly charged ring:", "options": ["0", "kQ/R", "kQ/R²", "Infinite"], "correct_answer": "B", "chapter": "Electrostatics", "topic_tags": ["ring_center_V"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Capacitance of two concentric spheres (inner R, outer 2R):", "options": ["4πε₀(2R)/(2R-R) = 8πε₀R", "ε₀·R", "Hard to compute", "0"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["spherical_cap"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Slope of V-vs-I graph for ohmic conductor:", "options": ["Resistance R", "1/R", "0", "Infinite"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["V_I_slope"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Force on current loop in uniform magnetic field:", "options": ["Zero (only torque)", "BIA always", "BIL", "Negative"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["loop_uniform_field"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Magnetic moment of current loop with N turns:", "options": ["NIA", "NIA·sin(θ)", "Both — magnitude is NIA, vector includes θ", "0"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["magnetic_moment"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Self-inductance of solenoid: L ∝", "options": ["n² (turns per length squared)", "1/n", "n", "1/A"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["L_solenoid_n²"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Power factor cos(φ) in pure inductive circuit:", "options": ["0", "0.5", "1", "Undefined"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["PF_inductive"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Resonant frequency of series LCR: f_r = ?", "options": ["1/(2π√(LC))", "√(LC)", "LC", "RC"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["LCR_resonance"], "difficulty": "medium", "marks": 4},
-    {"question_text": "EM waves are produced by:", "options": ["Accelerating charges", "Static charges", "Resting charges", "Neutral atoms"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["accelerating_charge"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Speed of light in glass with n=1.5:", "options": ["c", "2c/3", "1.5c", "0.5c"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["speed_in_medium"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Newton's rings — central fringe is:", "options": ["Bright", "Dark (phase change at glass-air)", "Random", "Doesn't exist"], "correct_answer": "B", "chapter": "Wave Optics", "topic_tags": ["Newton_rings"], "difficulty": "medium", "marks": 4},
-    {"question_text": "X-rays were discovered by:", "options": ["Rutherford", "Roentgen", "Curie", "Planck"], "correct_answer": "B", "chapter": "Modern Physics", "topic_tags": ["Roentgen"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Heisenberg uncertainty: Δx·Δp ≥ ?", "options": ["h", "ℏ/2", "h/(2π)", "Both B and C equivalent (ℏ = h/2π)"], "correct_answer": "D", "chapter": "Modern Physics", "topic_tags": ["uncertainty"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Logic gate that is universal:", "options": ["AND", "OR", "NAND (or NOR)", "XOR"], "correct_answer": "C", "chapter": "Logic Gates", "topic_tags": ["universal_gate"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Op-amp in inverting mode gain = ?", "options": ["-R_f/R_in", "R_f/R_in", "1", "1+R_f/R_in"], "correct_answer": "A", "chapter": "Electronics", "topic_tags": ["op_amp_inverting"], "difficulty": "hard", "marks": 4}
+    {
+      "question_text": "A simple pendulum's period at the equator vs. the pole:",
+      "options": [
+        "Same",
+        "Longer at equator (g lower)",
+        "Longer at pole",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "pendulum_g"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The period of a simple pendulum is T = 2π√(L/g). Gravity is weaker at the equator due to Earth's rotation and oblate shape, resulting in lower g. Since period is inversely proportional to √g, lower g at the equator produces a longer period."
+    },
+    {
+      "question_text": "Rotational KE of solid sphere rolling without slipping:",
+      "options": [
+        "(1/2)mv²",
+        "(7/10)mv²",
+        "(2/5)mv²",
+        "mv²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "rolling_sphere"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For rolling without slipping, total KE = translational KE + rotational KE. With v = ωr, the rotational KE of a solid sphere (I = 2/5 mr²) equals (2/5)mv². Adding translational KE of (1/2)mv² gives total KE = (7/10)mv²."
+    },
+    {
+      "question_text": "Moment of inertia of thin ring (mass M, radius R) about axis perp to plane through center:",
+      "options": [
+        "MR²/2",
+        "MR²",
+        "(2/5)MR²",
+        "MR²/12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Rotational Motion",
+      "topic_tags": [
+        "MI_ring"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For a thin ring, all mass is located at the same distance R from the axis perpendicular to the plane through the center. Using I = ∫r²dm, every mass element contributes r² = R², so I = R²∫dm = MR²."
+    },
+    {
+      "question_text": "Doppler frequency observer moving toward stationary source at v:",
+      "options": [
+        "f·(v_sound+v)/v_sound",
+        "f·v_sound/(v_sound-v)",
+        "f·(v_sound-v)/v_sound",
+        "f"
+      ],
+      "correct_answer": "A",
+      "chapter": "Waves",
+      "topic_tags": [
+        "Doppler_observer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When an observer moves toward a stationary source, the sound waves are encountered more frequently because the observer is closing the distance. The observed frequency is f·(v_sound + v)/v_sound, where the observer's velocity adds to the sound speed in the medium, increasing the relative approach rate and thus the frequency heard."
+    },
+    {
+      "question_text": "Intensity of sound at distance r from point source ∝",
+      "options": [
+        "1/r",
+        "1/r²",
+        "r",
+        "r²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "intensity_distance"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sound intensity from a point source spreads uniformly over an expanding spherical surface. Since the sphere's surface area is 4πr², the same power is distributed over increasingly larger areas as distance increases, making intensity inversely proportional to r²."
+    },
+    {
+      "question_text": "Mean free path of gas molecule depends on:",
+      "options": [
+        "Density (inverse) and cross-section",
+        "Only temperature",
+        "Only pressure",
+        "Only volume"
+      ],
+      "correct_answer": "A",
+      "chapter": "Kinetic Theory",
+      "topic_tags": [
+        "mean_free_path"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The mean free path λ = 1/(√2 π d² n), where d is molecular diameter and n is number density. Since density is proportional to number density, mean free path is inversely proportional to density and directly proportional to molecular cross-section (πd²). Temperature and pressure alone don't fully determine it; density (which depends on both) is the key factor."
+    },
+    {
+      "question_text": "Wien's displacement: λ_max·T = b. As T rises, λ_max:",
+      "options": [
+        "Increases",
+        "Decreases",
+        "Same",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Wien_shift"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "From Wien's law, λ_max = b/T, showing an inverse relationship between wavelength and temperature. As temperature T increases, λ_max must decrease proportionally, shifting the peak emission toward shorter (bluer) wavelengths."
+    },
+    {
+      "question_text": "Adiabatic process (ideal gas): PV^γ = ?",
+      "options": [
+        "Constant",
+        "Variable",
+        "0",
+        "T"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "adiabatic"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In an adiabatic process, no heat is exchanged with the surroundings. For an ideal gas undergoing adiabatic compression or expansion, the relationship PV^γ remains constant throughout the process, where γ is the heat capacity ratio (Cp/Cv)."
+    },
+    {
+      "question_text": "Carnot engine reversed becomes:",
+      "options": [
+        "Heat pump / refrigerator",
+        "Just heat engine again",
+        "Diode",
+        "Capacitor"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Carnot_reverse"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A Carnot engine operates between two heat reservoirs, extracting work from heat flow. When reversed, work input drives heat flow from cold to hot reservoir, which is the defining principle of both heat pumps and refrigerators—making them the thermodynamic reverse of a heat engine."
+    },
+    {
+      "question_text": "Inside long uniformly charged cylindrical shell, E is:",
+      "options": [
+        "0",
+        "λ/(2πε₀r)",
+        "Q/r²",
+        "Constant"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "cylinder_inside"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "By Gauss's law, the electric field inside a uniformly charged cylindrical shell depends only on enclosed charge. Since there is no charge inside the shell itself, any Gaussian surface drawn within the shell encloses zero charge, making the electric field zero everywhere inside."
+    },
+    {
+      "question_text": "Electric potential at center of uniformly charged ring:",
+      "options": [
+        "0",
+        "kQ/R",
+        "kQ/R²",
+        "Infinite"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "ring_center_V"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "All points on a uniformly charged ring are equidistant from the center at distance R. Since electric potential is a scalar (not a vector), contributions from all charge elements add directly without cancellation, giving V = kQ/R."
+    },
+    {
+      "question_text": "Capacitance of two concentric spheres (inner R, outer 2R):",
+      "options": [
+        "4πε₀(2R)/(2R-R) = 8πε₀R",
+        "ε₀·R",
+        "Hard to compute",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "spherical_cap"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "For concentric spheres, capacitance is C = 4πε₀R₁R₂/(R₂-R₁). Substituting R₁ = R and R₂ = 2R gives C = 4πε₀(R)(2R)/(2R-R) = 8πε₀R, which matches option A."
+    },
+    {
+      "question_text": "Slope of V-vs-I graph for ohmic conductor:",
+      "options": [
+        "Resistance R",
+        "1/R",
+        "0",
+        "Infinite"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "V_I_slope"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For an ohmic conductor, Ohm's law states V = IR. When plotting V on the y-axis against I on the x-axis, the slope is ΔV/ΔI = R. This slope represents the resistance of the conductor."
+    },
+    {
+      "question_text": "Force on current loop in uniform magnetic field:",
+      "options": [
+        "Zero (only torque)",
+        "BIA always",
+        "BIL",
+        "Negative"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "loop_uniform_field"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A current loop experiences equal and opposite forces on opposite sides in a uniform magnetic field. These forces cancel, producing zero net force but creating a net torque that rotates the loop."
+    },
+    {
+      "question_text": "Magnetic moment of current loop with N turns:",
+      "options": [
+        "NIA",
+        "NIA·sin(θ)",
+        "Both — magnitude is NIA, vector includes θ",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "magnetic_moment"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The magnetic moment of a current loop is defined as the product of the number of turns, current, and loop area. The angle θ relates to the torque experienced in an external field, not the intrinsic magnetic moment itself, which has a fixed magnitude NIA perpendicular to the loop's plane."
+    },
+    {
+      "question_text": "Self-inductance of solenoid: L ∝",
+      "options": [
+        "n² (turns per length squared)",
+        "1/n",
+        "n",
+        "1/A"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "L_solenoid_n²"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Self-inductance depends on L = μ₀N²A/l, where N is total turns and l is length. Since n = N/l (turns per unit length), substituting gives L ∝ n², because N = nl, so N² = n²l²."
+    },
+    {
+      "question_text": "Power factor cos(φ) in pure inductive circuit:",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Undefined"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "PF_inductive"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In a pure inductive circuit, current lags voltage by 90°, making φ = 90°. Therefore, cos(90°) = 0, meaning no real power is consumed—only reactive power circulates."
+    },
+    {
+      "question_text": "Resonant frequency of series LCR: f_r = ?",
+      "options": [
+        "1/(2π√(LC))",
+        "√(LC)",
+        "LC",
+        "RC"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "LCR_resonance"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At resonance in a series LCR circuit, the inductive and capacitive reactances cancel (X_L = X_C), making impedance purely resistive and minimal. This occurs when ωL = 1/(ωC), solving for ω gives ω = 1/√(LC), and converting to frequency f using ω = 2πf yields f_r = 1/(2π√(LC))."
+    },
+    {
+      "question_text": "EM waves are produced by:",
+      "options": [
+        "Accelerating charges",
+        "Static charges",
+        "Resting charges",
+        "Neutral atoms"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "accelerating_charge"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Changing electric and magnetic fields, which generate EM waves, require moving charges. Static or resting charges produce only constant electric fields; neutral atoms have no net charge to create fields. Only accelerating charges produce the time-varying fields necessary for electromagnetic wave radiation."
+    },
+    {
+      "question_text": "Speed of light in glass with n=1.5:",
+      "options": [
+        "c",
+        "2c/3",
+        "1.5c",
+        "0.5c"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "speed_in_medium"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Light's speed in a medium equals c divided by the refractive index: v = c/n. With n = 1.5, we get v = c/1.5 = c/(3/2) = 2c/3."
+    },
+    {
+      "question_text": "Newton's rings — central fringe is:",
+      "options": [
+        "Bright",
+        "Dark (phase change at glass-air)",
+        "Random",
+        "Doesn't exist"
+      ],
+      "correct_answer": "B",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "Newton_rings"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At the point of contact between the lens and glass plate, the air gap is zero, so there's no path difference. However, reflection from the denser glass surface causes a phase change of π (or path difference of λ/2), resulting in destructive interference and a dark central fringe."
+    },
+    {
+      "question_text": "X-rays were discovered by:",
+      "options": [
+        "Rutherford",
+        "Roentgen",
+        "Curie",
+        "Planck"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "Roentgen"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Roentgen discovered X-rays in 1895 while experimenting with cathode rays, observing penetrating radiation that could pass through matter and produce fluorescence. This breakthrough earned him the first Nobel Prize in Physics in 1901."
+    },
+    {
+      "question_text": "Heisenberg uncertainty: Δx·Δp ≥ ?",
+      "options": [
+        "h",
+        "ℏ/2",
+        "h/(2π)",
+        "Both B and C equivalent (ℏ = h/2π)"
+      ],
+      "correct_answer": "D",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "uncertainty"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The Heisenberg uncertainty principle states Δx·Δp ≥ ℏ/2, where ℏ (h-bar) equals h/(2π). Since both expressions are mathematically equivalent, option D correctly identifies that B and C represent the same physical bound using different notations."
+    },
+    {
+      "question_text": "Logic gate that is universal:",
+      "options": [
+        "AND",
+        "OR",
+        "NAND (or NOR)",
+        "XOR"
+      ],
+      "correct_answer": "C",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "universal_gate"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A universal gate can implement any logic function using only itself. NAND and NOR gates are universal because any other logic gate (AND, OR, NOT) can be constructed using combinations of only NAND gates or only NOR gates, while AND, OR, and XOR gates individually cannot."
+    },
+    {
+      "question_text": "Op-amp in inverting mode gain = ?",
+      "options": [
+        "-R_f/R_in",
+        "R_f/R_in",
+        "1",
+        "1+R_f/R_in"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electronics",
+      "topic_tags": [
+        "op_amp_inverting"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "In inverting mode, the op-amp's output is 180° out of phase with the input. Applying virtual ground principle (non-inverting input at ground), the gain is determined by the ratio of feedback resistor to input resistor with a negative sign, giving -R_f/R_in."
+    }
   ]
 }

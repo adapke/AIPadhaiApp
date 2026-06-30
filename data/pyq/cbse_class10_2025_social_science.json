@@ -8,228 +8,443 @@
   "questions": [
     {
       "question_text": "Who was the leader of Italian unification?",
-      "options": ["Garibaldi", "Bismarck", "Napoleon", "Hitler"],
+      "options": [
+        "Garibaldi",
+        "Bismarck",
+        "Napoleon",
+        "Hitler"
+      ],
       "correct_answer": "A",
       "chapter": "Rise of Nationalism in Europe",
-      "topic_tags": ["Italy", "Garibaldi"],
+      "topic_tags": [
+        "Italy",
+        "Garibaldi"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Garibaldi was the military commander and nationalist leader who played the crucial role in unifying Italy through his campaigns in southern Italy and Sicily (1860), which merged with the northern kingdom to complete Italian unification."
     },
     {
       "question_text": "Khilafat Movement was launched in:",
-      "options": ["1919", "1920", "1922", "1930"],
+      "options": [
+        "1919",
+        "1920",
+        "1922",
+        "1930"
+      ],
       "correct_answer": "B",
       "chapter": "Nationalism in India",
-      "topic_tags": ["Khilafat", "1920"],
+      "topic_tags": [
+        "Khilafat",
+        "1920"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Khilafat Movement was launched in 1920 in response to the threat to the Ottoman Caliphate following World War I. Led by Ali Brothers (Muhammad Ali and Shaukat Ali), it mobilized Indian Muslims to protect the Islamic institution and became a significant non-cooperation movement aligned with Gandhi's nationalist efforts."
     },
     {
       "question_text": "Salt Satyagraha was led by:",
-      "options": ["Subhash Chandra Bose", "Mahatma Gandhi", "Jawaharlal Nehru", "Sardar Patel"],
+      "options": [
+        "Subhash Chandra Bose",
+        "Mahatma Gandhi",
+        "Jawaharlal Nehru",
+        "Sardar Patel"
+      ],
       "correct_answer": "B",
       "chapter": "Nationalism in India",
-      "topic_tags": ["Gandhi", "Salt_March"],
+      "topic_tags": [
+        "Gandhi",
+        "Salt_March"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Salt Satyagraha (1930) was Gandhi's landmark civil disobedience campaign against British salt monopoly in India. He led the Salt March to Dandi and produced salt illegally, inspiring mass non-violent resistance across the country and becoming a defining moment of the Indian independence movement."
     },
     {
       "question_text": "The Indian National Congress was founded in:",
-      "options": ["1882", "1885", "1905", "1919"],
+      "options": [
+        "1882",
+        "1885",
+        "1905",
+        "1919"
+      ],
       "correct_answer": "B",
       "chapter": "Nationalism in India",
-      "topic_tags": ["INC", "founding"],
+      "topic_tags": [
+        "INC",
+        "founding"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Indian National Congress was established in 1885 by Allan Octavian Hume and other British sympathizers as a platform for educated Indians to voice grievances through constitutional means, making it one of the earliest modern political organizations in India."
     },
     {
       "question_text": "Print culture in Europe was revolutionised by:",
-      "options": ["Marco Polo", "Johannes Gutenberg", "Newton", "Galileo"],
+      "options": [
+        "Marco Polo",
+        "Johannes Gutenberg",
+        "Newton",
+        "Galileo"
+      ],
       "correct_answer": "B",
       "chapter": "Print Culture",
-      "topic_tags": ["Gutenberg", "printing_press"],
+      "topic_tags": [
+        "Gutenberg",
+        "printing_press"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Gutenberg's invention of the movable type printing press around 1440 enabled mass production of books, transforming information dissemination and literacy across Europe—a fundamental revolution in print culture that the other figures did not initiate."
     },
     {
       "question_text": "The Indian Constitution adopted on:",
-      "options": ["15 August 1947", "26 January 1950", "26 November 1949", "26 January 1947"],
+      "options": [
+        "15 August 1947",
+        "26 January 1950",
+        "26 November 1949",
+        "26 January 1947"
+      ],
       "correct_answer": "C",
       "chapter": "Indian Constitution",
-      "topic_tags": ["Constitution", "adoption_date"],
+      "topic_tags": [
+        "Constitution",
+        "adoption_date"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Indian Constitution was drafted by the Constituent Assembly and formally adopted on 26 November 1949, though it came into effect on 26 January 1950 (celebrated as Republic Day). August 15, 1947 marks India's independence, not the Constitution's adoption."
     },
     {
       "question_text": "Right to Information Act was passed in:",
-      "options": ["2002", "2005", "2010", "2012"],
+      "options": [
+        "2002",
+        "2005",
+        "2010",
+        "2012"
+      ],
       "correct_answer": "B",
       "chapter": "Democratic Rights",
-      "topic_tags": ["RTI", "2005"],
+      "topic_tags": [
+        "RTI",
+        "2005"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Right to Information (RTI) Act was enacted by Parliament on October 12, 2005, and came into effect on October 12, 2005, replacing the archaic Freedom of Information Act of 1997 and establishing citizens' constitutional right to access government information."
     },
     {
       "question_text": "Which is the longest river of India?",
-      "options": ["Yamuna", "Ganga", "Brahmaputra", "Krishna"],
+      "options": [
+        "Yamuna",
+        "Ganga",
+        "Brahmaputra",
+        "Krishna"
+      ],
       "correct_answer": "B",
       "chapter": "Drainage",
-      "topic_tags": ["rivers", "Ganga"],
+      "topic_tags": [
+        "rivers",
+        "Ganga"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Ganga is the longest river in India at approximately 2,525 km, flowing from the Himalayas through northern India to the Bay of Bengal. While the Brahmaputra is also very long, the Ganga surpasses it in total length within Indian territory."
     },
     {
       "question_text": "Sundarbans is famous for:",
-      "options": ["Sandalwood", "Mangroves and Royal Bengal Tigers", "Tea", "Coffee"],
+      "options": [
+        "Sandalwood",
+        "Mangroves and Royal Bengal Tigers",
+        "Tea",
+        "Coffee"
+      ],
       "correct_answer": "B",
       "chapter": "Forests and Wildlife",
-      "topic_tags": ["Sundarbans"],
+      "topic_tags": [
+        "Sundarbans"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Sundarbans, located in the delta region of the Ganges-Brahmaputra rivers in India and Bangladesh, is the world's largest mangrove forest ecosystem and the natural habitat of the endangered Royal Bengal Tiger, making it a UNESCO World Heritage Site."
     },
     {
       "question_text": "Indian Standard Time is based on longitude:",
-      "options": ["75°E", "82.5°E", "90°E", "78°E"],
+      "options": [
+        "75°E",
+        "82.5°E",
+        "90°E",
+        "78°E"
+      ],
       "correct_answer": "B",
       "chapter": "Resources and Development",
-      "topic_tags": ["IST"],
+      "topic_tags": [
+        "IST"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Indian Standard Time is calculated based on a standard meridian that divides the Earth into time zones. The 82.5°E meridian passes through the central part of India and was chosen as the standard reference for IST to keep the time relatively uniform across the country's vast east-west expanse."
     },
     {
       "question_text": "Black soil is most suitable for:",
-      "options": ["Rice", "Wheat", "Cotton", "Tea"],
+      "options": [
+        "Rice",
+        "Wheat",
+        "Cotton",
+        "Tea"
+      ],
       "correct_answer": "C",
       "chapter": "Agriculture",
-      "topic_tags": ["soil", "cotton"],
+      "topic_tags": [
+        "soil",
+        "cotton"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Black soil, rich in clay and minerals, retains moisture well and has high fertility, making it ideal for cotton cultivation. Cotton requires well-drained but nutrient-rich soil with adequate water retention, which black soil provides exceptionally well."
     },
     {
       "question_text": "Tertiary sector includes:",
-      "options": ["Mining", "Manufacturing", "Services", "Agriculture"],
+      "options": [
+        "Mining",
+        "Manufacturing",
+        "Services",
+        "Agriculture"
+      ],
       "correct_answer": "C",
       "chapter": "Sectors of Indian Economy",
-      "topic_tags": ["tertiary", "services"],
+      "topic_tags": [
+        "tertiary",
+        "services"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The tertiary sector comprises service industries—including healthcare, education, retail, finance, and transportation—that provide intangible services to consumers. Sectors A, B, and D (primary and secondary sectors) involve extracting, processing, or producing physical goods."
     },
     {
       "question_text": "RBI is the central bank of India established in:",
-      "options": ["1935", "1947", "1950", "1969"],
+      "options": [
+        "1935",
+        "1947",
+        "1950",
+        "1969"
+      ],
       "correct_answer": "A",
       "chapter": "Money and Credit",
-      "topic_tags": ["RBI", "1935"],
+      "topic_tags": [
+        "RBI",
+        "1935"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Reserve Bank of India was established in 1935 under the Reserve Bank of India Act, 1934, initially as a private institution before being nationalized in 1949. While 1947 marks Indian independence and 1950 marks the Constitution's adoption, the RBI itself predates both these events."
     },
     {
       "question_text": "Money supplied by the Reserve Bank of India is called:",
-      "options": ["High-powered money", "Demand deposits", "Time deposits", "Cheques"],
+      "options": [
+        "High-powered money",
+        "Demand deposits",
+        "Time deposits",
+        "Cheques"
+      ],
       "correct_answer": "A",
       "chapter": "Money and Credit",
-      "topic_tags": ["money_supply"],
+      "topic_tags": [
+        "money_supply"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "High-powered money refers to currency and coins issued by the central bank (RBI) that forms the monetary base of the economy. It's called \"high-powered\" because it serves as the foundation from which commercial banks create broader money supply through lending."
     },
     {
       "question_text": "MNCs are companies that operate in:",
-      "options": ["One country only", "Two countries only", "More than one country", "Only India"],
+      "options": [
+        "One country only",
+        "Two countries only",
+        "More than one country",
+        "Only India"
+      ],
       "correct_answer": "C",
       "chapter": "Globalisation",
-      "topic_tags": ["MNC"],
+      "topic_tags": [
+        "MNC"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Multinational Corporations (MNCs) by definition operate across multiple countries, engaging in business activities in more than one nation. This is what distinguishes them from domestic companies that operate in a single country."
     },
     {
       "question_text": "ISO 9000 is a:",
-      "options": ["Quality certification", "Sales target", "Tax mark", "Currency code"],
+      "options": [
+        "Quality certification",
+        "Sales target",
+        "Tax mark",
+        "Currency code"
+      ],
       "correct_answer": "A",
       "chapter": "Consumer Rights",
-      "topic_tags": ["ISO", "quality"],
+      "topic_tags": [
+        "ISO",
+        "quality"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "ISO 9000 is an international standard that specifies requirements for quality management systems, enabling organizations to demonstrate their ability to consistently provide products and services meeting customer and regulatory requirements."
     },
     {
       "question_text": "First Battle of Panipat was fought in:",
-      "options": ["1526", "1556", "1761", "1857"],
+      "options": [
+        "1526",
+        "1556",
+        "1761",
+        "1857"
+      ],
       "correct_answer": "A",
       "chapter": "Indian History",
-      "topic_tags": ["Panipat", "Babur"],
+      "topic_tags": [
+        "Panipat",
+        "Babur"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The First Battle of Panipat occurred in 1526 when Babur defeated Ibrahim Lodi, establishing the Mughal Empire in India. This battle marks the beginning of Mughal rule and is distinguished from later Panipat battles (1556 and 1761)."
     },
     {
       "question_text": "Who built the Taj Mahal?",
-      "options": ["Akbar", "Babur", "Shah Jahan", "Aurangzeb"],
+      "options": [
+        "Akbar",
+        "Babur",
+        "Shah Jahan",
+        "Aurangzeb"
+      ],
       "correct_answer": "C",
       "chapter": "Indian History",
-      "topic_tags": ["Taj_Mahal", "Mughal"],
+      "topic_tags": [
+        "Taj_Mahal",
+        "Mughal"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Shah Jahan commissioned the Taj Mahal in memory of his wife Mumtaz Mahal after her death in 1631. Construction began in 1632 and was completed in 1653, making it one of the most iconic monuments of the Mughal Empire."
     },
     {
       "question_text": "Founder of Mauryan empire was:",
-      "options": ["Ashoka", "Chandragupta Maurya", "Bindusara", "Akbar"],
+      "options": [
+        "Ashoka",
+        "Chandragupta Maurya",
+        "Bindusara",
+        "Akbar"
+      ],
       "correct_answer": "B",
       "chapter": "Ancient India",
-      "topic_tags": ["Maurya"],
+      "topic_tags": [
+        "Maurya"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Chandragupta Maurya established the Mauryan Empire around 322 BCE after overthrowing the Nanda dynasty with help from Kautilya. While Ashoka and Bindusara were important later rulers of this empire, they did not found it."
     },
     {
       "question_text": "Capital of Andhra Pradesh is:",
-      "options": ["Hyderabad", "Amaravati", "Vijayawada", "Visakhapatnam"],
+      "options": [
+        "Hyderabad",
+        "Amaravati",
+        "Vijayawada",
+        "Visakhapatnam"
+      ],
       "correct_answer": "B",
       "chapter": "Political Geography",
-      "topic_tags": ["AP", "capital"],
+      "topic_tags": [
+        "AP",
+        "capital"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Amaravati was officially designated as the capital of Andhra Pradesh in 2015 following the bifurcation of the state, replacing Hyderabad which became the capital of Telangana. The city is being developed as a new capital in the Andhra Pradesh region."
     },
     {
       "question_text": "Tropic of Cancer passes through how many Indian states?",
-      "options": ["6", "7", "8", "9"],
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
       "correct_answer": "C",
       "chapter": "Geographical Basics",
-      "topic_tags": ["Tropic_of_Cancer"],
+      "topic_tags": [
+        "Tropic_of_Cancer"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Tropic of Cancer passes through 8 Indian states: Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram. This imaginary line at 23.5°N latitude divides India into tropical and subtropical regions."
     },
     {
       "question_text": "Sahyadri mountain range is located in:",
-      "options": ["North India", "Eastern India", "Western India", "Central India"],
+      "options": [
+        "North India",
+        "Eastern India",
+        "Western India",
+        "Central India"
+      ],
       "correct_answer": "C",
       "chapter": "Physical Features",
-      "topic_tags": ["Sahyadri"],
+      "topic_tags": [
+        "Sahyadri"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Sahyadri range, also called the Western Ghats, runs along India's western coast through states like Maharashtra, Karnataka, and Kerala, forming a natural boundary between the coastal plains and the Deccan Plateau."
     },
     {
       "question_text": "PRWD (Public Right to Welfare and Development) Schemes include:",
-      "options": ["NREGA", "Right to Education", "Right to Food", "All of these"],
+      "options": [
+        "NREGA",
+        "Right to Education",
+        "Right to Food",
+        "All of these"
+      ],
       "correct_answer": "D",
       "chapter": "Democratic Rights",
-      "topic_tags": ["welfare_schemes"],
+      "topic_tags": [
+        "welfare_schemes"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "PRWD schemes encompass comprehensive social welfare and development programs, including guaranteed employment through NREGA, free education under the Right to Education Act, and food security through various food distribution schemes. Therefore, all listed options are components of Public Right to Welfare and Development initiatives."
     },
     {
       "question_text": "Independence Day of India is celebrated on:",
-      "options": ["26 January", "15 August", "2 October", "14 November"],
+      "options": [
+        "26 January",
+        "15 August",
+        "2 October",
+        "14 November"
+      ],
       "correct_answer": "B",
       "chapter": "Indian History",
-      "topic_tags": ["Independence_Day"],
+      "topic_tags": [
+        "Independence_Day"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "India adopted its Constitution on 26 January 1950, making that Republic Day. However, Independence Day commemorates India's independence from British rule on 15 August 1947, when the Indian Independence Act came into effect."
     },
     {
       "question_text": "Civil Disobedience Movement was launched in:",
-      "options": ["1920", "1930", "1942", "1947"],
+      "options": [
+        "1920",
+        "1930",
+        "1942",
+        "1947"
+      ],
       "correct_answer": "B",
       "chapter": "Nationalism in India",
-      "topic_tags": ["civil_disobedience"],
+      "topic_tags": [
+        "civil_disobedience"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Civil Disobedience Movement was launched by Gandhi on March 12, 1930, when he led the Salt March from Sabarmati Ashram to Dandi, protesting British salt monopoly and taxation in India."
     }
   ]
 }

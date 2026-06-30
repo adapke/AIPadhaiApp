@@ -8,228 +8,447 @@
   "questions": [
     {
       "question_text": "Two point charges +q and -q are placed distance d apart. Electric field at midpoint is:",
-      "options": ["0", "kq/d²", "2kq/d²", "8kq/d²"],
+      "options": [
+        "0",
+        "kq/d²",
+        "2kq/d²",
+        "8kq/d²"
+      ],
       "correct_answer": "D",
       "chapter": "Electric Charges and Fields",
-      "topic_tags": ["electric_field", "dipole"],
+      "topic_tags": [
+        "electric_field",
+        "dipole"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At the midpoint, each charge is distance d/2 away. Both charges create fields pointing in the same direction (away from +q, toward -q), so fields add rather than cancel. Each contributes kq/(d/2)² = 4kq/d², giving total field 8kq/d²."
     },
     {
       "question_text": "Capacitance of a parallel plate capacitor with vacuum, plate area A and separation d is:",
-      "options": ["ε₀A/d", "ε₀d/A", "ε₀Ad", "Ad/ε₀"],
+      "options": [
+        "ε₀A/d",
+        "ε₀d/A",
+        "ε₀Ad",
+        "Ad/ε₀"
+      ],
       "correct_answer": "A",
       "chapter": "Electrostatic Potential and Capacitance",
-      "topic_tags": ["capacitance", "formula"],
+      "topic_tags": [
+        "capacitance",
+        "formula"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Capacitance is defined as C = Q/V. For a parallel plate capacitor, the electric field E = σ/ε₀ = Q/(ε₀A), and voltage V = Ed = Qd/(ε₀A). Therefore, C = Q/V = ε₀A/d, showing capacitance is directly proportional to plate area and inversely proportional to separation."
     },
     {
       "question_text": "Current through a resistor is 2 A. Power dissipated in a 5 Ω resistor is:",
-      "options": ["10 W", "20 W", "5 W", "2.5 W"],
+      "options": [
+        "10 W",
+        "20 W",
+        "5 W",
+        "2.5 W"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["power", "I²R"],
+      "topic_tags": [
+        "power",
+        "I²R"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Using P = I²R, with current I = 2 A and resistance R = 5 Ω: P = (2)² × 5 = 4 × 5 = 20 W."
     },
     {
       "question_text": "An electron enters a magnetic field perpendicular to velocity. Its path is:",
-      "options": ["Straight line", "Parabola", "Circle", "Ellipse"],
+      "options": [
+        "Straight line",
+        "Parabola",
+        "Circle",
+        "Ellipse"
+      ],
       "correct_answer": "C",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["circular_motion", "magnetic_force"],
+      "topic_tags": [
+        "circular_motion",
+        "magnetic_force"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When a charged particle moves perpendicular to a magnetic field, the Lorentz force acts perpendicular to both the velocity and field, causing centripetal acceleration. This constant perpendicular force maintains a constant radius, producing uniform circular motion."
     },
     {
       "question_text": "Lenz's law follows from conservation of:",
-      "options": ["Charge", "Momentum", "Energy", "Mass"],
+      "options": [
+        "Charge",
+        "Momentum",
+        "Energy",
+        "Mass"
+      ],
       "correct_answer": "C",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["Lenz_law", "energy_conservation"],
+      "topic_tags": [
+        "Lenz_law",
+        "energy_conservation"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Lenz's law states that induced currents oppose the change causing them, which prevents energy from being created or destroyed. If induced effects aided the change rather than opposing it, we'd have perpetual energy generation, violating energy conservation."
     },
     {
       "question_text": "RMS value of AC current with peak Io is:",
-      "options": ["Io", "Io/√2", "Io/2", "2Io"],
+      "options": [
+        "Io",
+        "Io/√2",
+        "Io/2",
+        "2Io"
+      ],
       "correct_answer": "B",
       "chapter": "Alternating Current",
-      "topic_tags": ["RMS"],
+      "topic_tags": [
+        "RMS"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The RMS (root mean square) value represents the equivalent DC current that would deliver the same power. For a sinusoidal AC current, integrating i² over one complete cycle and taking the square root yields I_rms = I₀/√2, where I₀ is the peak amplitude."
     },
     {
       "question_text": "Speed of EM waves in vacuum is:",
-      "options": ["3×10⁸ m/s", "3×10⁶ m/s", "1.5×10⁸ m/s", "3×10¹⁰ m/s"],
+      "options": [
+        "3×10⁸ m/s",
+        "3×10⁶ m/s",
+        "1.5×10⁸ m/s",
+        "3×10¹⁰ m/s"
+      ],
       "correct_answer": "A",
       "chapter": "Electromagnetic Waves",
-      "topic_tags": ["c", "speed_of_light"],
+      "topic_tags": [
+        "c",
+        "speed_of_light"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The speed of light in vacuum is a fundamental constant, approximately 3×10⁸ m/s. This is the speed at which all electromagnetic waves propagate through vacuum, derived from Maxwell's equations and experimentally confirmed to be about 299,792,458 m/s."
     },
     {
       "question_text": "Focal length of a concave lens is:",
-      "options": ["Positive", "Negative", "Zero", "Infinity"],
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Infinity"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["sign_convention", "concave_lens"],
+      "topic_tags": [
+        "sign_convention",
+        "concave_lens"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Concave lenses are diverging lenses that spread out light rays. By the sign convention used in optics, diverging lenses have negative focal lengths, while converging lenses have positive focal lengths."
     },
     {
       "question_text": "Young's double slit experiment demonstrates:",
-      "options": ["Reflection", "Refraction", "Interference", "Polarisation"],
+      "options": [
+        "Reflection",
+        "Refraction",
+        "Interference",
+        "Polarisation"
+      ],
       "correct_answer": "C",
       "chapter": "Wave Optics",
-      "topic_tags": ["interference", "YDSE"],
+      "topic_tags": [
+        "interference",
+        "YDSE"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In Young's double slit experiment, light passes through two slits acting as coherent sources, creating overlapping waves that produce an interference pattern of bright and dark fringes on a screen. This pattern results from constructive and destructive interference where waves combine."
     },
     {
       "question_text": "Energy E of a photon with frequency ν is:",
-      "options": ["hν", "h/ν", "ν/h", "h+ν"],
+      "options": [
+        "hν",
+        "h/ν",
+        "ν/h",
+        "h+ν"
+      ],
       "correct_answer": "A",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["photon", "Planck"],
+      "topic_tags": [
+        "photon",
+        "Planck"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Planck's equation defines photon energy as directly proportional to frequency, with Planck's constant (h) as the proportionality factor: E = hν. Higher frequency photons carry more energy."
     },
     {
       "question_text": "Bohr's first orbit radius for hydrogen is approximately:",
-      "options": ["0.529 Å", "5.29 Å", "0.529 nm", "5.29 m"],
+      "options": [
+        "0.529 Å",
+        "5.29 Å",
+        "0.529 nm",
+        "5.29 m"
+      ],
       "correct_answer": "A",
       "chapter": "Atoms",
-      "topic_tags": ["Bohr_radius"],
+      "topic_tags": [
+        "Bohr_radius"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Bohr radius for hydrogen's first orbit is defined as a₀ = h²/(4π²mₑke²) ≈ 0.529 Å, which equals 0.0529 nm or 5.29 × 10⁻¹¹ m. Option A uses Ångströms, the traditional unit for atomic scales, while option C incorrectly scales this by a factor of 10."
     },
     {
       "question_text": "Stable nucleus has:",
-      "options": ["N=Z always", "N>Z for heavy nuclei", "N<Z always", "N=A"],
+      "options": [
+        "N=Z always",
+        "N>Z for heavy nuclei",
+        "N<Z always",
+        "N=A"
+      ],
       "correct_answer": "B",
       "chapter": "Nuclei",
-      "topic_tags": ["stability", "neutron_proton"],
+      "topic_tags": [
+        "stability",
+        "neutron_proton"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For light nuclei, the Coulomb repulsion between protons is weak, so N≈Z maintains stability. However, as nuclei get heavier, increased Coulomb repulsion requires extra neutrons (N>Z) to provide additional strong nuclear force without adding more repelling protons, stabilizing the nucleus."
     },
     {
       "question_text": "In a p-n junction diode, depletion region is formed due to:",
-      "options": ["Holes only", "Electrons only", "Diffusion of carriers", "Photons"],
+      "options": [
+        "Holes only",
+        "Electrons only",
+        "Diffusion of carriers",
+        "Photons"
+      ],
       "correct_answer": "C",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["depletion_region", "diode"],
+      "topic_tags": [
+        "depletion_region",
+        "diode"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The depletion region forms when charge carriers diffuse across the junction boundary—electrons diffuse from n-type to p-type, and holes diffuse from p-type to n-type. This diffusion creates an electric field that opposes further movement, establishing the depletion region."
     },
     {
       "question_text": "Magnetic field at center of a circular coil of radius r with current I has magnitude:",
-      "options": ["μ₀I/2r", "μ₀I/r", "2μ₀I/r", "μ₀I/(4πr)"],
+      "options": [
+        "μ₀I/2r",
+        "μ₀I/r",
+        "2μ₀I/r",
+        "μ₀I/(4πr)"
+      ],
       "correct_answer": "A",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["Biot_Savart", "circular_coil"],
+      "topic_tags": [
+        "Biot_Savart",
+        "circular_coil"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The magnetic field at the center of a circular coil is derived from the Biot-Savart law. For a complete circular loop, all current elements contribute field components that add constructively at the center, yielding B = μ₀I/(2r), where the factor of 2 comes from integrating around the full circle."
     },
     {
       "question_text": "Self-inductance of a coil depends on:",
-      "options": ["Current through it", "Voltage across it", "Geometry and turns", "Resistance"],
+      "options": [
+        "Current through it",
+        "Voltage across it",
+        "Geometry and turns",
+        "Resistance"
+      ],
       "correct_answer": "C",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["self_inductance"],
+      "topic_tags": [
+        "self_inductance"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Self-inductance is an intrinsic property of a coil determined by its physical characteristics: the number of turns (N), cross-sectional area (A), and length (l), expressed as L = μ₀N²A/l. It is independent of current, voltage, or resistance flowing through it."
     },
     {
       "question_text": "Power factor of a pure inductive AC circuit is:",
-      "options": ["0", "0.5", "1", "-1"],
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "-1"
+      ],
       "correct_answer": "A",
       "chapter": "Alternating Current",
-      "topic_tags": ["power_factor", "inductor"],
+      "topic_tags": [
+        "power_factor",
+        "inductor"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In a pure inductive circuit, current lags voltage by 90°. Power factor equals cos(φ), where φ is the phase angle between voltage and current. Since cos(90°) = 0, the power factor is zero, meaning no real power is consumed—only reactive power circulates."
     },
     {
       "question_text": "Resistivity of a semiconductor with temperature:",
-      "options": ["Increases", "Decreases", "Remains constant", "First increases then decreases"],
+      "options": [
+        "Increases",
+        "Decreases",
+        "Remains constant",
+        "First increases then decreases"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["resistivity", "temperature_dependence"],
+      "topic_tags": [
+        "resistivity",
+        "temperature_dependence"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In semiconductors, increased temperature provides more thermal energy to free charge carriers from the valence band, exponentially increasing their concentration. This effect dominates over increased collision rates, causing resistivity to decrease with rising temperature—opposite to metals."
     },
     {
       "question_text": "Number of free electrons per atom in copper is approximately:",
-      "options": ["0", "1", "2", "4"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["copper", "free_electrons"],
+      "topic_tags": [
+        "copper",
+        "free_electrons"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Copper has an atomic number of 29 with electron configuration ending in 3d¹⁰4s¹. The single 4s electron in the outermost shell is loosely bound and constitutes the free electron that contributes to copper's excellent electrical and thermal conductivity."
     },
     {
       "question_text": "A wave with frequency 500 Hz and wavelength 0.5 m has speed:",
-      "options": ["100 m/s", "250 m/s", "500 m/s", "1000 m/s"],
+      "options": [
+        "100 m/s",
+        "250 m/s",
+        "500 m/s",
+        "1000 m/s"
+      ],
       "correct_answer": "B",
       "chapter": "Wave Optics",
-      "topic_tags": ["wave_speed", "v=fλ"],
+      "topic_tags": [
+        "wave_speed",
+        "v=fλ"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Wave speed equals frequency multiplied by wavelength: v = f × λ = 500 Hz × 0.5 m = 250 m/s."
     },
     {
       "question_text": "Total internal reflection occurs when light goes from:",
-      "options": ["Denser to rarer", "Rarer to denser", "Same medium", "Any angle"],
+      "options": [
+        "Denser to rarer",
+        "Rarer to denser",
+        "Same medium",
+        "Any angle"
+      ],
       "correct_answer": "A",
       "chapter": "Ray Optics",
-      "topic_tags": ["TIR", "refractive_index"],
+      "topic_tags": [
+        "TIR",
+        "refractive_index"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Total internal reflection requires light traveling from a denser medium (higher refractive index) to a rarer medium (lower refractive index) at an angle exceeding the critical angle, causing all light to reflect back rather than refract out."
     },
     {
       "question_text": "Drift velocity is:",
-      "options": ["Random thermal velocity", "Average velocity in direction of field", "Speed of light", "Same as Fermi velocity"],
+      "options": [
+        "Random thermal velocity",
+        "Average velocity in direction of field",
+        "Speed of light",
+        "Same as Fermi velocity"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["drift_velocity"],
+      "topic_tags": [
+        "drift_velocity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Drift velocity is the net velocity charge carriers acquire in response to an applied electric field, calculated as the average displacement per unit time in the field direction. It's distinct from random thermal motion (A), constant regardless of field strength (C), and differs from Fermi velocity (D)."
     },
     {
       "question_text": "Wavelength of de Broglie wave depends on:",
-      "options": ["Mass only", "Velocity only", "Momentum", "Charge"],
+      "options": [
+        "Mass only",
+        "Velocity only",
+        "Momentum",
+        "Charge"
+      ],
       "correct_answer": "C",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["de_Broglie"],
+      "topic_tags": [
+        "de_Broglie"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The de Broglie wavelength is given by λ = h/p, where h is Planck's constant and p is momentum. Since momentum p = mv (mass × velocity), the wavelength depends on both mass and velocity combined through their product, not independently. Therefore, it depends specifically on momentum."
     },
     {
       "question_text": "Forbidden energy gap in a semiconductor lies between:",
-      "options": ["Two conduction bands", "Conduction and valence bands", "Two valence bands", "Outside both"],
+      "options": [
+        "Two conduction bands",
+        "Conduction and valence bands",
+        "Two valence bands",
+        "Outside both"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["band_gap"],
+      "topic_tags": [
+        "band_gap"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The forbidden energy gap (bandgap) is the energy range where no electron states exist in a semiconductor's band structure. It specifically separates the valence band (where electrons are bound to atoms) from the conduction band (where electrons are free to move), which defines the minimum energy needed to excite an electron and create conductivity."
     },
     {
       "question_text": "Magnetic flux unit is:",
-      "options": ["Tesla", "Weber", "Henry", "Coulomb"],
+      "options": [
+        "Tesla",
+        "Weber",
+        "Henry",
+        "Coulomb"
+      ],
       "correct_answer": "B",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["units", "Weber"],
+      "topic_tags": [
+        "units",
+        "Weber"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Magnetic flux is defined as the product of magnetic field strength and area (Φ = BA). The SI unit for this quantity is the weber (Wb), named after physicist Wilhelm Weber, where 1 Wb = 1 Tesla·m²."
     },
     {
       "question_text": "Eddy currents are used in:",
-      "options": ["Induction furnace", "Battery", "Resistor", "Switch"],
+      "options": [
+        "Induction furnace",
+        "Battery",
+        "Resistor",
+        "Switch"
+      ],
       "correct_answer": "A",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["eddy_currents", "applications"],
+      "topic_tags": [
+        "eddy_currents",
+        "applications"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Eddy currents are induced loops of electrical current in conductors exposed to changing magnetic fields. In induction furnaces, eddy currents flowing through metal workpieces generate resistive heating, enabling high-temperature melting and material processing."
     }
   ]
 }

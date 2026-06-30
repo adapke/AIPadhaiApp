@@ -8,228 +8,453 @@
   "questions": [
     {
       "question_text": "Which of the following is a balanced chemical equation?",
-      "options": ["H2 + O2 → H2O", "2H2 + O2 → 2H2O", "H2 + 2O → H2O", "H + O → H2O"],
+      "options": [
+        "H2 + O2 → H2O",
+        "2H2 + O2 → 2H2O",
+        "H2 + 2O → H2O",
+        "H + O → H2O"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Reactions and Equations",
-      "topic_tags": ["balancing", "combustion"],
+      "topic_tags": [
+        "balancing",
+        "combustion"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Option B is balanced because it has equal numbers of each atom on both sides: 4 hydrogen atoms and 2 oxygen atoms on the left equal 4 hydrogen and 2 oxygen on the right. Options A, C, and D violate the law of conservation of mass with unequal atom counts."
     },
     {
       "question_text": "The pH of a neutral solution is:",
-      "options": ["0", "7", "14", "Greater than 7"],
+      "options": [
+        "0",
+        "7",
+        "14",
+        "Greater than 7"
+      ],
       "correct_answer": "B",
       "chapter": "Acids, Bases and Salts",
-      "topic_tags": ["pH_scale", "neutral"],
+      "topic_tags": [
+        "pH_scale",
+        "neutral"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "At neutrality, the concentration of hydrogen ions equals the concentration of hydroxide ions ([H+] = [OH-] = 10^-7 M), which corresponds to pH = 7 on the logarithmic pH scale where pH = -log[H+]."
     },
     {
       "question_text": "Which metal is liquid at room temperature?",
-      "options": ["Iron", "Copper", "Mercury", "Gold"],
+      "options": [
+        "Iron",
+        "Copper",
+        "Mercury",
+        "Gold"
+      ],
       "correct_answer": "C",
       "chapter": "Metals and Non-Metals",
-      "topic_tags": ["physical_properties", "mercury"],
+      "topic_tags": [
+        "physical_properties",
+        "mercury"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mercury has a melting point of approximately -39°C, making it liquid at standard room temperature (around 20-25°C), while iron, copper, and gold all have melting points well above 1000°C and remain solid at room temperature."
     },
     {
       "question_text": "The molecular formula of methane is:",
-      "options": ["CH4", "C2H6", "C2H4", "C2H2"],
+      "options": [
+        "CH4",
+        "C2H6",
+        "C2H4",
+        "C2H2"
+      ],
       "correct_answer": "A",
       "chapter": "Carbon and its Compounds",
-      "topic_tags": ["alkanes", "molecular_formula"],
+      "topic_tags": [
+        "alkanes",
+        "molecular_formula"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Methane is the simplest hydrocarbon with one carbon atom bonded to four hydrogen atoms, giving it the formula CH4. The other options represent different hydrocarbons: ethane (C2H6), ethene (C2H4), and ethyne (C2H2)."
     },
     {
       "question_text": "In the periodic table, elements in the same group have similar:",
-      "options": ["Atomic number", "Atomic mass", "Number of valence electrons", "Number of neutrons"],
+      "options": [
+        "Atomic number",
+        "Atomic mass",
+        "Number of valence electrons",
+        "Number of neutrons"
+      ],
       "correct_answer": "C",
       "chapter": "Periodic Classification of Elements",
-      "topic_tags": ["valence_electrons", "groups"],
+      "topic_tags": [
+        "valence_electrons",
+        "groups"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Elements in the same group (vertical column) have the same number of electron shells occupied and the same number of electrons in their outermost shell, which determines their chemical properties and reactivity. Atomic number and mass vary across groups, and neutron count is unrelated to group position."
     },
     {
       "question_text": "Photosynthesis takes place in:",
-      "options": ["Mitochondria", "Chloroplast", "Nucleus", "Ribosome"],
+      "options": [
+        "Mitochondria",
+        "Chloroplast",
+        "Nucleus",
+        "Ribosome"
+      ],
       "correct_answer": "B",
       "chapter": "Life Processes",
-      "topic_tags": ["photosynthesis", "chloroplast"],
+      "topic_tags": [
+        "photosynthesis",
+        "chloroplast"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Chloroplasts contain chlorophyll and are the specialized organelles where light-dependent and light-independent reactions of photosynthesis occur. Mitochondria perform cellular respiration, the nucleus controls genetics, and ribosomes synthesize proteins."
     },
     {
       "question_text": "Which part of the brain controls balance?",
-      "options": ["Cerebrum", "Cerebellum", "Medulla", "Hypothalamus"],
+      "options": [
+        "Cerebrum",
+        "Cerebellum",
+        "Medulla",
+        "Hypothalamus"
+      ],
       "correct_answer": "B",
       "chapter": "Control and Coordination",
-      "topic_tags": ["brain", "cerebellum"],
+      "topic_tags": [
+        "brain",
+        "cerebellum"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The cerebellum, located at the base of the brain behind the brainstem, is responsible for coordinating muscle movements and maintaining balance and posture through constant sensory feedback."
     },
     {
       "question_text": "Insulin is produced by:",
-      "options": ["Liver", "Pancreas", "Kidney", "Spleen"],
+      "options": [
+        "Liver",
+        "Pancreas",
+        "Kidney",
+        "Spleen"
+      ],
       "correct_answer": "B",
       "chapter": "Control and Coordination",
-      "topic_tags": ["hormones", "pancreas"],
+      "topic_tags": [
+        "hormones",
+        "pancreas"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The pancreas produces insulin through specialized cells called beta cells located in the islets of Langerhans. Insulin regulates blood glucose levels by facilitating glucose uptake into cells."
     },
     {
       "question_text": "The process of converting a tadpole to a frog is an example of:",
-      "options": ["Pollination", "Regeneration", "Metamorphosis", "Budding"],
+      "options": [
+        "Pollination",
+        "Regeneration",
+        "Metamorphosis",
+        "Budding"
+      ],
       "correct_answer": "C",
       "chapter": "How do Organisms Reproduce?",
-      "topic_tags": ["development", "metamorphosis"],
+      "topic_tags": [
+        "development",
+        "metamorphosis"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "During metamorphosis, an organism undergoes dramatic physical transformation through distinct developmental stages. A tadpole's conversion to a frog involves major changes—loss of the tail, development of legs, and changes in respiratory and digestive systems—which are characteristic features of this biological process."
     },
     {
       "question_text": "Mendel performed his experiments on:",
-      "options": ["Rose plant", "Pea plant", "Mango plant", "Sunflower"],
+      "options": [
+        "Rose plant",
+        "Pea plant",
+        "Mango plant",
+        "Sunflower"
+      ],
       "correct_answer": "B",
       "chapter": "Heredity and Evolution",
-      "topic_tags": ["mendel", "heredity"],
+      "topic_tags": [
+        "mendel",
+        "heredity"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mendel chose pea plants because they have easily observable traits (tall/short, green/yellow seeds), are quick-growing with short generation times, and can self-pollinate or be cross-pollinated, making them ideal for tracking inheritance patterns across generations."
     },
     {
       "question_text": "A concave mirror always forms a real image when the object is placed:",
-      "options": ["Between F and P", "At F", "Beyond F", "Behind the mirror"],
+      "options": [
+        "Between F and P",
+        "At F",
+        "Beyond F",
+        "Behind the mirror"
+      ],
       "correct_answer": "C",
       "chapter": "Light - Reflection and Refraction",
-      "topic_tags": ["concave_mirror", "real_image"],
+      "topic_tags": [
+        "concave_mirror",
+        "real_image"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For a concave mirror, real images form when the object is beyond the focal point (F) because the reflected rays converge in front of the mirror. Between F and P produces virtual images, at F produces no image, and behind the mirror is impossible for real object placement."
     },
     {
       "question_text": "The SI unit of electric current is:",
-      "options": ["Volt", "Ampere", "Ohm", "Watt"],
+      "options": [
+        "Volt",
+        "Ampere",
+        "Ohm",
+        "Watt"
+      ],
       "correct_answer": "B",
       "chapter": "Electricity",
-      "topic_tags": ["SI_units", "current"],
+      "topic_tags": [
+        "SI_units",
+        "current"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Electric current measures the flow of electric charge per unit time. The ampere (A) is defined as one coulomb of charge flowing past a point per second, making it the standard SI unit for current. Volt measures potential difference, ohm measures resistance, and watt measures power."
     },
     {
       "question_text": "Ohm's law states that V equals:",
-      "options": ["I + R", "I - R", "I × R", "I / R"],
+      "options": [
+        "I + R",
+        "I - R",
+        "I × R",
+        "I / R"
+      ],
       "correct_answer": "C",
       "chapter": "Electricity",
-      "topic_tags": ["ohms_law", "resistance"],
+      "topic_tags": [
+        "ohms_law",
+        "resistance"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ohm's law defines the relationship between voltage, current, and resistance in a circuit. Voltage equals current multiplied by resistance (V = I × R), showing that voltage is directly proportional to both current and resistance."
     },
     {
       "question_text": "Which lens is used to correct hypermetropia (long-sightedness)?",
-      "options": ["Concave lens", "Convex lens", "Cylindrical lens", "Bifocal lens"],
+      "options": [
+        "Concave lens",
+        "Convex lens",
+        "Cylindrical lens",
+        "Bifocal lens"
+      ],
       "correct_answer": "B",
       "chapter": "The Human Eye and the Colourful World",
-      "topic_tags": ["eye_defects", "lenses"],
+      "topic_tags": [
+        "eye_defects",
+        "lenses"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Hypermetropia occurs when the eye's focal length is too long, causing light to focus behind the retina. A convex (converging) lens bends light rays inward, moving the focal point forward onto the retina to restore clear vision."
     },
     {
       "question_text": "The natural source of energy that does not pollute is:",
-      "options": ["Coal", "Petroleum", "Nuclear", "Solar"],
+      "options": [
+        "Coal",
+        "Petroleum",
+        "Nuclear",
+        "Solar"
+      ],
       "correct_answer": "D",
       "chapter": "Sources of Energy",
-      "topic_tags": ["renewable", "solar"],
+      "topic_tags": [
+        "renewable",
+        "solar"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Solar energy is a renewable source that converts sunlight directly into usable energy through photovoltaic cells or thermal systems, producing no pollutants or greenhouse gases during operation, unlike coal and petroleum which emit carbon dioxide and other harmful substances."
     },
     {
       "question_text": "Which gas is responsible for global warming?",
-      "options": ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"],
+      "options": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Helium"
+      ],
       "correct_answer": "C",
       "chapter": "Our Environment",
-      "topic_tags": ["greenhouse_gases", "climate"],
+      "topic_tags": [
+        "greenhouse_gases",
+        "climate"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Carbon dioxide traps heat in Earth's atmosphere by absorbing infrared radiation, preventing it from escaping to space. This greenhouse effect causes global warming, making it the primary gas responsible for the phenomenon."
     },
     {
       "question_text": "The chemical formula of washing soda is:",
-      "options": ["NaCl", "Na2CO3·10H2O", "NaHCO3", "Na2SO4"],
+      "options": [
+        "NaCl",
+        "Na2CO3·10H2O",
+        "NaHCO3",
+        "Na2SO4"
+      ],
       "correct_answer": "B",
       "chapter": "Acids, Bases and Salts",
-      "topic_tags": ["sodium_compounds", "formulas"],
+      "topic_tags": [
+        "sodium_compounds",
+        "formulas"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Washing soda is sodium carbonate decahydrate, which contains a sodium carbonate compound (Na2CO3) bonded with 10 water molecules (10H2O). This specific hydrated form is the standard chemical formula for the commercial product used in laundry and cleaning applications."
     },
     {
       "question_text": "Reactivity series: Which is most reactive?",
-      "options": ["Iron", "Sodium", "Copper", "Gold"],
+      "options": [
+        "Iron",
+        "Sodium",
+        "Copper",
+        "Gold"
+      ],
       "correct_answer": "B",
       "chapter": "Metals and Non-Metals",
-      "topic_tags": ["reactivity_series"],
+      "topic_tags": [
+        "reactivity_series"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Sodium is an alkali metal in Group 1 with only one valence electron, making it extremely eager to lose that electron and form positive ions. Iron, copper, and gold are transition/post-transition metals with much higher ionization energies and greater stability, making them significantly less reactive."
     },
     {
       "question_text": "Magnification of a mirror = -2 means:",
-      "options": ["Image is virtual and twice the size", "Image is real and twice the size, inverted", "Image is half the size", "Object is twice as far"],
+      "options": [
+        "Image is virtual and twice the size",
+        "Image is real and twice the size, inverted",
+        "Image is half the size",
+        "Object is twice as far"
+      ],
       "correct_answer": "B",
       "chapter": "Light - Reflection and Refraction",
-      "topic_tags": ["magnification", "mirrors"],
+      "topic_tags": [
+        "magnification",
+        "mirrors"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A negative magnification indicates the image is inverted and real. The magnitude of 2 means the image is twice the size of the object. Therefore, the image is real, inverted, and magnified twice."
     },
     {
       "question_text": "Which of these has the longest wavelength in the visible spectrum?",
-      "options": ["Violet", "Green", "Yellow", "Red"],
+      "options": [
+        "Violet",
+        "Green",
+        "Yellow",
+        "Red"
+      ],
       "correct_answer": "D",
       "chapter": "The Human Eye and the Colourful World",
-      "topic_tags": ["spectrum", "wavelength"],
+      "topic_tags": [
+        "spectrum",
+        "wavelength"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Red light has the longest wavelength in the visible spectrum, ranging from approximately 620-750 nanometers, while violet has the shortest wavelength at 380-450 nanometers. Wavelength increases from violet through the spectrum toward red."
     },
     {
       "question_text": "The unit of resistance is:",
-      "options": ["Volt", "Watt", "Ohm", "Coulomb"],
+      "options": [
+        "Volt",
+        "Watt",
+        "Ohm",
+        "Coulomb"
+      ],
       "correct_answer": "C",
       "chapter": "Electricity",
-      "topic_tags": ["SI_units", "resistance"],
+      "topic_tags": [
+        "SI_units",
+        "resistance"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Resistance measures how much a material opposes the flow of electric current. The ohm (Ω) is the standard SI unit for resistance, defined as one volt per ampere. The other units measure voltage, power, and electric charge respectively."
     },
     {
       "question_text": "Which is NOT a fossil fuel?",
-      "options": ["Coal", "Petroleum", "Natural gas", "Biogas"],
+      "options": [
+        "Coal",
+        "Petroleum",
+        "Natural gas",
+        "Biogas"
+      ],
       "correct_answer": "D",
       "chapter": "Sources of Energy",
-      "topic_tags": ["fossil_fuels", "renewable"],
+      "topic_tags": [
+        "fossil_fuels",
+        "renewable"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Biogas is produced from decomposing organic matter and is continuously renewable, whereas coal, petroleum, and natural gas are all formed from ancient organic material and take millions of years to regenerate, making them non-renewable fossil fuels."
     },
     {
       "question_text": "Anode of an electrolytic cell is:",
-      "options": ["Positive electrode", "Negative electrode", "Neutral", "None"],
+      "options": [
+        "Positive electrode",
+        "Negative electrode",
+        "Neutral",
+        "None"
+      ],
       "correct_answer": "A",
       "chapter": "Metals and Non-Metals",
-      "topic_tags": ["electrolysis", "anode"],
+      "topic_tags": [
+        "electrolysis",
+        "anode"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In an electrolytic cell, electrical current drives non-spontaneous reactions. The anode is where oxidation occurs and must be connected to the positive terminal of the power source to attract anions, making it the positive electrode."
     },
     {
       "question_text": "An organism that prepares its own food is called:",
-      "options": ["Heterotroph", "Autotroph", "Saprotroph", "Parasite"],
+      "options": [
+        "Heterotroph",
+        "Autotroph",
+        "Saprotroph",
+        "Parasite"
+      ],
       "correct_answer": "B",
       "chapter": "Life Processes",
-      "topic_tags": ["nutrition", "autotrophs"],
+      "topic_tags": [
+        "nutrition",
+        "autotrophs"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "An autotroph is an organism that produces its own food through photosynthesis (plants, algae) or chemosynthesis, whereas heterotrophs consume other organisms, saprotrophs decompose dead matter, and parasites feed on host organisms."
     },
     {
       "question_text": "Number of chromosomes in a human gamete (egg or sperm):",
-      "options": ["23", "46", "44", "22"],
+      "options": [
+        "23",
+        "46",
+        "44",
+        "22"
+      ],
       "correct_answer": "A",
       "chapter": "Heredity and Evolution",
-      "topic_tags": ["chromosomes", "gametes", "meiosis"],
+      "topic_tags": [
+        "chromosomes",
+        "gametes",
+        "meiosis"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Gametes are haploid cells produced through meiosis, containing half the chromosomes of a diploid somatic cell. Since human somatic cells have 46 chromosomes, gametes contain 23 chromosomes."
     }
   ]
 }

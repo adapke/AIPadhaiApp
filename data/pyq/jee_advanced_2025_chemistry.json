@@ -6,30 +6,430 @@
   "default_year": 2025,
   "default_paper": "advanced",
   "questions": [
-    {"question_text": "Hybridization of central S in SO4²⁻:", "options": ["sp", "sp2", "sp3", "sp3d"], "correct_answer": "C", "chapter": "Chemical Bonding", "topic_tags": ["sulfate"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Color of [Cu(NH3)4]²⁺:", "options": ["Pink", "Deep blue", "Green", "Yellow"], "correct_answer": "B", "chapter": "Coordination Compounds", "topic_tags": ["copper_ammonia"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Equilibrium constant relation: ΔG° = ?", "options": ["RT ln K", "-RT ln K", "RT/K", "K/RT"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["Gibbs_K"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Strongest acid:", "options": ["HClO4", "HClO3", "HClO2", "HClO"], "correct_answer": "A", "chapter": "p-Block", "topic_tags": ["oxyacid_strength"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Oxidation state of Mn in MnO4⁻:", "options": ["+5", "+6", "+7", "+4"], "correct_answer": "C", "chapter": "d-Block", "topic_tags": ["permanganate"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Most stable allotrope of carbon under normal conditions:", "options": ["Diamond", "Graphite", "Fullerene", "Amorphous"], "correct_answer": "B", "chapter": "p-Block", "topic_tags": ["carbon_allotropes"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Acidity order: HCOOH, CH3COOH, ClCH2COOH, Cl3CCOOH:", "options": ["Cl3CCOOH > ClCH2COOH > HCOOH > CH3COOH", "Reverse", "Equal", "CH3COOH strongest"], "correct_answer": "A", "chapter": "Carboxylic Acids", "topic_tags": ["substituent_acidity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reagent that converts ethanol to ethanoic acid:", "options": ["KMnO4 in acid", "NaBH4", "Na metal", "Conc. H2SO4 cold"], "correct_answer": "A", "chapter": "Alcohols", "topic_tags": ["oxidation"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of geometrical isomers of 2-pentene:", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Stereochemistry", "topic_tags": ["cis_trans"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Most reactive in SN1:", "options": ["CH3Cl", "(CH3)3CCl", "(CH3)2CHCl", "CH3CH2Cl"], "correct_answer": "B", "chapter": "Haloalkanes", "topic_tags": ["SN1"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Aldol product from acetaldehyde:", "options": ["3-Hydroxybutanal", "Acetic acid", "Ethanol", "Acetone"], "correct_answer": "A", "chapter": "Aldehydes", "topic_tags": ["aldol"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hofmann bromamide reaction converts:", "options": ["Amide to amine with one C less", "Amine to amide", "Acid to amine", "Alcohol to amide"], "correct_answer": "A", "chapter": "Amines", "topic_tags": ["Hofmann"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Glucose + Tollens' reagent gives:", "options": ["Silver mirror", "Green colour", "Brown precipitate", "No reaction"], "correct_answer": "A", "chapter": "Biomolecules", "topic_tags": ["Tollens_glucose"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of σ bonds in CO2:", "options": ["0", "2", "3", "4"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["sigma_CO2"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reduction potential E° for Cu²⁺/Cu:", "options": ["+0.34 V", "-0.34 V", "0", "+1.5 V"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["E°_Cu"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Adsorption isotherm Langmuir assumes:", "options": ["Multilayer adsorption", "Monolayer adsorption on uniform sites", "No saturation", "Free thermal motion"], "correct_answer": "B", "chapter": "Surface Chemistry", "topic_tags": ["Langmuir"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Coordination number of Na⁺ in NaCl:", "options": ["4", "6", "8", "12"], "correct_answer": "B", "chapter": "Solid State", "topic_tags": ["NaCl_coord"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of atoms per unit cell in BCC:", "options": ["1", "2", "4", "6"], "correct_answer": "B", "chapter": "Solid State", "topic_tags": ["BCC"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Most basic amine:", "options": ["NH3", "CH3NH2", "(CH3)3N", "Aniline"], "correct_answer": "B", "chapter": "Amines", "topic_tags": ["basicity_2°_solvent"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Friedel-Crafts acylation uses:", "options": ["RCOCl + AlCl3", "RCl + AlCl3", "RBr + ZnCl2", "ROH + H2SO4"], "correct_answer": "A", "chapter": "Aromatic Chemistry", "topic_tags": ["Friedel_Crafts_acyl"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Nylon-6,6 is formed by polymerization of:", "options": ["Adipic acid + hexamethylenediamine", "Caprolactam alone", "Glycerol + acid", "Ethene"], "correct_answer": "A", "chapter": "Polymers", "topic_tags": ["nylon66"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Lattice energy of NaF vs NaCl:", "options": ["NaF > NaCl", "NaCl > NaF", "Equal", "Depends on T"], "correct_answer": "A", "chapter": "Solid State", "topic_tags": ["lattice_energy"], "difficulty": "medium", "marks": 4},
-    {"question_text": "ZnSO4 in aqueous solution is:", "options": ["Acidic", "Basic", "Neutral", "Strongly alkaline"], "correct_answer": "A", "chapter": "Equilibrium", "topic_tags": ["salt_hydrolysis"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Aldol vs Cannizzaro: Cannizzaro happens with:", "options": ["Aldehydes with α-H", "Aldehydes without α-H", "All aldehydes", "Only formaldehyde"], "correct_answer": "B", "chapter": "Aldehydes", "topic_tags": ["Cannizzaro_alpha_H"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Maximum number of moles in 1 L of 2 M KCl:", "options": ["0.5", "1", "2", "4"], "correct_answer": "C", "chapter": "Mole Concept", "topic_tags": ["molarity"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Hybridization of central S in SO4²⁻:",
+      "options": [
+        "sp",
+        "sp2",
+        "sp3",
+        "sp3d"
+      ],
+      "correct_answer": "C",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "sulfate"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Sulfur in SO₄²⁻ forms four S-O bonds arranged tetrahedrally around the central atom. Four electron groups (four bonding pairs, no lone pairs) require sp³ hybridization to minimize repulsion and achieve the tetrahedral geometry."
+    },
+    {
+      "question_text": "Color of [Cu(NH3)4]²⁺:",
+      "options": [
+        "Pink",
+        "Deep blue",
+        "Green",
+        "Yellow"
+      ],
+      "correct_answer": "B",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "copper_ammonia"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The [Cu(NH3)4]²⁺ complex forms when ammonia ligands coordinate to Cu²⁺ ions. Ammonia is a strong field ligand that causes significant d-orbital splitting in copper, resulting in absorption of red/orange light and transmission of blue light, giving the complex its characteristic deep blue color."
+    },
+    {
+      "question_text": "Equilibrium constant relation: ΔG° = ?",
+      "options": [
+        "RT ln K",
+        "-RT ln K",
+        "RT/K",
+        "K/RT"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Gibbs_K"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At equilibrium, the relationship between standard free energy change and the equilibrium constant is derived from ΔG° = ΔH° - TΔS° combined with ln K = ΔH°/RT - ΔS°/R, yielding ΔG° = -RT ln K. The negative sign is critical because a spontaneous reaction (negative ΔG°) has K > 1, making ln K positive."
+    },
+    {
+      "question_text": "Strongest acid:",
+      "options": [
+        "HClO4",
+        "HClO3",
+        "HClO2",
+        "HClO"
+      ],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "oxyacid_strength"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "HClO4 is the strongest because it has the most oxygen atoms bonded to chlorine, which withdraws electron density from the O-H bond, making it easier for the proton to dissociate. Acid strength increases with more oxygens in the oxoacid series."
+    },
+    {
+      "question_text": "Oxidation state of Mn in MnO4⁻:",
+      "options": [
+        "+5",
+        "+6",
+        "+7",
+        "+4"
+      ],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "permanganate"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In MnO₄⁻, oxygen has oxidation state -2. With four oxygens contributing -8 total and the ion having a -1 charge, manganese must be +7 to balance: Mn + (-8) = -1, so Mn = +7."
+    },
+    {
+      "question_text": "Most stable allotrope of carbon under normal conditions:",
+      "options": [
+        "Diamond",
+        "Graphite",
+        "Fullerene",
+        "Amorphous"
+      ],
+      "correct_answer": "B",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "carbon_allotropes"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Graphite is the most thermodynamically stable allotrope of carbon at standard temperature and pressure because it has the lowest Gibbs free energy under these conditions, despite diamond being harder and more well-known."
+    },
+    {
+      "question_text": "Acidity order: HCOOH, CH3COOH, ClCH2COOH, Cl3CCOOH:",
+      "options": [
+        "Cl3CCOOH > ClCH2COOH > HCOOH > CH3COOH",
+        "Reverse",
+        "Equal",
+        "CH3COOH strongest"
+      ],
+      "correct_answer": "A",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": [
+        "substituent_acidity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Electron-withdrawing chlorine atoms stabilize the conjugate base by withdrawing electron density from the carboxylate group, making the carboxylic acid more acidic. More chlorine atoms create stronger electron withdrawal, so Cl3CCOOH is strongest, while CH3COOH (with electron-donating methyl) is weakest."
+    },
+    {
+      "question_text": "Reagent that converts ethanol to ethanoic acid:",
+      "options": [
+        "KMnO4 in acid",
+        "NaBH4",
+        "Na metal",
+        "Conc. H2SO4 cold"
+      ],
+      "correct_answer": "A",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "oxidation"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "KMnO4 in acidic conditions is a strong oxidizing agent that oxidizes the primary alcohol group (-CH2OH) in ethanol to a carboxylic acid group (-COOH), producing ethanoic acid. The other reagents either reduce carbonyl compounds, react with hydroxyl groups without oxidation, or cause dehydration rather than oxidation."
+    },
+    {
+      "question_text": "Number of geometrical isomers of 2-pentene:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Stereochemistry",
+      "topic_tags": [
+        "cis_trans"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "2-pentene has a C=C double bond between carbons 2 and 3 (CH₃-CH=CH-CH₂-CH₃). Since each carbon of the double bond has two different groups attached, cis-trans isomerism is possible, yielding two geometrical isomers: cis-2-pentene and trans-2-pentene."
+    },
+    {
+      "question_text": "Most reactive in SN1:",
+      "options": [
+        "CH3Cl",
+        "(CH3)3CCl",
+        "(CH3)2CHCl",
+        "CH3CH2Cl"
+      ],
+      "correct_answer": "B",
+      "chapter": "Haloalkanes",
+      "topic_tags": [
+        "SN1"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "SN1 reactions proceed through a carbocation intermediate, and reactivity depends on carbocation stability. (CH3)3CCl forms a tertiary carbocation, which is most stable due to hyperconjugation and inductive effects from three alkyl groups, making it most reactive in SN1."
+    },
+    {
+      "question_text": "Aldol product from acetaldehyde:",
+      "options": [
+        "3-Hydroxybutanal",
+        "Acetic acid",
+        "Ethanol",
+        "Acetone"
+      ],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "aldol"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In aldol condensation, two acetaldehyde molecules undergo enolization and nucleophilic addition. The enolate of one acetaldehyde attacks the carbonyl carbon of another, forming a C-C bond and creating a β-hydroxy aldehyde product: 3-hydroxybutanal."
+    },
+    {
+      "question_text": "Hofmann bromamide reaction converts:",
+      "options": [
+        "Amide to amine with one C less",
+        "Amine to amide",
+        "Acid to amine",
+        "Alcohol to amide"
+      ],
+      "correct_answer": "A",
+      "chapter": "Amines",
+      "topic_tags": [
+        "Hofmann"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The Hoffmann bromamide degradation cleaves the C-N bond in primary amides using Br₂ and NaOH, eliminating the carbonyl carbon and forming amines with one fewer carbon atom than the starting amide."
+    },
+    {
+      "question_text": "Glucose + Tollens' reagent gives:",
+      "options": [
+        "Silver mirror",
+        "Green colour",
+        "Brown precipitate",
+        "No reaction"
+      ],
+      "correct_answer": "A",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "Tollens_glucose"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Glucose is an aldehyde sugar that reduces Tollens' reagent (ammoniacal silver nitrate), oxidizing the aldehyde group to a carboxylic acid while reducing Ag⁺ to metallic silver, which deposits as a characteristic silver mirror on the test tube walls."
+    },
+    {
+      "question_text": "Number of σ bonds in CO2:",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "sigma_CO2"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "CO2 has a linear structure O=C=O where carbon forms two double bonds with oxygen atoms. Each double bond consists of one σ bond and one π bond, giving a total of 2 σ bonds."
+    },
+    {
+      "question_text": "Reduction potential E° for Cu²⁺/Cu:",
+      "options": [
+        "+0.34 V",
+        "-0.34 V",
+        "0",
+        "+1.5 V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "E°_Cu"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The reduction potential for Cu²⁺/Cu is +0.34 V because copper is less reactive than hydrogen and readily accepts electrons, making reduction favorable. This positive value indicates Cu²⁺ is a good oxidizing agent and will spontaneously gain electrons under standard conditions."
+    },
+    {
+      "question_text": "Adsorption isotherm Langmuir assumes:",
+      "options": [
+        "Multilayer adsorption",
+        "Monolayer adsorption on uniform sites",
+        "No saturation",
+        "Free thermal motion"
+      ],
+      "correct_answer": "B",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "Langmuir"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Langmuir isotherm model assumes that adsorbate molecules form only a single layer on the surface at uniform, equivalent binding sites. This monolayer assumption with energetically identical sites is fundamental to deriving the characteristic Langmuir equation and distinguishes it from other adsorption models like BET theory, which allows multilayer formation."
+    },
+    {
+      "question_text": "Coordination number of Na⁺ in NaCl:",
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "NaCl_coord"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In NaCl's rock salt structure, each Na⁺ ion is surrounded by six Cl⁻ ions arranged octahedrally (one above, one below, and four in a square plane around it). Therefore, the coordination number is 6."
+    },
+    {
+      "question_text": "Number of atoms per unit cell in BCC:",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "BCC"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In BCC (body-centered cubic), there is 1 atom at each of the 8 corners (contributing 1/8 each = 1 total) plus 1 atom at the body center (contributing 1 whole). Total = 1 + 1 = 2 atoms per unit cell."
+    },
+    {
+      "question_text": "Most basic amine:",
+      "options": [
+        "NH3",
+        "CH3NH2",
+        "(CH3)3N",
+        "Aniline"
+      ],
+      "correct_answer": "B",
+      "chapter": "Amines",
+      "topic_tags": [
+        "basicity_2°_solvent"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Basicity of amines depends on nitrogen's ability to donate electrons. Ammonia (NH3) has three hydrogens but poor orbital overlap. Methylamine (CH3NH2) benefits from the electron-donating alkyl group enhancing basicity while retaining a lone pair for proton acceptance. Trimethylamine is sterically hindered, and aniline's lone pair is delocalized into the aromatic ring, greatly reducing basicity."
+    },
+    {
+      "question_text": "Friedel-Crafts acylation uses:",
+      "options": [
+        "RCOCl + AlCl3",
+        "RCl + AlCl3",
+        "RBr + ZnCl2",
+        "ROH + H2SO4"
+      ],
+      "correct_answer": "A",
+      "chapter": "Aromatic Chemistry",
+      "topic_tags": [
+        "Friedel_Crafts_acyl"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Friedel-Crafts acylation introduces an acyl group (RCO-) onto a benzene ring using an acyl chloride (RCOCl) activated by the Lewis acid catalyst AlCl3, which generates the electrophilic acylium ion (RCO+) necessary for the reaction. Option B describes alkylation, not acylation."
+    },
+    {
+      "question_text": "Nylon-6,6 is formed by polymerization of:",
+      "options": [
+        "Adipic acid + hexamethylenediamine",
+        "Caprolactam alone",
+        "Glycerol + acid",
+        "Ethene"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "nylon66"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Nylon-6,6 is formed through condensation polymerization between adipic acid (a 6-carbon dicarboxylic acid) and hexamethylenediamine (a 6-carbon diamine). The \"6,6\" designation refers to these six carbons from each monomer. Option B produces Nylon-6, while C and D do not form nylon polymers."
+    },
+    {
+      "question_text": "Lattice energy of NaF vs NaCl:",
+      "options": [
+        "NaF > NaCl",
+        "NaCl > NaF",
+        "Equal",
+        "Depends on T"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "lattice_energy"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Lattice energy is inversely proportional to ionic radius. F⁻ is significantly smaller than Cl⁻, resulting in shorter interionic distances and stronger electrostatic attractions in the NaF crystal lattice, making its lattice energy greater than NaCl's."
+    },
+    {
+      "question_text": "ZnSO4 in aqueous solution is:",
+      "options": [
+        "Acidic",
+        "Basic",
+        "Neutral",
+        "Strongly alkaline"
+      ],
+      "correct_answer": "A",
+      "chapter": "Equilibrium",
+      "topic_tags": [
+        "salt_hydrolysis"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Zn²⁺ ions undergo hydrolysis, acting as weak Lewis acids by withdrawing electron density from coordinated water molecules. This produces H⁺ ions, making the solution acidic, despite SO₄²⁻ being the conjugate base of a strong acid (HSO₄⁻)."
+    },
+    {
+      "question_text": "Aldol vs Cannizzaro: Cannizzaro happens with:",
+      "options": [
+        "Aldehydes with α-H",
+        "Aldehydes without α-H",
+        "All aldehydes",
+        "Only formaldehyde"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "Cannizzaro_alpha_H"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Cannizzaro reaction occurs when aldehydes lack α-hydrogens and cannot undergo aldol condensation, forcing them to undergo disproportionation (self-oxidation-reduction) instead. Aldehydes with α-H preferentially undergo aldol reactions, making the absence of α-H the key requirement for Cannizzaro."
+    },
+    {
+      "question_text": "Maximum number of moles in 1 L of 2 M KCl:",
+      "options": [
+        "0.5",
+        "1",
+        "2",
+        "4"
+      ],
+      "correct_answer": "C",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "molarity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A 2 M solution means 2 moles of solute dissolved per liter of solution. Therefore, 1 L of 2 M KCl contains 2 moles of KCl."
+    }
   ]
 }

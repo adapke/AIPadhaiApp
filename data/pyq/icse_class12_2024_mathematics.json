@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "isc_board",
   "questions": [
-    {"question_text": "If R = {(1,1),(2,2),(3,3)} on {1,2,3}, R is:", "options": ["Reflexive only", "Symmetric only", "Reflexive + symmetric + transitive (equivalence)", "Not a relation"], "correct_answer": "C", "chapter": "Relations and Functions", "topic_tags": ["equivalence"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Principal value of tan⁻¹(1):", "options": ["π/4", "π/2", "π/3", "π/6"], "correct_answer": "A", "chapter": "Inverse Trig", "topic_tags": ["arctan"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If det([[1,2],[3,4]]) = ?", "options": ["-2", "2", "10", "-10"], "correct_answer": "A", "chapter": "Determinants", "topic_tags": ["2x2_det"], "difficulty": "easy", "marks": 1},
-    {"question_text": "(A^T)^T = ?", "options": ["A", "-A", "I", "0"], "correct_answer": "A", "chapter": "Matrices", "topic_tags": ["transpose"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Continuity of f(x) = x² at x=0:", "options": ["Continuous", "Discontinuous", "Removable discontinuity", "Jump"], "correct_answer": "A", "chapter": "Continuity", "topic_tags": ["continuous"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Derivative of e^(2x):", "options": ["e^(2x)", "2e^(2x)", "e^(x)", "2xe^(2x)"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["chain_rule"], "difficulty": "easy", "marks": 1},
-    {"question_text": "∫(2x+1) dx = ?", "options": ["x²+x+C", "x²+1+C", "2x²+1+C", "x²+x"], "correct_answer": "A", "chapter": "Integration", "topic_tags": ["basic"], "difficulty": "easy", "marks": 1},
-    {"question_text": "∫₀¹ x dx = ?", "options": ["1/2", "1", "0", "2"], "correct_answer": "A", "chapter": "Definite Integration", "topic_tags": ["definite"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Area enclosed by y = x and x-axis from 0 to 4:", "options": ["4", "8", "16", "2"], "correct_answer": "B", "chapter": "Application of Integrals", "topic_tags": ["area"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Order of (dy/dx)³ + x = 0:", "options": ["1", "2", "3", "0"], "correct_answer": "A", "chapter": "Differential Equations", "topic_tags": ["order"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Solution of dy/dx = y:", "options": ["y = Cx", "y = Ce^x", "y = C+x", "y = e^(Cx)"], "correct_answer": "B", "chapter": "Differential Equations", "topic_tags": ["separable"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Magnitude of vector (2,3,6):", "options": ["7", "11", "5", "13"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["magnitude"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Equation of line through origin in direction (1,1,1):", "options": ["x=y=z (parametric)", "x+y+z=0", "x²+y²+z²=1", "1/x+1/y+1/z=1"], "correct_answer": "A", "chapter": "3D Geometry", "topic_tags": ["line_origin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If P(A) = P(B) = 1/2 and A,B independent, P(A∪B):", "options": ["1/2", "3/4", "1", "1/4"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["union_independent"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mean of binomial B(10, 0.3):", "options": ["3", "7", "30", "0.3"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["binomial_mean"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of injective functions from {1,2,3} to {1,2,3,4}:", "options": ["12", "24", "64", "12"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["injective_count"], "difficulty": "medium", "marks": 1},
-    {"question_text": "lim x→0 (sin 5x)/(sin 3x):", "options": ["5/3", "3/5", "0", "1"], "correct_answer": "A", "chapter": "Limits", "topic_tags": ["sin_ratio"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Maximum of f(x) = x(1-x) on [0,1]:", "options": ["1/4", "1/2", "1", "0"], "correct_answer": "A", "chapter": "Application of Derivatives", "topic_tags": ["maxima"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of solutions of cos x = 0 in [0, 2π):", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Trig Equations", "topic_tags": ["cos_zeros"], "difficulty": "easy", "marks": 1},
-    {"question_text": "If z = -i, |z|:", "options": ["0", "1", "-1", "i"], "correct_answer": "B", "chapter": "Complex Numbers", "topic_tags": ["modulus_i"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Sum of n=1 to n=5 of n²:", "options": ["25", "55", "100", "30"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["sum_squares"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Identity matrix I_n has eigenvalues:", "options": ["All 0", "All 1", "All n", "1 and 0"], "correct_answer": "B", "chapter": "Matrices", "topic_tags": ["eigenvalues"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Variance of constant data is:", "options": ["0", "1", "constant", "Indeterminate"], "correct_answer": "A", "chapter": "Statistics", "topic_tags": ["variance_constant"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Direction cosines of vector (1,1,1):", "options": ["(1,1,1)/√3", "(1/3, 1/3, 1/3)", "(0,0,0)", "(1,1,1)"], "correct_answer": "A", "chapter": "Vectors", "topic_tags": ["DCs"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Roots of x² + 1 = 0:", "options": ["±1", "±i", "0", "±2"], "correct_answer": "B", "chapter": "Complex Numbers", "topic_tags": ["i_roots"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "If R = {(1,1),(2,2),(3,3)} on {1,2,3}, R is:",
+      "options": [
+        "Reflexive only",
+        "Symmetric only",
+        "Reflexive + symmetric + transitive (equivalence)",
+        "Not a relation"
+      ],
+      "correct_answer": "C",
+      "chapter": "Relations and Functions",
+      "topic_tags": [
+        "equivalence"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For a relation on {1,2,3} to be reflexive, every element must relate to itself—R contains (1,1), (2,2), (3,3), so it's reflexive. For symmetry, if (a,b) is in R, then (b,a) must be too—since all pairs are identical elements, this holds. For transitivity, whenever (a,b) and (b,c) are in R, (a,c) must be too—this is satisfied vacuously since only diagonal pairs exist. Thus R satisfies all three properties, making it an equivalence relation."
+    },
+    {
+      "question_text": "Principal value of tan⁻¹(1):",
+      "options": [
+        "π/4",
+        "π/2",
+        "π/3",
+        "π/6"
+      ],
+      "correct_answer": "A",
+      "chapter": "Inverse Trig",
+      "topic_tags": [
+        "arctan"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The principal value of tan⁻¹(1) is π/4 because tan(π/4) = 1, and π/4 lies within the principal range of inverse tangent [-π/2, π/2]."
+    },
+    {
+      "question_text": "If det([[1,2],[3,4]]) = ?",
+      "options": [
+        "-2",
+        "2",
+        "10",
+        "-10"
+      ],
+      "correct_answer": "A",
+      "chapter": "Determinants",
+      "topic_tags": [
+        "2x2_det"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a 2×2 matrix, the determinant is (ad - bc). Here: (1)(4) - (2)(3) = 4 - 6 = -2."
+    },
+    {
+      "question_text": "(A^T)^T = ?",
+      "options": [
+        "A",
+        "-A",
+        "I",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "transpose"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Transposing a matrix twice returns the original matrix because the first transpose swaps rows and columns, and the second transpose swaps them back to their original positions."
+    },
+    {
+      "question_text": "Continuity of f(x) = x² at x=0:",
+      "options": [
+        "Continuous",
+        "Discontinuous",
+        "Removable discontinuity",
+        "Jump"
+      ],
+      "correct_answer": "A",
+      "chapter": "Continuity",
+      "topic_tags": [
+        "continuous"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For continuity at x=0, we need lim(x→0) x² = f(0). Since x² approaches 0 as x approaches 0, and f(0) = 0, all three conditions for continuity are satisfied. Therefore f(x) = x² is continuous at x=0."
+    },
+    {
+      "question_text": "Derivative of e^(2x):",
+      "options": [
+        "e^(2x)",
+        "2e^(2x)",
+        "e^(x)",
+        "2xe^(2x)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "chain_rule"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Using the chain rule, the derivative of e^(2x) requires multiplying the derivative of the outer function e^(u) by the derivative of the inner function u=2x. This gives e^(2x) · 2 = 2e^(2x)."
+    },
+    {
+      "question_text": "∫(2x+1) dx = ?",
+      "options": [
+        "x²+x+C",
+        "x²+1+C",
+        "2x²+1+C",
+        "x²+x"
+      ],
+      "correct_answer": "A",
+      "chapter": "Integration",
+      "topic_tags": [
+        "basic"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Apply the power rule to each term: the integral of 2x is x² (bring down exponent 2, divide by 2), and the integral of 1 is x. Adding the constant of integration C gives x²+x+C."
+    },
+    {
+      "question_text": "∫₀¹ x dx = ?",
+      "options": [
+        "1/2",
+        "1",
+        "0",
+        "2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Definite Integration",
+      "topic_tags": [
+        "definite"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The antiderivative of x is x²/2. Evaluating from 0 to 1: [x²/2]₀¹ = 1/2 - 0 = 1/2."
+    },
+    {
+      "question_text": "Area enclosed by y = x and x-axis from 0 to 4:",
+      "options": [
+        "4",
+        "8",
+        "16",
+        "2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Application of Integrals",
+      "topic_tags": [
+        "area"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The region forms a right triangle with base 4 (along x-axis) and height 4 (where y = x at x = 4). Using the triangle area formula: A = ½ × base × height = ½ × 4 × 4 = 8."
+    },
+    {
+      "question_text": "Order of (dy/dx)³ + x = 0:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "order"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The order of a differential equation is determined by the highest derivative present, not by the power of that derivative. In the equation (dy/dx)³ + x = 0, the highest (and only) derivative is dy/dx, which is a first-order derivative, so the order is 1."
+    },
+    {
+      "question_text": "Solution of dy/dx = y:",
+      "options": [
+        "y = Cx",
+        "y = Ce^x",
+        "y = C+x",
+        "y = e^(Cx)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differential Equations",
+      "topic_tags": [
+        "separable"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "This is a separable differential equation. Separating variables: dy/y = dx. Integrating both sides: ln|y| = x + C. Exponentiating: y = e^(x+C) = e^C · e^x = Ce^x, where C = e^C is an arbitrary constant."
+    },
+    {
+      "question_text": "Magnitude of vector (2,3,6):",
+      "options": [
+        "7",
+        "11",
+        "5",
+        "13"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "magnitude"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The magnitude of a vector (a, b, c) is calculated using √(a² + b² + c²). For (2, 3, 6): √(4 + 9 + 36) = √49 = 7."
+    },
+    {
+      "question_text": "Equation of line through origin in direction (1,1,1):",
+      "options": [
+        "x=y=z (parametric)",
+        "x+y+z=0",
+        "x²+y²+z²=1",
+        "1/x+1/y+1/z=1"
+      ],
+      "correct_answer": "A",
+      "chapter": "3D Geometry",
+      "topic_tags": [
+        "line_origin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "A line through the origin with direction vector (1,1,1) can be expressed parametrically as (t,t,t) where t is the parameter. This simplifies to x=y=z, which is the standard parametric form for this line. The other options represent either a plane (B), a sphere (C), or a surface (D), not a line."
+    },
+    {
+      "question_text": "If P(A) = P(B) = 1/2 and A,B independent, P(A∪B):",
+      "options": [
+        "1/2",
+        "3/4",
+        "1",
+        "1/4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "union_independent"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For independent events, P(A∪B) = P(A) + P(B) - P(A∩B). Since A and B are independent, P(A∩B) = P(A)·P(B) = 1/2 · 1/2 = 1/4. Therefore, P(A∪B) = 1/2 + 1/2 - 1/4 = 3/4."
+    },
+    {
+      "question_text": "Mean of binomial B(10, 0.3):",
+      "options": [
+        "3",
+        "7",
+        "30",
+        "0.3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_mean"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "For a binomial distribution B(n, p), the mean is calculated as μ = n × p. With n = 10 and p = 0.3, the mean equals 10 × 0.3 = 3."
+    },
+    {
+      "question_text": "Number of injective functions from {1,2,3} to {1,2,3,4}:",
+      "options": [
+        "12",
+        "24",
+        "64",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "injective_count"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "An injective function requires each element in the domain to map to a distinct element in the codomain. For the first element, there are 4 choices; for the second, 3 remaining choices; for the third, 2 remaining choices. Thus: 4 × 3 × 2 = 24."
+    },
+    {
+      "question_text": "lim x→0 (sin 5x)/(sin 3x):",
+      "options": [
+        "5/3",
+        "3/5",
+        "0",
+        "1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Limits",
+      "topic_tags": [
+        "sin_ratio"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Using the standard limit lim(u→0) sin(u)/u = 1, rewrite the expression as (sin 5x)/(sin 3x) = [sin 5x/(5x)] × (5x) / [sin 3x/(3x)] × (3x). As x→0, both bracketed terms approach 1, leaving 5x/(3x) = 5/3."
+    },
+    {
+      "question_text": "Maximum of f(x) = x(1-x) on [0,1]:",
+      "options": [
+        "1/4",
+        "1/2",
+        "1",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Application of Derivatives",
+      "topic_tags": [
+        "maxima"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Taking the derivative: f'(x) = 1 - 2x. Setting f'(x) = 0 gives x = 1/2. Evaluating f(1/2) = (1/2)(1/2) = 1/4, which is the maximum on [0,1]."
+    },
+    {
+      "question_text": "Number of solutions of cos x = 0 in [0, 2π):",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trig Equations",
+      "topic_tags": [
+        "cos_zeros"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Cosine equals zero when x = π/2 and x = 3π/2 within the interval [0, 2π). These are the only two points where the cosine function crosses the x-axis in this range."
+    },
+    {
+      "question_text": "If z = -i, |z|:",
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "i"
+      ],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "modulus_i"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The modulus of a complex number z = a + bi is calculated as |z| = √(a² + b²). For z = -i, we have a = 0 and b = -1, so |z| = √(0² + (-1)²) = √1 = 1."
+    },
+    {
+      "question_text": "Sum of n=1 to n=5 of n²:",
+      "options": [
+        "25",
+        "55",
+        "100",
+        "30"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "sum_squares"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Calculate each term: 1² + 2² + 3² + 4² + 5² = 1 + 4 + 9 + 16 + 25 = 55. Alternatively, use the formula n(n+1)(2n+1)/6, which gives 5(6)(11)/6 = 55."
+    },
+    {
+      "question_text": "Identity matrix I_n has eigenvalues:",
+      "options": [
+        "All 0",
+        "All 1",
+        "All n",
+        "1 and 0"
+      ],
+      "correct_answer": "B",
+      "chapter": "Matrices",
+      "topic_tags": [
+        "eigenvalues"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The identity matrix I_n multiplied by any vector equals that vector itself, so every vector is an eigenvector with eigenvalue 1. Alternatively, det(I_n - λI) = (1-λ)^n, which has only λ = 1 as a root with multiplicity n."
+    },
+    {
+      "question_text": "Variance of constant data is:",
+      "options": [
+        "0",
+        "1",
+        "constant",
+        "Indeterminate"
+      ],
+      "correct_answer": "A",
+      "chapter": "Statistics",
+      "topic_tags": [
+        "variance_constant"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Variance measures the spread of data around the mean. For constant data, all values are identical to the mean, so deviations from the mean are zero, making the variance zero."
+    },
+    {
+      "question_text": "Direction cosines of vector (1,1,1):",
+      "options": [
+        "(1,1,1)/√3",
+        "(1/3, 1/3, 1/3)",
+        "(0,0,0)",
+        "(1,1,1)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Vectors",
+      "topic_tags": [
+        "DCs"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The direction cosines are found by dividing each component by the magnitude of the vector. The magnitude of (1,1,1) is √(1²+1²+1²) = √3, so the direction cosines are (1/√3, 1/√3, 1/√3) = (1,1,1)/√3."
+    },
+    {
+      "question_text": "Roots of x² + 1 = 0:",
+      "options": [
+        "±1",
+        "±i",
+        "0",
+        "±2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "i_roots"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "To solve x² + 1 = 0, rearrange to x² = -1. Since i is defined as the imaginary unit where i² = -1, the solutions are x = ±i (both i and -i satisfy the equation)."
+    }
   ]
 }

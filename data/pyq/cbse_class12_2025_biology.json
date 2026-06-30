@@ -8,228 +8,436 @@
   "questions": [
     {
       "question_text": "Reproduction in Amoeba occurs by:",
-      "options": ["Budding", "Binary fission", "Sporulation", "Fragmentation"],
+      "options": [
+        "Budding",
+        "Binary fission",
+        "Sporulation",
+        "Fragmentation"
+      ],
       "correct_answer": "B",
       "chapter": "Reproduction in Organisms",
-      "topic_tags": ["binary_fission", "Amoeba"],
+      "topic_tags": [
+        "binary_fission",
+        "Amoeba"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Amoeba reproduces asexually by binary fission, where the nucleus divides by mitosis and the cytoplasm splits into two equal daughter cells. This is the primary reproductive method for most amoeba species, unlike budding (unequal division) or sporulation (spore formation)."
     },
     {
       "question_text": "Pollination by wind is called:",
-      "options": ["Entomophily", "Ornithophily", "Anemophily", "Hydrophily"],
+      "options": [
+        "Entomophily",
+        "Ornithophily",
+        "Anemophily",
+        "Hydrophily"
+      ],
       "correct_answer": "C",
       "chapter": "Sexual Reproduction in Flowering Plants",
-      "topic_tags": ["pollination"],
+      "topic_tags": [
+        "pollination"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Anemophily is the correct term because \"anemo-\" means wind and \"-phily\" means attraction or pollination by. Wind pollination is characterized by plants producing light, dry pollen dispersed by air currents, unlike insect (entomophily), bird (ornithophily), or water (hydrophily) pollination."
     },
     {
       "question_text": "Implantation of embryo takes place in:",
-      "options": ["Ovary", "Fallopian tube", "Uterus", "Vagina"],
+      "options": [
+        "Ovary",
+        "Fallopian tube",
+        "Uterus",
+        "Vagina"
+      ],
       "correct_answer": "C",
       "chapter": "Human Reproduction",
-      "topic_tags": ["implantation"],
+      "topic_tags": [
+        "implantation"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The blastocyst travels through the fallopian tube over several days and reaches the uterus, where it embeds into the thickened endometrium for nutrient absorption and development. Implantation cannot occur in the ovary, fallopian tube, or vagina as they lack the specialized endometrial lining necessary for embryo attachment and growth."
     },
     {
       "question_text": "Father of genetics is:",
-      "options": ["Darwin", "Mendel", "Hugo de Vries", "Morgan"],
+      "options": [
+        "Darwin",
+        "Mendel",
+        "Hugo de Vries",
+        "Morgan"
+      ],
       "correct_answer": "B",
       "chapter": "Principles of Inheritance",
-      "topic_tags": ["Mendel"],
+      "topic_tags": [
+        "Mendel"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Gregor Mendel discovered the fundamental laws of inheritance through his experiments with pea plants, establishing the scientific basis of genetics long before others contributed to the field. He is universally recognized as the founder of genetics."
     },
     {
       "question_text": "Number of chromosomes in human somatic cell is:",
-      "options": ["23", "44", "46", "48"],
+      "options": [
+        "23",
+        "44",
+        "46",
+        "48"
+      ],
       "correct_answer": "C",
       "chapter": "Cell Cycle",
-      "topic_tags": ["chromosomes", "human"],
+      "topic_tags": [
+        "chromosomes",
+        "human"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Human somatic cells are diploid, containing 23 pairs of chromosomes (22 pairs of autosomes plus one pair of sex chromosomes), totaling 46 chromosomes. Gametes contain only 23 chromosomes, which is why option A is incorrect for somatic cells."
     },
     {
       "question_text": "DNA fingerprinting was developed by:",
-      "options": ["Watson", "Crick", "Alec Jeffreys", "Mendel"],
+      "options": [
+        "Watson",
+        "Crick",
+        "Alec Jeffreys",
+        "Mendel"
+      ],
       "correct_answer": "C",
       "chapter": "Molecular Basis of Inheritance",
-      "topic_tags": ["DNA_fingerprinting"],
+      "topic_tags": [
+        "DNA_fingerprinting"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Alec Jeffreys discovered DNA fingerprinting in 1984 by identifying that variable number tandem repeats (VNTRs) in DNA are unique to individuals, enabling identification through DNA analysis. Watson and Crick determined DNA structure, while Mendel studied inheritance patterns—neither developed fingerprinting techniques."
     },
     {
       "question_text": "DNA replication is which type?",
-      "options": ["Conservative", "Semi-conservative", "Dispersive", "Random"],
+      "options": [
+        "Conservative",
+        "Semi-conservative",
+        "Dispersive",
+        "Random"
+      ],
       "correct_answer": "B",
       "chapter": "Molecular Basis of Inheritance",
-      "topic_tags": ["replication"],
+      "topic_tags": [
+        "replication"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "DNA replication is semi-conservative because each new DNA molecule consists of one original (parental) strand and one newly synthesized strand. This was demonstrated by Meselson and Stahl's experiment using nitrogen isotopes, which showed the two strands separate and each serves as a template for a new complementary strand."
     },
     {
       "question_text": "Translation occurs at:",
-      "options": ["Nucleus", "Mitochondria", "Ribosome", "Lysosome"],
+      "options": [
+        "Nucleus",
+        "Mitochondria",
+        "Ribosome",
+        "Lysosome"
+      ],
       "correct_answer": "C",
       "chapter": "Molecular Basis of Inheritance",
-      "topic_tags": ["translation"],
+      "topic_tags": [
+        "translation"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Translation is the process of synthesizing proteins from mRNA, which requires ribosomes as the molecular machinery that reads codons and assembles amino acids into polypeptide chains. Ribosomes are the only cellular structures equipped with this function."
     },
     {
       "question_text": "Lamarckism is also called:",
-      "options": ["Theory of inheritance of acquired characters", "Natural selection", "Mutation theory", "Use and disuse"],
+      "options": [
+        "Theory of inheritance of acquired characters",
+        "Natural selection",
+        "Mutation theory",
+        "Use and disuse"
+      ],
       "correct_answer": "A",
       "chapter": "Evolution",
-      "topic_tags": ["Lamarck"],
+      "topic_tags": [
+        "Lamarck"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Lamarckism is fundamentally based on the idea that traits an organism acquires during its lifetime through use or disuse can be inherited by offspring. This core concept is formally known as the \"inheritance of acquired characters,\" making it the defining characteristic and alternative name for Lamarckism."
     },
     {
       "question_text": "Most common ABO blood group in India is:",
-      "options": ["A", "B", "O", "AB"],
+      "options": [
+        "A",
+        "B",
+        "O",
+        "AB"
+      ],
       "correct_answer": "C",
       "chapter": "Human Health",
-      "topic_tags": ["blood_groups"],
+      "topic_tags": [
+        "blood_groups"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Type O blood group has the highest frequency in the Indian population due to genetic distribution patterns and evolutionary factors affecting allele frequencies in the subcontinent's diverse populations."
     },
     {
       "question_text": "AIDS is caused by:",
-      "options": ["Bacteria", "HIV virus", "Fungus", "Protozoa"],
+      "options": [
+        "Bacteria",
+        "HIV virus",
+        "Fungus",
+        "Protozoa"
+      ],
       "correct_answer": "B",
       "chapter": "Human Health and Disease",
-      "topic_tags": ["AIDS", "HIV"],
+      "topic_tags": [
+        "AIDS",
+        "HIV"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "HIV directly infects and destroys CD4+ T cells of the immune system, progressively weakening immunity until opportunistic infections develop, defining AIDS as an acquired immunodeficiency syndrome caused specifically by this retrovirus."
     },
     {
       "question_text": "Penicillin was discovered by:",
-      "options": ["Pasteur", "Fleming", "Koch", "Watson"],
+      "options": [
+        "Pasteur",
+        "Fleming",
+        "Koch",
+        "Watson"
+      ],
       "correct_answer": "B",
       "chapter": "Microbes in Human Welfare",
-      "topic_tags": ["antibiotics"],
+      "topic_tags": [
+        "antibiotics"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Fleming discovered penicillin in 1928 when he noticed that a mold (Penicillium notatum) contaminating his bacterial culture plates had killed the surrounding bacteria, leading to the first widely-used antibiotic."
     },
     {
       "question_text": "Mycorrhiza is association between:",
-      "options": ["Algae + fungi", "Fungi + roots of plants", "Bacteria + roots", "Two plants"],
+      "options": [
+        "Algae + fungi",
+        "Fungi + roots of plants",
+        "Bacteria + roots",
+        "Two plants"
+      ],
       "correct_answer": "B",
       "chapter": "Microbes in Human Welfare",
-      "topic_tags": ["mycorrhiza", "symbiosis"],
+      "topic_tags": [
+        "mycorrhiza",
+        "symbiosis"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Mycorrhiza is a symbiotic relationship where fungal hyphae colonize plant roots, with the fungus absorbing water and minerals for the plant while receiving carbohydrates in return. This mutualistic association between fungi and plant roots is the defining characteristic of mycorrhiza."
     },
     {
       "question_text": "Restriction endonuclease is used for:",
-      "options": ["Joining DNA", "Cutting DNA at specific sites", "Replication", "Translation"],
+      "options": [
+        "Joining DNA",
+        "Cutting DNA at specific sites",
+        "Replication",
+        "Translation"
+      ],
       "correct_answer": "B",
       "chapter": "Biotechnology Principles",
-      "topic_tags": ["restriction_enzyme"],
+      "topic_tags": [
+        "restriction_enzyme"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Restriction endonucleases are enzymes that recognize specific DNA sequences and cleave the phosphodiester bonds at those precise locations, producing fragments with defined endpoints. This cutting capability is fundamental to genetic engineering and DNA analysis."
     },
     {
       "question_text": "PCR stands for:",
-      "options": ["Polymerase Chain Reaction", "Plasmid Cell Replication", "Protein Cell Reaction", "Primer Chain Reaction"],
+      "options": [
+        "Polymerase Chain Reaction",
+        "Plasmid Cell Replication",
+        "Protein Cell Reaction",
+        "Primer Chain Reaction"
+      ],
       "correct_answer": "A",
       "chapter": "Biotechnology Principles",
-      "topic_tags": ["PCR"],
+      "topic_tags": [
+        "PCR"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "PCR is the standard abbreviation for Polymerase Chain Reaction, a fundamental molecular biology technique that uses DNA polymerase enzyme to repeatedly copy and amplify specific DNA sequences through repeated cycles of heating and cooling."
     },
     {
       "question_text": "Bt cotton is genetically modified for:",
-      "options": ["Drought tolerance", "Pest resistance", "Higher yield", "Frost tolerance"],
+      "options": [
+        "Drought tolerance",
+        "Pest resistance",
+        "Higher yield",
+        "Frost tolerance"
+      ],
       "correct_answer": "B",
       "chapter": "Biotechnology Applications",
-      "topic_tags": ["Bt", "GM_crops"],
+      "topic_tags": [
+        "Bt",
+        "GM_crops"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Bt cotton contains a gene from the bacterium Bacillus thuringiensis that produces a protein toxic to certain insect pests (like bollworms), making the plant resistant to these insects without requiring chemical pesticides."
     },
     {
       "question_text": "Eutrophication results in:",
-      "options": ["Increased fish population", "Oxygen depletion in water bodies", "Cleaner water", "Higher pH"],
+      "options": [
+        "Increased fish population",
+        "Oxygen depletion in water bodies",
+        "Cleaner water",
+        "Higher pH"
+      ],
       "correct_answer": "B",
       "chapter": "Environmental Issues",
-      "topic_tags": ["eutrophication", "pollution"],
+      "topic_tags": [
+        "eutrophication",
+        "pollution"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Eutrophication occurs when excess nutrients (nitrogen and phosphorus) trigger algal blooms. As algae die and decompose, aerobic bacteria consume dissolved oxygen rapidly, leading to hypoxic \"dead zones\" where aquatic life cannot survive."
     },
     {
       "question_text": "Greenhouse gases include:",
-      "options": ["Only CO2", "CO2, CH4, N2O", "Only water vapour", "Only O3"],
+      "options": [
+        "Only CO2",
+        "CO2, CH4, N2O",
+        "Only water vapour",
+        "Only O3"
+      ],
       "correct_answer": "B",
       "chapter": "Environmental Issues",
-      "topic_tags": ["greenhouse"],
+      "topic_tags": [
+        "greenhouse"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Greenhouse gases are molecules that trap heat in the atmosphere by absorbing infrared radiation. While CO2 is the most abundant, methane (CH4) and nitrous oxide (N2O) are also significant greenhouse gases, making option B the most complete and accurate answer."
     },
     {
       "question_text": "10% energy law is given by:",
-      "options": ["Tansley", "Lindeman", "Odum", "Darwin"],
+      "options": [
+        "Tansley",
+        "Lindeman",
+        "Odum",
+        "Darwin"
+      ],
       "correct_answer": "B",
       "chapter": "Ecosystem",
-      "topic_tags": ["energy_pyramid", "Lindeman"],
+      "topic_tags": [
+        "energy_pyramid",
+        "Lindeman"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Lindeman proposed the 10% energy law, which states that only approximately 10% of energy is transferred from one trophic level to the next, with the remaining 90% lost through metabolism, heat, and waste. This fundamental principle forms the basis of understanding energy flow in ecosystems."
     },
     {
       "question_text": "Apiculture is rearing of:",
-      "options": ["Fish", "Honeybees", "Silkworm", "Cattle"],
+      "options": [
+        "Fish",
+        "Honeybees",
+        "Silkworm",
+        "Cattle"
+      ],
       "correct_answer": "B",
       "chapter": "Microbes in Human Welfare",
-      "topic_tags": ["apiculture"],
+      "topic_tags": [
+        "apiculture"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Apiculture comes from the Latin word \"apis\" meaning bee, so it specifically refers to the scientific management and rearing of honeybees for honey production and pollination services."
     },
     {
       "question_text": "Number of layers in human ovum is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "C",
       "chapter": "Human Reproduction",
-      "topic_tags": ["ovum"],
+      "topic_tags": [
+        "ovum"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The human ovum has three distinct layers: the outer zona pellucida (a glycoprotein layer), the middle layer of follicle cells (corona radiata), and the innermost cell membrane surrounding the cytoplasm and nucleus."
     },
     {
       "question_text": "Test cross is performed to:",
-      "options": ["Determine genotype", "Determine phenotype", "Cross two strains", "Find mutation"],
+      "options": [
+        "Determine genotype",
+        "Determine phenotype",
+        "Cross two strains",
+        "Find mutation"
+      ],
       "correct_answer": "A",
       "chapter": "Genetics",
-      "topic_tags": ["test_cross"],
+      "topic_tags": [
+        "test_cross"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "A test cross involves breeding an individual with a homozygous recessive organism to reveal hidden recessive alleles. The phenotypic ratios in offspring directly expose the genotype of the tested individual, making genotype determination its primary purpose."
     },
     {
       "question_text": "Hemophilia is a:",
-      "options": ["Autosomal dominant", "X-linked recessive", "Y-linked", "Autosomal recessive"],
+      "options": [
+        "Autosomal dominant",
+        "X-linked recessive",
+        "Y-linked",
+        "Autosomal recessive"
+      ],
       "correct_answer": "B",
       "chapter": "Genetic Disorders",
-      "topic_tags": ["hemophilia", "X_linked"],
+      "topic_tags": [
+        "hemophilia",
+        "X_linked"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Hemophilia is caused by mutations in genes encoding blood clotting factors located on the X chromosome. Males need only one mutant allele to express the disease, while females require two, making it X-linked recessive rather than autosomal or Y-linked."
     },
     {
       "question_text": "Energy currency of cell is:",
-      "options": ["NADH", "FADH2", "ATP", "GTP"],
+      "options": [
+        "NADH",
+        "FADH2",
+        "ATP",
+        "GTP"
+      ],
       "correct_answer": "C",
       "chapter": "Cell Biology",
-      "topic_tags": ["ATP"],
+      "topic_tags": [
+        "ATP"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "ATP is the primary energy currency because it directly transfers chemical energy through phosphate bond hydrolysis to drive cellular processes, while NADH and FADH2 are electron carriers and GTP is used more selectively for specific reactions."
     },
     {
       "question_text": "Number of base pairs in human genome is approximately:",
-      "options": ["3 billion", "3 million", "3 thousand", "3 trillion"],
+      "options": [
+        "3 billion",
+        "3 million",
+        "3 thousand",
+        "3 trillion"
+      ],
       "correct_answer": "A",
       "chapter": "Molecular Biology",
-      "topic_tags": ["genome_size"],
+      "topic_tags": [
+        "genome_size"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The human genome contains approximately 3 billion base pairs distributed across 23 pairs of chromosomes. This well-established figure comes from the Human Genome Project and represents the complete haploid genome sequence."
     }
   ]
 }

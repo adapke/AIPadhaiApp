@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Proportions",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Divide ₹125 by 5 books to find the unit cost: ₹125 ÷ 5 = ₹25 per book. Then multiply by 7: ₹25 × 7 = ₹175."
     },
     {
       "question_text": "Simple interest on ₹1000 at 8% for 2 years:",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Interest",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "Using the simple interest formula SI = (P × R × T) / 100, where P = ₹1000, R = 8%, and T = 2 years: SI = (1000 × 8 × 2) / 100 = 16000 / 100 = ₹160."
     },
     {
       "question_text": "Square of 13:",
@@ -43,7 +45,8 @@
       "correct_answer": "A",
       "chapter": "Squares and Cubes",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "13 × 13 = 169. This is calculated by multiplying 13 by itself, which gives (10 + 3)² = 100 + 60 + 9 = 169."
     },
     {
       "question_text": "tan(45°) equals:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Trigonometry",
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The tangent of 45° is the ratio of opposite to adjacent sides in a 45-45-90 triangle, where both legs are equal. Therefore tan(45°) = 1/1 = 1."
     },
     {
       "question_text": "Area of triangle with base 10 cm, height 6 cm:",
@@ -69,7 +73,8 @@
       "correct_answer": "A",
       "chapter": "Mensuration",
       "difficulty": "easy",
-      "marks": 2
+      "marks": 2,
+      "explanation": "The area of a triangle is calculated using the formula A = ½ × base × height. With base = 10 cm and height = 6 cm: A = ½ × 10 × 6 = 30 cm²."
     }
   ]
 }

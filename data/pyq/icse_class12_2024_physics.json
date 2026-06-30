@@ -8,228 +8,430 @@
   "questions": [
     {
       "question_text": "Coulomb's law constant k = 1/(4πε₀) is approximately:",
-      "options": ["9×10⁹ N·m²/C²", "9×10⁻⁹", "9×10⁶", "9×10¹²"],
+      "options": [
+        "9×10⁹ N·m²/C²",
+        "9×10⁻⁹",
+        "9×10⁶",
+        "9×10¹²"
+      ],
       "correct_answer": "A",
       "chapter": "Electrostatics",
-      "topic_tags": ["Coulomb_constant"],
+      "topic_tags": [
+        "Coulomb_constant"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Coulomb's constant k = 1/(4πε₀) where ε₀ ≈ 8.85×10⁻¹² C²/(N·m²). Calculating: k ≈ 1/(4π × 8.85×10⁻¹²) ≈ 9×10⁹ N·m²/C², which is the standard SI unit value used in electrostatics."
     },
     {
       "question_text": "Capacitance with dielectric (constant K) becomes:",
-      "options": ["C/K", "C × K", "C - K", "C + K"],
+      "options": [
+        "C/K",
+        "C × K",
+        "C - K",
+        "C + K"
+      ],
       "correct_answer": "B",
       "chapter": "Electrostatic Potential",
-      "topic_tags": ["dielectric"],
+      "topic_tags": [
+        "dielectric"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Inserting a dielectric material with constant K between capacitor plates increases the capacitance by a factor of K because the dielectric reduces the electric field inside the capacitor, allowing more charge to accumulate at the same voltage. The new capacitance is C_new = K × C_original."
     },
     {
       "question_text": "Resistance varies with temperature for a conductor as:",
-      "options": ["Increases", "Decreases", "Stays constant", "Random"],
+      "options": [
+        "Increases",
+        "Decreases",
+        "Stays constant",
+        "Random"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["resistance_temperature"],
+      "topic_tags": [
+        "resistance_temperature"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "For most conductors, increasing temperature causes atoms to vibrate more vigorously, increasing collisions between free electrons and the lattice. This greater obstruction to electron flow increases resistance according to R = R₀(1 + αΔT), where α is the temperature coefficient."
     },
     {
       "question_text": "Right-hand thumb rule gives direction of:",
-      "options": ["Force on charge", "Magnetic field around current", "Velocity", "Acceleration"],
+      "options": [
+        "Force on charge",
+        "Magnetic field around current",
+        "Velocity",
+        "Acceleration"
+      ],
       "correct_answer": "B",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["right_hand_rule"],
+      "topic_tags": [
+        "right_hand_rule"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The right-hand thumb rule states that when you point your thumb in the direction of current flow, your fingers curl in the direction of the magnetic field lines circling around the conductor. This rule specifically describes the relationship between current direction and induced magnetic field orientation."
     },
     {
       "question_text": "Lenz's law gives the direction of:",
-      "options": ["Force", "Induced current", "Acceleration", "Voltage source"],
+      "options": [
+        "Force",
+        "Induced current",
+        "Acceleration",
+        "Voltage source"
+      ],
       "correct_answer": "B",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["Lenz"],
+      "topic_tags": [
+        "Lenz"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Lenz's law states that an induced current flows in a direction that opposes the change in magnetic flux that caused it. This law specifically describes the directional behavior of induced currents, not forces, accelerations, or voltage sources."
     },
     {
       "question_text": "AC frequency in India is:",
-      "options": ["50 Hz", "60 Hz", "100 Hz", "120 Hz"],
+      "options": [
+        "50 Hz",
+        "60 Hz",
+        "100 Hz",
+        "120 Hz"
+      ],
       "correct_answer": "A",
       "chapter": "Alternating Current",
-      "topic_tags": ["AC"],
+      "topic_tags": [
+        "AC"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "India uses 50 Hz AC frequency as the standard for its power distribution system, which is common across most countries except North America and parts of Asia that use 60 Hz."
     },
     {
       "question_text": "Speed of light in vacuum is approximately:",
-      "options": ["3×10⁵ m/s", "3×10⁸ m/s", "3×10⁶ m/s", "Infinity"],
+      "options": [
+        "3×10⁵ m/s",
+        "3×10⁸ m/s",
+        "3×10⁶ m/s",
+        "Infinity"
+      ],
       "correct_answer": "B",
       "chapter": "Electromagnetic Waves",
-      "topic_tags": ["c"],
+      "topic_tags": [
+        "c"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The speed of light in vacuum is a fundamental constant denoted as c, which equals approximately 299,792,458 m/s, commonly rounded to 3×10⁸ m/s. Options A and C have incorrect exponents (too small), while option D is physically incorrect."
     },
     {
       "question_text": "Total internal reflection occurs when:",
-      "options": ["Light goes from denser to rarer beyond critical angle", "From rarer to denser", "Perpendicular incidence", "Reflection from rough surface"],
+      "options": [
+        "Light goes from denser to rarer beyond critical angle",
+        "From rarer to denser",
+        "Perpendicular incidence",
+        "Reflection from rough surface"
+      ],
       "correct_answer": "A",
       "chapter": "Ray Optics",
-      "topic_tags": ["TIR"],
+      "topic_tags": [
+        "TIR"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Total internal reflection requires light traveling from a denser medium (higher refractive index) to a rarer medium (lower refractive index) at an angle of incidence greater than the critical angle, causing all light to reflect back into the denser medium rather than refract out."
     },
     {
       "question_text": "Young's double slit experiment demonstrates:",
-      "options": ["Reflection", "Refraction", "Interference of light", "Polarisation only"],
+      "options": [
+        "Reflection",
+        "Refraction",
+        "Interference of light",
+        "Polarisation only"
+      ],
       "correct_answer": "C",
       "chapter": "Wave Optics",
-      "topic_tags": ["YDSE"],
+      "topic_tags": [
+        "YDSE"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Young's double slit experiment shows that light produces alternating bright and dark fringes on a screen, which occurs when light waves from two slits overlap and either reinforce (constructive interference) or cancel (destructive interference) each other—a phenomenon unique to waves."
     },
     {
       "question_text": "Photoelectric effect requires light of frequency ≥:",
-      "options": ["Any frequency", "Threshold frequency", "Visible only", "UV only"],
+      "options": [
+        "Any frequency",
+        "Threshold frequency",
+        "Visible only",
+        "UV only"
+      ],
       "correct_answer": "B",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["photoelectric"],
+      "topic_tags": [
+        "photoelectric"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The photoelectric effect occurs when photon energy exceeds the work function of a metal. Since photon energy E = hf, a minimum frequency (threshold frequency) must be reached for electrons to be ejected. Below this frequency, no photoemission occurs regardless of light intensity."
     },
     {
       "question_text": "Bohr model explains spectrum of:",
-      "options": ["All atoms", "Hydrogen-like atoms only", "All molecules", "Solids"],
+      "options": [
+        "All atoms",
+        "Hydrogen-like atoms only",
+        "All molecules",
+        "Solids"
+      ],
       "correct_answer": "B",
       "chapter": "Atoms",
-      "topic_tags": ["Bohr"],
+      "topic_tags": [
+        "Bohr"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The Bohr model successfully predicts energy levels and spectral lines only for hydrogen-like atoms (hydrogen and hydrogen-like ions with one electron). It fails for multi-electron atoms because it cannot account for electron-electron repulsion and requires quantum mechanics for accurate predictions."
     },
     {
       "question_text": "Nuclear binding energy per nucleon is maximum for:",
-      "options": ["Hydrogen", "Iron-56", "Uranium", "Helium"],
+      "options": [
+        "Hydrogen",
+        "Iron-56",
+        "Uranium",
+        "Helium"
+      ],
       "correct_answer": "B",
       "chapter": "Nuclei",
-      "topic_tags": ["binding_energy", "iron"],
+      "topic_tags": [
+        "binding_energy",
+        "iron"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Iron-56 has the most stable nucleus because it sits at the peak of the binding energy per nucleon curve. Nuclei lighter than iron gain energy by fusing, while heavier nuclei gain energy by fission, making iron-56 the most tightly bound nucleus overall."
     },
     {
       "question_text": "Semiconductor with extra electrons due to dopant:",
-      "options": ["p-type", "n-type", "Intrinsic", "Compensated"],
+      "options": [
+        "p-type",
+        "n-type",
+        "Intrinsic",
+        "Compensated"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["n_type"],
+      "topic_tags": [
+        "n_type"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "When a dopant introduces extra electrons into a semiconductor, these electrons act as charge carriers. Since electrons carry negative charge, this creates an n-type (negative-type) semiconductor where electrons are the majority carriers."
     },
     {
       "question_text": "Forward bias of pn junction means:",
-      "options": ["p connected to negative", "p connected to positive", "Both ends positive", "Both ends negative"],
+      "options": [
+        "p connected to negative",
+        "p connected to positive",
+        "Both ends positive",
+        "Both ends negative"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["forward_bias"],
+      "topic_tags": [
+        "forward_bias"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Forward bias occurs when the positive terminal of a battery connects to the p-type (hole) region and the negative terminal connects to the n-type (electron) region, reducing the depletion width and allowing current flow across the junction."
     },
     {
       "question_text": "Logic gate that outputs 1 only if both inputs are 1:",
-      "options": ["OR", "AND", "NAND", "XOR"],
+      "options": [
+        "OR",
+        "AND",
+        "NAND",
+        "XOR"
+      ],
       "correct_answer": "B",
       "chapter": "Logic Gates",
-      "topic_tags": ["AND_gate"],
+      "topic_tags": [
+        "AND_gate"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The AND gate produces a 1 output only when both input signals are 1; all other input combinations (0-0, 0-1, 1-0) produce 0 output."
     },
     {
       "question_text": "Electron volt (eV) is unit of:",
-      "options": ["Voltage", "Energy", "Charge", "Power"],
+      "options": [
+        "Voltage",
+        "Energy",
+        "Charge",
+        "Power"
+      ],
       "correct_answer": "B",
       "chapter": "Atoms",
-      "topic_tags": ["eV"],
+      "topic_tags": [
+        "eV"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "One electron volt is defined as the energy gained by an electron when accelerated through a potential difference of one volt, making it a unit of energy, not voltage or the other quantities."
     },
     {
       "question_text": "Half-life of radioactive isotope is:",
-      "options": ["Constant", "Decreases with time", "Increases with time", "Depends on amount"],
+      "options": [
+        "Constant",
+        "Decreases with time",
+        "Increases with time",
+        "Depends on amount"
+      ],
       "correct_answer": "A",
       "chapter": "Nuclei",
-      "topic_tags": ["half_life"],
+      "topic_tags": [
+        "half_life"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Half-life is defined as the time required for exactly half of a radioactive sample to decay, determined solely by the nuclear properties of the isotope. This decay rate follows an exponential function that is independent of time elapsed, initial amount, or external conditions, making it an intrinsic constant for each isotope."
     },
     {
       "question_text": "Solar cell converts:",
-      "options": ["Heat to electricity", "Light to electricity", "Sound to electricity", "Magnetic to electricity"],
+      "options": [
+        "Heat to electricity",
+        "Light to electricity",
+        "Sound to electricity",
+        "Magnetic to electricity"
+      ],
       "correct_answer": "B",
       "chapter": "Semiconductor Electronics",
-      "topic_tags": ["solar_cell"],
+      "topic_tags": [
+        "solar_cell"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Solar cells contain semiconductor materials that absorb photons from light and release electrons, creating an electric current through the photovoltaic effect. This is a direct conversion of light energy into electrical energy."
     },
     {
       "question_text": "Magnetic flux unit is:",
-      "options": ["Tesla", "Weber", "Henry", "Coulomb"],
+      "options": [
+        "Tesla",
+        "Weber",
+        "Henry",
+        "Coulomb"
+      ],
       "correct_answer": "B",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["units", "Weber"],
+      "topic_tags": [
+        "units",
+        "Weber"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Magnetic flux is defined as the product of magnetic field strength and area (Φ = BA), with units of Tesla·meter². The Weber (Wb) is the SI unit specifically designated for magnetic flux, where 1 Wb = 1 T·m²."
     },
     {
       "question_text": "Power dissipated in resistor R with current I:",
-      "options": ["IR", "I²R", "I/R", "R/I"],
+      "options": [
+        "IR",
+        "I²R",
+        "I/R",
+        "R/I"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["power"],
+      "topic_tags": [
+        "power"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Power is the rate of energy dissipation, calculated as P = VI. Using Ohm's law (V = IR), substituting gives P = I(IR) = I²R, which is the correct formula for power dissipated in a resistor."
     },
     {
       "question_text": "Magnification of telescope in normal adjustment is:",
-      "options": ["f_e/f_o", "f_o/f_e", "f_o + f_e", "f_o × f_e"],
+      "options": [
+        "f_e/f_o",
+        "f_o/f_e",
+        "f_o + f_e",
+        "f_o × f_e"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["telescope"],
+      "topic_tags": [
+        "telescope"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "In normal adjustment, the telescope is focused at infinity with the eyepiece positioned so its focal point coincides with the objective's focal point. The angular magnification equals the ratio of the objective's focal length to the eyepiece's focal length (f_o/f_e), making distant objects appear larger."
     },
     {
       "question_text": "Photon energy E = hν depends on:",
-      "options": ["Only Planck's constant", "Only frequency", "Both h and ν", "Wavelength only"],
+      "options": [
+        "Only Planck's constant",
+        "Only frequency",
+        "Both h and ν",
+        "Wavelength only"
+      ],
       "correct_answer": "C",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["E_h_nu"],
+      "topic_tags": [
+        "E_h_nu"
+      ],
       "difficulty": "easy",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The equation E = hν shows energy is the product of two factors: Planck's constant (h) and frequency (ν). Since energy depends on both multiplicative terms, changing either h or ν changes the photon's energy, making both necessary."
     },
     {
       "question_text": "Equipotential surfaces are perpendicular to:",
-      "options": ["Magnetic field", "Electric field", "Gravity", "Velocity"],
+      "options": [
+        "Magnetic field",
+        "Electric field",
+        "Gravity",
+        "Velocity"
+      ],
       "correct_answer": "B",
       "chapter": "Electrostatics",
-      "topic_tags": ["equipotential"],
+      "topic_tags": [
+        "equipotential"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Equipotential surfaces are defined as surfaces where the electric potential is constant at every point. Since the electric field points in the direction of maximum potential change, it must be perpendicular to any surface of constant potential."
     },
     {
       "question_text": "Ampere's law relates magnetic field to:",
-      "options": ["Charge", "Current enclosed", "Voltage", "Time"],
+      "options": [
+        "Charge",
+        "Current enclosed",
+        "Voltage",
+        "Time"
+      ],
       "correct_answer": "B",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["Ampere"],
+      "topic_tags": [
+        "Ampere"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "Ampere's law states that the line integral of the magnetic field around a closed loop equals the permeability constant times the current enclosed by that loop. The magnetic field is directly proportional to the current passing through the surface bounded by the loop."
     },
     {
       "question_text": "Number of electrons in 1 coulomb is approximately:",
-      "options": ["6.25×10¹⁸", "1.6×10⁻¹⁹", "1.6×10¹⁹", "6.022×10²³"],
+      "options": [
+        "6.25×10¹⁸",
+        "1.6×10⁻¹⁹",
+        "1.6×10¹⁹",
+        "6.022×10²³"
+      ],
       "correct_answer": "A",
       "chapter": "Current Electricity",
-      "topic_tags": ["coulomb_electrons"],
+      "topic_tags": [
+        "coulomb_electrons"
+      ],
       "difficulty": "medium",
-      "marks": 1
+      "marks": 1,
+      "explanation": "The elementary charge (charge of one electron) is 1.6×10⁻¹⁹ coulombs. To find the number of electrons in 1 coulomb, divide 1 by the charge per electron: 1 ÷ (1.6×10⁻¹⁹) = 6.25×10¹⁸ electrons."
     }
   ]
 }

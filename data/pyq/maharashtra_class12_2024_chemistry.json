@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "hsc_board",
   "questions": [
-    {"question_text": "Solid state - crystalline solids have:", "options": ["Definite shape and melting point", "Variable melting point", "No order", "Amorphous nature"], "correct_answer": "A", "chapter": "Solid State", "topic_tags": ["crystalline"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Number of atoms per unit cell in FCC:", "options": ["2", "4", "6", "8"], "correct_answer": "B", "chapter": "Solid State", "topic_tags": ["FCC"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Coordination number of Cl⁻ in NaCl:", "options": ["4", "6", "8", "12"], "correct_answer": "B", "chapter": "Solid State", "topic_tags": ["NaCl_coord"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Molality m unit:", "options": ["mol/L solution", "mol/kg solvent", "mol/g", "mol/L solvent"], "correct_answer": "B", "chapter": "Solutions", "topic_tags": ["molality"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Vapor pressure decrease of solution depends on:", "options": ["Nature of solute", "Mole fraction of solute (non-volatile)", "Temperature only", "Type of solvent"], "correct_answer": "B", "chapter": "Solutions", "topic_tags": ["Raoult"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Osmotic pressure π = ?", "options": ["nRT/V", "CRT (C = molar concentration)", "Both A and B", "RT/V"], "correct_answer": "C", "chapter": "Solutions", "topic_tags": ["osmotic_pressure"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Salt bridge in galvanic cell:", "options": ["Carries electrons", "Maintains electrical neutrality of electrolytes", "Powers the cell", "Stores energy"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["salt_bridge"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Standard reduction potential E°(Cu²⁺/Cu):", "options": ["-0.34 V", "+0.34 V", "0", "+0.76 V"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["Cu_E"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Order of zero-order reaction has units of:", "options": ["s⁻¹", "mol·L⁻¹·s⁻¹", "L·mol⁻¹·s⁻¹", "Dimensionless"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["zero_order_units"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Activation energy Ea — Arrhenius: k = A·e^?", "options": ["Ea/RT", "-Ea/RT", "RT/Ea", "RT·Ea"], "correct_answer": "B", "chapter": "Kinetics", "topic_tags": ["Arrhenius"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Tyndall effect is shown by:", "options": ["True solution", "Colloid", "Pure water", "Glass"], "correct_answer": "B", "chapter": "Surface Chemistry", "topic_tags": ["Tyndall"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Brownian motion observed in:", "options": ["Solids", "Liquids", "Colloids/suspensions", "Crystals"], "correct_answer": "C", "chapter": "Surface Chemistry", "topic_tags": ["Brownian"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Common name for Al(OH)₃:", "options": ["Aluminium hydroxide", "Boric acid", "Sodium aluminate", "Aluminium chloride"], "correct_answer": "A", "chapter": "p-Block", "topic_tags": ["compound_name"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Diatomic molecule with bond order 3:", "options": ["O2", "N2", "F2", "Cl2"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["bond_order_3"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Hybridization of central atom in PCl5:", "options": ["sp3", "sp3d", "sp3d2", "sp"], "correct_answer": "B", "chapter": "Chemical Bonding", "topic_tags": ["PCl5"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of unpaired electrons in Fe³⁺ (d⁵):", "options": ["3", "4", "5", "6"], "correct_answer": "C", "chapter": "d-Block", "topic_tags": ["unpaired"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Coordination number of [Co(NH3)6]³⁺:", "options": ["3", "4", "6", "12"], "correct_answer": "C", "chapter": "Coordination Compounds", "topic_tags": ["coord_number"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Reaction of alkyl halide with KCN gives:", "options": ["Nitrile (R-CN)", "Isocyanide", "Both depending on conditions", "Amine"], "correct_answer": "A", "chapter": "Haloalkanes", "topic_tags": ["KCN"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Acidic strength: o-nitrophenol vs phenol:", "options": ["o-nitrophenol stronger", "Phenol stronger", "Equal", "Cannot say"], "correct_answer": "A", "chapter": "Phenols", "topic_tags": ["nitro_acidity"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Lucas test reagent:", "options": ["ZnCl2 + HCl", "AgNO3", "Fehling's", "Tollens"], "correct_answer": "A", "chapter": "Alcohols", "topic_tags": ["Lucas"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Aspirin contains group:", "options": ["Alcohol", "Ester + carboxylic acid", "Amide", "Amine"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["aspirin"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Cellulose is α or β linkage?", "options": ["α-1,4", "β-1,4", "α-1,6", "β-1,6"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["cellulose"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of hydrogen bonds between A-T base pair:", "options": ["1", "2", "3", "4"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["A_T"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Bakelite is formed from:", "options": ["Phenol + formaldehyde", "Adipic acid + amine", "Ethene", "Vinyl chloride"], "correct_answer": "A", "chapter": "Polymers", "topic_tags": ["Bakelite"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Insecticide DDT chemical name contains:", "options": ["Dichloride", "Trichloro", "Tetrachloro", "Both A and B"], "correct_answer": "D", "chapter": "Chemistry in Everyday Life", "topic_tags": ["DDT"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Solid state - crystalline solids have:",
+      "options": [
+        "Definite shape and melting point",
+        "Variable melting point",
+        "No order",
+        "Amorphous nature"
+      ],
+      "correct_answer": "A",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "crystalline"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Crystalline solids have atoms arranged in a repeating, ordered three-dimensional pattern. This ordered structure gives them a definite geometric shape and a characteristic sharp melting point where the entire structure breaks down simultaneously."
+    },
+    {
+      "question_text": "Number of atoms per unit cell in FCC:",
+      "options": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "FCC"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "In FCC (face-centered cubic), there are 8 corner atoms (each shared by 8 unit cells, contributing 8 × 1/8 = 1 atom) and 6 face atoms (each shared by 2 unit cells, contributing 6 × 1/2 = 3 atoms), totaling 1 + 3 = 4 atoms per unit cell."
+    },
+    {
+      "question_text": "Coordination number of Cl⁻ in NaCl:",
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solid State",
+      "topic_tags": [
+        "NaCl_coord"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "In NaCl's rock salt structure, each Cl⁻ ion is surrounded by six Na⁺ ions arranged octahedrally around it—one above, one below, and four in the central plane. This octahedral arrangement defines the coordination number as 6."
+    },
+    {
+      "question_text": "Molality m unit:",
+      "options": [
+        "mol/L solution",
+        "mol/kg solvent",
+        "mol/g",
+        "mol/L solvent"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "molality"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Molality is defined as moles of solute per kilogram of solvent (not solution). This distinguishes it from molarity, which uses liters of solution, making molality independent of temperature and pressure changes."
+    },
+    {
+      "question_text": "Vapor pressure decrease of solution depends on:",
+      "options": [
+        "Nature of solute",
+        "Mole fraction of solute (non-volatile)",
+        "Temperature only",
+        "Type of solvent"
+      ],
+      "correct_answer": "B",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "Raoult"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Vapor pressure decrease follows Raoult's Law, which states that the lowering of vapor pressure is directly proportional to the mole fraction of the solute (for non-volatile solutes). This is a colligative property depending only on the number of solute particles, not their identity or the solvent type."
+    },
+    {
+      "question_text": "Osmotic pressure π = ?",
+      "options": [
+        "nRT/V",
+        "CRT (C = molar concentration)",
+        "Both A and B",
+        "RT/V"
+      ],
+      "correct_answer": "C",
+      "chapter": "Solutions",
+      "topic_tags": [
+        "osmotic_pressure"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Osmotic pressure equals nRT/V, which can be rewritten as CRT by dividing moles by volume to get molar concentration. Both expressions are mathematically equivalent and correct representations of van 't Hoff's equation for osmotic pressure."
+    },
+    {
+      "question_text": "Salt bridge in galvanic cell:",
+      "options": [
+        "Carries electrons",
+        "Maintains electrical neutrality of electrolytes",
+        "Powers the cell",
+        "Stores energy"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "salt_bridge"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The salt bridge allows ions (not electrons) to flow between the two half-cells, preventing charge accumulation that would otherwise stop the reaction. This ion flow maintains electrical neutrality by replacing electrons lost in one chamber with positive ions or gaining negative ions."
+    },
+    {
+      "question_text": "Standard reduction potential E°(Cu²⁺/Cu):",
+      "options": [
+        "-0.34 V",
+        "+0.34 V",
+        "0",
+        "+0.76 V"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Cu_E"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The standard reduction potential for Cu²⁺/Cu is +0.34 V because copper is less reactive than hydrogen and lies above it in the activity series, giving it a positive reduction potential. This positive value indicates Cu²⁺ is readily reduced to Cu metal."
+    },
+    {
+      "question_text": "Order of zero-order reaction has units of:",
+      "options": [
+        "s⁻¹",
+        "mol·L⁻¹·s⁻¹",
+        "L·mol⁻¹·s⁻¹",
+        "Dimensionless"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "zero_order_units"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "For a zero-order reaction, the rate law is rate = k[A]⁰ = k. Since rate always has units of mol·L⁻¹·s⁻¹ (concentration per time), the rate constant k for a zero-order reaction must have these same units to make the equation dimensionally consistent."
+    },
+    {
+      "question_text": "Activation energy Ea — Arrhenius: k = A·e^?",
+      "options": [
+        "Ea/RT",
+        "-Ea/RT",
+        "RT/Ea",
+        "RT·Ea"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinetics",
+      "topic_tags": [
+        "Arrhenius"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Arrhenius equation includes a negative exponent because activation energy represents an energy barrier that must be overcome. As temperature increases, the exponent becomes less negative, allowing more molecules to possess sufficient energy, thus increasing the rate constant k exponentially."
+    },
+    {
+      "question_text": "Tyndall effect is shown by:",
+      "options": [
+        "True solution",
+        "Colloid",
+        "Pure water",
+        "Glass"
+      ],
+      "correct_answer": "B",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "Tyndall"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Colloids contain suspended particles large enough (1-1000 nm) to scatter light, making the light path visible, which is the defining characteristic of the Tyndall effect. True solutions have dissolved solutes too small to scatter light, so they don't exhibit this effect."
+    },
+    {
+      "question_text": "Brownian motion observed in:",
+      "options": [
+        "Solids",
+        "Liquids",
+        "Colloids/suspensions",
+        "Crystals"
+      ],
+      "correct_answer": "C",
+      "chapter": "Surface Chemistry",
+      "topic_tags": [
+        "Brownian"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Brownian motion occurs when particles are bombarded by molecular collisions from the surrounding medium. Colloids and suspensions have particles large enough to be visible under a microscope yet small enough to experience significant random molecular impacts, making their erratic movement observable, whereas particles in true solutions or bulk solids don't exhibit this visible effect."
+    },
+    {
+      "question_text": "Common name for Al(OH)₃:",
+      "options": [
+        "Aluminium hydroxide",
+        "Boric acid",
+        "Sodium aluminate",
+        "Aluminium chloride"
+      ],
+      "correct_answer": "A",
+      "chapter": "p-Block",
+      "topic_tags": [
+        "compound_name"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Al(OH)₃ contains aluminum and hydroxide ions bonded together. The common name directly reflects the chemical formula: aluminum + hydroxide = aluminium hydroxide, which is the standard IUPAC nomenclature for this compound."
+    },
+    {
+      "question_text": "Diatomic molecule with bond order 3:",
+      "options": [
+        "O2",
+        "N2",
+        "F2",
+        "Cl2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "bond_order_3"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "N2 has a triple bond (one σ and two π bonds) between its nitrogen atoms, giving a bond order of 3. The other diatomic molecules have only single or double bonds: O2 has bond order 2, while F2 and Cl2 each have bond order 1."
+    },
+    {
+      "question_text": "Hybridization of central atom in PCl5:",
+      "options": [
+        "sp3",
+        "sp3d",
+        "sp3d2",
+        "sp"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "PCl5"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Phosphorus in PCl5 has 5 valence electrons and forms 5 bonds with chlorine atoms, requiring 5 electron domains. This necessitates sp3d hybridization, which provides 5 orbitals to accommodate the 5 bonding pairs in a trigonal bipyramidal geometry."
+    },
+    {
+      "question_text": "Number of unpaired electrons in Fe³⁺ (d⁵):",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "unpaired"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Fe³⁺ has a d⁵ configuration where five electrons occupy the five d orbitals. According to Hund's rule, electrons fill orbitals singly with parallel spins before pairing, so all five d electrons remain unpaired."
+    },
+    {
+      "question_text": "Coordination number of [Co(NH3)6]³⁺:",
+      "options": [
+        "3",
+        "4",
+        "6",
+        "12"
+      ],
+      "correct_answer": "C",
+      "chapter": "Coordination Compounds",
+      "topic_tags": [
+        "coord_number"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The coordination number equals the number of ligands directly bonded to the central metal ion. In [Co(NH₃)₆]³⁺, six ammonia (NH₃) ligands are coordinated to the cobalt center, giving a coordination number of 6."
+    },
+    {
+      "question_text": "Reaction of alkyl halide with KCN gives:",
+      "options": [
+        "Nitrile (R-CN)",
+        "Isocyanide",
+        "Both depending on conditions",
+        "Amine"
+      ],
+      "correct_answer": "A",
+      "chapter": "Haloalkanes",
+      "topic_tags": [
+        "KCN"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "KCN is a source of CN⁻ nucleophile, which attacks the carbon of the alkyl halide through an SN2 mechanism. The CN⁻ attacks via its carbon atom (not nitrogen), forming a C-C bond and producing a nitrile (R-CN) as the primary product."
+    },
+    {
+      "question_text": "Acidic strength: o-nitrophenol vs phenol:",
+      "options": [
+        "o-nitrophenol stronger",
+        "Phenol stronger",
+        "Equal",
+        "Cannot say"
+      ],
+      "correct_answer": "A",
+      "chapter": "Phenols",
+      "topic_tags": [
+        "nitro_acidity"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The nitro group is strongly electron-withdrawing through both inductive and resonance effects, stabilizing the negative charge on the conjugate base anion. Being ortho to the hydroxyl group, it exerts maximum electronic withdrawal, making o-nitrophenol significantly more acidic than phenol."
+    },
+    {
+      "question_text": "Lucas test reagent:",
+      "options": [
+        "ZnCl2 + HCl",
+        "AgNO3",
+        "Fehling's",
+        "Tollens"
+      ],
+      "correct_answer": "A",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "Lucas"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "The Lucas test uses ZnCl2 + HCl to distinguish alcohols by their reactivity. Primary alcohols don't react, secondary alcohols react slowly, and tertiary alcohols react immediately to form alkyl chlorides, producing cloudiness. Other options test for different functional groups (aldehydes/ketones or silver halides)."
+    },
+    {
+      "question_text": "Aspirin contains group:",
+      "options": [
+        "Alcohol",
+        "Ester + carboxylic acid",
+        "Amide",
+        "Amine"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "aspirin"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Aspirin (acetylsalicylic acid) has two key functional groups: an ester group formed from the acetyl moiety bonded to the hydroxyl group on the benzene ring, and a carboxylic acid group (-COOH) attached directly to the ring."
+    },
+    {
+      "question_text": "Cellulose is α or β linkage?",
+      "options": [
+        "α-1,4",
+        "β-1,4",
+        "α-1,6",
+        "β-1,6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "cellulose"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Cellulose contains β-1,4 glycosidic linkages between glucose units, which create a linear, extended structure. This differs from starch (which uses α-1,4 linkages) and allows cellulose to form strong hydrogen-bonded fibers suitable for plant structural support."
+    },
+    {
+      "question_text": "Number of hydrogen bonds between A-T base pair:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "A_T"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Adenine (A) has two amino groups that can act as hydrogen bond donors, while thymine (T) has two carbonyl groups that can act as acceptors. These form exactly two complementary hydrogen bonds between the bases in the DNA double helix."
+    },
+    {
+      "question_text": "Bakelite is formed from:",
+      "options": [
+        "Phenol + formaldehyde",
+        "Adipic acid + amine",
+        "Ethene",
+        "Vinyl chloride"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "Bakelite"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Bakelite is a phenol-formaldehyde resin created through a condensation reaction between phenol and formaldehyde, producing the first fully synthetic plastic. This cross-linked polymer structure gives bakelite its characteristic hardness and heat resistance."
+    },
+    {
+      "question_text": "Insecticide DDT chemical name contains:",
+      "options": [
+        "Dichloride",
+        "Trichloro",
+        "Tetrachloro",
+        "Both A and B"
+      ],
+      "correct_answer": "D",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "DDT"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "DDT's full chemical name is dichlorodiphenyltrichloroethane, which contains both \"dichloro\" (two chlorines on the diphenyl groups) and \"trichloro\" (three chlorines on the ethane portion), making both A and B correct components of its nomenclature."
+    }
   ]
 }

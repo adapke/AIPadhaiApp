@@ -8,228 +8,428 @@
   "questions": [
     {
       "question_text": "Atomic radius decreases across a period because:",
-      "options": ["Effective nuclear charge increases", "Number of shells decreases", "Mass decreases", "Atomic number stays"],
+      "options": [
+        "Effective nuclear charge increases",
+        "Number of shells decreases",
+        "Mass decreases",
+        "Atomic number stays"
+      ],
       "correct_answer": "A",
       "chapter": "Periodic Properties",
-      "topic_tags": ["atomic_radius"],
+      "topic_tags": [
+        "atomic_radius"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "As you move across a period, protons increase in the nucleus while electrons fill the same shell. The increased positive charge (effective nuclear charge) pulls electrons closer, reducing atomic radius despite no change in the number of electron shells."
     },
     {
       "question_text": "Most polar bond:",
-      "options": ["H-F", "H-Cl", "H-Br", "H-I"],
+      "options": [
+        "H-F",
+        "H-Cl",
+        "H-Br",
+        "H-I"
+      ],
       "correct_answer": "A",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["polarity"],
+      "topic_tags": [
+        "polarity"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Electronegativity difference determines bond polarity. Fluorine has the highest electronegativity of all elements, creating the largest electronegativity gap with hydrogen, making H-F the most polar bond among the hydrogen halides."
     },
     {
       "question_text": "Henry's law deals with:",
-      "options": ["Solubility of gas in liquid", "Boiling point", "Vapor pressure of pure liquid", "Reaction rate"],
+      "options": [
+        "Solubility of gas in liquid",
+        "Boiling point",
+        "Vapor pressure of pure liquid",
+        "Reaction rate"
+      ],
       "correct_answer": "A",
       "chapter": "Solutions",
-      "topic_tags": ["Henry_law"],
+      "topic_tags": [
+        "Henry_law"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Henry's law states that the solubility of a gas in a liquid is directly proportional to the partial pressure of that gas above the liquid. This fundamental principle describes gas-liquid equilibrium behavior, making solubility of gas in liquid the correct answer."
     },
     {
       "question_text": "Vapor pressure of solution containing non-volatile solute:",
-      "options": ["Higher than pure solvent", "Lower than pure solvent", "Equal", "Random"],
+      "options": [
+        "Higher than pure solvent",
+        "Lower than pure solvent",
+        "Equal",
+        "Random"
+      ],
       "correct_answer": "B",
       "chapter": "Solutions",
-      "topic_tags": ["Raoult"],
+      "topic_tags": [
+        "Raoult"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Non-volatile solutes dissolve in the solvent but don't contribute to vapor pressure. They reduce the mole fraction of solvent molecules at the surface, decreasing the number of solvent molecules that can escape into the vapor phase, thus lowering overall vapor pressure below that of the pure solvent."
     },
     {
       "question_text": "ΔS° (entropy) for spontaneous reaction at high T:",
-      "options": ["Always positive", "Always negative", "Can be either", "Zero"],
+      "options": [
+        "Always positive",
+        "Always negative",
+        "Can be either",
+        "Zero"
+      ],
       "correct_answer": "C",
       "chapter": "Thermodynamics",
-      "topic_tags": ["entropy"],
+      "topic_tags": [
+        "entropy"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At high temperatures, the entropy term (TΔS°) dominates the Gibbs free energy equation (ΔG° = ΔH° - TΔS°). A reaction is spontaneous when ΔG° < 0, which can occur with either positive or negative ΔS° depending on the enthalpy contribution, making C correct."
     },
     {
       "question_text": "Hund's rule says:",
-      "options": ["Fill orbitals one electron each before pairing", "Always pair first", "Fill highest orbital first", "Random"],
+      "options": [
+        "Fill orbitals one electron each before pairing",
+        "Always pair first",
+        "Fill highest orbital first",
+        "Random"
+      ],
       "correct_answer": "A",
       "chapter": "Atomic Structure",
-      "topic_tags": ["Hund"],
+      "topic_tags": [
+        "Hund"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Hund's rule states that electrons occupy orbitals singly with parallel spins before pairing up in the same orbital, minimizing electron-electron repulsion and maximizing stability."
     },
     {
       "question_text": "Conjugate base of HCO3⁻:",
-      "options": ["H2CO3", "CO3²⁻", "CO2", "OH⁻"],
+      "options": [
+        "H2CO3",
+        "CO3²⁻",
+        "CO2",
+        "OH⁻"
+      ],
       "correct_answer": "B",
       "chapter": "Acid-Base",
-      "topic_tags": ["conjugate_base"],
+      "topic_tags": [
+        "conjugate_base"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A conjugate base is formed by removing a proton (H⁺) from an acid. Removing H⁺ from HCO3⁻ yields CO3²⁻, which is its conjugate base."
     },
     {
       "question_text": "Most thermodynamically stable alkane isomer of C8H18:",
-      "options": ["n-octane", "iso-octane", "Most branched form (often 2,2,3,3-tetramethylbutane)", "All equal"],
+      "options": [
+        "n-octane",
+        "iso-octane",
+        "Most branched form (often 2,2,3,3-tetramethylbutane)",
+        "All equal"
+      ],
       "correct_answer": "C",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["isomer_stability"],
+      "topic_tags": [
+        "isomer_stability"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Branched alkanes are more thermologically stable than linear isomers because branching reduces surface area and intermolecular van der Waals forces. The most branched isomer (2,2,3,3-tetramethylbutane) has the lowest enthalpy and greatest stability due to maximum branching minimizing unfavorable molecular interactions."
     },
     {
       "question_text": "Friedel-Crafts alkylation cannot use:",
-      "options": ["Primary alkyl halides", "Secondary halides", "Aryl halides", "Tertiary halides"],
+      "options": [
+        "Primary alkyl halides",
+        "Secondary halides",
+        "Aryl halides",
+        "Tertiary halides"
+      ],
       "correct_answer": "C",
       "chapter": "Aromatic Chemistry",
-      "topic_tags": ["Friedel_Crafts"],
+      "topic_tags": [
+        "Friedel_Crafts"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Friedel-Crafts alkylation requires formation of a stable carbocation intermediate. Aryl halides (C-X bonds attached directly to the benzene ring) cannot form carbocations because the sp² carbon is not conducive to carbocation stability. Primary, secondary, and tertiary alkyl halides can all form carbocations of varying stability and participate in the reaction."
     },
     {
       "question_text": "Williamson ether synthesis uses:",
-      "options": ["Alcohol + acid", "Alkoxide + alkyl halide", "Two alcohols", "Acid + base"],
+      "options": [
+        "Alcohol + acid",
+        "Alkoxide + alkyl halide",
+        "Two alcohols",
+        "Acid + base"
+      ],
       "correct_answer": "B",
       "chapter": "Ethers",
-      "topic_tags": ["Williamson"],
+      "topic_tags": [
+        "Williamson"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Williamson ether synthesis requires an alkoxide (RO⁻, formed by deprotonating an alcohol with base) to act as a nucleophile that attacks an alkyl halide (SN2 mechanism), forming a new C-O bond and producing an ether."
     },
     {
       "question_text": "Most common ore of aluminium:",
-      "options": ["Hematite", "Bauxite", "Galena", "Pyrolusite"],
+      "options": [
+        "Hematite",
+        "Bauxite",
+        "Galena",
+        "Pyrolusite"
+      ],
       "correct_answer": "B",
       "chapter": "Metallurgy",
-      "topic_tags": ["bauxite"],
+      "topic_tags": [
+        "bauxite"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Bauxite is the primary ore of aluminum because it contains aluminum oxide (Al₂O₃) as its main component and is economically viable for aluminum extraction through the Hall-Héroult process. The other options are ores of iron, lead, and manganese respectively."
     },
     {
       "question_text": "Number of ions produced by 1 mol AlCl3:",
-      "options": ["2", "3", "4", "6"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "6"
+      ],
       "correct_answer": "C",
       "chapter": "Solutions",
-      "topic_tags": ["van_t_Hoff"],
+      "topic_tags": [
+        "van_t_Hoff"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "AlCl₃ dissociates in solution into one Al³⁺ ion and three Cl⁻ ions, producing a total of 4 ions per mole of AlCl₃."
     },
     {
       "question_text": "Werner's coordination theory: primary valence:",
-      "options": ["Ionizable", "Non-ionizable", "Both", "Variable"],
+      "options": [
+        "Ionizable",
+        "Non-ionizable",
+        "Both",
+        "Variable"
+      ],
       "correct_answer": "A",
       "chapter": "Coordination Compounds",
-      "topic_tags": ["Werner"],
+      "topic_tags": [
+        "Werner"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Primary valence represents the charge on the central metal ion and is satisfied by anions that form ionic bonds with the metal. These primary valences are ionizable because they dissociate in solution, producing free ions detectable through conductivity measurements."
     },
     {
       "question_text": "EAN of [Fe(CN)6]³⁻ (Fe³⁺, Z=26):",
-      "options": ["35", "36", "37", "38"],
+      "options": [
+        "35",
+        "36",
+        "37",
+        "38"
+      ],
       "correct_answer": "A",
       "chapter": "Coordination Compounds",
-      "topic_tags": ["EAN"],
+      "topic_tags": [
+        "EAN"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Fe³⁺ has 23 electrons (26 - 3). Each CN⁻ ligand donates 2 electrons, and 6 ligands contribute 12 electrons total. The effective atomic number is 23 + 12 = 35."
     },
     {
       "question_text": "Common name of formaldehyde:",
-      "options": ["Methanal", "Methyl alcohol", "Methane", "Methanoic acid"],
+      "options": [
+        "Methanal",
+        "Methyl alcohol",
+        "Methane",
+        "Methanoic acid"
+      ],
       "correct_answer": "A",
       "chapter": "Aldehydes",
-      "topic_tags": ["IUPAC"],
+      "topic_tags": [
+        "IUPAC"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Methanal is the IUPAC systematic name for formaldehyde (HCHO). It follows the naming convention where \"meth-\" indicates one carbon and \"-anal\" denotes an aldehyde functional group. The other options represent different compounds: methyl alcohol is methanol, methane is a hydrocarbon, and methanoic acid is formic acid."
     },
     {
       "question_text": "Lewis structure of CH2O (formaldehyde):",
-      "options": ["C with 4 single bonds", "C double bond O, two C-H", "C triple bond O", "Linear C"],
+      "options": [
+        "C with 4 single bonds",
+        "C double bond O, two C-H",
+        "C triple bond O",
+        "Linear C"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["Lewis_formaldehyde"],
+      "topic_tags": [
+        "Lewis_formaldehyde"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Carbon forms a double bond with oxygen (satisfying oxygen's need for 2 bonds) and single bonds with two hydrogens, giving carbon 4 total bonds and satisfying the octet rule for both C and O."
     },
     {
       "question_text": "Acid strength: HOCl, HOBr, HOI",
-      "options": ["HOCl > HOBr > HOI", "Reverse", "Equal", "HOBr > HOI > HOCl"],
+      "options": [
+        "HOCl > HOBr > HOI",
+        "Reverse",
+        "Equal",
+        "HOBr > HOI > HOCl"
+      ],
       "correct_answer": "A",
       "chapter": "p-Block",
-      "topic_tags": ["acid_strength"],
+      "topic_tags": [
+        "acid_strength"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In oxyacids with the same structure, acid strength depends on the electronegativity of the central atom. Chlorine is more electronegative than bromine or iodine, so it withdraws electron density more effectively, stabilizing the conjugate base (OCl⁻) better than OBr⁻ or OI⁻, making HOCl the strongest acid."
     },
     {
       "question_text": "Hybridisation of S in SF6:",
-      "options": ["sp3", "sp3d", "sp3d2", "sp"],
+      "options": [
+        "sp3",
+        "sp3d",
+        "sp3d2",
+        "sp"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["SF6"],
+      "topic_tags": [
+        "SF6"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Sulfur in SF6 forms six bonds with fluorine atoms, requiring six hybrid orbitals. With six electron groups (all bonding pairs) around sulfur, it adopts an octahedral geometry that requires sp3d2 hybridization (using s, three p, and two d orbitals)."
     },
     {
       "question_text": "Reagent for SN2 reaction:",
-      "options": ["t-BuO⁻ in t-BuOH", "Strong nucleophile + polar aprotic solvent", "Acid", "Heat"],
+      "options": [
+        "t-BuO⁻ in t-BuOH",
+        "Strong nucleophile + polar aprotic solvent",
+        "Acid",
+        "Heat"
+      ],
       "correct_answer": "B",
       "chapter": "Haloalkanes",
-      "topic_tags": ["SN2"],
+      "topic_tags": [
+        "SN2"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "SN2 reactions require a strong nucleophile that isn't sterically hindered and a polar aprotic solvent (like DMSO or acetonitrile) that solvates cations but leaves nucleophiles unsolvated, making them highly reactive. Option A favors E2 elimination, option C promotes SN1/E1, and heat favors elimination over substitution."
     },
     {
       "question_text": "Geometrical isomerism shown by:",
-      "options": ["1-butene", "2-butene", "Methane", "Ethane"],
+      "options": [
+        "1-butene",
+        "2-butene",
+        "Methane",
+        "Ethane"
+      ],
       "correct_answer": "B",
       "chapter": "Stereochemistry",
-      "topic_tags": ["cis_trans"],
+      "topic_tags": [
+        "cis_trans"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "2-butene has a C=C double bond with two different groups (CH₃ and H) attached to each carbon, allowing cis-trans isomerism. 1-butene, methane, and ethane lack the necessary structural requirements: 1-butene has identical hydrogens on one carbon, while methane and ethane lack carbon-carbon double bonds entirely."
     },
     {
       "question_text": "Strongest base:",
-      "options": ["NH3", "OH⁻", "NH2⁻ (amide ion)", "F⁻"],
+      "options": [
+        "NH3",
+        "OH⁻",
+        "NH2⁻ (amide ion)",
+        "F⁻"
+      ],
       "correct_answer": "C",
       "chapter": "Acid-Base",
-      "topic_tags": ["basicity"],
+      "topic_tags": [
+        "basicity"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The amide ion (NH2⁻) is the strongest base because it has the weakest conjugate acid (NH3). Basicity is inversely related to conjugate acid strength—the weaker the conjugate acid, the stronger the base."
     },
     {
       "question_text": "Most stable conformation of ethane:",
-      "options": ["Eclipsed", "Staggered", "Skew", "Cis"],
+      "options": [
+        "Eclipsed",
+        "Staggered",
+        "Skew",
+        "Cis"
+      ],
       "correct_answer": "B",
       "chapter": "Stereochemistry",
-      "topic_tags": ["conformation"],
+      "topic_tags": [
+        "conformation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In the staggered conformation, the C-H bonds on adjacent carbons are maximally separated, minimizing steric strain and electron-electron repulsion between bonding pairs. The eclipsed conformation has overlapping bonds creating maximum repulsion, making it less stable."
     },
     {
       "question_text": "Slope of Arrhenius plot (ln k vs 1/T):",
-      "options": ["+Ea/R", "-Ea/R", "Ea", "R"],
+      "options": [
+        "+Ea/R",
+        "-Ea/R",
+        "Ea",
+        "R"
+      ],
       "correct_answer": "B",
       "chapter": "Kinetics",
-      "topic_tags": ["Arrhenius"],
+      "topic_tags": [
+        "Arrhenius"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Arrhenius equation rearranged as ln k = -Ea/R(1/T) + ln A shows that when plotting ln k versus 1/T, the slope equals -Ea/R because of the negative sign in front of the activation energy term."
     },
     {
       "question_text": "Buffer of weak acid HA: max buffering at pH:",
-      "options": ["pKa - 1", "pKa", "pKa + 1", "pH = 7"],
+      "options": [
+        "pKa - 1",
+        "pKa",
+        "pKa + 1",
+        "pH = 7"
+      ],
       "correct_answer": "B",
       "chapter": "Equilibrium",
-      "topic_tags": ["buffer"],
+      "topic_tags": [
+        "buffer"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A buffer resists pH changes most effectively when the concentrations of weak acid (HA) and its conjugate base (A⁻) are equal. Using the Henderson-Hasselbalch equation, when [HA] = [A⁻], the pH equals pKa, providing maximum buffering capacity."
     },
     {
       "question_text": "Empirical formula of glucose C6H12O6:",
-      "options": ["CHO", "CH2O", "C2H4O2", "C3H6O3"],
+      "options": [
+        "CHO",
+        "CH2O",
+        "C2H4O2",
+        "C3H6O3"
+      ],
       "correct_answer": "B",
       "chapter": "Mole Concept",
-      "topic_tags": ["empirical"],
+      "topic_tags": [
+        "empirical"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The empirical formula is the simplest whole number ratio of atoms. Divide all subscripts in C6H12O6 by their greatest common divisor (6): C(6÷6)H(12÷6)O(6÷6) = CH2O."
     }
   ]
 }

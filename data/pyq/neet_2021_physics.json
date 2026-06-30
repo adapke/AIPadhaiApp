@@ -6,30 +6,430 @@
   "default_year": 2021,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Unit of work in SI system is:", "options": ["newton", "joule", "watt", "pascal"], "correct_answer": "B", "chapter": "Work, Energy and Power", "topic_tags": ["units"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If a body's KE doubles, its momentum becomes:", "options": ["Same", "Double", "Square root of 2 times", "Half"], "correct_answer": "C", "chapter": "Work, Energy and Power", "topic_tags": ["KE_momentum"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Power dissipated in 10Ω resistor with 2 A current:", "options": ["20 W", "40 W", "10 W", "5 W"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["I²R"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Two capacitors 4μF and 6μF in series. Equivalent:", "options": ["2.4 μF", "5 μF", "10 μF", "24 μF"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["series"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Velocity of EM wave in vacuum:", "options": ["3×10⁵ m/s", "3×10⁶ m/s", "3×10⁸ m/s", "3×10¹⁰ m/s"], "correct_answer": "C", "chapter": "Electromagnetic Waves", "topic_tags": ["c"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Refractive index of glass is 1.5. Speed of light in glass:", "options": ["1.5×3×10⁸ m/s", "2×10⁸ m/s", "3×10⁸ m/s", "4.5×10⁸ m/s"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["refraction"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Magnification of compound microscope:", "options": ["m_o × m_e", "m_o + m_e", "m_o - m_e", "m_o / m_e"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["microscope"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wavelength of yellow sodium light is approximately:", "options": ["400 nm", "500 nm", "589 nm", "700 nm"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["sodium"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Rutherford's α-particle experiment proved:", "options": ["Plum pudding model", "Nucleus is small and dense", "Atom is indivisible", "Electrons orbit"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Rutherford"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Frequency of radiation from n=3 to n=2 in H atom:", "options": ["Lyman", "Balmer", "Paschen", "Brackett"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Balmer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mass of α-particle is approximately:", "options": ["1 amu", "2 amu", "4 amu", "8 amu"], "correct_answer": "C", "chapter": "Nuclei", "topic_tags": ["alpha_particle"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Half-life of C-14 is approximately:", "options": ["5730 years", "1600 years", "100 years", "50000 years"], "correct_answer": "A", "chapter": "Nuclei", "topic_tags": ["C14"], "difficulty": "medium", "marks": 4},
-    {"question_text": "n-type semiconductor majority carrier:", "options": ["Holes", "Electrons", "Both equally", "Neither"], "correct_answer": "B", "chapter": "Semiconductor Electronics", "topic_tags": ["n_type"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Truth table of OR gate: 0+1 =", "options": ["0", "1", "Both", "X"], "correct_answer": "B", "chapter": "Logic Gates", "topic_tags": ["OR"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Energy stored in inductor L carrying current I:", "options": ["LI", "LI²/2", "L/I", "L²I"], "correct_answer": "B", "chapter": "EMI", "topic_tags": ["energy_inductor"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Power factor unity means:", "options": ["Pure resistor circuit", "Pure inductor", "Pure capacitor", "No current"], "correct_answer": "A", "chapter": "AC Circuits", "topic_tags": ["power_factor"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnification = 1 means image is:", "options": ["Reduced", "Same size as object", "Magnified", "Inverted only"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["magnification"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Sound wave is which type:", "options": ["Transverse", "Longitudinal", "EM", "Standing only"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["sound"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If frequency of SHM doubles, time period:", "options": ["Doubles", "Halves", "Same", "Quadruples"], "correct_answer": "B", "chapter": "Oscillations", "topic_tags": ["frequency_period"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Centripetal force on body moving in circle is directed:", "options": ["Tangentially", "Toward centre", "Away from centre", "Vertically"], "correct_answer": "B", "chapter": "Circular Motion", "topic_tags": ["centripetal"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Resistance of an ideal ammeter:", "options": ["Very low", "Infinite", "Moderate", "Variable"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["ammeter"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnetic field on axis of bar magnet:", "options": ["Equal at all points", "Decreases with distance", "Increases with distance", "Constant"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["bar_magnet"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Concave mirror produces real image when object is:", "options": ["Inside focal length", "Beyond focal length", "At focal length", "At pole"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["concave_mirror"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of free electrons in metals per cubic meter is approximately:", "options": ["10²⁸", "10⁻²⁸", "10⁶", "10¹⁶"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["electron_density"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Charge of electron is approximately:", "options": ["1.6×10⁻¹⁹ C", "1.6×10¹⁹ C", "9.1×10⁻³¹ C", "6.022×10²³"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["electron_charge"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Unit of work in SI system is:",
+      "options": [
+        "newton",
+        "joule",
+        "watt",
+        "pascal"
+      ],
+      "correct_answer": "B",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": [
+        "units"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Work equals force multiplied by displacement (W = F × d). Since force is measured in newtons and displacement in meters, work's SI unit is newton-meter, which is defined as one joule."
+    },
+    {
+      "question_text": "If a body's KE doubles, its momentum becomes:",
+      "options": [
+        "Same",
+        "Double",
+        "Square root of 2 times",
+        "Half"
+      ],
+      "correct_answer": "C",
+      "chapter": "Work, Energy and Power",
+      "topic_tags": [
+        "KE_momentum"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "KE is proportional to v², while momentum is proportional to v. If KE doubles, then v² doubles, so v increases by √2. Since momentum is directly proportional to velocity, momentum also increases by √2."
+    },
+    {
+      "question_text": "Power dissipated in 10Ω resistor with 2 A current:",
+      "options": [
+        "20 W",
+        "40 W",
+        "10 W",
+        "5 W"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "I²R"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power dissipated is calculated using P = I²R. With I = 2 A and R = 10 Ω, we get P = (2)² × 10 = 4 × 10 = 40 W."
+    },
+    {
+      "question_text": "Two capacitors 4μF and 6μF in series. Equivalent:",
+      "options": [
+        "2.4 μF",
+        "5 μF",
+        "10 μF",
+        "24 μF"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "series"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For capacitors in series, use the reciprocal formula: 1/C_eq = 1/C₁ + 1/C₂. With 4μF and 6μF: 1/C_eq = 1/4 + 1/6 = 5/12, so C_eq = 12/5 = 2.4μF."
+    },
+    {
+      "question_text": "Velocity of EM wave in vacuum:",
+      "options": [
+        "3×10⁵ m/s",
+        "3×10⁶ m/s",
+        "3×10⁸ m/s",
+        "3×10¹⁰ m/s"
+      ],
+      "correct_answer": "C",
+      "chapter": "Electromagnetic Waves",
+      "topic_tags": [
+        "c"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The speed of light in vacuum is a fundamental physical constant denoted as c, which equals approximately 3×10⁸ m/s. This value is derived from Maxwell's equations and is the maximum speed at which any electromagnetic wave, including light, can propagate through a vacuum."
+    },
+    {
+      "question_text": "Refractive index of glass is 1.5. Speed of light in glass:",
+      "options": [
+        "1.5×3×10⁸ m/s",
+        "2×10⁸ m/s",
+        "3×10⁸ m/s",
+        "4.5×10⁸ m/s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "refraction"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Refractive index equals the ratio of light speed in vacuum to speed in the medium: n = c/v. Therefore, v = c/n = (3×10⁸ m/s)/1.5 = 2×10⁸ m/s."
+    },
+    {
+      "question_text": "Magnification of compound microscope:",
+      "options": [
+        "m_o × m_e",
+        "m_o + m_e",
+        "m_o - m_e",
+        "m_o / m_e"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "microscope"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The total magnification of a compound microscope equals the product of the objective lens magnification and eyepiece magnification because each lens magnifies the image sequentially—the objective creates an enlarged intermediate image, which the eyepiece then magnifies further."
+    },
+    {
+      "question_text": "Wavelength of yellow sodium light is approximately:",
+      "options": [
+        "400 nm",
+        "500 nm",
+        "589 nm",
+        "700 nm"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "sodium"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Yellow light falls in the 570-590 nm range of the visible spectrum. Sodium's characteristic yellow emission lines (the sodium D-lines) occur at precisely 589 nm, making this the defining wavelength for yellow sodium light."
+    },
+    {
+      "question_text": "Rutherford's α-particle experiment proved:",
+      "options": [
+        "Plum pudding model",
+        "Nucleus is small and dense",
+        "Atom is indivisible",
+        "Electrons orbit"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Rutherford"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The α-particles fired at gold foil were mostly undeflected, but some scattered at large angles. This unexpected large-angle scattering could only occur if atoms contained a small, dense, positively charged nucleus rather than positive charge distributed throughout the atom as the plum pudding model predicted."
+    },
+    {
+      "question_text": "Frequency of radiation from n=3 to n=2 in H atom:",
+      "options": [
+        "Lyman",
+        "Balmer",
+        "Paschen",
+        "Brackett"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Balmer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Balmer series corresponds to transitions ending at n=2, regardless of the starting level. Since this transition goes from n=3 to n=2, it falls within the Balmer series definition."
+    },
+    {
+      "question_text": "Mass of α-particle is approximately:",
+      "options": [
+        "1 amu",
+        "2 amu",
+        "4 amu",
+        "8 amu"
+      ],
+      "correct_answer": "C",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "alpha_particle"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "An α-particle is a helium-4 nucleus consisting of 2 protons and 2 neutrons. Since each nucleon (proton or neutron) has a mass of approximately 1 amu, the total mass is about 4 amu."
+    },
+    {
+      "question_text": "Half-life of C-14 is approximately:",
+      "options": [
+        "5730 years",
+        "1600 years",
+        "100 years",
+        "50000 years"
+      ],
+      "correct_answer": "A",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "C14"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "C-14 undergoes radioactive decay at a well-established rate determined through extensive experimental observation and is used in radiocarbon dating for archaeological samples. The half-life of 5730 years is the scientifically accepted value that allows accurate dating of organic materials up to about 50,000 years old."
+    },
+    {
+      "question_text": "n-type semiconductor majority carrier:",
+      "options": [
+        "Holes",
+        "Electrons",
+        "Both equally",
+        "Neither"
+      ],
+      "correct_answer": "B",
+      "chapter": "Semiconductor Electronics",
+      "topic_tags": [
+        "n_type"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In n-type semiconductors, donor impurities (like phosphorus in silicon) contribute extra electrons that become the primary charge carriers since they outnumber the thermally generated holes by a large margin."
+    },
+    {
+      "question_text": "Truth table of OR gate: 0+1 =",
+      "options": [
+        "0",
+        "1",
+        "Both",
+        "X"
+      ],
+      "correct_answer": "B",
+      "chapter": "Logic Gates",
+      "topic_tags": [
+        "OR"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In an OR gate, the output is 1 if at least one input is 1. Since one input is 1, the output is 1 regardless of the other input being 0."
+    },
+    {
+      "question_text": "Energy stored in inductor L carrying current I:",
+      "options": [
+        "LI",
+        "LI²/2",
+        "L/I",
+        "L²I"
+      ],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": [
+        "energy_inductor"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The energy stored in an inductor is derived from the work done to establish the magnetic field as current builds up. Integrating the power (P = LI dI/dt) from zero current to final current I yields E = ½LI², analogous to kinetic energy in mechanics."
+    },
+    {
+      "question_text": "Power factor unity means:",
+      "options": [
+        "Pure resistor circuit",
+        "Pure inductor",
+        "Pure capacitor",
+        "No current"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC Circuits",
+      "topic_tags": [
+        "power_factor"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power factor is the cosine of the phase angle between voltage and current. Unity power factor (cos θ = 1) occurs when θ = 0°, meaning voltage and current are in phase. This happens only in a pure resistor, where there's no reactive component to cause phase shift."
+    },
+    {
+      "question_text": "Magnification = 1 means image is:",
+      "options": [
+        "Reduced",
+        "Same size as object",
+        "Magnified",
+        "Inverted only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "magnification"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When magnification equals 1, the absolute value of the magnification ratio (image size/object size) is 1, meaning the image and object have identical sizes. A magnification of 1 indicates no enlargement or reduction, just a same-sized reproduction."
+    },
+    {
+      "question_text": "Sound wave is which type:",
+      "options": [
+        "Transverse",
+        "Longitudinal",
+        "EM",
+        "Standing only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "sound"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sound waves require a medium (air, water, solids) to propagate and work by compressing and rarefying particles parallel to the direction of wave travel, making them longitudinal waves rather than transverse waves that oscillate perpendicular to travel direction."
+    },
+    {
+      "question_text": "If frequency of SHM doubles, time period:",
+      "options": [
+        "Doubles",
+        "Halves",
+        "Same",
+        "Quadruples"
+      ],
+      "correct_answer": "B",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "frequency_period"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Frequency and time period are inversely related by the equation T = 1/f. When frequency doubles, the time period becomes half its original value since T is inversely proportional to f."
+    },
+    {
+      "question_text": "Centripetal force on body moving in circle is directed:",
+      "options": [
+        "Tangentially",
+        "Toward centre",
+        "Away from centre",
+        "Vertically"
+      ],
+      "correct_answer": "B",
+      "chapter": "Circular Motion",
+      "topic_tags": [
+        "centripetal"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Centripetal force must continuously change the direction of velocity to keep an object moving in a circular path. Since velocity is always tangent to the circle, the force must point perpendicular to velocity—toward the center—to curve the path inward."
+    },
+    {
+      "question_text": "Resistance of an ideal ammeter:",
+      "options": [
+        "Very low",
+        "Infinite",
+        "Moderate",
+        "Variable"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "ammeter"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "An ideal ammeter must have very low resistance so it draws minimal current from the circuit being measured, ensuring accurate current readings without significantly altering the circuit's behavior."
+    },
+    {
+      "question_text": "Magnetic field on axis of bar magnet:",
+      "options": [
+        "Equal at all points",
+        "Decreases with distance",
+        "Increases with distance",
+        "Constant"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "bar_magnet"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The magnetic field from a bar magnet follows an inverse relationship with distance. On the axis, the field strength is proportional to 1/r³ (where r is distance), so it decreases as you move farther from the magnet."
+    },
+    {
+      "question_text": "Concave mirror produces real image when object is:",
+      "options": [
+        "Inside focal length",
+        "Beyond focal length",
+        "At focal length",
+        "At pole"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "concave_mirror"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A concave mirror produces a real image only when the object is positioned beyond the focal length (farther from the mirror than the focal point). When the object is at or inside the focal length, the mirror produces a virtual image instead."
+    },
+    {
+      "question_text": "Number of free electrons in metals per cubic meter is approximately:",
+      "options": [
+        "10²⁸",
+        "10⁻²⁸",
+        "10⁶",
+        "10¹⁶"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "electron_density"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Metals contain one to three free electrons per atom. With atomic number density around 10²⁸ atoms/m³, the free electron density is approximately 10²⁸ electrons/m³, matching the order of magnitude of atomic density in solids."
+    },
+    {
+      "question_text": "Charge of electron is approximately:",
+      "options": [
+        "1.6×10⁻¹⁹ C",
+        "1.6×10¹⁹ C",
+        "9.1×10⁻³¹ C",
+        "6.022×10²³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "electron_charge"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The elementary charge (magnitude of electron charge) is a fundamental constant approximately equal to 1.6×10⁻¹⁹ coulombs. Option B has the wrong sign in the exponent, C represents electron mass, and D is Avogadro's number."
+    }
   ]
 }

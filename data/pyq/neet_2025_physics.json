@@ -8,228 +8,446 @@
   "questions": [
     {
       "question_text": "A body of mass 2 kg moves with velocity 4 m/s. Its kinetic energy is:",
-      "options": ["8 J", "16 J", "32 J", "4 J"],
+      "options": [
+        "8 J",
+        "16 J",
+        "32 J",
+        "4 J"
+      ],
       "correct_answer": "B",
       "chapter": "Work, Energy and Power",
-      "topic_tags": ["KE", "kinetic_energy"],
+      "topic_tags": [
+        "KE",
+        "kinetic_energy"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Kinetic energy is calculated using KE = ½mv². With m = 2 kg and v = 4 m/s: KE = ½(2)(4²) = ½(2)(16) = 16 J."
     },
     {
       "question_text": "Acceleration due to gravity at Earth's surface is approximately:",
-      "options": ["9.8 m/s²", "98 m/s²", "0.98 m/s²", "980 m/s²"],
+      "options": [
+        "9.8 m/s²",
+        "98 m/s²",
+        "0.98 m/s²",
+        "980 m/s²"
+      ],
       "correct_answer": "A",
       "chapter": "Gravitation",
-      "topic_tags": ["g", "gravity"],
+      "topic_tags": [
+        "g",
+        "gravity"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Earth's gravitational acceleration is determined by g = GM/r², where G is the gravitational constant, M is Earth's mass, and r is Earth's radius. This calculation yields approximately 9.8 m/s², which is the standard value used in physics."
     },
     {
       "question_text": "Unit of magnetic flux is:",
-      "options": ["Tesla", "Weber", "Henry", "Gauss"],
+      "options": [
+        "Tesla",
+        "Weber",
+        "Henry",
+        "Gauss"
+      ],
       "correct_answer": "B",
       "chapter": "Electromagnetic Induction",
-      "topic_tags": ["units", "flux"],
+      "topic_tags": [
+        "units",
+        "flux"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Magnetic flux is defined as the product of magnetic field strength and area (Φ = BA). Since field strength is measured in Tesla and area in square meters, the unit is Tesla·m², which is defined as one Weber (Wb). Tesla measures field strength alone, Henry measures inductance, and Gauss is an older unit for field strength."
     },
     {
       "question_text": "Refractive index of water is approximately:",
-      "options": ["1.0", "1.33", "1.5", "2.0"],
+      "options": [
+        "1.0",
+        "1.33",
+        "1.5",
+        "2.0"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["refractive_index", "water"],
+      "topic_tags": [
+        "refractive_index",
+        "water"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Water slows light to about 75% of its speed in vacuum, giving a refractive index of c/v ≈ 3×10⁸/(2.25×10⁸) ≈ 1.33. This is the standard, experimentally-determined value for water at visible wavelengths."
     },
     {
       "question_text": "Power of a lens in dioptres for focal length 50 cm is:",
-      "options": ["0.5 D", "2 D", "1 D", "5 D"],
+      "options": [
+        "0.5 D",
+        "2 D",
+        "1 D",
+        "5 D"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["power_of_lens"],
+      "topic_tags": [
+        "power_of_lens"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Power of a lens is calculated using P = 1/f, where f is focal length in meters. Converting 50 cm to 0.5 m, P = 1/0.5 = 2 dioptres."
     },
     {
       "question_text": "First law of thermodynamics is conservation of:",
-      "options": ["Mass", "Momentum", "Energy", "Charge"],
+      "options": [
+        "Mass",
+        "Momentum",
+        "Energy",
+        "Charge"
+      ],
       "correct_answer": "C",
       "chapter": "Thermodynamics",
-      "topic_tags": ["first_law", "conservation"],
+      "topic_tags": [
+        "first_law",
+        "conservation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The first law of thermodynamics states that energy cannot be created or destroyed, only converted from one form to another. It directly expresses the principle of energy conservation in thermodynamic systems."
     },
     {
       "question_text": "Sound is which type of wave?",
-      "options": ["Transverse", "Longitudinal", "Electromagnetic", "Standing only"],
+      "options": [
+        "Transverse",
+        "Longitudinal",
+        "Electromagnetic",
+        "Standing only"
+      ],
       "correct_answer": "B",
       "chapter": "Waves",
-      "topic_tags": ["sound", "longitudinal"],
+      "topic_tags": [
+        "sound",
+        "longitudinal"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Sound travels through vibrations parallel to the direction of wave propagation, causing compressions and rarefactions in the medium—the defining characteristic of longitudinal waves. Unlike transverse waves (which vibrate perpendicular to propagation), sound requires a material medium and cannot travel through a vacuum."
     },
     {
       "question_text": "Echo is produced due to:",
-      "options": ["Reflection of sound", "Refraction of sound", "Absorption", "Diffraction"],
+      "options": [
+        "Reflection of sound",
+        "Refraction of sound",
+        "Absorption",
+        "Diffraction"
+      ],
       "correct_answer": "A",
       "chapter": "Sound",
-      "topic_tags": ["echo", "reflection"],
+      "topic_tags": [
+        "echo",
+        "reflection"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "An echo occurs when sound waves bounce off a hard surface and return to the listener's ears after a time delay. This bouncing back of sound is the definition of reflection, making it the mechanism responsible for echo production."
     },
     {
       "question_text": "Resistance of an ideal voltmeter is:",
-      "options": ["Zero", "Very low", "Infinite", "Equal to circuit"],
+      "options": [
+        "Zero",
+        "Very low",
+        "Infinite",
+        "Equal to circuit"
+      ],
       "correct_answer": "C",
       "chapter": "Current Electricity",
-      "topic_tags": ["voltmeter", "resistance"],
+      "topic_tags": [
+        "voltmeter",
+        "resistance"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "An ideal voltmeter must have infinite resistance so it draws negligible current from the circuit, ensuring it measures the true potential difference without affecting the voltage being measured."
     },
     {
       "question_text": "The SI unit of electric potential is:",
-      "options": ["Ampere", "Volt", "Coulomb", "Ohm"],
+      "options": [
+        "Ampere",
+        "Volt",
+        "Coulomb",
+        "Ohm"
+      ],
       "correct_answer": "B",
       "chapter": "Electrostatic Potential",
-      "topic_tags": ["units", "volt"],
+      "topic_tags": [
+        "units",
+        "volt"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Electric potential is defined as the work done per unit charge, or energy per charge (J/C). The volt is specifically defined as one joule per coulomb, making it the standard SI unit for measuring electric potential difference."
     },
     {
       "question_text": "Time period of a pendulum depends on:",
-      "options": ["Mass", "Amplitude only", "Length and g", "Material"],
+      "options": [
+        "Mass",
+        "Amplitude only",
+        "Length and g",
+        "Material"
+      ],
       "correct_answer": "C",
       "chapter": "Oscillations",
-      "topic_tags": ["pendulum", "period"],
+      "topic_tags": [
+        "pendulum",
+        "period"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The time period of a simple pendulum is determined by T = 2π√(L/g), which depends only on length (L) and gravitational acceleration (g). Mass, amplitude (for small angles), and material don't affect the period."
     },
     {
       "question_text": "Bohr's quantization condition: angular momentum L equals:",
-      "options": ["nh", "nh/2π", "h/n", "h·n²"],
+      "options": [
+        "nh",
+        "nh/2π",
+        "h/n",
+        "h·n²"
+      ],
       "correct_answer": "B",
       "chapter": "Atoms",
-      "topic_tags": ["Bohr", "quantization"],
+      "topic_tags": [
+        "Bohr",
+        "quantization"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Bohr's quantization condition states that the angular momentum of an electron in a stationary orbit must be an integer multiple of the reduced Planck constant ℏ = h/2π, giving L = nℏ = nh/2π, where n is a positive integer."
     },
     {
       "question_text": "Photon has rest mass:",
-      "options": ["Equal to electron", "Zero", "Half of electron", "Twice of electron"],
+      "options": [
+        "Equal to electron",
+        "Zero",
+        "Half of electron",
+        "Twice of electron"
+      ],
       "correct_answer": "B",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["photon", "rest_mass"],
+      "topic_tags": [
+        "photon",
+        "rest_mass"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Photons are massless particles that travel at the speed of light. Einstein's mass-energy relation E=mc² and the photon energy equation E=hf together imply that photons must have zero rest mass to propagate at light speed."
     },
     {
       "question_text": "Drift velocity is directly proportional to:",
-      "options": ["Resistivity", "Electric field", "Length squared", "Area"],
+      "options": [
+        "Resistivity",
+        "Electric field",
+        "Length squared",
+        "Area"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["drift_velocity"],
+      "topic_tags": [
+        "drift_velocity"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Drift velocity is given by v_d = μE, where μ is mobility and E is electric field. The relationship shows drift velocity increases linearly with applied electric field strength, making it directly proportional to the field."
     },
     {
       "question_text": "An emf source of 12 V with internal resistance 2 Ω is connected to 4 Ω. Current is:",
-      "options": ["1 A", "2 A", "3 A", "4 A"],
+      "options": [
+        "1 A",
+        "2 A",
+        "3 A",
+        "4 A"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["internal_resistance"],
+      "topic_tags": [
+        "internal_resistance"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using Ohm's law for a complete circuit: I = emf / (total resistance). Total resistance equals internal resistance plus external resistance: 2 Ω + 4 Ω = 6 Ω. Therefore, I = 12 V / 6 Ω = 2 A."
     },
     {
       "question_text": "Number of nodes in third harmonic of stationary wave in open pipe is:",
-      "options": ["2", "3", "4", "5"],
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
       "correct_answer": "B",
       "chapter": "Waves",
-      "topic_tags": ["stationary_waves", "harmonics"],
+      "topic_tags": [
+        "stationary_waves",
+        "harmonics"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In an open pipe, the third harmonic has wavelength λ/3, fitting 1.5 wavelengths in the pipe length. This creates 3 nodes: one at each end and one in the middle, with antinodes between them."
     },
     {
       "question_text": "Critical angle for total internal reflection in glass (n=1.5) is:",
-      "options": ["30°", "42°", "60°", "90°"],
+      "options": [
+        "30°",
+        "42°",
+        "60°",
+        "90°"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["TIR", "critical_angle"],
+      "topic_tags": [
+        "TIR",
+        "critical_angle"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The critical angle is found using sin(θc) = 1/n. With n=1.5, sin(θc) = 1/1.5 ≈ 0.667, giving θc ≈ 42°. At this angle, light traveling from denser to less dense medium refracts along the interface."
     },
     {
       "question_text": "Capacitance increases when dielectric is inserted because:",
-      "options": ["Charge decreases", "Voltage decreases at same charge", "Distance increases", "Area decreases"],
+      "options": [
+        "Charge decreases",
+        "Voltage decreases at same charge",
+        "Distance increases",
+        "Area decreases"
+      ],
       "correct_answer": "B",
       "chapter": "Capacitance",
-      "topic_tags": ["dielectric", "capacitance"],
+      "topic_tags": [
+        "dielectric",
+        "capacitance"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A dielectric material reduces the electric field inside the capacitor by polarizing, which decreases the voltage across the plates for a constant charge. Since capacitance C = Q/V, lower voltage at the same charge increases capacitance."
     },
     {
       "question_text": "Wein's displacement law: λ_max × T equals approximately:",
-      "options": ["2.9×10⁻³ m·K", "2.9 m·K", "5.67×10⁻⁸ W/m²K⁴", "1 m·K"],
+      "options": [
+        "2.9×10⁻³ m·K",
+        "2.9 m·K",
+        "5.67×10⁻⁸ W/m²K⁴",
+        "1 m·K"
+      ],
       "correct_answer": "A",
       "chapter": "Heat Transfer",
-      "topic_tags": ["Wein", "blackbody"],
+      "topic_tags": [
+        "Wein",
+        "blackbody"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Wien's displacement law states that the peak wavelength of radiation emitted by a blackbody is inversely proportional to its temperature: λ_max × T = constant. This constant, known as Wien's displacement constant, has the experimentally determined value of approximately 2.9×10⁻³ m·K."
     },
     {
       "question_text": "An object 5 cm tall is placed 30 cm from a concave mirror of focal length 15 cm. Image distance is:",
-      "options": ["-30 cm", "-15 cm", "+30 cm", "+10 cm"],
+      "options": [
+        "-30 cm",
+        "-15 cm",
+        "+30 cm",
+        "+10 cm"
+      ],
       "correct_answer": "A",
       "chapter": "Ray Optics",
-      "topic_tags": ["mirror_formula"],
+      "topic_tags": [
+        "mirror_formula"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the mirror equation 1/f = 1/u + 1/v, where u = 30 cm and f = 15 cm: 1/15 = 1/30 + 1/v gives v = -30 cm. The negative sign indicates a real, inverted image formed on the same side as the object."
     },
     {
       "question_text": "Doppler effect is observed in:",
-      "options": ["Only sound", "Only light", "Both sound and light", "Neither"],
+      "options": [
+        "Only sound",
+        "Only light",
+        "Both sound and light",
+        "Neither"
+      ],
       "correct_answer": "C",
       "chapter": "Waves",
-      "topic_tags": ["Doppler"],
+      "topic_tags": [
+        "Doppler"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Doppler effect occurs whenever a wave source moves relative to an observer, causing a change in perceived frequency. Since both sound and light are waves, both exhibit this effect—sound frequency shifts are heard as pitch changes from moving vehicles, and light frequency shifts create redshift/blueshift from moving celestial objects."
     },
     {
       "question_text": "An electron in n=2 hydrogen orbital has energy:",
-      "options": ["-13.6 eV", "-3.4 eV", "-1.5 eV", "0 eV"],
+      "options": [
+        "-13.6 eV",
+        "-3.4 eV",
+        "-1.5 eV",
+        "0 eV"
+      ],
       "correct_answer": "B",
       "chapter": "Atoms",
-      "topic_tags": ["hydrogen", "energy_levels"],
+      "topic_tags": [
+        "hydrogen",
+        "energy_levels"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The energy of a hydrogen electron in level n is given by E = -13.6 eV/n². For n=2: E = -13.6/4 = -3.4 eV."
     },
     {
       "question_text": "Specific heat capacity of water at 25°C is approximately:",
-      "options": ["1 cal/g·K", "2 cal/g·K", "0.5 cal/g·K", "10 cal/g·K"],
+      "options": [
+        "1 cal/g·K",
+        "2 cal/g·K",
+        "0.5 cal/g·K",
+        "10 cal/g·K"
+      ],
       "correct_answer": "A",
       "chapter": "Thermodynamics",
-      "topic_tags": ["specific_heat", "water"],
+      "topic_tags": [
+        "specific_heat",
+        "water"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Water's specific heat capacity is defined as approximately 1 calorie per gram per Kelvin (or per °C) at standard conditions around 25°C. This is actually the basis for how the calorie unit was historically defined—the energy needed to raise 1 gram of water by 1°C."
     },
     {
       "question_text": "Momentum p of a photon of energy E in vacuum is:",
-      "options": ["E/c", "Ec", "E·c²", "c/E"],
+      "options": [
+        "E/c",
+        "Ec",
+        "E·c²",
+        "c/E"
+      ],
       "correct_answer": "A",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["photon_momentum"],
+      "topic_tags": [
+        "photon_momentum"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The energy-momentum relation for photons is E = pc, where c is the speed of light. Solving for momentum gives p = E/c, since photons are massless particles and always travel at speed c."
     },
     {
       "question_text": "Image formed by a plane mirror is:",
-      "options": ["Real, inverted", "Virtual, erect, same size", "Virtual, magnified", "Real, magnified"],
+      "options": [
+        "Real, inverted",
+        "Virtual, erect, same size",
+        "Virtual, magnified",
+        "Real, magnified"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["plane_mirror"],
+      "topic_tags": [
+        "plane_mirror"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A plane mirror forms an image by reflecting light rays that appear to come from behind the mirror. Since light doesn't actually converge at the image location, it's virtual. The image is erect (upright) and equal in size to the object due to the law of reflection maintaining equal angles of incidence and reflection."
     }
   ]
 }

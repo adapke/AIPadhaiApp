@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "puc_board",
   "questions": [
-    {"question_text": "Number of moles in 88 g of CO2 (M=44):", "options": ["1", "2", "0.5", "4"], "correct_answer": "B", "chapter": "Mole Concept", "topic_tags": ["moles"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Quantum number that determines orbital orientation:", "options": ["n", "l", "m", "s"], "correct_answer": "C", "chapter": "Atomic Structure", "topic_tags": ["magnetic_qn"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Hybridization of Cr in CrO4²⁻:", "options": ["sp3", "sp3d", "d3s", "sp"], "correct_answer": "A", "chapter": "d-Block", "topic_tags": ["chromate"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Daniell cell EMF approximately:", "options": ["0.34 V", "1.1 V", "2.0 V", "12 V"], "correct_answer": "B", "chapter": "Electrochemistry", "topic_tags": ["Daniell"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Standard reduction potential of zinc:", "options": ["-0.76 V", "+0.76 V", "0 V", "+0.34 V"], "correct_answer": "A", "chapter": "Electrochemistry", "topic_tags": ["E°_Zn"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of d-electrons in Cu²⁺ (Z=29):", "options": ["7", "8", "9", "10"], "correct_answer": "C", "chapter": "d-Block", "topic_tags": ["d_count"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Number of stereoisomers of glucose:", "options": ["8", "16", "32", "4"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["isomers"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Active ingredient in baking powder:", "options": ["NaHCO3", "Na2CO3", "NaOH", "KOH"], "correct_answer": "A", "chapter": "s-Block", "topic_tags": ["baking_powder"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Most acidic amino acid:", "options": ["Glycine", "Glutamic acid", "Lysine", "Arginine"], "correct_answer": "B", "chapter": "Biomolecules", "topic_tags": ["amino_acids"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Plant hormone produced from indoleacetic acid:", "options": ["Auxin", "Gibberellin", "Cytokinin", "Ethylene"], "correct_answer": "A", "chapter": "Biomolecules", "topic_tags": ["IAA"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Geometry of methane:", "options": ["Tetrahedral", "Trigonal", "Linear", "Bent"], "correct_answer": "A", "chapter": "Chemical Bonding", "topic_tags": ["CH4"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Color of CuSO4 solution:", "options": ["Pink", "Blue", "Green", "Yellow"], "correct_answer": "B", "chapter": "d-Block", "topic_tags": ["copper_sulfate"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Compound used as antifreeze:", "options": ["Methanol", "Ethanol", "Ethylene glycol", "Glycerol"], "correct_answer": "C", "chapter": "Alcohols", "topic_tags": ["antifreeze"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Phenol is more acidic than ethanol because:", "options": ["Resonance stabilizes phenoxide", "Phenol has OH", "Phenol is aromatic", "Ethanol has stronger O-H"], "correct_answer": "A", "chapter": "Phenols", "topic_tags": ["acidity_phenol"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Reaction of ethanol with hot conc. H2SO4 gives:", "options": ["Methanol", "Ethene", "Ethanal", "Acetic acid"], "correct_answer": "B", "chapter": "Alcohols", "topic_tags": ["dehydration"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Schiff's reagent identifies:", "options": ["Alcohols", "Aldehydes", "Acids", "Esters"], "correct_answer": "B", "chapter": "Aldehydes", "topic_tags": ["Schiff"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Aldol condensation requires:", "options": ["α-H atom", "Acidic medium", "Heat", "All conditions"], "correct_answer": "A", "chapter": "Aldehydes", "topic_tags": ["aldol"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Mercerized cotton is treated with:", "options": ["HCl", "NaOH", "H2SO4", "Heat"], "correct_answer": "B", "chapter": "Polymers", "topic_tags": ["mercerization"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Hydroformylation reaction produces:", "options": ["Aldehyde from alkene + CO + H2", "Alcohol from CO2", "Acid from alcohol", "Ester from acid"], "correct_answer": "A", "chapter": "Aldehydes", "topic_tags": ["hydroformylation"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Tincture of iodine is iodine in:", "options": ["Water", "Ethanol", "Acetone", "Benzene"], "correct_answer": "B", "chapter": "Chemistry in Everyday Life", "topic_tags": ["tincture"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Atomic radii in same group from top to bottom:", "options": ["Decrease", "Increase", "Same", "Random"], "correct_answer": "B", "chapter": "Periodic Properties", "topic_tags": ["radius_group"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Lassaigne's test detects:", "options": ["O only", "N, S, halogens in organic compounds", "C only", "H only"], "correct_answer": "B", "chapter": "Organic Analysis", "topic_tags": ["Lassaigne"], "difficulty": "easy", "marks": 1},
-    {"question_text": "Diels-Alder reaction is between:", "options": ["Two alkenes", "Diene + dienophile", "Alkyne + alkene", "Two alkynes"], "correct_answer": "B", "chapter": "Hydrocarbons", "topic_tags": ["Diels_Alder"], "difficulty": "hard", "marks": 1},
-    {"question_text": "Concentration of HCl in stomach:", "options": ["0.001 M", "0.01 M", "0.1 M", "1 M"], "correct_answer": "C", "chapter": "Acid-Base", "topic_tags": ["stomach_acid"], "difficulty": "medium", "marks": 1},
-    {"question_text": "Common name of CH3COOH:", "options": ["Formic acid", "Acetic acid", "Propionic acid", "Butyric acid"], "correct_answer": "B", "chapter": "Carboxylic Acids", "topic_tags": ["acetic"], "difficulty": "easy", "marks": 1}
+    {
+      "question_text": "Number of moles in 88 g of CO2 (M=44):",
+      "options": [
+        "1",
+        "2",
+        "0.5",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Mole Concept",
+      "topic_tags": [
+        "moles"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "To find moles, divide mass by molar mass: moles = 88 g ÷ 44 g/mol = 2 moles. This is the fundamental relationship used to convert between mass and number of moles."
+    },
+    {
+      "question_text": "Quantum number that determines orbital orientation:",
+      "options": [
+        "n",
+        "l",
+        "m",
+        "s"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "magnetic_qn"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The magnetic quantum number (m) determines orbital orientation in space by specifying the possible spatial orientations of an orbital around the nucleus. It ranges from -l to +l and defines how orbitals are positioned relative to an external magnetic field."
+    },
+    {
+      "question_text": "Hybridization of Cr in CrO4²⁻:",
+      "options": [
+        "sp3",
+        "sp3d",
+        "d3s",
+        "sp"
+      ],
+      "correct_answer": "A",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "chromate"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "In CrO4²⁻, Cr forms four sigma bonds with oxygen atoms arranged tetrahedrally around the central atom. This tetrahedral geometry requires sp³ hybridization, where one s orbital and three p orbitals combine to create four equivalent hybrid orbitals pointing toward the vertices of a tetrahedron."
+    },
+    {
+      "question_text": "Daniell cell EMF approximately:",
+      "options": [
+        "0.34 V",
+        "1.1 V",
+        "2.0 V",
+        "12 V"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "Daniell"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The Daniell cell consists of a zinc electrode (anode, E° = -0.76 V) and a copper electrode (cathode, E° = +0.34 V). The cell EMF is calculated as E°cell = E°cathode - E°anode = 0.34 - (-0.76) = 1.10 V."
+    },
+    {
+      "question_text": "Standard reduction potential of zinc:",
+      "options": [
+        "-0.76 V",
+        "+0.76 V",
+        "0 V",
+        "+0.34 V"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrochemistry",
+      "topic_tags": [
+        "E°_Zn"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Zinc has a strong tendency to lose electrons and be oxidized, making it a reducing agent. Its standard reduction potential is negative (-0.76 V), reflecting that the reduction half-reaction Zn²⁺ + 2e⁻ → Zn is thermodynamically unfavorable under standard conditions."
+    },
+    {
+      "question_text": "Number of d-electrons in Cu²⁺ (Z=29):",
+      "options": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "correct_answer": "C",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "d_count"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Copper (Z=29) has electron configuration [Ar]3d¹⁰4s¹. When Cu loses 2 electrons to form Cu²⁺, it first loses the 4s¹ electron, then one 3d electron, leaving [Ar]3d⁹ with 9 d-electrons."
+    },
+    {
+      "question_text": "Number of stereoisomers of glucose:",
+      "options": [
+        "8",
+        "16",
+        "32",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "isomers"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Glucose has 4 chiral centers (C2, C3, C4, C5), generating 2^4 = 16 possible stereoisomers. Each chiral center can exist in either R or S configuration, creating this total number of stereoisomeric forms."
+    },
+    {
+      "question_text": "Active ingredient in baking powder:",
+      "options": [
+        "NaHCO3",
+        "Na2CO3",
+        "NaOH",
+        "KOH"
+      ],
+      "correct_answer": "A",
+      "chapter": "s-Block",
+      "topic_tags": [
+        "baking_powder"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Sodium bicarbonate (NaHCO₃) is the active ingredient in baking powder because it decomposes when heated to produce CO₂ gas, which creates the rise in baked goods. The other options either don't produce gas upon heating or are too caustic for food use."
+    },
+    {
+      "question_text": "Most acidic amino acid:",
+      "options": [
+        "Glycine",
+        "Glutamic acid",
+        "Lysine",
+        "Arginine"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "amino_acids"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Glutamic acid contains a carboxyl group (-COOH) in its side chain with a pKa around 2.1, making it highly ionizable and acidic. Among the options, only glutamic acid has an acidic functional group; the others lack acidic side chains or possess basic groups instead."
+    },
+    {
+      "question_text": "Plant hormone produced from indoleacetic acid:",
+      "options": [
+        "Auxin",
+        "Gibberellin",
+        "Cytokinin",
+        "Ethylene"
+      ],
+      "correct_answer": "A",
+      "chapter": "Biomolecules",
+      "topic_tags": [
+        "IAA"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Indoleacetic acid (IAA) is the chemical precursor and primary form of auxin in plants. Auxin is the plant hormone synthesized from IAA, responsible for regulating cell elongation, phototropism, and apical dominance."
+    },
+    {
+      "question_text": "Geometry of methane:",
+      "options": [
+        "Tetrahedral",
+        "Trigonal",
+        "Linear",
+        "Bent"
+      ],
+      "correct_answer": "A",
+      "chapter": "Chemical Bonding",
+      "topic_tags": [
+        "CH4"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Carbon in methane forms four single bonds with hydrogen atoms. To minimize electron pair repulsion (VSEPR theory), these four bonding pairs arrange themselves in three-dimensional space as far apart as possible, creating a tetrahedral geometry with 109.5° bond angles."
+    },
+    {
+      "question_text": "Color of CuSO4 solution:",
+      "options": [
+        "Pink",
+        "Blue",
+        "Green",
+        "Yellow"
+      ],
+      "correct_answer": "B",
+      "chapter": "d-Block",
+      "topic_tags": [
+        "copper_sulfate"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "CuSO4 solution is blue because Cu²⁺ ions in aqueous solution are hydrated, forming [Cu(H₂O)₄]²⁺ complexes that absorb red light and transmit blue light, giving the characteristic blue color."
+    },
+    {
+      "question_text": "Compound used as antifreeze:",
+      "options": [
+        "Methanol",
+        "Ethanol",
+        "Ethylene glycol",
+        "Glycerol"
+      ],
+      "correct_answer": "C",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "antifreeze"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Ethylene glycol is the preferred antifreeze because it has a high boiling point and low freezing point, providing effective freeze and boil-over protection. Unlike methanol (toxic) and ethanol (volatile), ethylene glycol's two hydroxyl groups enable strong hydrogen bonding, making it ideal for automotive cooling systems."
+    },
+    {
+      "question_text": "Phenol is more acidic than ethanol because:",
+      "options": [
+        "Resonance stabilizes phenoxide",
+        "Phenol has OH",
+        "Phenol is aromatic",
+        "Ethanol has stronger O-H"
+      ],
+      "correct_answer": "A",
+      "chapter": "Phenols",
+      "topic_tags": [
+        "acidity_phenol"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The phenoxide ion (C₆H₅O⁻) formed after phenol loses a proton is stabilized by resonance delocalization of the negative charge across the aromatic ring, making it a much more stable conjugate base than ethoxide (CH₃CH₂O⁻), which cannot be similarly stabilized."
+    },
+    {
+      "question_text": "Reaction of ethanol with hot conc. H2SO4 gives:",
+      "options": [
+        "Methanol",
+        "Ethene",
+        "Ethanal",
+        "Acetic acid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Alcohols",
+      "topic_tags": [
+        "dehydration"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Under heating with concentrated H₂SO₄, ethanol undergoes an elimination reaction (dehydration) where a water molecule is removed from adjacent carbon and oxygen atoms, forming a C=C double bond to produce ethene."
+    },
+    {
+      "question_text": "Schiff's reagent identifies:",
+      "options": [
+        "Alcohols",
+        "Aldehydes",
+        "Acids",
+        "Esters"
+      ],
+      "correct_answer": "B",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "Schiff"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Schiff's reagent contains fuchsin dye decolorized by sulfurous acid. Aldehydes react with the reagent to regenerate the magenta color through formation of an aldehyde-bisulfite adduct, making this a characteristic test for aldehydes."
+    },
+    {
+      "question_text": "Aldol condensation requires:",
+      "options": [
+        "α-H atom",
+        "Acidic medium",
+        "Heat",
+        "All conditions"
+      ],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "aldol"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Aldol condensation fundamentally requires an α-hydrogen atom on the carbonyl compound, which is abstracted to form an enolate nucleophile that attacks another carbonyl group. While acid/base catalysts and heat can facilitate the reaction, the α-H is the essential structural requirement."
+    },
+    {
+      "question_text": "Mercerized cotton is treated with:",
+      "options": [
+        "HCl",
+        "NaOH",
+        "H2SO4",
+        "Heat"
+      ],
+      "correct_answer": "B",
+      "chapter": "Polymers",
+      "topic_tags": [
+        "mercerization"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "Mercerization is a chemical process that swells cotton fibers using a strong alkali (sodium hydroxide/NaOH), which increases strength, luster, and dye affinity without chemically altering the cellulose structure itself."
+    },
+    {
+      "question_text": "Hydroformylation reaction produces:",
+      "options": [
+        "Aldehyde from alkene + CO + H2",
+        "Alcohol from CO2",
+        "Acid from alcohol",
+        "Ester from acid"
+      ],
+      "correct_answer": "A",
+      "chapter": "Aldehydes",
+      "topic_tags": [
+        "hydroformylation"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "Hydroformylation is a catalytic reaction where an alkene reacts with carbon monoxide and hydrogen in the presence of a metal catalyst (typically cobalt or rhodium) to add a formyl group (-CHO), producing an aldehyde as the primary product."
+    },
+    {
+      "question_text": "Tincture of iodine is iodine in:",
+      "options": [
+        "Water",
+        "Ethanol",
+        "Acetone",
+        "Benzene"
+      ],
+      "correct_answer": "B",
+      "chapter": "Chemistry in Everyday Life",
+      "topic_tags": [
+        "tincture"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Iodine has limited solubility in water but dissolves readily in organic solvents. Ethanol is the traditional solvent used in pharmaceutical preparations of iodine tincture because it provides good solubility and has antimicrobial properties itself, making it ideal for topical applications."
+    },
+    {
+      "question_text": "Atomic radii in same group from top to bottom:",
+      "options": [
+        "Decrease",
+        "Increase",
+        "Same",
+        "Random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Periodic Properties",
+      "topic_tags": [
+        "radius_group"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "As you move down a group in the periodic table, each element has an additional electron shell. Despite increased nuclear charge, the outermost electrons are farther from the nucleus and shielded by inner electrons, causing atomic radius to increase."
+    },
+    {
+      "question_text": "Lassaigne's test detects:",
+      "options": [
+        "O only",
+        "N, S, halogens in organic compounds",
+        "C only",
+        "H only"
+      ],
+      "correct_answer": "B",
+      "chapter": "Organic Analysis",
+      "topic_tags": [
+        "Lassaigne"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Lassaigne's test involves fusing an organic compound with molten sodium, which converts nitrogen, sulfur, and halogens into ionic forms (cyanide, sulfide, halide ions) that can be detected through subsequent chemical reactions. Oxygen cannot be detected by this method since it remains unreacted."
+    },
+    {
+      "question_text": "Diels-Alder reaction is between:",
+      "options": [
+        "Two alkenes",
+        "Diene + dienophile",
+        "Alkyne + alkene",
+        "Two alkynes"
+      ],
+      "correct_answer": "B",
+      "chapter": "Hydrocarbons",
+      "topic_tags": [
+        "Diels_Alder"
+      ],
+      "difficulty": "hard",
+      "marks": 1,
+      "explanation": "The Diels-Alder reaction specifically requires a conjugated diene (4π electrons) reacting with a dienophile (2π electrons) to form a cyclohexene ring through a concerted mechanism. Simple alkene-alkene reactions don't undergo this characteristic reaction."
+    },
+    {
+      "question_text": "Concentration of HCl in stomach:",
+      "options": [
+        "0.001 M",
+        "0.01 M",
+        "0.1 M",
+        "1 M"
+      ],
+      "correct_answer": "C",
+      "chapter": "Acid-Base",
+      "topic_tags": [
+        "stomach_acid"
+      ],
+      "difficulty": "medium",
+      "marks": 1,
+      "explanation": "The stomach produces hydrochloric acid to aid digestion, with a concentration of approximately 0.1 M (roughly pH 1-2). This concentration is strong enough to denature proteins and activate pepsinogen, yet dilute enough to avoid excessive damage to stomach lining."
+    },
+    {
+      "question_text": "Common name of CH3COOH:",
+      "options": [
+        "Formic acid",
+        "Acetic acid",
+        "Propionic acid",
+        "Butyric acid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Carboxylic Acids",
+      "topic_tags": [
+        "acetic"
+      ],
+      "difficulty": "easy",
+      "marks": 1,
+      "explanation": "Acetic acid has the molecular formula CH₃COOH, with a methyl group (CH₃) attached to a carboxyl group (COOH). Formic acid has only one carbon, while propionic and butyric acids have three and four carbons respectively."
+    }
   ]
 }

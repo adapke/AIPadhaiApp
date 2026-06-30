@@ -6,30 +6,430 @@
   "default_year": 2018,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Dimensions of energy:", "options": ["[MLT⁻¹]", "[ML²T⁻²]", "[MLT⁻²]", "[ML²T⁻¹]"], "correct_answer": "B", "chapter": "Units and Dimensions", "topic_tags": ["energy_dim"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Body in free fall from rest: distance after t seconds:", "options": ["gt", "gt²", "½gt²", "g/t²"], "correct_answer": "C", "chapter": "Kinematics", "topic_tags": ["free_fall_distance"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Maximum range of projectile at angle θ:", "options": ["u²sin(2θ)/g", "u²sin²(θ)/(2g)", "u²/(2g)", "ug/sin θ"], "correct_answer": "A", "chapter": "Projectile Motion", "topic_tags": ["max_range"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Impulse equals:", "options": ["F·t", "F·d", "F/m", "ma"], "correct_answer": "A", "chapter": "Laws of Motion", "topic_tags": ["impulse"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Centripetal acceleration of body in circular motion radius r, speed v:", "options": ["v²/r", "vr", "r/v²", "v/r²"], "correct_answer": "A", "chapter": "Circular Motion", "topic_tags": ["centripetal_acc"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Kepler's 2nd law (equal areas in equal time) implies:", "options": ["Energy conservation", "Angular momentum conservation", "Linear momentum conservation", "Mass conservation"], "correct_answer": "B", "chapter": "Gravitation", "topic_tags": ["Kepler_2"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Period of geostationary satellite:", "options": ["12 hr", "24 hr (sidereal day)", "365 days", "48 hr"], "correct_answer": "B", "chapter": "Gravitation", "topic_tags": ["geostationary"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Pascal's law: pressure in fluid:", "options": ["Decreases with depth", "Transmitted equally in all directions", "Acts only downward", "Zero at surface"], "correct_answer": "B", "chapter": "Fluids", "topic_tags": ["Pascal"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Bernoulli's equation conserves:", "options": ["Mass", "Pressure", "Energy per unit volume", "Force"], "correct_answer": "C", "chapter": "Fluids", "topic_tags": ["Bernoulli"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Thermal expansion: ΔL/L = ?", "options": ["α·ΔT", "α/ΔT", "ΔT", "α·T²"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["thermal_expansion"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Reflected wave inversion at fixed boundary in string:", "options": ["No inversion (same phase)", "180° phase change", "Random", "No reflection"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["fixed_boundary"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Doppler: observer moves toward stationary source. Observed frequency:", "options": ["Lower than emitted", "Higher than emitted", "Same", "Zero"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["Doppler_observer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Coulomb's law: F = kq1q2/r². k in SI:", "options": ["8.99×10⁹ N·m²/C²", "8.99×10⁻⁹", "1.6×10⁻¹⁹", "6.022×10²³"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Coulomb_k"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Capacitor with charge Q, voltage V: energy stored:", "options": ["QV", "(1/2)QV", "QV²", "Q/V"], "correct_answer": "B", "chapter": "Capacitance", "topic_tags": ["energy_stored"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Drift velocity of electron in conductor with field E:", "options": ["v_d = μE", "v_d = E/μ", "v_d = μ/E", "Constant"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["drift_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Right-hand rule for current-carrying wire gives:", "options": ["Direction of force", "Direction of magnetic field around wire", "Direction of current", "All of these"], "correct_answer": "B", "chapter": "Magnetism", "topic_tags": ["right_hand"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Force per unit length between parallel wires distance d, currents I₁, I₂:", "options": ["μ₀I₁I₂/(2πd)", "μ₀I₁I₂·d", "Independent of d", "Negative"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["parallel_wires"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Lenz's law: induced current opposes:", "options": ["Cause that produces it", "Direction of motion", "Current direction", "Random"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["Lenz"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Phase difference between voltage and current in pure inductor:", "options": ["0", "π/2 (V leads)", "π", "π/2 (I leads)"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["inductor_phase"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Frequency of EM wave with λ = 1 km:", "options": ["3 kHz", "300 kHz", "300 MHz", "3 MHz"], "correct_answer": "B", "chapter": "EM Waves", "topic_tags": ["freq_lambda"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Concave lens with f = -20 cm. Power in dioptres:", "options": ["-5 D", "+5 D", "-0.2 D", "+0.2 D"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["power_diopter"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Refractive index increases when light enters:", "options": ["Less dense medium", "More dense medium", "Same medium", "Vacuum"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["denser"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Photon energy: E = hf. h is:", "options": ["Planck's constant", "Boltzmann constant", "Avogadro number", "Speed of light"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["Planck"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of α particles in Rutherford's gold foil experiment that bounced back:", "options": ["All", "Many", "Few (1 in 8000 approx)", "None"], "correct_answer": "C", "chapter": "Atoms", "topic_tags": ["Rutherford_experiment"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mass of electron is approximately:", "options": ["9.11×10⁻³¹ kg", "1.67×10⁻²⁷ kg", "1.6×10⁻¹⁹ kg", "Negligible"], "correct_answer": "A", "chapter": "Modern Physics", "topic_tags": ["electron_mass"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Dimensions of energy:",
+      "options": [
+        "[MLT⁻¹]",
+        "[ML²T⁻²]",
+        "[MLT⁻²]",
+        "[ML²T⁻¹]"
+      ],
+      "correct_answer": "B",
+      "chapter": "Units and Dimensions",
+      "topic_tags": [
+        "energy_dim"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Energy equals force times distance: E = F × d. Force has dimensions [MLT⁻²], and distance has dimensions [L], so energy's dimensions are [MLT⁻²][L] = [ML²T⁻²]."
+    },
+    {
+      "question_text": "Body in free fall from rest: distance after t seconds:",
+      "options": [
+        "gt",
+        "gt²",
+        "½gt²",
+        "g/t²"
+      ],
+      "correct_answer": "C",
+      "chapter": "Kinematics",
+      "topic_tags": [
+        "free_fall_distance"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the kinematic equation for constant acceleration starting from rest, distance s = ½at². Since acceleration due to gravity is g, the distance fallen is s = ½gt²."
+    },
+    {
+      "question_text": "Maximum range of projectile at angle θ:",
+      "options": [
+        "u²sin(2θ)/g",
+        "u²sin²(θ)/(2g)",
+        "u²/(2g)",
+        "ug/sin θ"
+      ],
+      "correct_answer": "A",
+      "chapter": "Projectile Motion",
+      "topic_tags": [
+        "max_range"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Range of a projectile is R = u²sin(2θ)/g. This is maximized when sin(2θ) = 1, which occurs at θ = 45°, giving maximum range u²/g. Option A correctly shows the general range formula that achieves its maximum value at the optimal angle."
+    },
+    {
+      "question_text": "Impulse equals:",
+      "options": [
+        "F·t",
+        "F·d",
+        "F/m",
+        "ma"
+      ],
+      "correct_answer": "A",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "impulse"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Impulse is defined as the product of force and the time interval over which it acts. Mathematically, J = F·t, which also equals the change in momentum (Δp = m·Δv)."
+    },
+    {
+      "question_text": "Centripetal acceleration of body in circular motion radius r, speed v:",
+      "options": [
+        "v²/r",
+        "vr",
+        "r/v²",
+        "v/r²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Circular Motion",
+      "topic_tags": [
+        "centripetal_acc"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Centripetal acceleration is the rate of change of velocity direction in circular motion. Deriving from F = mv²/r and a = F/m, we get a = v²/r, which has correct dimensions of acceleration and increases with speed while decreasing with larger radius."
+    },
+    {
+      "question_text": "Kepler's 2nd law (equal areas in equal time) implies:",
+      "options": [
+        "Energy conservation",
+        "Angular momentum conservation",
+        "Linear momentum conservation",
+        "Mass conservation"
+      ],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "Kepler_2"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A planet sweeping equal areas in equal times means the areal velocity (dA/dt) is constant, which is directly proportional to angular momentum per unit mass (L/m). Since areal velocity is constant, angular momentum must be conserved."
+    },
+    {
+      "question_text": "Period of geostationary satellite:",
+      "options": [
+        "12 hr",
+        "24 hr (sidereal day)",
+        "365 days",
+        "48 hr"
+      ],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "geostationary"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A geostationary satellite must orbit Earth at the same rate Earth rotates to remain fixed above one location. Since Earth completes one rotation relative to the stars in 23 hours 56 minutes (one sidereal day, approximately 24 hours), the satellite's orbital period must equal this duration."
+    },
+    {
+      "question_text": "Pascal's law: pressure in fluid:",
+      "options": [
+        "Decreases with depth",
+        "Transmitted equally in all directions",
+        "Acts only downward",
+        "Zero at surface"
+      ],
+      "correct_answer": "B",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "Pascal"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Pascal's law states that pressure applied to a confined fluid is transmitted undiminished in all directions throughout the fluid. This principle is fundamental to hydraulic systems and explains why pressure acts equally on all surfaces in contact with the fluid, regardless of orientation."
+    },
+    {
+      "question_text": "Bernoulli's equation conserves:",
+      "options": [
+        "Mass",
+        "Pressure",
+        "Energy per unit volume",
+        "Force"
+      ],
+      "correct_answer": "C",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "Bernoulli"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Bernoulli's equation is derived from conservation of energy along a streamline in fluid flow. It states that the sum of kinetic energy per unit volume, potential energy per unit volume, and pressure (which represents flow work energy per unit volume) remains constant, making energy per unit volume the conserved quantity."
+    },
+    {
+      "question_text": "Thermal expansion: ΔL/L = ?",
+      "options": [
+        "α·ΔT",
+        "α/ΔT",
+        "ΔT",
+        "α·T²"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "thermal_expansion"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Linear thermal expansion is defined as the fractional change in length (ΔL/L) being proportional to the temperature change, with the proportionality constant being the linear expansion coefficient α. Therefore, ΔL/L = α·ΔT."
+    },
+    {
+      "question_text": "Reflected wave inversion at fixed boundary in string:",
+      "options": [
+        "No inversion (same phase)",
+        "180° phase change",
+        "Random",
+        "No reflection"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "fixed_boundary"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When a wave traveling along a string encounters a fixed boundary, the string endpoint cannot move. The reflected wave must therefore reverse direction and invert to satisfy this boundary condition, resulting in a 180° phase shift relative to the incident wave."
+    },
+    {
+      "question_text": "Doppler: observer moves toward stationary source. Observed frequency:",
+      "options": [
+        "Lower than emitted",
+        "Higher than emitted",
+        "Same",
+        "Zero"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "Doppler_observer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When an observer moves toward a stationary source, the observer encounters more wave crests per unit time, effectively compressing the wavelength in the observer's reference frame. This results in a higher observed frequency than the emitted frequency."
+    },
+    {
+      "question_text": "Coulomb's law: F = kq1q2/r². k in SI:",
+      "options": [
+        "8.99×10⁹ N·m²/C²",
+        "8.99×10⁻⁹",
+        "1.6×10⁻¹⁹",
+        "6.022×10²³"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Coulomb_k"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Coulomb's constant k relates the electrostatic force between two charges to their magnitudes and separation distance. In SI units, k equals 8.99×10⁹ N·m²/C², which comes from k = 1/(4πε₀) where ε₀ is the permittivity of free space. The other options represent unrelated physical constants."
+    },
+    {
+      "question_text": "Capacitor with charge Q, voltage V: energy stored:",
+      "options": [
+        "QV",
+        "(1/2)QV",
+        "QV²",
+        "Q/V"
+      ],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "energy_stored"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Energy stored in a capacitor equals the work done to charge it, which is the integral of V dQ from 0 to Q. Since V = Q/C, this integral yields (1/2)QV, or equivalently (1/2)CV²."
+    },
+    {
+      "question_text": "Drift velocity of electron in conductor with field E:",
+      "options": [
+        "v_d = μE",
+        "v_d = E/μ",
+        "v_d = μ/E",
+        "Constant"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Electrons in a conductor experience a constant electric force, causing acceleration interrupted by collisions. The resulting average drift velocity is proportional to the applied electric field, with the proportionality constant being the charge carrier mobility (μ). Thus v_d = μE."
+    },
+    {
+      "question_text": "Right-hand rule for current-carrying wire gives:",
+      "options": [
+        "Direction of force",
+        "Direction of magnetic field around wire",
+        "Direction of current",
+        "All of these"
+      ],
+      "correct_answer": "B",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "right_hand"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When applying the right-hand rule to a current-carrying wire, you point your thumb in the direction of current flow, and your fingers curl in the direction the magnetic field circles around the wire. This directly gives the magnetic field direction, not the force or current direction."
+    },
+    {
+      "question_text": "Force per unit length between parallel wires distance d, currents I₁, I₂:",
+      "options": [
+        "μ₀I₁I₂/(2πd)",
+        "μ₀I₁I₂·d",
+        "Independent of d",
+        "Negative"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "parallel_wires"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The magnetic field from wire 1 at distance d is B = μ₀I₁/(2πd). This field exerts force F = BI₂L on wire 2, giving force per unit length F/L = μ₀I₁I₂/(2πd), which decreases with distance d."
+    },
+    {
+      "question_text": "Lenz's law: induced current opposes:",
+      "options": [
+        "Cause that produces it",
+        "Direction of motion",
+        "Current direction",
+        "Random"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "Lenz"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Induced current opposes the change in magnetic flux that causes it. This is the fundamental principle of Lenz's law—the induced effects always resist the change producing them, not just the motion or current direction alone."
+    },
+    {
+      "question_text": "Phase difference between voltage and current in pure inductor:",
+      "options": [
+        "0",
+        "π/2 (V leads)",
+        "π",
+        "π/2 (I leads)"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "inductor_phase"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In a pure inductor, the voltage across it is V = L(di/dt), meaning voltage is proportional to the rate of change of current. This causes voltage to lead current by 90° or π/2 radians, since the derivative of a sinusoidal current results in a phase shift of π/2 ahead."
+    },
+    {
+      "question_text": "Frequency of EM wave with λ = 1 km:",
+      "options": [
+        "3 kHz",
+        "300 kHz",
+        "300 MHz",
+        "3 MHz"
+      ],
+      "correct_answer": "B",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "freq_lambda"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using c = fλ, where c = 3×10⁸ m/s and λ = 1 km = 1000 m: f = (3×10⁸)/1000 = 3×10⁵ Hz = 300 kHz."
+    },
+    {
+      "question_text": "Concave lens with f = -20 cm. Power in dioptres:",
+      "options": [
+        "-5 D",
+        "+5 D",
+        "-0.2 D",
+        "+0.2 D"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "power_diopter"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power is calculated using P = 1/f, where f must be in meters. Converting -20 cm to -0.2 m, then P = 1/(-0.2) = -5 D. The negative sign correctly indicates the diverging nature of a concave lens."
+    },
+    {
+      "question_text": "Refractive index increases when light enters:",
+      "options": [
+        "Less dense medium",
+        "More dense medium",
+        "Same medium",
+        "Vacuum"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "denser"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When light enters a more dense medium, it slows down because the medium has more particles to interact with. Since refractive index is defined as the ratio of light's speed in vacuum to its speed in the medium, a slower speed results in a higher refractive index."
+    },
+    {
+      "question_text": "Photon energy: E = hf. h is:",
+      "options": [
+        "Planck's constant",
+        "Boltzmann constant",
+        "Avogadro number",
+        "Speed of light"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "Planck"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In the photon energy equation E = hf, h represents the proportionality constant that relates a photon's energy to its frequency. This fundamental constant from quantum mechanics is defined as Planck's constant, approximately 6.626 × 10⁻³⁴ J·s."
+    },
+    {
+      "question_text": "Number of α particles in Rutherford's gold foil experiment that bounced back:",
+      "options": [
+        "All",
+        "Many",
+        "Few (1 in 8000 approx)",
+        "None"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Rutherford_experiment"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In Rutherford's experiment, most α particles passed straight through the gold foil because the atom is mostly empty space, but a small fraction (~1 in 8000) bounced back when they collided directly with the dense, positively charged nucleus, revealing the nuclear model of the atom."
+    },
+    {
+      "question_text": "Mass of electron is approximately:",
+      "options": [
+        "9.11×10⁻³¹ kg",
+        "1.67×10⁻²⁷ kg",
+        "1.6×10⁻¹⁹ kg",
+        "Negligible"
+      ],
+      "correct_answer": "A",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "electron_mass"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The electron mass is a fundamental constant in physics, approximately 9.11×10⁻³¹ kg. Option B is the proton mass, C is the elementary charge (not mass), and D is incorrect since the electron has measurable mass that affects atomic structure and behavior."
+    }
   ]
 }

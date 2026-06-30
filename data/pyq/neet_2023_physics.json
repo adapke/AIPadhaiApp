@@ -6,30 +6,430 @@
   "default_year": 2023,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Acceleration of free fall:", "options": ["9.8 m/s²", "9.81 cm/s²", "98 m/s²", "0"], "correct_answer": "A", "chapter": "Gravitation", "topic_tags": ["g"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Newton's 2nd law: F = ?", "options": ["mv", "ma", "m/a", "ma²"], "correct_answer": "B", "chapter": "Laws of Motion", "topic_tags": ["F_ma"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Power dissipated in 6 Ω with 2 A:", "options": ["12 W", "24 W", "36 W", "48 W"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["I2R"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Lens formula: 1/f = ?", "options": ["1/v - 1/u", "1/u - 1/v", "u + v", "uv"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["lens"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Echo time difference for 343 m/s sound and reflector 17.15 m away:", "options": ["0.05 s", "0.1 s", "1 s", "2 s"], "correct_answer": "B", "chapter": "Sound", "topic_tags": ["echo"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Capacitance of parallel plate with vacuum:", "options": ["ε₀A/d", "ε₀d/A", "ε₀Ad", "Ad/ε₀"], "correct_answer": "A", "chapter": "Capacitance", "topic_tags": ["C_vacuum"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Spring constant of two springs k each in parallel:", "options": ["k/2", "k", "2k", "4k"], "correct_answer": "C", "chapter": "Oscillations", "topic_tags": ["parallel_springs"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Critical angle formula sin θ_c = ?", "options": ["n", "1/n", "n²", "1"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["TIR"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Drift velocity v_d = ?", "options": ["I/(nAe)", "nAe/I", "IeA/n", "eIA/n"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["drift_v"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Bohr's quantization: angular momentum =", "options": ["nh", "nh/2π", "n²h", "h/n"], "correct_answer": "B", "chapter": "Atoms", "topic_tags": ["Bohr_L"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Max number of electrons in M shell (n=3):", "options": ["8", "16", "18", "32"], "correct_answer": "C", "chapter": "Atomic Structure", "topic_tags": ["M_shell"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mass-energy relation: E = ?", "options": ["mc", "mc²", "mc³", "m²c"], "correct_answer": "B", "chapter": "Nuclei", "topic_tags": ["E_mc2"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Resistance increases with temperature in:", "options": ["Conductor", "Semiconductor", "Both", "Neither"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["R_temp"], "difficulty": "medium", "marks": 4},
-    {"question_text": "AC voltmeter reads:", "options": ["Peak value", "RMS value", "Average value", "Zero (AC)"], "correct_answer": "B", "chapter": "AC", "topic_tags": ["RMS"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Doppler shift in atomic spectra (red shift) suggests:", "options": ["Galaxy approaching", "Galaxy receding", "Stable", "No light"], "correct_answer": "B", "chapter": "Modern Physics", "topic_tags": ["red_shift"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Wave-particle duality is shown by:", "options": ["Only photons", "Photons and electrons (all particles)", "Only matter", "Only EM waves"], "correct_answer": "B", "chapter": "Dual Nature", "topic_tags": ["duality"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Compton effect demonstrates:", "options": ["Wave nature of light", "Particle nature of light (photons)", "Interference", "Polarisation"], "correct_answer": "B", "chapter": "Modern Physics", "topic_tags": ["Compton"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of significant figures in 0.005020:", "options": ["3", "4", "5", "6"], "correct_answer": "B", "chapter": "Units and Dimensions", "topic_tags": ["sig_figs"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Avg velocity of body returning to start in time T (any path):", "options": ["Maximum speed", "Zero", "Twice path length / T", "Indeterminate"], "correct_answer": "B", "chapter": "Kinematics", "topic_tags": ["avg_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Energy stored per unit volume in inductor with field B:", "options": ["B²/(2μ₀)", "B/μ₀", "Bμ₀", "B²μ₀"], "correct_answer": "A", "chapter": "EMI", "topic_tags": ["energy_density"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Wavelength of EM wave 1 MHz:", "options": ["300 m", "30 m", "3 m", "0.3 m"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["wavelength"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Lens maker's formula: 1/f = (n-1)(?)", "options": ["1/R1 - 1/R2", "1/R1 + 1/R2", "R1·R2", "R1/R2"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["lens_maker"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Forbidden energy gap in metal:", "options": ["Large", "Small", "Zero (overlap)", "Negative"], "correct_answer": "C", "chapter": "Semiconductors", "topic_tags": ["metal_band"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If 50 g water cools from 80°C to 30°C, heat released (c=4.18 J/g·K):", "options": ["1045 J", "10450 J", "5225 J", "200 J"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["specific_heat"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Eddy currents are caused by:", "options": ["Static charge", "Changing magnetic flux in bulk conductor", "Wave reflection", "Direct EMF"], "correct_answer": "B", "chapter": "EMI", "topic_tags": ["eddy"], "difficulty": "easy", "marks": 4}
+    {
+      "question_text": "Acceleration of free fall:",
+      "options": [
+        "9.8 m/s²",
+        "9.81 cm/s²",
+        "98 m/s²",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "g"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The acceleration due to gravity near Earth's surface is approximately 9.8 m/s² (or 9.81 m/s² for greater precision). Option B uses centimeters instead of meters, making it 100 times too small, while C is too large and D represents no acceleration."
+    },
+    {
+      "question_text": "Newton's 2nd law: F = ?",
+      "options": [
+        "mv",
+        "ma",
+        "m/a",
+        "ma²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "F_ma"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Newton's second law states that force equals mass multiplied by acceleration (F = ma). This fundamental equation describes how an object's acceleration is directly proportional to the net force applied and inversely proportional to its mass."
+    },
+    {
+      "question_text": "Power dissipated in 6 Ω with 2 A:",
+      "options": [
+        "12 W",
+        "24 W",
+        "36 W",
+        "48 W"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "I2R"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power dissipated in a resistor is calculated using P = I²R, where current I = 2 A and resistance R = 6 Ω. Thus P = (2)² × 6 = 4 × 6 = 24 W."
+    },
+    {
+      "question_text": "Lens formula: 1/f = ?",
+      "options": [
+        "1/v - 1/u",
+        "1/u - 1/v",
+        "u + v",
+        "uv"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "lens"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The lens formula relates focal length to object and image distances. Using the principle of refraction at curved surfaces and geometric optics, the reciprocal of focal length equals the sum of reciprocals of image and object distances: 1/f = 1/v + 1/u. Since this is equivalent to 1/v - 1/u when rearranged for standard sign conventions (where u is negative for real objects), option A is correct."
+    },
+    {
+      "question_text": "Echo time difference for 343 m/s sound and reflector 17.15 m away:",
+      "options": [
+        "0.05 s",
+        "0.1 s",
+        "1 s",
+        "2 s"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sound",
+      "topic_tags": [
+        "echo"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Sound must travel to the reflector and back, covering twice the distance: 2 × 17.15 m = 34.3 m. Using time = distance/speed: 34.3 m ÷ 343 m/s = 0.1 s."
+    },
+    {
+      "question_text": "Capacitance of parallel plate with vacuum:",
+      "options": [
+        "ε₀A/d",
+        "ε₀d/A",
+        "ε₀Ad",
+        "Ad/ε₀"
+      ],
+      "correct_answer": "A",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "C_vacuum"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The capacitance formula derives from C = Q/V, where voltage between plates is V = Ed = σd/ε₀ = Qd/(ε₀A). Substituting gives C = Q/(Qd/ε₀A) = ε₀A/d, showing capacitance is directly proportional to plate area and inversely proportional to separation distance."
+    },
+    {
+      "question_text": "Spring constant of two springs k each in parallel:",
+      "options": [
+        "k/2",
+        "k",
+        "2k",
+        "4k"
+      ],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "parallel_springs"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "When springs are in parallel, they experience the same displacement, and their forces add together. The equivalent spring constant is the sum: k_eq = k + k = 2k."
+    },
+    {
+      "question_text": "Critical angle formula sin θ_c = ?",
+      "options": [
+        "n",
+        "1/n",
+        "n²",
+        "1"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "TIR"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Light travels from a denser medium (refractive index n) to a less dense medium (refractive index 1, like air). At the critical angle, refracted light travels along the interface (90° refraction angle). Using Snell's law: n sin θ_c = 1 × sin 90°, which gives sin θ_c = 1/n."
+    },
+    {
+      "question_text": "Drift velocity v_d = ?",
+      "options": [
+        "I/(nAe)",
+        "nAe/I",
+        "IeA/n",
+        "eIA/n"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "drift_v"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Drift velocity is derived from current I = nAev_d, where n is charge carrier density, A is cross-sectional area, e is elementary charge, and v_d is drift velocity. Solving for v_d gives v_d = I/(nAe)."
+    },
+    {
+      "question_text": "Bohr's quantization: angular momentum =",
+      "options": [
+        "nh",
+        "nh/2π",
+        "n²h",
+        "h/n"
+      ],
+      "correct_answer": "B",
+      "chapter": "Atoms",
+      "topic_tags": [
+        "Bohr_L"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In Bohr's model, the quantization condition states that angular momentum must equal an integer multiple of ℏ (h-bar), where ℏ = h/2π. Therefore, angular momentum = nℏ = nh/2π, where n is a positive integer (1, 2, 3, ...)."
+    },
+    {
+      "question_text": "Max number of electrons in M shell (n=3):",
+      "options": [
+        "8",
+        "16",
+        "18",
+        "32"
+      ],
+      "correct_answer": "C",
+      "chapter": "Atomic Structure",
+      "topic_tags": [
+        "M_shell"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The M shell (n=3) can hold electrons according to the formula 2n². Substituting n=3: 2(3)² = 2(9) = 18 electrons maximum."
+    },
+    {
+      "question_text": "Mass-energy relation: E = ?",
+      "options": [
+        "mc",
+        "mc²",
+        "mc³",
+        "m²c"
+      ],
+      "correct_answer": "B",
+      "chapter": "Nuclei",
+      "topic_tags": [
+        "E_mc2"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Einstein's mass-energy equivalence relates energy to mass through the speed of light. The correct formula includes c squared because energy involves kinetic considerations, and the derivation from relativity shows that the proportionality constant between mass and energy is the square of light's speed."
+    },
+    {
+      "question_text": "Resistance increases with temperature in:",
+      "options": [
+        "Conductor",
+        "Semiconductor",
+        "Both",
+        "Neither"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "R_temp"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In conductors, resistance increases with temperature because thermal motion of atoms increases, causing more collisions that impede electron flow. Semiconductors behave oppositely—resistance decreases with temperature as thermal energy frees more charge carriers, dominating over collision effects."
+    },
+    {
+      "question_text": "AC voltmeter reads:",
+      "options": [
+        "Peak value",
+        "RMS value",
+        "Average value",
+        "Zero (AC)"
+      ],
+      "correct_answer": "B",
+      "chapter": "AC",
+      "topic_tags": [
+        "RMS"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "An AC voltmeter measures the RMS (root mean square) value because it's calibrated to display the equivalent DC voltage that would produce the same power dissipation in a resistive load. This is the standard convention for AC meters."
+    },
+    {
+      "question_text": "Doppler shift in atomic spectra (red shift) suggests:",
+      "options": [
+        "Galaxy approaching",
+        "Galaxy receding",
+        "Stable",
+        "No light"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "red_shift"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A redshift occurs when light wavelengths increase, which happens when a source moves away from the observer. This is the Doppler effect applied to light, indicating the galaxy is receding."
+    },
+    {
+      "question_text": "Wave-particle duality is shown by:",
+      "options": [
+        "Only photons",
+        "Photons and electrons (all particles)",
+        "Only matter",
+        "Only EM waves"
+      ],
+      "correct_answer": "B",
+      "chapter": "Dual Nature",
+      "topic_tags": [
+        "duality"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Wave-particle duality is a fundamental principle showing that all matter and energy exhibit both wave and particle properties. Both photons (electromagnetic radiation) and massive particles like electrons demonstrate this dual nature through experiments like diffraction and the photoelectric effect, not just one category of entity."
+    },
+    {
+      "question_text": "Compton effect demonstrates:",
+      "options": [
+        "Wave nature of light",
+        "Particle nature of light (photons)",
+        "Interference",
+        "Polarisation"
+      ],
+      "correct_answer": "B",
+      "chapter": "Modern Physics",
+      "topic_tags": [
+        "Compton"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In Compton scattering, a photon collides with an electron and transfers energy/momentum, with the scattered photon's wavelength increasing predictably. This energy and momentum transfer behavior can only be explained by treating light as particles (photons) with definite energy and momentum, not as waves."
+    },
+    {
+      "question_text": "Number of significant figures in 0.005020:",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_answer": "B",
+      "chapter": "Units and Dimensions",
+      "topic_tags": [
+        "sig_figs"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Leading zeros (the three zeros before 5) are not significant, but all digits after the first non-zero digit are significant. The digits 5, 0, 2, and 0 are all significant, giving 4 significant figures total."
+    },
+    {
+      "question_text": "Avg velocity of body returning to start in time T (any path):",
+      "options": [
+        "Maximum speed",
+        "Zero",
+        "Twice path length / T",
+        "Indeterminate"
+      ],
+      "correct_answer": "B",
+      "chapter": "Kinematics",
+      "topic_tags": [
+        "avg_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Average velocity is displacement divided by time. Since the body returns to its starting point, the net displacement is zero regardless of the path taken or speed variations. Therefore, average velocity = 0/T = 0."
+    },
+    {
+      "question_text": "Energy stored per unit volume in inductor with field B:",
+      "options": [
+        "B²/(2μ₀)",
+        "B/μ₀",
+        "Bμ₀",
+        "B²μ₀"
+      ],
+      "correct_answer": "A",
+      "chapter": "EMI",
+      "topic_tags": [
+        "energy_density"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The magnetic energy density derives from the relationship between magnetic field energy and inductance. Since energy stored in an inductor is U = ½LI², and the magnetic field B relates to current through B = μ₀nI, substituting gives energy per unit volume as B²/(2μ₀)."
+    },
+    {
+      "question_text": "Wavelength of EM wave 1 MHz:",
+      "options": [
+        "300 m",
+        "30 m",
+        "3 m",
+        "0.3 m"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "wavelength"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the wave equation c = fλ, where c = 3×10⁸ m/s and f = 1 MHz = 10⁶ Hz: λ = c/f = (3×10⁸)/(10⁶) = 300 m."
+    },
+    {
+      "question_text": "Lens maker's formula: 1/f = (n-1)(?)",
+      "options": [
+        "1/R1 - 1/R2",
+        "1/R1 + 1/R2",
+        "R1·R2",
+        "R1/R2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "lens_maker"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The lens maker's formula relates focal length to the radii of curvature using the convention that R1 is positive for the first surface and R2 is negative for the second surface (or vice versa). The difference 1/R1 - 1/R2 accounts for the net bending power of both curved surfaces, which determines the focal length."
+    },
+    {
+      "question_text": "Forbidden energy gap in metal:",
+      "options": [
+        "Large",
+        "Small",
+        "Zero (overlap)",
+        "Negative"
+      ],
+      "correct_answer": "C",
+      "chapter": "Semiconductors",
+      "topic_tags": [
+        "metal_band"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "In metals, the conduction band and valence band overlap in energy, allowing electrons to move freely without needing to cross a band gap. This overlap means there is effectively no forbidden energy gap (zero gap), enabling metals' excellent electrical conductivity."
+    },
+    {
+      "question_text": "If 50 g water cools from 80°C to 30°C, heat released (c=4.18 J/g·K):",
+      "options": [
+        "1045 J",
+        "10450 J",
+        "5225 J",
+        "200 J"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "specific_heat"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using Q = mcΔT: Q = 50 g × 4.18 J/g·K × (80-30)°C = 50 × 4.18 × 50 = 10,450 J. The temperature change is 50 K, and multiplying mass, specific heat capacity, and temperature change gives the total heat released."
+    },
+    {
+      "question_text": "Eddy currents are caused by:",
+      "options": [
+        "Static charge",
+        "Changing magnetic flux in bulk conductor",
+        "Wave reflection",
+        "Direct EMF"
+      ],
+      "correct_answer": "B",
+      "chapter": "EMI",
+      "topic_tags": [
+        "eddy"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Eddy currents are induced loops of electric current that form within conductors when magnetic flux through them changes. According to Faraday's law, a changing magnetic field induces an electric field, which drives these circular currents in the bulk material."
+    }
   ]
 }

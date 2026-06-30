@@ -6,30 +6,430 @@
   "default_year": 2018,
   "default_paper": "advanced",
   "questions": [
-    {"question_text": "Number of subsets of a set with n elements:", "options": ["n", "n²", "2^n", "n!"], "correct_answer": "C", "chapter": "Sets", "topic_tags": ["power_set"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Set of even integers under addition forms:", "options": ["Group", "Ring", "Semigroup only", "Both A and B"], "correct_answer": "D", "chapter": "Sets/Algebra", "topic_tags": ["group"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Cardinality of {x ∈ Z : x² < 10}:", "options": ["6", "7", "8", "9"], "correct_answer": "B", "chapter": "Sets", "topic_tags": ["set_builder"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of relations from {1,2} to {1,2}:", "options": ["4", "8", "16", "24"], "correct_answer": "C", "chapter": "Relations", "topic_tags": ["count_relations"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Inverse function of f(x) = 2x+3:", "options": ["x/2 + 3", "(x-3)/2", "2x-3", "2x+3"], "correct_answer": "B", "chapter": "Functions", "topic_tags": ["inverse_linear"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Period of f(x) = sin(2x):", "options": ["π", "2π", "π/2", "4π"], "correct_answer": "A", "chapter": "Trig Functions", "topic_tags": ["period_sin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "tan(π/4 + π/3):", "options": ["(1+√3)/(1-√3)", "1+√3", "(1-√3)/(1+√3)", "√3"], "correct_answer": "A", "chapter": "Trigonometry", "topic_tags": ["sum_tan"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Solve cos x = -1/2 in [0, 2π]:", "options": ["{π/3, 5π/3}", "{2π/3, 4π/3}", "{π/3, 4π/3}", "{π/2, 3π/2}"], "correct_answer": "B", "chapter": "Trig Equations", "topic_tags": ["cos_equation"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of distinct real roots of x⁴ - 5x² + 4 = 0:", "options": ["1", "2", "3", "4"], "correct_answer": "D", "chapter": "Polynomials", "topic_tags": ["biquadratic"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If α, β are roots of x² - 5x + 6 = 0, then α³ + β³:", "options": ["35", "65", "215", "75"], "correct_answer": "A", "chapter": "Polynomials", "topic_tags": ["symmetric_functions"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Complex number (1+i)²:", "options": ["2i", "1+i", "2", "-1+i"], "correct_answer": "A", "chapter": "Complex Numbers", "topic_tags": ["i_squared"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Cube roots of unity (other than 1):", "options": ["ω, ω² (complex)", "1, -1", "i, -i", "Only 1"], "correct_answer": "A", "chapter": "Complex Numbers", "topic_tags": ["unity_roots"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of permutations of letters in 'PARALLEL':", "options": ["3360", "8!", "8!/8", "3360 / 2"], "correct_answer": "A", "chapter": "Permutations", "topic_tags": ["with_repetition"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Binomial coefficient C(10,3):", "options": ["120", "60", "1000", "30"], "correct_answer": "A", "chapter": "Combinatorics", "topic_tags": ["combinations"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Coefficient of x⁴ in (1+x)¹⁰:", "options": ["120", "210", "252", "300"], "correct_answer": "B", "chapter": "Binomial Theorem", "topic_tags": ["coefficient"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Sum 1 + 1/2 + 1/4 + ... ad infinitum:", "options": ["1", "2", "1.5", "∞"], "correct_answer": "B", "chapter": "Sequences", "topic_tags": ["GP_infinity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "AP: 2, 5, 8, 11. 100th term:", "options": ["299", "302", "299.5", "298"], "correct_answer": "A", "chapter": "Sequences", "topic_tags": ["AP_nth"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Slope of line through (1,2) and (3,4):", "options": ["1", "2", "1/2", "-1"], "correct_answer": "A", "chapter": "Coordinate Geometry", "topic_tags": ["slope"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Equation of circle through origin with radius 3:", "options": ["x²+y²=9", "(x-3)²+y²=0", "x²+y²=3", "x+y=3"], "correct_answer": "A", "chapter": "Conic Sections", "topic_tags": ["circle_origin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Focus of parabola y² = 8x:", "options": ["(2, 0)", "(0, 2)", "(-2, 0)", "(4, 0)"], "correct_answer": "A", "chapter": "Conic Sections", "topic_tags": ["parabola_focus"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If f(x) is continuous on [a,b] and f(a)<0<f(b), there exists c in (a,b) with f(c)=0. This is:", "options": ["MVT", "IVT", "Rolle's", "L'Hopital"], "correct_answer": "B", "chapter": "Continuity", "topic_tags": ["IVT"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Derivative of sin(x²):", "options": ["cos(x²)", "2x cos(x²)", "2x sin(x²)", "-cos(x²)"], "correct_answer": "B", "chapter": "Differentiation", "topic_tags": ["chain_rule"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Mean of binomial B(10, 0.5):", "options": ["1", "5", "10", "0.5"], "correct_answer": "B", "chapter": "Probability", "topic_tags": ["binomial_mean"], "difficulty": "easy", "marks": 4},
-    {"question_text": "If A, B independent with P(A)=0.4, P(B)=0.5, P(A∪B):", "options": ["0.7", "0.9", "0.2", "0.5"], "correct_answer": "A", "chapter": "Probability", "topic_tags": ["independent_union"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of integer solutions to x+y+z=10 with x,y,z ≥ 0:", "options": ["55", "66", "C(12,2)=66", "Both B and C"], "correct_answer": "D", "chapter": "Combinatorics", "topic_tags": ["stars_bars"], "difficulty": "hard", "marks": 4}
+    {
+      "question_text": "Number of subsets of a set with n elements:",
+      "options": [
+        "n",
+        "n²",
+        "2^n",
+        "n!"
+      ],
+      "correct_answer": "C",
+      "chapter": "Sets",
+      "topic_tags": [
+        "power_set"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Each element can either be included or excluded from a subset, giving 2 choices per element. With n independent binary choices, the total number of distinct subsets is 2^n."
+    },
+    {
+      "question_text": "Set of even integers under addition forms:",
+      "options": [
+        "Group",
+        "Ring",
+        "Semigroup only",
+        "Both A and B"
+      ],
+      "correct_answer": "D",
+      "chapter": "Sets/Algebra",
+      "topic_tags": [
+        "group"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "Even integers under addition form a group because they satisfy closure, associativity, contain identity (0), and inverses. They additionally form a ring when paired with multiplication, since even integers are closed under both operations and satisfy all ring axioms including distributivity."
+    },
+    {
+      "question_text": "Cardinality of {x ∈ Z : x² < 10}:",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sets",
+      "topic_tags": [
+        "set_builder"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "x² < 10 means |x| < √10 ≈ 3.16. For integers, this gives x ∈ {-3, -2, -1, 0, 1, 2, 3}, which contains exactly 7 elements."
+    },
+    {
+      "question_text": "Number of relations from {1,2} to {1,2}:",
+      "options": [
+        "4",
+        "8",
+        "16",
+        "24"
+      ],
+      "correct_answer": "C",
+      "chapter": "Relations",
+      "topic_tags": [
+        "count_relations"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "A relation from {1,2} to {1,2} is any subset of the Cartesian product {1,2} × {1,2}. Since {1,2} × {1,2} has 4 elements, there are 2^4 = 16 possible subsets, each representing a different relation."
+    },
+    {
+      "question_text": "Inverse function of f(x) = 2x+3:",
+      "options": [
+        "x/2 + 3",
+        "(x-3)/2",
+        "2x-3",
+        "2x+3"
+      ],
+      "correct_answer": "B",
+      "chapter": "Functions",
+      "topic_tags": [
+        "inverse_linear"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "To find the inverse, set y = 2x + 3, then solve for x: y - 3 = 2x, so x = (y - 3)/2. Replace y with x to get f⁻¹(x) = (x - 3)/2."
+    },
+    {
+      "question_text": "Period of f(x) = sin(2x):",
+      "options": [
+        "π",
+        "2π",
+        "π/2",
+        "4π"
+      ],
+      "correct_answer": "A",
+      "chapter": "Trig Functions",
+      "topic_tags": [
+        "period_sin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For f(x) = sin(2x), the period is calculated using the formula T = 2π/|b|, where b is the coefficient of x. Here b = 2, so T = 2π/2 = π."
+    },
+    {
+      "question_text": "tan(π/4 + π/3):",
+      "options": [
+        "(1+√3)/(1-√3)",
+        "1+√3",
+        "(1-√3)/(1+√3)",
+        "√3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Trigonometry",
+      "topic_tags": [
+        "sum_tan"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the tangent addition formula tan(A + B) = (tan A + tan B)/(1 - tan A tan B), with tan(π/4) = 1 and tan(π/3) = √3: tan(π/4 + π/3) = (1 + √3)/(1 - 1·√3) = (1 + √3)/(1 - √3)."
+    },
+    {
+      "question_text": "Solve cos x = -1/2 in [0, 2π]:",
+      "options": [
+        "{π/3, 5π/3}",
+        "{2π/3, 4π/3}",
+        "{π/3, 4π/3}",
+        "{π/2, 3π/2}"
+      ],
+      "correct_answer": "B",
+      "chapter": "Trig Equations",
+      "topic_tags": [
+        "cos_equation"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The cosine equals -1/2 at angles in the second and third quadrants. In [0, 2π], these are 2π/3 (where reference angle is π/3) and 4π/3 (where reference angle is also π/3)."
+    },
+    {
+      "question_text": "Number of distinct real roots of x⁴ - 5x² + 4 = 0:",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "D",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "biquadratic"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Substitute y = x² to get y² - 5y + 4 = 0, which factors as (y - 1)(y - 4) = 0, giving y = 1 or y = 4. Each positive y-value yields two real x-values: x² = 1 gives x = ±1, and x² = 4 gives x = ±2, for a total of 4 distinct real roots."
+    },
+    {
+      "question_text": "If α, β are roots of x² - 5x + 6 = 0, then α³ + β³:",
+      "options": [
+        "35",
+        "65",
+        "215",
+        "75"
+      ],
+      "correct_answer": "A",
+      "chapter": "Polynomials",
+      "topic_tags": [
+        "symmetric_functions"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "From x² - 5x + 6 = 0, by Vieta's formulas: α + β = 5 and αβ= 6. Using the identity α³ + β³ = (α + β)³ - 3αβ(α + β), we get: α³ + β³ = 5³ - 3(6)(5) = 125 - 90 = 35."
+    },
+    {
+      "question_text": "Complex number (1+i)²:",
+      "options": [
+        "2i",
+        "1+i",
+        "2",
+        "-1+i"
+      ],
+      "correct_answer": "A",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "i_squared"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the formula (a+b)² = a² + 2ab + b², we get (1+i)² = 1 + 2i + i² = 1 + 2i - 1 = 2i, since i² = -1."
+    },
+    {
+      "question_text": "Cube roots of unity (other than 1):",
+      "options": [
+        "ω, ω² (complex)",
+        "1, -1",
+        "i, -i",
+        "Only 1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Complex Numbers",
+      "topic_tags": [
+        "unity_roots"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The three cube roots of unity satisfy x³ = 1, which factors as (x - 1)(x² + x + 1) = 0. Besides x = 1, the quadratic gives two complex roots ω = e^(2πi/3) = -1/2 + i√3/2 and ω² = e^(4πi/3) = -1/2 - i√3/2, where ω³ = 1 and 1 + ω + ω² = 0."
+    },
+    {
+      "question_text": "Number of permutations of letters in 'PARALLEL':",
+      "options": [
+        "3360",
+        "8!",
+        "8!/8",
+        "3360 / 2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Permutations",
+      "topic_tags": [
+        "with_repetition"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The word 'PARALLEL' has 8 letters with repetitions: A appears 3 times, L appears 2 times, P, R, E each appear once. Using the permutation formula with repetition: 8!/(3!×2!) = 40320/(6×2) = 3360."
+    },
+    {
+      "question_text": "Binomial coefficient C(10,3):",
+      "options": [
+        "120",
+        "60",
+        "1000",
+        "30"
+      ],
+      "correct_answer": "A",
+      "chapter": "Combinatorics",
+      "topic_tags": [
+        "combinations"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the binomial coefficient formula C(n,k) = n!/(k!(n-k)!), we get C(10,3) = 10!/(3!×7!) = (10×9×8)/(3×2×1) = 720/6 = 120."
+    },
+    {
+      "question_text": "Coefficient of x⁴ in (1+x)¹⁰:",
+      "options": [
+        "120",
+        "210",
+        "252",
+        "300"
+      ],
+      "correct_answer": "B",
+      "chapter": "Binomial Theorem",
+      "topic_tags": [
+        "coefficient"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the binomial theorem, the coefficient of x⁴ in (1+x)¹⁰ is C(10,4) = 10!/(4!×6!) = (10×9×8×7)/(4×3×2×1) = 5040/24 = 210."
+    },
+    {
+      "question_text": "Sum 1 + 1/2 + 1/4 + ... ad infinitum:",
+      "options": [
+        "1",
+        "2",
+        "1.5",
+        "∞"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "GP_infinity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "This is a geometric series with first term a = 1 and common ratio r = 1/2. Since |r| < 1, the series converges to a/(1-r) = 1/(1-1/2) = 1/(1/2) = 2."
+    },
+    {
+      "question_text": "AP: 2, 5, 8, 11. 100th term:",
+      "options": [
+        "299",
+        "302",
+        "299.5",
+        "298"
+      ],
+      "correct_answer": "A",
+      "chapter": "Sequences",
+      "topic_tags": [
+        "AP_nth"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The common difference is 3 (5-2=3). Using the AP formula aₙ = a₁ + (n-1)d, the 100th term is 2 + (100-1)×3 = 2 + 297 = 299."
+    },
+    {
+      "question_text": "Slope of line through (1,2) and (3,4):",
+      "options": [
+        "1",
+        "2",
+        "1/2",
+        "-1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Coordinate Geometry",
+      "topic_tags": [
+        "slope"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the slope formula m = (y₂ - y₁)/(x₂ - x₁), we get m = (4 - 2)/(3 - 1) = 2/2 = 1."
+    },
+    {
+      "question_text": "Equation of circle through origin with radius 3:",
+      "options": [
+        "x²+y²=9",
+        "(x-3)²+y²=0",
+        "x²+y²=3",
+        "x+y=3"
+      ],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "circle_origin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A circle through the origin with radius 3 has its center at distance 3 from (0,0). Since the origin lies on the circle, the distance from center to origin equals the radius, so the center is at (3,0) or (0,3) or any point 3 units away. The standard form x²+y² = r² represents a circle centered at origin with radius r, giving x²+y² = 9."
+    },
+    {
+      "question_text": "Focus of parabola y² = 8x:",
+      "options": [
+        "(2, 0)",
+        "(0, 2)",
+        "(-2, 0)",
+        "(4, 0)"
+      ],
+      "correct_answer": "A",
+      "chapter": "Conic Sections",
+      "topic_tags": [
+        "parabola_focus"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The parabola y² = 8x is in the form y² = 4px, where 4p = 8, so p = 2. For a parabola with vertex at the origin opening rightward, the focus is at (p, 0) = (2, 0)."
+    },
+    {
+      "question_text": "If f(x) is continuous on [a,b] and f(a)<0<f(b), there exists c in (a,b) with f(c)=0. This is:",
+      "options": [
+        "MVT",
+        "IVT",
+        "Rolle's",
+        "L'Hopital"
+      ],
+      "correct_answer": "B",
+      "chapter": "Continuity",
+      "topic_tags": [
+        "IVT"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Intermediate Value Theorem states that a continuous function on a closed interval must attain all values between its endpoint values. Since f(a)<0 and f(b)>0, the value 0 lies between them, so some point c must satisfy f(c)=0."
+    },
+    {
+      "question_text": "Derivative of sin(x²):",
+      "options": [
+        "cos(x²)",
+        "2x cos(x²)",
+        "2x sin(x²)",
+        "-cos(x²)"
+      ],
+      "correct_answer": "B",
+      "chapter": "Differentiation",
+      "topic_tags": [
+        "chain_rule"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Using the chain rule, the derivative of sin(u) is cos(u) · du/dx. Here u = x², so du/dx = 2x, giving 2x cos(x²)."
+    },
+    {
+      "question_text": "Mean of binomial B(10, 0.5):",
+      "options": [
+        "1",
+        "5",
+        "10",
+        "0.5"
+      ],
+      "correct_answer": "B",
+      "chapter": "Probability",
+      "topic_tags": [
+        "binomial_mean"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "For a binomial distribution B(n, p), the mean is calculated as μ = n × p. With n = 10 and p = 0.5, the mean equals 10 × 0.5 = 5."
+    },
+    {
+      "question_text": "If A, B independent with P(A)=0.4, P(B)=0.5, P(A∪B):",
+      "options": [
+        "0.7",
+        "0.9",
+        "0.2",
+        "0.5"
+      ],
+      "correct_answer": "A",
+      "chapter": "Probability",
+      "topic_tags": [
+        "independent_union"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "For independent events, P(A∪B) = P(A) + P(B) - P(A∩B). Since A and B are independent, P(A∩B) = P(A)·P(B) = 0.4 × 0.5 = 0.2. Therefore, P(A∪B) = 0.4 + 0.5 - 0.2 = 0.7."
+    },
+    {
+      "question_text": "Number of integer solutions to x+y+z=10 with x,y,z ≥ 0:",
+      "options": [
+        "55",
+        "66",
+        "C(12,2)=66",
+        "Both B and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Combinatorics",
+      "topic_tags": [
+        "stars_bars"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "This is a stars and bars problem: distributing 10 identical items into 3 distinct bins. The formula is C(n+k-1, k-1) = C(10+3-1, 3-1) = C(12,2) = 12×11/2 = 66. Both options B (stating the answer is 66) and C (showing the calculation C(12,2)=66) correctly identify and demonstrate the solution."
+    }
   ]
 }

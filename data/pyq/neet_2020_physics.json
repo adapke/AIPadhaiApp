@@ -6,30 +6,430 @@
   "default_year": 2020,
   "default_paper": "main",
   "questions": [
-    {"question_text": "Mass of moon is approximately:", "options": ["10⁻² × Earth", "1.2×10⁻² × Earth", "10 × Earth", "100 × Earth"], "correct_answer": "B", "chapter": "Gravitation", "topic_tags": ["moon_mass"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Escape velocity from moon vs Earth:", "options": ["Same", "Moon higher", "Moon lower", "Doesn't apply"], "correct_answer": "C", "chapter": "Gravitation", "topic_tags": ["escape_velocity"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Newton's 3rd law of motion: action and reaction:", "options": ["Act on same body", "Act on different bodies", "Same direction", "Different magnitude"], "correct_answer": "B", "chapter": "Laws of Motion", "topic_tags": ["Newton_3rd"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Pressure formula: P = ?", "options": ["F/A", "FA", "F·A", "A/F"], "correct_answer": "A", "chapter": "Fluids", "topic_tags": ["pressure"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Heat capacity of water:", "options": ["1 cal/g·°C", "1 J/g·°C", "4.18 cal/g·°C", "10 cal/g·°C"], "correct_answer": "A", "chapter": "Thermodynamics", "topic_tags": ["heat_capacity"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Temperature in Kelvin if 0°C:", "options": ["0", "100", "273.15", "373"], "correct_answer": "C", "chapter": "Thermodynamics", "topic_tags": ["Kelvin"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Doppler effect cause:", "options": ["Reflection", "Relative motion between source and observer", "Absorption", "Polarization"], "correct_answer": "B", "chapter": "Waves", "topic_tags": ["Doppler"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of fringes on screen in YDSE depends on:", "options": ["Slit separation only", "Wavelength only", "Both separation and wavelength", "Source intensity"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["YDSE_fringes"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Coherent sources are required for:", "options": ["Reflection", "Refraction", "Interference", "Diffraction (partly)"], "correct_answer": "C", "chapter": "Wave Optics", "topic_tags": ["coherence"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Magnetic field at solenoid axis (n turns/m, current I):", "options": ["μ₀nI", "μ₀I/n", "μ₀n/I", "μ₀nI/2"], "correct_answer": "A", "chapter": "Magnetism", "topic_tags": ["solenoid_field"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Power consumed by 100W bulb in 10 hr (kWh):", "options": ["1", "10", "100", "1000"], "correct_answer": "A", "chapter": "Current Electricity", "topic_tags": ["energy_kWh"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Electric flux through closed surface enclosing charge q:", "options": ["q/ε₀ (Gauss)", "qε₀", "q²", "0"], "correct_answer": "A", "chapter": "Electrostatics", "topic_tags": ["Gauss"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Equivalent capacitance of 2 caps C in parallel:", "options": ["C/2", "2C", "C", "C²"], "correct_answer": "B", "chapter": "Capacitance", "topic_tags": ["parallel_cap"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Refractive index n = ?", "options": ["c/v", "v/c", "c·v", "1"], "correct_answer": "A", "chapter": "Ray Optics", "topic_tags": ["refractive_index"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Image formed by convex mirror is always:", "options": ["Real, inverted", "Virtual, erect, diminished", "Virtual, magnified", "Real, same size"], "correct_answer": "B", "chapter": "Ray Optics", "topic_tags": ["convex_mirror"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Power factor of pure resistor:", "options": ["0", "0.5", "1", "Variable"], "correct_answer": "C", "chapter": "AC", "topic_tags": ["resistor_pf"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Frequency of EM wave with λ=10 cm:", "options": ["3 GHz", "3 MHz", "300 GHz", "3 kHz"], "correct_answer": "A", "chapter": "EM Waves", "topic_tags": ["frequency_wavelength"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Number of free electrons per atom in copper:", "options": ["0", "1", "2", "4"], "correct_answer": "B", "chapter": "Current Electricity", "topic_tags": ["copper_electrons"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Time period of physical pendulum depends on:", "options": ["Only length", "Length and gravity", "Moment of inertia, distance to CG, gravity", "Material"], "correct_answer": "C", "chapter": "Oscillations", "topic_tags": ["physical_pendulum"], "difficulty": "hard", "marks": 4},
-    {"question_text": "Sound intensity level unit:", "options": ["Hz", "dB (decibel)", "W", "Pa"], "correct_answer": "B", "chapter": "Sound", "topic_tags": ["dB"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Amount of charge in 1 mole electrons:", "options": ["1 C", "96,500 C (Faraday)", "1.6×10⁻¹⁹ C", "9.65×10²³ C"], "correct_answer": "B", "chapter": "Electrochemistry/Current", "topic_tags": ["Faraday_mole"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Reactance of inductor X_L:", "options": ["ωL", "1/(ωL)", "ω/L", "L"], "correct_answer": "A", "chapter": "AC", "topic_tags": ["inductive_reactance"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Specific heat at constant pressure Cp - Cv =", "options": ["0", "R (gas constant)", "T", "Cp + Cv"], "correct_answer": "B", "chapter": "Thermodynamics", "topic_tags": ["Cp_minus_Cv"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Coefficient of viscosity unit:", "options": ["Pa·s", "N/m²", "kg/m·s² (same as Pa·s)", "Both A and C"], "correct_answer": "D", "chapter": "Fluids", "topic_tags": ["viscosity_units"], "difficulty": "medium", "marks": 4},
-    {"question_text": "If pendulum length increases by 4×, period changes by:", "options": ["2×", "4×", "1/2×", "16×"], "correct_answer": "A", "chapter": "Oscillations", "topic_tags": ["pendulum_scale"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Mass of moon is approximately:",
+      "options": [
+        "10⁻² × Earth",
+        "1.2×10⁻² × Earth",
+        "10 × Earth",
+        "100 × Earth"
+      ],
+      "correct_answer": "B",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "moon_mass"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Moon's mass is approximately 7.3 × 10²² kg while Earth's mass is about 6.0 × 10²⁴ kg. Dividing these values gives a ratio of roughly 0.012, or 1.2 × 10⁻², making the Moon approximately 1.2% of Earth's mass."
+    },
+    {
+      "question_text": "Escape velocity from moon vs Earth:",
+      "options": [
+        "Same",
+        "Moon higher",
+        "Moon lower",
+        "Doesn't apply"
+      ],
+      "correct_answer": "C",
+      "chapter": "Gravitation",
+      "topic_tags": [
+        "escape_velocity"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Escape velocity depends on both mass and radius: v = √(2GM/r). The Moon has much less mass than Earth and a smaller radius, but the mass difference dominates, resulting in a lower escape velocity (~2.4 km/s for Moon vs ~11.2 km/s for Earth)."
+    },
+    {
+      "question_text": "Newton's 3rd law of motion: action and reaction:",
+      "options": [
+        "Act on same body",
+        "Act on different bodies",
+        "Same direction",
+        "Different magnitude"
+      ],
+      "correct_answer": "B",
+      "chapter": "Laws of Motion",
+      "topic_tags": [
+        "Newton_3rd"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Action and reaction forces occur between two interacting objects—one object exerts a force on the second object, and the second exerts an equal and opposite force back on the first. Therefore, they must act on different bodies to satisfy Newton's third law."
+    },
+    {
+      "question_text": "Pressure formula: P = ?",
+      "options": [
+        "F/A",
+        "FA",
+        "F·A",
+        "A/F"
+      ],
+      "correct_answer": "A",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "pressure"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Pressure is defined as force distributed over an area. The force applied is divided by the area over which it acts, giving the formula P = F/A, where F is force and A is the area."
+    },
+    {
+      "question_text": "Heat capacity of water:",
+      "options": [
+        "1 cal/g·°C",
+        "1 J/g·°C",
+        "4.18 cal/g·°C",
+        "10 cal/g·°C"
+      ],
+      "correct_answer": "A",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "heat_capacity"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Water's specific heat capacity is defined as 1 calorie per gram per degree Celsius—this is actually how the calorie unit was originally defined. By contrast, in SI units it equals approximately 4.18 J/g·°C, making option B incorrect."
+    },
+    {
+      "question_text": "Temperature in Kelvin if 0°C:",
+      "options": [
+        "0",
+        "100",
+        "273.15",
+        "373"
+      ],
+      "correct_answer": "C",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Kelvin"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The Kelvin scale is defined so that absolute zero (0 K) equals -273.15°C. Therefore, 0°C corresponds to 273.15 K, found by adding 273.15 to the Celsius temperature."
+    },
+    {
+      "question_text": "Doppler effect cause:",
+      "options": [
+        "Reflection",
+        "Relative motion between source and observer",
+        "Absorption",
+        "Polarization"
+      ],
+      "correct_answer": "B",
+      "chapter": "Waves",
+      "topic_tags": [
+        "Doppler"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When a source and observer move relative to each other, the distance between successive wave crests changes, causing the observer to detect a different frequency than the source emits. This relative motion compresses or stretches the wavelength, producing the Doppler effect."
+    },
+    {
+      "question_text": "Number of fringes on screen in YDSE depends on:",
+      "options": [
+        "Slit separation only",
+        "Wavelength only",
+        "Both separation and wavelength",
+        "Source intensity"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "YDSE_fringes"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The fringe spacing is λD/d (wavelength × distance / slit separation), so smaller wavelengths or larger separations produce more fringes within a fixed screen width. Therefore, the total number depends on both parameters."
+    },
+    {
+      "question_text": "Coherent sources are required for:",
+      "options": [
+        "Reflection",
+        "Refraction",
+        "Interference",
+        "Diffraction (partly)"
+      ],
+      "correct_answer": "C",
+      "chapter": "Wave Optics",
+      "topic_tags": [
+        "coherence"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Interference requires two or more waves to overlap and produce a stable, observable pattern of constructive and destructive interference. This is only possible when the sources are coherent—meaning they have a constant phase relationship and the same frequency—so the interference pattern doesn't fluctuate randomly."
+    },
+    {
+      "question_text": "Magnetic field at solenoid axis (n turns/m, current I):",
+      "options": [
+        "μ₀nI",
+        "μ₀I/n",
+        "μ₀n/I",
+        "μ₀nI/2"
+      ],
+      "correct_answer": "A",
+      "chapter": "Magnetism",
+      "topic_tags": [
+        "solenoid_field"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "At the axis of a solenoid, each turn contributes a magnetic field proportional to the current. With n turns per unit length, the total field is the superposition of all contributions, yielding B = μ₀nI, where μ₀ is the permeability of free space."
+    },
+    {
+      "question_text": "Power consumed by 100W bulb in 10 hr (kWh):",
+      "options": [
+        "1",
+        "10",
+        "100",
+        "1000"
+      ],
+      "correct_answer": "A",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "energy_kWh"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Power consumption is calculated as Energy = Power × Time. With a 100W bulb operating for 10 hours: Energy = 0.1 kW × 10 hr = 1 kWh."
+    },
+    {
+      "question_text": "Electric flux through closed surface enclosing charge q:",
+      "options": [
+        "q/ε₀ (Gauss)",
+        "qε₀",
+        "q²",
+        "0"
+      ],
+      "correct_answer": "A",
+      "chapter": "Electrostatics",
+      "topic_tags": [
+        "Gauss"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Gauss's law directly states that electric flux through any closed surface is equal to the enclosed charge divided by the permittivity of free space (ε₀). This fundamental relationship quantifies how electric field lines emanate from enclosed charges."
+    },
+    {
+      "question_text": "Equivalent capacitance of 2 caps C in parallel:",
+      "options": [
+        "C/2",
+        "2C",
+        "C",
+        "C²"
+      ],
+      "correct_answer": "B",
+      "chapter": "Capacitance",
+      "topic_tags": [
+        "parallel_cap"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "When capacitors are connected in parallel, their voltages are equal and charges add together. Since Q_total = Q₁ + Q₂ and C_eq = Q_total/V, the equivalent capacitance is C_eq = C + C = 2C."
+    },
+    {
+      "question_text": "Refractive index n = ?",
+      "options": [
+        "c/v",
+        "v/c",
+        "c·v",
+        "1"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "refractive_index"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The refractive index is defined as the ratio of the speed of light in vacuum (c) to the speed of light in a medium (v). Since light always travels slower in a medium than in vacuum, n is always greater than 1."
+    },
+    {
+      "question_text": "Image formed by convex mirror is always:",
+      "options": [
+        "Real, inverted",
+        "Virtual, erect, diminished",
+        "Virtual, magnified",
+        "Real, same size"
+      ],
+      "correct_answer": "B",
+      "chapter": "Ray Optics",
+      "topic_tags": [
+        "convex_mirror"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "A convex mirror always diverges light rays, causing them to appear as if they originate from a point behind the mirror. This creates a virtual image that is always erect (upright) and diminished (smaller than the object), regardless of object position."
+    },
+    {
+      "question_text": "Power factor of pure resistor:",
+      "options": [
+        "0",
+        "0.5",
+        "1",
+        "Variable"
+      ],
+      "correct_answer": "C",
+      "chapter": "AC",
+      "topic_tags": [
+        "resistor_pf"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "In a pure resistor, voltage and current are in phase (0° phase difference), so cos(0°) = 1. Power factor equals cos(φ), where φ is the phase angle between voltage and current."
+    },
+    {
+      "question_text": "Frequency of EM wave with λ=10 cm:",
+      "options": [
+        "3 GHz",
+        "3 MHz",
+        "300 GHz",
+        "3 kHz"
+      ],
+      "correct_answer": "A",
+      "chapter": "EM Waves",
+      "topic_tags": [
+        "frequency_wavelength"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Using the wave equation c = fλ, where c = 3×10⁸ m/s and λ = 0.1 m: f = c/λ = (3×10⁸)/(0.1) = 3×10⁹ Hz = 3 GHz."
+    },
+    {
+      "question_text": "Number of free electrons per atom in copper:",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
+      "correct_answer": "B",
+      "chapter": "Current Electricity",
+      "topic_tags": [
+        "copper_electrons"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Copper has an atomic number of 29 with electron configuration ending in 3d¹⁰4s¹. The single 4s electron in the outermost shell is loosely bound and becomes a free electron in the conduction band, contributing to copper's excellent electrical conductivity."
+    },
+    {
+      "question_text": "Time period of physical pendulum depends on:",
+      "options": [
+        "Only length",
+        "Length and gravity",
+        "Moment of inertia, distance to CG, gravity",
+        "Material"
+      ],
+      "correct_answer": "C",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "physical_pendulum"
+      ],
+      "difficulty": "hard",
+      "marks": 4,
+      "explanation": "The time period of a physical pendulum is given by T = 2π√(I/mgd), where I is moment of inertia about the pivot, m is mass, g is gravity, and d is distance from pivot to center of gravity. All three factors in this formula directly affect the period."
+    },
+    {
+      "question_text": "Sound intensity level unit:",
+      "options": [
+        "Hz",
+        "dB (decibel)",
+        "W",
+        "Pa"
+      ],
+      "correct_answer": "B",
+      "chapter": "Sound",
+      "topic_tags": [
+        "dB"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The decibel (dB) is a logarithmic unit that quantifies sound intensity level relative to a reference intensity, making it the standard measure for expressing how loud a sound is perceived. The other options measure frequency (Hz), power (W), and pressure (Pa), but not intensity level itself."
+    },
+    {
+      "question_text": "Amount of charge in 1 mole electrons:",
+      "options": [
+        "1 C",
+        "96,500 C (Faraday)",
+        "1.6×10⁻¹⁹ C",
+        "9.65×10²³ C"
+      ],
+      "correct_answer": "B",
+      "chapter": "Electrochemistry/Current",
+      "topic_tags": [
+        "Faraday_mole"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "One mole contains Avogadro's number of electrons (6.02×10²³). Multiplying this by the elementary charge (1.6×10⁻¹⁹ C per electron) gives 96,500 C, which is defined as one Faraday—the standard unit for charge per mole of electrons."
+    },
+    {
+      "question_text": "Reactance of inductor X_L:",
+      "options": [
+        "ωL",
+        "1/(ωL)",
+        "ω/L",
+        "L"
+      ],
+      "correct_answer": "A",
+      "chapter": "AC",
+      "topic_tags": [
+        "inductive_reactance"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Inductive reactance is defined as the opposition to AC current from an inductor and is directly proportional to both frequency (ω) and inductance (L), giving X_L = ωL. This shows inductors block higher frequencies more strongly."
+    },
+    {
+      "question_text": "Specific heat at constant pressure Cp - Cv =",
+      "options": [
+        "0",
+        "R (gas constant)",
+        "T",
+        "Cp + Cv"
+      ],
+      "correct_answer": "B",
+      "chapter": "Thermodynamics",
+      "topic_tags": [
+        "Cp_minus_Cv"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The difference between heat capacities arises from the work done during expansion at constant pressure. At constant pressure, the system must do P∆V work, while at constant volume no work occurs. This additional energy requirement per mole per unit temperature equals the gas constant R."
+    },
+    {
+      "question_text": "Coefficient of viscosity unit:",
+      "options": [
+        "Pa·s",
+        "N/m²",
+        "kg/m·s² (same as Pa·s)",
+        "Both A and C"
+      ],
+      "correct_answer": "D",
+      "chapter": "Fluids",
+      "topic_tags": [
+        "viscosity_units"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Viscosity's unit Pa·s (Pascal-second) is dimensionally equivalent to kg/(m·s). Both A and C express the same unit in different forms: Pa·s uses pressure units, while kg/(m·s) uses fundamental SI base units, making both correct representations."
+    },
+    {
+      "question_text": "If pendulum length increases by 4×, period changes by:",
+      "options": [
+        "2×",
+        "4×",
+        "1/2×",
+        "16×"
+      ],
+      "correct_answer": "A",
+      "chapter": "Oscillations",
+      "topic_tags": [
+        "pendulum_scale"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The period of a pendulum follows T = 2π√(L/g). When length increases by 4×, the period increases by √4 = 2×, since period is proportional to the square root of length."
+    }
   ]
 }

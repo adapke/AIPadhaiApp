@@ -8,228 +8,454 @@
   "questions": [
     {
       "question_text": "The number of ATP molecules produced by complete oxidation of one glucose molecule is approximately:",
-      "options": ["30-32", "36-38", "24-26", "40-42"],
+      "options": [
+        "30-32",
+        "36-38",
+        "24-26",
+        "40-42"
+      ],
       "correct_answer": "A",
       "chapter": "Respiration in Plants",
-      "topic_tags": ["cellular_respiration", "ATP_yield"],
+      "topic_tags": [
+        "cellular_respiration",
+        "ATP_yield"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "During glycolysis, the pyruvate oxidation, and the citric acid cycle, one glucose yields 4 ATP directly, but the ~10 NADH and 2 FADH₂ produced generate approximately 26-28 ATP through oxidative phosphorylation, totaling 30-32 ATP per glucose molecule."
     },
     {
       "question_text": "Which of the following is the powerhouse of the cell?",
-      "options": ["Ribosome", "Mitochondria", "Golgi apparatus", "Endoplasmic reticulum"],
+      "options": [
+        "Ribosome",
+        "Mitochondria",
+        "Golgi apparatus",
+        "Endoplasmic reticulum"
+      ],
       "correct_answer": "B",
       "chapter": "Cell - The Unit of Life",
-      "topic_tags": ["organelles", "energy"],
+      "topic_tags": [
+        "organelles",
+        "energy"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Mitochondria are the powerhouse of the cell because they generate ATP through cellular respiration, providing the energy required for nearly all cellular processes. The other organelles have different functions like protein synthesis, modification, or translation."
     },
     {
       "question_text": "In humans, which chromosome carries the gene for haemophilia?",
-      "options": ["Autosome 7", "Y chromosome", "X chromosome", "Chromosome 21"],
+      "options": [
+        "Autosome 7",
+        "Y chromosome",
+        "X chromosome",
+        "Chromosome 21"
+      ],
       "correct_answer": "C",
       "chapter": "Principles of Inheritance and Variation",
-      "topic_tags": ["sex_linked", "genetic_disorders"],
+      "topic_tags": [
+        "sex_linked",
+        "genetic_disorders"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Haemophilia is an X-linked recessive disorder caused by a mutation in the gene encoding clotting factor VIII or IX. Since the gene is located on the X chromosome, males need only one copy of the mutant allele to express the disease, while females typically need two copies to be affected."
     },
     {
       "question_text": "Which hormone is responsible for lowering blood glucose levels?",
-      "options": ["Glucagon", "Adrenaline", "Insulin", "Thyroxine"],
+      "options": [
+        "Glucagon",
+        "Adrenaline",
+        "Insulin",
+        "Thyroxine"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Coordination and Integration",
-      "topic_tags": ["pancreas", "endocrine"],
+      "topic_tags": [
+        "pancreas",
+        "endocrine"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Insulin is secreted by the pancreas in response to high blood glucose and facilitates glucose uptake into cells for storage or use, thereby lowering blood glucose levels. The other hormones either raise glucose levels (glucagon, adrenaline) or regulate metabolism generally (thyroxine)."
     },
     {
       "question_text": "The Calvin cycle takes place in which part of the chloroplast?",
-      "options": ["Thylakoid lumen", "Stroma", "Grana", "Outer membrane"],
+      "options": [
+        "Thylakoid lumen",
+        "Stroma",
+        "Grana",
+        "Outer membrane"
+      ],
       "correct_answer": "B",
       "chapter": "Photosynthesis in Higher Plants",
-      "topic_tags": ["dark_reaction", "chloroplast"],
+      "topic_tags": [
+        "dark_reaction",
+        "chloroplast"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Calvin cycle is a light-independent process that uses ATP and NADPH produced by light reactions to fix CO₂ into glucose. It occurs in the stroma, the fluid-filled space surrounding the thylakoids, while the light reactions occur in the thylakoid membranes."
     },
     {
       "question_text": "Which of the following is NOT a function of the liver?",
-      "options": ["Bile production", "Glycogen storage", "Insulin secretion", "Detoxification"],
+      "options": [
+        "Bile production",
+        "Glycogen storage",
+        "Insulin secretion",
+        "Detoxification"
+      ],
       "correct_answer": "C",
       "chapter": "Digestion and Absorption",
-      "topic_tags": ["liver", "function"],
+      "topic_tags": [
+        "liver",
+        "function"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The liver produces bile, stores glycogen, and detoxifies harmful substances, but insulin secretion is NOT a liver function—the pancreas produces insulin through its beta cells in the islets of Langerhans."
     },
     {
       "question_text": "The functional unit of kidney is:",
-      "options": ["Neuron", "Nephron", "Hepatocyte", "Glomerulus"],
+      "options": [
+        "Neuron",
+        "Nephron",
+        "Hepatocyte",
+        "Glomerulus"
+      ],
       "correct_answer": "B",
       "chapter": "Excretory Products and their Elimination",
-      "topic_tags": ["kidney", "anatomy"],
+      "topic_tags": [
+        "kidney",
+        "anatomy"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The nephron is the functional filtering unit of the kidney that performs all essential processes: ultrafiltration in the glomerulus, selective reabsorption in the tubule, and secretion to produce urine. While the glomerulus is part of a nephron, the nephron as a whole is the complete functional unit."
     },
     {
       "question_text": "Mendel's law of independent assortment is based on:",
-      "options": ["Monohybrid cross", "Dihybrid cross", "Test cross", "Back cross"],
+      "options": [
+        "Monohybrid cross",
+        "Dihybrid cross",
+        "Test cross",
+        "Back cross"
+      ],
       "correct_answer": "B",
       "chapter": "Principles of Inheritance and Variation",
-      "topic_tags": ["mendel", "dihybrid"],
+      "topic_tags": [
+        "mendel",
+        "dihybrid"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The law of independent assortment requires observing two or more different traits simultaneously to show they segregate independently. Only a dihybrid cross (involving two traits) demonstrates this principle, whereas a monohybrid cross involves just one trait."
     },
     {
       "question_text": "Which biomolecule is the major component of cell membrane?",
-      "options": ["Carbohydrate", "Phospholipid", "Protein", "Nucleic acid"],
+      "options": [
+        "Carbohydrate",
+        "Phospholipid",
+        "Protein",
+        "Nucleic acid"
+      ],
       "correct_answer": "B",
       "chapter": "Biomolecules",
-      "topic_tags": ["membrane", "lipids"],
+      "topic_tags": [
+        "membrane",
+        "lipids"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Phospholipids form the fundamental lipid bilayer structure of all cell membranes, with their hydrophobic tails facing inward and hydrophilic heads facing outward, creating a stable barrier that controls what enters and exits the cell."
     },
     {
       "question_text": "The site of protein synthesis in a cell is:",
-      "options": ["Mitochondria", "Ribosome", "Nucleus", "Lysosome"],
+      "options": [
+        "Mitochondria",
+        "Ribosome",
+        "Nucleus",
+        "Lysosome"
+      ],
       "correct_answer": "B",
       "chapter": "Cell - The Unit of Life",
-      "topic_tags": ["ribosome", "translation"],
+      "topic_tags": [
+        "ribosome",
+        "translation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Ribosomes are the cellular organelles that translate mRNA into protein chains by reading codons and assembling amino acids in the correct sequence. While the nucleus contains DNA instructions and mitochondria provide energy, only ribosomes perform the actual synthesis process."
     },
     {
       "question_text": "Which of the following is a viral disease?",
-      "options": ["Cholera", "Typhoid", "Influenza", "Tuberculosis"],
+      "options": [
+        "Cholera",
+        "Typhoid",
+        "Influenza",
+        "Tuberculosis"
+      ],
       "correct_answer": "C",
       "chapter": "Human Health and Disease",
-      "topic_tags": ["viral_diseases", "pathogens"],
+      "topic_tags": [
+        "viral_diseases",
+        "pathogens"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Influenza is caused by the influenza virus, whereas cholera, typhoid, and tuberculosis are all bacterial infections caused by specific bacteria (Vibrio cholerae, Salmonella typhi, and Mycobacterium tuberculosis respectively)."
     },
     {
       "question_text": "Auxin is primarily produced in which part of the plant?",
-      "options": ["Root tip", "Mature leaves", "Apical meristem", "Xylem"],
+      "options": [
+        "Root tip",
+        "Mature leaves",
+        "Apical meristem",
+        "Xylem"
+      ],
       "correct_answer": "C",
       "chapter": "Plant Growth and Development",
-      "topic_tags": ["hormones", "auxin"],
+      "topic_tags": [
+        "hormones",
+        "auxin"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The apical meristem, located at the shoot tip, is the primary site of auxin production in plants. While root tips also produce auxin, the apical meristem is considered the major source, as it contains actively dividing cells that synthesize and accumulate the hormone for regulating stem elongation and growth."
     },
     {
       "question_text": "The respiratory pigment in human blood is:",
-      "options": ["Chlorophyll", "Haemoglobin", "Melanin", "Myoglobin"],
+      "options": [
+        "Chlorophyll",
+        "Haemoglobin",
+        "Melanin",
+        "Myoglobin"
+      ],
       "correct_answer": "B",
       "chapter": "Breathing and Exchange of Gases",
-      "topic_tags": ["respiratory_pigments", "RBC"],
+      "topic_tags": [
+        "respiratory_pigments",
+        "RBC"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Haemoglobin is the iron-containing protein in red blood cells that binds and transports oxygen throughout the body. Chlorophyll is found in plants, melanin is a skin pigment, and myoglobin is found in muscle tissue, not blood."
     },
     {
       "question_text": "Which gland is known as the master gland of the body?",
-      "options": ["Thyroid", "Pituitary", "Adrenal", "Pancreas"],
+      "options": [
+        "Thyroid",
+        "Pituitary",
+        "Adrenal",
+        "Pancreas"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Coordination and Integration",
-      "topic_tags": ["pituitary", "endocrine"],
+      "topic_tags": [
+        "pituitary",
+        "endocrine"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The pituitary gland controls the secretion of hormones from most other endocrine glands (thyroid, adrenal, etc.) through its releasing hormones, making it the master regulator of the endocrine system."
     },
     {
       "question_text": "Which type of nutrition is found in fungi?",
-      "options": ["Autotrophic", "Saprotrophic", "Photosynthetic", "Chemosynthetic"],
+      "options": [
+        "Autotrophic",
+        "Saprotrophic",
+        "Photosynthetic",
+        "Chemosynthetic"
+      ],
       "correct_answer": "B",
       "chapter": "Biological Classification",
-      "topic_tags": ["fungi", "nutrition"],
+      "topic_tags": [
+        "fungi",
+        "nutrition"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Fungi lack chloroplasts and cannot produce their own food through photosynthesis. Instead, they absorb nutrients by secreting enzymes that break down dead organic matter externally, then absorb the digested products—a process called saprotrophic nutrition."
     },
     {
       "question_text": "The genetic material of HIV is:",
-      "options": ["DNA", "RNA", "Both DNA and RNA", "Protein"],
+      "options": [
+        "DNA",
+        "RNA",
+        "Both DNA and RNA",
+        "Protein"
+      ],
       "correct_answer": "B",
       "chapter": "Human Health and Disease",
-      "topic_tags": ["HIV", "retrovirus"],
+      "topic_tags": [
+        "HIV",
+        "retrovirus"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "HIV is a retrovirus that contains two copies of single-stranded RNA as its genetic material. Upon infection, this RNA is reverse-transcribed into DNA, but the virus itself carries and transmits RNA, not DNA."
     },
     {
       "question_text": "The phenomenon by which water moves from a region of higher water concentration to lower is called:",
-      "options": ["Diffusion", "Osmosis", "Active transport", "Plasmolysis"],
+      "options": [
+        "Diffusion",
+        "Osmosis",
+        "Active transport",
+        "Plasmolysis"
+      ],
       "correct_answer": "B",
       "chapter": "Transport in Plants",
-      "topic_tags": ["osmosis", "water_movement"],
+      "topic_tags": [
+        "osmosis",
+        "water_movement"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Osmosis is the specific term for water movement across a semipermeable membrane from regions of higher water concentration (lower solute concentration) to lower water concentration (higher solute concentration). While diffusion is the general process of concentration gradient movement, osmosis specifically describes this water-mediated phenomenon."
     },
     {
       "question_text": "Restriction enzymes are produced by:",
-      "options": ["Eukaryotes", "Bacteria", "Plants", "Fungi"],
+      "options": [
+        "Eukaryotes",
+        "Bacteria",
+        "Plants",
+        "Fungi"
+      ],
       "correct_answer": "B",
       "chapter": "Biotechnology: Principles and Processes",
-      "topic_tags": ["restriction_enzymes", "molecular_biology"],
+      "topic_tags": [
+        "restriction_enzymes",
+        "molecular_biology"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Restriction enzymes evolved in bacteria as a primitive immune system to cut foreign DNA from bacteriophages and other invaders, while protecting their own DNA with methylation patterns. This defense mechanism is specific to bacteria."
     },
     {
       "question_text": "Which of the following is a non-renewable resource?",
-      "options": ["Solar energy", "Wind energy", "Coal", "Biomass"],
+      "options": [
+        "Solar energy",
+        "Wind energy",
+        "Coal",
+        "Biomass"
+      ],
       "correct_answer": "C",
       "chapter": "Environmental Issues",
-      "topic_tags": ["resources", "fossil_fuels"],
+      "topic_tags": [
+        "resources",
+        "fossil_fuels"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Coal is formed from ancient plant material compressed over millions of years and cannot be regenerated on human timescales, making it non-renewable. Solar, wind, and biomass are continuously replenished by natural processes."
     },
     {
       "question_text": "Cells that secrete insulin in pancreas are:",
-      "options": ["Alpha cells", "Beta cells", "Delta cells", "Gamma cells"],
+      "options": [
+        "Alpha cells",
+        "Beta cells",
+        "Delta cells",
+        "Gamma cells"
+      ],
       "correct_answer": "B",
       "chapter": "Chemical Coordination and Integration",
-      "topic_tags": ["pancreas", "beta_cells", "islets"],
+      "topic_tags": [
+        "pancreas",
+        "beta_cells",
+        "islets"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Beta cells in the pancreatic islets (islets of Langerhans) are specialized to produce and secrete insulin, the hormone that regulates blood glucose levels. Alpha cells secrete glucagon, while delta cells secrete somatostatin."
     },
     {
       "question_text": "Which is the longest cell in the human body?",
-      "options": ["RBC", "Neuron", "Muscle cell", "Epithelial cell"],
+      "options": [
+        "RBC",
+        "Neuron",
+        "Muscle cell",
+        "Epithelial cell"
+      ],
       "correct_answer": "B",
       "chapter": "Neural Control and Coordination",
-      "topic_tags": ["neuron", "cell_size"],
+      "topic_tags": [
+        "neuron",
+        "cell_size"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Neurons, particularly sensory neurons in the spinal cord, can extend over a meter long when including their axons, making them significantly longer than muscle cells or other human cell types."
     },
     {
       "question_text": "The basic unit of classification is:",
-      "options": ["Genus", "Species", "Family", "Order"],
+      "options": [
+        "Genus",
+        "Species",
+        "Family",
+        "Order"
+      ],
       "correct_answer": "B",
       "chapter": "The Living World",
-      "topic_tags": ["taxonomy", "classification"],
+      "topic_tags": [
+        "taxonomy",
+        "classification"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Species is the smallest, most specific taxonomic rank where organisms can interbreed and produce fertile offspring. All higher ranks (genus, family, order) group multiple species together, making species the fundamental unit upon which all biological classification is built."
     },
     {
       "question_text": "Photosynthesis in C4 plants is more efficient because:",
-      "options": ["They have more chlorophyll", "Lower photorespiration", "Larger leaves", "More stomata"],
+      "options": [
+        "They have more chlorophyll",
+        "Lower photorespiration",
+        "Larger leaves",
+        "More stomata"
+      ],
       "correct_answer": "B",
       "chapter": "Photosynthesis in Higher Plants",
-      "topic_tags": ["C4_pathway", "photorespiration"],
+      "topic_tags": [
+        "C4_pathway",
+        "photorespiration"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "C4 plants use a two-stage carbon fixation process where PEP carboxylase initially captures CO2, concentrating it around RuBisCO in bundle sheath cells. This high CO2 concentration minimizes photorespiration (the wasteful oxygenation of RuBP), making photosynthesis more efficient than in C3 plants."
     },
     {
       "question_text": "Which of the following is the powerhouse of pollination by wind?",
-      "options": ["Heavy pollen", "Colourful flowers", "Light dry pollen", "Scented flowers"],
+      "options": [
+        "Heavy pollen",
+        "Colourful flowers",
+        "Light dry pollen",
+        "Scented flowers"
+      ],
       "correct_answer": "C",
       "chapter": "Sexual Reproduction in Flowering Plants",
-      "topic_tags": ["anemophily", "pollination"],
+      "topic_tags": [
+        "anemophily",
+        "pollination"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Wind-pollinated plants require pollen that can be easily carried through the air over long distances. Light, dry pollen has low mass and doesn't clump together, allowing it to remain airborne and disperse effectively via wind currents, whereas heavy pollen would quickly fall to the ground."
     },
     {
       "question_text": "Hardy-Weinberg principle applies to:",
-      "options": ["A small population", "An isolated population", "A large random-mating population in equilibrium", "Only sexually reproducing species"],
+      "options": [
+        "A small population",
+        "An isolated population",
+        "A large random-mating population in equilibrium",
+        "Only sexually reproducing species"
+      ],
       "correct_answer": "C",
       "chapter": "Evolution",
-      "topic_tags": ["population_genetics", "equilibrium"],
+      "topic_tags": [
+        "population_genetics",
+        "equilibrium"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The Hardy-Weinberg principle requires a large population to minimize random genetic drift, random mating to ensure equal allele distribution, and equilibrium conditions (no mutation, selection, or migration). Option C is the only choice that encompasses all these essential requirements."
     }
   ]
 }
