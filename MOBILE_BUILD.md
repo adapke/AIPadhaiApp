@@ -46,6 +46,49 @@ npm run ios:run       # launches simulator
 npm run android:run   # launches emulator
 ```
 
+## Verified build — Windows (prod-198)
+
+Both apps were bootstrapped and the **Android debug APK built green** on a
+Windows 11 box (2026-06-30). Recorded so it's reproducible.
+
+Toolchain that worked: Node 24, JDK **17** (Gradle 8.2.1 in the Capacitor 6
+template does **not** support JDK 21 — point `JAVA_HOME` at a 17), Android
+SDK with `platform-tools` + `platforms;android-34` + `build-tools;34.0.0`.
+
+```powershell
+cd mobile
+npm install
+npx cap add android            # one-time: scaffolds mobile/android/
+npm run build                  # configure server URL + cap sync
+
+$env:JAVA_HOME    = "C:\Program Files\Eclipse Adoptium\jdk-17.x.x-hotspot"
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+cd android
+.\gradlew.bat assembleDebug    # -> app/build/outputs/apk/debug/app-debug.apk
+```
+
+Result: package `in.aipathshala.app` v1.0, ~4.4 MB, label "AI Pathshala".
+Sideload with `adb install app-debug.apk`.
+
+**Windows gotcha — AF_UNIX self-pipe.** If `gradlew` dies with
+`java.io.IOException: Unable to establish loopback connection`
+(`sun.nio.ch.UnixDomainSockets.connect0 ... Invalid argument`), your
+`%TEMP%` is resolving to an 8.3 short path (e.g.
+`C:\Users\ANKUS~1\AppData\Local\Temp`) and this JDK's WEPoll NIO selector
+can't bind its AF_UNIX self-pipe there. Give every JVM a clean ASCII temp
+dir for the build session — **machine-local, never commit this**:
+
+```powershell
+mkdir C:\gtmp
+$env:TEMP = "C:\gtmp"; $env:TMP = "C:\gtmp"
+$env:_JAVA_OPTIONS = "-Djava.io.tmpdir=C:\gtmp"
+.\gradlew.bat assembleDebug
+```
+
+**iOS is built in cloud CI** (`.github/workflows/mobile-ios.yml`, `macos-14`
+runners) — Xcode is macOS-only so it can't compile on this Windows box. The
+generated `mobile/ios/` project is rebuilt by CI each run and is git-ignored.
+
 ## Production builds
 
 **Android (.aab for Play Store):**

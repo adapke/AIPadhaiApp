@@ -1,0 +1,105 @@
+name: iOS build (Capacitor)
+
+# iOS apps CANNOT be built on Windows or Linux — Apple's toolchain (Xcode,
+# xcodebuild, CocoaPods) is macOS-only. This workflow builds the iOS app on
+# GitHub's hosted macOS runners, so no local Mac is required.
+#
+# By default it does an UNSIGNED simulator build, which proves the Capacitor
+# iOS app compiles end-to-end (no Apple Developer account needed). To produce
+# a distributable signed .ipa for TestFlight / App Store, add the signing
+# secrets noted at the bottom and switch the build step to archive+export.
+#
+# The native mobile/ios/ project is generated here on every run (it is not
+# committed), so this stays in sync with mobile/capacitor.config.json.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile-ios.yml'
+
+jobs:
+  ios:
+    name: Build iOS (unsigned, simulator)
+    runs-on: macos-14
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Show toolchain
+        run: |
+          node --version
+          xcodebuild -version
+          pod --version
+
+      - name: Install Capacitor deps
+        run: npm install --no-audit --no-fund
+
+      - name: Configure server URL (production)
+        # Rewrites server.url across the student/parent/teacher configs.
+        # Falls back gracefully if APP_BASE_URL isn't set.
+        run: npm run configure:prod || npm run configure || true
+
+      - name: Add iOS platform + sync web assets
+        run: |
+          npx cap add ios || echo "ios platform already present — syncing"
+          npx cap sync ios
+
+      - name: Build iOS app (unsigned, simulator)
+        working-directory: mobile/ios/App
+        run: |
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Package the .app as an artifact
+        working-directory: mobile/ios/App
+        run: |
+          APP_PATH=$(find build -name 'App.app' -type d | head -n1)
+          if [ -n "$APP_PATH" ]; then
+            cd "$(dirname "$APP_PATH")"
+            zip -r "$GITHUB_WORKSPACE/AIPathshala-ios-simulator.zip" App.app
+          fi
+
+      - name: Upload iOS build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-simulator-app
+          path: AIPathshala-ios-simulator.zip
+          if-no-files-found: warn
+
+# ----------------------------------------------------------------------------
+# Producing a SIGNED .ipa (TestFlight / App Store) — enable later
+# ----------------------------------------------------------------------------
+# 1. Apple Developer Program account (USD 99/yr).
+# 2. Add these repo secrets (Settings → Secrets and variables → Actions):
+#      APPLE_CERTIFICATE_P12_BASE64   - base64 of your Distribution .p12
+#      APPLE_CERTIFICATE_PASSWORD     - password for that .p12
+#      APPLE_PROVISIONING_PROFILE_B64 - base64 of the .mobileprovision
+#      APPLE_TEAM_ID                  - 10-char team id
+#      KEYCHAIN_PASSWORD              - any throwaway string
+# 3. Before the build step, import the cert into a temp keychain and install
+#    the provisioning profile, then replace the simulator build with:
+#      xcodebuild -workspace App.xcworkspace -scheme App -configuration Release \
+#        -archivePath build/App.xcarchive -destination 'generic/platform=iOS' archive
+#      xcodebuild -exportArchive -archivePath build/App.xcarchive \
+#        -exportPath build/ipa -exportOptionsPlist ExportOptions.plist
+# 4. Upload build/ipa/*.ipa to App Store Connect (e.g. with
+#    apple-actions/upload-testflight-build or `xcrun altool`).
+# Full signing + store-submission walkthrough: mobile/MOBILE_BUILD.md
