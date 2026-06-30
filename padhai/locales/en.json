@@ -206,5 +206,21 @@
   "school.updates": "School Updates",
   "school.admin": "School admin",
   "goalcat.college_entrances": "College Entrances",
-  "goalcat.state_board": "State Board"
+  "goalcat.state_board": "State Board",
+
+  "action.generate_lesson": "Generate lesson",
+  "action.narrate_lang": "Narrate in selected language",
+  "action.start_quiz": "Start quiz",
+  "action.start_game": "Start game",
+  "action.generate_recap": "Generate recap",
+  "action.show_transcript": "Show transcript",
+  "action.open_notes": "Open notes",
+  "status.all_saved": "All changes saved",
+  "live.conversation": "Live conversation",
+  "flash.num_cards": "Number of cards",
+  "flash.generate_deck": "Generate deck",
+  "flash.flip_hint": "Tap or press SPACE to flip",
+  "voice.conversation": "Voice conversation",
+  "essay.grade": "Grade my answer",
+  "essay.ai_score": "AI Score"
 }

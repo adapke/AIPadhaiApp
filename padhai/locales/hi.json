@@ -206,5 +206,21 @@
   "school.updates": "स्कूल अपडेट",
   "school.admin": "स्कूल एडमिन",
   "goalcat.college_entrances": "कॉलेज प्रवेश",
-  "goalcat.state_board": "राज्य बोर्ड"
+  "goalcat.state_board": "राज्य बोर्ड",
+
+  "action.generate_lesson": "लेसन बनाएँ",
+  "action.narrate_lang": "चुनी गई भाषा में सुनाएँ",
+  "action.start_quiz": "क्विज़ शुरू करें",
+  "action.start_game": "गेम शुरू करें",
+  "action.generate_recap": "रीकैप बनाएँ",
+  "action.show_transcript": "ट्रांसक्रिप्ट दिखाएँ",
+  "action.open_notes": "नोट्स खोलें",
+  "status.all_saved": "सभी बदलाव सहेजे गए",
+  "live.conversation": "लाइव बातचीत",
+  "flash.num_cards": "कार्ड्स की संख्या",
+  "flash.generate_deck": "डेक बनाएँ",
+  "flash.flip_hint": "पलटने के लिए टैप करें या SPACE दबाएँ",
+  "voice.conversation": "वॉइस बातचीत",
+  "essay.grade": "मेरा उत्तर जाँचें",
+  "essay.ai_score": "AI स्कोर"
 }
