@@ -185,5 +185,26 @@
   "goalcat.govt_exams": "Government Exams",
   "goalcat.campus": "Campus Placements",
   "trust.expert_verification": "Expert verification",
-  "common.not_set": "Not set"
+  "common.not_set": "Not set",
+
+  "render.analyzing": "Analyzing document",
+  "render.understanding": "Understanding topic",
+  "render.script": "Creating script",
+  "render.storyboard": "Creating storyboard",
+  "render.voice": "Generating voice",
+  "render.animation": "Rendering animation",
+  "render.quiz": "Preparing quiz",
+  "render.ready": "Your video is ready",
+  "studio.type_topic": "Type a topic",
+  "studio.video_mode": "Video mode",
+  "studio.output_format": "Output format",
+  "audience.general": "General audience",
+  "audience.public": "General public",
+  "audience.exam": "Exam focused",
+  "school.create_content": "Create Content",
+  "school.manage": "Manage School",
+  "school.updates": "School Updates",
+  "school.admin": "School admin",
+  "goalcat.college_entrances": "College Entrances",
+  "goalcat.state_board": "State Board"
 }

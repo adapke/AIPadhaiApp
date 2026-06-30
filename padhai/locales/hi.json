@@ -185,5 +185,26 @@
   "goalcat.govt_exams": "सरकारी परीक्षाएं",
   "goalcat.campus": "कैंपस प्लेसमेंट",
   "trust.expert_verification": "विशेषज्ञ सत्यापन",
-  "common.not_set": "सेट नहीं है"
+  "common.not_set": "सेट नहीं है",
+
+  "render.analyzing": "दस्तावेज़ का विश्लेषण",
+  "render.understanding": "विषय समझ रहे हैं",
+  "render.script": "स्क्रिप्ट बना रहे हैं",
+  "render.storyboard": "स्टोरीबोर्ड बना रहे हैं",
+  "render.voice": "आवाज़ बना रहे हैं",
+  "render.animation": "एनिमेशन रेंडर हो रहा है",
+  "render.quiz": "क्विज़ तैयार हो रही है",
+  "render.ready": "आपका वीडियो तैयार है",
+  "studio.type_topic": "विषय लिखें",
+  "studio.video_mode": "वीडियो मोड",
+  "studio.output_format": "आउटपुट प्रारूप",
+  "audience.general": "सामान्य दर्शक",
+  "audience.public": "आम जनता",
+  "audience.exam": "परीक्षा केंद्रित",
+  "school.create_content": "सामग्री बनाएं",
+  "school.manage": "स्कूल प्रबंधित करें",
+  "school.updates": "स्कूल अपडेट",
+  "school.admin": "स्कूल एडमिन",
+  "goalcat.college_entrances": "कॉलेज प्रवेश",
+  "goalcat.state_board": "राज्य बोर्ड"
 }
