@@ -358,6 +358,64 @@ def list_untagged(*, limit: int = 50) -> list[Question]:
     return [_row_to_question(r) for r in rows]
 
 
+# ---------- prod-194 — AI answer-explanation backfill ----------
+
+
+def set_explanation(qid: str, text: str | None) -> bool:
+    """prod-194 — set (or clear) the answer explanation on one question.
+
+    Returns True if a row was updated, False if qid not found. The
+    backfill worker calls this after generating an explanation via Claude;
+    curated explanations (e.g. the SAT seed) are never overwritten because
+    the worker only reads `list_without_explanation()`.
+    """
+    with _conn() as conn:
+        cursor = conn.execute(
+            "UPDATE question_bank SET explanation = ? WHERE id = ?",
+            (text, qid),
+        )
+        return cursor.rowcount > 0
+
+
+def list_without_explanation(
+    *, limit: int = 100, board: str | None = None, subject: str | None = None,
+) -> list[Question]:
+    """prod-194 — questions that have no answer explanation yet. The AI
+    backfill reads this to find work; optional board/subject narrows it
+    (e.g. board='cbse' to explain just the CBSE bank). Treats empty
+    string the same as NULL."""
+    where = ["(explanation IS NULL OR explanation = '')"]
+    params: list = []
+    if board is not None:
+        where.append("board = ?"); params.append(board)
+    if subject is not None:
+        where.append("subject = ?"); params.append(subject)
+    sql = (
+        f"SELECT {_SEL} FROM question_bank WHERE " + " AND ".join(where)
+        + " ORDER BY board, subject, created_at DESC LIMIT ?"
+    )
+    params.append(max(1, min(limit, 2000)))
+    with _conn() as conn:
+        rows = conn.execute(sql, params).fetchall()
+    return [_row_to_question(r) for r in rows]
+
+
+def explanation_coverage_stats() -> dict:
+    """prod-194 — how many bank questions carry an answer explanation."""
+    with _conn() as conn:
+        total = conn.execute("SELECT COUNT(*) FROM question_bank").fetchone()[0]
+        have = conn.execute(
+            "SELECT COUNT(*) FROM question_bank "
+            "WHERE explanation IS NOT NULL AND explanation != ''"
+        ).fetchone()[0]
+    return {
+        "total": int(total),
+        "explained": int(have),
+        "missing": int(total - have),
+        "coverage_pct": round((have / total) * 100, 2) if total else 0.0,
+    }
+
+
 def get_by_id(qid: str) -> Question | None:
     with _conn() as conn:
         r = conn.execute(

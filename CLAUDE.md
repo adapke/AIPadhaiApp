@@ -707,6 +707,26 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-194 — AI answer-explanation backfill (whole question bank).**
+  prod-193 surfaced explanations and curated the 64 SAT ones; this
+  finishes coverage for everything else. New `padhai/explain.py`
+  (`generate_explanation`) writes a concise worked-solution via Claude
+  (Haiku, `enforce_cap=False` system call, ~Rs 0.01/question). New
+  `question_bank` helpers: `set_explanation`, `list_without_explanation`
+  (board/subject filter; empty string counts as missing), and
+  `explanation_coverage_stats`. `scripts/backfill_explanations.py` finds
+  questions with no explanation, generates + caches into the
+  `explanation` column — idempotent/resumable, with
+  `--limit` / `--board` / `--subject` / `--dry-run` / `--all`. Curated
+  explanations are never overwritten (the worker reads only the missing
+  set). Verified live: 3 real explanations generated + cached (coverage
+  64 → 67 of 2567). Honest gap: the full ~2500-question run is an ops
+  task (~Rs 25, a few minutes — `python scripts/backfill_explanations.py
+  --all`) run against the production DB after deploy; the AI-cached
+  explanations live in the DB, not the JSON seed (same model as the
+  prod-138 NCERT tagger). Tests: `tests/test_explain.py` — generate via
+  fake client, empty-question guard, backfill-helper roundtrip.
+
 - **prod-193 — Per-question answer explanations (practice tests).** The
   "why was I wrong?" feature every US SAT-prep tool has. Added an
   `explanation` column to `question_bank` (idempotent ALTER mirroring the
