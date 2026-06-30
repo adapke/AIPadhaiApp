@@ -12996,6 +12996,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         ibps_po:'Bank exams (IBPS PO)', cat:'CAT (MBA)', gate:'GATE',
         neet_pg:'NEET PG', cbse_board_10:'CBSE Class 10 Board',
         cbse_board_12:'CBSE Class 12 Board', state_board:'State Board',
+        sat:'SAT (US Admissions)',
         none:'No exam — just learning',
       };
       return map[code] || code.replace(/_/g,' ');
@@ -13062,12 +13063,131 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
                 '<a href="/admin/concept-curator" style="color:#fbbf24;text-decoration:none;margin-right:10px">Curator</a>' +
                 '<a href="/admin/curator-stats" style="color:#fbbf24;text-decoration:none">Stats</a>' +
               '</div>' +
-              '<a class="btn ghost" href="/onboarding">Edit goals</a>' +
+              '<button class="btn ghost" onclick="toggleGoalEditor()">✏️ Change goal</button>' +
             '</div>' +
+          '</div>' +
+          '<div id="goalEditor" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid #334155"></div>' +
+          syllabusBlock() +
+        '</div>'
+      );
+    }
+
+    // prod-197 — syllabus + study-material entry point, consolidated INTO the
+    // progress card (replaces the old full-width studyMaterialsSection). Links
+    // to the student's OWN track: the /sat hub for SAT, otherwise /syllabus
+    // (which auto-selects their board/exam from onboarding). The full
+    // all-boards catalog still lives on the dedicated /syllabus page.
+    function syllabusBlock() {
+      var onb = (DASH && DASH.onboarding) || {};
+      var isSat = onb.target_exam === 'sat';
+      var sylHref = isSat ? '/sat' : '/syllabus';
+      var sylLabel = isSat
+        ? 'Open your SAT hub — syllabus, practice & videos'
+        : 'View your full syllabus + chapter outlines';
+      var track = [gradeLabel(onb.class_grade), boardLabel(onb.board)]
+        .filter(function(x){ return x && x !== '—'; }).join(' · ');
+      if (onb.target_exam && onb.target_exam !== 'none') {
+        track = (track ? track + ' · ' : '') + 'Target: ' + examLabel(onb.target_exam);
+      }
+      return (
+        '<div style="margin-top:14px;padding-top:14px;border-top:1px solid #334155">' +
+          '<div style="font-size:13px;color:#cbd5e1;font-weight:800;margin-bottom:8px">' +
+            '📚 Your syllabus & study material' +
+            (track ? ' <span style="color:#64748b;font-weight:400">· ' + escapeHtml(track) + '</span>' : '') +
+          '</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+            '<a class="btn" href="' + sylHref + '">' + escapeHtml(sylLabel) + ' →</a>' +
+            '<a class="btn ghost" href="/practice">Practice tests</a>' +
+            '<a class="btn ghost" href="/flashcards">Flashcards</a>' +
+            '<a class="btn ghost" href="#concept-videos">Concept videos</a>' +
           '</div>' +
         '</div>'
       );
     }
+
+    // prod-197 — inline goal editor. The old "Edit goals" link sent users to
+    // /onboarding, which dead-ends on a "You're all set" screen once
+    // onboarding is complete — so the goal felt permanent / uneditable. This
+    // edits any of the five onboarding fields in place via
+    // POST /api/onboarding/step (which accepts a single field out-of-sequence)
+    // and then re-renders the dashboard with the new goal + syllabus track.
+    var GOAL_OPTIONS = null;
+    async function ensureGoalOptions() {
+      if (GOAL_OPTIONS) return GOAL_OPTIONS;
+      try {
+        var r = await fetch('/api/onboarding/options');
+        GOAL_OPTIONS = await r.json();
+      } catch (e) { GOAL_OPTIONS = null; }
+      return GOAL_OPTIONS;
+    }
+    window.toggleGoalEditor = async function() {
+      var box = document.getElementById('goalEditor');
+      if (!box) return;
+      if (box.style.display !== 'none') { box.style.display = 'none'; return; }
+      box.style.display = '';
+      box.innerHTML = '<div class="sub"><span class="spinner" style="vertical-align:middle"></span> Loading options…</div>';
+      var opts = await ensureGoalOptions();
+      if (!opts || !opts.steps) {
+        box.innerHTML = '<div class="empty">Could not load options right now. ' +
+          '<a href="/onboarding" style="color:#fbbf24">Open full setup →</a></div>';
+        return;
+      }
+      var onb = (DASH && DASH.onboarding) || {};
+      var selStyle = 'width:100%;padding:8px;margin-top:4px;background:#0f172a;color:#e2e8f0;' +
+        'border:1px solid #334155;border-radius:8px;font-size:13px';
+      var rows = opts.steps.map(function(s) {
+        var cur = onb[s.field];
+        var optionsHtml = (s.options || []).map(function(o) {
+          var val = String(o.code);
+          var isSel = (String(cur == null ? '' : cur) === val) ? ' selected' : '';
+          return '<option value="' + escapeHtml(val) + '"' + isSel + '>' + escapeHtml(o.label) + '</option>';
+        }).join('');
+        return '<label style="display:block;margin-bottom:10px;font-size:12px;color:#94a3b8">' +
+          escapeHtml(s.label) +
+          '<select data-field="' + escapeHtml(s.field) + '" class="goal-sel" style="' + selStyle + '">' +
+          optionsHtml + '</select></label>';
+      }).join('');
+      box.innerHTML =
+        '<div style="font-weight:800;font-size:14px;margin-bottom:10px">Change your study goal</div>' +
+        '<div class="grid-2">' + rows + '</div>' +
+        '<div style="display:flex;gap:8px;margin-top:6px">' +
+          '<button class="btn" id="goalSaveBtn" onclick="saveGoal()">Save changes</button>' +
+          '<button class="btn ghost" onclick="toggleGoalEditor()">Cancel</button>' +
+        '</div>';
+    };
+    window.saveGoal = async function() {
+      var onb = (DASH && DASH.onboarding) || {};
+      var sels = document.querySelectorAll('#goalEditor .goal-sel');
+      var changes = [];
+      sels.forEach(function(s) {
+        var field = s.dataset.field, val = s.value;
+        if (String(onb[field] == null ? '' : onb[field]) !== String(val)) {
+          changes.push({ field: field, value: val });
+        }
+      });
+      if (!changes.length) { toggleGoalEditor(); return; }
+      var btn = document.getElementById('goalSaveBtn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+      for (var i = 0; i < changes.length; i++) {
+        var fd = new FormData();
+        fd.append('field', changes[i].field);
+        fd.append('value', changes[i].value);
+        try {
+          var r = await fetch('/api/onboarding/step', { method: 'POST', body: fd, headers: authH() });
+          if (!r.ok) {
+            var t = await r.text();
+            alert('Could not save ' + changes[i].field + ' (' + r.status + '): ' + t.slice(0, 160));
+            if (btn) { btn.disabled = false; btn.textContent = 'Save changes'; }
+            return;
+          }
+        } catch (e) {
+          alert('Network error while saving your goal. Please try again.');
+          if (btn) { btn.disabled = false; btn.textContent = 'Save changes'; }
+          return;
+        }
+      }
+      await load();  // re-render with the new goal + syllabus track
+    };
 
     // Fetched once after first paint. Updates the AI-quota chip in the
     // profile header so the student knows how close they are to the
@@ -14101,7 +14221,8 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         personalisedOverlaySection() +
         myPacksSection() +
         browsePacksSection() +
-        studyMaterialsSection() +
+        // prod-197 — studyMaterialsSection() removed from first view; the
+        // syllabus is now consolidated into the progress card (syllabusBlock).
         sampleFlashcardsSection() +
         trendingVideosSection() +
         conceptVideosSection() +
