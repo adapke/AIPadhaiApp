@@ -144,5 +144,25 @@
   "home.start_today": "आज ही मुफ़्त में सीखना शुरू करें",
   "home.concept_videos": "कॉन्सेप्ट वीडियो",
   "home.browse_packs": "परीक्षा पैक ब्राउज़ करें",
-  "notif.mark_all_read": "सभी को पढ़ा हुआ चिह्नित करें"
+  "notif.mark_all_read": "सभी को पढ़ा हुआ चिह्नित करें",
+
+  "dash.welcome_back": "वापसी पर स्वागत है",
+  "home.study_plan": "अध्ययन योजना",
+  "home.continue_learning": "सीखना जारी रखें",
+  "home.resume_next": "अगला नियोजित पाठ फिर से शुरू करें",
+  "home.select_goal": "सक्रिय करने के लिए एक लक्ष्य चुनें",
+  "home.curated_videos": "चुनिंदा कॉन्सेप्ट वीडियो",
+  "home.verified_by_educators": "शिक्षकों द्वारा सत्यापित",
+  "cta.try_it": "आज़माएं",
+  "common.coming_soon": "जल्द आ रहा है",
+  "home.open_studio": "स्टडी स्टूडियो खोलें",
+  "home.ask_tutor_citations": "संदर्भ के साथ AI ट्यूटर से पूछें",
+  "support.whatsapp_chat": "व्हाट्सएप सहायता चैट खोलें",
+  "support.call_pathshala": "AI पाठशाला सहायता को कॉल करें",
+  "land.photo_to_video": "पाठ्यपुस्तक की फ़ोटो से मिनटों में वीडियो पाठ",
+  "land.upload_page": "अपनी पाठ्यपुस्तक का पेज या फ़ोटो अपलोड करें",
+  "land.choose_lang_exam": "अपनी भाषा और परीक्षा चुनें",
+  "land.watch_personalised": "अपना व्यक्तिगत AI पाठ देखें",
+  "home.open_exam_hub": "एग्ज़ाम हब खोलें",
+  "auth.send_reset": "रीसेट लिंक भेजें"
 }

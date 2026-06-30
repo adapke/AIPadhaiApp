@@ -144,5 +144,25 @@
   "home.start_today": "Start learning for free today",
   "home.concept_videos": "Concept videos",
   "home.browse_packs": "Browse exam packs",
-  "notif.mark_all_read": "Mark all read"
+  "notif.mark_all_read": "Mark all read",
+
+  "dash.welcome_back": "Welcome back",
+  "home.study_plan": "Study Plan",
+  "home.continue_learning": "Continue Learning",
+  "home.resume_next": "Resume next planned lesson",
+  "home.select_goal": "Select a goal to activate",
+  "home.curated_videos": "Curated concept videos",
+  "home.verified_by_educators": "Verified by educators",
+  "cta.try_it": "Try it",
+  "common.coming_soon": "Coming soon",
+  "home.open_studio": "Open Study Studio",
+  "home.ask_tutor_citations": "Ask the AI Tutor with citations",
+  "support.whatsapp_chat": "Open WhatsApp support chat",
+  "support.call_pathshala": "Call AI Pathshala support",
+  "land.photo_to_video": "From textbook photo to video lesson in minutes",
+  "land.upload_page": "Upload your textbook page or photo",
+  "land.choose_lang_exam": "Choose your language and exam",
+  "land.watch_personalised": "Watch your personalised AI lesson",
+  "home.open_exam_hub": "Open Exam Hub",
+  "auth.send_reset": "Send reset link"
 }
