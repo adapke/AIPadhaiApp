@@ -132,5 +132,17 @@
 
   "footer.terms": "Terms of Service",
   "footer.privacy": "Privacy Policy",
-  "footer.community": "Exam community"
+  "footer.community": "Exam community",
+
+  "home.hero_title": "Study Smarter with AI",
+  "home.start_free": "Start for Free",
+  "home.watch_demo": "Watch Demo",
+  "home.how_it_works": "How PadhaiApp works",
+  "home.everything": "Everything you need to crack your exam",
+  "home.step_snap": "Snap a Page",
+  "home.step_video": "Get a Video Lesson",
+  "home.start_today": "Start learning for free today",
+  "home.concept_videos": "Concept videos",
+  "home.browse_packs": "Browse exam packs",
+  "notif.mark_all_read": "Mark all read"
 }

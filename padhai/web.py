@@ -10053,9 +10053,11 @@ def sitemap_xml() -> Response:
 
 
 @app.get("/landing", response_class=HTMLResponse)
-def landing_page() -> HTMLResponse:
-    """Public landing for unauthed visitors."""
-    return HTMLResponse(_home_ui.get_landing_html())
+def landing_page(request: Request) -> HTMLResponse:
+    """Public landing for unauthed visitors. prod-201: localized server-side
+    from ?lang= / padhai_lang cookie / Accept-Language (was English-only)."""
+    locale = _locale_from_request(request)
+    return HTMLResponse(_home_ui.get_landing_html(locale=locale))
 
 
 @app.get("/auth/login")

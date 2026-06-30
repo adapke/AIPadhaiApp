@@ -132,5 +132,17 @@
 
   "footer.terms": "सेवा की शर्तें",
   "footer.privacy": "गोपनीयता नीति",
-  "footer.community": "परीक्षा समुदाय"
+  "footer.community": "परीक्षा समुदाय",
+
+  "home.hero_title": "AI के साथ होशियारी से पढ़ें",
+  "home.start_free": "मुफ़्त में शुरू करें",
+  "home.watch_demo": "डेमो देखें",
+  "home.how_it_works": "PadhaiApp कैसे काम करता है",
+  "home.everything": "अपनी परीक्षा पास करने के लिए ज़रूरी सब कुछ",
+  "home.step_snap": "पेज की फ़ोटो लें",
+  "home.step_video": "वीडियो पाठ पाएं",
+  "home.start_today": "आज ही मुफ़्त में सीखना शुरू करें",
+  "home.concept_videos": "कॉन्सेप्ट वीडियो",
+  "home.browse_packs": "परीक्षा पैक ब्राउज़ करें",
+  "notif.mark_all_read": "सभी को पढ़ा हुआ चिह्नित करें"
 }

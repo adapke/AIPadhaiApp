@@ -1062,6 +1062,117 @@ PA = {
     "trust.tagline": "ਭਾਰਤ ਸਿੱਖਣ OS",
 }
 
+# prod-201 — high-visibility landing / home / dashboard strings, added across
+# all 8 non-Hindi locales (en.json + hi.json carry these directly). First-pass
+# translations; native-speaker review still the gate (see module docstring).
+# Brand tokens (PadhaiApp, AI) are intentionally kept in their English form.
+_NEW = {
+    "ta": {
+        "home.hero_title": "AI உடன் சிறப்பாகப் படியுங்கள்",
+        "home.start_free": "இலவசமாகத் தொடங்குங்கள்",
+        "home.watch_demo": "டெமோவைப் பாருங்கள்",
+        "home.how_it_works": "PadhaiApp எவ்வாறு செயல்படுகிறது",
+        "home.everything": "உங்கள் தேர்வில் வெற்றிபெற தேவையான அனைத்தும்",
+        "home.step_snap": "ஒரு பக்கத்தைப் படம் எடுங்கள்",
+        "home.step_video": "வீடியோ பாடம் பெறுங்கள்",
+        "home.start_today": "இன்றே இலவசமாகக் கற்கத் தொடங்குங்கள்",
+        "home.concept_videos": "கருத்து வீடியோக்கள்",
+        "home.browse_packs": "தேர்வு தொகுப்புகளை உலாவுங்கள்",
+        "notif.mark_all_read": "அனைத்தையும் படித்ததாகக் குறி",
+    },
+    "te": {
+        "home.hero_title": "AI తో తెలివిగా చదవండి",
+        "home.start_free": "ఉచితంగా ప్రారంభించండి",
+        "home.watch_demo": "డెమో చూడండి",
+        "home.how_it_works": "PadhaiApp ఎలా పనిచేస్తుంది",
+        "home.everything": "మీ పరీక్షలో నెగ్గడానికి కావలసినదంతా",
+        "home.step_snap": "ఒక పేజీని ఫోటో తీయండి",
+        "home.step_video": "వీడియో పాఠం పొందండి",
+        "home.start_today": "ఈరోజే ఉచితంగా నేర్చుకోవడం ప్రారంభించండి",
+        "home.concept_videos": "కాన్సెప్ట్ వీడియోలు",
+        "home.browse_packs": "పరీక్షా ప్యాక్‌లను బ్రౌజ్ చేయండి",
+        "notif.mark_all_read": "అన్నింటిని చదివినట్లు గుర్తించు",
+    },
+    "kn": {
+        "home.hero_title": "AI ಜೊತೆ ಜಾಣ್ಮೆಯಿಂದ ಕಲಿಯಿರಿ",
+        "home.start_free": "ಉಚಿತವಾಗಿ ಪ್ರಾರಂಭಿಸಿ",
+        "home.watch_demo": "ಡೆಮೋ ನೋಡಿ",
+        "home.how_it_works": "PadhaiApp ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
+        "home.everything": "ನಿಮ್ಮ ಪರೀಕ್ಷೆಯಲ್ಲಿ ಗೆಲ್ಲಲು ಬೇಕಾದ ಎಲ್ಲವೂ",
+        "home.step_snap": "ಒಂದು ಪುಟದ ಫೋಟೋ ತೆಗೆಯಿರಿ",
+        "home.step_video": "ವೀಡಿಯೋ ಪಾಠ ಪಡೆಯಿರಿ",
+        "home.start_today": "ಇಂದೇ ಉಚಿತವಾಗಿ ಕಲಿಯಲು ಪ್ರಾರಂಭಿಸಿ",
+        "home.concept_videos": "ಕಾನ್ಸೆಪ್ಟ್ ವೀಡಿಯೋಗಳು",
+        "home.browse_packs": "ಪರೀಕ್ಷಾ ಪ್ಯಾಕ್‌ಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ",
+        "notif.mark_all_read": "ಎಲ್ಲವನ್ನೂ ಓದಿದೆ ಎಂದು ಗುರುತಿಸಿ",
+    },
+    "ml": {
+        "home.hero_title": "AI ഉപയോഗിച്ച് മിടുക്കോടെ പഠിക്കൂ",
+        "home.start_free": "സൗജന്യമായി ആരംഭിക്കൂ",
+        "home.watch_demo": "ഡെമോ കാണുക",
+        "home.how_it_works": "PadhaiApp എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+        "home.everything": "നിങ്ങളുടെ പരീക്ഷ ജയിക്കാൻ വേണ്ടതെല്ലാം",
+        "home.step_snap": "ഒരു പേജ് ഫോട്ടോ എടുക്കൂ",
+        "home.step_video": "വീഡിയോ പാഠം നേടൂ",
+        "home.start_today": "ഇന്നുതന്നെ സൗജന്യമായി പഠിക്കാൻ തുടങ്ങൂ",
+        "home.concept_videos": "കൺസെപ്റ്റ് വീഡിയോകൾ",
+        "home.browse_packs": "പരീക്ഷാ പാക്കുകൾ ബ്രൗസ് ചെയ്യൂ",
+        "notif.mark_all_read": "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക",
+    },
+    "mr": {
+        "home.hero_title": "AI सह हुशारीने अभ्यास करा",
+        "home.start_free": "विनामूल्य सुरू करा",
+        "home.watch_demo": "डेमो पहा",
+        "home.how_it_works": "PadhaiApp कसे कार्य करते",
+        "home.everything": "तुमची परीक्षा उत्तीर्ण होण्यासाठी आवश्यक सर्वकाही",
+        "home.step_snap": "पानाचा फोटो काढा",
+        "home.step_video": "व्हिडिओ पाठ मिळवा",
+        "home.start_today": "आजच विनामूल्य शिकायला सुरुवात करा",
+        "home.concept_videos": "संकल्पना व्हिडिओ",
+        "home.browse_packs": "परीक्षा पॅक ब्राउझ करा",
+        "notif.mark_all_read": "सर्व वाचले म्हणून चिन्हांकित करा",
+    },
+    "bn": {
+        "home.hero_title": "AI দিয়ে স্মার্টভাবে পড়ুন",
+        "home.start_free": "বিনামূল্যে শুরু করুন",
+        "home.watch_demo": "ডেমো দেখুন",
+        "home.how_it_works": "PadhaiApp কীভাবে কাজ করে",
+        "home.everything": "আপনার পরীক্ষায় সফল হতে যা যা দরকার",
+        "home.step_snap": "একটি পৃষ্ঠার ছবি তুলুন",
+        "home.step_video": "ভিডিও পাঠ পান",
+        "home.start_today": "আজই বিনামূল্যে শেখা শুরু করুন",
+        "home.concept_videos": "ধারণা ভিডিও",
+        "home.browse_packs": "পরীক্ষা প্যাক ব্রাউজ করুন",
+        "notif.mark_all_read": "সব পঠিত হিসেবে চিহ্নিত করুন",
+    },
+    "gu": {
+        "home.hero_title": "AI સાથે હોશિયારીથી ભણો",
+        "home.start_free": "મફતમાં શરૂ કરો",
+        "home.watch_demo": "ડેમો જુઓ",
+        "home.how_it_works": "PadhaiApp કેવી રીતે કામ કરે છે",
+        "home.everything": "તમારી પરીક્ષા પાસ કરવા માટે જરૂરી બધું",
+        "home.step_snap": "પાનાનો ફોટો લો",
+        "home.step_video": "વિડિયો પાઠ મેળવો",
+        "home.start_today": "આજે જ મફતમાં શીખવાનું શરૂ કરો",
+        "home.concept_videos": "કન્સેપ્ટ વિડિયો",
+        "home.browse_packs": "પરીક્ષા પેક બ્રાઉઝ કરો",
+        "notif.mark_all_read": "બધાને વાંચ્યા તરીકે ચિહ્નિત કરો",
+    },
+    "pa": {
+        "home.hero_title": "AI ਨਾਲ ਸਿਆਣਪ ਨਾਲ ਪੜ੍ਹੋ",
+        "home.start_free": "ਮੁਫ਼ਤ ਵਿੱਚ ਸ਼ੁਰੂ ਕਰੋ",
+        "home.watch_demo": "ਡੈਮੋ ਦੇਖੋ",
+        "home.how_it_works": "PadhaiApp ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+        "home.everything": "ਤੁਹਾਡੀ ਪ੍ਰੀਖਿਆ ਪਾਸ ਕਰਨ ਲਈ ਲੋੜੀਂਦਾ ਸਭ ਕੁਝ",
+        "home.step_snap": "ਪੰਨੇ ਦੀ ਫੋਟੋ ਲਓ",
+        "home.step_video": "ਵੀਡੀਓ ਪਾਠ ਪ੍ਰਾਪਤ ਕਰੋ",
+        "home.start_today": "ਅੱਜ ਹੀ ਮੁਫ਼ਤ ਵਿੱਚ ਸਿੱਖਣਾ ਸ਼ੁਰੂ ਕਰੋ",
+        "home.concept_videos": "ਸੰਕਲਪ ਵੀਡੀਓ",
+        "home.browse_packs": "ਪ੍ਰੀਖਿਆ ਪੈਕ ਬ੍ਰਾਊਜ਼ ਕਰੋ",
+        "notif.mark_all_read": "ਸਭ ਨੂੰ ਪੜ੍ਹਿਆ ਵਜੋਂ ਨਿਸ਼ਾਨ ਲਗਾਓ",
+    },
+}
+
 LOCALES = {
     "ta": TA, "te": TE, "kn": KN, "ml": ML,
     "mr": MR, "bn": BN, "gu": GU, "pa": PA,
@@ -1082,6 +1193,7 @@ def main() -> int:
 
     failed = False
     for code, data in LOCALES.items():
+        data = {**data, **_NEW.get(code, {})}  # prod-201 additions
         missing = [k for k in en_keys if k not in data]
         extra = [k for k in data if k not in en_keys]
         pct = round(100 * (len(en_keys) - len(missing)) / len(en_keys), 1)
