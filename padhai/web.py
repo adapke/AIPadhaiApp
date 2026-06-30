@@ -10074,10 +10074,14 @@ def login_shortcut_redirect() -> RedirectResponse:
 
 
 @app.get("/ui-legacy", response_class=HTMLResponse)
-def ui_legacy() -> HTMLResponse:
+def ui_legacy(request: Request) -> HTMLResponse:
     """The pre-v3.18 dashboard. Kept so existing bookmarks /
-    embedded views don't break while the new home rolls out."""
-    return HTMLResponse(_INDEX_HTML)
+    embedded views don't break while the new home rolls out.
+    prod-203: localized server-side from ?lang= / padhai_lang cookie so the
+    legacy SPA (Daily Study Flow, More Tools, goal picker, etc.) translates too."""
+    from . import i18n
+    locale = _locale_from_request(request)
+    return HTMLResponse(i18n.localize_template(_INDEX_HTML, locale))
 
 
 @app.get("/features", response_class=HTMLResponse)

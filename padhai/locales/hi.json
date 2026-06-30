@@ -164,5 +164,26 @@
   "land.choose_lang_exam": "अपनी भाषा और परीक्षा चुनें",
   "land.watch_personalised": "अपना व्यक्तिगत AI पाठ देखें",
   "home.open_exam_hub": "एग्ज़ाम हब खोलें",
-  "auth.send_reset": "रीसेट लिंक भेजें"
+  "auth.send_reset": "रीसेट लिंक भेजें",
+
+  "flow.title": "दैनिक अध्ययन प्रवाह",
+  "flow.explainer": "व्याख्या देखें या पढ़ें",
+  "flow.practice": "अभ्यास प्रश्न हल करें",
+  "flow.doubt": "स्रोत के साथ एक संदेह पूछें",
+  "flow.doubt_sub": "AI ट्यूटर आपकी अपलोड की गई सामग्री से उत्तर देता है",
+  "flow.mock": "त्वरित मॉक टेस्ट",
+  "flow.flashcards": "फ्लैशकार्ड पुनरावलोकन",
+  "tool.pyq_sub": "आपकी परीक्षा के पिछले वर्ष के प्रश्न",
+  "tool.more": "और टूल",
+  "tool.quiz_maker": "क्विज़ मेकर",
+  "tool.mock_tests": "मॉक टेस्ट",
+  "tool.pyq": "PYQ अभ्यास",
+  "tool.doubt_chat": "संदेह चैट",
+  "tool.learning_path": "लर्निंग पाथ",
+  "goalcat.school_boards": "स्कूल बोर्ड",
+  "goalcat.all_state_boards": "सभी राज्य बोर्ड",
+  "goalcat.govt_exams": "सरकारी परीक्षाएं",
+  "goalcat.campus": "कैंपस प्लेसमेंट",
+  "trust.expert_verification": "विशेषज्ञ सत्यापन",
+  "common.not_set": "सेट नहीं है"
 }

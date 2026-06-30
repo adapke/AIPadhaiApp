@@ -164,5 +164,26 @@
   "land.choose_lang_exam": "Choose your language and exam",
   "land.watch_personalised": "Watch your personalised AI lesson",
   "home.open_exam_hub": "Open Exam Hub",
-  "auth.send_reset": "Send reset link"
+  "auth.send_reset": "Send reset link",
+
+  "flow.title": "Daily Study Flow",
+  "flow.explainer": "Watch or read an explainer",
+  "flow.practice": "Solve practice questions",
+  "flow.doubt": "Ask one doubt with source",
+  "flow.doubt_sub": "AI tutor answers from your uploaded material",
+  "flow.mock": "Quick mock test",
+  "flow.flashcards": "Flashcard revision",
+  "tool.pyq_sub": "Previous year questions for your exam",
+  "tool.more": "More Tools",
+  "tool.quiz_maker": "Quiz Maker",
+  "tool.mock_tests": "Mock Tests",
+  "tool.pyq": "PYQ Practice",
+  "tool.doubt_chat": "Doubt Chat",
+  "tool.learning_path": "Learning Path",
+  "goalcat.school_boards": "School Boards",
+  "goalcat.all_state_boards": "All State Boards",
+  "goalcat.govt_exams": "Government Exams",
+  "goalcat.campus": "Campus Placements",
+  "trust.expert_verification": "Expert verification",
+  "common.not_set": "Not set"
 }
