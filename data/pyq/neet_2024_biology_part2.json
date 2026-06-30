@@ -6,30 +6,430 @@
   "default_year": 2024,
   "default_paper": "main_part2",
   "questions": [
-    {"question_text": "Site of fertilization in human reproduction:", "options": ["Ovary", "Fallopian tube (ampullary-isthmic)", "Uterus", "Cervix"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["fertilization_site"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of cells in morula stage:", "options": ["2-4", "8-16", "32-64", "100"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["morula"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hormone that triggers ovulation:", "options": ["FSH", "LH surge", "Estrogen", "Progesterone"], "correct_answer": "B", "chapter": "Human Reproduction", "topic_tags": ["LH_surge"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Mendel's first law (segregation) deals with:", "options": ["Independent assortment", "One pair of alleles separating into gametes", "Linkage", "Sex determination"], "correct_answer": "B", "chapter": "Principles of Inheritance", "topic_tags": ["segregation"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Replication of DNA needs primer made of:", "options": ["DNA", "RNA", "Protein", "Lipid"], "correct_answer": "B", "chapter": "Molecular Biology", "topic_tags": ["primer"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Genetic code is degenerate means:", "options": ["One codon codes many amino acids", "Multiple codons code same amino acid", "Code is incomplete", "Code is random"], "correct_answer": "B", "chapter": "Molecular Biology", "topic_tags": ["degenerate"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Functional unit of contractile element in muscle:", "options": ["Myofibril", "Sarcomere", "Sarcoplasmic reticulum", "Tropomyosin"], "correct_answer": "B", "chapter": "Locomotion", "topic_tags": ["sarcomere"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Active transport requires:", "options": ["No energy", "ATP", "Concentration gradient (downhill)", "Diffusion alone"], "correct_answer": "B", "chapter": "Cell Physiology", "topic_tags": ["active_transport"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of layers in Calvin cycle:", "options": ["1 (cyclic)", "2", "3 (carboxylation, reduction, regeneration)", "5"], "correct_answer": "C", "chapter": "Photosynthesis", "topic_tags": ["Calvin_stages"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Source of O2 in photosynthesis:", "options": ["CO2", "Water (photolysis of)", "Glucose", "Atmospheric O2"], "correct_answer": "B", "chapter": "Photosynthesis", "topic_tags": ["photolysis_water"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of valves in heart:", "options": ["2", "3", "4", "5"], "correct_answer": "C", "chapter": "Circulation", "topic_tags": ["heart_valves"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Universal blood donor:", "options": ["O-negative", "O-positive", "AB-positive", "A-negative"], "correct_answer": "A", "chapter": "Body Fluids", "topic_tags": ["donor"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Universal recipient:", "options": ["AB-positive", "O-negative", "A-positive", "AB-negative"], "correct_answer": "A", "chapter": "Body Fluids", "topic_tags": ["recipient"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Number of cranial nerves in humans:", "options": ["10", "12", "14", "31"], "correct_answer": "B", "chapter": "Neural Control", "topic_tags": ["cranial_nerves"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Hormone secreted by pancreatic α-cells:", "options": ["Insulin", "Glucagon", "Somatostatin", "Adrenaline"], "correct_answer": "B", "chapter": "Endocrine System", "topic_tags": ["glucagon"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Master gland in human body:", "options": ["Thyroid", "Adrenal", "Pituitary", "Pancreas"], "correct_answer": "C", "chapter": "Endocrine System", "topic_tags": ["pituitary"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Movement of leaves due to touch (Mimosa):", "options": ["Phototropism", "Geotropism", "Thigmonasty/Seismonasty", "Hydrotropism"], "correct_answer": "C", "chapter": "Plant Movements", "topic_tags": ["thigmonasty"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Causal agent of malaria:", "options": ["Bacteria", "Plasmodium (protozoa)", "Virus", "Fungus"], "correct_answer": "B", "chapter": "Human Health", "topic_tags": ["malaria"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Antibiotic effective against bacterial cell wall synthesis:", "options": ["Streptomycin", "Penicillin", "Acyclovir", "Cisplatin"], "correct_answer": "B", "chapter": "Microbes in Welfare", "topic_tags": ["penicillin"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Plasmid is:", "options": ["Linear DNA", "Circular extrachromosomal DNA in bacteria", "Viral DNA", "Protein"], "correct_answer": "B", "chapter": "Biotechnology", "topic_tags": ["plasmid"], "difficulty": "easy", "marks": 4},
-    {"question_text": "Tropic of Cancer plant zone supports:", "options": ["Tropical rainforests", "Tundra", "Coniferous forests", "Deserts only"], "correct_answer": "A", "chapter": "Ecosystem", "topic_tags": ["tropical"], "difficulty": "medium", "marks": 4},
-    {"question_text": "ISRO satellite mission to study chlorophyll/biosphere:", "options": ["Chandrayaan", "Mangalyaan", "RISAT/ResourceSat", "Aryabhata"], "correct_answer": "C", "chapter": "Biodiversity", "topic_tags": ["remote_sensing"], "difficulty": "medium", "marks": 4},
-    {"question_text": "10% energy law in ecology (Lindeman):", "options": ["Energy lost between trophic levels", "Only 10% energy transferred to next level", "Both A and B describe it", "Energy doubles each level"], "correct_answer": "C", "chapter": "Ecosystem", "topic_tags": ["Lindeman"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Carbon monoxide poisoning binds:", "options": ["Hemoglobin (CO has stronger affinity than O2)", "Insulin", "Amylase", "DNA only"], "correct_answer": "A", "chapter": "Human Health", "topic_tags": ["CO_poisoning"], "difficulty": "medium", "marks": 4},
-    {"question_text": "Polyembryony in mango cultivars:", "options": ["More than one embryo per seed", "One embryo", "No embryo", "Hybrid embryo only"], "correct_answer": "A", "chapter": "Sexual Reproduction in Plants", "topic_tags": ["polyembryony"], "difficulty": "medium", "marks": 4}
+    {
+      "question_text": "Site of fertilization in human reproduction:",
+      "options": [
+        "Ovary",
+        "Fallopian tube (ampullary-isthmic)",
+        "Uterus",
+        "Cervix"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "fertilization_site"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Sperm typically meets the egg in the ampullary-isthmic region of the fallopian tube, where the egg is still traveling toward the uterus after ovulation. Fertilization must occur here before the zygote reaches the uterus for implantation."
+    },
+    {
+      "question_text": "Number of cells in morula stage:",
+      "options": [
+        "2-4",
+        "8-16",
+        "32-64",
+        "100"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "morula"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The morula stage occurs after the blastomere stage and represents early cleavage divisions. By this stage, the embryo has undergone 3-4 rounds of mitotic division, producing approximately 8-16 cells arranged in a compact, solid ball-like structure characteristic of the morula."
+    },
+    {
+      "question_text": "Hormone that triggers ovulation:",
+      "options": [
+        "FSH",
+        "LH surge",
+        "Estrogen",
+        "Progesterone"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Reproduction",
+      "topic_tags": [
+        "LH_surge"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The LH surge causes the final maturation and release of the oocyte from the ovary. While FSH stimulates follicle development and estrogen rises during the follicular phase, only the sharp LH surge directly triggers ovulation."
+    },
+    {
+      "question_text": "Mendel's first law (segregation) deals with:",
+      "options": [
+        "Independent assortment",
+        "One pair of alleles separating into gametes",
+        "Linkage",
+        "Sex determination"
+      ],
+      "correct_answer": "B",
+      "chapter": "Principles of Inheritance",
+      "topic_tags": [
+        "segregation"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "During gamete formation, alleles for a single gene separate so each gamete receives only one allele. This segregation of one allele pair is the fundamental principle of Mendel's law of segregation."
+    },
+    {
+      "question_text": "Replication of DNA needs primer made of:",
+      "options": [
+        "DNA",
+        "RNA",
+        "Protein",
+        "Lipid"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "primer"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "DNA polymerase cannot initiate synthesis de novo and requires a short starter sequence. Primase, an RNA polymerase, synthesizes these RNA primers (~10 nucleotides), which provide the 3'-OH group needed for DNA polymerase to begin extending the strand."
+    },
+    {
+      "question_text": "Genetic code is degenerate means:",
+      "options": [
+        "One codon codes many amino acids",
+        "Multiple codons code same amino acid",
+        "Code is incomplete",
+        "Code is random"
+      ],
+      "correct_answer": "B",
+      "chapter": "Molecular Biology",
+      "topic_tags": [
+        "degenerate"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The genetic code is degenerate because most amino acids are encoded by more than one codon (up to six codons for some amino acids). This redundancy in coding allows different DNA sequences to produce the same protein, providing a buffer against certain mutations."
+    },
+    {
+      "question_text": "Functional unit of contractile element in muscle:",
+      "options": [
+        "Myofibril",
+        "Sarcomere",
+        "Sarcoplasmic reticulum",
+        "Tropomyosin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Locomotion",
+      "topic_tags": [
+        "sarcomere"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The sarcomere is the smallest contractile unit bounded by Z-discs, containing thick filaments (myosin) and thin filaments (actin) that interact to produce muscle contraction, making it the functional contractile element rather than larger structures like myofibrils or organelles."
+    },
+    {
+      "question_text": "Active transport requires:",
+      "options": [
+        "No energy",
+        "ATP",
+        "Concentration gradient (downhill)",
+        "Diffusion alone"
+      ],
+      "correct_answer": "B",
+      "chapter": "Cell Physiology",
+      "topic_tags": [
+        "active_transport"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Active transport moves substances against their concentration gradient, requiring energy input from ATP hydrolysis to power transport proteins. This distinguishes it from passive processes like diffusion that rely on existing gradients."
+    },
+    {
+      "question_text": "Number of layers in Calvin cycle:",
+      "options": [
+        "1 (cyclic)",
+        "2",
+        "3 (carboxylation, reduction, regeneration)",
+        "5"
+      ],
+      "correct_answer": "C",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "Calvin_stages"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Calvin cycle consists of three distinct phases: carboxylation (where CO₂ fixes to RuBP via rubisco), reduction (where ATP and NADPH reduce 3-PG to G3P), and regeneration (where G3P molecules regenerate RuBP to continue the cycle)."
+    },
+    {
+      "question_text": "Source of O2 in photosynthesis:",
+      "options": [
+        "CO2",
+        "Water (photolysis of)",
+        "Glucose",
+        "Atmospheric O2"
+      ],
+      "correct_answer": "B",
+      "chapter": "Photosynthesis",
+      "topic_tags": [
+        "photolysis_water"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "During the light-dependent reactions, water molecules are split (photolysis) by light energy at photosystem II, releasing oxygen gas as a byproduct along with electrons and protons that drive ATP and NADPH synthesis."
+    },
+    {
+      "question_text": "Number of valves in heart:",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "correct_answer": "C",
+      "chapter": "Circulation",
+      "topic_tags": [
+        "heart_valves"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The human heart has four valves: the tricuspid valve (right atrium to right ventricle), pulmonary valve (right ventricle to pulmonary artery), mitral valve (left atrium to left ventricle), and aortic valve (left ventricle to aorta). These prevent backflow of blood."
+    },
+    {
+      "question_text": "Universal blood donor:",
+      "options": [
+        "O-negative",
+        "O-positive",
+        "AB-positive",
+        "A-negative"
+      ],
+      "correct_answer": "A",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "donor"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "O-negative blood lacks both A and B antigens and the Rh factor, so it cannot trigger immune reactions in recipients with any blood type, making it compatible with all recipients."
+    },
+    {
+      "question_text": "Universal recipient:",
+      "options": [
+        "AB-positive",
+        "O-negative",
+        "A-positive",
+        "AB-negative"
+      ],
+      "correct_answer": "A",
+      "chapter": "Body Fluids",
+      "topic_tags": [
+        "recipient"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "AB-positive blood type has both A and B antigens on red blood cells but lacks anti-A and anti-B antibodies in plasma, allowing it to receive blood from all eight blood types without triggering an immune reaction."
+    },
+    {
+      "question_text": "Number of cranial nerves in humans:",
+      "options": [
+        "10",
+        "12",
+        "14",
+        "31"
+      ],
+      "correct_answer": "B",
+      "chapter": "Neural Control",
+      "topic_tags": [
+        "cranial_nerves"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Humans have 12 pairs of cranial nerves that emerge directly from the brain, numbered I through XII. These include the olfactory, optic, oculomotor nerves and others, extending to the vagus nerve (CN X)."
+    },
+    {
+      "question_text": "Hormone secreted by pancreatic α-cells:",
+      "options": [
+        "Insulin",
+        "Glucagon",
+        "Somatostatin",
+        "Adrenaline"
+      ],
+      "correct_answer": "B",
+      "chapter": "Endocrine System",
+      "topic_tags": [
+        "glucagon"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Pancreatic α-cells specifically produce glucagon, a hormone that raises blood glucose levels by stimulating glycogenolysis and gluconeogenesis. Insulin is secreted by β-cells, while δ-cells produce somatostatin; adrenaline comes from the adrenal medulla."
+    },
+    {
+      "question_text": "Master gland in human body:",
+      "options": [
+        "Thyroid",
+        "Adrenal",
+        "Pituitary",
+        "Pancreas"
+      ],
+      "correct_answer": "C",
+      "chapter": "Endocrine System",
+      "topic_tags": [
+        "pituitary"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "The pituitary gland is called the master gland because it produces hormones that regulate other endocrine glands, including the thyroid, adrenal, and reproductive glands, controlling their hormone secretion and overall endocrine function."
+    },
+    {
+      "question_text": "Movement of leaves due to touch (Mimosa):",
+      "options": [
+        "Phototropism",
+        "Geotropism",
+        "Thigmonasty/Seismonasty",
+        "Hydrotropism"
+      ],
+      "correct_answer": "C",
+      "chapter": "Plant Movements",
+      "topic_tags": [
+        "thigmonasty"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Mimosa's leaf movement in response to touch is a nastic movement (non-directional response independent of stimulus direction) caused by rapid changes in turgor pressure in specialized cells at the leaf base. This rapid, reversible folding upon mechanical stimulation defines thigmonasty (touch response) or seismonasty (shock response)."
+    },
+    {
+      "question_text": "Causal agent of malaria:",
+      "options": [
+        "Bacteria",
+        "Plasmodium (protozoa)",
+        "Virus",
+        "Fungus"
+      ],
+      "correct_answer": "B",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "malaria"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Malaria is caused by Plasmodium parasites transmitted by Anopheles mosquitoes. Plasmodium is a protozoan (single-celled eukaryotic organism), not a bacterium, virus, or fungus, making it the only correct classification among the options."
+    },
+    {
+      "question_text": "Antibiotic effective against bacterial cell wall synthesis:",
+      "options": [
+        "Streptomycin",
+        "Penicillin",
+        "Acyclovir",
+        "Cisplatin"
+      ],
+      "correct_answer": "B",
+      "chapter": "Microbes in Welfare",
+      "topic_tags": [
+        "penicillin"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Penicillin inhibits bacterial peptidoglycan cross-linking in the cell wall by binding penicillin-binding proteins and blocking transpeptidase activity, preventing cell wall synthesis. Streptomycin targets ribosomes, acyclovir targets viral DNA synthesis, and cisplatin is a chemotherapy agent."
+    },
+    {
+      "question_text": "Plasmid is:",
+      "options": [
+        "Linear DNA",
+        "Circular extrachromosomal DNA in bacteria",
+        "Viral DNA",
+        "Protein"
+      ],
+      "correct_answer": "B",
+      "chapter": "Biotechnology",
+      "topic_tags": [
+        "plasmid"
+      ],
+      "difficulty": "easy",
+      "marks": 4,
+      "explanation": "Plasmids are small, circular DNA molecules found independently within bacterial cells, separate from the main chromosome. They replicate autonomously and carry genes that often provide selective advantages like antibiotic resistance."
+    },
+    {
+      "question_text": "Tropic of Cancer plant zone supports:",
+      "options": [
+        "Tropical rainforests",
+        "Tundra",
+        "Coniferous forests",
+        "Deserts only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Ecosystem",
+      "topic_tags": [
+        "tropical"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The Tropic of Cancer region receives high solar radiation and abundant moisture from tropical weather systems, supporting dense vegetation growth characteristic of tropical rainforests rather than the sparse vegetation of deserts, tundras, or coniferous forests."
+    },
+    {
+      "question_text": "ISRO satellite mission to study chlorophyll/biosphere:",
+      "options": [
+        "Chandrayaan",
+        "Mangalyaan",
+        "RISAT/ResourceSat",
+        "Aryabhata"
+      ],
+      "correct_answer": "C",
+      "chapter": "Biodiversity",
+      "topic_tags": [
+        "remote_sensing"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "ResourceSat (RISAT) is specifically designed for Earth observation and resource monitoring, including vegetation and chlorophyll mapping through multispectral imaging. Chandrayaan targets the Moon, Mangalyaan studies Mars, and Aryabhata was India's first satellite for atmospheric studies—none focus on biosphere/chlorophyll assessment like ResourceSat does."
+    },
+    {
+      "question_text": "10% energy law in ecology (Lindeman):",
+      "options": [
+        "Energy lost between trophic levels",
+        "Only 10% energy transferred to next level",
+        "Both A and B describe it",
+        "Energy doubles each level"
+      ],
+      "correct_answer": "C",
+      "chapter": "Ecosystem",
+      "topic_tags": [
+        "Lindeman"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "The 10% energy law states that approximately 10% of energy is transferred to the next trophic level, while the remaining 90% is lost through respiration, heat, and waste. Both statements accurately describe this principle: option A correctly identifies that energy is lost between levels, and option B correctly specifies that only 10% transfers forward."
+    },
+    {
+      "question_text": "Carbon monoxide poisoning binds:",
+      "options": [
+        "Hemoglobin (CO has stronger affinity than O2)",
+        "Insulin",
+        "Amylase",
+        "DNA only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Human Health",
+      "topic_tags": [
+        "CO_poisoning"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Carbon monoxide binds to the iron in hemoglobin's heme group with affinity ~200 times greater than oxygen, preventing oxygen transport and causing cellular hypoxia. This explains CO poisoning's lethal effects."
+    },
+    {
+      "question_text": "Polyembryony in mango cultivars:",
+      "options": [
+        "More than one embryo per seed",
+        "One embryo",
+        "No embryo",
+        "Hybrid embryo only"
+      ],
+      "correct_answer": "A",
+      "chapter": "Sexual Reproduction in Plants",
+      "topic_tags": [
+        "polyembryony"
+      ],
+      "difficulty": "medium",
+      "marks": 4,
+      "explanation": "Polyembryony literally means \"many embryos\" (poly- = many, -embryony = embryo formation). In mango cultivars, this trait produces multiple embryos within a single seed, allowing asexual reproduction and genetic uniformity in offspring."
+    }
   ]
 }

@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Cell Biology",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The cell is the smallest unit that can perform all life functions independently, including metabolism, growth, and reproduction. All living organisms are composed of one or more cells, making it the fundamental building block of life."
     },
     {
       "question_text": "Which blood group is the universal donor?",
@@ -30,7 +31,8 @@
       "correct_answer": "D",
       "chapter": "Body Fluids",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "O- blood lacks both A and B antigens on red blood cells and is Rh-negative, so it won't trigger an immune response in recipients with any blood type, making it universally compatible for transfusion."
     },
     {
       "question_text": "Photosynthesis occurs in:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Photosynthesis",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Chloroplasts contain chlorophyll and the light-dependent and light-independent reactions needed for photosynthesis, while mitochondria perform cellular respiration, the nucleus stores DNA, and ribosomes synthesize proteins."
     },
     {
       "question_text": "Number of chromosomes in normal human somatic cell:",
@@ -56,7 +59,8 @@
       "correct_answer": "B",
       "chapter": "Cell Division",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Human somatic cells are diploid, containing two complete sets of chromosomes: 22 pairs of autosomes plus one pair of sex chromosomes (XX or XY), totaling 46 chromosomes. Gametes contain 23 chromosomes (option A)."
     },
     {
       "question_text": "Insulin is produced by which cells of the pancreas?",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Chemical Coordination",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Beta cells are specialized endocrine cells located in the islets of Langerhans that synthesize and secrete insulin in response to elevated blood glucose levels."
     },
     {
       "question_text": "The functional unit of kidney is:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Excretory System",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The nephron is the functional unit of the kidney because it performs all essential filtration and reabsorption processes needed to produce urine. Each nephron consists of a glomerulus and renal tubule that work together to filter blood, reabsorb useful substances, and concentrate waste."
     },
     {
       "question_text": "Mendel's law of segregation deals with:",
@@ -95,7 +101,8 @@
       "correct_answer": "A",
       "chapter": "Genetics",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Mendel's law of segregation describes how alleles of a single gene separate during gamete formation, with each gamete receiving only one allele. This applies to inheritance of one trait controlled by one gene."
     },
     {
       "question_text": "DNA replication is:",
@@ -108,7 +115,8 @@
       "correct_answer": "B",
       "chapter": "Molecular Biology",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "During DNA replication, each original strand serves as a template for a new complementary strand, resulting in two DNA molecules each containing one original strand and one newly synthesized strand. This is the semi-conservative mechanism demonstrated by the Meselson-Stahl experiment."
     },
     {
       "question_text": "Which structure carries oxygen in red blood cells?",
@@ -121,7 +129,8 @@
       "correct_answer": "B",
       "chapter": "Body Fluids",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Hemoglobin is an iron-containing protein molecule within red blood cells that binds oxygen in the lungs and transports it throughout the body. Plasma is the liquid component of blood, platelets aid clotting, and WBCs fight infection."
     },
     {
       "question_text": "The smallest functional unit of the lung is:",
@@ -134,7 +143,8 @@
       "correct_answer": "B",
       "chapter": "Respiratory System",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The alveolus is where gas exchange actually occurs between air and blood through diffusion across its thin walls, making it the smallest structure capable of performing the lung's primary function rather than just conducting air."
     }
   ]
 }

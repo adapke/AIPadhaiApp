@@ -8,228 +8,428 @@
   "questions": [
     {
       "question_text": "lim x→0 (eˣ-1)/x equals:",
-      "options": ["0", "1", "e", "Infinity"],
+      "options": [
+        "0",
+        "1",
+        "e",
+        "Infinity"
+      ],
       "correct_answer": "B",
       "chapter": "Limits",
-      "topic_tags": ["standard_limit"],
+      "topic_tags": [
+        "standard_limit"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using L'Hôpital's rule (since both numerator and denominator approach 0), take derivatives: d/dx(eˣ-1) = eˣ and d/dx(x) = 1, giving lim x→0 eˣ/1 = e⁰ = 1."
     },
     {
       "question_text": "Derivative of ln(x) is:",
-      "options": ["1/x", "x", "ln(x)", "x ln(x)"],
+      "options": [
+        "1/x",
+        "x",
+        "ln(x)",
+        "x ln(x)"
+      ],
       "correct_answer": "A",
       "chapter": "Differentiation",
-      "topic_tags": ["log"],
+      "topic_tags": [
+        "log"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The derivative of ln(x) is found using the fundamental calculus rule that d/dx[ln(x)] = 1/x. This is a standard result derived from the definition of the derivative and the properties of logarithms."
     },
     {
       "question_text": "∫sin(x) dx equals:",
-      "options": ["cos(x) + C", "-cos(x) + C", "tan(x) + C", "sec(x) + C"],
+      "options": [
+        "cos(x) + C",
+        "-cos(x) + C",
+        "tan(x) + C",
+        "sec(x) + C"
+      ],
       "correct_answer": "B",
       "chapter": "Integration",
-      "topic_tags": ["trig_integral"],
+      "topic_tags": [
+        "trig_integral"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The derivative of -cos(x) is sin(x), since d/dx[-cos(x)] = -(-sin(x)) = sin(x). Therefore, the antiderivative of sin(x) is -cos(x) + C."
     },
     {
       "question_text": "If A is 3×3 matrix with det(A) = 5, det(A²):",
-      "options": ["10", "25", "5", "125"],
+      "options": [
+        "10",
+        "25",
+        "5",
+        "125"
+      ],
       "correct_answer": "B",
       "chapter": "Determinants",
-      "topic_tags": ["determinant_power"],
+      "topic_tags": [
+        "determinant_power"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the property that det(A²) = det(A·A) = det(A)·det(A) = [det(A)]², we get det(A²) = 5² = 25."
     },
     {
       "question_text": "Number of permutations of letters in 'BANANA':",
-      "options": ["60", "120", "360", "720"],
+      "options": [
+        "60",
+        "120",
+        "360",
+        "720"
+      ],
       "correct_answer": "A",
       "chapter": "Permutations and Combinations",
-      "topic_tags": ["repetition"],
+      "topic_tags": [
+        "repetition"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "BANANA has 6 letters with repetitions: 3 A's, 2 N's, and 1 B. Using the formula for permutations with repetition: 6!/(3!×2!×1!) = 720/(6×2) = 60."
     },
     {
       "question_text": "Coefficient of x^5 in (1+x)^10:",
-      "options": ["252", "210", "120", "90"],
+      "options": [
+        "252",
+        "210",
+        "120",
+        "90"
+      ],
       "correct_answer": "A",
       "chapter": "Binomial Theorem",
-      "topic_tags": ["binomial_coef"],
+      "topic_tags": [
+        "binomial_coef"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the binomial theorem, the coefficient of x^5 in (1+x)^10 is C(10,5) = 10!/(5!×5!) = (10×9×8×7×6)/(5×4×3×2×1) = 30240/120 = 252."
     },
     {
       "question_text": "Modulus of complex z = 3 + 4i:",
-      "options": ["3", "4", "5", "7"],
+      "options": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
       "correct_answer": "C",
       "chapter": "Complex Numbers",
-      "topic_tags": ["modulus"],
+      "topic_tags": [
+        "modulus"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The modulus of a complex number z = a + bi is calculated as √(a² + b²). For z = 3 + 4i, this gives √(3² + 4²) = √(9 + 16) = √25 = 5."
     },
     {
       "question_text": "Argument of z = i is:",
-      "options": ["0", "π/2", "π", "3π/2"],
+      "options": [
+        "0",
+        "π/2",
+        "π",
+        "3π/2"
+      ],
       "correct_answer": "B",
       "chapter": "Complex Numbers",
-      "topic_tags": ["argument"],
+      "topic_tags": [
+        "argument"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The argument of a complex number is the angle it makes with the positive real axis in the complex plane. Since i is located at (0, 1), it lies directly on the positive imaginary axis, which corresponds to an angle of π/2 radians (90°)."
     },
     {
       "question_text": "Sum of n terms of GP with first term 'a' and ratio 'r' (r≠1):",
-      "options": ["na", "a(rⁿ-1)/(r-1)", "n(a+r)", "ar"],
+      "options": [
+        "na",
+        "a(rⁿ-1)/(r-1)",
+        "n(a+r)",
+        "ar"
+      ],
       "correct_answer": "B",
       "chapter": "Sequences",
-      "topic_tags": ["GP_sum"],
+      "topic_tags": [
+        "GP_sum"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For a geometric progression, each term is multiplied by the common ratio r. The sum formula a + ar + ar² + ... + ar^(n-1) can be derived by multiplying by r, subtracting the original series, and simplifying to get a(r^n - 1)/(r - 1)."
     },
     {
       "question_text": "Slope of line perpendicular to y = 2x + 3:",
-      "options": ["2", "-2", "1/2", "-1/2"],
+      "options": [
+        "2",
+        "-2",
+        "1/2",
+        "-1/2"
+      ],
       "correct_answer": "D",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["perpendicular_slope"],
+      "topic_tags": [
+        "perpendicular_slope"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When two lines are perpendicular, their slopes are negative reciprocals of each other. The given line has slope 2, so the perpendicular slope is -1/2 (flip and negate: 1/2, then negate to get -1/2)."
     },
     {
       "question_text": "Distance from origin to (3,4) is:",
-      "options": ["5", "7", "12", "25"],
+      "options": [
+        "5",
+        "7",
+        "12",
+        "25"
+      ],
       "correct_answer": "A",
       "chapter": "Coordinate Geometry",
-      "topic_tags": ["distance"],
+      "topic_tags": [
+        "distance"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the distance formula, distance = √[(3-0)² + (4-0)²] = √[9 + 16] = √25 = 5."
     },
     {
       "question_text": "Eccentricity of parabola y² = 4x:",
-      "options": ["0", "1", "2", "1/2"],
+      "options": [
+        "0",
+        "1",
+        "2",
+        "1/2"
+      ],
       "correct_answer": "B",
       "chapter": "Conic Sections",
-      "topic_tags": ["parabola"],
+      "topic_tags": [
+        "parabola"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "A parabola is defined as the locus of points equidistant from a focus and directrix. This geometric definition gives all parabolas an eccentricity (ratio of distance to focus versus distance to directrix) of exactly 1, regardless of orientation or parameter."
     },
     {
       "question_text": "Number of ways to arrange 5 books on a shelf:",
-      "options": ["24", "60", "120", "720"],
+      "options": [
+        "24",
+        "60",
+        "120",
+        "720"
+      ],
       "correct_answer": "C",
       "chapter": "Permutations",
-      "topic_tags": ["factorial"],
+      "topic_tags": [
+        "factorial"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Arranging 5 distinct books requires calculating 5! (5 factorial) = 5 × 4 × 3 × 2 × 1 = 120, since each position can be filled by any remaining book."
     },
     {
       "question_text": "If sec θ = 2, then cos θ:",
-      "options": ["1/2", "2", "√3/2", "1"],
+      "options": [
+        "1/2",
+        "2",
+        "√3/2",
+        "1"
+      ],
       "correct_answer": "A",
       "chapter": "Trigonometry",
-      "topic_tags": ["reciprocal_trig"],
+      "topic_tags": [
+        "reciprocal_trig"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Since sec θ is the reciprocal of cos θ, we have sec θ = 1/cos θ. Given sec θ = 2, we can solve: 1/cos θ = 2, which gives cos θ = 1/2."
     },
     {
       "question_text": "Range of sin x is:",
-      "options": ["[-1, 1]", "(-∞, ∞)", "[0, 1]", "[-π, π]"],
+      "options": [
+        "[-1, 1]",
+        "(-∞, ∞)",
+        "[0, 1]",
+        "[-π, π]"
+      ],
       "correct_answer": "A",
       "chapter": "Functions",
-      "topic_tags": ["range"],
+      "topic_tags": [
+        "range"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The sine function oscillates between a minimum value of -1 and a maximum value of 1 for all real inputs, never exceeding these bounds. Therefore, its range is the closed interval [-1, 1]."
     },
     {
       "question_text": "∫₀^π/2 cos(x) dx equals:",
-      "options": ["0", "1", "-1", "π"],
+      "options": [
+        "0",
+        "1",
+        "-1",
+        "π"
+      ],
       "correct_answer": "B",
       "chapter": "Definite Integration",
-      "topic_tags": ["definite_cos"],
+      "topic_tags": [
+        "definite_cos"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The antiderivative of cos(x) is sin(x). Evaluating from 0 to π/2: sin(π/2) - sin(0) = 1 - 0 = 1."
     },
     {
       "question_text": "If x² + y² = 25, the point closest to (5,5) on the curve:",
-      "options": ["(3, 4)", "(5, 0)", "(0, 5)", "(5/√2, 5/√2)"],
+      "options": [
+        "(3, 4)",
+        "(5, 0)",
+        "(0, 5)",
+        "(5/√2, 5/√2)"
+      ],
       "correct_answer": "D",
       "chapter": "Application of Derivatives",
-      "topic_tags": ["minima"],
+      "topic_tags": [
+        "minima"
+      ],
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The curve x² + y² = 25 is a circle with radius 5 centered at the origin. The closest point on this circle to (5,5) lies on the line from the origin through (5,5). This line has slope 1, so the closest point is at (5/√2, 5/√2), which normalized to the circle's radius gives this answer."
     },
     {
       "question_text": "Vector i + j + k has magnitude:",
-      "options": ["1", "√2", "√3", "3"],
+      "options": [
+        "1",
+        "√2",
+        "√3",
+        "3"
+      ],
       "correct_answer": "C",
       "chapter": "Vectors",
-      "topic_tags": ["magnitude"],
+      "topic_tags": [
+        "magnitude"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The magnitude of vector i + j + k is calculated using √(1² + 1² + 1²) = √3, since each unit vector has coefficient 1."
     },
     {
       "question_text": "Solution of dy/dx = y/x:",
-      "options": ["y = Cx", "y = Ce^x", "y = x²", "y = C/x"],
+      "options": [
+        "y = Cx",
+        "y = Ce^x",
+        "y = x²",
+        "y = C/x"
+      ],
       "correct_answer": "A",
       "chapter": "Differential Equations",
-      "topic_tags": ["homogeneous"],
+      "topic_tags": [
+        "homogeneous"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "This is a separable differential equation. Separating variables: dy/y = dx/x. Integrating both sides gives ln|y| = ln|x| + C₁, which simplifies to y = Cx where C is the constant of integration."
     },
     {
       "question_text": "P(A) = 0.6, P(B) = 0.4, A and B independent. P(A∩B):",
-      "options": ["0.1", "0.24", "0.4", "0.6"],
+      "options": [
+        "0.1",
+        "0.24",
+        "0.4",
+        "0.6"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["independence"],
+      "topic_tags": [
+        "independence"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When two events are independent, P(A∩B) = P(A) × P(B). Therefore, P(A∩B) = 0.6 × 0.4 = 0.24."
     },
     {
       "question_text": "Mean of binomial distribution np with n=20, p=0.5:",
-      "options": ["5", "10", "20", "0.5"],
+      "options": [
+        "5",
+        "10",
+        "20",
+        "0.5"
+      ],
       "correct_answer": "B",
       "chapter": "Probability",
-      "topic_tags": ["binomial_mean"],
+      "topic_tags": [
+        "binomial_mean"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The mean of a binomial distribution is calculated using the formula μ = np. With n = 20 and p = 0.5, we get μ = 20 × 0.5 = 10."
     },
     {
       "question_text": "If f(x) = x³, then f'(2):",
-      "options": ["8", "12", "6", "16"],
+      "options": [
+        "8",
+        "12",
+        "6",
+        "16"
+      ],
       "correct_answer": "B",
       "chapter": "Differentiation",
-      "topic_tags": ["power_rule"],
+      "topic_tags": [
+        "power_rule"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the power rule, f'(x) = 3x². Substituting x = 2: f'(2) = 3(2)² = 3(4) = 12."
     },
     {
       "question_text": "Maximum value of f(x) = x(1-x) on [0,1]:",
-      "options": ["1/2", "1/4", "1", "0"],
+      "options": [
+        "1/2",
+        "1/4",
+        "1",
+        "0"
+      ],
       "correct_answer": "B",
       "chapter": "Application of Derivatives",
-      "topic_tags": ["maxima"],
+      "topic_tags": [
+        "maxima"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Find the critical point by taking the derivative: f'(x) = 1 - 2x = 0 gives x = 1/2. Evaluating f(1/2) = (1/2)(1/2) = 1/4, which exceeds the boundary values f(0) = 0 and f(1) = 0."
     },
     {
       "question_text": "lim x→∞ x/(x+1):",
-      "options": ["0", "1", "∞", "Does not exist"],
+      "options": [
+        "0",
+        "1",
+        "∞",
+        "Does not exist"
+      ],
       "correct_answer": "B",
       "chapter": "Limits",
-      "topic_tags": ["rational_limit"],
+      "topic_tags": [
+        "rational_limit"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Divide both numerator and denominator by x to get 1/(1 + 1/x). As x approaches infinity, 1/x approaches 0, leaving 1/1 = 1."
     },
     {
       "question_text": "If a vector A makes 60° with x-axis with magnitude 4, x-component:",
-      "options": ["2", "2√3", "4", "0"],
+      "options": [
+        "2",
+        "2√3",
+        "4",
+        "0"
+      ],
       "correct_answer": "A",
       "chapter": "Vectors",
-      "topic_tags": ["component"],
+      "topic_tags": [
+        "component"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The x-component of a vector equals its magnitude multiplied by the cosine of the angle it makes with the x-axis. Here: x-component = 4 × cos(60°) = 4 × (1/2) = 2."
     }
   ]
 }

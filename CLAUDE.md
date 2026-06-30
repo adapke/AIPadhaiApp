@@ -707,6 +707,22 @@ Reviewed 2026-06-03. Re-audit before changing.
 
 ### Also done since last review
 
+- **prod-195 — Shipped explanations for the flagship Indian exams (JEE +
+  NEET).** prod-194 built the AI explanation pipeline; this writes real
+  explanations into the **version-controlled** seed JSON (not just a
+  throwaway DB), so they reach every environment on the normal PYQ
+  re-import — exactly how the SAT explanations ship. New
+  `scripts/explain_seed_files.py` reads `data/pyq/*.json`, generates a
+  worked-solution for each question missing one (via prod-194's
+  `explain.generate_explanation`), and writes it back in place
+  (idempotent — skips questions that already have one). Ran it on the JEE
+  Main 2024 + NEET 2024 sets: **134 explanations** added across 8 files,
+  re-imported (coverage 67 → 201 of 2567, ~7.8%). The long tail (state
+  boards, older years, CBSE/UPSC/SSC) is the same command over more globs
+  (or `backfill_explanations.py --all` against a deployed DB). No new
+  test surface — `explain.py` is covered by prod-194's `test_explain.py`,
+  and `test_pyq_import` exercises the updated JSON.
+
 - **prod-194 — AI answer-explanation backfill (whole question bank).**
   prod-193 surfaced explanations and curated the 64 SAT ones; this
   finishes coverage for everything else. New `padhai/explain.py`

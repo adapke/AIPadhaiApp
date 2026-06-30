@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Mole Concept",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Use the formula: moles = mass ÷ molar mass. Substituting the values: moles = 18 g ÷ 18 g/mol = 1 mole."
     },
     {
       "question_text": "Which gas is responsible for ozone layer depletion?",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Environmental Chemistry",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "CFCs (chlorofluorocarbons) release chlorine atoms when UV radiation breaks them down in the stratosphere. These chlorine atoms catalytically destroy ozone molecules, with each chlorine atom destroying thousands of ozone molecules through a chain reaction."
     },
     {
       "question_text": "Functional group of carboxylic acid is:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Organic Chemistry",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The carboxylic acid functional group contains both a carbonyl carbon (C=O) and a hydroxyl group bonded to it, represented as -COOH. The other options represent alcohol (-OH), aldehyde (-CHO), and amine (-NH2) functional groups respectively."
     },
     {
       "question_text": "Which element exhibits maximum oxidation state?",
@@ -56,7 +59,8 @@
       "correct_answer": "A",
       "chapter": "Redox Reactions",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Chlorine in the +7 oxidation state (found in perchlorate, ClO₄⁻) represents the maximum oxidation state among these elements. Fluorine cannot exceed +1 because it's the most electronegative element and has no d-orbitals, while Na and Mg have lower maximum oxidation states due to their group positions."
     },
     {
       "question_text": "Acid rain is primarily caused by:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Environmental Chemistry",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "SO2 (sulfur dioxide) and NOx (nitrogen oxides) dissolve in atmospheric water to form sulfuric and nitric acids, which fall as acid rain. CO2 causes climate change rather than acidity, CFCs damage the ozone layer, and methane is a greenhouse gas."
     },
     {
       "question_text": "VBT predicts the geometry of CH4 to be:",
@@ -82,7 +87,8 @@
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "According to Valence Bond Theory, carbon in CH4 undergoes sp³ hybridization, creating four equivalent hybrid orbitals that point toward the corners of a tetrahedron to minimize electron pair repulsion. Each hybrid orbital overlaps with a hydrogen 1s orbital to form a C-H bond."
     },
     {
       "question_text": "Glucose belongs to which class of compounds?",
@@ -95,7 +101,8 @@
       "correct_answer": "B",
       "chapter": "Biomolecules",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Glucose is a monosaccharide with the molecular formula C₆H₁₂O₆, containing carbon, hydrogen, and oxygen in a 1:2:1 ratio—the defining characteristic of carbohydrates. It serves as the primary energy source in cellular respiration."
     }
   ]
 }

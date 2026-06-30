@@ -8,183 +8,362 @@
   "questions": [
     {
       "question_text": "The atomic number of carbon is:",
-      "options": ["4", "6", "8", "12"],
+      "options": [
+        "4",
+        "6",
+        "8",
+        "12"
+      ],
       "correct_answer": "B",
       "chapter": "Atomic Structure",
-      "topic_tags": ["atomic_number", "carbon"],
+      "topic_tags": [
+        "atomic_number",
+        "carbon"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Carbon has 6 protons in its nucleus, which defines its atomic number. The atomic number is determined solely by the number of protons, making 6 the defining characteristic of carbon."
     },
     {
       "question_text": "The molecular formula of methane is:",
-      "options": ["CH3", "CH4", "C2H4", "C2H6"],
+      "options": [
+        "CH3",
+        "CH4",
+        "C2H4",
+        "C2H6"
+      ],
       "correct_answer": "B",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["alkane", "molecular_formula"],
+      "topic_tags": [
+        "alkane",
+        "molecular_formula"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Methane contains one carbon atom bonded to four hydrogen atoms, giving the molecular formula CH₄. This represents the simplest hydrocarbon and is the primary component of natural gas."
     },
     {
       "question_text": "Which of the following is an example of an alkali metal?",
-      "options": ["Calcium", "Sodium", "Aluminum", "Iron"],
+      "options": [
+        "Calcium",
+        "Sodium",
+        "Aluminum",
+        "Iron"
+      ],
       "correct_answer": "B",
       "chapter": "Periodic Classification",
-      "topic_tags": ["alkali_metal", "group_1"],
+      "topic_tags": [
+        "alkali_metal",
+        "group_1"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Alkali metals are Group 1 elements with one valence electron. Sodium (Na) is in Group 1, making it an alkali metal. Calcium is Group 2 (alkaline earth metal), while aluminum and iron are transition/post-transition metals."
     },
     {
       "question_text": "The pH of pure water at 25°C is:",
-      "options": ["6", "7", "8", "10"],
+      "options": [
+        "6",
+        "7",
+        "8",
+        "10"
+      ],
       "correct_answer": "B",
       "chapter": "Equilibrium",
-      "topic_tags": ["pH", "neutrality"],
+      "topic_tags": [
+        "pH",
+        "neutrality"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At 25°C, pure water undergoes autoionization producing equal concentrations of H⁺ and OH⁻ ions (10⁻⁷ M each). Since pH = -log[H⁺], pH = -log(10⁻⁷) = 7, making pure water neutral at this temperature."
     },
     {
       "question_text": "The number of moles in 36 g of water is:",
-      "options": ["1", "2", "3", "4"],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
       "correct_answer": "B",
       "chapter": "Mole Concept",
-      "topic_tags": ["moles", "molar_mass"],
+      "topic_tags": [
+        "moles",
+        "molar_mass"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The molar mass of water (H₂O) is 18 g/mol (2×1 + 16). Dividing the given mass by molar mass: 36 g ÷ 18 g/mol = 2 moles."
     },
     {
       "question_text": "The IUPAC name of CH3-CH2-OH is:",
-      "options": ["Methanol", "Ethanol", "Propanol", "Butanol"],
+      "options": [
+        "Methanol",
+        "Ethanol",
+        "Propanol",
+        "Butanol"
+      ],
       "correct_answer": "B",
       "chapter": "Organic Chemistry",
-      "topic_tags": ["IUPAC_nomenclature", "alcohol"],
+      "topic_tags": [
+        "IUPAC_nomenclature",
+        "alcohol"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The compound contains a 2-carbon chain (eth-) with a hydroxyl (-OH) group, making it an alcohol (-ol). Therefore, the IUPAC name is ethanol."
     },
     {
       "question_text": "Avogadro's number is:",
-      "options": ["6.022 × 10^23", "9.81 × 10^8", "3 × 10^8", "1.6 × 10^-19"],
+      "options": [
+        "6.022 × 10^23",
+        "9.81 × 10^8",
+        "3 × 10^8",
+        "1.6 × 10^-19"
+      ],
       "correct_answer": "A",
       "chapter": "Mole Concept",
-      "topic_tags": ["avogadro_number"],
+      "topic_tags": [
+        "avogadro_number"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Avogadro's number represents the quantity of atoms or molecules in one mole of a substance, defined as approximately 6.022 × 10^23 particles. The other values represent different physical constants: option B is nonsensical, C is the speed of light, and D is the elementary charge."
     },
     {
       "question_text": "Which gas is liberated when zinc reacts with dilute hydrochloric acid?",
-      "options": ["Oxygen", "Hydrogen", "Chlorine", "Carbon dioxide"],
+      "options": [
+        "Oxygen",
+        "Hydrogen",
+        "Chlorine",
+        "Carbon dioxide"
+      ],
       "correct_answer": "B",
       "chapter": "Hydrogen",
-      "topic_tags": ["acid_metal_reaction", "hydrogen"],
+      "topic_tags": [
+        "acid_metal_reaction",
+        "hydrogen"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Zinc is more reactive than hydrogen, so it displaces hydrogen from hydrochloric acid. The reaction Zn + 2HCl → ZnCl₂ + H₂↑ produces hydrogen gas as the only gaseous product."
     },
     {
       "question_text": "The hybridization of carbon in methane (CH4) is:",
-      "options": ["sp", "sp2", "sp3", "sp3d"],
+      "options": [
+        "sp",
+        "sp2",
+        "sp3",
+        "sp3d"
+      ],
       "correct_answer": "C",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["hybridization", "tetrahedral"],
+      "topic_tags": [
+        "hybridization",
+        "tetrahedral"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Carbon in methane forms four single bonds with hydrogen atoms and has no lone pairs, requiring four equivalent hybrid orbitals. This geometry demands sp3 hybridization, which combines one s orbital and three p orbitals to create four tetrahedral orbitals."
     },
     {
       "question_text": "Which catalyst is used in the Haber process for the synthesis of ammonia?",
-      "options": ["Platinum", "Iron", "Nickel", "Vanadium"],
+      "options": [
+        "Platinum",
+        "Iron",
+        "Nickel",
+        "Vanadium"
+      ],
       "correct_answer": "B",
       "chapter": "p-Block Elements",
-      "topic_tags": ["haber_process", "catalyst"],
+      "topic_tags": [
+        "haber_process",
+        "catalyst"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Iron is the industrial catalyst of choice for the Haber process because it's cost-effective, readily available, and provides optimal activity for nitrogen fixation at the high temperatures and pressures required. While other metals catalyze the reaction, iron offers the best balance of efficiency and economy for large-scale ammonia production."
     },
     {
       "question_text": "The oxidation state of sulfur in H2SO4 is:",
-      "options": ["+2", "+4", "+6", "-2"],
+      "options": [
+        "+2",
+        "+4",
+        "+6",
+        "-2"
+      ],
       "correct_answer": "C",
       "chapter": "Redox Reactions",
-      "topic_tags": ["oxidation_state", "sulfuric_acid"],
+      "topic_tags": [
+        "oxidation_state",
+        "sulfuric_acid"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "In H2SO4, hydrogen is +1 and oxygen is -2. Using the equation: 2(+1) + S + 4(-2) = 0, solving for S gives +6. Sulfur is fully oxidized in sulfuric acid, bonding to four oxygen atoms."
     },
     {
       "question_text": "Which of the following is the strongest reducing agent?",
-      "options": ["F2", "Cl2", "Br2", "I2"],
+      "options": [
+        "F2",
+        "Cl2",
+        "Br2",
+        "I2"
+      ],
       "correct_answer": "D",
       "chapter": "Redox Reactions",
-      "topic_tags": ["reducing_agent", "halogens"],
+      "topic_tags": [
+        "reducing_agent",
+        "halogens"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The strongest reducing agent is the species most easily oxidized. Iodine (I2) is oxidized most readily because iodide ions have the weakest hold on their electrons due to the largest atomic size and lowest electronegativity among the halogens, making I2 the best electron donor."
     },
     {
       "question_text": "The geometry of NH3 is:",
-      "options": ["Linear", "Trigonal planar", "Tetrahedral", "Pyramidal"],
+      "options": [
+        "Linear",
+        "Trigonal planar",
+        "Tetrahedral",
+        "Pyramidal"
+      ],
       "correct_answer": "D",
       "chapter": "Chemical Bonding",
-      "topic_tags": ["VSEPR", "ammonia_geometry"],
+      "topic_tags": [
+        "VSEPR",
+        "ammonia_geometry"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Nitrogen has 5 valence electrons and forms 3 bonds with hydrogen atoms, leaving 1 lone pair. With 3 bonding pairs and 1 lone pair, the electron geometry is tetrahedral, but the molecular geometry (considering only atoms) is pyramidal due to the lone pair repulsion."
     },
     {
       "question_text": "Which functional group is present in CH3-CHO?",
-      "options": ["Alcohol", "Aldehyde", "Ketone", "Carboxylic acid"],
+      "options": [
+        "Alcohol",
+        "Aldehyde",
+        "Ketone",
+        "Carboxylic acid"
+      ],
       "correct_answer": "B",
       "chapter": "Organic Chemistry",
-      "topic_tags": ["aldehyde", "functional_groups"],
+      "topic_tags": [
+        "aldehyde",
+        "functional_groups"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The structure CH3-CHO contains a carbonyl group (C=O) bonded to a hydrogen atom and an alkyl group, which defines an aldehyde. Alcohols have -OH groups, ketones have C=O between two carbons, and carboxylic acids have -COOH groups."
     },
     {
       "question_text": "Which of the following is an isotope of hydrogen?",
-      "options": ["Helium", "Deuterium", "Lithium", "Oxygen"],
+      "options": [
+        "Helium",
+        "Deuterium",
+        "Lithium",
+        "Oxygen"
+      ],
       "correct_answer": "B",
       "chapter": "Atomic Structure",
-      "topic_tags": ["isotope", "hydrogen"],
+      "topic_tags": [
+        "isotope",
+        "hydrogen"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Deuterium is an isotope of hydrogen because it has the same atomic number (1 proton) but a different mass number due to an extra neutron, making it ²H while regular hydrogen is ¹H."
     },
     {
       "question_text": "What is the chemical formula of sulphuric acid?",
-      "options": ["HCl", "HNO3", "H2SO4", "H3PO4"],
+      "options": [
+        "HCl",
+        "HNO3",
+        "H2SO4",
+        "H3PO4"
+      ],
       "correct_answer": "C",
       "chapter": "Acids and Bases",
-      "topic_tags": ["chemical_formula", "acid"],
+      "topic_tags": [
+        "chemical_formula",
+        "acid"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Sulphuric acid contains one sulfur atom bonded to four oxygen atoms, with two acidic hydrogen atoms, giving the formula H₂SO₄. The other options represent hydrochloric, nitric, and phosphoric acids respectively."
     },
     {
       "question_text": "The most electronegative element is:",
-      "options": ["Oxygen", "Fluorine", "Chlorine", "Nitrogen"],
+      "options": [
+        "Oxygen",
+        "Fluorine",
+        "Chlorine",
+        "Nitrogen"
+      ],
       "correct_answer": "B",
       "chapter": "Periodic Properties",
-      "topic_tags": ["electronegativity", "fluorine"],
+      "topic_tags": [
+        "electronegativity",
+        "fluorine"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Fluorine is the most electronegative element because it has the smallest atomic radius and the highest nuclear charge relative to its electron shells, creating the strongest pull on electrons in chemical bonds."
     },
     {
       "question_text": "The first law of thermodynamics is mathematically expressed as:",
-      "options": ["ΔU = q + w", "ΔS > 0", "PV = nRT", "ΔG = ΔH - TΔS"],
+      "options": [
+        "ΔU = q + w",
+        "ΔS > 0",
+        "PV = nRT",
+        "ΔG = ΔH - TΔS"
+      ],
       "correct_answer": "A",
       "chapter": "Thermodynamics",
-      "topic_tags": ["first_law", "internal_energy"],
+      "topic_tags": [
+        "first_law",
+        "internal_energy"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The first law of thermodynamics states that energy is conserved—the change in internal energy (ΔU) equals heat (q) added to the system plus work (w) done on the system. This is the fundamental energy conservation equation in thermodynamics."
     },
     {
       "question_text": "Which of the following is the correct electronic configuration of Na (Z=11)?",
-      "options": ["1s² 2s² 2p⁶ 3s¹", "1s² 2s² 2p⁶", "1s² 2s² 2p⁵ 3s²", "1s² 2s² 2p⁶ 3s²"],
+      "options": [
+        "1s² 2s² 2p⁶ 3s¹",
+        "1s² 2s² 2p⁶",
+        "1s² 2s² 2p⁵ 3s²",
+        "1s² 2s² 2p⁶ 3s²"
+      ],
       "correct_answer": "A",
       "chapter": "Atomic Structure",
-      "topic_tags": ["electronic_configuration", "sodium"],
+      "topic_tags": [
+        "electronic_configuration",
+        "sodium"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Sodium has 11 electrons that must be distributed across orbitals following the Aufbau principle. Filling orbitals in order of increasing energy (1s, 2s, 2p, 3s) accounts for all 11 electrons: 2+2+6+1=11, placing the final electron in the 3s orbital."
     },
     {
       "question_text": "The compound formed when methane is treated with chlorine in presence of sunlight is mainly:",
-      "options": ["CH3Cl", "CH2Cl2", "CHCl3", "CCl4"],
+      "options": [
+        "CH3Cl",
+        "CH2Cl2",
+        "CHCl3",
+        "CCl4"
+      ],
       "correct_answer": "A",
       "chapter": "Hydrocarbons",
-      "topic_tags": ["chlorination", "substitution_reaction"],
+      "topic_tags": [
+        "chlorination",
+        "substitution_reaction"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Chlorination of methane under sunlight is a free radical substitution that occurs stepwise. The reaction produces a mixture of products (CH3Cl, CH2Cl2, CHCl3, CCl4), but CH3Cl is the major product because once formed, it's less reactive toward further chlorination compared to the remaining hydrogen atoms on methane, making monochlorination the kinetically favored primary product."
     }
   ]
 }

@@ -8,183 +8,354 @@
   "questions": [
     {
       "question_text": "A body moves with uniform velocity. Its acceleration is:",
-      "options": ["zero", "constant non-zero", "increasing", "decreasing"],
+      "options": [
+        "zero",
+        "constant non-zero",
+        "increasing",
+        "decreasing"
+      ],
       "correct_answer": "A",
       "chapter": "Kinematics",
-      "topic_tags": ["uniform_velocity", "acceleration"],
+      "topic_tags": [
+        "uniform_velocity",
+        "acceleration"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Uniform velocity means the speed and direction remain constant, so there is no change in velocity over time. Since acceleration is defined as the rate of change of velocity, zero change in velocity produces zero acceleration."
     },
     {
       "question_text": "The SI unit of work and energy is:",
-      "options": ["Newton", "Joule", "Watt", "Pascal"],
+      "options": [
+        "Newton",
+        "Joule",
+        "Watt",
+        "Pascal"
+      ],
       "correct_answer": "B",
       "chapter": "Work, Energy and Power",
-      "topic_tags": ["si_units"],
+      "topic_tags": [
+        "si_units"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Work and energy are measured as force applied over a distance (W = F·d). Since force is in Newtons and distance in meters, the unit is Newton-meter, which is defined as one Joule. Watt measures power (energy per time), and Pascal measures pressure."
     },
     {
       "question_text": "What is the value of acceleration due to gravity (g) on Earth's surface in m/s^2?",
-      "options": ["9.8", "10", "8.9", "11"],
+      "options": [
+        "9.8",
+        "10",
+        "8.9",
+        "11"
+      ],
       "correct_answer": "A",
       "chapter": "Gravitation",
-      "topic_tags": ["g_value"],
+      "topic_tags": [
+        "g_value"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Earth's surface gravity is determined by the planet's mass and radius. The standard value used in physics is 9.8 m/s², accounting for Earth's oblate spheroid shape and varying altitude; 10 m/s² is only an approximation."
     },
     {
       "question_text": "Two resistors of 4 ohm and 6 ohm are connected in parallel. The equivalent resistance is:",
-      "options": ["10 ohm", "2.4 ohm", "1.5 ohm", "24 ohm"],
+      "options": [
+        "10 ohm",
+        "2.4 ohm",
+        "1.5 ohm",
+        "24 ohm"
+      ],
       "correct_answer": "B",
       "chapter": "Current Electricity",
-      "topic_tags": ["parallel_circuit", "resistance"],
+      "topic_tags": [
+        "parallel_circuit",
+        "resistance"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "For parallel resistors, use the formula 1/R_eq = 1/R₁ + 1/R₂. Substituting: 1/R_eq = 1/4 + 1/6 = 3/12 + 2/12 = 5/12, so R_eq = 12/5 = 2.4 ohm."
     },
     {
       "question_text": "The dimensional formula for momentum is:",
-      "options": ["MLT^-1", "ML^2T^-2", "MLT^-2", "ML^2T^-1"],
+      "options": [
+        "MLT^-1",
+        "ML^2T^-2",
+        "MLT^-2",
+        "ML^2T^-1"
+      ],
       "correct_answer": "A",
       "chapter": "Units and Measurements",
-      "topic_tags": ["dimensional_analysis"],
+      "topic_tags": [
+        "dimensional_analysis"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Momentum is the product of mass and velocity. Since mass has dimension M and velocity has dimension LT^-1, momentum's dimension is M × LT^-1 = MLT^-1."
     },
     {
       "question_text": "A capacitor of 4 microfarad is charged to 100 V. The energy stored is:",
-      "options": ["0.02 J", "0.04 J", "0.2 J", "0.4 J"],
+      "options": [
+        "0.02 J",
+        "0.04 J",
+        "0.2 J",
+        "0.4 J"
+      ],
       "correct_answer": "A",
       "chapter": "Electrostatic Potential and Capacitance",
-      "topic_tags": ["capacitor_energy"],
+      "topic_tags": [
+        "capacitor_energy"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the capacitor energy formula E = ½CV², substitute C = 4 × 10⁻⁶ F and V = 100 V: E = ½ × 4 × 10⁻⁶ × (100)² = 2 × 10⁻⁶ × 10,000 = 0.02 J."
     },
     {
       "question_text": "The de Broglie wavelength of an electron is given by:",
-      "options": ["h/mv", "hv/m", "mv/h", "m/hv"],
+      "options": [
+        "h/mv",
+        "hv/m",
+        "mv/h",
+        "m/hv"
+      ],
       "correct_answer": "A",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["de_broglie", "wavelength"],
+      "topic_tags": [
+        "de_broglie",
+        "wavelength"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The de Broglie wavelength relates a particle's wavelength to its momentum. Since momentum p = mv, the wavelength is λ = h/p = h/mv, where h is Planck's constant."
     },
     {
       "question_text": "The half-life of a radioactive substance is the time taken for:",
-      "options": ["all atoms to decay", "half the atoms to decay", "the activity to become half", "Both B and C"],
+      "options": [
+        "all atoms to decay",
+        "half the atoms to decay",
+        "the activity to become half",
+        "Both B and C"
+      ],
       "correct_answer": "D",
       "chapter": "Nuclei",
-      "topic_tags": ["radioactive_decay", "half_life"],
+      "topic_tags": [
+        "radioactive_decay",
+        "half_life"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Half-life is defined as the time required for half the atoms in a sample to decay. Since activity (decay rate) is directly proportional to the number of remaining atoms, when half the atoms decay, the activity simultaneously becomes half. Therefore, both statements B and C are correct."
     },
     {
       "question_text": "The focal length of a convex lens is positive. The image of an object placed at the focus is formed at:",
-      "options": ["the focus on the same side", "infinity", "twice the focal length", "the optical center"],
+      "options": [
+        "the focus on the same side",
+        "infinity",
+        "twice the focal length",
+        "the optical center"
+      ],
       "correct_answer": "B",
       "chapter": "Ray Optics",
-      "topic_tags": ["convex_lens", "image_formation"],
+      "topic_tags": [
+        "convex_lens",
+        "image_formation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When an object is placed at the focal point of a convex lens, the rays passing through the lens emerge parallel to each other. Parallel rays are considered to converge at infinity, so the image forms at infinity."
     },
     {
       "question_text": "What is the magnitude of the magnetic field at the center of a circular coil of radius r carrying current I, with N turns?",
-      "options": ["μ₀NI/(2r)", "μ₀I/(2r)", "μ₀NI/r", "μ₀I/r"],
+      "options": [
+        "μ₀NI/(2r)",
+        "μ₀I/(2r)",
+        "μ₀NI/r",
+        "μ₀I/r"
+      ],
       "correct_answer": "A",
       "chapter": "Moving Charges and Magnetism",
-      "topic_tags": ["magnetic_field", "circular_coil"],
+      "topic_tags": [
+        "magnetic_field",
+        "circular_coil"
+      ],
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The magnetic field at the center of a single circular loop is μ₀I/(2r). With N turns, each contributes equally to the field, so the total field is the sum of N identical contributions, giving μ₀NI/(2r)."
     },
     {
       "question_text": "The period of a simple pendulum of length L is:",
-      "options": ["2π√(L/g)", "2π√(g/L)", "π√(L/g)", "√(L/g)"],
+      "options": [
+        "2π√(L/g)",
+        "2π√(g/L)",
+        "π√(L/g)",
+        "√(L/g)"
+      ],
       "correct_answer": "A",
       "chapter": "Oscillations",
-      "topic_tags": ["simple_pendulum", "period"],
+      "topic_tags": [
+        "simple_pendulum",
+        "period"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The period formula derives from balancing the restoring force with centripetal acceleration. For small oscillations, this yields T = 2π√(L/g), where the period increases with length and decreases with stronger gravity."
     },
     {
       "question_text": "The speed of sound in air at NTP is approximately:",
-      "options": ["330 m/s", "3 x 10^8 m/s", "1500 m/s", "100 m/s"],
+      "options": [
+        "330 m/s",
+        "3 x 10^8 m/s",
+        "1500 m/s",
+        "100 m/s"
+      ],
       "correct_answer": "A",
       "chapter": "Waves",
-      "topic_tags": ["sound_speed"],
+      "topic_tags": [
+        "sound_speed"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At NTP (Normal Temperature and Pressure), sound travels through air at approximately 330 m/s. Option B is the speed of light, option C is sound's speed in water, and option D is too slow for sound in air."
     },
     {
       "question_text": "Photoelectric effect proves the:",
-      "options": ["wave nature of light", "particle nature of light", "both A and B", "neither A nor B"],
+      "options": [
+        "wave nature of light",
+        "particle nature of light",
+        "both A and B",
+        "neither A nor B"
+      ],
       "correct_answer": "B",
       "chapter": "Dual Nature of Matter",
-      "topic_tags": ["photoelectric_effect"],
+      "topic_tags": [
+        "photoelectric_effect"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The photoelectric effect demonstrates that light consists of discrete energy packets (photons) that eject electrons from a metal surface only when their frequency exceeds a threshold—behavior unexplainable by wave theory alone, thus proving light's particle nature."
     },
     {
       "question_text": "Two charges +q and -q are separated by a distance d. The dipole moment is:",
-      "options": ["qd", "q/d", "2qd", "qd/2"],
+      "options": [
+        "qd",
+        "q/d",
+        "2qd",
+        "qd/2"
+      ],
       "correct_answer": "A",
       "chapter": "Electric Charges and Fields",
-      "topic_tags": ["dipole_moment"],
+      "topic_tags": [
+        "dipole_moment"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The dipole moment is defined as the product of the charge magnitude and the separation distance between the charges: p = q × d. Since we have charges +q and -q separated by distance d, the magnitude of the dipole moment is qd."
     },
     {
       "question_text": "An object moves in a circular path of radius r with speed v. Its centripetal acceleration is:",
-      "options": ["v^2/r", "v/r", "vr", "v^2 r"],
+      "options": [
+        "v^2/r",
+        "v/r",
+        "vr",
+        "v^2 r"
+      ],
       "correct_answer": "A",
       "chapter": "Motion in a Plane",
-      "topic_tags": ["circular_motion", "centripetal_acceleration"],
+      "topic_tags": [
+        "circular_motion",
+        "centripetal_acceleration"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Centripetal acceleration is the rate of change of velocity direction in circular motion. Using the relationship between arc length, velocity, and radius, the centripetal acceleration equals v²/r, which can also be derived from Newton's second law applied to circular motion."
     },
     {
       "question_text": "The first law of thermodynamics is essentially a statement of:",
-      "options": ["conservation of momentum", "conservation of energy", "conservation of mass", "increase in entropy"],
+      "options": [
+        "conservation of momentum",
+        "conservation of energy",
+        "conservation of mass",
+        "increase in entropy"
+      ],
       "correct_answer": "B",
       "chapter": "Thermodynamics",
-      "topic_tags": ["first_law", "energy_conservation"],
+      "topic_tags": [
+        "first_law",
+        "energy_conservation"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The first law of thermodynamics states that the change in internal energy of a system equals heat added minus work done by the system (ΔU = Q - W), which is fundamentally a restatement of energy conservation—energy cannot be created or destroyed, only transformed between heat, work, and internal energy forms."
     },
     {
       "question_text": "An object is thrown vertically upward with initial velocity u. The time to reach maximum height is:",
-      "options": ["u/g", "u/(2g)", "2u/g", "g/u"],
+      "options": [
+        "u/g",
+        "u/(2g)",
+        "2u/g",
+        "g/u"
+      ],
       "correct_answer": "A",
       "chapter": "Kinematics",
-      "topic_tags": ["projectile", "free_fall"],
+      "topic_tags": [
+        "projectile",
+        "free_fall"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "At maximum height, the object's velocity becomes zero. Using the equation v = u - gt, setting v = 0 and solving for t gives t = u/g, which is the time to reach maximum height."
     },
     {
       "question_text": "Coulomb's law states that the force between two point charges is inversely proportional to:",
-      "options": ["the distance", "the square of the distance", "the cube of the distance", "the square root of the distance"],
+      "options": [
+        "the distance",
+        "the square of the distance",
+        "the cube of the distance",
+        "the square root of the distance"
+      ],
       "correct_answer": "B",
       "chapter": "Electric Charges and Fields",
-      "topic_tags": ["coulombs_law"],
+      "topic_tags": [
+        "coulombs_law"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Coulomb's law mathematically states F = k(q₁q₂)/r², where the force is inversely proportional to r². This means force decreases with the square of the separation distance between charges."
     },
     {
       "question_text": "What does the area under a velocity-time graph represent?",
-      "options": ["acceleration", "displacement", "force", "momentum"],
+      "options": [
+        "acceleration",
+        "displacement",
+        "force",
+        "momentum"
+      ],
       "correct_answer": "B",
       "chapter": "Kinematics",
-      "topic_tags": ["velocity_time_graph"],
+      "topic_tags": [
+        "velocity_time_graph"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The area under a velocity-time graph equals displacement because displacement is calculated as velocity multiplied by time (Δx = v·Δt), and area represents this product graphically."
     },
     {
       "question_text": "The energy stored in a stretched spring (force constant k, extension x) is:",
-      "options": ["kx", "kx^2", "(1/2)kx^2", "2kx"],
+      "options": [
+        "kx",
+        "kx^2",
+        "(1/2)kx^2",
+        "2kx"
+      ],
       "correct_answer": "C",
       "chapter": "Work, Energy and Power",
-      "topic_tags": ["elastic_potential_energy", "spring"],
+      "topic_tags": [
+        "elastic_potential_energy",
+        "spring"
+      ],
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The elastic potential energy stored in a spring equals the work done against the restoring force. Since force varies linearly from 0 to kx during stretching, the average force is kx/2, giving work = (average force) × (distance) = (kx/2) × x = (1/2)kx²."
     }
   ]
 }

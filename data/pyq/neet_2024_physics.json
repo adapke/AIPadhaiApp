@@ -17,7 +17,8 @@
       "correct_answer": "B",
       "chapter": "Current Electricity",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Electric current measures the flow of charge per unit time. The ampere (A) is defined as one coulomb of charge flowing past a point per second, making it the SI base unit for electric current, while volt, ohm, and watt measure voltage, resistance, and power respectively."
     },
     {
       "question_text": "A body falls freely. After 2 seconds its velocity is (g=10 m/s²):",
@@ -30,7 +31,8 @@
       "correct_answer": "B",
       "chapter": "Kinematics",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the equation v = u + gt where initial velocity u = 0, g = 10 m/s², and t = 2 s: v = 0 + (10)(2) = 20 m/s."
     },
     {
       "question_text": "Refractive index of vacuum is:",
@@ -43,7 +45,8 @@
       "correct_answer": "B",
       "chapter": "Ray Optics",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Refractive index is defined as the ratio of the speed of light in vacuum to the speed of light in a medium. Since vacuum has no material to slow light down, light travels at its maximum speed in vacuum, making this ratio equal to 1."
     },
     {
       "question_text": "Lens formula relating object distance u, image distance v, focal length f:",
@@ -56,7 +59,8 @@
       "correct_answer": "A",
       "chapter": "Ray Optics",
       "difficulty": "medium",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The lens formula is derived from similar triangles in ray optics. Using the sign convention where distances are measured from the lens, the relationship 1/f = 1/v - 1/u follows from equating magnifications and applying geometric principles to converging and diverging lens systems."
     },
     {
       "question_text": "Two resistors 6Ω and 3Ω in series. Equivalent resistance:",
@@ -69,7 +73,8 @@
       "correct_answer": "B",
       "chapter": "Current Electricity",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "When resistors are connected in series, their resistances add directly: R_total = R₁ + R₂ = 6Ω + 3Ω = 9Ω."
     },
     {
       "question_text": "Power dissipated when 5A flows through 4Ω resistor:",
@@ -82,7 +87,8 @@
       "correct_answer": "B",
       "chapter": "Current Electricity",
       "difficulty": "easy",
-      "marks": 4
+      "marks": 4,
+      "explanation": "Using the power formula P = I²R, where current I = 5A and resistance R = 4Ω: P = (5)² × 4 = 25 × 4 = 100 W."
     },
     {
       "question_text": "The wavelength of an electron with kinetic energy 100 eV is approximately:",
@@ -95,7 +101,8 @@
       "correct_answer": "A",
       "chapter": "Dual Nature",
       "difficulty": "hard",
-      "marks": 4
+      "marks": 4,
+      "explanation": "The de Broglie wavelength λ = h/p, where momentum p = √(2mK) for non-relativistic electrons. Substituting K = 100 eV and converting units gives λ ≈ 0.12 nm."
     }
   ]
 }
