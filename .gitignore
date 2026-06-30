@@ -55,3 +55,16 @@ compose_up*.log
 *.aab
 mobile/android/local.properties
 mobile/ios/
+
+# Mobile signing secrets — NEVER commit these (see MOBILE_RELEASE.md).
+# Losing the upload keystore means you can never update the Android app;
+# leaking it lets anyone publish as you.
+*.jks
+*.keystore
+keystore.properties
+key.properties
+google-services.json
+GoogleService-Info.plist
+*.p8
+*.p12
+*.mobileprovision
