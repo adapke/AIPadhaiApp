@@ -938,6 +938,15 @@ DIAGRAM_KEYWORDS: list[tuple[tuple[str, ...], str]] = [
      "water_cycle"),
     (("atom", "electron", "proton", "neutron", "nucleus"), "atom"),
     (("addition", "plus", "sum", "add ", "adding"), "addition_dots"),
+    # prod-211 — primary/middle-school maths visuals. Multi-word keys
+    # ("times table") guard against false hits ("sometimes"). "multiply" and
+    # "multiplication" are BOTH listed (one is not a substring of the other).
+    (("multiplication", "multiply", "multiplying", "times table"),
+     "multiplication_array"),
+    (("division", "divide", "dividing", "quotient", "divisor"),
+     "division_groups"),
+    (("subtraction", "subtract", "minus", "take away"), "subtraction_dots"),
+    (("fraction", "numerator", "denominator"), "fraction_circle"),
 ]
 
 

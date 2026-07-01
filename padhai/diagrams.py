@@ -399,3 +399,148 @@ def atom(
     _label(draw, "Nucleus", cx, cy + 50, body_font_path, 18, theme.fg)
     _label(draw, "Electron shells", cx, cy + h // 2 - 30,
            body_font_path, 18, theme.fg)
+
+
+# ----------------------------- division_groups ------------------------- #
+
+@register("division_groups")
+def division_groups(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """Visualise '12 ÷ 3 = 4' as sharing: twelve dots shared equally into
+    3 groups, four dots per group. The narration carries the real example;
+    this is the always-correct illustration of what division *means*."""
+    groups, per = 3, 4
+    dot_r = 15
+    cy = y + h // 2 - 18
+    gap = max(24, w // 24)
+    box_w = min(160, max(90, (w - (groups + 1) * gap) // groups))
+    box_h = min(int(h * 0.55), 2 * (dot_r * 2 + 12) + 24)
+    total_w = groups * box_w + (groups - 1) * gap
+    start_x = x + (w - total_w) // 2
+
+    for g in range(groups):
+        bx = start_x + g * (box_w + gap)
+        by = cy - box_h // 2
+        draw.rectangle((bx, by, bx + box_w, by + box_h),
+                       outline=theme.accent, width=3)
+        dcx = bx + box_w // 2
+        dcy = by + box_h // 2
+        for i in range(per):
+            row, col = divmod(i, 2)
+            ddx = (col - 0.5) * (dot_r * 2 + 12)
+            ddy = (row - 0.5) * (dot_r * 2 + 12)
+            draw.ellipse(
+                (dcx + ddx - dot_r, dcy + ddy - dot_r,
+                 dcx + ddx + dot_r, dcy + ddy + dot_r),
+                fill=(80, 130, 220),
+            )
+        _label(draw, "4", dcx, by + box_h + 6, body_font_path, 22, theme.fg)
+
+    _label(draw, "12 ÷ 3 = 4", x + w // 2, y + h - 30,
+           body_font_path, 30, theme.fg)
+
+
+# ----------------------------- multiplication_array -------------------- #
+
+@register("multiplication_array")
+def multiplication_array(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """Visualise '3 × 4 = 12' as a rectangular array — 3 rows of 4 dots.
+    An array is the clearest mental model of multiplication for kids."""
+    rows, cols = 3, 4
+    dot_r = 16
+    step = dot_r * 2 + 14
+    grid_w = (cols - 1) * step
+    grid_h = (rows - 1) * step
+    start_x = x + (w - grid_w) // 2
+    start_y = y + (h - grid_h) // 2 - 16
+
+    for r in range(rows):
+        for c in range(cols):
+            px = start_x + c * step
+            py = start_y + r * step
+            draw.ellipse((px - dot_r, py - dot_r, px + dot_r, py + dot_r),
+                         fill=(90, 170, 90))
+
+    # brace-ish labels: rows on the left, cols on top
+    _label(draw, "3 rows", x + 70, start_y + grid_h // 2 - 12,
+           body_font_path, 18, theme.fg)
+    _label(draw, "4 in each row", start_x + grid_w // 2, start_y - 40,
+           body_font_path, 18, theme.fg)
+    _label(draw, "3 × 4 = 12", x + w // 2, y + h - 30,
+           body_font_path, 30, theme.fg)
+
+
+# ----------------------------- subtraction_dots ------------------------ #
+
+@register("subtraction_dots")
+def subtraction_dots(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """Visualise '5 − 2 = 3' as taking away: five dots, the last two crossed
+    out, three remain. Take-away is how subtraction is first taught."""
+    total, remove = 5, 2
+    dot_r = 22
+    cy = y + h // 2 - 10
+    step = dot_r * 2 + 20
+    row_w = (total - 1) * step
+    start_x = x + (w - row_w) // 2
+
+    for i in range(total):
+        px = start_x + i * step
+        taken = i >= (total - remove)
+        draw.ellipse((px - dot_r, cy - dot_r, px + dot_r, cy + dot_r),
+                     fill=(150, 150, 160) if taken else (80, 130, 220))
+        if taken:
+            # red cross to show "taken away"
+            draw.line((px - dot_r, cy - dot_r, px + dot_r, cy + dot_r),
+                      fill=(220, 70, 60), width=4)
+            draw.line((px - dot_r, cy + dot_r, px + dot_r, cy - dot_r),
+                      fill=(220, 70, 60), width=4)
+
+    _label(draw, "5 − 2 = 3", x + w // 2, y + h - 30,
+           body_font_path, 30, theme.fg)
+
+
+# ----------------------------- fraction_circle ------------------------- #
+
+@register("fraction_circle")
+def fraction_circle(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """Visualise the fraction 3/4 — a circle cut into 4 equal slices with 3
+    shaded. The canonical 'parts of a whole' picture."""
+    parts, shaded = 4, 3
+    r = min(w, h) // 2 - 46
+    r = max(60, r)
+    cx = x + w // 2
+    cy = y + h // 2 - 12
+    box = (cx - r, cy - r, cx + r, cy + r)
+
+    for i in range(parts):
+        start = i * (360 // parts) - 90
+        end = start + (360 // parts)
+        fill = theme.accent if i < shaded else theme.bg
+        draw.pieslice(box, start, end, fill=fill, outline=theme.fg, width=3)
+
+    _label(draw, "3/4", cx, y + h - 46, body_font_path, 32, theme.fg)
+    _label(draw, "3 of 4 equal parts", cx, y + h - 20,
+           body_font_path, 16, theme.muted)
