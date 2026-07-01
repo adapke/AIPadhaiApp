@@ -9755,6 +9755,16 @@ def _locale_from_request(request: Request) -> str:
     return i18n.normalise_locale(al)
 
 
+def _localized_page(request: Request, html: str) -> HTMLResponse:
+    """prod-208 — serve a static SPA page HTML localized to the request's
+    resolved locale. Same choke-point pattern new_ui_pages.py uses for its
+    module pages, so the language switcher (cookie + reload) applies to the
+    profile / teacher / parent / flashcards / quiz / chat surfaces too — not
+    just /home + /ui-legacy. No-op when the locale resolves to English."""
+    from .i18n import localize_template
+    return HTMLResponse(localize_template(html, _locale_from_request(request)))
+
+
 @app.get("/ui", response_class=HTMLResponse)
 def ui(request: Request) -> HTMLResponse:
     """Direct link to the goal-led home UI — useful when an API
@@ -12544,59 +12554,59 @@ def get_job_subtitles_vtt(job_id: str, request: Request):
 # matches the literal path first.
 
 @app.get("/lessons/new", response_class=HTMLResponse)
-def lesson_new_page() -> HTMLResponse:
+def lesson_new_page(request: Request) -> HTMLResponse:
     """Lesson generator screen — upload → options → generate → watch."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_lesson_new_html())
+    return _localized_page(request, _ui.get_lesson_new_html())
 
 
 @app.get("/lessons/{job_id}", response_class=HTMLResponse)
-def lesson_player_page(job_id: str) -> HTMLResponse:  # noqa: ARG001
+def lesson_player_page(request: Request, job_id: str) -> HTMLResponse:  # noqa: ARG001
     """Video player screen with tabs: quiz, chat, flashcards, notes, recap."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_lesson_player_html())
+    return _localized_page(request, _ui.get_lesson_player_html())
 
 
 @app.get("/flashcards", response_class=HTMLResponse)
-def flashcards_page() -> HTMLResponse:
+def flashcards_page(request: Request) -> HTMLResponse:
     """SM-2 flashcard study screen — due queue, flip, rate."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_flashcards_html())
+    return _localized_page(request, _ui.get_flashcards_html())
 
 
 @app.get("/quiz", response_class=HTMLResponse)
-def quiz_page() -> HTMLResponse:
+def quiz_page(request: Request) -> HTMLResponse:
     """Standalone quiz screen — reads ?lesson= from query string."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_quiz_html())
+    return _localized_page(request, _ui.get_quiz_html())
 
 
 @app.get("/chat", response_class=HTMLResponse)
-def chat_page() -> HTMLResponse:
+def chat_page(request: Request) -> HTMLResponse:
     """AI Tutor chat screen — reads ?lesson= from query string."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_chat_html())
+    return _localized_page(request, _ui.get_chat_html())
 
 
 @app.get("/profile", response_class=HTMLResponse)
-def profile_page() -> HTMLResponse:
+def profile_page(request: Request) -> HTMLResponse:
     """User preferences and account settings."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_profile_html())
+    return _localized_page(request, _ui.get_profile_html())
 
 
 @app.get("/teacher", response_class=HTMLResponse)
-def teacher_page() -> HTMLResponse:
+def teacher_page(request: Request) -> HTMLResponse:
     """Teacher home — classes, assignments, doubt queue."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_teacher_html())
+    return _localized_page(request, _ui.get_teacher_html())
 
 
 @app.get("/parent", response_class=HTMLResponse)
-def parent_page() -> HTMLResponse:
+def parent_page(request: Request) -> HTMLResponse:
     """Parent portal — child progress, fee payment."""
     from . import ui_pages as _ui
-    return HTMLResponse(_ui.get_parent_html())
+    return _localized_page(request, _ui.get_parent_html())
 
 
 @app.get("/static/landing-demo.mp4", include_in_schema=False)

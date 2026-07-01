@@ -236,5 +236,22 @@
   "adaptive.syllabus_pack": "Syllabus pack",
   "adaptive.questions_per_session": "Questions per session",
   "adaptive.create_pack": "Create adaptive pack",
-  "adaptive.your_packs": "Your packs"
+  "adaptive.your_packs": "Your packs",
+
+  "auth.sign_up": "Sign up",
+  "auth.log_in": "Log in",
+  "auth.log_out": "Log out",
+  "auth.full_name": "Full name",
+  "profile.study_preferences": "Study Preferences",
+  "profile.display_name": "Display name",
+  "profile.preferred_language": "Preferred language",
+  "profile.change_password": "Change Password",
+  "profile.save_changes": "Save changes",
+  "teacher.dashboard": "Teacher Dashboard",
+  "teacher.my_classes": "My Classes",
+  "parent.portal": "Parent Portal",
+  "parent.your_children": "Your Children",
+  "parent.link_child": "Link a child",
+  "common.show_answer": "Show answer",
+  "common.try_again": "Try again"
 }

@@ -236,5 +236,22 @@
   "adaptive.syllabus_pack": "सिलेबस पैक",
   "adaptive.questions_per_session": "प्रति सत्र प्रश्न",
   "adaptive.create_pack": "अडैप्टिव पैक बनाएँ",
-  "adaptive.your_packs": "आपके पैक"
+  "adaptive.your_packs": "आपके पैक",
+
+  "auth.sign_up": "साइन अप करें",
+  "auth.log_in": "लॉग इन करें",
+  "auth.log_out": "लॉग आउट करें",
+  "auth.full_name": "पूरा नाम",
+  "profile.study_preferences": "अध्ययन प्राथमिकताएँ",
+  "profile.display_name": "प्रदर्शित नाम",
+  "profile.preferred_language": "पसंदीदा भाषा",
+  "profile.change_password": "पासवर्ड बदलें",
+  "profile.save_changes": "बदलाव सहेजें",
+  "teacher.dashboard": "शिक्षक डैशबोर्ड",
+  "teacher.my_classes": "मेरी कक्षाएँ",
+  "parent.portal": "अभिभावक पोर्टल",
+  "parent.your_children": "आपके बच्चे",
+  "parent.link_child": "बच्चे को जोड़ें",
+  "common.show_answer": "उत्तर दिखाएँ",
+  "common.try_again": "फिर से कोशिश करें"
 }
