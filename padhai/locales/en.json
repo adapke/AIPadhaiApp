@@ -222,5 +222,19 @@
   "flash.flip_hint": "Tap or press SPACE to flip",
   "voice.conversation": "Voice conversation",
   "essay.grade": "Grade my answer",
-  "essay.ai_score": "AI Score"
+  "essay.ai_score": "AI Score",
+
+  "essay.model_answer": "Model Answer",
+  "math.image_url": "Image URL of handwritten solution",
+  "math.check_work": "Check my work",
+  "math.extracted_steps": "Extracted steps",
+  "math.step_validation": "Step validation",
+  "interview.track": "Interview track",
+  "interview.start": "Start interview",
+  "interview.tap_answer": "Tap to answer",
+  "interview.report": "Interview Report",
+  "adaptive.syllabus_pack": "Syllabus pack",
+  "adaptive.questions_per_session": "Questions per session",
+  "adaptive.create_pack": "Create adaptive pack",
+  "adaptive.your_packs": "Your packs"
 }

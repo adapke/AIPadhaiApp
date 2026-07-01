@@ -222,5 +222,19 @@
   "flash.flip_hint": "पलटने के लिए टैप करें या SPACE दबाएँ",
   "voice.conversation": "वॉइस बातचीत",
   "essay.grade": "मेरा उत्तर जाँचें",
-  "essay.ai_score": "AI स्कोर"
+  "essay.ai_score": "AI स्कोर",
+
+  "essay.model_answer": "आदर्श उत्तर",
+  "math.image_url": "हाथ से लिखे हल की इमेज URL",
+  "math.check_work": "मेरा हल जाँचें",
+  "math.extracted_steps": "निकाले गए चरण",
+  "math.step_validation": "चरण जाँच",
+  "interview.track": "इंटरव्यू ट्रैक",
+  "interview.start": "इंटरव्यू शुरू करें",
+  "interview.tap_answer": "उत्तर देने के लिए टैप करें",
+  "interview.report": "इंटरव्यू रिपोर्ट",
+  "adaptive.syllabus_pack": "सिलेबस पैक",
+  "adaptive.questions_per_session": "प्रति सत्र प्रश्न",
+  "adaptive.create_pack": "अडैप्टिव पैक बनाएँ",
+  "adaptive.your_packs": "आपके पैक"
 }
