@@ -253,5 +253,22 @@
   "parent.your_children": "Your Children",
   "parent.link_child": "Link a child",
   "common.show_answer": "Show answer",
-  "common.try_again": "Try again"
+  "common.try_again": "Try again",
+
+  "examhub.title": "Exam Hub",
+  "onboarding.welcome": "Welcome to AI Pathshala",
+  "onboarding.skip": "Skip for now",
+  "dashboard.change_goal": "Change your study goal",
+  "dashboard.your_activity": "Your activity",
+  "examhub.readiness_score": "Readiness score",
+  "examhub.open_daily_plan": "Open daily plan",
+  "examhub.my_packs": "My exam packs",
+  "examhub.enrol": "Enrol in this pack",
+  "examhub.already_enrolled": "Already enrolled",
+  "common.all_modules": "All modules",
+  "common.trending_week": "Trending this week",
+  "study.read_syllabus": "Read the syllabus",
+  "study.practise_flashcards": "Practise flashcards",
+  "study.take_practice_test": "Take a practice test",
+  "concept.ask_ai_tutor": "Ask AI tutor instead"
 }

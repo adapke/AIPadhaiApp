@@ -253,5 +253,22 @@
   "parent.your_children": "आपके बच्चे",
   "parent.link_child": "बच्चे को जोड़ें",
   "common.show_answer": "उत्तर दिखाएँ",
-  "common.try_again": "फिर से कोशिश करें"
+  "common.try_again": "फिर से कोशिश करें",
+
+  "examhub.title": "परीक्षा हब",
+  "onboarding.welcome": "AI Pathshala में आपका स्वागत है",
+  "onboarding.skip": "अभी छोड़ें",
+  "dashboard.change_goal": "अपना लक्ष्य बदलें",
+  "dashboard.your_activity": "आपकी गतिविधि",
+  "examhub.readiness_score": "तैयारी स्कोर",
+  "examhub.open_daily_plan": "दैनिक प्लान खोलें",
+  "examhub.my_packs": "मेरे परीक्षा पैक",
+  "examhub.enrol": "इस पैक में शामिल हों",
+  "examhub.already_enrolled": "पहले से शामिल",
+  "common.all_modules": "सभी मॉड्यूल",
+  "common.trending_week": "इस हफ़्ते ट्रेंडिंग",
+  "study.read_syllabus": "सिलेबस पढ़ें",
+  "study.practise_flashcards": "फ़्लैशकार्ड अभ्यास करें",
+  "study.take_practice_test": "अभ्यास टेस्ट दें",
+  "concept.ask_ai_tutor": "इसके बजाय AI ट्यूटर से पूछें"
 }

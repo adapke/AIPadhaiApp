@@ -10027,13 +10027,13 @@ Response within 72 hours as required by DPDP Act §13.</p>
 
 
 @app.get("/terms", include_in_schema=False)
-def terms_page() -> HTMLResponse:
-    return HTMLResponse(_TERMS_HTML)
+def terms_page(request: Request) -> HTMLResponse:
+    return _localized_page(request, _TERMS_HTML)
 
 
 @app.get("/privacy", include_in_schema=False)
-def privacy_page() -> HTMLResponse:
-    return HTMLResponse(_PRIVACY_HTML)
+def privacy_page(request: Request) -> HTMLResponse:
+    return _localized_page(request, _PRIVACY_HTML)
 
 
 @app.get("/robots.txt", include_in_schema=False)
@@ -12632,10 +12632,10 @@ def landing_demo_video():
 
 
 @app.get("/onboarding", response_class=HTMLResponse)
-def onboarding_page() -> HTMLResponse:
+def onboarding_page(request: Request) -> HTMLResponse:
     """Multi-step student onboarding wizard. Drives the
     /api/onboarding/* endpoints declared in padhai/routers/onboarding.py."""
-    return HTMLResponse(_ONBOARDING_HTML)
+    return _localized_page(request, _ONBOARDING_HTML)
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
