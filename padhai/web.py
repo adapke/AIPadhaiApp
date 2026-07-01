@@ -8134,8 +8134,24 @@ document.querySelectorAll('.ex-chip').forEach(c => {
   c.addEventListener('click', () => {
     $('ex-topic').value = c.dataset.topic;
     $('ex-topic').focus();
+    exInvalidateIfChanged();
   });
 });
+
+// prod-210 — the explainer video used exLast.topic (the LAST topic that was
+// Explained), so changing the topic box and clicking "Make Video" without
+// re-running Explain rendered the OLD topic — an off-topic video. Clearing
+// exLast whenever the box no longer matches the explained topic forces a fresh
+// Explain first, so the video always matches what the student actually picked.
+function exInvalidateIfChanged() {
+  const typed = $('ex-topic').value.trim().toLowerCase();
+  const explained = (exLast && (exLast.topic || '')).trim().toLowerCase();
+  if (exLast && typed && typed !== explained) {
+    exLast = null;
+    const out = $('ex-output'); if (out) out.style.display = 'none';
+    const vid = $('ex-video-card'); if (vid) vid.style.display = 'none';
+  }
+}
 
 async function exRun(regenerate) {
   const topic = $('ex-topic').value.trim();
@@ -8198,6 +8214,7 @@ function exEscape(s) {
   }[c]));
 }
 
+$('ex-topic').addEventListener('input', exInvalidateIfChanged);
 $('exf').addEventListener('submit', e => { e.preventDefault(); exRun(false); });
 $('ex-regen').addEventListener('click', () => exRun(true));
 $('ex-copy').addEventListener('click', async () => {
@@ -8247,6 +8264,12 @@ function exVideoStatus(text, kind) {
 let exVideoPollTimer = null, exVideoLessonId = null;
 
 async function exMakeVideo() {
+  // prod-210 — if the box no longer matches the explained topic, re-Explain
+  // first so the rendered video is about the CURRENT topic, never a stale one.
+  const typed = $('ex-topic').value.trim();
+  if (typed && (!exLast || typed.toLowerCase() !== (exLast.topic || '').trim().toLowerCase())) {
+    await exRun(false);
+  }
   if (!exLast) return;
   const topic = exLast.topic || $('ex-topic').value;
   const language = $('ex-lang').value;
