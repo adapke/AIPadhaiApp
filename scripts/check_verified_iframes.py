@@ -44,6 +44,14 @@ def main() -> int:
         ),
     )
     p.add_argument(
+        "--tier", default="verified",
+        help=(
+            "Which quality_tier to audit (default 'verified'). Pass "
+            "'channel_seed' to check the unconfirmed curator queue — prod-216 "
+            "flags rows whose URL isn't a playable video at all."
+        ),
+    )
+    p.add_argument(
         "--limit", type=int, default=0,
         help="Cap the number of rows checked (0 = no cap).",
     )
@@ -66,14 +74,14 @@ def main() -> int:
 
     from padhai import concept_videos as cv
 
-    # Use the existing curator-queue helper to walk verified rows.
+    # Use the existing curator-queue helper to walk rows of the chosen tier.
     rows = cv.list_curator_queue(
-        quality_tier="verified",
+        quality_tier=args.tier,
         limit=args.limit if args.limit else 10000,
     )
     started = time.time()
     print(
-        f"[iframe-check] starting on {len(rows)} verified row(s) "
+        f"[iframe-check] starting on {len(rows)} {args.tier} row(s) "
         f"(auto_demote={args.auto_demote})",
         file=sys.stderr,
     )

@@ -198,6 +198,40 @@ def _derive_embed_url(source_url: str) -> str:
     return source_url
 
 
+def is_playable_video_url(source_url: str) -> bool:
+    """True when the URL points at a SPECIFIC embeddable video, not a channel
+    page, search-results page, or playlist.
+
+    prod-216: 21 of the original prod-14 seed rows are
+    `youtube.com/@Channel/search?query=…` placeholders — curator TODO markers
+    that can never embed or play. This distinguishes them from real
+    watch?v= / youtu.be/ / embed/ URLs so the health check and curator queue
+    are honest about *why* a row isn't usable (not-a-video vs embed-blocked).
+
+    Non-YouTube hosts are treated as playable (we can't classify them and
+    don't want to false-flag a legitimate direct link)."""
+    if not source_url:
+        return False
+    import urllib.parse
+    host = (urllib.parse.urlparse(source_url).hostname or "").lower()
+    yt_hosts = {
+        "www.youtube.com", "youtube.com", "m.youtube.com",
+        "www.youtube-nocookie.com", "youtube-nocookie.com", "youtu.be",
+    }
+    if host in yt_hosts or host.endswith(".youtube.com"):
+        # Shape-based (not strict-11-char): a specific video link carries a
+        # ?v=/&v= param, or a /embed//shorts/ path, or is a youtu.be/<id> link.
+        # Channel pages, /search, and /playlist links have none of these.
+        return bool(_PLAYABLE_YT.search(source_url))
+    return True
+
+
+_PLAYABLE_YT = re.compile(
+    r"(?:[?&]v=[\w-]+|youtu\.be/[\w-]+|/embed/[\w-]+|/shorts/[\w-]+)",
+    re.I,
+)
+
+
 _SEL = (
     "id, concept, source, source_url, embed_url, title, channel, "
     "duration_sec, language, board, grade_min, grade_max, subject, "
@@ -396,6 +430,15 @@ def set_quality_tier(
     existing = get_by_id(cid)
     if not existing:
         return None
+    # prod-216 — 'verified' means a human confirmed this SPECIFIC video plays
+    # and embeds. A channel/search/playlist placeholder URL can never satisfy
+    # that, so refuse to promote one (guards the curator + auto-curator paths).
+    if tier == "verified" and not is_playable_video_url(existing.source_url):
+        raise ValueError(
+            "cannot mark a non-playable URL as verified "
+            "(channel/search/playlist link) — set a specific "
+            "watch?v= / youtu.be/ / embed URL first"
+        )
     new_note = existing.curator_note or ""
     if curator_note:
         sep = " | " if new_note else ""
@@ -475,6 +518,14 @@ def check_iframe_embed(source_url: str, timeout_sec: float = 3.0) -> dict:
         host = (parsed.hostname or "").lower()
         if host not in _IFRAME_CHECK_HOSTS:
             out["reason"] = f"host {host!r} not in allowlist (SSRF guard)"
+            return out
+
+        # prod-216 — a channel/search/playlist link can never embed a video.
+        # Report that honestly (embeddable=False) instead of firing a HEAD that
+        # would 404 and look like a transient/network error.
+        if not is_playable_video_url(source_url):
+            out["embeddable"] = False
+            out["reason"] = "not a playable video URL (channel/search/playlist link)"
             return out
 
         req = urllib.request.Request(
