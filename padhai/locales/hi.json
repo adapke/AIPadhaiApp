@@ -287,5 +287,22 @@
   "org.class_groups": "क्लास ग्रुप",
   "org.daily_attendance": "दैनिक attendance",
   "org.save_attendance": "attendance सेव करें",
-  "org.class_timetable": "क्लास timetable"
+  "org.class_timetable": "क्लास timetable",
+
+  "curriculum.mapper": "पाठ्यक्रम मैपर",
+  "curriculum.match_lesson": "पाठ मिलाएँ",
+  "curriculum.match_syllabus": "सिलेबस से मिलाएँ",
+  "common.browse_catalogue": "कैटलॉग देखें",
+  "parent.dashboard": "अभिभावक डैशबोर्ड",
+  "common.my_activity": "मेरी गतिविधि",
+  "parent.send_verification": "सत्यापन लिंक भेजें",
+  "common.recent_lessons": "हाल के पाठ",
+  "org.add_member": "सदस्य जोड़ें",
+  "org.new_class_group": "नया क्लास ग्रुप",
+  "org.submit_exam": "परीक्षा सबमिट करें",
+  "org.exam_attempts": "परीक्षा प्रयास",
+  "common.upload_csv": "CSV अपलोड करें",
+  "common.in_progress": "जारी है",
+  "common.not_started": "शुरू नहीं हुआ",
+  "dashboard.total_lessons": "कुल पाठ"
 }

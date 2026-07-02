@@ -287,5 +287,22 @@
   "org.class_groups": "Class groups",
   "org.daily_attendance": "Daily attendance",
   "org.save_attendance": "Save attendance",
-  "org.class_timetable": "Class timetable"
+  "org.class_timetable": "Class timetable",
+
+  "curriculum.mapper": "Curriculum mapper",
+  "curriculum.match_lesson": "Match a lesson",
+  "curriculum.match_syllabus": "Match against syllabus",
+  "common.browse_catalogue": "Browse the catalogue",
+  "parent.dashboard": "Parent dashboard",
+  "common.my_activity": "My activity",
+  "parent.send_verification": "Send verification link",
+  "common.recent_lessons": "Recent lessons",
+  "org.add_member": "Add a member",
+  "org.new_class_group": "New class group",
+  "org.submit_exam": "Submit exam",
+  "org.exam_attempts": "Exam attempts",
+  "common.upload_csv": "Upload CSV",
+  "common.in_progress": "In progress",
+  "common.not_started": "Not started",
+  "dashboard.total_lessons": "Total Lessons"
 }
