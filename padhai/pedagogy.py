@@ -798,6 +798,8 @@ def generate_explainer(
     client: anthropic.Anthropic | None = None,
     user_id: str | None = None,
     user_tier: str | None = None,
+    syllabus_scope: str | None = None,
+    board_hint: str | None = None,
 ) -> dict:
     """Topic-to-explanation: type a concept name, get a structured mini-lesson.
 
@@ -806,7 +808,14 @@ def generate_explainer(
     request from 1000 students hits the cache 999 times.
 
     `user_id` + `user_tier` (optional) gate the call behind
-    llm_obs.check_daily_cap so a runaway loop can't burn the budget."""
+    llm_obs.check_daily_cap so a runaway loop can't burn the budget.
+
+    prod-212 — `syllabus_scope` (from exam_taxonomy.taxonomy_scope_for_user)
+    and `board_hint` ground the explanation in the student's actual
+    board/grade/chapter so a bare topic like "Trigonometry" is explained at
+    the right depth for their curriculum instead of drifting to a generic
+    (often higher-level) version. Both optional — omitted for anonymous /
+    no-enrollment users (generic explainer, unchanged behaviour)."""
     if language_code not in SUPPORTED_LANGUAGES:
         raise ValueError(f"language {language_code!r} not supported")
     if level not in LEVEL_GUIDANCE:
@@ -870,8 +879,19 @@ def generate_explainer(
             "content": (
                 f"Topic: {topic}\n"
                 f"Language: {SUPPORTED_LANGUAGES[language_code]} ({language_code})\n"
-                f"Level: {level} — {LEVEL_GUIDANCE[level]}\n\n"
-                "Generate the explainer JSON now."
+                f"Level: {level} — {LEVEL_GUIDANCE[level]}\n"
+                + (
+                    f"Board/exam context: {board_hint}. Explain this topic at "
+                    f"the depth and framing this board expects at this level.\n"
+                    if board_hint else ""
+                )
+                + (
+                    f"Curriculum scope: {syllabus_scope}\n"
+                    "Keep the explanation within this syllabus — do not drift to "
+                    "a more advanced version of the topic than this scope covers.\n"
+                    if syllabus_scope else ""
+                )
+                + "\nGenerate the explainer JSON now."
             ),
         }],
     )

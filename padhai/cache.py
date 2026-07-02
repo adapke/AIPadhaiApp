@@ -158,17 +158,29 @@ class Cache:
         path.write_text(json.dumps(cards, ensure_ascii=False, indent=2),
                         encoding="utf-8")
 
-    def explainer_key(self, topic: str, language: str, level: str) -> str:
-        return self._hash(
+    def explainer_key(
+        self, topic: str, language: str, level: str, scope_key: str = "",
+    ) -> str:
+        # prod-212 — `scope_key` (board/exam) makes a curriculum-grounded
+        # explainer cache-distinct from the generic one, so a CBSE-10 student's
+        # "Trigonometry" doesn't collide with an ungrounded request. Appended
+        # only when non-empty, so pre-existing (ungrounded) cache keys are
+        # preserved byte-for-byte.
+        parts = [
             topic.strip().lower().encode("utf-8"),
             language.encode(),
             level.encode(),
-        )
+        ]
+        if scope_key:
+            parts.append(scope_key.strip().lower().encode("utf-8"))
+        return self._hash(*parts)
 
-    def get_explainer(self, topic: str, language: str, level: str) -> dict | None:
+    def get_explainer(
+        self, topic: str, language: str, level: str, scope_key: str = "",
+    ) -> dict | None:
         if not self.enabled:
             return None
-        key = self.explainer_key(topic, language, level)
+        key = self.explainer_key(topic, language, level, scope_key)
         path = self.root / "explainers" / f"{key}.json"
         if not path.exists():
             return None
@@ -179,11 +191,12 @@ class Cache:
 
     def put_explainer(
         self, topic: str, language: str, level: str, payload: dict,
+        scope_key: str = "",
     ) -> None:
         if not self.enabled:
             return
         (self.root / "explainers").mkdir(parents=True, exist_ok=True)
-        key = self.explainer_key(topic, language, level)
+        key = self.explainer_key(topic, language, level, scope_key)
         path = self.root / "explainers" / f"{key}.json"
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2),
                         encoding="utf-8")

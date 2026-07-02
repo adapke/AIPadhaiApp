@@ -33,6 +33,29 @@ from ..web import current_user
 router = APIRouter()
 
 
+def _explainer_scope(user: AuthUser | None) -> tuple[str, str | None, str | None]:
+    """prod-212 — resolve (scope_key, syllabus_scope, board_hint) from the
+    user's most-recent active exam-pack enrollment so the explainer is
+    grounded in their board/grade/chapter. Best-effort: anonymous users, users
+    with no enrollment, or an un-migrated taxonomy all yield ("", None, None)
+    → the generic ungrounded explainer, exactly as before. scope_key feeds the
+    cache so grounded and generic variants never collide."""
+    if user is None:
+        return "", None, None
+    try:
+        from ..exam_taxonomy import taxonomy_scope_for_user
+        sc = taxonomy_scope_for_user(user.id)
+    except Exception:
+        return "", None, None
+    if not sc:
+        return "", None, None
+    return (
+        sc.get("exam_code") or "",
+        sc.get("scope_summary"),
+        sc.get("board_hint"),
+    )
+
+
 @router.post("/explain")
 def explain_topic(
     topic: str = Form(..., min_length=2, max_length=200),
@@ -74,13 +97,18 @@ def explain_topic(
             },
         )
 
+    scope_key, syllabus_scope, board_hint = _explainer_scope(user)
+
     if not regenerate:
-        cached = _web.cache.get_explainer(topic, language, level)
+        cached = _web.cache.get_explainer(topic, language, level, scope_key)
         if cached is not None:
             return {**cached, "cached": True, "language": language, "level": level}
 
-    payload = generate_explainer(topic, language_code=language, level=level)
-    _web.cache.put_explainer(topic, language, level, payload)
+    payload = generate_explainer(
+        topic, language_code=language, level=level,
+        syllabus_scope=syllabus_scope, board_hint=board_hint,
+    )
+    _web.cache.put_explainer(topic, language, level, payload, scope_key)
     return {**payload, "cached": False, "language": language, "level": level}
 
 
@@ -184,10 +212,14 @@ def explain_video(
         })
 
     # topic only — fast Haiku-only path
-    explainer = _web.cache.get_explainer(topic, language, level)
+    scope_key, syllabus_scope, board_hint = _explainer_scope(user)
+    explainer = _web.cache.get_explainer(topic, language, level, scope_key)
     if explainer is None:
-        explainer = generate_explainer(topic, language_code=language, level=level)
-        _web.cache.put_explainer(topic, language, level, explainer)
+        explainer = generate_explainer(
+            topic, language_code=language, level=level,
+            syllabus_scope=syllabus_scope, board_hint=board_hint,
+        )
+        _web.cache.put_explainer(topic, language, level, explainer, scope_key)
 
     if teacher:
         entitled = resolve_provider_for_tier(user)
@@ -206,6 +238,10 @@ def explain_video(
         "teacher": teacher,
         "render_mode": "animated",
         "talking_head_provider": provider_name,
+        # prod-212 — carry the curriculum scope so the rendered-video cache
+        # key is scope-aware (a grounded video must not be served to a
+        # different-board student).
+        "scope_key": scope_key,
     }
     if user is not None:
         payload["user_id"] = user.id

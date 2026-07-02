@@ -353,11 +353,16 @@ def _render_explainer_video(job: Job) -> dict:
     dimensions = tuple(profile_dict.get("output_dimensions", [1280, 720])) \
         if profile_dict else (1280, 720)
 
-    # Synthetic image_bytes so the existing cache keys work
-    synthetic_bytes = _json.dumps(
-        {"topic": topic, "language": language, "level": level},
-        sort_keys=True,
-    ).encode("utf-8")
+    # Synthetic image_bytes so the existing cache keys work. prod-212 — fold
+    # in the curriculum scope_key when present so a board-grounded explainer
+    # video is cached distinctly from the generic one (and never served to a
+    # different-board student). Omitted when empty → key is byte-identical to
+    # the pre-prod-212 ungrounded key, so existing cached videos still hit.
+    _key_dict = {"topic": topic, "language": language, "level": level}
+    _scope_key = p.get("scope_key") or ""
+    if _scope_key:
+        _key_dict["scope"] = _scope_key
+    synthetic_bytes = _json.dumps(_key_dict, sort_keys=True).encode("utf-8")
     lesson_id = cache.lesson_key(synthetic_bytes, language, level, MODEL)
 
     storage_key = _video_storage_key(
