@@ -270,5 +270,22 @@
   "study.read_syllabus": "सिलेबस पढ़ें",
   "study.practise_flashcards": "फ़्लैशकार्ड अभ्यास करें",
   "study.take_practice_test": "अभ्यास टेस्ट दें",
-  "concept.ask_ai_tutor": "इसके बजाय AI ट्यूटर से पूछें"
+  "concept.ask_ai_tutor": "इसके बजाय AI ट्यूटर से पूछें",
+
+  "practice.time_limit": "समय सीमा",
+  "practice.generate_test": "टेस्ट बनाएँ",
+  "practice.submit_test": "टेस्ट सबमिट करें",
+  "practice.your_result": "आपका परिणाम",
+  "practice.recent_tests": "हाल के टेस्ट",
+  "path.title": "व्यक्तिगत लर्निंग पथ",
+  "path.plan_length": "प्लान की अवधि",
+  "path.daily_time": "रोज़ का समय",
+  "path.build_plan": "मेरा प्लान बनाएँ",
+  "org.create_title": "अपना स्कूल या कोचिंग संस्थान बनाएँ",
+  "org.name": "संस्थान का नाम",
+  "org.create": "संस्थान बनाएँ",
+  "org.class_groups": "क्लास ग्रुप",
+  "org.daily_attendance": "दैनिक attendance",
+  "org.save_attendance": "attendance सेव करें",
+  "org.class_timetable": "क्लास timetable"
 }

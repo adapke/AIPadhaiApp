@@ -270,5 +270,22 @@
   "study.read_syllabus": "Read the syllabus",
   "study.practise_flashcards": "Practise flashcards",
   "study.take_practice_test": "Take a practice test",
-  "concept.ask_ai_tutor": "Ask AI tutor instead"
+  "concept.ask_ai_tutor": "Ask AI tutor instead",
+
+  "practice.time_limit": "Time limit",
+  "practice.generate_test": "Generate test",
+  "practice.submit_test": "Submit test",
+  "practice.your_result": "Your result",
+  "practice.recent_tests": "Recent tests",
+  "path.title": "Personalised learning path",
+  "path.plan_length": "Plan length",
+  "path.daily_time": "Daily time",
+  "path.build_plan": "Build my plan",
+  "org.create_title": "Create your school or coaching organisation",
+  "org.name": "Organisation name",
+  "org.create": "Create organisation",
+  "org.class_groups": "Class groups",
+  "org.daily_attendance": "Daily attendance",
+  "org.save_attendance": "Save attendance",
+  "org.class_timetable": "Class timetable"
 }
