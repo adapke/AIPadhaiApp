@@ -544,3 +544,163 @@ def fraction_circle(
     _label(draw, "3/4", cx, y + h - 46, body_font_path, 32, theme.fg)
     _label(draw, "3 of 4 equal parts", cx, y + h - 20,
            body_font_path, 16, theme.muted)
+
+
+def _dashed_line(
+    draw: ImageDraw.ImageDraw,
+    x1: int, y1: int, x2: int, y2: int,
+    color: tuple[int, int, int], width: int = 2, dash: int = 10,
+) -> None:
+    """A dashed line — PIL has no native dash, so step along the segment."""
+    length = math.hypot(x2 - x1, y2 - y1)
+    if length == 0:
+        return
+    steps = max(1, int(length // dash))
+    for s in range(0, steps, 2):
+        t0 = s / steps
+        t1 = min(1.0, (s + 1) / steps)
+        draw.line(
+            (x1 + (x2 - x1) * t0, y1 + (y2 - y1) * t0,
+             x1 + (x2 - x1) * t1, y1 + (y2 - y1) * t1),
+            fill=color, width=width,
+        )
+
+
+# ----------------------------- pythagoras ------------------------------ #
+
+@register("pythagoras")
+def pythagoras(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """Right triangle with legs a, b and hypotenuse c, plus a² + b² = c².
+    The single most-drawn figure in secondary geometry."""
+    m = 70
+    base = min(360, w - 2 * m)
+    height = min(210, h - 2 * m - 30)
+    ax, ay = x + m, y + m + height           # right-angle corner
+    bx, by = ax + base, ay                    # along the bottom
+    cx2, cy2 = ax, ay - height                # up the left side
+
+    draw.polygon([(ax, ay), (bx, by), (cx2, cy2)], fill=theme.accent)
+    for p, q in [((ax, ay), (bx, by)), ((ax, ay), (cx2, cy2)),
+                 ((bx, by), (cx2, cy2))]:
+        draw.line((p[0], p[1], q[0], q[1]), fill=theme.fg, width=3)
+
+    sq = 18  # right-angle marker
+    draw.rectangle((ax, ay - sq, ax + sq, ay), outline=theme.fg, width=2)
+
+    _label(draw, "b", (ax + bx) // 2, ay + 10, body_font_path, 22, theme.fg)
+    _label(draw, "a", ax - 28, (ay + cy2) // 2 - 12, body_font_path, 22, theme.fg)
+    _label(draw, "c", (bx + cx2) // 2 + 14, (by + cy2) // 2 - 22,
+           body_font_path, 22, theme.fg)
+    _label(draw, "a² + b² = c²", x + w // 2, y + h - 28,
+           body_font_path, 30, theme.fg)
+
+
+# ----------------------------- triangle_area --------------------------- #
+
+@register("triangle_area")
+def triangle_area(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """A triangle with base b and a dashed height h, plus Area = ½ × b × h."""
+    m = 70
+    base = min(360, w - 2 * m)
+    ax, ay = x + m, y + h - m - 34            # base-left
+    bx, by = ax + base, ay                    # base-right
+    apex_x = ax + int(base * 0.62)            # off-centre apex
+    apex_y = y + m
+
+    draw.polygon([(ax, ay), (bx, by), (apex_x, apex_y)], fill=theme.accent)
+    for p, q in [((ax, ay), (bx, by)), ((ax, ay), (apex_x, apex_y)),
+                 ((bx, by), (apex_x, apex_y))]:
+        draw.line((p[0], p[1], q[0], q[1]), fill=theme.fg, width=3)
+
+    # dashed perpendicular height from apex down to the base
+    _dashed_line(draw, apex_x, apex_y, apex_x, ay, theme.fg, width=2)
+    draw.rectangle((apex_x, ay - 14, apex_x + 14, ay), outline=theme.fg, width=2)
+
+    _label(draw, "b", (ax + bx) // 2, ay + 10, body_font_path, 22, theme.fg)
+    _label(draw, "h", apex_x + 22, (apex_y + ay) // 2, body_font_path, 22, theme.fg)
+    _label(draw, "Area = ½ × b × h", x + w // 2, y + h - 26,
+           body_font_path, 28, theme.fg)
+
+
+# ----------------------------- number_line ----------------------------- #
+
+@register("number_line")
+def number_line(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """A −4…4 number line with arrowheads, ticks, and one highlighted point
+    at +2. The mental model for integers / negative numbers / ordering."""
+    cy = y + h // 2
+    x0, x1 = x + 70, x + w - 70
+    draw.line((x0, cy, x1, cy), fill=theme.fg, width=3)
+    _arrow(draw, x0 + 30, cy, x0, cy, theme.fg)      # left arrowhead
+    _arrow(draw, x1 - 30, cy, x1, cy, theme.fg)      # right arrowhead
+
+    values = list(range(-4, 5))
+    n = len(values)
+    highlight = 2
+    for i, val in enumerate(values):
+        tx = int(x0 + i * (x1 - x0) / (n - 1))
+        draw.line((tx, cy - 12, tx, cy + 12), fill=theme.fg, width=2)
+        _label(draw, str(val), tx, cy + 18, body_font_path, 18, theme.fg)
+        if val == highlight:
+            draw.ellipse((tx - 11, cy - 11, tx + 11, cy + 11), fill=theme.accent)
+
+    _label(draw, "Number line", x + w // 2, y + h - 26,
+           body_font_path, 26, theme.fg)
+
+
+# ----------------------------- linear_graph ---------------------------- #
+
+@register("linear_graph")
+def linear_graph(
+    draw: ImageDraw.ImageDraw,
+    x: int, y: int, w: int, h: int,
+    theme: Theme,
+    title_font_path: str,  # noqa: ARG001
+    body_font_path: str,
+) -> None:
+    """x–y axes with a straight line through the origin (y = x) and two marked
+    points — the picture behind linear equations / slope / coordinate geometry."""
+    m = 56
+    ox, oy = x + m + 30, y + h - m - 26        # origin (bottom-left area)
+    ax_right = x + w - m
+    ax_top = y + m
+
+    # axes with arrowheads
+    draw.line((ox, oy, ax_right, oy), fill=theme.fg, width=3)   # x-axis
+    draw.line((ox, oy, ox, ax_top), fill=theme.fg, width=3)     # y-axis
+    _arrow(draw, ax_right - 30, oy, ax_right, oy, theme.fg)
+    _arrow(draw, ox, ax_top + 30, ox, ax_top, theme.fg)
+    _label(draw, "x", ax_right - 6, oy + 12, body_font_path, 20, theme.fg)
+    _label(draw, "y", ox - 22, ax_top, body_font_path, 20, theme.fg)
+
+    # line y = x from origin up-right (equal pixel run/rise for a 45° look)
+    span = min(ax_right - ox, oy - ax_top) - 20
+    draw.line((ox, oy, ox + span, oy - span), fill=theme.accent, width=4)
+
+    # two marked points on the line
+    for frac in (0.45, 0.9):
+        px, py = int(ox + span * frac), int(oy - span * frac)
+        draw.ellipse((px - 6, py - 6, px + 6, py + 6), fill=theme.fg)
+
+    _label(draw, "y = x", ox + span - 40, oy - span - 6,
+           body_font_path, 22, theme.accent)
+    _label(draw, "Straight-line graph", x + w // 2, y + h - 22,
+           body_font_path, 24, theme.fg)

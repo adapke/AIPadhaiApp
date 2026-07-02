@@ -967,6 +967,15 @@ DIAGRAM_KEYWORDS: list[tuple[tuple[str, ...], str]] = [
      "division_groups"),
     (("subtraction", "subtract", "minus", "take away"), "subtraction_dots"),
     (("fraction", "numerator", "denominator"), "fraction_circle"),
+    # prod-213 — secondary-school geometry / coordinate maths. "pythagoras"
+    # is listed BEFORE the generic triangle so "pythagoras theorem" (no
+    # "triangle" token) resolves to the labelled a²+b²=c² figure, while a bare
+    # "triangle" / "area of a triangle" gets the base-height area figure.
+    (("pythagoras", "pythagorean", "hypotenuse"), "pythagoras"),
+    (("area of a triangle", "area of triangle", "triangle"), "triangle_area"),
+    (("number line", "integers", "negative numbers"), "number_line"),
+    (("linear equation", "straight line", "slope", "coordinate geometry",
+      "cartesian"), "linear_graph"),
 ]
 
 

@@ -17,10 +17,16 @@ from padhai import diagrams
 from padhai.pedagogy import pick_diagram
 
 NEW_TEMPLATES = (
+    # prod-211 — primary maths
     "division_groups",
     "multiplication_array",
     "subtraction_dots",
     "fraction_circle",
+    # prod-213 — secondary maths / geometry / coordinate
+    "pythagoras",
+    "triangle_area",
+    "number_line",
+    "linear_graph",
 )
 
 # topic phrase -> expected template
@@ -35,6 +41,17 @@ TOPIC_MAP = {
     "subtract two numbers": "subtraction_dots",
     "fractions for class 5": "fraction_circle",
     "numerator and denominator": "fraction_circle",
+    # prod-213
+    "pythagoras theorem": "pythagoras",
+    "the pythagorean theorem": "pythagoras",
+    "find the hypotenuse": "pythagoras",
+    "area of a triangle": "triangle_area",
+    "properties of a triangle": "triangle_area",
+    "integers on a number line": "number_line",
+    "comparing negative numbers": "number_line",  # 'adding …' would hit addition
+    "linear equation in two variables": "linear_graph",
+    "slope of a straight line": "linear_graph",
+    "coordinate geometry basics": "linear_graph",
 }
 
 
@@ -59,6 +76,15 @@ def test_addition_still_wins_and_no_math_collision():
 def test_unmatched_topic_returns_none():
     # A non-maths, non-templated topic still falls through to plain slides.
     assert pick_diagram("the french revolution") is None
+
+
+def test_pythagoras_ordered_before_generic_triangle():
+    # "pythagoras" is registered before the generic triangle so the theorem
+    # figure wins for Pythagoras topics, while a bare "triangle" gets the
+    # area figure — neither should shadow the other.
+    assert pick_diagram("pythagoras theorem") == "pythagoras"
+    assert pick_diagram("triangle") == "triangle_area"
+    assert pick_diagram("area of a triangle") == "triangle_area"
 
 
 def _find_font() -> str | None:
