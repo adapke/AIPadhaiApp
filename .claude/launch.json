@@ -2,6 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "padhai-preview",
+      "runtimeExecutable": "C:/Python314/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "padhai.web:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010",
+        "--log-level",
+        "warning"
+      ],
+      "port": 8010
+    },
+    {
       "name": "padhai-web",
       "runtimeExecutable": "python",
       "runtimeArgs": [

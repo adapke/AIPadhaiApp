@@ -86,12 +86,18 @@ HOME_HTML = """<!doctype html>
     --radius:8px;
   }
   *{box-sizing:border-box}
+  html,body{height:100%}
   body{margin:0;background:var(--bg);color:var(--ink);
-       font-family:Inter,Segoe UI,Arial,sans-serif}
-  .app{min-height:100vh;display:grid;
+       font-family:Inter,Segoe UI,Arial,sans-serif;overflow:hidden}
+  /* App-shell (prod-222): fixed to the viewport so each column scrolls
+     on its own — the left nav and right rail stay put while the centre
+     column scrolls. Reverts to natural page flow below 1180px (see the
+     media query) where the columns reflow into stacked rows. */
+  .app{height:100vh;overflow:hidden;display:grid;
        grid-template-columns:230px 1fr 330px}
   aside{background:var(--nav);color:#eef3ff;padding:18px 14px;
-        display:flex;flex-direction:column;gap:14px}
+        display:flex;flex-direction:column;gap:14px;
+        height:100vh;overflow-y:auto}
   .brand{display:flex;gap:10px;align-items:center;
          padding:2px 4px 14px;
          border-bottom:1px solid rgba(255,255,255,.12)}
@@ -117,7 +123,7 @@ HOME_HTML = """<!doctype html>
                background:#162033;border-radius:10px;padding:12px;
                color:#cfd8ea;font-size:12px;line-height:1.45}
   .signin-card a{color:#fff;text-decoration:underline;font-weight:700}
-  main{padding:20px;overflow:auto;scroll-behavior:smooth}
+  main{padding:20px;height:100vh;overflow-y:auto;scroll-behavior:smooth}
   .topbar{display:flex;align-items:center;justify-content:space-between;
           gap:12px;margin-bottom:16px}
   .search{flex:1;min-width:220px;background:var(--panel);
@@ -201,7 +207,7 @@ HOME_HTML = """<!doctype html>
   .step-title{font-weight:780;font-size:13px;margin-bottom:3px}
   .step-meta{color:var(--muted);font-size:12px}
   .rightbar{border-left:1px solid var(--line);background:#fbfcff;
-            padding:20px 16px;overflow:auto}
+            padding:20px 16px;height:100vh;overflow-y:auto}
   .rightbar h2{font-size:15px;margin:0 0 12px}
   .side-card{background:var(--panel);border:1px solid var(--line);
              border-radius:var(--radius);padding:13px;margin-bottom:12px}
@@ -251,7 +257,13 @@ HOME_HTML = """<!doctype html>
                 margin-bottom:8px}
   .mobile-bottom-nav{display:none}
   @media(max-width:1180px){
-    .app{grid-template-columns:200px 1fr}
+    /* Columns reflow into stacked rows below this width — drop the
+       fixed-viewport app-shell and let the whole page scroll normally
+       so nothing gets clipped (prod-222). */
+    html,body{height:auto}
+    body{overflow:auto}
+    .app{height:auto;overflow:visible;grid-template-columns:200px 1fr}
+    aside,main,.rightbar{height:auto;overflow:visible}
     .rightbar{grid-column:1/-1;border-left:0;
               border-top:1px solid var(--line);
               display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -428,6 +440,37 @@ HOME_HTML = """<!doctype html>
   .task-grid{min-height:200px}
   .hero{min-height:160px;contain:layout style}
   .cards3{min-height:90px}
+
+  /* prod-222: curated video lessons row — first-glance, horizontally
+     scrollable, click-to-play inline. */
+  .vidsec{margin:4px 0 18px}
+  .vidsec-head{display:flex;align-items:center;justify-content:space-between;
+               margin-bottom:10px}
+  .vidsec-head h2{font-size:16px;margin:0}
+  .vidsec-head a{font-size:13px;color:var(--brand);text-decoration:none;
+                 font-weight:700;white-space:nowrap}
+  .vidrow{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;
+          scroll-snap-type:x proximity}
+  .vidrow::-webkit-scrollbar{height:8px}
+  .vidrow::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  .vidcard{flex:0 0 232px;scroll-snap-align:start;background:var(--panel);
+           border:1px solid var(--line);border-radius:var(--radius);
+           overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;
+           transition:transform .12s,box-shadow .12s}
+  .vidcard:hover{transform:translateY(-2px);
+                 box-shadow:0 6px 18px rgba(15,28,51,.12)}
+  .vidcard .thumb{position:relative;width:100%;aspect-ratio:16/9;
+                  background:#0f1c33 center/cover no-repeat}
+  .vidcard .thumb .play{position:absolute;inset:0;display:grid;
+                        place-items:center;font-size:34px;color:#fff;
+                        text-shadow:0 2px 8px rgba(0,0,0,.6)}
+  .vidcard .thumb iframe{position:absolute;inset:0;width:100%;height:100%;
+                        border:0}
+  .vidcard .vmeta{padding:9px 11px}
+  .vidcard .vtitle{font-size:13px;font-weight:700;line-height:1.3;
+                   display:-webkit-box;-webkit-line-clamp:2;
+                   -webkit-box-orient:vertical;overflow:hidden}
+  .vidcard .vsub{font-size:11px;color:var(--muted);margin-top:3px}
 
   /* Header language switcher */
   .lang-switch{display:inline-flex;align-items:center;gap:4px;
@@ -694,6 +737,16 @@ HOME_HTML = """<!doctype html>
         </div>
       </a>
     </nav>
+
+    <!-- prod-222: curated video lessons — surfaced on the home screen so
+         they're accessible on first glance. Click a card to play inline. -->
+    <section class="vidsec" id="videoLessons" style="display:none">
+      <div class="vidsec-head">
+        <h2>🎬 Watch — curated video lessons</h2>
+        <a href="/concept">Browse all videos →</a>
+      </div>
+      <div class="vidrow" id="videoRow"></div>
+    </section>
 
     <!-- P2: single controlled seasonal promo slot. The report explicitly
          warns against multiple competing banners ("Use one controlled
@@ -1297,6 +1350,68 @@ HOME_HTML = """<!doctype html>
     }
   }
 
+  // -------- prod-222: curated video lessons on the home screen --------
+  function _ytId(v){
+    var s = (v && (v.embed_url || v.source_url)) || '';
+    var m = s.match(/(?:\\/embed\\/|[?&]v=|youtu\\.be\\/|\\/shorts\\/)([\\w-]{6,})/);
+    return m ? m[1] : '';
+  }
+  function _homeLang(){
+    var lang = 'en';
+    try {
+      var mm = document.cookie.match(/(?:^|; )padhai_lang=([^;]+)/);
+      if (mm) lang = decodeURIComponent(mm[1]);
+      var qp = new URLSearchParams(location.search).get('lang');
+      if (qp) lang = qp;
+    } catch(_) {}
+    return lang;
+  }
+  async function loadHomeVideos(){
+    var wrap = $('videoRow'), sec = $('videoLessons');
+    if (!wrap || !sec) return;
+    var lang = _homeLang();
+    var url = '/api/concept-videos?limit=10&quality_tier=verified&language=';
+    var data = await getJSON(url + encodeURIComponent(lang));
+    var rows = (data && (data.rows || data.videos)) || [];
+    if (!rows.length && lang !== 'en'){
+      data = await getJSON(url + 'en');
+      rows = (data && (data.rows || data.videos)) || [];
+    }
+    if (!rows.length) return;
+    function esc(s){ return String(s==null?'':s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    var html = rows.map(function(v){
+      var id = _ytId(v); if(!id) return '';
+      var thumb = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
+      var sub = esc(v.subject || v.channel || v.board || '');
+      var watch = esc(v.source_url || ('https://www.youtube.com/watch?v=' + id));
+      var emb = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      return '<a class="vidcard" href="' + watch + '" target="_blank" rel="noopener" '
+        + 'data-embed="' + esc(emb) + '">'
+        + '<div class="thumb" style="background-image:url(' + thumb + ')">'
+        + '<div class="play">&#9654;</div></div>'
+        + '<div class="vmeta"><div class="vtitle">' + esc(v.title || 'Video lesson') + '</div>'
+        + (sub ? '<div class="vsub">' + sub + '</div>' : '') + '</div></a>';
+    }).join('');
+    if (!html) return;
+    wrap.innerHTML = html;
+    sec.style.display = '';
+    wrap.querySelectorAll('.vidcard').forEach(function(card){
+      card.addEventListener('click', function(ev){
+        var emb = card.getAttribute('data-embed'); if(!emb) return;
+        ev.preventDefault();
+        var t = card.querySelector('.thumb');
+        if (t && !t.querySelector('iframe')){
+          t.style.backgroundImage = 'none';
+          t.innerHTML = '<iframe src="' + emb + '" title="Video lesson" '
+            + 'allow="autoplay; encrypted-media; picture-in-picture" '
+            + 'allowfullscreen></iframe>';
+        }
+      });
+    });
+  }
+
   // -------- Hero CTA: navigate to real screens --------
   const _CTA_ROUTES = {
     'Continue today\\'s plan': '/lessons/new',
@@ -1339,6 +1454,7 @@ HOME_HTML = """<!doctype html>
   async function boot(){
     loadUser();
     loadDueBadge();
+    loadHomeVideos();
     manifest = await getJSON('/api/navigation/manifest');
     renderSidebar(manifest);
     renderSectionGroups(manifest);
@@ -1943,11 +2059,45 @@ LANDING_HTML = """<!doctype html>
     <b>PadhaiApp</b>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
+    <!-- prod-222: language switcher on the landing page (front door). -->
+    <select id="landingLang" aria-label="Language / भाषा"
+            style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);
+                   border-radius:8px;padding:8px 8px;font-size:13px;cursor:pointer">
+      <option value="en">🌐 English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="ta">தமிழ்</option>
+      <option value="te">తెలుగు</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="ml">മലയാളം</option>
+      <option value="mr">मराठी</option>
+      <option value="bn">বাংলা</option>
+      <option value="gu">ગુજરાતી</option>
+      <option value="pa">ਪੰਜਾਬੀ</option>
+    </select>
     <a class="nav-signin" href="#auth" data-auth="login"
        style="color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:9px 14px">Sign In</a>
     <a class="nav-cta" href="#auth" data-auth="signup">Create Account</a>
   </div>
 </nav>
+<script>
+(function(){
+  var sel = document.getElementById('landingLang');
+  if(!sel) return;
+  var cur = 'en';
+  try {
+    var m = document.cookie.match(/(?:^|; )padhai_lang=([^;]+)/);
+    if (m) cur = decodeURIComponent(m[1]);
+    var qp = new URLSearchParams(location.search).get('lang');
+    if (qp) cur = qp;
+  } catch(e){}
+  sel.value = cur;
+  sel.addEventListener('change', function(){
+    var v = sel.value;
+    try { document.cookie = 'padhai_lang=' + v + ';path=/;max-age=31536000;samesite=lax'; } catch(e){}
+    location.href = '/landing?auth=login&lang=' + encodeURIComponent(v);
+  });
+})();
+</script>
 
 <!-- ── Hero ────────────────────────────────────────────── -->
 <section class="hero">
