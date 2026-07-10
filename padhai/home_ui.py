@@ -504,6 +504,9 @@ HOME_HTML = """<!doctype html>
     </div>
     <!-- Quick-launch: always-visible links to core screens -->
     <div class="quickbar">
+      <a class="nav-chip" href="/dashboard">
+        <span class="icon">📊</span>Dashboard
+      </a>
       <a class="nav-chip" href="/lessons/new">
         <span class="icon">🎬</span>New lesson
       </a>
@@ -1242,18 +1245,45 @@ HOME_HTML = """<!doctype html>
         + 'your questions.';
   }
 
-  // -------- User identity in topbar --------
+  // -------- User identity + auth corner in topbar (prod-221) --------
+  // Always shows an actionable control: signed out → Sign in / Create
+  // account; signed in → Dashboard + name + Sign out. So login, register
+  // and the dashboard are reachable in one click from the home screen.
   async function loadUser(){
     const u = await getJSON('/auth/me');
     const pill = $('userPill');
     if(u && u.email){
-      pill.textContent = u.email.split('@')[0] + ' · ' + (u.subscription_tier || 'M1');
+      const who = (u.email.split('@')[0]) + ' · ' + (u.subscription_tier || 'M1');
+      pill.innerHTML =
+        '<a href="/dashboard" class="btn primary" style="text-decoration:none;'
+        + 'padding:8px 12px;white-space:nowrap">Dashboard</a>'
+        + '<span style="font-size:12px;color:var(--muted);margin:0 4px">'
+        + who.replace(/</g,'&lt;') + '</span>'
+        + '<a href="#" onclick="return phLogout()" class="btn" '
+        + 'style="text-decoration:none;padding:8px 12px">Sign out</a>';
+      pill.style.display = 'flex';
+      pill.style.gap = '8px';
+      pill.style.alignItems = 'center';
       $('signinCard').style.display = 'none';
     } else {
-      pill.textContent = 'Not signed in';
+      pill.innerHTML =
+        '<a href="/login" class="btn" style="text-decoration:none;'
+        + 'padding:8px 12px;white-space:nowrap">Sign in</a>'
+        + '<a href="/register" class="btn primary" style="text-decoration:none;'
+        + 'padding:8px 12px;white-space:nowrap">Create account</a>';
+      pill.style.display = 'flex';
+      pill.style.gap = '8px';
+      pill.style.alignItems = 'center';
       $('signinCard').style.display = '';
     }
   }
+  // Global so the inline Sign-out link can reach it.
+  window.phLogout = function(){
+    try { localStorage.removeItem('pathshala_token'); } catch(_) {}
+    try { localStorage.removeItem('pathshala_email'); } catch(_) {}
+    location.href = '/landing';
+    return false;
+  };
 
   // -------- Due flashcards badge --------
   async function loadDueBadge(){
@@ -1912,7 +1942,11 @@ LANDING_HTML = """<!doctype html>
     <div class="nav-logo">P</div>
     <b>PadhaiApp</b>
   </div>
-  <a class="nav-cta" href="#auth">Start for Free</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a class="nav-signin" href="#auth" data-auth="login"
+       style="color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:9px 14px">Sign In</a>
+    <a class="nav-cta" href="#auth" data-auth="signup">Create Account</a>
+  </div>
 </nav>
 
 <!-- ── Hero ────────────────────────────────────────────── -->
@@ -2072,15 +2106,25 @@ LANDING_HTML = """<!doctype html>
   const submitBtn = document.getElementById('submitBtn');
   const signupOnly = document.getElementById('signupOnly');
   const errBox = document.getElementById('errBox');
+  function applyMode(m){
+    mode = (m === 'signup') ? 'signup' : 'login';
+    tabs.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+    submitBtn.textContent =
+      mode === 'login' ? 'Sign In' : 'Create Account';
+    signupOnly.style.display = mode === 'login' ? 'none' : '';
+    errBox.classList.remove('show');
+  }
   tabs.forEach(t => {
-    t.addEventListener('click', () => {
-      mode = t.dataset.mode;
-      tabs.forEach(b => b.classList.toggle('active', b === t));
-      submitBtn.textContent =
-        mode === 'login' ? 'Sign In' : 'Create Account';
-      signupOnly.style.display = mode === 'login' ? 'none' : '';
-      errBox.classList.remove('show');
-    });
+    t.addEventListener('click', () => applyMode(t.dataset.mode));
+  });
+  // prod-221: deep-link the right tab. /login → ?auth=login,
+  // /register & /signup → ?auth=signup; top-nav links carry data-auth.
+  try {
+    const qp = new URLSearchParams(location.search).get('auth');
+    if (qp === 'signup' || qp === 'login') applyMode(qp);
+  } catch(_) {}
+  document.querySelectorAll('[data-auth]').forEach(el => {
+    el.addEventListener('click', () => applyMode(el.dataset.auth));
   });
   document.getElementById('authForm').addEventListener(
     'submit', async (ev) => {

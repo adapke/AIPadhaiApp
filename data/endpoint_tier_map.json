@@ -1,15 +1,15 @@
 {
   "counts": {
     "ADMIN_ONLY": 132,
-    "ANONYMOUS_OK": 437,
+    "ANONYMOUS_OK": 438,
     "AUTH_REQUIRED": 24,
-    "PUBLIC": 179,
+    "PUBLIC": 182,
     "TIER_GATED": 2,
     "UNKNOWN": 15
   },
   "routes": [
     {
-      "lineno": 9683,
+      "lineno": 9726,
       "methods": [
         "GET"
       ],
@@ -32,7 +32,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -1727,7 +1727,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10119,
+      "lineno": 10192,
       "methods": [
         "GET"
       ],
@@ -2079,7 +2079,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 11665,
+      "lineno": 11770,
       "methods": [
         "POST"
       ],
@@ -2783,7 +2783,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 14671,
+      "lineno": 14917,
       "methods": [
         "GET"
       ],
@@ -3388,7 +3388,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 14405,
+      "lineno": 14651,
       "methods": [
         "GET"
       ],
@@ -3399,7 +3399,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14342,
+      "lineno": 14588,
       "methods": [
         "GET"
       ],
@@ -3410,7 +3410,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14432,
+      "lineno": 14678,
       "methods": [
         "POST"
       ],
@@ -3421,7 +3421,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14374,
+      "lineno": 14620,
       "methods": [
         "POST"
       ],
@@ -4103,7 +4103,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10578,
+      "lineno": 10683,
       "methods": [
         "GET"
       ],
@@ -4125,7 +4125,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 10596,
+      "lineno": 10701,
       "methods": [
         "GET"
       ],
@@ -4279,7 +4279,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14227,
+      "lineno": 14473,
       "methods": [
         "GET"
       ],
@@ -4290,7 +4290,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14261,
+      "lineno": 14507,
       "methods": [
         "PUT"
       ],
@@ -5137,7 +5137,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 240,
+      "lineno": 241,
       "methods": [
         "POST"
       ],
@@ -5148,7 +5148,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 174,
+      "lineno": 175,
       "methods": [
         "GET"
       ],
@@ -5159,7 +5159,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 190,
+      "lineno": 191,
       "methods": [
         "GET"
       ],
@@ -5170,7 +5170,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 203,
+      "lineno": 204,
       "methods": [
         "POST"
       ],
@@ -6402,7 +6402,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 14484,
+      "lineno": 14730,
       "methods": [
         "GET"
       ],
@@ -7513,7 +7513,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 11311,
+      "lineno": 11416,
       "methods": [
         "GET"
       ],
@@ -7524,7 +7524,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 11033,
+      "lineno": 11138,
       "methods": [
         "POST"
       ],
@@ -7535,7 +7535,7 @@
       "tier_class": "TIER_GATED"
     },
     {
-      "lineno": 11251,
+      "lineno": 11356,
       "methods": [
         "POST"
       ],
@@ -7634,7 +7634,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 11467,
+      "lineno": 11572,
       "methods": [
         "POST"
       ],
@@ -7645,7 +7645,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 14638,
+      "lineno": 14884,
       "methods": [
         "POST"
       ],
@@ -7656,7 +7656,7 @@
       "tier_class": "AUTH_REQUIRED"
     },
     {
-      "lineno": 14572,
+      "lineno": 14818,
       "methods": [
         "POST"
       ],
@@ -7667,7 +7667,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10046,
+      "lineno": 10101,
       "methods": [
         "GET"
       ],
@@ -7678,7 +7678,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10512,
+      "lineno": 10617,
       "methods": [
         "POST"
       ],
@@ -7689,7 +7689,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10568,
+      "lineno": 10673,
       "methods": [
         "POST"
       ],
@@ -7700,7 +7700,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10578,
+      "lineno": 10683,
       "methods": [
         "GET"
       ],
@@ -7711,7 +7711,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10391,
+      "lineno": 10464,
       "methods": [
         "GET"
       ],
@@ -7722,7 +7722,18 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 14602,
+      "lineno": 10489,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "parent_link_verify",
+      "path": "/auth/parent-link/verify",
+      "source_file": "padhai/web.py",
+      "tier_class": "ANONYMOUS_OK"
+    },
+    {
+      "lineno": 14848,
       "methods": [
         "POST"
       ],
@@ -7733,7 +7744,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 11739,
+      "lineno": 11844,
       "methods": [
         "POST"
       ],
@@ -7744,7 +7755,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 11726,
+      "lineno": 11831,
       "methods": [
         "GET"
       ],
@@ -7755,7 +7766,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10311,
+      "lineno": 10384,
       "methods": [
         "POST"
       ],
@@ -7810,7 +7821,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12553,
+      "lineno": 12658,
       "methods": [
         "GET"
       ],
@@ -7865,7 +7876,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -7888,7 +7899,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12610,
+      "lineno": 12722,
       "methods": [
         "GET"
       ],
@@ -7899,7 +7910,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -7911,7 +7922,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 36,
+      "lineno": 59,
       "methods": [
         "POST"
       ],
@@ -7922,7 +7933,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 87,
+      "lineno": 115,
       "methods": [
         "POST"
       ],
@@ -7933,7 +7944,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10066,
+      "lineno": 10139,
       "methods": [
         "GET"
       ],
@@ -7944,7 +7955,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12539,
+      "lineno": 12644,
       "methods": [
         "GET"
       ],
@@ -7955,7 +7966,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10075,
+      "lineno": 10148,
       "methods": [
         "GET"
       ],
@@ -7966,7 +7977,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10088,
+      "lineno": 10161,
       "methods": [
         "GET"
       ],
@@ -7977,7 +7988,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 9753,
+      "lineno": 9806,
       "methods": [
         "GET"
       ],
@@ -7988,7 +7999,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 9778,
+      "lineno": 9831,
       "methods": [
         "GET"
       ],
@@ -7999,7 +8010,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8011,7 +8022,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 12181,
+      "lineno": 12286,
       "methods": [
         "GET"
       ],
@@ -8022,7 +8033,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 12213,
+      "lineno": 12318,
       "methods": [
         "GET"
       ],
@@ -8033,7 +8044,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12389,
+      "lineno": 12494,
       "methods": [
         "GET"
       ],
@@ -8066,7 +8077,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12416,
+      "lineno": 12521,
       "methods": [
         "GET"
       ],
@@ -8077,7 +8088,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12479,
+      "lineno": 12584,
       "methods": [
         "GET"
       ],
@@ -8088,7 +8099,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12244,
+      "lineno": 12349,
       "methods": [
         "GET"
       ],
@@ -8099,7 +8110,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10040,
+      "lineno": 10093,
       "methods": [
         "GET"
       ],
@@ -8121,7 +8132,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10648,
+      "lineno": 10753,
       "methods": [
         "POST"
       ],
@@ -8132,7 +8143,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 12525,
+      "lineno": 12630,
       "methods": [
         "GET"
       ],
@@ -8143,7 +8154,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12532,
+      "lineno": 12637,
       "methods": [
         "GET"
       ],
@@ -8242,7 +8253,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8254,7 +8265,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8266,7 +8277,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 12100,
+      "lineno": 12205,
       "methods": [
         "POST"
       ],
@@ -8277,7 +8288,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10053,
+      "lineno": 10108,
       "methods": [
         "GET"
       ],
@@ -8288,7 +8299,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 11822,
+      "lineno": 11927,
       "methods": [
         "GET"
       ],
@@ -8310,7 +8321,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8344,7 +8355,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 1388,
+      "lineno": 1398,
       "methods": [
         "GET"
       ],
@@ -8355,7 +8366,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8367,7 +8378,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 12603,
+      "lineno": 12715,
       "methods": [
         "GET"
       ],
@@ -8378,7 +8389,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12574,
+      "lineno": 12686,
       "methods": [
         "GET"
       ],
@@ -8389,7 +8400,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8401,7 +8412,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8424,7 +8435,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10009,
+      "lineno": 10062,
       "methods": [
         "GET"
       ],
@@ -8435,7 +8446,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12560,
+      "lineno": 12672,
       "methods": [
         "GET"
       ],
@@ -8446,7 +8457,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12546,
+      "lineno": 12651,
       "methods": [
         "GET"
       ],
@@ -8457,7 +8468,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8469,7 +8480,18 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 10014,
+      "lineno": 10114,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "register_shortcut_redirect",
+      "path": "/register",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10067,
       "methods": [
         "GET"
       ],
@@ -8480,7 +8502,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 434,
+      "lineno": 625,
       "methods": [
         "GET"
       ],
@@ -8491,7 +8513,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8558,7 +8580,18 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10027,
+      "lineno": 10121,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "signup_shortcut_redirect",
+      "path": "/signup",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 10080,
       "methods": [
         "GET"
       ],
@@ -8569,7 +8602,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12581,
+      "lineno": 12693,
       "methods": [
         "GET"
       ],
@@ -8580,7 +8613,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 12022,
+      "lineno": 12127,
       "methods": [
         "GET"
       ],
@@ -8591,7 +8624,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8603,7 +8636,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 12567,
+      "lineno": 12679,
       "methods": [
         "GET"
       ],
@@ -8625,7 +8658,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 10004,
+      "lineno": 10057,
       "methods": [
         "GET"
       ],
@@ -8636,13 +8669,24 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10635,
+      "lineno": 10740,
       "methods": [
         "GET"
       ],
       "min_tier": null,
       "name": "tiers",
       "path": "/tiers",
+      "source_file": "padhai/web.py",
+      "tier_class": "PUBLIC"
+    },
+    {
+      "lineno": 12665,
+      "methods": [
+        "GET"
+      ],
+      "min_tier": null,
+      "name": "tutor_alias",
+      "path": "/tutor",
       "source_file": "padhai/web.py",
       "tier_class": "PUBLIC"
     },
@@ -8658,7 +8702,7 @@
       "tier_class": "ANONYMOUS_OK"
     },
     {
-      "lineno": 9743,
+      "lineno": 9796,
       "methods": [
         "GET"
       ],
@@ -8669,7 +8713,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 10059,
+      "lineno": 10128,
       "methods": [
         "GET"
       ],
@@ -8680,7 +8724,7 @@
       "tier_class": "PUBLIC"
     },
     {
-      "lineno": 2417,
+      "lineno": 2460,
       "methods": [
         "GET"
       ],
@@ -8692,7 +8736,7 @@
       "tier_class": "UNKNOWN"
     },
     {
-      "lineno": 12134,
+      "lineno": 12239,
       "methods": [
         "POST"
       ],
@@ -8703,5 +8747,5 @@
       "tier_class": "ANONYMOUS_OK"
     }
   ],
-  "total": 789
+  "total": 793
 }

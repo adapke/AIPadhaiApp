@@ -102,6 +102,7 @@ _PAGE_PROLOGUE = """<!doctype html>
       <a href="/home">Home</a>
       <a href="/chat">AI Tutor</a>
       <a href="/profile">Settings</a>
+      <a href="#" onclick="return phLogout()">Sign out</a>
     </nav>
   </header>
   <main>
@@ -115,6 +116,12 @@ _PAGE_EPILOGUE = """  </main>
         '<div class="signin">Please <a href="/landing">sign in</a> to use this feature.</div>';
     }
     function authH() { return TOK ? { 'Authorization': 'Bearer ' + TOK } : {}; }
+    function phLogout() {
+      try { localStorage.removeItem('pathshala_token'); } catch (e) {}
+      try { localStorage.removeItem('pathshala_email'); } catch (e) {}
+      location.href = '/landing';
+      return false;
+    }
     function escapeHtml(s) {
       return String(s == null ? '' : s)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;')

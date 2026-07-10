@@ -40,12 +40,17 @@ sys.path.insert(0, str(REPO_ROOT))
 #             no auth, public discovery surface). Total 786 -> 788.
 #   prod-192: +1 PUBLIC (GET /sat — US Digital SAT exam hub: details +
 #             videos + flashcards + practice test CTA). Total 788 -> 789.
-EXPECTED_TOTAL = 789
+#   prod-221: +4 (rebaseline). +3 PUBLIC redirects — GET /register &
+#             GET /signup (real sign-up URLs → /landing?auth=signup) and
+#             GET /tutor (prod-218 alias → /chat); +1 ANONYMOUS_OK —
+#             GET /auth/parent-link/verify (prod-219, current_user optional).
+#             Total 789 -> 793.
+EXPECTED_TOTAL = 793
 EXPECTED_COUNTS = {
     "ADMIN_ONLY":    132,
-    "ANONYMOUS_OK":  437,
+    "ANONYMOUS_OK":  438,
     "AUTH_REQUIRED": 24,
-    "PUBLIC":        179,
+    "PUBLIC":        182,
     "TIER_GATED":    2,
     "UNKNOWN":       15,
 }

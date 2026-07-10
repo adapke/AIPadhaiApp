@@ -10102,13 +10102,27 @@ def landing_page(request: Request) -> HTMLResponse:
 def login_page_redirect() -> RedirectResponse:
     """Redirect GET /auth/login → /landing so bookmarks and direct
     navigation work; the actual login form and POST handler live there."""
-    return RedirectResponse("/landing", status_code=302)
+    return RedirectResponse("/landing?auth=login", status_code=302)
 
 
 @app.get("/login")
 def login_shortcut_redirect() -> RedirectResponse:
-    """Convenience alias — /login → /landing."""
-    return RedirectResponse("/landing", status_code=302)
+    """Convenience alias — /login → landing with the Sign In tab open."""
+    return RedirectResponse("/landing?auth=login", status_code=302)
+
+
+@app.get("/register")
+def register_shortcut_redirect() -> RedirectResponse:
+    """Convenience alias — /register → landing with the Create Account
+    tab pre-selected. prod-221: real, shareable sign-up URL (was 404)."""
+    return RedirectResponse("/landing?auth=signup", status_code=302)
+
+
+@app.get("/signup")
+def signup_shortcut_redirect() -> RedirectResponse:
+    """Convenience alias — /signup → landing with the Create Account
+    tab pre-selected. prod-221: real, shareable sign-up URL (was 404)."""
+    return RedirectResponse("/landing?auth=signup", status_code=302)
 
 
 @app.get("/ui-legacy", response_class=HTMLResponse)
@@ -12975,6 +12989,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       <a href="/onboarding">Goals</a>
       <a href="/chat">AI Tutor</a>
       <a href="/profile">Settings</a>
+      <a href="#" onclick="return phLogout()" id="dashSignOut">Sign out</a>
     </nav>
   </header>
 
@@ -13026,6 +13041,13 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
     function authH() {
       var t = token();
       return t ? { 'Authorization': 'Bearer ' + t } : {};
+    }
+    // prod-221: sign out from the dashboard header nav.
+    function phLogout() {
+      try { localStorage.removeItem('pathshala_token'); } catch (e) {}
+      try { localStorage.removeItem('pathshala_email'); } catch (e) {}
+      location.href = '/landing';
+      return false;
     }
     function escapeHtml(s) {
       return String(s == null ? '' : s)
