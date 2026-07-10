@@ -10472,6 +10472,38 @@ def parent_consent_verify(request: Request, t: str):
     ))
 
 
+@app.get("/auth/parent-link/verify", name="parent_link_verify",
+         response_class=HTMLResponse)
+def parent_link_verify(request: Request, t: str, user=Depends(current_user)):
+    """The invited party clicks the parent<->child link-verification link.
+
+    prod-219 — this companion page was dropped during the parents.py router
+    extraction, which left routers/parents.py:create_parent_link crashing on
+    url_for("parent_link_verify") (NoMatchFound → 500 on every link attempt)
+    AND the verify link itself 404ing. Restored here so it shares the
+    _consent_result_page template with the DPDP consent flow, as the code
+    comment intended. Requires the invited account to be signed in (linking
+    is authenticated, unlike the token-only DPDP minor-unlock)."""
+    if user is None:
+        return HTMLResponse(_consent_result_page(
+            ok=False,
+            message="Please sign in with the invited account, then reopen "
+                    "this link to confirm the connection.",
+        ), status_code=401)
+    try:
+        ip = (request.headers.get("x-forwarded-for") or
+              (request.client.host if request.client else "unknown")).split(",")[0].strip()
+        from . import parents as _parents
+        _parents.verify(token=t, acting_user_id=user.id, acting_ip=ip)
+    except ValueError as e:
+        return HTMLResponse(_consent_result_page(
+            ok=False, message=str(e),
+        ), status_code=400)
+    return HTMLResponse(_consent_result_page(
+        ok=True, message="Parent–child connection confirmed.",
+    ))
+
+
 def _mask_email(e: str) -> str:
     # Show "mo***@x.com" so the parent sees we got their email right
     # without leaking it on a shareable URL response.
