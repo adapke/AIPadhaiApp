@@ -24,8 +24,25 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from functools import lru_cache
 from pathlib import Path
+
+# Regions of an HTML template that carry code, not user-visible prose, and
+# must NEVER be run through the catalog string-swap: a catalog value like
+# "Edit" would otherwise corrupt a JS identifier such as `toggleGoalEditor`
+# into `toggleGoalसंपादित करेंor`, breaking the whole <script> (the page then
+# hangs on its loading spinner because the inline JS never parses).
+#   • <script>…</script>  — inline JavaScript
+#   • <style>…</style>    — inline CSS
+#   • on*="…" / on*='…'   — inline event-handler attributes (also JS)
+_CODE_REGION_RE = re.compile(
+    r"<script\b[^>]*>.*?</script>"
+    r"|<style\b[^>]*>.*?</style>"
+    r"|\son[a-zA-Z]+\s*=\s*\"[^\"]*\""
+    r"|\son[a-zA-Z]+\s*=\s*'[^']*'",
+    re.IGNORECASE | re.DOTALL,
+)
 
 SUPPORTED_LOCALES = (
     "en", "hi", "ta", "te", "kn", "ml", "mr", "bn", "gu", "pa",
@@ -118,16 +135,34 @@ def localize_template(html: str, locale: str) -> str:
 
     Falls back to returning `html` unchanged when locale == 'en' or
     the locale has no swap pairs (unknown locale, or all values
-    identical to English)."""
+    identical to English).
+
+    Code regions (<script>, <style>, inline on*= handlers) are masked
+    out before the swap and restored afterwards, so a catalog value can
+    never corrupt a JS identifier or CSS token — the class of bug that
+    silently broke a page's inline script and left it hanging on its
+    loading spinner."""
     if locale == "en":
         return html
     pairs = _swap_pairs(locale)
     if not pairs:
         return html
-    out = html
+
+    # Stash code regions behind sentinels the swap can't touch. Null
+    # bytes never appear in the English UI catalog, so they're safe.
+    stash: list[str] = []
+
+    def _mask(m: re.Match) -> str:
+        stash.append(m.group(0))
+        return f"\x00{len(stash) - 1}\x00"
+
+    out = _CODE_REGION_RE.sub(_mask, html)
     for en_val, loc_val in pairs:
         if en_val in out:
             out = out.replace(en_val, loc_val)
+    # Restore the untouched code regions.
+    for i, original in enumerate(stash):
+        out = out.replace(f"\x00{i}\x00", original)
     return out
 
 

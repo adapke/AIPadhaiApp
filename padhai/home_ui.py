@@ -1144,13 +1144,13 @@ HOME_HTML = """<!doctype html>
                ' from the syllabus');
     if(kind === 'mock') return '/practice?mode=mock&topic=' + t;
     if(kind === 'current_affairs') return '/chat?q='
-             + encodeURIComponent('Brief me on today\'s current affairs for '
+             + encodeURIComponent('Brief me on today\\'s current affairs for '
                + (block.title || 'general awareness'));
     if(kind === 'flashcards') return '/flashcards?topic=' + t;
     if(kind === 'memory_boost') return '/memory-boost';
     // Default: open the AI tutor with the title as the question seed.
     return '/chat?q=' + encodeURIComponent('Teach me ' +
-           (block.title || 'today\'s study topic'));
+           (block.title || 'today\\'s study topic'));
   }
 
   function renderPlan(dash){
