@@ -168,7 +168,7 @@ def _top_nav() -> str:
         '<a href="/concept">Concepts</a>'
         '<a href="/syllabus">Syllabus</a>'
         '<a href="/practice">Practice</a>'
-        '<a href="/tutor">Tutor</a>'
+        '<a href="/chat">Tutor</a>'
         '<a class="nav-cta" href="/home">Sign in</a>'
         '</div>'
         '</nav>'

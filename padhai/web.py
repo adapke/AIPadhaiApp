@@ -12616,6 +12616,13 @@ def chat_page(request: Request) -> HTMLResponse:
     return _localized_page(request, _ui.get_chat_html())
 
 
+@app.get("/tutor", include_in_schema=False)
+def tutor_alias() -> RedirectResponse:
+    """The AI Tutor lives at /chat; /tutor is a friendly alias so typed or
+    bookmarked links (and older nav) don't 404."""
+    return RedirectResponse("/chat", status_code=307)
+
+
 @app.get("/profile", response_class=HTMLResponse)
 def profile_page(request: Request) -> HTMLResponse:
     """User preferences and account settings."""
