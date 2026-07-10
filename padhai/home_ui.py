@@ -2109,13 +2109,15 @@ LANDING_HTML = """<!doctype html>
   <div class="hero-ctas">
     <a class="btn-primary" href="#auth">Start for Free &rarr;</a>
     <a class="btn-secondary" href="#" id="watchDemoBtn">Watch Demo</a>
+    <!-- prod-223: front-door entry to the SAT hub for international students. -->
+    <a class="btn-secondary" href="/sat">🇺🇸 SAT (US) &rarr;</a>
   </div>
   <div class="stats-bar">
     <span>50,000+ Students</span>
     <span class="sep">•</span>
     <span>7 Indian Languages</span>
     <span class="sep">•</span>
-    <span>UPSC &nbsp;·&nbsp; NEET &nbsp;·&nbsp; JEE &nbsp;·&nbsp; CBSE &nbsp;·&nbsp; SSC</span>
+    <span>UPSC &nbsp;·&nbsp; NEET &nbsp;·&nbsp; JEE &nbsp;·&nbsp; CBSE &nbsp;·&nbsp; SSC &nbsp;·&nbsp; <a href="/sat" style="color:inherit;text-decoration:underline">SAT</a></span>
   </div>
 </section>
 
