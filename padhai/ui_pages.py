@@ -64,7 +64,8 @@ def _mode_options_html(selected: str = "teaching") -> str:
 # ---------------------------------------------------------------------------
 
 def _page_shell(*, title: str, body: str, extra_head: str = "", extra_script: str = "") -> str:
-    """Shared HTML shell: auth guard, nav bar, common CSS, responsive meta."""
+    """Shared HTML shell: auth guard, persona-aware nav bar, common CSS."""
+    from . import ui_nav as _nav
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -193,6 +194,7 @@ def _page_shell(*, title: str, body: str, extra_head: str = "", extra_script: st
           padding:24px;width:100%;max-width:460px;
           max-height:90vh;overflow:auto;
           box-shadow:0 20px 60px rgba(15,23,42,.25)}}
+{_nav.NAV_STYLE}
   .modal h2{{font-size:18px;margin-bottom:16px}}
   .modal-close{{float:right;background:none;border:none;
                 font-size:22px;color:var(--muted);cursor:pointer;
@@ -227,14 +229,7 @@ def _page_shell(*, title: str, body: str, extra_head: str = "", extra_script: st
 {extra_head}
 </head>
 <body>
-<nav class="top-nav">
-  <div class="nav-logo">P</div>
-  <span class="nav-brand">PadhaiApp</span>
-  <span class="nav-sep">/</span>
-  <span class="nav-breadcrumb">{title}</span>
-  <span class="nav-email" id="navEmail">—</span>
-  <a href="/home" class="nav-home">← Home</a>
-</nav>
+{_nav.NAV_HTML}
 {body}
 <script>
 (function(){{
@@ -272,6 +267,7 @@ function escapeHtml(s) {{
     .replace(/'/g,'&#39;');
 }}
 
+{_nav.NAV_SCRIPT}
 {extra_script}
 </script>
 </body>

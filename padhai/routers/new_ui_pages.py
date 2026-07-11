@@ -92,19 +92,11 @@ _PAGE_PROLOGUE = """<!doctype html>
       padding:14px;margin-top:14px;white-space:pre-wrap;font-size:14px;line-height:1.6}
     .err{color:#fecaca;background:#7f1d1d;padding:10px;border-radius:8px;margin-top:10px}
     .ok{color:#a7f3d0;background:#065f46;padding:10px;border-radius:8px;margin-top:10px}
+__NAV_STYLE__
   </style>
 </head>
 <body>
-  <header>
-    <h1>__TITLE__</h1>
-    <nav>
-      <a href="/dashboard">← Dashboard</a>
-      <a href="/home">Home</a>
-      <a href="/chat">AI Tutor</a>
-      <a href="/profile">Settings</a>
-      <a href="#" onclick="return phLogout()">Sign out</a>
-    </nav>
-  </header>
+__NAV__
   <main>
 """
 
@@ -125,6 +117,7 @@ __AUTH_GATE__
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+    __NAV_SCRIPT__
     __PAGE_SCRIPT__
   </script>
 </body>
@@ -151,11 +144,18 @@ _AUTH_GATE_SNIPPET = """    if (!TOK) {
 
 
 def _page(title: str, body: str, script: str, requires_auth: bool = True) -> str:
-    prologue = _PAGE_PROLOGUE.replace("__TITLE__", title)
+    from .. import ui_nav as _nav
+    prologue = (
+        _PAGE_PROLOGUE
+        .replace("__TITLE__", title)
+        .replace("__NAV_STYLE__", _nav.NAV_STYLE)
+        .replace("__NAV__", _nav.NAV_HTML)
+    )
     gate = _AUTH_GATE_SNIPPET if requires_auth else ""
     epilogue = (
         _PAGE_EPILOGUE
         .replace("__AUTH_GATE__", gate)
+        .replace("__NAV_SCRIPT__", _nav.NAV_SCRIPT)
         .replace("__PAGE_SCRIPT__", script)
     )
     return prologue + body + epilogue
