@@ -12950,6 +12950,14 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
     .section-header{display:flex;justify-content:space-between;
       align-items:baseline;margin-bottom:12px}
     .section-title{margin:0;font-size:18px;font-weight:800}
+    /* prod-234 — declutter: group dashboard sections into tabs */
+    .dash-tabs{display:flex;gap:4px;flex-wrap:wrap;margin:4px 0 18px;
+      border-bottom:1px solid #334155}
+    .dash-tab{background:transparent;color:#94a3b8;border:0;
+      border-bottom:2px solid transparent;padding:9px 15px;font-weight:700;
+      font-size:14px;cursor:pointer;white-space:nowrap}
+    .dash-tab:hover{color:#e2e8f0}
+    .dash-tab.active{color:#fbbf24;border-bottom-color:#fbbf24}
     .section-sub{margin:0;color:#94a3b8;font-size:13px}
     .anchor{scroll-margin-top:80px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -14348,6 +14356,53 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
       loadConceptVideos(q);
     };
 
+    // prod-234 — declutter: after render, group the ~10 stacked sections into
+    // 3 tabs (Progress / Packs & Practice / Videos). Uses DOM wrappers so the
+    // async content loaders (which toggle inner section display) don't fight
+    // the tab visibility. Profile header + progress card stay pinned on top.
+    function groupDashboardTabs() {
+      var root = document.getElementById('dashRoot');
+      if (!root) return;
+      var secs = root.querySelectorAll('.section.anchor');
+      if (secs.length < 3) return;
+      var TABS = [
+        {id:'progress', label:'📊 Progress', ids:['activity','readiness','personalised-overlay']},
+        {id:'packs', label:'🎯 Packs & Practice', ids:['my-packs','browse-packs','study-materials','sample-flashcards','more-modules']},
+        {id:'videos', label:'🎬 Videos', ids:['trending-videos','concept-videos']}
+      ];
+      var idToTab = {};
+      TABS.forEach(function(t){ t.ids.forEach(function(i){ idToTab[i]=t.id; }); });
+      var panes = {};
+      TABS.forEach(function(t){
+        var d = document.createElement('div'); d.className='dash-pane'; d.dataset.pane=t.id; panes[t.id]=d;
+      });
+      Array.prototype.forEach.call(secs, function(s){
+        (panes[idToTab[s.id]] || panes[TABS[0].id]).appendChild(s);
+      });
+      var bar = document.createElement('div'); bar.className='dash-tabs'; bar.setAttribute('role','tablist');
+      TABS.forEach(function(t,i){
+        var b = document.createElement('button');
+        b.type='button'; b.className='dash-tab'+(i===0?' active':''); b.dataset.tab=t.id; b.innerHTML=t.label;
+        b.addEventListener('click', function(){ window.setDashTab(t.id); });
+        bar.appendChild(b);
+      });
+      root.appendChild(bar);
+      TABS.forEach(function(t){ root.appendChild(panes[t.id]); });
+      window.setDashTab = function(id){
+        TABS.forEach(function(t){ panes[t.id].style.display = (t.id===id) ? '' : 'none'; });
+        Array.prototype.forEach.call(bar.querySelectorAll('.dash-tab'), function(b){
+          b.classList.toggle('active', b.dataset.tab===id);
+        });
+      };
+      window.setDashTab(TABS[0].id);
+      // If arriving via a #section hash, open the tab that holds it.
+      if (location.hash) {
+        var el = document.querySelector(location.hash);
+        var pane = el && el.closest('.dash-pane');
+        if (pane) window.setDashTab(pane.dataset.pane);
+      }
+    }
+
     function render() {
       var html = profileHeader() +
         studyProgress() +
@@ -14363,6 +14418,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         conceptVideosSection() +
         moreModulesSection();
       document.getElementById('dashRoot').innerHTML = html;
+      groupDashboardTabs();  // prod-234 — declutter into tabs
       // Populate the dynamic pieces after the rest is rendered.
       loadConceptVideos('');
       loadAiQuota();
