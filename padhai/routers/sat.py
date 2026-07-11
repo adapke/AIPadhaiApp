@@ -328,6 +328,12 @@ _PROLOGUE = """<!doctype html>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SAT Prep · AI Pathshala</title>
+<!-- prod-226: warm the YouTube connections so thumbnails paint instantly and
+     the first click starts playback fast. -->
+<link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+<link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin />
+<link rel="dns-prefetch" href="https://i.ytimg.com" />
+<link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
 <style>
   *{box-sizing:border-box}
   body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -360,7 +366,15 @@ _PROLOGUE = """<!doctype html>
   .tab.on{background:#0077c8;color:#fff}
   .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
   .vid{background:#fff;border:1px solid #e1e9f2;border-radius:12px;overflow:hidden}
-  .vid .fr{position:relative;padding-top:56.25%;background:#000}
+  /* prod-226: thumbnail facade — the grid paints instantly from lightweight
+     YouTube thumbnails; the heavy iframe loads only when a card is clicked. */
+  .vid .fr{position:relative;padding-top:56.25%;background:#0a2a52 center/cover no-repeat;cursor:pointer}
+  .vid .fr .pbtn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .vid .fr .pbtn::before{content:"";width:62px;height:44px;border-radius:12px;
+    background:rgba(0,0,0,.62);transition:background .12s}
+  .vid .fr:hover .pbtn::before,.vid .fr:focus .pbtn::before{background:#f00}
+  .vid .fr .pbtn::after{content:"";position:absolute;border-style:solid;
+    border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff}
   .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .vid .t{padding:10px 12px;font-size:13.5px;font-weight:600}
   .fcrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
@@ -533,14 +547,28 @@ _SCRIPT = """
 
   // ---- videos ----
   var vsecs = Object.keys(D.videos);
+  function playFr(fr){
+    var id = fr.getAttribute('data-id');
+    if(!id || fr.querySelector('iframe')) return;
+    fr.style.backgroundImage='none';
+    fr.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+
+      '?autoplay=1&rel=0" title="Video lesson" allowfullscreen '+
+      'allow="autoplay; encrypted-media; picture-in-picture"></iframe>';
+  }
   function renderVideos(sec){
     document.getElementById('vgrid').innerHTML = D.videos[sec].map(function(v){
-      return '<div class="vid"><div class="fr"><iframe loading="lazy" '+
-        'src="https://www.youtube-nocookie.com/embed/'+esc(v.id)+'" '+
-        'title="'+esc(v.title)+'" allowfullscreen '+
-        'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"></iframe></div>'+
+      var thumb='https://i.ytimg.com/vi/'+esc(v.id)+'/hqdefault.jpg';
+      return '<div class="vid"><div class="fr" data-id="'+esc(v.id)+'" '+
+        'role="button" tabindex="0" aria-label="Play: '+esc(v.title)+'" '+
+        'style="background-image:url('+thumb+')"><span class="pbtn"></span></div>'+
         '<div class="t">'+esc(v.title)+'</div></div>';
     }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('#vgrid .fr'),function(fr){
+      fr.addEventListener('click',function(){playFr(fr);});
+      fr.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();playFr(fr);}
+      });
+    });
     Array.prototype.forEach.call(document.querySelectorAll('#vtabs .tab'),function(b){
       b.classList.toggle('on', b.dataset.sec===sec);
     });
