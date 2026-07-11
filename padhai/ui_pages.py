@@ -341,6 +341,7 @@ def get_lesson_new_html() -> str:
             <option value="middle">Middle School (Class 6–8)</option>
             <option value="secondary" selected>Secondary (Class 9–12)</option>
             <option value="neet_jee">NEET / JEE Entrance</option>
+            <option value="sat">SAT (US Digital SAT)</option>
           </select>
         </div>
         <div class="field">

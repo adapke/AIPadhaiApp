@@ -383,6 +383,7 @@ _PRACTICE_BODY = """
           <option value="upsc">UPSC (generic)</option>
           <option value="cat">CAT</option>
           <option value="gate">GATE</option>
+          <option value="sat">SAT (US Digital SAT)</option>
           <option value="generic">Generic / school board</option>
         </select>
       </div>
@@ -420,6 +421,28 @@ _PRACTICE_BODY = """
 _PRACTICE_SCRIPT = """
 var TEST = null;
 var ANSWERS = {};
+// prod-224: make the Subject dropdown exam-aware. SAT has its own two
+// sections (Math, Reading & Writing) that map to the seeded question bank;
+// every other exam keeps the default Indian-subject list.
+(function(){
+  var examEl = document.getElementById('examSel');
+  var subjEl = document.getElementById('subjectSel');
+  if (!examEl || !subjEl) return;
+  var defaultOpts = subjEl.innerHTML;
+  var SAT_OPTS = '<option value="sat_math">SAT Math</option>'
+    + '<option value="sat_reading_writing">SAT Reading &amp; Writing</option>';
+  function sync(){
+    if (examEl.value === 'sat') {
+      if (subjEl.getAttribute('data-mode') !== 'sat') {
+        subjEl.innerHTML = SAT_OPTS; subjEl.setAttribute('data-mode','sat');
+      }
+    } else if (subjEl.getAttribute('data-mode') === 'sat') {
+      subjEl.innerHTML = defaultOpts; subjEl.setAttribute('data-mode','default');
+    }
+  }
+  examEl.addEventListener('change', sync);
+  sync();
+})();
 window.genTest = async function() {
   var btn = document.getElementById('genBtn');
   btn.disabled = true; btn.textContent = 'Generating…';

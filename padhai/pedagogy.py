@@ -48,6 +48,14 @@ LEVEL_GUIDANCE = {
     "middle": "Pitch this at a middle-school student (grades 6-8). Introduce technical terms with definitions.",
     "secondary": "Pitch this at a secondary-school / board-exam student (grades 9-12). Full technical depth, exam-relevant framing.",
     "neet_jee": "Pitch this at a NEET/JEE aspirant. Maximum rigour, derivations, common exam traps.",
+    "sat": (
+        "Pitch this at a US Digital SAT aspirant (College Board). Two sections — "
+        "Reading & Writing (evidence-based reading, command of standard English "
+        "conventions, expression of ideas) and Math (algebra, advanced math, "
+        "problem-solving & data analysis, geometry & trigonometry; Desmos "
+        "calculator allowed). Use SAT-style framing and reference the 400-1600 "
+        "scoring where useful."
+    ),
 }
 
 # Board / exam-specific prompt addenda injected into the user turn.

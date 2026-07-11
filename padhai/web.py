@@ -4633,6 +4633,7 @@ Tip: paste vocab, formulas, doubts to ask later. Press Tab to indent. Auto-saves
               <option value="upsc_mains">UPSC Mains</option>
               <option value="cat">CAT</option>
               <option value="gate">GATE</option>
+              <option value="sat">SAT (US Digital SAT)</option>
               <option value="generic">Generic / Other</option>
             </select>
           </div>
@@ -8053,6 +8054,20 @@ function ptSetSubmitStatus(msg, cls) {
   const el = $('pt-submit-status');
   el.textContent = msg; el.className = 'status ' + (cls || '');
 }
+
+// prod-224: SAT uses two fixed sections (sat_math / sat_reading_writing)
+// that map to the seeded question bank. When SAT is chosen, prefill the
+// free-text subject with a valid section so the test generates from the bank.
+$('pt-exam').addEventListener('change', () => {
+  const s = $('pt-subject');
+  if ($('pt-exam').value === 'sat') {
+    if (s.value.indexOf('sat_') !== 0) s.value = 'sat_math';
+    s.placeholder = 'sat_math or sat_reading_writing';
+  } else if (s.value.indexOf('sat_') === 0) {
+    s.value = '';
+    s.placeholder = 'e.g. Physics, General Studies, Quantitative Aptitude';
+  }
+});
 
 $('pt-create').addEventListener('click', async () => {
   if (!requireAuthOrPrompt()) return;
