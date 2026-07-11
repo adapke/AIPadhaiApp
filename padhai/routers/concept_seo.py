@@ -265,19 +265,24 @@ def concept_index(request: Request) -> HTMLResponse:
 
     base = str(request.base_url).rstrip("/")
 
-    # prod-226c: build a concept -> YouTube thumbnail map in ONE query so the
-    # index renders as a visual video gallery (was text-only cards). Verified
-    # rows come first, so we keep the best video's id per concept.
+    # prod-226c/d: build a concept -> YouTube thumbnail map so the index
+    # renders as a visual video gallery (was text-only cards). One direct
+    # query over the whole verified catalog — search() caps at 250 rows, which
+    # silently dropped ~19 concepts to placeholders once the catalog passed
+    # 250; this covers every concept.
     thumb_by_norm: dict[str, str] = {}
     try:
-        for v in _cv.search(language="en", limit=250):
-            key = _cv._normalise_concept(v.concept)
+        with _cv._conn() as _c:
+            rows = _c.execute(
+                "SELECT concept, embed_url FROM concept_videos "
+                "WHERE language = 'en' AND quality_tier = 'verified' "
+                "AND source = 'youtube'"
+            ).fetchall()
+        for concept, embed_url in rows:
+            key = _cv._normalise_concept(concept)
             if key in thumb_by_norm:
                 continue
-            vid = (
-                (v.embed_url or "").rstrip("/").split("/")[-1]
-                if v.source == "youtube" else ""
-            )
+            vid = (embed_url or "").rstrip("/").split("/")[-1]
             if vid:
                 thumb_by_norm[key] = vid
     except Exception:
