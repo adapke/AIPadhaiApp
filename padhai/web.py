@@ -14723,26 +14723,13 @@ def seed_starter_flashcards(
             "deck_count": len(_sr.list_my_decks(user.id, limit=500)),
         })
 
-    created_decks = 0
-    created_cards = 0
-    for deck_spec in _starter.STARTER_DECKS:
-        deck = _sr.create_deck(
-            owner_user_id=user.id,
-            title=deck_spec["title"],
-            description=deck_spec.get("description"),
-            topic_code=deck_spec.get("topic_code"),
-            language=deck_spec.get("language", "en"),
-            visibility="private",
-        )
-        created_decks += 1
-        for front, back in deck_spec["cards"]:
-            _sr.add_card(
-                deck_id=deck.id,
-                owner_user_id=user.id,
-                front=front,
-                back=back,
-            )
-            created_cards += 1
+    # Seed all decks + cards in ONE transaction. The old per-card loop opened
+    # a fresh connection + committed for each of ~98 cards, so first-ever
+    # flashcards load spent ~20s fsyncing (a visible hang). bulk_create_decks
+    # commits once — sub-second.
+    created_decks, created_cards = _sr.bulk_create_decks(
+        owner_user_id=user.id, deck_specs=_starter.STARTER_DECKS,
+    )
     return JSONResponse({
         "seeded": True,
         "decks_created": created_decks,

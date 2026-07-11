@@ -2159,9 +2159,9 @@ def get_teacher_html() -> str:
   async function loadDoubts() {
     document.getElementById('doubtsList').dataset.loaded = '1';
     try {
-      var r = await apiFetch('/api/doubts/queue');
+      var r = await apiFetch('/api/doubts/queue/pending');
       var doubts = [];
-      if (r.ok) doubts = await r.json();
+      if (r.ok) { var d = await r.json(); doubts = d.rows || d.doubts || (Array.isArray(d) ? d : []); }
       renderDoubts(doubts);
     } catch(e) {
       renderDoubts([]);
@@ -2612,17 +2612,14 @@ def get_parent_html() -> str:
       whatsapp: document.getElementById('chkWhatsapp').checked,
       sms: document.getElementById('chkSms').checked
     };
-    try {
-      await apiFetch('/api/me/notifications', {
-        method:'PUT',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(prefs)
-      });
-      var s = document.getElementById('notifSuccess');
-      s.textContent = 'Notification preferences saved.';
-      s.style.display = 'block';
-      setTimeout(function() { s.style.display = 'none'; }, 3000);
-    } catch(e) {}
+    // There is no server-side notification-prefs endpoint yet, so persist
+    // locally instead of firing a request that 404s and then falsely showing
+    // "saved". Honest + no failing network call. (Backend can sync later.)
+    try { localStorage.setItem('padhai_notif_prefs', JSON.stringify(prefs)); } catch(e) {}
+    var s = document.getElementById('notifSuccess');
+    s.textContent = 'Notification preferences saved on this device.';
+    s.style.display = 'block';
+    setTimeout(function() { s.style.display = 'none'; }, 3000);
     btn.disabled = false; btn.textContent = 'Save notification settings';
   });
 

@@ -413,6 +413,58 @@ def add_card(
     return _get_card(cid)  # type: ignore[return-value]
 
 
+def bulk_create_decks(
+    *, owner_user_id: str, deck_specs: list[dict],
+) -> tuple[int, int]:
+    """Create many decks + their cards in a SINGLE transaction (one commit).
+
+    The starter-seed used to call create_deck()/add_card() per row, and each
+    opened its own connection and committed — so ~100 cards meant ~100 SQLite
+    fsyncs, which took ~20s on first flashcards load (a visible hang). This
+    does all inserts under one _conn() so it commits once (~sub-second).
+
+    Each spec: {title, description?, pack_code?, topic_code?, language?,
+    cards: [(front, back), ...]}. Returns (decks_created, cards_created).
+    """
+    now = time.time()
+    decks = 0
+    cards = 0
+    with _conn() as conn:
+        for spec in deck_specs:
+            title = (spec.get("title") or "").strip()
+            if len(title) < 3 or len(title) > 200:
+                continue
+            did = uuid.uuid4().hex
+            spec_cards = spec.get("cards") or []
+            conn.execute(
+                "INSERT INTO flashcard_decks "
+                "(id, owner_user_id, title, description, pack_code, "
+                " topic_code, language, visibility, card_count, "
+                " created_at, updated_at) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (did, owner_user_id, title, spec.get("description"),
+                 spec.get("pack_code"), spec.get("topic_code"),
+                 spec.get("language", "en"), "private",
+                 len(spec_cards), now, now),
+            )
+            decks += 1
+            for pos, (front, back) in enumerate(spec_cards, start=1):
+                front = (front or "").strip()
+                back = (back or "").strip()
+                if not front or not back:
+                    continue
+                conn.execute(
+                    "INSERT INTO flashcards "
+                    "(id, deck_id, position, front, back, hint, "
+                    " source_ref, citation_json, created_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (uuid.uuid4().hex, did, pos, front, back,
+                     None, None, None, now),
+                )
+                cards += 1
+    return decks, cards
+
+
 def _get_card(card_id: str) -> Card | None:
     with _conn() as conn:
         r = conn.execute(
