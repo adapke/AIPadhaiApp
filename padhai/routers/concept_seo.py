@@ -265,6 +265,35 @@ def concept_index(request: Request) -> HTMLResponse:
 
     base = str(request.base_url).rstrip("/")
 
+    # prod-226c: build a concept -> YouTube thumbnail map in ONE query so the
+    # index renders as a visual video gallery (was text-only cards). Verified
+    # rows come first, so we keep the best video's id per concept.
+    thumb_by_norm: dict[str, str] = {}
+    try:
+        for v in _cv.search(language="en", limit=250):
+            key = _cv._normalise_concept(v.concept)
+            if key in thumb_by_norm:
+                continue
+            vid = (
+                (v.embed_url or "").rstrip("/").split("/")[-1]
+                if v.source == "youtube" else ""
+            )
+            if vid:
+                thumb_by_norm[key] = vid
+    except Exception:
+        thumb_by_norm = {}
+
+    def _card_thumb(name: str) -> str:
+        vid = thumb_by_norm.get(_cv._normalise_concept(name), "")
+        if vid:
+            src = f"https://i.ytimg.com/vi/{vid}/mqdefault.jpg"
+            return (
+                '<div class="ccard-thumb">'
+                f'<img loading="lazy" src="{src}" alt="" width="320" height="180">'
+                '<span class="ccard-play"></span></div>'
+            )
+        return '<div class="ccard-thumb no-thumb"><span class="ccard-play"></span></div>'
+
     # Build category chips
     chips_html = "".join(
         f'<button class="chip" data-cat="{html.escape(subject)}" '
@@ -278,8 +307,11 @@ def concept_index(request: Request) -> HTMLResponse:
     for subject, items in grouped_sorted:
         cards = "".join(
             f'<a class="ccard" href="/concept/{quote(_safe_slug(n.replace(" ", "-")))}">'
+            + _card_thumb(n) +
+            f'<div class="ccard-body">'
             f'<div class="ccard-title">{html.escape(n)}</div>'
             f'<div class="ccard-meta">▶ Watch explainer</div>'
+            '</div>'
             '</a>'
             for n in items
         )
@@ -304,6 +336,8 @@ def concept_index(request: Request) -> HTMLResponse:
         'explainer in AI Pathshala\'s catalog. Covers CBSE / ICSE / state '
         'boards / NEET / JEE / UPSC.">'
         f'<link rel="canonical" href="{base}/concept">'
+        '<link rel="preconnect" href="https://i.ytimg.com" crossorigin>'
+        '<link rel="dns-prefetch" href="https://i.ytimg.com">'
         '<style>' + _SPA_CHROME_CSS +
         '.hero{padding:18px 0 8px}'
         '.hero h1{font-size:28px;margin:0 0 8px;line-height:1.2}'
@@ -329,11 +363,25 @@ def concept_index(request: Request) -> HTMLResponse:
         '.grp-n{color:#9aa3b0;font-size:13px;font-weight:500}'
         '.grid{display:grid;grid-template-columns:repeat(auto-fill,'
         'minmax(220px,1fr));gap:12px}'
-        '.ccard{background:#fff;border:1px solid #e3e6ec;border-radius:8px;'
-        'padding:14px 16px;text-decoration:none;color:#101828;display:block;'
-        'transition:border-color 0.15s,box-shadow 0.15s;min-height:60px}'
+        '.ccard{background:#fff;border:1px solid #e3e6ec;border-radius:10px;'
+        'text-decoration:none;color:#101828;display:block;overflow:hidden;'
+        'transition:border-color 0.15s,box-shadow 0.15s}'
         '.ccard:hover{border-color:#1565d8;'
-        'box-shadow:0 2px 8px rgba(21,101,216,0.08)}'
+        'box-shadow:0 2px 10px rgba(21,101,216,0.12)}'
+        # thumbnail (16:9) with a YouTube-style play button
+        '.ccard-thumb{position:relative;width:100%;aspect-ratio:16/9;'
+        'background:#0b3a8a;overflow:hidden}'
+        '.ccard-thumb img{width:100%;height:100%;object-fit:cover;display:block}'
+        '.ccard-thumb.no-thumb{background:linear-gradient(135deg,#1565d8,#0b3a8a)}'
+        '.ccard-play{position:absolute;inset:0;display:flex;'
+        'align-items:center;justify-content:center}'
+        '.ccard-play::before{content:"";width:48px;height:34px;'
+        'border-radius:9px;background:rgba(0,0,0,0.55);transition:background .12s}'
+        '.ccard:hover .ccard-play::before{background:#f00}'
+        '.ccard-play::after{content:"";position:absolute;border-style:solid;'
+        'border-width:8px 0 8px 14px;'
+        'border-color:transparent transparent transparent #fff}'
+        '.ccard-body{padding:11px 14px}'
         '.ccard-title{font-weight:600;font-size:14px;margin-bottom:4px;'
         'line-height:1.3}'
         '.ccard-meta{font-size:12px;color:#5a6470}'
