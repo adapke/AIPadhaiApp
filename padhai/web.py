@@ -12751,9 +12751,18 @@ def student_dashboard_page(request: Request) -> HTMLResponse:
     language switcher (which sets the cookie + reloads) actually takes effect
     here, not just on /home."""
     from . import i18n
+    from . import ui_nav as _ui_nav
     locale = _locale_from_request(request)
+    html = i18n.localize_template(_STUDENT_DASHBOARD_HTML, locale)
+    # Swap the placeholder for the shared persona-aware nav (prod-233) after
+    # localisation so its markup/script survive intact.
+    html = html.replace(
+        "__PHNAV__",
+        f"<style>{_ui_nav.NAV_STYLE}</style>{_ui_nav.NAV_HTML}"
+        f"<script>{_ui_nav.NAV_SCRIPT}</script>",
+    )
     return HTMLResponse(
-        i18n.localize_template(_STUDENT_DASHBOARD_HTML, locale),
+        html,
         headers={"Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"},
     )
 
@@ -13007,16 +13016,7 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
   </style>
 </head>
 <body>
-  <header>
-    <h1>Exam Hub</h1>
-    <nav>
-      <a href="/home">Home</a>
-      <a href="/onboarding">Goals</a>
-      <a href="/chat">AI Tutor</a>
-      <a href="/profile">Settings</a>
-      <a href="#" onclick="return phLogout()" id="dashSignOut">Sign out</a>
-    </nav>
-  </header>
+  __PHNAV__
 
   <main>
     <div id="dashRoot">
