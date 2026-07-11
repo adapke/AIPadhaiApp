@@ -249,44 +249,56 @@ def concept_index(request: Request) -> HTMLResponse:
     except Exception:
         names = []
 
-    # Group by subject for chip-filterable grid
-    grouped: dict[str, list[str]] = {}
-    for n in names:
-        grouped.setdefault(_categorise(n), []).append(n)
-    # Stable order: Mathematics first (broadest appeal), then sciences,
-    # then humanities, then Other last
-    subject_order = [
-        "Mathematics", "Physics", "Chemistry", "Biology",
-        "History", "Geography", "Polity / Civics", "Other",
-    ]
-    grouped_sorted = [
-        (s, sorted(grouped[s])) for s in subject_order if s in grouped
-    ]
-
     base = str(request.base_url).rstrip("/")
 
-    # prod-226c/d: build a concept -> YouTube thumbnail map so the index
-    # renders as a visual video gallery (was text-only cards). One direct
-    # query over the whole verified catalog — search() caps at 250 rows, which
-    # silently dropped ~19 concepts to placeholders once the catalog passed
-    # 250; this covers every concept.
+    # prod-226c/d/e: ONE query over the whole verified catalog → per-concept
+    # thumbnail id + subject. search() caps at 250 rows (which silently dropped
+    # ~19 concepts to placeholders once the catalog passed 250), so query
+    # directly. The subject lets us group the 145 SAT videos into their OWN
+    # section instead of scattering them across Mathematics / Physics / Other
+    # by name-keyword (a "Math · Advanced Math — SAT…" concept was landing in
+    # Physics, "R&W · …" in Chemistry, etc.).
     thumb_by_norm: dict[str, str] = {}
+    subject_by_norm: dict[str, str] = {}
     try:
         with _cv._conn() as _c:
             rows = _c.execute(
-                "SELECT concept, embed_url FROM concept_videos "
+                "SELECT concept, embed_url, subject FROM concept_videos "
                 "WHERE language = 'en' AND quality_tier = 'verified' "
                 "AND source = 'youtube'"
             ).fetchall()
-        for concept, embed_url in rows:
+        for concept, embed_url, subject in rows:
             key = _cv._normalise_concept(concept)
+            subject_by_norm.setdefault(key, subject or "")
             if key in thumb_by_norm:
                 continue
             vid = (embed_url or "").rstrip("/").split("/")[-1]
             if vid:
                 thumb_by_norm[key] = vid
     except Exception:
-        thumb_by_norm = {}
+        thumb_by_norm, subject_by_norm = {}, {}
+
+    _SAT_CAT = "SAT (Digital SAT)"
+
+    def _cat(name: str) -> str:
+        # SAT videos (subjects sat_math / sat_reading_writing / sat_overview)
+        # get their own section rather than being keyword-scattered.
+        if subject_by_norm.get(_cv._normalise_concept(name), "").startswith("sat_"):
+            return _SAT_CAT
+        return _categorise(name)
+
+    # Group by subject for the chip-filterable grid
+    grouped: dict[str, list[str]] = {}
+    for n in names:
+        grouped.setdefault(_cat(n), []).append(n)
+    # Stable order: India school subjects, then the SAT block, then Other.
+    subject_order = [
+        "Mathematics", "Physics", "Chemistry", "Biology",
+        "History", "Geography", "Polity / Civics", _SAT_CAT, "Other",
+    ]
+    grouped_sorted = [
+        (s, sorted(grouped[s])) for s in subject_order if s in grouped
+    ]
 
     def _card_thumb(name: str) -> str:
         vid = thumb_by_norm.get(_cv._normalise_concept(name), "")
