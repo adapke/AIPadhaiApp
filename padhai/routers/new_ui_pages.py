@@ -111,10 +111,7 @@ _PAGE_PROLOGUE = """<!doctype html>
 _PAGE_EPILOGUE = """  </main>
   <script>
     var TOK = localStorage.getItem('pathshala_token');
-    if (!TOK) {
-      document.querySelector('main').innerHTML =
-        '<div class="signin">Please <a href="/landing">sign in</a> to use this feature.</div>';
-    }
+__AUTH_GATE__
     function authH() { return TOK ? { 'Authorization': 'Bearer ' + TOK } : {}; }
     function phLogout() {
       try { localStorage.removeItem('pathshala_token'); } catch (e) {}
@@ -135,9 +132,24 @@ _PAGE_EPILOGUE = """  </main>
 """
 
 
-def _page(title: str, body: str, script: str) -> str:
+# The auth gate replaces the whole <main> with a sign-in prompt when the
+# visitor has no token. Pages that only read PUBLIC endpoints (e.g. the
+# curriculum catalogue — non-copyrighted chapter metadata) pass
+# requires_auth=False so anonymous visitors can browse without an account.
+_AUTH_GATE_SNIPPET = """    if (!TOK) {
+      document.querySelector('main').innerHTML =
+        '<div class="signin">Please <a href="/landing">sign in</a> to use this feature.</div>';
+    }"""
+
+
+def _page(title: str, body: str, script: str, requires_auth: bool = True) -> str:
     prologue = _PAGE_PROLOGUE.replace("__TITLE__", title)
-    epilogue = _PAGE_EPILOGUE.replace("__PAGE_SCRIPT__", script)
+    gate = _AUTH_GATE_SNIPPET if requires_auth else ""
+    epilogue = (
+        _PAGE_EPILOGUE
+        .replace("__AUTH_GATE__", gate)
+        .replace("__PAGE_SCRIPT__", script)
+    )
     return prologue + body + epilogue
 
 
@@ -936,40 +948,104 @@ _CURRICULUM_SCRIPT = """
 window.loadCurriculum = async function() {
   var out = document.getElementById('curOut');
   out.innerHTML = '<div class="empty"><span class="spinner"></span> Loading…</div>';
+  var b = document.getElementById('curBoard').value;
+  var g = document.getElementById('curGrade').value;
+  var s = document.getElementById('curSubject').value;
   var qs = [];
-  var b = document.getElementById('curBoard').value; if (b) qs.push('board=' + b);
-  var g = document.getElementById('curGrade').value; if (g) qs.push('cls=' + g);
-  var s = document.getElementById('curSubject').value; if (s) qs.push('subject=' + s);
+  if (b) qs.push('board=' + encodeURIComponent(b));
+  if (g) qs.push('cls=' + encodeURIComponent(g));
+  if (s) qs.push('subject=' + encodeURIComponent(s));
   try {
     var r = await fetch('/curriculum/index' + (qs.length ? '?' + qs.join('&') : ''));
     if (!r.ok) throw new Error('HTTP ' + r.status);
     var d = await r.json();
     var rows = d.entries || d.curriculum || d.rows || (Array.isArray(d) ? d : []);
-    if (!rows || !rows.length) { out.innerHTML = '<div class="empty">No chapters matched. Loosen filters.</div>'; return; }
-    out.innerHTML = rows.slice(0, 80).map(function(c) {
-      // Backend rows use `class` (reserved word in JS — bracket-access)
-      var cls = c['class'] != null ? c['class'] : (c.grade != null ? c.grade : '?');
-      var summary = c.summary ? '<div class="sub" style="margin-top:6px">' + escapeHtml(c.summary) + '</div>' : '';
-      var topics = (c.topics || []).length
-        ? '<div style="margin-top:6px">' + c.topics.slice(0, 6).map(function(t) {
-            return '<span class="chip">' + escapeHtml(t) + '</span>';
-          }).join('') + '</div>'
-        : '';
-      return '<div class="result"><strong>' +
-        (c.chapter_no ? c.chapter_no + '. ' : '') +
-        escapeHtml(c.chapter_title || c.title || '(untitled)') + '</strong>' +
-        '<div class="sub">' + escapeHtml(c.board || '?') + ' · Class ' + escapeHtml(String(cls)) +
-        ' · ' + escapeHtml(c.subject || '?') + (c.level ? ' · ' + escapeHtml(c.level) : '') + '</div>' +
-        summary + topics + '</div>';
-    }).join('');
+    if (!rows || !rows.length) {
+      out.innerHTML = '<div class="empty">No chapters match those filters. Try “All boards / All classes / All subjects”.</div>';
+      return;
+    }
+    var shown = Math.min(rows.length, 120);
+    out.innerHTML = '<div class="sub" style="margin-bottom:10px">Showing ' + shown +
+      (rows.length > shown ? ' of ' + rows.length : '') + ' chapter' + (rows.length === 1 ? '' : 's') + '</div>' +
+      rows.slice(0, 120).map(function(c) {
+        // Backend rows use `class` (reserved word in JS — bracket-access)
+        var cls = c['class'] != null ? c['class'] : (c.grade != null ? c.grade : '?');
+        var summary = c.summary ? '<div class="sub" style="margin-top:6px">' + escapeHtml(c.summary) + '</div>' : '';
+        var topics = (c.topics || []).length
+          ? '<div style="margin-top:6px">' + c.topics.slice(0, 6).map(function(t) {
+              return '<span class="chip">' + escapeHtml(t) + '</span>';
+            }).join('') + '</div>'
+          : '';
+        return '<div class="result"><strong>' +
+          (c.chapter_no ? c.chapter_no + '. ' : '') +
+          escapeHtml(c.chapter_title || c.title || '(untitled)') + '</strong>' +
+          '<div class="sub">' + escapeHtml(c.board || '?') + ' · Class ' + escapeHtml(String(cls)) +
+          ' · ' + escapeHtml(c.subject || '?') + (c.level ? ' · ' + escapeHtml(c.level) : '') + '</div>' +
+          summary + topics + '</div>';
+      }).join('');
   } catch(e) {
     out.innerHTML = '<div class="err">Could not load: ' + escapeHtml(e.message) + '</div>';
   }
 };
-loadCurriculum();
+
+// Populate a <select> with real values from the catalogue so the filters
+// never offer a board/subject the data doesn't actually have.
+function _curFill(id, values, allLabel, keep) {
+  var sel = document.getElementById(id);
+  if (!sel) return;
+  var cur = keep ? sel.value : '';
+  sel.innerHTML = '<option value="">' + allLabel + '</option>' +
+    values.map(function(v) {
+      var sv = String(v);
+      return '<option value="' + escapeHtml(sv) + '"' + (sv === cur ? ' selected' : '') +
+             '>' + escapeHtml(sv) + '</option>';
+    }).join('');
+  if (cur && values.map(String).indexOf(cur) < 0) sel.value = '';
+}
+
+// Refresh the subject dropdown scoped to the current board+class (cascade) so
+// you can't pick a subject that board doesn't teach → no dead-end 0 results.
+// Deliberately omits the subject filter itself (the endpoint would otherwise
+// collapse `subjects` to the single selected value).
+async function _curRefreshSubjects() {
+  var b = document.getElementById('curBoard').value;
+  var g = document.getElementById('curGrade').value;
+  var qs = [];
+  if (b) qs.push('board=' + encodeURIComponent(b));
+  if (g) qs.push('cls=' + encodeURIComponent(g));
+  try {
+    var r = await fetch('/curriculum/index' + (qs.length ? '?' + qs.join('&') : ''));
+    var d = await r.json();
+    _curFill('curSubject', d.subjects || [], 'All subjects', true);
+  } catch(e) {}
+}
+
+(async function initCurriculum() {
+  // Populate all three dropdowns from the full catalogue so every option
+  // maps to real data (data has more boards than the old hardcoded list).
+  try {
+    var r = await fetch('/curriculum/index');
+    var d = await r.json();
+    _curFill('curBoard', d.boards || [], 'All boards', false);
+    _curFill('curGrade', d.classes || [], 'All classes', false);
+    _curFill('curSubject', d.subjects || [], 'All subjects', false);
+  } catch(e) {}
+  loadCurriculum();
+  // Auto-filter on change; board/class change also re-scopes the subjects.
+  var bs = document.getElementById('curBoard');
+  var gs = document.getElementById('curGrade');
+  var ss = document.getElementById('curSubject');
+  if (bs) bs.addEventListener('change', async function(){ await _curRefreshSubjects(); loadCurriculum(); });
+  if (gs) gs.addEventListener('change', async function(){ await _curRefreshSubjects(); loadCurriculum(); });
+  if (ss) ss.addEventListener('change', loadCurriculum);
+})();
 """
 
-_CURRICULUM_HTML = _page("Curriculum", _CURRICULUM_BODY, _CURRICULUM_SCRIPT)
+# Public page — the curriculum catalogue is non-copyrighted metadata
+# (chapter titles + topic tags), browseable without an account.
+_CURRICULUM_HTML = _page(
+    "Curriculum", _CURRICULUM_BODY, _CURRICULUM_SCRIPT, requires_auth=False,
+)
 
 
 # ---------- 11. Learning paths ----------
