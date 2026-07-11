@@ -100,8 +100,12 @@ def test_concept_page_returns_html_with_seo_markup(monkeypatch, tmp_path):
     assert '"@type": "VideoObject"' in body
     assert '"isFamilyFriendly": true' in body
 
-    # YouTube iframe present
-    assert 'iframe src="https://www.youtube.com/embed/test_video_id"' in body
+    # YouTube video embedded via the lightweight thumbnail facade (prod-226):
+    # the thumbnail paints instantly and the iframe loads on click, so the
+    # embed URL lives in the facade's data-embed (and the Schema.org
+    # embedUrl); the player still gains allowfullscreen when it loads.
+    assert 'data-embed="https://www.youtube.com/embed/test_video_id"' in body
+    assert "i.ytimg.com/vi/test_video_id/hqdefault.jpg" in body
     assert 'allowfullscreen' in body
 
     # CTA + canonical

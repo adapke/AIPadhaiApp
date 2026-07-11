@@ -448,6 +448,46 @@ def concept_page(
         f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         if video.source == "youtube" and video_id else ""
     )
+
+    # prod-226: thumbnail facade — the page paints the thumbnail + a play
+    # button instantly (great LCP + SEO via og:image below); the heavy iframe
+    # loads with autoplay only when the visitor clicks. Falls back to a plain
+    # lazy iframe when there's no thumbnail (non-YouTube source).
+    if thumbnail and embed_url:
+        embed_block = (
+            f'<div class="embed lite" id="cvEmbed" role="button" tabindex="0" '
+            f'aria-label="Play video: {title}" data-embed="{embed_url}" '
+            f'style="background-image:url({thumbnail})">'
+            f'<span class="pbtn"></span></div>'
+        )
+        embed_script = (
+            '<script>'
+            '(function(){'
+            'var e=document.getElementById("cvEmbed");if(!e)return;'
+            'function play(){'
+            'var u=e.getAttribute("data-embed");'
+            'if(!u||e.querySelector("iframe"))return;'
+            'u+=(u.indexOf("?")>=0?"&":"?")+"autoplay=1";'
+            'e.style.backgroundImage="none";'
+            'var f=document.createElement("iframe");f.src=u;'
+            'f.setAttribute("allowfullscreen","");'
+            'f.setAttribute("allow","autoplay; encrypted-media; picture-in-picture");'
+            'e.appendChild(f);'
+            '}'
+            'e.addEventListener("click",play);'
+            'e.addEventListener("keydown",function(ev){'
+            'if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();play();}});'
+            '})();'
+            '</script>'
+        )
+    else:
+        embed_block = (
+            f'<div class="embed"><iframe src="{embed_url}" allowfullscreen '
+            f'allow="accelerometer; clipboard-write; encrypted-media; '
+            f'gyroscope; picture-in-picture" title="{title}" '
+            f'loading="lazy"></iframe></div>'
+        )
+        embed_script = ""
     schema_org = (
         '<script type="application/ld+json">{'
         '"@context": "https://schema.org",'
@@ -553,6 +593,11 @@ def concept_page(
         f'<title>{title} — AI Pathshala</title>'
         f'<meta name="description" content="{html.escape(description)}">'
         f'<link rel="canonical" href="{canonical_url}">\n'
+        # prod-226: warm YouTube connections so the thumbnail paints instantly
+        # and the first click starts playback fast.
+        '<link rel="preconnect" href="https://i.ytimg.com" crossorigin>'
+        '<link rel="preconnect" href="https://www.youtube-nocookie.com" crossorigin>'
+        '<link rel="dns-prefetch" href="https://i.ytimg.com">'
         + hreflang_tags + "\n"
         + og_tags
         + schema_org
@@ -564,11 +609,21 @@ def concept_page(
         'color:#0b3a8a}'
         '.main h2{font-size:18px;margin:28px 0 10px;color:#0b3a8a}'
         '.embed{position:relative;width:100%;padding-bottom:56.25%;'
-        'background:#000;border-radius:10px;overflow:hidden;'
-        'margin:14px 0 12px;'
+        'background:#0b3a8a center/cover no-repeat;border-radius:10px;'
+        'overflow:hidden;margin:14px 0 12px;'
         'box-shadow:0 2px 10px rgba(11,58,138,0.08)}'
         '.embed iframe{position:absolute;inset:0;width:100%;height:100%;'
         'border:0}'
+        '.embed.lite{cursor:pointer}'
+        '.embed.lite .pbtn{position:absolute;inset:0;display:flex;'
+        'align-items:center;justify-content:center}'
+        '.embed.lite .pbtn::before{content:"";width:72px;height:50px;'
+        'border-radius:14px;background:rgba(0,0,0,0.62);transition:background .12s}'
+        '.embed.lite:hover .pbtn::before,.embed.lite:focus .pbtn::before'
+        '{background:#f00}'
+        '.embed.lite .pbtn::after{content:"";position:absolute;'
+        'border-style:solid;border-width:13px 0 13px 22px;'
+        'border-color:transparent transparent transparent #fff}'
         '.meta{color:#5a6470;font-size:13px;margin:6px 0;line-height:1.5}'
         '.meta-pill{background:#eef3fc;color:#0b3a8a;padding:3px 10px;'
         'border-radius:999px;font-size:12px;font-weight:600;'
@@ -616,11 +671,7 @@ def concept_page(
         f'<span class="meta-pill">{html.escape(video.language)}</span>'
         f' Curated explainer by <b>{channel}</b>'
         '</div>'
-        f'<div class="embed">'
-        f'<iframe src="{embed_url}" allowfullscreen '
-        f'allow="accelerometer; clipboard-write; encrypted-media; '
-        f'gyroscope; picture-in-picture" '
-        f'title="{title}" loading="lazy"></iframe></div>'
+        + embed_block +
         '<a class="cta" href="/home">Sign up to track your progress →</a>'
         + examples_html
         + f'<div class="src">Source: <a href="{src_url}" rel="noopener" '
@@ -631,8 +682,9 @@ def concept_page(
         + related_aside_html +
         '</div>'
         '</main>'
-        + _footer() +
-        '</body></html>'
+        + _footer()
+        + embed_script
+        + '</body></html>'
     )
     return HTMLResponse(body)
 
