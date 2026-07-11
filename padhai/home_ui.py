@@ -928,7 +928,7 @@ HOME_HTML = """<!doctype html>
     'generate lessons':           '/lessons/new',
     'doubt chat':                 '/chat',
     'flashcard decks (srs)':      '/ui-legacy#flashcards',
-    'quiz maker':                 '/quiz',
+    'quiz maker':                 '/practice',
     // mocks
     'browse mocks':               '/ui-legacy#practice',
     'my attempts':                '/ui-legacy#practice',
@@ -1130,8 +1130,8 @@ HOME_HTML = """<!doctype html>
       'continue today': '/dashboard',
       'continue todays plan': '/dashboard',
       'open study studio': '/lessons/new',
-      'take 20-min mock': '/quiz',
-      'take a mock': '/quiz',
+      'take 20-min mock': '/practice',
+      'take a mock': '/practice',
       'ask ai tutor': '/chat',
       'review flashcards': '/flashcards',
       'browse exam packs': '/dashboard#browse-packs',
@@ -1416,7 +1416,7 @@ HOME_HTML = """<!doctype html>
   const _CTA_ROUTES = {
     'Continue today\\'s plan': '/lessons/new',
     'Open Study Studio': '/lessons/new',
-    'Take 20-min mock': '/quiz',
+    'Take 20-min mock': '/practice',
     'Ask AI tutor': '/chat',
     'New lesson': '/lessons/new',
     'Study flashcards': '/flashcards',
@@ -1445,7 +1445,7 @@ HOME_HTML = """<!doctype html>
       if(kindText.includes('practice') || kindText.includes('read'))
         el.style.cursor = 'pointer';
       el.addEventListener('click', () => {
-        if(kindText.includes('mock')) location.href = '/quiz';
+        if(kindText.includes('mock')) location.href = '/practice';
         else location.href = '/lessons/new';
       });
     });

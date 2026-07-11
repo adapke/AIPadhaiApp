@@ -12664,8 +12664,18 @@ def flashcards_page(request: Request) -> HTMLResponse:
 
 
 @app.get("/quiz", response_class=HTMLResponse)
-def quiz_page(request: Request) -> HTMLResponse:
-    """Standalone quiz screen — reads ?lesson= from query string."""
+def quiz_page(request: Request):
+    """Standalone quiz screen. It quizzes a *specific lesson*, so it needs
+    ?lesson=<id>. Opened without one — from a generic "Quiz maker" / "Take a
+    mock" link, or by typing /quiz directly — there's no lesson to quiz, so
+    send the user to the self-serve practice generator (pick exam + subject →
+    generate → take) instead of dead-ending on a "No lesson ID" error."""
+    if not request.query_params.get("lesson"):
+        lang = request.query_params.get("lang")
+        return RedirectResponse(
+            "/practice" + (f"?lang={lang}" if lang else ""),
+            status_code=307,
+        )
     from . import ui_pages as _ui
     return _localized_page(request, _ui.get_quiz_html())
 
