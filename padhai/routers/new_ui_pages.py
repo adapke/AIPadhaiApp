@@ -138,7 +138,15 @@ __AUTH_GATE__
 # requires_auth=False so anonymous visitors can browse without an account.
 _AUTH_GATE_SNIPPET = """    if (!TOK) {
       document.querySelector('main').innerHTML =
-        '<div class="signin">Please <a href="/landing">sign in</a> to use this feature.</div>';
+        '<div class="signin">' +
+        '<div style="font-size:40px;margin-bottom:8px">\\uD83D\\uDD10</div>' +
+        '<h2 style="margin:0 0 6px;color:#e2e8f0">Sign in to continue</h2>' +
+        '<p style="margin:0 auto 18px;max-width:420px">This is a personal learning tool. Sign in, or create a free account, to use it.</p>' +
+        '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">' +
+        '<a class="btn" href="/landing?auth=login">Sign in</a>' +
+        '<a class="btn ghost" href="/landing?auth=signup">Create free account</a>' +
+        '<a class="btn ghost" href="/home">Back to home</a>' +
+        '</div></div>';
     }"""
 
 
