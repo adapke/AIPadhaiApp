@@ -1198,19 +1198,77 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Render an array of flat objects as a compact table into `body`.
+function renderRowsTable(body, rows, kind) {
+  if (!Array.isArray(rows)) { rows = (rows == null ? [] : [rows]); }
+  if (!rows.length) {
+    body.innerHTML = '<div class="empty">No ' + kind + ' yet.</div>';
+    return;
+  }
+  var keys = Object.keys(rows[0]).filter(function(k){
+    return ['id','created_at','updated_at','org_id'].indexOf(k) < 0;
+  }).slice(0, 7);
+  var html = '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+  html += '<thead><tr>' + keys.map(function(k){
+    return '<th style="text-align:left;padding:6px 8px;background:#374151;'+
+           'border-bottom:1px solid #4b5563">' + escapeHtml(k) + '</th>';
+  }).join('') + '</tr></thead><tbody>';
+  rows.forEach(function(row){
+    html += '<tr>' + keys.map(function(k){
+      var v = row[k];
+      if (v === null || v === undefined) v = '';
+      if (typeof v === 'object') { try { v = JSON.stringify(v); } catch(_) { v = String(v); } }
+      return '<td style="padding:6px 8px;border-bottom:1px solid #374151;vertical-align:top">'+
+             escapeHtml(String(v).slice(0,200)) + '</td>';
+    }).join('') + '</tr>';
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
+}
+
 async function showSection(orgId, kind, title) {
   openOrgModal(title);
-  var endpoints = {
-    members:    '/api/orgs/' + encodeURIComponent(orgId) + '/members',
-    classes:    '/api/orgs/' + encodeURIComponent(orgId) + '/classes',
-    timetable:  '/api/orgs/' + encodeURIComponent(orgId) + '/timetable',
-    assignments:'/api/orgs/' + encodeURIComponent(orgId) + '/assignments',
-    fees:       '/api/orgs/' + encodeURIComponent(orgId) + '/fees/structures',
-    exams:      '/api/orgs/' + encodeURIComponent(orgId) + '/exams'
-  };
-  var url = endpoints[kind];
   var body = document.getElementById('orgModalBody');
   try {
+    // Timetable is stored PER CLASS (/classes/{cid}/timetable) — there is no
+    // org-level timetable endpoint. Load the org's classes, then each class's
+    // slots, and show them together with a Class column. (Fixes the 404 the
+    // old org-level '/timetable' URL produced.)
+    if (kind === 'timetable') {
+      var cr = await fetch('/api/orgs/' + encodeURIComponent(orgId) + '/classes', { headers: authH() });
+      if (!cr.ok) throw new Error('HTTP ' + cr.status);
+      var cd = await cr.json();
+      var classes = cd.classes || cd.rows || [];
+      if (!classes.length) {
+        body.innerHTML = '<div class="empty">Timetables are set per class — add a class first (use the Classes tile).</div>';
+        return;
+      }
+      var slots = [];
+      for (var i = 0; i < classes.length; i++) {
+        var cls = classes[i];
+        try {
+          var tr = await fetch('/api/orgs/' + encodeURIComponent(orgId) + '/classes/' +
+                     encodeURIComponent(cls.id) + '/timetable', { headers: authH() });
+          if (tr.ok) {
+            var tdd = await tr.json();
+            (tdd.slots || []).forEach(function(s){
+              slots.push(Object.assign({ 'class': cls.name || cls.id }, s));
+            });
+          }
+        } catch(_) {}
+      }
+      renderRowsTable(body, slots, 'timetable slots');
+      return;
+    }
+
+    var endpoints = {
+      members:    '/api/orgs/' + encodeURIComponent(orgId) + '/members',
+      classes:    '/api/orgs/' + encodeURIComponent(orgId) + '/classes',
+      assignments:'/api/orgs/' + encodeURIComponent(orgId) + '/assignments',
+      fees:       '/api/orgs/' + encodeURIComponent(orgId) + '/fees/structures',
+      exams:      '/api/orgs/' + encodeURIComponent(orgId) + '/exams'
+    };
+    var url = endpoints[kind];
     var r = await fetch(url, { headers: authH() });
     if (!r.ok) {
       var detail = '';
@@ -1220,34 +1278,64 @@ async function showSection(orgId, kind, title) {
     var d = await r.json();
     var rows = d.rows || d.items || d.classes || d.members || d.structures ||
                d.invoices || d.exams || d.assignments || d.slots || d;
-    if (!Array.isArray(rows)) { rows = [rows]; }
-    if (!rows.length) {
-      body.innerHTML = '<div class="empty">No ' + kind + ' found.</div>';
-      return;
-    }
-    var html = '<table style="width:100%;border-collapse:collapse;font-size:13px">';
-    // Header row uses the keys of the first object
-    var keys = Object.keys(rows[0]).filter(function(k){
-      return ['id','created_at','updated_at','org_id'].indexOf(k) < 0;
-    }).slice(0, 6);
-    html += '<thead><tr>' + keys.map(function(k){
-      return '<th style="text-align:left;padding:6px 8px;background:#374151;'+
-             'border-bottom:1px solid #4b5563">' + escapeHtml(k) + '</th>';
-    }).join('') + '</tr></thead><tbody>';
-    rows.forEach(function(row){
-      html += '<tr>' + keys.map(function(k){
-        var v = row[k];
-        if (v === null || v === undefined) v = '';
-        if (typeof v === 'object') { try { v = JSON.stringify(v); } catch(_) { v = String(v); } }
-        return '<td style="padding:6px 8px;border-bottom:1px solid #374151;vertical-align:top">'+
-               escapeHtml(String(v).slice(0,200)) + '</td>';
-      }).join('') + '</tr>';
-    });
-    html += '</tbody></table>';
-    body.innerHTML = html;
+    renderRowsTable(body, rows, kind);
   } catch(e) {
     body.innerHTML = '<div class="err">Could not load ' + kind + ': ' +
       escapeHtml(e.message) + '</div>';
+  }
+}
+
+// prod-228 — inline org creation. POST /api/orgs already supports self-serve
+// creation (the caller becomes owner + first admin). The old invite-only
+// alert() made /school a dead end for anyone not pre-invited; this opens a
+// real create form so a fresh user can start a school/coaching centre.
+function openCreateOrg() {
+  openOrgModal('Create a school / coaching centre');
+  document.getElementById('orgModalBody').innerHTML =
+    '<label for="newOrgName">Name</label>' +
+    '<input id="newOrgName" placeholder="e.g. Sunrise Coaching Centre" />' +
+    '<label for="newOrgKind" style="margin-top:10px">Type</label>' +
+    '<select id="newOrgKind">' +
+      '<option value="coaching">Coaching centre</option>' +
+      '<option value="school">School</option>' +
+      '<option value="ngo">NGO</option>' +
+      '<option value="gov">Government</option>' +
+    '</select>' +
+    '<label for="newOrgCity" style="margin-top:10px">City (optional)</label>' +
+    '<input id="newOrgCity" placeholder="e.g. Pune" />' +
+    '<div style="margin-top:14px">' +
+      '<button class="btn" id="createOrgBtn">Create</button>' +
+      '<span id="createOrgStatus" style="margin-left:10px;color:#94a3b8;font-size:13px"></span>' +
+    '</div>';
+  document.getElementById('createOrgBtn').addEventListener('click', submitCreateOrg);
+  var nm = document.getElementById('newOrgName'); if (nm) nm.focus();
+}
+
+async function submitCreateOrg() {
+  var name = (document.getElementById('newOrgName').value || '').trim();
+  var status = document.getElementById('createOrgStatus');
+  if (name.length < 2) { status.textContent = 'Enter a name (at least 2 characters).'; return; }
+  var kind = document.getElementById('newOrgKind').value;
+  var city = (document.getElementById('newOrgCity').value || '').trim();
+  var btn = document.getElementById('createOrgBtn');
+  btn.disabled = true;
+  status.innerHTML = '<span class="spinner"></span> Creating…';
+  try {
+    var fd = new FormData();
+    fd.append('name', name);
+    fd.append('kind', kind);
+    if (city) fd.append('city', city);
+    var r = await fetch('/api/orgs', { method: 'POST', headers: authH(), body: fd });
+    if (!r.ok) {
+      var detail = '';
+      try { var ej = await r.json(); detail = ej.detail || ej.error || ''; } catch(_) {}
+      throw new Error('HTTP ' + r.status + (detail ? ' — ' + detail : ''));
+    }
+    closeOrgModal();
+    loadSchool();
+  } catch(e) {
+    status.textContent = 'Could not create: ' + e.message;
+    btn.disabled = false;
   }
 }
 
@@ -1266,16 +1354,18 @@ async function loadSchool() {
     if (!orgs || !orgs.length) {
       out.innerHTML =
         '<div class="empty">' +
-        '<p>You are not a member of any school or org yet.</p>' +
-        '<p style="margin-top:8px">Ask your school admin to send you an invite, or '+
-        '<a href="/api/orgs" style="color:#fbbf24" onclick="alert(\'Org creation is currently invite-only — contact admin@aipathshala.in to onboard a new school.\');return false;">request a new org</a>.</p>' +
+        '<p>You are not a member of any school or coaching centre yet.</p>' +
+        '<p style="margin-top:8px">Create one to manage classes, members, attendance, fees, timetables and exams — you\'ll be its admin.</p>' +
+        '<div style="margin-top:12px"><button class="btn" onclick="openCreateOrg()">＋ Create a school / coaching centre</button></div>' +
         '</div>';
       return;
     }
     out.innerHTML = orgs.map(function(o) {
       var orgId = o.id || o.org_id || '';
-      var role  = o.role || 'member';
+      var role  = o.role || o.my_role || '';
       var isStaff = role === 'admin' || role === 'teacher';
+      var okind = o.kind || o.org_type || '';
+      var nm = escapeHtml(o.name || o.org_name || orgId);
       var actions = [
         { kind: 'members',     label: 'Members',     icon: '👥' },
         { kind: 'classes',     label: 'Classes',     icon: '🏫' },
@@ -1286,17 +1376,19 @@ async function loadSchool() {
       ];
       var tiles = actions.map(function(a){
         return '<button class="btn ghost" style="padding:8px 12px;flex:1;min-width:110px;text-align:left" '+
-          'onclick="showSection(\'' + orgId + '\',\'' + a.kind + '\',\'' + a.label + ' — ' + escapeHtml(o.org_name || o.name || orgId).replace(/'/g, "\\'") + '\')">'+
+          'onclick="showSection(\'' + orgId + '\',\'' + a.kind + '\',\'' + a.label + ' — ' + nm.replace(/'/g, "\\'") + '\')">'+
           a.icon + ' ' + a.label + '</button>';
       }).join('');
-      return '<div class="result"><strong>' + escapeHtml(o.org_name || o.name || orgId) + '</strong>' +
-        '<div class="sub" style="margin-top:6px">Role: <span class="chip">' + escapeHtml(role) + '</span>' +
-        (o.org_type ? ' · ' + escapeHtml(o.org_type) : '') +
-        (isStaff ? ' · <span class="chip" style="background:#16855f;color:#fff">Staff access</span>' : '') +
+      return '<div class="result"><strong>' + nm + '</strong>' +
+        '<div class="sub" style="margin-top:6px">' +
+        (okind ? '<span class="chip">' + escapeHtml(okind) + '</span>' : '') +
+        (role ? ' <span class="chip">Role: ' + escapeHtml(role) + '</span>' : '') +
+        (isStaff ? ' <span class="chip" style="background:#16855f;color:#fff">Staff access</span>' : '') +
         '</div>' +
         '<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px">' + tiles + '</div>' +
         '</div>';
-    }).join('');
+    }).join('') +
+      '<div style="margin-top:16px"><button class="btn ghost" onclick="openCreateOrg()">＋ New organisation</button></div>';
   } catch(e) {
     out.innerHTML = '<div class="err">Could not load your orgs: ' + escapeHtml(e.message) +
       '<div style="margin-top:8px"><button class="btn ghost" onclick="loadSchool()">Retry</button></div></div>';
