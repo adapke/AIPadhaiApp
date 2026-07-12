@@ -14061,8 +14061,14 @@ _STUDENT_DASHBOARD_HTML = """<!doctype html>
         {url:'/curriculum', name:'Curriculum',        desc:'Browse NCERT / state-board chapter coverage',   icon:'📚'},
         {url:'/path',       name:'Learning paths',    desc:'Multi-week plans aligned to your target exam',  icon:'🛤'},
         {url:'/library',    name:'Upload library',    desc:'All textbook scans you have uploaded',          icon:'📁'},
-        {url:'/school',     name:'School & orgs',     desc:'Orgs you are a member of (classes, fees)',      icon:'🏫'},
       ];
+      // prod-254: "School & orgs" is a teacher/admin surface — keep it out of
+      // a student's module grid (client note: hide what's irrelevant to the
+      // registration type). Only surface it for teacher/admin roles.
+      var _role = (localStorage.getItem('padhai_role') || 'student').toLowerCase();
+      if (_role === 'teacher' || _role === 'admin') {
+        modules.push({url:'/school', name:'School & orgs', desc:'Orgs you are a member of (classes, fees)', icon:'🏫'});
+      }
       var cards = modules.map(function(m) {
         return (
           '<a class="card" href="' + m.url + '" ' +
