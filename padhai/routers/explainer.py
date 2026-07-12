@@ -104,10 +104,34 @@ def explain_topic(
         if cached is not None:
             return {**cached, "cached": True, "language": language, "level": level}
 
-    payload = generate_explainer(
-        topic, language_code=language, level=level,
-        syllabus_scope=syllabus_scope, board_hint=board_hint,
-    )
+    # prod-246: thread the caller's id + tier so the daily-cost cap fires
+    # (free tier = ₹5/day taste). Cached hits above are free and never gated —
+    # only NEW generation counts. generate_explainer raises
+    # RuntimeError('daily_ai_budget_*') when over budget; convert that to an
+    # honest structured upsell (200) instead of a 500.
+    try:
+        payload = generate_explainer(
+            topic, language_code=language, level=level,
+            user_id=(user.id if user else None),
+            user_tier=(user.subscription_tier if user else None),
+            syllabus_scope=syllabus_scope, board_hint=board_hint,
+        )
+    except RuntimeError as e:
+        if str(e).startswith("daily_ai_budget_"):
+            msg = (
+                "You've used today's free AI explanations. Your free AI resets "
+                "tomorrow — or upgrade at /pricing for a lot more each day."
+                if "over_budget" in str(e)
+                else "AI explanations are a premium feature. Upgrade at /pricing."
+            )
+            return {
+                "topic": topic, "language": language, "level": level,
+                "cached": False, "over_budget": True, "upgrade_url": "/pricing",
+                "one_liner": msg, "explanation": msg,
+                "key_points": ["Your free AI resets daily", "Upgrade at /pricing for more"],
+                "worked_example": "", "common_mistakes": [], "analogy": "",
+            }
+        raise
     _web.cache.put_explainer(topic, language, level, payload, scope_key)
     return {**payload, "cached": False, "language": language, "level": level}
 

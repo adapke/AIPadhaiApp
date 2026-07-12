@@ -42,6 +42,31 @@ from ..web import current_user
 router = APIRouter()
 
 
+def _chat_over_budget_payload(question: str, lesson_id: str | None, reason: str) -> dict:
+    """prod-246 — graceful reply when a signed-in user has spent their daily
+    AI allowance (free tier = ₹5/day taste). Returned as a normal chat answer
+    with an `over_budget` flag + upsell link so the SPA renders it inline
+    instead of an error."""
+    if reason == "over_budget":
+        answer = (
+            "You've used today's free AI tutor. Your free AI resets tomorrow — "
+            "or upgrade at /pricing for a lot more each day."
+        )
+    else:  # premium_feature (only if the free allowance is set back to 0)
+        answer = (
+            "The AI tutor is a premium feature. Upgrade at /pricing to start "
+            "chatting with your AI tutor."
+        )
+    return {
+        "question": question,
+        "answer": answer,
+        "citations": [],
+        "lesson_id": lesson_id,
+        "over_budget": True,
+        "upgrade_url": "/pricing",
+    }
+
+
 # ---------- Chat system prompt + citation parser ----------
 
 CHAT_SYSTEM_PROMPT = """You are PadhAI's Spark — a friendly tutor that answers \
@@ -110,6 +135,8 @@ def chat_general_route(
     + exam-mode lock as the lesson-grounded path; answers from Haiku
     with a short tutor-style system prompt.
     """
+    from .. import llm_call
+    from .. import llm_obs as _llm_obs
     from .. import web as _web
     from ..models import HAIKU_MODEL
 
@@ -135,26 +162,32 @@ def chat_general_route(
                 },
             )
 
+    # prod-246: route through call_claude so the tutor chat (a) enforces the
+    # per-user daily cap — a signed-in free user gets the ₹5/day taste then an
+    # honest upsell instead of unlimited free Claude — and (b) records its cost
+    # on the admin dashboard (previously this surface was uncosted).
     try:
-        response = _web._claude().messages.create(
+        result = llm_call.call_claude(
+            module="tutor_chat", prompt_version="general-v1",
             model=HAIKU_MODEL,
+            user_id=(user.id if user else None),
+            subscription_tier=(user.subscription_tier if user else None),
             max_tokens=800,
             system=_GENERAL_TUTOR_SYSTEM,
             messages=[{"role": "user", "content": question}],
         )
-    except Exception as e:
+    except _llm_obs.BudgetExceeded as e:
+        return JSONResponse(_chat_over_budget_payload(question, None, e.reason))
+    except RuntimeError as e:
         # Bubble up as a 502 so the SPA can show a useful message
         # instead of the generic "Failed to get a response".
         raise HTTPException(
             502, f"AI provider error: {type(e).__name__}",
         ) from e
 
-    answer = next(
-        (b.text for b in response.content if b.type == "text"), "",
-    )
     return JSONResponse({
         "question": question,
-        "answer": answer or "(no answer)",
+        "answer": result.text or "(no answer)",
         "citations": [],
         "lesson_id": None,
     })
@@ -173,6 +206,8 @@ def chat_about_lesson_route(
     once the render completes (look for `result.lesson_id`).
     The endpoint loads the cached Lesson JSON and answers with Claude
     grounded in that material — no general-knowledge hallucination."""
+    from .. import llm_call
+    from .. import llm_obs as _llm_obs
     from .. import web as _web
     from ..pedagogy import MODEL
 
@@ -210,17 +245,30 @@ def chat_about_lesson_route(
     lesson_json = json.dumps(
         dataclasses.asdict(cached), ensure_ascii=False,
     )
-    response = _web._claude().messages.create(
-        model=MODEL,
-        max_tokens=1000,
-        system=CHAT_SYSTEM_PROMPT + "\n\nLESSON:\n" + lesson_json,
-        messages=[{"role": "user", "content": question}],
-        thinking={"type": "adaptive"},
-        output_config={"effort": "low"},
-    )
-    answer = next(
-        (b.text for b in response.content if b.type == "text"), "",
-    )
+    # prod-246: route through call_claude so lesson doubt-chat enforces the
+    # per-user daily cap (free tier = ₹5/day taste, then an honest upsell)
+    # and records its cost on the dashboard — previously uncosted + uncapped.
+    try:
+        result = llm_call.call_claude(
+            module="lesson_chat", prompt_version="grounded-v1",
+            model=MODEL,
+            user_id=(user.id if user else None),
+            subscription_tier=(user.subscription_tier if user else None),
+            max_tokens=1000,
+            system=CHAT_SYSTEM_PROMPT + "\n\nLESSON:\n" + lesson_json,
+            messages=[{"role": "user", "content": question}],
+            thinking={"type": "adaptive"},
+            output_config={"effort": "low"},
+        )
+    except _llm_obs.BudgetExceeded as e:
+        return JSONResponse(
+            _chat_over_budget_payload(question, lesson_id, e.reason),
+        )
+    except RuntimeError as e:
+        raise HTTPException(
+            502, f"AI provider error: {type(e).__name__}",
+        ) from e
+    answer = result.text
     citations = _parse_citations(answer, total_scenes=len(cached.scenes))
     # v0.14 C7: page citations come from each cited scene's
     # source_pages (set by the lesson generator). Dedupe across cited
