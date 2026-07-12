@@ -1,7 +1,7 @@
 """Parent ↔ child account linking with DPDP §9 consent audit.
 
 Different from the bootstrap-signup DPDP flow in padhai/dpdp.py (which
-handles "user under 13 signs up; parent must verify"). This module
+handles "user under 18 signs up; parent must verify"). This module
 covers the *post-signup* case: a parent who already has an AI Pathshala
 account wants to link to their (already-signed-up) child to see
 progress, pay fees, and receive notifications.

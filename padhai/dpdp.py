@@ -1,4 +1,4 @@
-"""DPDP Act 2023 §9 — verifiable parental consent for users under 13.
+"""DPDP Act 2023 §9 — verifiable parental consent for users under 18.
 
 The Digital Personal Data Protection Act 2023 §9(1):
   "Every Data Fiduciary shall, before processing any personal data of a
@@ -12,21 +12,21 @@ Section 9(2):
 
 For AI Pathshala that means:
 - DOB is collected at signup.
-- If the user is under 13, the account is created but LOCKED (no
+- If the user is under 18, the account is created but LOCKED (no
   generation, no chat, no library access) until a parent confirms.
 - The parent's email is captured at signup; a verification token is
   emailed; clicking that link records consent with a timestamp + IP.
-- No behavioural tracking is performed on under-13 accounts (no
+- No behavioural tracking is performed on under-18 accounts (no
   PostHog events, no advertising IDs — already true; this module
   exposes `is_minor()` so downstream code can guard analytics).
 
 Schema additions (applied to the existing `users` table via ALTER TABLE
 in a SQLite-tolerant pattern — see `migrate()`):
   dob                     YYYY-MM-DD birth date
-  parent_email            null unless user is under 13
+  parent_email            null unless user is under 18
   parent_consent_at       null until consent recorded
   parent_consent_ip       audit trail per DPDP §9
-  account_locked          1 when user is under 13 + no consent yet
+  account_locked          1 when user is under 18 + no consent yet
 
 Consent tokens are stored in a new `parent_consent_tokens` table — never
 in the URL persistently, never in logs. The token is single-use; once

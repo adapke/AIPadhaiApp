@@ -9927,7 +9927,7 @@ tools for Indian students. Features vary by subscription tier (Free M1 through E
 
 <h2>3. Account Registration</h2>
 <p>You must provide accurate information. You are responsible for keeping your password confidential.
-You must not share your account. You must be at least 13 years old, or provide verifiable parental
+You must not share your account. You must be at least 18 years old, or provide verifiable parental
 consent (as required by the Digital Personal Data Protection Act 2023).</p>
 
 <h2>4. Acceptable Use</h2>
@@ -10587,7 +10587,7 @@ def _consent_result_page(*, ok: bool, message: str) -> str:
   <p class="meta">
     Per the Digital Personal Data Protection Act 2023 §9, a verifiable
     parental consent is required before we process personal data of
-    users under 13.
+    users under 18.
   </p>
 </div>
 </body></html>"""
