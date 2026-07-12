@@ -182,17 +182,9 @@ def generate(
         }],
     )
 
-    raw = ""
-    try:
-        # result.response is the anthropic Message object
-        msg = result.response
-        for block in getattr(msg, "content", []) or []:
-            if getattr(block, "type", "") == "text":
-                raw += block.text
-    except Exception as e:
-        raise RuntimeError(f"could not read Claude response: {e}") from e
-
-    raw = _strip_to_json(raw)
+    # ClaudeCallResult exposes the extracted text as .text (the raw anthropic
+    # Message is .resp) — there is no .response attribute.
+    raw = _strip_to_json(result.text or "")
     if not raw:
         raise ValueError("Claude returned an empty assignment")
     try:

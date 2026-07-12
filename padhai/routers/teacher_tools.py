@@ -209,17 +209,9 @@ def adjust_reading_level(
     except (RuntimeError, ValueError) as e:
         raise HTTPException(502, f"reading-level adjuster failed: {e}") from e
 
-    rewritten = ""
-    try:
-        for block in getattr(result.response, "content", []) or []:
-            if getattr(block, "type", "") == "text":
-                rewritten += block.text
-    except Exception as e:
-        raise HTTPException(
-            502, f"could not read Claude response: {e}",
-        ) from e
-
-    rewritten = rewritten.strip()
+    # ClaudeCallResult exposes the extracted text as .text (the raw anthropic
+    # Message is .resp) — there is no .response attribute.
+    rewritten = (result.text or "").strip()
     if not rewritten:
         raise HTTPException(502, "Claude returned empty output")
 

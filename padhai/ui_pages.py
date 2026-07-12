@@ -1985,6 +1985,11 @@ def get_teacher_html() -> str:
                placeholder="e.g. Chapter 5 quiz" required maxlength="160">
       </div>
       <div class="field">
+        <label for="assignTopic">Topic</label>
+        <input type="text" id="assignTopic" name="topic"
+               placeholder="e.g. Trigonometry — identities" required maxlength="200">
+      </div>
+      <div class="field">
         <label for="assignClass">Class</label>
         <select id="assignClass" name="class_id" required>
           <option value="">— select class —</option>
@@ -2065,8 +2070,10 @@ def get_teacher_html() -> str:
     try {
       var r = await apiFetch('/api/orgs/me');
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      var orgs = await r.json();
-      var org = Array.isArray(orgs) ? orgs[0] : orgs;
+      var d = await r.json();
+      // /api/orgs/me returns {orgs:[...]}
+      var orgs = d.orgs || d.rows || (Array.isArray(d) ? d : []);
+      var org = orgs[0];
       if (org && org.id) {
         orgId = org.id;
         return org;
@@ -2080,7 +2087,8 @@ def get_teacher_html() -> str:
     try {
       var r = await apiFetch('/api/orgs/' + encodeURIComponent(orgId) + '/classes');
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      var classes = await r.json();
+      var cd = await r.json();
+      var classes = cd.classes || cd.rows || (Array.isArray(cd) ? cd : []);
       classesCache = classes;
       renderClasses(classes);
     } catch(e) {
@@ -2118,7 +2126,8 @@ def get_teacher_html() -> str:
     try {
       var r = await apiFetch('/api/orgs/' + encodeURIComponent(orgId) + '/assignments');
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      var assignments = await r.json();
+      var ad = await r.json();
+      var assignments = ad.assignments || ad.rows || (Array.isArray(ad) ? ad : []);
       renderAssignments(assignments);
     } catch(e) {
       document.getElementById('assignmentsList').innerHTML =
@@ -2182,12 +2191,35 @@ def get_teacher_html() -> str:
         '<div style="font-weight:700;font-size:13px">' + escapeHtml(d.student_name || 'Student') + '</div>' +
         '<div style="font-size:13px;margin-top:4px;line-height:1.5">' + escapeHtml(d.question || '—') + '</div>' +
         '</div>' +
-        '<button class="btn btn-sm btn-primary">Respond</button>' +
+        '<button class="btn btn-sm btn-primary" onclick="respondDoubt(\'' + escapeHtml(d.id || '') + '\')">Respond</button>' +
         '</div></div>';
     });
     html += '</div>';
     el.innerHTML = html;
   }
+
+  // Claim + answer a doubt from the queue (was a dead button).
+  window.respondDoubt = async function(id) {
+    if (!id) return;
+    var text = window.prompt('Type your answer to this student doubt:');
+    if (text === null) return;
+    if (text.trim().length < 5) { alert('Answer must be at least 5 characters.'); return; }
+    try {
+      // Claim first (ignore 409 — may already be claimed by you); then answer.
+      await apiFetch('/api/doubts/' + encodeURIComponent(id) + '/claim', { method: 'POST' });
+      var fd = new FormData();
+      fd.append('response_text', text.trim());
+      fd.append('method', 'human');
+      var r = await apiFetch('/api/doubts/' + encodeURIComponent(id) + '/answer', { method: 'POST', body: fd });
+      if (!r.ok) {
+        var d = await r.json().catch(function(){ return {}; });
+        throw new Error(d.detail || ('HTTP ' + r.status));
+      }
+      loadDoubts();
+    } catch(e) {
+      alert('Could not send answer: ' + e.message);
+    }
+  };
 
   function populateClassSelect() {
     var sel = document.getElementById('assignClass');
@@ -2208,16 +2240,17 @@ def get_teacher_html() -> str:
     var errEl = document.getElementById('newClassError');
     errEl.style.display = 'none';
     btn.disabled = true; btn.textContent = '…';
-    var body = {
-      name: document.getElementById('className').value.trim(),
-      section: document.getElementById('classSection').value.trim(),
-      subject: document.getElementById('classSubject').value.trim()
-    };
+    // Endpoint takes Form fields: name (required), grade_level, section.
+    var fd = new FormData();
+    fd.append('name', document.getElementById('className').value.trim());
+    var _sec = document.getElementById('classSection').value.trim();
+    if (_sec) fd.append('section', _sec);
+    var _sub = document.getElementById('classSubject').value.trim();
+    if (_sub) fd.append('grade_level', _sub);
     try {
       var r = await apiFetch('/api/orgs/' + encodeURIComponent(orgId) + '/classes', {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(body)
+        body: fd
       });
       if (!r.ok) {
         var d = await r.json().catch(function(){return{};});
@@ -2241,17 +2274,20 @@ def get_teacher_html() -> str:
     var errEl = document.getElementById('newAssignError');
     errEl.style.display = 'none';
     btn.disabled = true; btn.textContent = '…';
-    var body = {
-      title: document.getElementById('assignTitle').value.trim(),
-      class_id: document.getElementById('assignClass').value,
-      due_at: document.getElementById('assignDue').value || null,
-      description: document.getElementById('assignDesc').value.trim()
-    };
+    // Endpoint takes Form fields: class_id, title, topic (all required),
+    // due_date, notes.
+    var fd = new FormData();
+    fd.append('class_id', document.getElementById('assignClass').value);
+    fd.append('title', document.getElementById('assignTitle').value.trim());
+    fd.append('topic', document.getElementById('assignTopic').value.trim());
+    var _due = document.getElementById('assignDue').value;
+    if (_due) fd.append('due_date', _due);
+    var _notes = document.getElementById('assignDesc').value.trim();
+    if (_notes) fd.append('notes', _notes);
     try {
       var r = await apiFetch('/api/orgs/' + encodeURIComponent(orgId) + '/assignments', {
         method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(body)
+        body: fd
       });
       if (!r.ok) {
         var d = await r.json().catch(function(){return{};});
@@ -2587,13 +2623,14 @@ def get_parent_html() -> str:
     try {
       var r = await apiFetch('/api/orgs/me');
       if (!r.ok) return;
-      var org = await r.json();
-      var fee = org && (org.fee_amount || (Array.isArray(org) && org[0] && org[0].fee_amount));
+      var fd = await r.json();
+      var org = (fd.orgs || fd.rows || (Array.isArray(fd) ? fd : []))[0];
+      var fee = org && org.fee_amount;
       if (fee) {
         document.getElementById('feesContent').innerHTML =
           '<div style="font-size:14px;line-height:1.6">' +
           '<div style="margin-bottom:8px"><strong>School:</strong> ' +
-            escapeHtml((Array.isArray(org) ? org[0].name : org.name) || '—') + '</div>' +
+            escapeHtml(org.name || '—') + '</div>' +
           '<div><strong>Fee:</strong> ₹' + escapeHtml(String(fee)) + ' / term</div>' +
           '</div>';
       }
