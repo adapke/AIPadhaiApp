@@ -238,14 +238,34 @@ function renderGrade(j) {
   // Response shape: { submission_id, ai_grade: { score, by_criterion, summary, suggestions, method } }
   var g = j.ai_grade || j;
   if (g.error) { out.innerHTML = '<div class="err">Grader error: ' + escapeHtml(g.error) + '</div>'; return; }
+  var sugg = g.suggestions || [];
+  var method = g.method || '';
+  // When the AI grader was skipped (free tier, or daily budget reached) the
+  // backend returns a cheap keyword-heuristic number that can read as a
+  // broken "0/100". Don't present it as an AI score — show an honest upgrade
+  // prompt instead. method is 'budget_premium_feature' | 'budget_over_budget'.
+  if (method.indexOf('budget_') === 0) {
+    var upgrade = method === 'budget_over_budget'
+      ? 'Try again tomorrow, or upgrade for a higher daily limit.'
+      : 'Full AI essay grading (per-criterion scoring + model answer) is a premium feature.';
+    out.innerHTML =
+      '<div class="err" style="line-height:1.55">' +
+      '<strong>AI grading needs an upgrade.</strong><br>' +
+      escapeHtml(g.summary || upgrade) +
+      '<br><a href="/pricing" style="display:inline-block;margin-top:10px;padding:8px 16px;' +
+      'background:#2f80ed;color:#fff;border-radius:8px;text-decoration:none;font-weight:700">' +
+      'See plans →</a></div>' +
+      (sugg.length ? '<div style="margin-top:14px"><strong>General writing tips</strong><ul>' +
+        sugg.map(function(s){ return '<li>' + escapeHtml(s) + '</li>'; }).join('') + '</ul></div>' : '');
+    return;
+  }
   var score = g.score != null ? g.score : '—';
   var byC = g.by_criterion || {};
   var criteria = Array.isArray(byC) ? byC
     : Object.entries(byC).map(function(kv) { return Object.assign({name:kv[0]}, kv[1]); });
-  var sugg = g.suggestions || [];
   out.innerHTML =
     '<div class="ok"><strong>Overall AI score:</strong> ' + escapeHtml(String(score)) + '/100' +
-    (g.method ? '  <span class="chip">' + escapeHtml(g.method) + '</span>' : '') + '</div>' +
+    (method ? '  <span class="chip">' + escapeHtml(method) + '</span>' : '') + '</div>' +
     (g.summary ? '<div class="result"><strong>Summary</strong>\\n\\n' + escapeHtml(g.summary) + '</div>' : '') +
     (criteria.length ? '<div style="margin-top:14px"><strong>Per-criterion breakdown</strong>' +
       criteria.map(function(c) {
@@ -423,12 +443,12 @@ _PRACTICE_BODY = """
         </select>
       </div>
       <div>
-        <label>Time (min)</label>
-        <select id="minSel">
-          <option value="10">10</option>
-          <option value="20" selected>20</option>
+        <label>Questions</label>
+        <select id="qSel">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="20">20</option>
           <option value="30">30</option>
-          <option value="60">60</option>
         </select>
       </div>
     </div>
@@ -468,9 +488,13 @@ window.genTest = async function() {
   btn.disabled = true; btn.textContent = 'Generating…';
   try {
     var fd = new FormData();
+    var nq = parseInt(document.getElementById('qSel').value, 10) || 10;
     fd.append('exam', document.getElementById('examSel').value);
     fd.append('subject', document.getElementById('subjectSel').value);
-    fd.append('target_minutes', document.getElementById('minSel').value);
+    fd.append('num_questions', String(nq));
+    // Keep target_minutes coherent with the chosen length (~90s/question)
+    // so the results header reads sensibly.
+    fd.append('target_minutes', String(Math.max(5, Math.min(240, Math.round(nq * 1.5)))));
     var r = await fetch('/api/practice-tests', {method:'POST', headers: authH(), body: fd});
     if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + (await r.text()).slice(0,200));
     var summary = await r.json();

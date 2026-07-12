@@ -482,17 +482,26 @@ def create_practice_test(
     exam: str = Form(..., max_length=32),
     subject: str = Form(..., max_length=64),
     target_minutes: int = Form(30, ge=5, le=240),
+    num_questions: int | None = Form(None, ge=1, le=60),
     user=Depends(current_user),
 ):
     """Generate a new practice test for the current user. Pulls from
     the J6 question bank for weak topics (J5), synthesises via
-    Claude when bank is thin."""
+    Claude when bank is thin.
+
+    `num_questions` (optional, 1-60) lets the student pick the length
+    directly; when omitted the count is derived from `target_minutes`
+    (~90s per question). `user_tier` is threaded so the daily-cost cap
+    gates correctly — without it, paid users were treated as free
+    tier (CLAUDE.md §14 bug #11)."""
     from .. import practice_test
     user = require_user(user)
     try:
         t = practice_test.generate(
             user_id=user.id, exam=exam, subject=subject,
             target_minutes=target_minutes,
+            target_questions=num_questions,
+            user_tier=user.subscription_tier,
         )
     except ValueError as e:
         raise HTTPException(400, str(e)) from e
