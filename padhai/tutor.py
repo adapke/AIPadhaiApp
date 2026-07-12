@@ -63,8 +63,14 @@ CREATE TABLE IF NOT EXISTS tutor_long_memory (
 # Daily cost cap per tier (paise). Once a user exceeds their cap,
 # new messages return a polite "you've used your daily AI tutor
 # budget" message. Resets at UTC midnight.
+# NB: this is a stale backward-compat copy read only by
+# routers/tutor_stream.py. The canonical table is
+# llm_obs.DAILY_COST_CAPS_BY_TIER; enforcement should be consolidated onto
+# llm_obs.check_daily_cap (follow-up). prod-245 syncs M1 → 500 so the
+# streaming tutor also gives free users the ₹5/day taste (then an
+# over_budget "used today's free AI" message) instead of a hard paywall.
 DAILY_COST_CAP_PAISE = {
-    "M1": 0,          # free tier: no tutor
+    "M1": 500,        # ₹5/day free AI taste (was 0 = hard paywall)
     "M2": 2000,       # ₹20/day
     "M3": 10000,      # ₹100/day (premium)
     "M4": 0,          # enterprise: uncapped (0 sentinel = no cap)

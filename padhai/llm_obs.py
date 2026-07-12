@@ -407,13 +407,22 @@ def user_cost_today_paise(user_id: str) -> int:
 # Caps were tuned at v0.7 when a Claude lesson cost ~₹5 and we wanted
 # free tier to be zero. After v0.14 the SPA does many more Claude calls
 # per session (essay grading + tutor follow-ups + interview turns) and
-# a ₹20/day cap on M2 burns out in ~6 essay grades. prod-33 bumped:
-#   • M1 stays at 0 (premium-feature gate stays clean)
-#   • M2 to ₹100/day so a real student can use the premium features
-#   • M3 to ₹400/day for the lip-sync tier
-# M4* enterprise tiers continue to be uncapped (handled below).
+# a ₹20/day cap on M2 burns out in ~6 essay grades. prod-33 bumped
+# M2→₹100/day and M3→₹400/day.
+#
+# prod-245: M1 (free) now carries a small ₹5/day *real* AI allowance
+# instead of 0. A 0 here is the "premium feature — no AI at all" sentinel
+# (check_daily_cap raises reason='premium_feature'); any value > 0 gives
+# free users genuine Claude until they've spent it, after which the
+# pre-flight raises reason='over_budget' — i.e. a real taste of the AI,
+# then an honest "you've used today's free AI, upgrade or come back
+# tomorrow" upsell (the copy the /essay etc. pages already render). The
+# value is env-tunable (PADHAI_M1_DAILY_CAP_PAISE) so ops can raise it or
+# set 0 to revert to the hard paywall without a deploy.
+# `None` (from daily_cap_paise) still means uncapped (M4* enterprise).
+_M1_DAILY_CAP_PAISE = int(os.environ.get("PADHAI_M1_DAILY_CAP_PAISE", "500"))
 DAILY_COST_CAPS_BY_TIER: dict[str, int] = {
-    "M1": 0,         # free tier — premium AI gated, heuristic fallback
+    "M1": _M1_DAILY_CAP_PAISE,  # ₹5/day free AI taste → then over_budget upsell
     "M2": 10000,     # ₹100 / day  (premium-voice tier; ~30 essay grades)
     "M3": 40000,     # ₹400 / day  (lip-sync video tier)
     # M4* (enterprise tiers) inherit uncapped via daily_cap_paise() below.

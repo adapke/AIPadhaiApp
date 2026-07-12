@@ -54,14 +54,16 @@ def _capped_calls_missing_tier(path: Path) -> list[tuple[str, str, int]]:
     return missing
 
 
-def test_none_tier_caps_to_zero_like_free():
-    """The footgun: an unknown/None tier is treated as free tier (cap 0),
-    which raises BudgetExceeded('premium_feature'). This is WHY routes
-    must pass the real tier — dropping it doesn't 'default to allowed'."""
-    assert llm_obs.daily_cap_paise(None) == 0
+def test_none_tier_caps_to_free_allowance():
+    """The footgun: an unknown/None tier resolves to the free tier's SMALL
+    daily allowance (prod-245: ₹5 = 500 paise, was 0). A paid user whose
+    tier is dropped is therefore throttled down to the free taste and then
+    over_budget — which is WHY routes must pass the real tier. (The default
+    is small, not generous, so dropping the tier is still a real footgun.)"""
+    assert llm_obs.daily_cap_paise(None) == 500
     assert llm_obs.daily_cap_paise(None) == llm_obs.daily_cap_paise("M1")
-    # Sanity: paid tiers are NOT zero (so threading the tier actually matters).
-    assert llm_obs.daily_cap_paise("M2") > 0
+    # Paid tiers are much larger than the free taste (so threading matters).
+    assert llm_obs.daily_cap_paise("M2") > llm_obs.daily_cap_paise("M1")
     assert llm_obs.daily_cap_paise("M4a") is None  # uncapped
 
 

@@ -29,14 +29,15 @@ UID_ENTERPRISE = f"qa-ent-{uuid.uuid4().hex[:8]}"
 
 
 def test_cap_table():
-    assert llm_obs.daily_cap_paise("M1") == 0
-    assert llm_obs.daily_cap_paise("M2") == 2000
-    assert llm_obs.daily_cap_paise("M3") == 10000
+    # prod-245: M1 now carries a ₹5/day (500p) free taste, not 0.
+    assert llm_obs.daily_cap_paise("M1") == 500
+    assert llm_obs.daily_cap_paise("M2") == 10000
+    assert llm_obs.daily_cap_paise("M3") == 40000
     assert llm_obs.daily_cap_paise("M4") is None
     assert llm_obs.daily_cap_paise("M4b") is None
-    assert llm_obs.daily_cap_paise(None) == 0
-    assert llm_obs.daily_cap_paise("unknown") == 0
-    print("  [OK] cap table — M1=0, M2=2000p, M3=10000p, M4*=None, default=0")
+    assert llm_obs.daily_cap_paise(None) == 500
+    assert llm_obs.daily_cap_paise("unknown") == 500
+    print("  [OK] cap table — M1=500p, M2=10000p, M3=40000p, M4*=None, default=500p")
 
 
 def test_check_anonymous():
@@ -45,13 +46,26 @@ def test_check_anonymous():
     print("  [OK] anonymous bypasses cap check")
 
 
-def test_check_free_tier_refuses():
+def test_check_free_tier_taste_then_over_budget():
+    # prod-245: a fresh M1 user gets the free taste (no raise) ...
+    llm_obs.check_daily_cap(user_id=UID_FREE, subscription_tier="M1")
+    print("  [OK] fresh M1 user -> no raise (Rs5/day taste allowed)")
+    # ... then over_budget once the ₹5 allowance is spent.
+    llm_obs.record_call(
+        module="test", prompt_version="qa",
+        model="claude-haiku-4-5-20251001",
+        tokens_in=100, tokens_out=50, latency_ms=200,
+        user_id=UID_FREE, cost_inr_paise=600,  # > 500p allowance
+    )
     try:
         llm_obs.check_daily_cap(user_id=UID_FREE, subscription_tier="M1")
-        raise AssertionError("expected BudgetExceeded for M1 user")
+        raise AssertionError("expected BudgetExceeded once allowance spent")
     except llm_obs.BudgetExceeded as e:
-        assert e.reason == "premium_feature", e.reason
-        print("  [OK] M1 user -> premium_feature (cap=0p, spent=0p)")
+        assert e.reason == "over_budget", e.reason
+        print(
+            f"  [OK] M1 user over Rs5 taste -> reason={e.reason} "
+            f"spent={e.spent_today_paise}p cap={e.cap_paise}p"
+        )
 
 
 def test_check_premium_under_budget():
@@ -67,12 +81,13 @@ def test_check_premium_under_budget():
 
 
 def test_check_premium_over_budget():
-    # Push spend over the M2 cap (INR20 = 2000p). Add another 1600p -> 2100p total.
+    # Push spend over the M2 cap (INR100 = 10000p). UID_PREMIUM already has
+    # 500p from the under-budget test; add 10000p -> 10500p total (> cap).
     llm_obs.record_call(
         module="test", prompt_version="qa",
         model="claude-sonnet-4-6",
         tokens_in=4000, tokens_out=2000, latency_ms=2500,
-        user_id=UID_PREMIUM, cost_inr_paise=1600,
+        user_id=UID_PREMIUM, cost_inr_paise=10000,
     )
     try:
         llm_obs.check_daily_cap(user_id=UID_PREMIUM, subscription_tier="M2")
@@ -156,7 +171,7 @@ def main():
     try:
         test_cap_table()
         test_check_anonymous()
-        test_check_free_tier_refuses()
+        test_check_free_tier_taste_then_over_budget()
         test_check_premium_under_budget()
         test_check_premium_over_budget()
         test_enterprise_uncapped()
