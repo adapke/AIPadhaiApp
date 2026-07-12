@@ -52,6 +52,36 @@ _ONBOARDING_COLS_SQL = [
 
 _migrated = False
 
+# prod-255: SQLite fallback. Previously all persistence here was Postgres-only,
+# so on the default SQLite deployment a student's class/board/target-exam was
+# silently discarded — which meant NOTHING downstream could personalise by
+# registration (client note #3). These helpers mirror the psycopg branch onto
+# the shared sqlite_path() users table.
+_SQLITE_ONBOARDING_COLS = [
+    ("class_grade", "TEXT"), ("board", "TEXT"), ("target_exam", "TEXT"),
+    ("preferred_language", "TEXT"), ("goal_minutes_daily", "INTEGER"),
+    ("onboarding_step", "INTEGER"), ("onboarding_completed_at", "REAL"),
+]
+
+
+def _sqlite_conn():
+    import sqlite3
+
+    from .. import db as _db
+    conn = sqlite3.connect(str(_db.sqlite_path()), timeout=10.0)
+    return conn
+
+
+def _ensure_onboarding_cols_sqlite(conn) -> None:
+    """Idempotent — SQLite lacks ADD COLUMN IF NOT EXISTS, so suppress the
+    duplicate-column error the second time round (same pattern as the
+    question_bank / ncert_code migrations)."""
+    import contextlib
+    import sqlite3
+    for name, typ in _SQLITE_ONBOARDING_COLS:
+        with contextlib.suppress(sqlite3.OperationalError):
+            conn.execute(f"ALTER TABLE users ADD COLUMN {name} {typ}")
+
 
 def _ensure_onboarding_cols() -> None:
     global _migrated
@@ -61,7 +91,11 @@ def _ensure_onboarding_cols() -> None:
         from ..db import get_db_url
         db_url = get_db_url()
         if not db_url:
-            _migrated = True  # SQLite path: handled per-session via best-effort below
+            # SQLite deployment — add the onboarding columns to the users table.
+            with _sqlite_conn() as conn:
+                _ensure_onboarding_cols_sqlite(conn)
+                conn.commit()
+            _migrated = True
             return
         import psycopg
         with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
@@ -302,18 +336,24 @@ def _load_state(user_id: str) -> dict:
     Returns an empty-ish dict on any error so the funnel still works."""
     from ..db import get_db_url
     db_url = get_db_url()
-    if not db_url:
-        return {f: None for f in _FIELDS}
+    _cols = (
+        "class_grade, board, target_exam, preferred_language, "
+        "goal_minutes_daily, onboarding_step, onboarding_completed_at"
+    )
     try:
-        import psycopg
-        with psycopg.connect(db_url, options="-c search_path=public") as conn:
-            r = conn.execute(
-                "SELECT class_grade, board, target_exam, "
-                "       preferred_language, goal_minutes_daily, "
-                "       onboarding_step, onboarding_completed_at "
-                "FROM users WHERE id = %s",
-                (user_id,),
-            ).fetchone()
+        if not db_url:
+            # SQLite deployment
+            with _sqlite_conn() as conn:
+                _ensure_onboarding_cols_sqlite(conn)
+                r = conn.execute(
+                    f"SELECT {_cols} FROM users WHERE id = ?", (user_id,),
+                ).fetchone()
+        else:
+            import psycopg
+            with psycopg.connect(db_url, options="-c search_path=public") as conn:
+                r = conn.execute(
+                    f"SELECT {_cols} FROM users WHERE id = %s", (user_id,),
+                ).fetchone()
         if not r:
             return {f: None for f in _FIELDS}
         return {
@@ -329,9 +369,19 @@ def _load_state(user_id: str) -> dict:
 def _persist_field(user_id: str, field: str, value: Any) -> None:
     from ..db import get_db_url
     db_url = get_db_url()
-    if not db_url:
-        return  # SQLite dev: silently no-op so UI still progresses
     try:
+        if not db_url:
+            # SQLite deployment — persist so personalisation actually survives.
+            with _sqlite_conn() as conn:
+                _ensure_onboarding_cols_sqlite(conn)
+                conn.execute(
+                    f"UPDATE users SET {field} = ?, "
+                    "  onboarding_step = MAX(COALESCE(onboarding_step, 0), ?) "
+                    "WHERE id = ?",
+                    (value, _step_index(field), user_id),
+                )
+                conn.commit()
+            return
         import psycopg
         with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
             conn.execute(
@@ -347,9 +397,17 @@ def _persist_field(user_id: str, field: str, value: Any) -> None:
 def _mark_complete(user_id: str, *, ts: float) -> None:
     from ..db import get_db_url
     db_url = get_db_url()
-    if not db_url:
-        return
     try:
+        if not db_url:
+            with _sqlite_conn() as conn:
+                _ensure_onboarding_cols_sqlite(conn)
+                conn.execute(
+                    "UPDATE users SET onboarding_completed_at = ?, "
+                    "  onboarding_step = 5 WHERE id = ?",
+                    (ts, user_id),
+                )
+                conn.commit()
+            return
         import psycopg
         with psycopg.connect(db_url, autocommit=True, options="-c search_path=public") as conn:
             conn.execute(
