@@ -3190,6 +3190,15 @@ _INDEX_HTML = r"""<!DOCTYPE html>
 </style>
 </head>
 <body>
+<!-- prod-236 — this is the deprecated legacy interface. Guide anyone who
+     lands here (bookmark / stale link) to the modern UI. -->
+<div style="background:#78350f;color:#fde68a;font:600 13px/1.4 system-ui,Segoe UI,sans-serif;
+            padding:9px 16px;display:flex;align-items:center;justify-content:center;
+            gap:12px;flex-wrap:wrap;text-align:center">
+  <span>You’re on the older interface.</span>
+  <a href="/home" style="background:#fbbf24;color:#0f172a;text-decoration:none;
+     font-weight:800;padding:6px 14px;border-radius:7px">Switch to the new experience →</a>
+</div>
 <div class="app">
   <header>
     <div style="display:flex; align-items:center; gap:14px;">
