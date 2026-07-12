@@ -1243,7 +1243,7 @@ async function loadLibrary() {
           '<td style="padding:10px;border-bottom:1px solid #334155"><span class="' + cls + '">' + escapeHtml(j.status) + '</span></td>' +
           '<td style="padding:10px;border-bottom:1px solid #334155">' + escapeHtml(j.language_code || 'en') + '</td>' +
           '<td style="padding:10px;border-bottom:1px solid #334155;text-align:right">' +
-            (j.status === 'succeeded' && j.id ? '<a class="btn ghost" href="/jobs/' + escapeHtml(j.id) + '/video">Video</a>' : '') +
+            (j.status === 'succeeded' && j.id ? '<a class="btn ghost" href="/lessons/' + escapeHtml(j.id) + '">▶ Watch</a>' : '') +
           '</td></tr>';
       }).join('') + '</tbody></table>';
   } catch(e) {

@@ -2677,8 +2677,8 @@ def get_parent_html() -> str:
           'border-bottom:1px solid var(--line);font-size:13px">' +
           '<span style="color:var(--muted);white-space:nowrap;min-width:56px">' + escapeHtml(date) + '</span>' +
           '<span style="flex:1">' + escapeHtml(label) + '</span>' +
-          (a.video_url ? '<a href="' + escapeHtml(a.video_url) + '" target="_blank" rel="noopener" ' +
-            'style="color:var(--brand);font-weight:700;text-decoration:none">Watch →</a>' : '') +
+          (a.video_url && a.id ? '<a href="/lessons/' + encodeURIComponent(a.id) + '" target="_blank" rel="noopener" ' +
+            'style="color:var(--brand);font-weight:700;text-decoration:none">▶ Watch</a>' : '') +
           '</div>';
       });
     }
