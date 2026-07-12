@@ -21,7 +21,6 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import ClassVar
 
 import pytest
 from fastapi.testclient import TestClient
@@ -83,15 +82,10 @@ def test_generate_handles_malformed_json(monkeypatch):
     from padhai import ai_resistant_assignments as ar
     from padhai import llm_call
 
-    class FakeBlock:
-        type = "text"
-        text = "this is not JSON"
-
-    class FakeResponse:
-        content: ClassVar[list] = [FakeBlock()]
-
     class FakeResult:
-        response = FakeResponse()
+        # ClaudeCallResult exposes the extracted text as .text (raw Message
+        # is .resp). ai_resistant_assignments.generate reads result.text.
+        text = "this is not JSON"
         call_id = "test"
         cost_inr_paise = 0
         model = "fake"
@@ -111,15 +105,8 @@ def test_generate_validates_questions_array(monkeypatch):
     from padhai import ai_resistant_assignments as ar
     from padhai import llm_call
 
-    class FakeBlock:
-        type = "text"
-        text = '{"title": "x", "instructions_md": "y"}'  # no questions
-
-    class FakeResponse:
-        content: ClassVar[list] = [FakeBlock()]
-
     class FakeResult:
-        response = FakeResponse()
+        text = '{"title": "x", "instructions_md": "y"}'  # no questions
         call_id = "test"
         cost_inr_paise = 0
         model = "fake"
