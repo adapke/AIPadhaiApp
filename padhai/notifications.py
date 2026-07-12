@@ -141,25 +141,34 @@ def feed_for_user(
     """Return notifications visible to `user_id` across their org
     memberships, sorted newest-first. Respects audience filtering +
     the send_at gate so scheduled notifications stay hidden."""
-    if not org_ids:
-        return []
     now = time.time()
 
-    # Build the audience filter: a notification is visible to the user
-    # if its audience is "all", their role, their class, or their user id.
-    audience_options = ["'all'", f"'role:{user_role}'", f"'user:{user_id}'"]
-    if user_class_id:
-        audience_options.append(f"'class:{user_class_id}'")
-    audience_clause = " OR ".join(f"audience = {opt}" for opt in audience_options)
+    # A notification is visible to the user if EITHER:
+    #   • it is addressed directly to them (audience = 'user:<id>') — this
+    #     must reach them regardless of org membership, because personal
+    #     notifications (e.g. a parent-link request, org_id='parent-link')
+    #     are sent to users who may not share any real org. prod-247: the
+    #     old code required `org_id IN org_ids` for ALL audiences and
+    #     short-circuited to [] for users with no org, so direct
+    #     notifications silently never arrived and the parent-link
+    #     handshake could never complete.
+    #   • OR it is an org-scoped broadcast (audience 'all' / role / class)
+    #     for an org the user actually belongs to.
+    personal_clause = f"audience = 'user:{user_id}'"
+    params: list = [now]
+    org_clause = ""
+    if org_ids:
+        org_audience = ["'all'", f"'role:{user_role}'"]
+        if user_class_id:
+            org_audience.append(f"'class:{user_class_id}'")
+        org_audience_clause = " OR ".join(f"audience = {o}" for o in org_audience)
+        org_placeholders = ",".join("?" for _ in org_ids)
+        org_clause = (
+            f" OR (org_id IN ({org_placeholders}) AND ({org_audience_clause}))"
+        )
+        params.extend(list(org_ids))
 
-    org_placeholders = ",".join("?" for _ in org_ids)
-    params: list = [*list(org_ids), now]
-
-    where = (
-        f"org_id IN ({org_placeholders}) "
-        f"AND send_at <= ? "
-        f"AND ({audience_clause})"
-    )
+    where = f"send_at <= ? AND ( {personal_clause}{org_clause} )"
 
     with _conn() as conn:
         rows = conn.execute(
@@ -224,8 +233,9 @@ def unread_count(
     user_class_id: str | None,
     org_ids: list[str],
 ) -> int:
-    if not org_ids:
-        return 0
+    # prod-247: no early return on empty org_ids — a user with no org can
+    # still have personal (user:<id>) notifications (e.g. a parent-link
+    # request). feed_for_user now handles those regardless of membership.
     return len(feed_for_user(
         user_id=user_id, user_role=user_role,
         user_class_id=user_class_id, org_ids=org_ids,
