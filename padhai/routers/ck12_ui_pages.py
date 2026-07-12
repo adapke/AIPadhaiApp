@@ -33,6 +33,7 @@ from fastapi.responses import HTMLResponse
 from .. import concept_examples as _ex
 from .. import memory_boost as _mb
 from .. import tutor_modes as _modes
+from .. import ui_nav as _nav
 from ..auth import AuthUser
 from ..web import current_user_optional as current_user
 
@@ -98,22 +99,14 @@ font-family:inherit;font-size:14px;padding:9px 12px;border:1px solid #d0d6de;
 border-radius:6px;background:#fff;color:#101828;outline:none}
 input:focus,select:focus,textarea:focus{border-color:#1565d8;
 box-shadow:0 0 0 3px rgba(21,101,216,0.10)}
-"""
+""" + _nav.NAV_STYLE
 
 
 def _top_nav() -> str:
-    return (
-        '<nav class="topnav" role="navigation">'
-        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
-        '<div class="nav-links">'
-        '<a href="/concept">Concepts</a>'
-        '<a href="/syllabus">Syllabus</a>'
-        '<a href="/mastery">Mastery</a>'
-        '<a href="/memory-boost">Memory Boost</a>'
-        '<a href="/tutor-modes">Tutor</a>'
-        '<a class="nav-cta" href="/home">Home</a>'
-        '</div></nav>'
-    )
+    # Shared persona-aware nav (ui_nav) so these pages match the rest of
+    # the app instead of a bespoke light-blue bar. The script populates
+    # the links from the signed-in role client-side.
+    return _nav.NAV_HTML + "<script>" + _nav.NAV_SCRIPT + "</script>"
 
 
 def _crumb(label: str) -> str:

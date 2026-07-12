@@ -25,6 +25,7 @@ from fastapi import APIRouter, Depends, Query
 from fastapi.responses import HTMLResponse
 
 from .. import mastery_aggregate
+from .. import ui_nav as _nav
 from ..auth import AuthUser
 from ..web import current_user_optional as current_user
 
@@ -70,16 +71,9 @@ def _anon_page() -> HTMLResponse:
         "border-radius:6px;text-decoration:none;font-weight:600;font-size:14px}"
         "h1{font-size:26px;margin:6px 0 12px;color:#0b3a8a}"
         ".sub{color:#5a6470;font-size:14px;margin:0 0 16px}"
+        + _nav.NAV_STYLE +
         "</style></head><body>"
-        '<nav class="topnav" role="navigation">'
-        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
-        '<div class="nav-links">'
-        '<a href="/concept">Concepts</a>'
-        '<a href="/syllabus">Syllabus</a>'
-        '<a href="/mastery">Mastery</a>'
-        '<a href="/memory-boost">Memory Boost</a>'
-        '<a class="nav-cta" href="/home">Sign in</a>'
-        '</div></nav>'
+        + _nav.NAV_HTML + "<script>" + _nav.NAV_SCRIPT + "</script>"
         '<div class="crumb">'
         '<a href="/home">Home</a> &nbsp;›&nbsp; <span>Mastery Map</span>'
         '</div>'
@@ -293,17 +287,10 @@ def mastery_page(
         ".empty{background:white;padding:32px;border-radius:8px;text-align:center;"
         "color:#5a6470}"
         ".empty a{color:#1565d8}"
+        + _nav.NAV_STYLE +
         "</style></head><body>"
-        # Top nav
-        '<nav class="topnav" role="navigation">'
-        '<a class="brand" href="/home">AI <span>Pathshala</span></a>'
-        '<div class="nav-links">'
-        '<a href="/concept">Concepts</a>'
-        '<a href="/syllabus">Syllabus</a>'
-        '<a href="/mastery">Mastery</a>'
-        '<a href="/memory-boost">Memory Boost</a>'
-        '<a class="nav-cta" href="/home">Home</a>'
-        '</div></nav>'
+        # Shared persona nav (ui_nav) — matches the rest of the app
+        + _nav.NAV_HTML + "<script>" + _nav.NAV_SCRIPT + "</script>"
         # Breadcrumb
         '<div class="crumb">'
         '<a href="/home">Home</a> &nbsp;›&nbsp; <span>Mastery Map</span>'
