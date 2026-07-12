@@ -5866,6 +5866,13 @@ function notifRenderList(items) {
   }
   wrap.innerHTML = items.map(n => {
     const ago = notifAgo(n.send_at);
+    // prod-251: a notification carrying a link_url (e.g. a "Verify parent
+    // link" request) must be actionable — render a one-click Open. Without
+    // this the child saw the request but had no way to accept it in-app.
+    const openBtn = n.link_url
+      ? `<a class="notif-open" href="${escapeHtml(n.link_url)}"
+           style="margin-left:auto;color:#1565d8;font-weight:700;text-decoration:none">Open →</a>`
+      : '';
     return `
       <div class="notif-row ${n.read ? '' : 'unread'}" data-nid="${escapeHtml(n.id)}">
         <div class="notif-title">${escapeHtml(n.title)}</div>
@@ -5873,6 +5880,7 @@ function notifRenderList(items) {
         <div class="notif-meta">
           <span class="notif-kind-pill ${n.kind}">${escapeHtml(n.kind.replace('_',' '))}</span>
           <span>${ago}</span>
+          ${openBtn}
         </div>
       </div>`;
   }).join('');
