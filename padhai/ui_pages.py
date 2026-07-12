@@ -2106,20 +2106,63 @@ def get_teacher_html() -> str:
     }
     var html = '<div style="display:grid;gap:10px">';
     classes.forEach(function(c) {
-      html += '<div class="card" style="display:flex;align-items:center;' +
-        'justify-content:space-between;gap:12px;padding:14px 16px">' +
+      var cid = escapeHtml(String(c.id));
+      html += '<div class="card" style="padding:14px 16px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">' +
         '<div>' +
         '<div style="font-weight:700;font-size:15px">' + escapeHtml(c.name || '—') + '</div>' +
         '<div style="color:var(--muted);font-size:12px;margin-top:3px">' +
         (c.subject ? escapeHtml(c.subject) + ' · ' : '') +
         '<span>' + (c.student_count || 0) + ' students</span></div>' +
         '</div>' +
-        '<a href="/class/' + escapeHtml(String(c.id)) + '" class="btn btn-sm">View →</a>' +
+        '<button type="button" class="btn btn-sm" onclick="toggleClassDetail(\'' + cid + '\')">' +
+          'View roster →</button>' +
+        '</div>' +
+        '<div id="cd-' + cid + '" style="display:none;margin-top:12px;' +
+          'border-top:1px solid var(--line);padding-top:12px"></div>' +
         '</div>';
     });
     html += '</div>';
     el.innerHTML = html;
   }
+
+  // prod-249: "View" used to link to /class/<id>, which has no route (404).
+  // Instead expand the class roster inline (existing attendance daily-roll
+  // endpoint) — no navigation, no dead-end, and a clear empty state for a
+  // brand-new class.
+  window.toggleClassDetail = async function(cid) {
+    var box = document.getElementById('cd-' + cid);
+    if (!box) return;
+    if (box.style.display !== 'none') { box.style.display = 'none'; return; }
+    box.style.display = 'block';
+    if (box.getAttribute('data-loaded') === '1') return;
+    box.innerHTML = '<div style="color:var(--muted);font-size:13px">Loading roster…</div>';
+    try {
+      var today = new Date().toISOString().slice(0, 10);
+      var r = await apiFetch('/api/orgs/' + encodeURIComponent(orgId) +
+        '/classes/' + encodeURIComponent(cid) + '/attendance?date=' + today);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var d = await r.json();
+      var students = d.students || [];
+      if (!students.length) {
+        box.innerHTML = '<div style="color:var(--muted);font-size:13px">' +
+          'No students have joined yet. Add them via the roster CSV upload, ' +
+          'then post work from the <strong>Assignments</strong> tab.</div>';
+      } else {
+        box.innerHTML = '<div style="font-weight:700;font-size:13px;margin-bottom:8px">' +
+          'Students (' + students.length + ')</div>' +
+          students.map(function(s) {
+            var nm = s.display_name || s.name || s.email || s.user_id || 'Student';
+            return '<div style="padding:6px 0;border-bottom:1px solid var(--line);' +
+              'font-size:13px">' + escapeHtml(String(nm)) + '</div>';
+          }).join('');
+      }
+      box.setAttribute('data-loaded', '1');
+    } catch(e) {
+      box.innerHTML = '<div class="alert alert-error">Could not load roster: ' +
+        escapeHtml(e.message) + '</div>';
+    }
+  };
 
   async function loadAssignments() {
     if (!orgId) return;
