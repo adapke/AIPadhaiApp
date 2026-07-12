@@ -1793,8 +1793,21 @@ def get_profile_html() -> str:
         var d = await r.json().catch(function(){return{};});
         throw new Error(d.detail || 'HTTP ' + r.status);
       }
-      successEl.textContent = 'Preferences saved!';
+      // prod-252: the server localizes off the padhai_lang cookie / ?lang=,
+      // NOT the saved DB profile — so previously choosing a language here
+      // did nothing visible ("language section not working"). Set the cookie,
+      // mirror to localStorage, and reload in the chosen language so the
+      // choice actually takes effect app-wide.
+      var lang = body.language;
+      document.cookie = 'padhai_lang=' + encodeURIComponent(lang)
+        + ';path=/;max-age=31536000;samesite=lax';
+      try { localStorage.setItem('padhai_lang', lang); } catch(_e) {}
+      successEl.textContent = 'Preferences saved — applying language…';
       successEl.style.display = 'block';
+      var u = new URL(location.href);
+      u.searchParams.set('lang', lang);
+      setTimeout(function(){ location.assign(u.toString()); }, 500);
+      return;
     } catch(err) {
       errorEl.textContent = 'Failed to save: ' + err.message;
       errorEl.style.display = 'block';
