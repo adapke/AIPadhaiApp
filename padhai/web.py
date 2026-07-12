@@ -9630,7 +9630,20 @@ async function schGenerateInvoices(sid) {
       throw new Error(j.detail || ('HTTP ' + r.status));
     }
     const j = await r.json();
-    alert(`Generated ${j.created} invoices. ${j.skipped_already_invoiced} students already had one.`);
+    // prod-250: a fresh org has no enrolled students, so generation is a
+    // no-op — say so plainly instead of "Generated 0 invoices" (which reads
+    // as broken). students_targeted comes from the generate endpoint.
+    if ((j.students_targeted || 0) === 0) {
+      alert('No students are enrolled yet, so there is nobody to invoice. '
+        + 'Add students to this class (roster upload / class enrolment) first, '
+        + 'then generate invoices.');
+    } else if ((j.created || 0) === 0) {
+      alert(`All ${j.students_targeted} students already have an invoice for `
+        + `this fee — nothing new to generate.`);
+    } else {
+      alert(`Generated ${j.created} invoice(s) across ${j.students_targeted} `
+        + `students. ${j.skipped_already_invoiced} already had one.`);
+    }
     await schLoadFeesSummary();
     await schLoadFeeInvoices();
   } catch (ex) {
