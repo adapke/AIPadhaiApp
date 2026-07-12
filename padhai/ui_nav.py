@@ -66,9 +66,19 @@ NAV_SCRIPT = """
     admin:   [['School','/school'],['Reports','/dashboard'],['Practice','/practice']]
   };
   var HOME = {student:'/home',teacher:'/teacher',parent:'/parent',admin:'/school'};
-  var role = (localStorage.getItem('padhai_role')||'student').toLowerCase();
-  if(!ROLE_NAV[role]) role='student';
   var here=(location.pathname||'/').replace(/\\/+$/,'')||'/';
+  // Path-based role inference: the persona landing pages are unambiguous, so a
+  // parent landing on /parent gets parent links even if no role was stored yet.
+  // (/school is intentionally NOT here — it's shared by teacher + admin.)
+  var PATH_ROLE = {'/parent':'parent','/teacher':'teacher'};
+  var role;
+  if(PATH_ROLE[here]){
+    role=PATH_ROLE[here];
+    try{localStorage.setItem('padhai_role',role);}catch(_){}
+  } else {
+    role=(localStorage.getItem('padhai_role')||'student').toLowerCase();
+  }
+  if(!ROLE_NAV[role]) role='student';
   var box=document.getElementById('phnavLinks');
   if(box){
     box.innerHTML=ROLE_NAV[role].map(function(l){

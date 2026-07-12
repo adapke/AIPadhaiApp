@@ -2466,7 +2466,11 @@ def get_parent_html() -> str:
     try {
       var r = await apiFetch('/api/parents/children');
       if (!r.ok) throw new Error('HTTP ' + r.status);
-      children = await r.json();
+      var cd = await r.json();
+      // /api/parents/children returns {links:[...]} — each entry is a
+      // parent-child LINK (its .id is the link id; the child's user id is
+      // .child_user_id). Unwrap to the array before rendering.
+      children = cd.links || cd.children || (Array.isArray(cd) ? cd : []);
       renderChildren(children);
       await loadFees();
       showArea('parentContent');
@@ -2492,39 +2496,33 @@ def get_parent_html() -> str:
       card.style.cssText = 'cursor:pointer;transition:border-color .15s';
       card.setAttribute('tabindex','0');
       card.setAttribute('role','button');
-      card.setAttribute('aria-label','View details for ' + escapeHtml(child.name || 'child'));
-
-      var streakColor = (child.streak || 0) >= 7 ? 'var(--green)' :
-                        (child.streak || 0) >= 3 ? 'var(--amber)' : 'var(--muted)';
+      var displayName = child.child_email || child.name || 'Child';
+      var relation = child.relation || 'child';
+      var status = (child.status || '').toLowerCase();
+      var linked = (status === 'active' || status === 'verified' || status === 'consented');
+      var statusLabel = linked ? 'Linked'
+        : status ? status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ')
+        : '';
+      var statusColor = linked ? 'var(--green)' : 'var(--amber)';
+      card.setAttribute('aria-label','View progress for ' + escapeHtml(displayName));
       card.innerHTML =
         '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">' +
         '<div style="width:44px;height:44px;border-radius:50%;' +
           'background:var(--brand-soft);color:var(--brand);' +
           'display:grid;place-items:center;font-size:20px;flex-shrink:0">👤</div>' +
-        '<div>' +
-          '<div style="font-weight:800;font-size:15px">' + escapeHtml(child.name || '—') + '</div>' +
-          '<div style="color:var(--muted);font-size:12px">' +
-            escapeHtml(child.exam_target || 'No exam target') + '</div>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:800;font-size:15px;overflow:hidden;' +
+            'text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(displayName) + '</div>' +
+          '<div style="color:var(--muted);font-size:12px;text-transform:capitalize">' +
+            escapeHtml(relation) + '</div>' +
         '</div>' +
+        (statusLabel ? '<span style="font-size:11px;font-weight:700;color:' + statusColor + ';' +
+          'background:var(--brand-soft);padding:3px 9px;border-radius:999px;white-space:nowrap">' +
+          escapeHtml(statusLabel) + '</span>' : '') +
         '</div>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">' +
-        '<div style="text-align:center">' +
-          '<div style="font-size:22px;font-weight:900;color:' + streakColor + '">' +
-            (child.streak || 0) + '</div>' +
-          '<div style="font-size:11px;color:var(--muted)">Day streak</div></div>' +
-        '<div style="text-align:center">' +
-          '<div style="font-size:22px;font-weight:900">' +
-            formatTime(child.today_minutes || 0) + '</div>' +
-          '<div style="font-size:11px;color:var(--muted)">Today</div></div>' +
-        '<div style="text-align:center">' +
-          '<div style="font-size:22px;font-weight:900;color:var(--brand)">' +
-            (child.readiness_pct || 0) + '%</div>' +
-          '<div style="font-size:11px;color:var(--muted)">Readiness</div></div>' +
-        '</div>' +
-        '<div style="margin-top:14px">' +
-          '<div class="progress-wrap" style="margin:0">' +
-            '<div class="progress-fill" style="width:' + (child.readiness_pct||0) + '%"></div>' +
-          '</div>' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;' +
+          'margin-top:4px;font-size:13px;color:var(--brand);font-weight:700">' +
+          '<span>View progress</span><span aria-hidden="true">→</span>' +
         '</div>';
 
       card.addEventListener('click', function() { openChildDetail(child); });
@@ -2550,7 +2548,8 @@ def get_parent_html() -> str:
     document.getElementById('childrenGrid').style.display = 'none';
     var detail = document.getElementById('childDetail');
     detail.style.display = 'block';
-    document.getElementById('childDetailName').textContent = escapeHtml(child.name || '—');
+    document.getElementById('childDetailName').textContent =
+      child.child_email || child.name || 'Child';
 
     var statsEl = document.getElementById('childStats');
     statsEl.innerHTML = '<div style="text-align:center;padding:24px">' +
@@ -2558,7 +2557,8 @@ def get_parent_html() -> str:
       '<div style="color:var(--muted);font-size:13px">Loading stats…</div></div>';
 
     try {
-      var r = await apiFetch('/api/parents/children/' + encodeURIComponent(child.id) + '/stats');
+      var childUid = child.child_user_id || child.id;
+      var r = await apiFetch('/api/parents/children/' + encodeURIComponent(childUid) + '/stats');
       if (!r.ok) throw new Error('HTTP ' + r.status);
       var stats = await r.json();
       renderChildStats(stats, child);
@@ -2570,48 +2570,71 @@ def get_parent_html() -> str:
 
   function renderChildStats(stats, child) {
     var el = document.getElementById('childStats');
-    var weakSubjects = stats.weak_subjects || [];
-    var recentActivity = stats.recent_activity || [];
+    // Real shape from GET /api/parents/children/{id}/stats:
+    //   {summary:{lessons_total, lessons_in_window, estimated_minutes,
+    //             streak_days, languages_count, cache_hits},
+    //    activity:[{date, lessons, minutes}], top_languages:[{code,count}],
+    //    recent_lessons:[{id, lesson_id, language, level, created_at, video_url}],
+    //    window_days:N}
+    var summary = stats.summary || {};
+    var recentLessons = stats.recent_lessons || [];
+    var topLangs = stats.top_languages || [];
+    var windowDays = stats.window_days || 7;
 
     var html = '<div style="display:grid;gap:14px">';
 
-    // Weak subjects
-    html += '<div class="card"><div style="font-weight:700;margin-bottom:10px">Weak Subjects</div>';
-    if (!weakSubjects.length) {
-      html += '<div style="color:var(--muted);font-size:13px">No weak subjects identified yet.</div>';
-    } else {
-      weakSubjects.forEach(function(s) {
-        html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">' +
-          '<div style="flex:1;font-size:13px;font-weight:700">' + escapeHtml(s.subject || s) + '</div>' +
-          '<div class="progress-wrap" style="flex:2;margin:0">' +
-            '<div class="progress-fill" style="width:' + (s.mastery||30) + '%;' +
-              'background:' + ((s.mastery||30) < 40 ? 'var(--red)' : 'var(--amber)') + '"></div>' +
-          '</div>' +
-          '<div style="font-size:12px;color:var(--muted);white-space:nowrap">' +
-            (s.mastery||30) + '% mastery</div>' +
-          '</div>';
-      });
-    }
+    // Summary tiles
+    html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">';
+    html += statTile(summary.streak_days || 0, 'Day streak',
+      (summary.streak_days || 0) >= 7 ? 'var(--green)' :
+      (summary.streak_days || 0) >= 3 ? 'var(--amber)' : 'var(--muted)');
+    html += statTile(formatTime(summary.estimated_minutes || 0),
+      'Time (' + windowDays + 'd)', 'var(--ink)');
+    html += statTile(summary.lessons_total || 0, 'Lessons', 'var(--brand)');
     html += '</div>';
 
-    // Recent activity
-    html += '<div class="card"><div style="font-weight:700;margin-bottom:10px">Recent Activity</div>';
-    if (!recentActivity.length) {
-      html += '<div style="color:var(--muted);font-size:13px">No recent activity recorded.</div>';
+    // Languages studied
+    if (topLangs.length) {
+      html += '<div class="card"><div style="font-weight:700;margin-bottom:10px">Languages studied</div>';
+      html += '<div style="display:flex;flex-wrap:wrap;gap:8px">';
+      topLangs.forEach(function(l) {
+        html += '<span style="font-size:12px;font-weight:700;background:var(--brand-soft);' +
+          'color:var(--brand);padding:4px 10px;border-radius:999px">' +
+          escapeHtml(String(l.code || '').toUpperCase()) +
+          ' · ' + (l.count || 0) + '</span>';
+      });
+      html += '</div></div>';
+    }
+
+    // Recent lessons
+    html += '<div class="card"><div style="font-weight:700;margin-bottom:10px">Recent lessons</div>';
+    if (!recentLessons.length) {
+      html += '<div style="color:var(--muted);font-size:13px">' +
+        'No lessons yet. Once your child generates a lesson it will show up here.</div>';
     } else {
-      recentActivity.slice(0,5).forEach(function(a) {
-        var date = a.at ? new Date(a.at).toLocaleDateString('en-IN',{
-          day:'numeric',month:'short'}) : '';
-        html += '<div style="display:flex;gap:10px;padding:8px 0;' +
+      recentLessons.slice(0, 6).forEach(function(a) {
+        var date = a.created_at ? new Date(a.created_at).toLocaleDateString('en-IN', {
+          day: 'numeric', month: 'short' }) : '';
+        var label = (a.level ? a.level.charAt(0).toUpperCase() + a.level.slice(1) + ' level' : 'Lesson') +
+          (a.language ? ' · ' + String(a.language).toUpperCase() : '');
+        html += '<div style="display:flex;gap:10px;align-items:center;padding:8px 0;' +
           'border-bottom:1px solid var(--line);font-size:13px">' +
-          '<span style="color:var(--muted);white-space:nowrap;min-width:60px">' + escapeHtml(date) + '</span>' +
-          '<span>' + escapeHtml(a.description || a.type || '—') + '</span>' +
+          '<span style="color:var(--muted);white-space:nowrap;min-width:56px">' + escapeHtml(date) + '</span>' +
+          '<span style="flex:1">' + escapeHtml(label) + '</span>' +
+          (a.video_url ? '<a href="' + escapeHtml(a.video_url) + '" target="_blank" rel="noopener" ' +
+            'style="color:var(--brand);font-weight:700;text-decoration:none">Watch →</a>' : '') +
           '</div>';
       });
     }
     html += '</div></div>';
 
     el.innerHTML = html;
+  }
+
+  function statTile(value, label, color) {
+    return '<div class="card" style="text-align:center;padding:14px 8px">' +
+      '<div style="font-size:22px;font-weight:900;color:' + (color || 'var(--ink)') + '">' + value + '</div>' +
+      '<div style="font-size:11px;color:var(--muted);margin-top:2px">' + escapeHtml(label) + '</div></div>';
   }
 
   document.getElementById('backToList').addEventListener('click', function() {
