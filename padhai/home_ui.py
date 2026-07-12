@@ -251,6 +251,10 @@ HOME_HTML = """<!doctype html>
   .nav-chip .icon{font-size:15px;flex-shrink:0}
   .quickbar{margin-top:10px;padding-top:10px;
             border-top:1px solid rgba(255,255,255,.1)}
+  .qb-label{color:#7f8db0;font-size:10px;font-weight:800;
+            letter-spacing:.6px;text-transform:uppercase;
+            padding:8px 8px 4px;margin-top:2px}
+  .qb-label:first-child{margin-top:0}
   .streak-badge{display:inline-flex;align-items:center;gap:5px;
                 background:#ff6b35;color:#fff;border-radius:999px;
                 padding:4px 10px;font-size:11px;font-weight:850;
@@ -547,11 +551,15 @@ HOME_HTML = """<!doctype html>
     </div>
     <!-- Quick-launch: always-visible links to core screens -->
     <div class="quickbar">
+      <div class="qb-label">Learn</div>
       <a class="nav-chip" href="/dashboard">
         <span class="icon">📊</span>Dashboard
       </a>
-      <a class="nav-chip" href="/lessons/new">
-        <span class="icon">🎬</span>New lesson
+      <a class="nav-chip" href="/practice">
+        <span class="icon">📝</span>Practice &amp; mock tests
+      </a>
+      <a class="nav-chip" href="/chat">
+        <span class="icon">🤖</span>AI Tutor
       </a>
       <a class="nav-chip" href="/flashcards">
         <span class="icon">🃏</span>Flashcards
@@ -559,9 +567,29 @@ HOME_HTML = """<!doctype html>
               color:#fff;border-radius:999px;padding:2px 7px;
               font-size:10px;display:none"></span>
       </a>
-      <a class="nav-chip" href="/chat">
-        <span class="icon">🤖</span>AI Tutor
+      <a class="nav-chip" href="/memory-boost">
+        <span class="icon">🔥</span>Memory boost
       </a>
+      <a class="nav-chip" href="/mastery">
+        <span class="icon">📈</span>My progress
+      </a>
+      <div class="qb-label">Tools</div>
+      <a class="nav-chip" href="/essay">
+        <span class="icon">✍️</span>Essay grader
+      </a>
+      <a class="nav-chip" href="/math">
+        <span class="icon">🧮</span>Math solver
+      </a>
+      <a class="nav-chip" href="/interview">
+        <span class="icon">🎤</span>Mock interview
+      </a>
+      <a class="nav-chip" href="/syllabus">
+        <span class="icon">📚</span>Syllabus &amp; videos
+      </a>
+      <a class="nav-chip" href="/lessons/new">
+        <span class="icon">🎬</span>New lesson
+      </a>
+      <div class="qb-label">You</div>
       <a class="nav-chip" href="/onboarding">
         <span class="icon">🎯</span>Set goals
       </a>
