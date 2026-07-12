@@ -927,12 +927,12 @@ HOME_HTML = """<!doctype html>
     'upload library':             '/lessons/new',
     'generate lessons':           '/lessons/new',
     'doubt chat':                 '/chat',
-    'flashcard decks (srs)':      '/ui-legacy#flashcards',
+    'flashcard decks (srs)':      '/flashcards',
     'quiz maker':                 '/practice',
     // mocks
-    'browse mocks':               '/ui-legacy#practice',
-    'my attempts':                '/ui-legacy#practice',
-    'question bank':              '/ui-legacy#practice',
+    'browse mocks':               '/practice',
+    'my attempts':                '/practice',
+    'question bank':              '/practice',
     // ai-tutor
     'ai tutor':                   '/chat',
     'start tutor session':        '/chat',
