@@ -237,3 +237,29 @@ def test_migrate_idempotent(monkeypatch, tmp_path):
     assert memory_boost.get_streak("u") == {
         "current_streak": 0, "longest_streak": 0, "last_active_date": None,
     }
+
+
+def test_pattern_grade0_case_insensitive_distinct(monkeypatch, tmp_path):
+    """prod-237 — Memory Boost must work for exam patterns and every board:
+
+    - exam-pattern questions live at grade 0 (SAT/UPSC/…); a grade the data
+      doesn't have must still resolve via grade relaxation,
+    - board matching is case-insensitive ('SAT' → stored 'sat'),
+    - a fresh user (no mastery) gets 3 DISTINCT questions (the old code
+      collided all three buckets onto the same fallback question).
+    """
+    _isolated_mb(monkeypatch, tmp_path)
+    from padhai import memory_boost, question_bank
+    for i, subj in enumerate(("sat_math", "sat_reading_writing", "sat_math")):
+        question_bank.upsert(
+            board="sat", grade=0, subject=subj, chapter=f"C{i}",
+            year=2024, paper="main",
+            question_text=f"SAT q{i} {uuid.uuid4().hex[:6]}",
+        )
+    # Uppercase board + a grade the data lacks (10) — should still work.
+    picks = memory_boost.get_or_create_pack(user_id="u-sat", board="SAT", grade=10)
+    assert len(picks) == 3, f"expected 3 picks, got {len(picks)}"
+    assert len({p.item_ref for p in picks}) == 3, "picks must be 3 distinct questions"
+    hydrated = memory_boost.hydrate_picks(picks)
+    assert all(not h["item"].get("missing") for h in hydrated)
+    assert all(h["item"].get("question_text") for h in hydrated)

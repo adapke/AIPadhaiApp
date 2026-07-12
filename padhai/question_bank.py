@@ -224,12 +224,14 @@ def search(
     offset = max(0, offset)
     where: list[str] = []
     params: list = []
+    # board/subject match case-insensitively — the bank stores lowercase
+    # keys ('cbse','jee','tamilnadu'), but callers pass mixed case ('CBSE').
     if board is not None:
-        where.append("board = ?"); params.append(board)
+        where.append("board = ? COLLATE NOCASE"); params.append(board)
     if grade is not None:
         where.append("grade = ?"); params.append(grade)
     if subject is not None:
-        where.append("subject = ?"); params.append(subject)
+        where.append("subject = ? COLLATE NOCASE"); params.append(subject)
     if chapter is not None:
         where.append("chapter = ?"); params.append(chapter)
     if difficulty is not None:

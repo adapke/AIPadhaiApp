@@ -36,6 +36,7 @@ same day, sees the same questions).
 """
 from __future__ import annotations
 
+import contextlib
 import random
 import sqlite3
 import time
@@ -128,109 +129,134 @@ def _existing_pack(
     return [MemoryBoostPick(*r) for r in rows]
 
 
-def _pick_pyq_for_bucket(
-    *,
-    bucket: str,
-    user_id: str,  # noqa: ARG001 — reserved for future per-user dedup of already-answered picks
-    board: str,
-    grade: int,
-    mastery_rows: list[mastery_aggregate.ConceptMastery],
-) -> tuple[str, str] | None:
-    """Pick one PYQ for the bucket. Returns (item_kind, item_ref).
+# Friendly board labels → the lowercase keys the question bank actually
+# stores. Defence-in-depth: the picker already sends real keys, but a
+# multi-word/mixed-case value still resolves here.
+_BOARD_ALIASES = {
+    "tamil nadu": "tamilnadu",
+    "andhra pradesh": "ap_telangana",
+    "andhra / telangana": "ap_telangana",
+    "ap/telangana": "ap_telangana",
+    "uttar pradesh": "state_up",
+    "west bengal": "westbengal",
+    "bank po": "bank_po",
+}
 
-    Bucket policies:
-      • 'critical' — red or decayed topic → pick a question from
-        that subject/chapter.
-      • 'warmup'   — green topic, decay-check.
-      • 'fresh'    — any untouched topic.
 
-    Returns None if the user's pool is too sparse (e.g. no PYQs at
-    all for that board+grade).
+def _norm_board(board: str) -> str:
+    key = (board or "").strip().lower()
+    return _BOARD_ALIASES.get(key, key)
+
+
+def _board_pool(board: str, grade: int) -> list:
+    """Candidate questions for a board. Tries (board, grade) first, then
+    relaxes to board-only so exam patterns whose questions live at grade 0
+    (SAT/UPSC/SSC/CAT/GATE/Bank/RRB) — or any board+grade with too few rows
+    — still yield a full pack. Deduped by id, board matched case-insensitively.
     """
-    # Score-rank topics by bucket affinity
-    if bucket == "critical":
-        candidates = [
-            m for m in mastery_rows
-            if m.color_state in ("red", "yellow") and m.decay_state != "untouched"
-        ]
-    elif bucket == "warmup":
-        candidates = [m for m in mastery_rows if m.color_state == "green"]
-    else:  # fresh
-        candidates = [m for m in mastery_rows if m.color_state == "untouched"]
+    board_n = _norm_board(board)
+    seen: dict[str, object] = {}
 
-    # Shuffle so the pack feels different day-to-day even when mastery
-    # is stable. Random is fine — not security-sensitive.
-    random.shuffle(candidates)
-
-    # Try each candidate topic to find a question we can pick.
-    seen_question_ids: set[str] = set()
-    for m in candidates[:20]:
-        # Find a question in this subject (the closest hook we have to topic)
-        try:
-            rows = question_bank.search(
-                board=board, grade=grade, subject=m.subject, limit=10,
-            )
-        except (TypeError, ValueError):
-            rows = []
+    def _add(rows) -> None:
         for q in rows:
-            if q.id in seen_question_ids:
-                continue
-            seen_question_ids.add(q.id)
-            return "pyq", q.id
+            if q.id not in seen:
+                seen[q.id] = q
 
-    # Fallback: any PYQ from the board+grade, regardless of mastery
-    try:
-        rows = question_bank.search(board=board, grade=grade, limit=20)
-    except (TypeError, ValueError):
-        rows = []
-    for q in rows:
-        return "pyq", q.id
-    return None
+    for kwargs in ({"board": board_n, "grade": grade}, {"board": board_n}):
+        with contextlib.suppress(TypeError, ValueError):
+            _add(question_bank.search(limit=80, **kwargs))
+        if len(seen) >= PACK_SIZE:
+            break
+    return list(seen.values())
+
+
+def _bucket_for(subject: str | None, subj_color: dict[str, str]) -> str:
+    c = subj_color.get((subject or "").strip().lower())
+    if c in ("red", "yellow"):
+        return "critical"
+    if c == "green":
+        return "warmup"
+    return "fresh"
 
 
 def get_or_create_pack(
     *, user_id: str, board: str, grade: int,
 ) -> list[MemoryBoostPick]:
-    """Return today's 3-item pack. Idempotent: if today's picks exist,
-    return them unchanged. Otherwise generate + persist a new pack."""
+    """Return today's pack (up to PACK_SIZE items). Idempotent: if today's
+    picks exist, return them unchanged. Otherwise generate + persist.
+
+    Guarantees up to 3 DISTINCT questions when the board has enough — a fresh
+    user with no mastery data still gets a varied 3-question drill (the old
+    code collided all three buckets onto the same fallback question).
+    """
     today = _ist_today()
     with _conn() as conn:
         existing = _existing_pack(conn, user_id, today)
         if existing:
             return existing
 
-        mastery_rows = mastery_aggregate.build_mastery_map(
-            user_id=user_id, board=board, grade=grade,
-        )
+        try:
+            mastery_rows = mastery_aggregate.build_mastery_map(
+                user_id=user_id, board=board, grade=grade,
+            )
+        except Exception:  # mastery is best-effort — never block the pack
+            mastery_rows = []
+        subj_color = {
+            (m.subject or "").strip().lower(): m.color_state
+            for m in mastery_rows
+        }
+
+        pool = _board_pool(board, grade)
+        random.shuffle(pool)  # day-to-day variety; not security-sensitive
+
+        chosen: list[tuple[str, object]] = []
+        chosen_ids: set[str] = set()
+        chosen_subj: set[str] = set()
+
+        def _take(q, *, want_variety: bool) -> bool:
+            if q.id in chosen_ids:
+                return False
+            subj = (q.subject or "").strip().lower()
+            if want_variety and subj and subj in chosen_subj:
+                return False
+            chosen.append((_bucket_for(q.subject, subj_color), q))
+            chosen_ids.add(q.id)
+            if subj:
+                chosen_subj.add(subj)
+            return True
+
+        # Pass 1: one question per bucket (mastery-aware), distinct subjects.
+        for bucket in ("critical", "warmup", "fresh"):
+            for q in pool:
+                if _bucket_for(q.subject, subj_color) == bucket and _take(q, want_variety=True):
+                    break
+        # Pass 2: fill to PACK_SIZE preferring subject variety.
+        if len(chosen) < PACK_SIZE:
+            for q in pool:
+                if len(chosen) >= PACK_SIZE:
+                    break
+                _take(q, want_variety=True)
+        # Pass 3: still short (few subjects) → drop the variety constraint.
+        if len(chosen) < PACK_SIZE:
+            for q in pool:
+                if len(chosen) >= PACK_SIZE:
+                    break
+                _take(q, want_variety=False)
 
         picks: list[MemoryBoostPick] = []
-        seen_refs: set[str] = set()
-        for bucket in ("critical", "warmup", "fresh"):
-            result = _pick_pyq_for_bucket(
-                bucket=bucket,
-                user_id=user_id,
-                board=board,
-                grade=grade,
-                mastery_rows=mastery_rows,
-            )
-            if result is None:
-                continue
-            item_kind, item_ref = result
-            if item_ref in seen_refs:
-                continue
-            seen_refs.add(item_ref)
+        for bucket, q in chosen[:PACK_SIZE]:
             pick_id = uuid.uuid4().hex
             now = time.time()
             conn.execute(
                 "INSERT INTO memory_boost_picks "
                 "(id, user_id, picked_at, pack_date, item_kind, "
                 "item_ref, bucket) VALUES (?,?,?,?,?,?,?)",
-                (pick_id, user_id, now, today, item_kind, item_ref, bucket),
+                (pick_id, user_id, now, today, "pyq", q.id, bucket),
             )
             picks.append(MemoryBoostPick(
                 id=pick_id, user_id=user_id, picked_at=now,
-                pack_date=today, item_kind=item_kind,
-                item_ref=item_ref, bucket=bucket,
+                pack_date=today, item_kind="pyq",
+                item_ref=q.id, bucket=bucket,
             ))
         return picks
 

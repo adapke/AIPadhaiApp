@@ -700,21 +700,31 @@ def memory_boost_page(
 
 # Board + grade pickers used by /memory-boost. Kept top-level so they
 # can be shared with future picker-driven pages.
+# Values are the exact lowercase keys stored in question_bank so the pack
+# lookup matches (search is also case-insensitive as of prod-237). Every
+# entry below has questions in the bank — school boards + the national
+# competitive-exam patterns.
 _SUPPORTED_BOARDS = [
-    ("CBSE", "CBSE"),
-    ("ICSE", "ICSE"),
-    ("Maharashtra", "Maharashtra"),
-    ("Tamil Nadu", "Tamil Nadu"),
-    ("Karnataka", "Karnataka"),
-    ("Andhra Pradesh", "Andhra Pradesh"),
-    ("Kerala", "Kerala"),
-    ("West Bengal", "West Bengal"),
-    ("Uttar Pradesh", "Uttar Pradesh"),
-    ("Bihar", "Bihar"),
-    ("Gujarat", "Gujarat"),
-    ("Rajasthan", "Rajasthan"),
-    ("NEET", "NEET (Class 11-12)"),
-    ("JEE", "JEE (Class 11-12)"),
+    ("cbse", "CBSE"),
+    ("icse", "ICSE"),
+    ("maharashtra", "Maharashtra"),
+    ("tamilnadu", "Tamil Nadu"),
+    ("karnataka", "Karnataka"),
+    ("ap_telangana", "Andhra / Telangana"),
+    ("kerala", "Kerala"),
+    ("westbengal", "West Bengal"),
+    ("gujarat", "Gujarat"),
+    ("bihar", "Bihar"),
+    # National entrance / competitive-exam patterns (grade-agnostic)
+    ("jee", "JEE — Engineering"),
+    ("neet", "NEET — Medical"),
+    ("upsc", "UPSC"),
+    ("ssc", "SSC"),
+    ("cat", "CAT — MBA"),
+    ("gate", "GATE"),
+    ("bank_po", "Bank PO"),
+    ("rrb", "Railways (RRB)"),
+    ("sat", "SAT — US"),
 ]
 
 
