@@ -415,16 +415,21 @@ _PRACTICE_BODY = """
       <div>
         <label>Exam</label>
         <select id="examSel">
-          <option value="jee_main" selected>JEE Main</option>
-          <option value="jee_advanced">JEE Advanced</option>
-          <option value="neet">NEET UG</option>
-          <option value="upsc_pre">UPSC Prelims</option>
-          <option value="upsc_mains">UPSC Mains</option>
-          <option value="upsc">UPSC (generic)</option>
-          <option value="cat">CAT</option>
-          <option value="gate">GATE</option>
-          <option value="sat">SAT (US Digital SAT)</option>
-          <option value="generic">Generic / school board</option>
+          <optgroup label="School boards">
+            <option value="cbse" selected>CBSE</option>
+            <option value="icse">ICSE</option>
+            <option value="state">State board</option>
+          </optgroup>
+          <optgroup label="Competitive exams">
+            <option value="jee_main">JEE Main</option>
+            <option value="jee_advanced">JEE Advanced</option>
+            <option value="neet">NEET UG</option>
+            <option value="upsc_pre">UPSC Prelims</option>
+            <option value="upsc_mains">UPSC Mains</option>
+            <option value="cat">CAT</option>
+            <option value="gate">GATE</option>
+            <option value="sat">SAT (US Digital SAT)</option>
+          </optgroup>
         </select>
       </div>
       <div>

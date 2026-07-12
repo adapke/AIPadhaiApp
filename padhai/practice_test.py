@@ -61,6 +61,12 @@ VALID_EXAMS = frozenset({
     "jee_main", "jee_advanced",
     "neet", "cat", "gate", "generic",
     "sat",  # prod-192 — US Digital SAT (subjects: sat_math, sat_reading_writing)
+    # prod-248 — school boards are first-class practice targets. A CBSE
+    # student picking "CBSE" must not get a 400. The bank pull filters by
+    # subject (board-agnostic) and synthesis uses the key as a context
+    # hint, so these behave like "generic" school practice with the right
+    # board label in the prompt.
+    "cbse", "icse", "state",
 })
 
 
